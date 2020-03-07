@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-navigation-drawer app color="#040404" dark v-model="drawer">
+    <v-navigation-drawer app color="#040404" dark v-model="drawer" width="230" permanent="true">
       <v-list>
         <v-list-item-content>
           <v-img src="../assets/imgs/El-8alaba.png" contain height="120"></v-img>
@@ -43,6 +43,7 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/' },
+        { icon: 'mdi-book', text: 'Your Library', route: '/library' },
       ],
     };
   },
