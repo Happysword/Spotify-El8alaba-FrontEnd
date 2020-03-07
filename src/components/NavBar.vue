@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-navigation-drawer app color="#040404" dark v-model="drawer">
+    <v-navigation-drawer app color="#040404" dark v-model="drawer" width="230" permanent>
       <v-list>
         <v-list-item-content>
           <v-img src="../assets/imgs/El-8alaba.png" contain height="120"></v-img>
@@ -17,11 +17,11 @@
     </v-navigation-drawer>
 
     <v-app-bar color="#0C0C0C" dense dark app>
-      <v-btn color="#040404" small fab class="mx-2" flat>
+      <v-btn color="#040404" small fab class="mx-2" >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
 
-      <v-btn color="#040404" small fab class="mx-2" flat>
+      <v-btn color="#040404" small fab class="mx-2" >
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
 
@@ -43,6 +43,7 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/' },
+        { icon: 'mdi-book', text: 'Your Library', route: '/library' },
       ],
     };
   },
