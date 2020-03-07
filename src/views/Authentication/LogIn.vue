@@ -1,14 +1,24 @@
 <template>
-  <v-container class="LogIn_root">
+  <v-container class="LogIn_root py-0">
+
+    <!-- Main row -->
     <v-row
       justify=center
       align=center
     >
       <v-col
-        cols=6
+        sm=8
+        lg=6
         xl=4
-        class="mt-12"
+        class="px-8"
       >
+        <!-- Logo -->
+        <v-img
+          src="../../assets/imgs/El-8alaba.png"
+          contain
+          height="140"
+        ></v-img>
+
         <!-- Username -->
         <v-text-field
           v-model="userInput.id"
@@ -16,6 +26,7 @@
           outlined
           placeholder="Email address or username"
           :rules="[]"
+          color='#1DB954'
         />
 
         <!-- Password -->
@@ -27,6 +38,7 @@
           :append-icon="userInput.password.show ? 'mdi-eye' : 'mdi-eye-off'"
           :type="userInput.password.show ? 'text' : 'password'"
           :rules="[]"
+          color='#1DB954'
           @click:append="userInput.password.show = !userInput.password.show"
         />
 
@@ -35,27 +47,40 @@
           <v-checkbox
             label="Remember me"
             v-model="userInput.rememberMe"
+            class="mt-0"
+            color='#1DB954'
           />
           <v-spacer/>
           <!-- 'Submit' button -->
           <v-btn
             rounded
-            color=primary
             min-width=160px
+            dark
+            color='#1DB954'
+            class="d-none d-sm-flex"
           >Log In</v-btn>
         </v-row>
 
+        <!-- Show only on xs -->
+        <v-btn
+          rounded
+          block
+          dark
+          color='#1DB954'
+          class="mb-3 d-flex d-sm-none"
+        >Log In</v-btn>
+
         <!-- 'Forgot your password' link -->
-        <v-row justify=center>
+        <v-container class="text-center">
           <!-- TODO[@XL3]: Replace 'font-weight-bold' with a lightening of color -->
           <a
-            style="text-decoration: none;"
+            style="text-decoration: none; color: #1DB954;"
             :class="userInput.onForgot ? 'font-weight-bold' : ''"
             @mouseover="userInput.onForgot = true"
             @mouseleave="userInput.onForgot = false"
           >Forgot your password?</a>
-        </v-row>
-        <v-divider class="my-6"/>
+        </v-container>
+        <v-divider class="my-3"/>
 
         <p class="title text-center font-weight-bold"
         >Don't have an account?</p>
@@ -68,7 +93,7 @@
           block
           large
           route to="/signup"
-        >Sign Up for wave</v-btn>
+        >Sign Up</v-btn>
 
       </v-col>
     </v-row>
