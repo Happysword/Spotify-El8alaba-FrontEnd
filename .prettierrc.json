@@ -5,5 +5,6 @@
   "semicolons": true,
   "trailingComma": "all",
   "endOfLine": "lf",
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "proseWrap": "always"
 }
