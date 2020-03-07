@@ -1,8 +1,9 @@
 <template>
         <v-btn-toggle
+          v-model="text"
           group
           color="success"
-          dense
+          dense="true"
           dark=""
         >
           <v-btn :value="selectBarValue" route :to="selectBarRoute">
