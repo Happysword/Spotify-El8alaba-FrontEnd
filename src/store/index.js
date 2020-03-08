@@ -5,8 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    playlistImg: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
-    // playlistImg: 'https://i.scdn.co/image/ab67706f00000002aa93fe4e8c2d24fc62556cba',
+    styling: ['rgba(66,17,121,1)', 'rgba(143,0,0,1)'],
+    // playlistImg: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
+    playlistImg: 'https://i.scdn.co/image/ab67706f00000002aa93fe4e8c2d24fc62556cba',
     play: false,
     playListName: 'Liked Songs',
     liked: false,
