@@ -17,11 +17,11 @@
     </v-navigation-drawer>
 
     <v-app-bar color="#0C0C0C" dense dark app>
-      <v-btn color="#040404" small fab class="mx-2" flat>
+      <v-btn color="#040404" small fab class="mx-2" depressed>
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
 
-      <v-btn color="#040404" small fab class="mx-2" flat>
+      <v-btn color="#040404" small fab class="mx-2" depressed>
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
 
@@ -43,6 +43,7 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/' },
+        { icon: 'mdi-heart', text: 'Liked Tracks', route: '/library/tracks' },
       ],
     };
   },
