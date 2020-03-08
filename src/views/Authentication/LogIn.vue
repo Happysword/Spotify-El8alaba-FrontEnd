@@ -1,6 +1,5 @@
 <template>
   <v-container class="LogIn_root py-0">
-
     <!-- Main row -->
     <v-row
       justify=center
@@ -17,64 +16,76 @@
           src="../../assets/imgs/El-8alaba.png"
           contain
           height="140"
-        ></v-img>
-
-        <!-- Username -->
-        <v-text-field
-          v-model="userInput.id"
-          clearable
-          outlined
-          placeholder="Email address or username"
-          :rules="[]"
-          color='#1DB954'
         />
 
-        <!-- Password -->
-        <v-text-field
-          clearable
-          outlined
-          placeholder="Password"
-          v-model="userInput.password.password"
-          :append-icon="userInput.password.show ? 'mdi-eye' : 'mdi-eye-off'"
-          :type="userInput.password.show ? 'text' : 'password'"
-          :rules="[]"
-          color='#1DB954'
-          @click:append="userInput.password.show = !userInput.password.show"
-        />
-
-        <v-row>
-          <!-- 'Remember me' checkbox -->
-          <v-checkbox
-            label="Remember me"
-            v-model="userInput.rememberMe"
-            class="mt-0"
+        <v-form ref="loginForm">
+          <!-- Username -->
+          <!-- Minimum username length is 3 -->
+          <v-text-field
             color='#1DB954'
+            clearable
+            outlined
+            placeholder="Email address or username"
+            v-model="userInput.username"
+            :rules="[
+              validation.required('Username'),
+              validation.noSpecialCharacters('Username'),
+              validation.minLength('Username', 3),
+            ]"
           />
-          <v-spacer/>
-          <!-- 'Submit' button -->
-          <v-btn
-            rounded
-            min-width=160px
-            dark
-            color='#1DB954'
-            class="d-none d-sm-flex"
-          >Log In</v-btn>
-        </v-row>
 
-        <!-- Show only on xs -->
-        <v-btn
-          rounded
-          block
-          dark
-          color='#1DB954'
-          class="mb-3 d-flex d-sm-none"
-        >Log In</v-btn>
+          <!-- Password -->
+          <!-- Minimum password length is 8 -->
+          <v-text-field
+            color='#1DB954'
+            clearable
+            outlined
+            placeholder="Password"
+            v-model="userInput.password"
+            :rules="[
+              validation.required('Password'),
+              validation.minLength('Password', 8),
+            ]"
+            :type="userInput.showPassword ? 'text' : 'password'"
+            :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="userInput.showPassword = !userInput.showPassword"
+          />
+
+          <v-row>
+            <!-- 'Remember me' checkbox -->
+            <v-checkbox
+              color='#1DB954'
+              class="mt-0"
+              label="Remember me"
+              v-model="userInput.rememberMe"
+            />
+            <v-spacer/>
+            <!-- 'Submit' button -->
+            <v-btn
+              color='#1DB954'
+              class="d-none d-sm-flex"
+              rounded
+              dark
+              min-width=160px
+              @click="submit"
+            >Log In</v-btn>
+          </v-row>
+
+          <!-- Show only on xs -->
+          <v-btn
+            color='#1DB954'
+            class="mb-3 d-flex d-sm-none"
+            rounded
+            dark
+            block
+            @click="submit"
+          >Log In</v-btn>
+        </v-form>
 
         <!-- 'Forgot your password' link -->
         <v-container class="text-center">
           <!-- TODO[@XL3]: Replace 'font-weight-bold' with a lightening of color -->
           <a
-            style="text-decoration: none; color: #1DB954;"
             :class="userInput.onForgot ? 'font-weight-bold' : ''"
             @mouseover="userInput.onForgot = true"
             @mouseleave="userInput.onForgot = false"
@@ -87,9 +98,9 @@
         <!-- 'Signup' button -->
         <!-- TODO[@XL3]: Replace 'route to' with a method -->
         <v-btn
+          color=secondary
           rounded
           outlined
-          color=secondary
           block
           large
           route to="/signup"
@@ -101,27 +112,35 @@
 </template>
 
 <script>
+import validation from '@/modules/LogIn/validation';
+
 export default {
   name: 'LogIn',
 
   data() {
     return {
       userInput: {
-        id: '',
-        password: {
-          password: '',
-          show: false,
-        },
+        username: '',
+        password: '',
+        showPassword: false,
         rememberMe: false,
         onForgot: false,
       },
-
-      rules: {
-      },
+      validation,
     };
+  },
+
+  methods: {
+    submit() {
+      this.$refs.loginForm.validate();
+    },
   },
 };
 </script>
 
 <style lang="css" scoped>
+a {
+  text-decoration: none;
+  color: #1DB954;
+}
 </style>
