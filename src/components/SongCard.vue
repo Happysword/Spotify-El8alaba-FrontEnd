@@ -1,14 +1,14 @@
 <template>
     <v-card
                             class="mx-auto"
-                            max-width="170"
+                            max-width="185"
                             dark=""
                             @mouseover="showActionButton = true"
                             @mouseleave="showActionButton = false"
                             height="285"
                             @click="CardClickLink()"
                         >
-                          <v-container>
+                          <v-container fluid="">
                               <v-img
                               :src="images[0].url"
                               height="150px"
@@ -26,7 +26,7 @@
 
                             <v-spacer></v-spacer>
 
-                            <v-btn fab="" small="" flat color="#1ED760"
+                            <v-btn fab="" small=""  color="#1ED760"
                             v-if="showActionButton"
                             @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
                                 <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>

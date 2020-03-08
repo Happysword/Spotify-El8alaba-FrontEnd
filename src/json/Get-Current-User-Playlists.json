@@ -52,55 +52,11 @@
             "spotify":"http://open.spotify.com/user/wizzlersmate/playlists/1AVZz0mBuGbCEoNRQdYQju"
          },
          "href":"https://api.spotify.com/v1/users/wizzlersmate/playlists/1AVZz0mBuGbCEoNRQdYQju",
-         "id":"1AVZz0mBuwbCEoNRQdYQju",
-         "images":[
-            {
-               "height":640,
-               "url":"https://mosaic.scdn.co/640/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
-               "width":640
-            },
-            {
-               "height":300,
-               "url":"https://mosaic.scdn.co/300/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
-               "width":300
-            },
-            {
-               "height":60,
-               "url":"https://mosaic.scdn.co/60/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
-               "width":60
-            }
-         ],
-         "name":"Another Playlist",
-         "owner":{
-            "external_urls":{
-               "spotify":"http://open.spotify.com/user/wizzlersmate"
-            },
-            "href":"https://api.spotify.com/v1/users/wizzlersmate",
-            "id":"wizzlersmate",
-            "type":"user",
-            "uri":"spotify:user:wizzlersmate"
-         },
-         "public":true,
-         "snapshot_id":"Y0qg/IT5T02DKpw4uQKc/9RUrqQJ07hbTKyEeDRPOo9LU0g0icBrIXwVkHfQZ/aD",
-         "tracks":{
-            "href":"https://api.spotify.com/v1/users/wizzlersmate/playlists/1AVZz0mBuGbCEoNRQdYQju/tracks",
-            "total":58
-         },
-         "type":"playlist",
-         "uri":"spotify:user:wizzlersmate:playlist:1AVZz0mBuGbCEoNRQdYQju"
-      },
-      {
-         "description": "This is a another big description",
-         "collaborative":false,
-         "external_urls":{
-            "spotify":"http://open.spotify.com/user/wizzlersmate/playlists/1AVZz0mBuGbCEoNRQdYQju"
-         },
-         "href":"https://api.spotify.com/v1/users/wizzlersmate/playlists/1AVZz0mBuGbCEoNRQdYQju",
          "id":"1AwZz0mBuGbCEoNRQdYQju",
          "images":[
             {
                "height":640,
-               "url":"https://mosaic.scdn.co/640/ab67616d0000b27338aae75dc37fb42457866ffdab67616d0000b27350a3147b4edd7701a876c6ceab67616d0000b2735393c5d3cac806092a9bc468ab67616d0000b2735675e83f707f1d7271e5cf8a",
+               "url":"https://i.scdn.co/image/ab67616d00001e023e7e7a06ef941871a2f51135",
                "width":640
             },
             {
@@ -114,7 +70,7 @@
                "width":60
             }
          ],
-         "name":"Another Playlist",
+         "name":"The Witcher",
          "owner":{
             "external_urls":{
                "spotify":"http://open.spotify.com/user/wizzlersmate"
@@ -144,7 +100,7 @@
          "images":[
             {
                "height":640,
-               "url":"https://mosaic.scdn.co/640/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+               "url":"https://i.scdn.co/image/ab67706f00000002fa20ac2b1da60929d51a58ea",
                "width":640
             },
             {
@@ -158,7 +114,7 @@
                "width":60
             }
          ],
-         "name":"Another Playlist",
+         "name":"Fresh & Chill",
          "owner":{
             "external_urls":{
                "spotify":"http://open.spotify.com/user/wizzlersmate"
@@ -188,7 +144,7 @@
          "images":[
             {
                "height":640,
-               "url":"https://mosaic.scdn.co/640/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+               "url":"https://i.scdn.co/image/ab67706f00000002b27dd9f4a8c5d2ef0125f942",
                "width":640
             },
             {
@@ -202,7 +158,7 @@
                "width":60
             }
          ],
-         "name":"Another Playlist",
+         "name":"Top Hits",
          "owner":{
             "external_urls":{
                "spotify":"http://open.spotify.com/user/wizzlersmate"

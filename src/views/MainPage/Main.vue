@@ -1,6 +1,6 @@
 <template>
 
-    <v-content class="grey darken-4" color="#282828">
+    <v-content class="grey darken-4">
 
       <Navbar></Navbar>
       <router-view></router-view>
