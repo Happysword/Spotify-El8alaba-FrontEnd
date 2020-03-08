@@ -24,6 +24,10 @@
       <v-btn color="#040404" small fab class="mx-2" flat>
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
+    <v-text-field prepend-inner-icon="mdi-magnify"
+    rounded background-color="white" height=30 class="mt-5"
+    light v-show= searching>
+    </v-text-field>
 
       <v-spacer></v-spacer>
 
@@ -43,8 +47,15 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/' },
+        { icon: 'mdi-magnify', text: 'Search', route: '/search' },
       ],
     };
+  },
+  props: {
+    searching: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
