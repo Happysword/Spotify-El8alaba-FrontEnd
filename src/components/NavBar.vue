@@ -43,7 +43,7 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/' },
-        { icon: 'mdi-heart', text: 'Liked Tracks', route: '/library/tracks' },
+        { icon: 'mdi-heart', text: 'Liked Songs', route: '/library/tracks' },
       ],
     };
   },

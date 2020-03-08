@@ -1,6 +1,6 @@
 <template>
-    <div class="ml-12">
-        <v-card class="d-inline-block ml-12 justify-end" dark>
+        <v-card class="d-inline-block my-8 ml-8 white--text"
+        color="#00000000" justify="center" flat>
             <v-img  @mouseover="overlay=true" @mouseout="overlay=false"
                 height="300"
                 :src="store.state.playlistImg">
@@ -31,7 +31,8 @@
             </v-btn>
             </v-card-actions>
             <v-card-actions class="justify-center">
-              <v-icon v-show="!store.state.liked" size="30" class="px-3" @click="changeLiked">
+              <v-icon v-show="!store.state.liked" size="30"
+              class="px-3" @click="changeLiked" color="#E0E0E0">
                 mdi-heart-outline
               </v-icon>
               <v-icon v-show="store.state.liked" size="30"
@@ -40,7 +41,7 @@
               </v-icon>
               <v-menu offset-y>
                 <template v-slot:activator="{ on }">
-                  <v-icon size="30" class="px-3" v-on="on">
+                  <v-icon size="30" class="px-3" v-on="on" color="#E0E0E0">
                     mdi-dots-horizontal
                   </v-icon>
                 </template>
@@ -51,7 +52,6 @@
                {{store.state.numberOfLikedSongs}} Songs
             </p>
         </v-card>
-    </div>
 </template>
 
 <script>
