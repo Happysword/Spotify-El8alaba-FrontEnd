@@ -1,10 +1,10 @@
 <template>
-    <v-container>
+    <v-container fluid="" >
         <select-bar v-for="(libraryLink,index) in libraryLinks"
         :key="index"
         :selectBarValue="libraryLink.value"
         :selectBarRoute="libraryLink.route"></select-bar>
-    <router-view></router-view>
+    <router-view ></router-view>
     </v-container>
 </template>
 
