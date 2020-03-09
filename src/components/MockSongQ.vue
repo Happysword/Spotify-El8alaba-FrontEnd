@@ -8,7 +8,9 @@ export default {};
 .hello {
   width: '100%';
   height: 80px;
-  border: 3px solid grey;
+  border: 2px solid grey;
+  text-align: center;
+  margin: 5px;
   color: white;
 }
 </style>
