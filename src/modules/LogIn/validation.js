@@ -15,7 +15,7 @@ export default {
   },
 
   noSpecialCharacters(propertyName) {
-    return (data) => (!!data && data.search(/[^a-zA-Z0-9_@\-.]/g) !== -1)
+    return (data) => (!!data && data.search(/[^a-zA-Z0-9_@\-.]/g) === -1)
       || `${propertyName} doesn't allow special characters`;
   },
 };

@@ -141,6 +141,6 @@ export default {
 <style lang="css" scoped>
 a {
   text-decoration: none;
-  color: #1DB954;
+  color: #1DB954 !important;
 }
 </style>
