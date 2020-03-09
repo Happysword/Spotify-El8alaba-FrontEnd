@@ -18,11 +18,18 @@
           height="140"
         />
 
+        <!-- Incorrect password bar -->
+        <p
+          class="caption red darken-1 white--text text-center py-3 mb-8"
+          v-if="userInput.incorrect"
+        >Incorrect username or password.
+        </p>
         <v-form ref="loginForm">
           <!-- Username -->
           <!-- Minimum username length is 3 -->
           <v-text-field
             color='#1DB954'
+            class="mb-n4"
             clearable
             outlined
             placeholder="Email address or username"
@@ -112,7 +119,8 @@
 </template>
 
 <script>
-import validation from '@/modules/LogIn/validation';
+import validation from '@/store/modules/LogIn/validation';
+import authentication from '@/store/modules/LogIn/authentication';
 
 export default {
   name: 'LogIn',
@@ -125,6 +133,7 @@ export default {
         showPassword: false,
         rememberMe: false,
         onForgot: false,
+        incorrect: false,
       },
       validation,
     };
@@ -132,7 +141,23 @@ export default {
 
   methods: {
     submit() {
-      this.$refs.loginForm.validate();
+      // Validate the form
+      if (!this.$refs.loginForm.validate()) return;
+
+      // Locate the user
+      const user = authentication.authenticateUser(
+        this.userInput.username,
+        this.userInput.password,
+      );
+
+      // If the user's found, redirect to home
+      if (user.found) {
+        this.$router.push('/');
+      } else {
+        // TODO[@XL3]: Record the current user
+        // TODO[@XL3]: Keep an authorization token
+        this.userInput.incorrect = true;
+      }
     },
   },
 };
