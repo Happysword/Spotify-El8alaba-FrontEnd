@@ -79,10 +79,10 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-list-item v-for="card in playlists.items" :key="card.id" dense=""
-            route :to="/playlist/+ card.id">
+        <v-list-item v-for="playlist in playlists.items" :key="playlist.id" dense=""
+            route :to="/playlist/+ playlist.id">
             <v-list-item-content >
-              <v-list-item-title class="subtitle-2">{{card.name}}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">{{playlist.name}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
       </v-container>
