@@ -4,16 +4,24 @@ import Main from '../views/MainPage/Main.vue';
 import Home from '../views/MainPage/Home.vue';
 import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
+import Landing from '../views/Landing.vue';
+import Queue from '../views/MainPage/Queue.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
+    name: 'Landing',
+    component: Landing,
+  },
+  {
+    path: '/home',
     name: 'Main',
     component: Main,
     children: [
-      { path: '/', name: 'home', component: Home },
+      { path: '/home', name: 'home', component: Home },
+      { path: '/home/queue', name: 'queue', component: Queue },
     ],
   },
   {
