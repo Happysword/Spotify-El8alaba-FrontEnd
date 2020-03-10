@@ -7,7 +7,6 @@
             <router-link to="/">
               <v-img
                 src="../assets/imgs/El-8alaba.png"
-                contain="true"
                 max-height="200"
                 max-width="200"
               ></v-img>
@@ -17,7 +16,7 @@
               <v-btn
                 v-for="button in buttons"
                 :key="button"
-                class="btn-green"
+                class="btn-green text-none d-none d-sm-table-cell"
                 type="li"
                 left
                 text
@@ -60,7 +59,7 @@
                     class="text-main"
                     rounded
                     depressed
-                    x-large
+                    large
                   >
                     Get spotify el8alaba free
                   </v-btn>
@@ -80,19 +79,19 @@ export default {
   data: () => ({
     buttons: [
       {
-        name: 'Download',
+        name: 'DOWNLOAD',
         route: '/download',
       },
       {
-        name: 'Premium',
+        name: 'PREMIUM',
         route: '/premium',
       },
       {
-        name: 'Login',
+        name: 'LOGIN',
         route: '/login',
       },
       {
-        name: 'SignUp',
+        name: 'SIGN UP',
         route: '/signup',
       },
     ],
@@ -136,5 +135,8 @@ export default {
 }
 .btn-green:hover {
   color: #20d15e;
+}
+#small-button {
+  width: 10px;
 }
 </style>
