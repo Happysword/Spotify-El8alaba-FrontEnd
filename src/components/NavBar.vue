@@ -32,6 +32,11 @@ export default {
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/home' },
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
+        {
+          icon: 'mdi-heart',
+          text: 'Liked Songs',
+          route: '/home/library/tracks',
+        },
       ],
     };
   },

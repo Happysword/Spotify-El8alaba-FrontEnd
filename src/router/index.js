@@ -8,6 +8,7 @@ import Landing from '../views/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
 import Genres from '../views/Genres/Genres.vue';
+import LikedTracks from '../views/PlayLists/LikedTracks.vue';
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
       { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
       { path: '/home/genre/:id', name: 'genres', component: Genres },
+      {
+        path: '/home/library/tracks',
+        name: 'LikedTracks',
+        component: LikedTracks,
+      },
     ],
   },
   {
