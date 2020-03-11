@@ -9,6 +9,10 @@ import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
 import Genres from '../views/Genres/Genres.vue';
 import LikedTracks from '../views/PlayLists/LikedTracks.vue';
+import Library from '../views/Library/Library.vue';
+import LibraryPlaylists from '../views/Library/LibraryPlaylists.vue';
+import LibraryAlbums from '../views/Library/LibraryAlbums.vue';
+import LibraryArtists from '../views/Library/LibraryArtists.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +35,29 @@ const routes = [
         path: '/home/library/tracks',
         name: 'LikedTracks',
         component: LikedTracks,
+      },
+      {
+        path: '/home/library',
+        name: 'library',
+        component: Library,
+        redirect: { name: 'libraryplaylists' },
+        children: [
+          {
+            path: '/home/playlists',
+            name: 'libraryplaylists',
+            component: LibraryPlaylists,
+          },
+          {
+            path: '/home/albums',
+            name: 'libraryalbums',
+            component: LibraryAlbums,
+          },
+          {
+            path: '/home/artists',
+            name: 'libraryartists',
+            component: LibraryArtists,
+          },
+        ],
       },
     ],
   },
