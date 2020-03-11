@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentUser: {},
+    searching: false,
   },
 
   mutations: {
@@ -14,8 +15,6 @@ export default new Vuex.Store({
     },
   },
 
-  actions: {
-  },
-  modules: {
-  },
+  actions: {},
+  modules: {},
 });

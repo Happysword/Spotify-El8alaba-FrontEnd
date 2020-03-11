@@ -9,6 +9,17 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
 
+        <v-text-field
+          prepend-inner-icon="mdi-magnify"
+          rounded
+          background-color="white"
+          height="30"
+          class="mt-5"
+          light
+          v-show="$store.state.searching"
+        >
+        </v-text-field>
+
         <v-spacer></v-spacer>
         <v-btn
           rounded

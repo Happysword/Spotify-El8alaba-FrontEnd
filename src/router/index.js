@@ -6,6 +6,8 @@ import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
 import Landing from '../views/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
+import Search from '../views/Search/Search.vue';
+import Genres from '../views/Genres/Genres.vue';
 
 Vue.use(VueRouter);
 
@@ -22,6 +24,8 @@ const routes = [
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
+      { path: '/home/search', name: 'search', component: Search },
+      { path: '/home/genre/:id', name: 'genres', component: Genres },
     ],
   },
   {

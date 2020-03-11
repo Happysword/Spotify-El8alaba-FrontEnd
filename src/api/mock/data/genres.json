@@ -1,0 +1,27 @@
+[
+      {
+        "src" : "https://t.scdn.co/images/47d9e28592b64a95a60bdbe9ae7fb2c8.jpeg",
+        "text" : "Arabic",
+        "route" : "genre/arabic",
+        "color" : "blue"
+      },
+      {
+        "src" : "https://t.scdn.co/images/9676cef74ec147a48607c737c4f93943.jpeg",
+        "text" : "Hip-Hop",
+        "route" : "genre/Hip-Hop",
+        "color" : "red"
+      },
+      {
+        "src" : "https://t.scdn.co/images/47d9e28592b64a95a60bdbe9ae7fb2c8.jpeg",
+        "text" : "Arabic",
+        "route" : "genre/arabic",
+        "color" : "blue"
+      },
+      {
+        "src" : "https://t.scdn.co/images/9676cef74ec147a48607c737c4f93943.jpeg",
+        "text" : "Hip-Hop",
+        "route" : "genre/Hip-Hop",
+        "color" : "red"
+      }
+     
+]
