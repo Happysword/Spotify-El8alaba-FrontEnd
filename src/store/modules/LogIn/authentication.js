@@ -1,10 +1,30 @@
-// TODO[XL3]: Implement hashing
-const hashPassword = (password) => password;
+// import client from 'api-client';
+// TODO[@XL3]: Add the import resolver
+import client from '@/api/mock/';
 
 export default {
-  // TODO[XL3]: Implement requests to a mock API
   authenticateUser(username, password) {
-    const hashedPw = hashPassword(password);
-    return { found: username === 'admin' && hashedPw === 'admin123' };
+    // Fetch the user
+    let found = false;
+    let data = null;
+
+    return new Promise((resolve) => {
+      client.fetchUsers()
+        .then((users) => {
+          // some instead of forEach for breaking on a true
+          users.some((user) => {
+            // TODO[@XL3]: Add password checking
+            if (user.username === username && user.password === password) {
+              found = true;
+              data = user;
+            }
+            // Breaking condition
+            return user.username === username && user.password === password;
+          });
+
+          // Return found data
+          resolve({ found, data });
+        });
+    });
   },
 };

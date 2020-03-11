@@ -24,12 +24,12 @@
           v-if="userInput.incorrect"
         >Incorrect username or password.
         </p>
+
         <v-form ref="loginForm">
           <!-- Username -->
           <!-- Minimum username length is 3 -->
           <v-text-field
             color='#1DB954'
-            class="mb-n4"
             clearable
             outlined
             placeholder="Email address or username"
@@ -140,22 +140,26 @@ export default {
   },
 
   methods: {
-    submit() {
+    async submit() {
       // Validate the form
       if (!this.$refs.loginForm.validate()) return;
 
       // Locate the user
-      const user = authentication.authenticateUser(
+      const user = {};
+      await authentication.authenticateUser(
         this.userInput.username,
         this.userInput.password,
-      );
+      ).then((u) => {
+        user.found = u.found;
+        user.data = u.data;
+      });
 
       // If the user's found, redirect to home
+      // TODO[@XL3]: Record the current user
+      // TODO[@XL3]: Keep an authorization token
       if (user.found) {
         this.$router.push('/');
       } else {
-        // TODO[@XL3]: Record the current user
-        // TODO[@XL3]: Keep an authorization token
         this.userInput.incorrect = true;
       }
     },
