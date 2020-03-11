@@ -5,6 +5,7 @@ import Home from '../views/MainPage/Home.vue';
 import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
 import Search from '../views/Search/Search.vue';
+import Genres from '../views/Genres/Genres.vue';
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,7 @@ const routes = [
     children: [
       { path: '/', name: 'home', component: Home },
       { path: '/search', name: 'search', component: Search },
+      { path: '/genre/:id', name: 'genres', component: Genres },
     ],
   },
   {
