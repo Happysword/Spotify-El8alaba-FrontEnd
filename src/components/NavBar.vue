@@ -109,7 +109,7 @@
             </v-container>
           </v-dialog>
 
-          <v-list-item route to="/library/tracks">
+          <v-list-item route to="/home/library/tracks">
             <v-list-item-icon>
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
@@ -124,9 +124,9 @@
         <v-list-item
           v-for="playlist in playlists.items"
           :key="playlist.id"
-          dense=""
+          dense
           route
-          :to="/playlist/ + playlist.id"
+          :to="'/home/playlist/' + playlist.id"
         >
           <v-list-item-content>
             <v-list-item-title class="subtitle-2">{{
@@ -150,13 +150,7 @@ export default {
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/home' },
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
-        {
-          icon: 'mdi-heart',
-          text: 'Liked Songs',
-          route: '/home/library/tracks',
-        },
-        { icon: 'mdi-home', text: 'Home', route: '/' },
-        { icon: 'mdi-book', text: 'Your Library', route: '/library' },
+        { icon: 'mdi-book', text: 'Your Library', route: '/home/library' },
       ],
       playlists: Jsonplaylists,
       dialog: false,

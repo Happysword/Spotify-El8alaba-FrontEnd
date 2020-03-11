@@ -43,17 +43,17 @@ const routes = [
         redirect: { name: 'libraryplaylists' },
         children: [
           {
-            path: '/home/playlists',
+            path: '/home/library/playlists',
             name: 'libraryplaylists',
             component: LibraryPlaylists,
           },
           {
-            path: '/home/albums',
+            path: '/home/library/albums',
             name: 'libraryalbums',
             component: LibraryAlbums,
           },
           {
-            path: '/home/artists',
+            path: '/home/library/artists',
             name: 'libraryartists',
             component: LibraryArtists,
           },
