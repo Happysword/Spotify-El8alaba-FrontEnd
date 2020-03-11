@@ -1,8 +1,15 @@
+// TODO[@XL3]: Add the Import Resolver
 // import client from 'api-client';
-// TODO[@XL3]: Add the import resolver
-import client from '@/api/mock/';
+import client from '@/api/mock';
 
 export default {
+  /**
+   * Fetches all users then returns an object containing the user's data.
+   *
+   * @param  {String} username The Username to match against
+   * @param  {String} password The Password to match against
+   * @return {Object}          The User's data
+   */
   authenticateUser(username, password) {
     // Fetch the user
     let found = false;

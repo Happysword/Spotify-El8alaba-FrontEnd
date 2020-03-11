@@ -112,7 +112,6 @@
           large
           route to="/signup"
         >Sign Up</v-btn>
-
       </v-col>
     </v-row>
   </v-container>
@@ -121,6 +120,7 @@
 <script>
 import validation from '@/store/modules/LogIn/validation';
 import authentication from '@/store/modules/LogIn/authentication';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'LogIn',
@@ -140,24 +140,27 @@ export default {
   },
 
   methods: {
+    ...mapMutations([
+      'setCurrentUser',
+    ]),
+
+    /**
+     * Authenticates the user and re-routes them to Home
+     */
     async submit() {
       // Validate the form
       if (!this.$refs.loginForm.validate()) return;
 
       // Locate the user
-      const user = {};
-      await authentication.authenticateUser(
+      const user = await authentication.authenticateUser(
         this.userInput.username,
         this.userInput.password,
-      ).then((u) => {
-        user.found = u.found;
-        user.data = u.data;
-      });
+      );
 
       // If the user's found, redirect to home
-      // TODO[@XL3]: Record the current user
       // TODO[@XL3]: Keep an authorization token
       if (user.found) {
+        this.setCurrentUser(user.data);
         this.$router.push('/');
       } else {
         this.userInput.incorrect = true;
