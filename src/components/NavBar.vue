@@ -63,7 +63,7 @@
             @click="dialog = false"
             >Cancel</v-btn>
             <v-btn rounded depressed color="success white--text" class="mx-4"
-            @click="dialog = false;CreatePlaylist();">Create</v-btn>
+            @click="dialog = false;">Create</v-btn>
       </v-row>
       </v-container>
     </v-dialog>
@@ -104,16 +104,7 @@ export default {
       ],
       playlists: Jsonplaylists,
       dialog: false,
-      createdPlaylist: '',
-      InputFieldValue: '',
     };
-  },
-  methods: {
-    CreatePlaylist() {
-      this.createdPlaylist = this.InputFieldValue;
-      this.InputFieldValue = '';
-      // TODO : ADD IT To playlists HERE
-    },
   },
 };
 </script>

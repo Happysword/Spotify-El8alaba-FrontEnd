@@ -18,8 +18,14 @@
                             {{name}}
                             </v-card-title>
 
-                            <v-card-subtitle class="caption" v-if="!showActionButton">
+                            <v-card-subtitle class="caption"
+                            v-if="!showActionButton && type === 'playlist'">
                             {{description}}
+                            </v-card-subtitle>
+
+                            <v-card-subtitle class="caption"
+                            v-if="!showActionButton && type === 'album'">
+                            {{artistName}}
                             </v-card-subtitle>
 
                             <v-card-actions>
@@ -49,6 +55,7 @@ export default {
     public: Boolean,
     tracks: Object,
     type: String,
+    artistName: String,
   },
   data() {
     return {
@@ -57,9 +64,13 @@ export default {
     };
   },
   methods: {
+    /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
-      // window.location.href = 'https://i.scdn.co/image/ab67706f000000022b29b4a26e620ccd2bd2d2f8';
-      this.$router.push(`/playlist/${this.id}`);
+      if (this.type === 'playlist') {
+        this.$router.push(`/playlist/${this.id}`);
+      } else if (this.type === 'album') {
+        this.$router.push(`/album/${this.id}`);
+      }
     },
   },
 };
