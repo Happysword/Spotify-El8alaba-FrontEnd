@@ -14,7 +14,7 @@
           rounded
           background-color="white"
           height="30"
-          class="mt-5"
+          class="searchbar-pos"
           light
           v-show="$store.state.searching"
         >
@@ -96,6 +96,11 @@ export default {
   color: white;
   font-weight: bold;
   float: right;
+}
+.searchbar-pos {
+  position: fixed;
+  margin-left: 120px;
+  width: 400px;
 }
 #upgrade-btn {
   border: 2px solid white;

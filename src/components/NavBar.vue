@@ -21,6 +21,7 @@
             v-for="link in links"
             :key="link.text"
             route
+            exact
             :to="link.route"
           >
             <v-list-item-icon>
