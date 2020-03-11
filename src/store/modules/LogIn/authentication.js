@@ -5,7 +5,7 @@ import client from '@/api/mock';
 export default {
   /**
    * Fetches all users then returns an object containing the user's data.
-   *
+   * If the user isn't found, the returned object is { false, null }.
    * @param  {String} username The Username to match against
    * @param  {String} password The Password to match against
    * @return {Object}          The User's data
