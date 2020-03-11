@@ -48,7 +48,7 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="New Playlist" v-model="InputFieldValue"
+                <v-text-field label="New Playlist"
                 required></v-text-field>
               </v-col>
             </v-row>
