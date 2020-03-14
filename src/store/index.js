@@ -21,6 +21,9 @@ export default new Vuex.Store({
       { title: 'Click Me' },
       { title: 'Click Me' },
     ],
+    MusicPlayer: {
+      isMute: false,
+    },
   },
 
   mutations: {
@@ -33,6 +36,9 @@ export default new Vuex.Store({
 
     changeLiked() {
       this.state.liked = !this.state.liked;
+    },
+    toggleSound() {
+      this.state.MusicPlayer.isMute = !this.state.MusicPlayer.isMute;
     },
   },
 

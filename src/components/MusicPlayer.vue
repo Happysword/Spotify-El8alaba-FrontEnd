@@ -2,21 +2,31 @@
   <v-footer app dark class="mock-player" height="90">
     <v-container>
       <v-row>
-        <v-col justify="center" align-self="center">
-          <h1 id="mock-div">Music Player Mock</h1>
+        <v-col align-self="center">
+          <LMusicP></LMusicP>
         </v-col>
-        <v-col justify="center" align-self="center">
-          <v-btn to="/home/queue">
-            <v-icon>mdi-playlist-play</v-icon>
-          </v-btn>
+        <v-col align-self="center">
+          <MMusicP></MMusicP>
         </v-col>
-      </v-row>
-    </v-container></v-footer
-  >
+        <v-col align-self="center">
+          <RMusicP></RMusicP>
+        </v-col>
+      </v-row> </v-container
+  ></v-footer>
 </template>
 
 <script>
-export default {};
+import LMusicP from './musicplayer/LeftPartMPlayer.vue';
+import RMusicP from './musicplayer/RightPartMPlayer.vue';
+import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
+
+export default {
+  components: {
+    LMusicP,
+    RMusicP,
+    MMusicP,
+  },
+};
 </script>
 
 <style scoped>
