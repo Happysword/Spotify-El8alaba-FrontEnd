@@ -2,13 +2,13 @@
   <v-footer app dark class="mock-player" height="90">
     <v-container fluid class="mx-0 pa-0">
       <v-row>
-        <v-col align-self="center" class="pa-0">
+        <v-col align-self="center" class="pa-0" cols="3">
           <LMusicP></LMusicP>
         </v-col>
-        <v-col align-self="center" class="pa-0">
+        <v-col align-self="center" class="pa-0" cols="6">
           <MMusicP></MMusicP>
         </v-col>
-        <v-col align-self="center" class="pa-0">
+        <v-col align-self="center" class="pa-0" cols="3">
           <RMusicP></RMusicP>
         </v-col>
       </v-row> </v-container
