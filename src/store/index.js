@@ -14,7 +14,7 @@ export default new Vuex.Store({
     play: false,
     playListName: 'Liked Songs',
     liked: false,
-    numberOfLikedSongs: '95',
+    numberOfLikedSongs: '10',
     items: [
       { title: 'Click Me' },
       { title: 'Click Me' },
