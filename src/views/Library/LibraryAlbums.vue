@@ -13,17 +13,30 @@
 </template>
 
 <script>
+import client from '../../api/mock';
 import SongCard from '../../components/SongCard.vue';
-import JsonAlbums from '../../json/Get-Current-User-Album.json';
 
 export default {
   data() {
     return {
-      albums: JsonAlbums,
+      albums: JSON,
     };
   },
   components: {
     SongCard,
+  },
+  created() {
+    this.fetchUserAlbums();
+  },
+  methods: {
+    // TODO: fix this function
+    fetchUserAlbums() {
+      client.getUserAlbums()
+        .then((response) => response.json)
+        .then((data) => {
+          this.albums = data;
+        });
+    },
   },
 };
 </script>

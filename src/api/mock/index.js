@@ -1,4 +1,5 @@
 import users from './data/users.json';
+import currentUserAlbum from './data/Get-Current-User-Album.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -19,5 +20,9 @@ export default {
    */
   fetchUsers() {
     return fetch(users, 1000);
+  },
+
+  fetchCurrentUserAlbum() {
+    return fetch(currentUserAlbum, 1000);
   },
 };

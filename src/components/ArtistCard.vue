@@ -9,25 +9,19 @@
                             @click="CardClickLink()"
                         >
                           <v-container fluid="">
-                              <v-img
+                              <v-img class="circle"
                               :src="images[0].url"
                               height="150px"
                               ></v-img>
                           </v-container>
                             <v-card-title class="font-weight-bold subtitle-2">
-                            {{name}}
+                            {{profileName}}
                             </v-card-title>
 
                             <v-card-subtitle class="caption"
-                            v-if="!showActionButton && type === 'playlist'">
-                            {{description}}
+                            v-if="!showActionButton">
+                            {{type}}
                             </v-card-subtitle>
-
-                            <v-card-subtitle class="caption"
-                            v-if="!showActionButton && type === 'album'">
-                            {{artistName}}
-                            </v-card-subtitle>
-
                             <v-card-actions>
 
                             <v-spacer></v-spacer>
@@ -47,15 +41,13 @@
 <script>
 export default {
   props: {
-    description: String,
     href: String,
     id: String,
     images: Array,
-    name: String,
     public: Boolean,
     tracks: Object,
     type: String,
-    artistName: String,
+    profileName: String,
   },
   data() {
     return {
@@ -66,12 +58,14 @@ export default {
   methods: {
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
-      if (this.type === 'playlist') {
-        this.$router.push(`/home/playlist/${this.id}`);
-      } else if (this.type === 'album') {
-        this.$router.push(`/home/album/${this.id}`);
-      }
+      this.$router.push(`/home/artist/${this.id}`);
     },
   },
 };
 </script>
+
+<style scoped>
+.circle {
+    border-radius: 500px;
+}
+</style>
