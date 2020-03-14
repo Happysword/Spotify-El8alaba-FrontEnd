@@ -21,7 +21,6 @@
               <!-- Minimum username length is 3 -->
               <v-text-field
                 color="#1DB954"
-                clearable
                 outlined
                 placeholder="Email address or username"
                 v-model="userInput.username"
@@ -36,7 +35,6 @@
               <!-- Minimum password length is 8 -->
               <v-text-field
                 color="#1DB954"
-                clearable
                 outlined
                 placeholder="Password"
                 v-model="userInput.password"
@@ -45,9 +43,7 @@
                   validation.minLength('Password', 8),
                 ]"
                 :type="userInput.showPassword ? 'text' : 'password'"
-                :append-icon="
-                  userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'
-                "
+                :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="userInput.showPassword = !userInput.showPassword"
               />
 
@@ -119,8 +115,8 @@
 </template>
 
 <script>
-import validation from '@/store/modules/LogIn/validation';
-import authentication from '@/store/modules/LogIn/authentication';
+import validation from '@/store/modules/auth/validation';
+import authentication from '@/store/modules/auth/authentication';
 import { mapMutations } from 'vuex';
 
 export default {
@@ -157,7 +153,7 @@ export default {
       );
 
       // If the user's found, redirect to home
-      // TODO[@XL3]: Keep an authorization token
+      // @todo[XL3]: Keep an authorization token
       if (user.found) {
         this.setCurrentUser(user.data);
         this.$router.push('/home');
