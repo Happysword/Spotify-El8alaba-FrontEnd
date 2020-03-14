@@ -23,6 +23,16 @@ export default new Vuex.Store({
     ],
     MusicPlayer: {
       isMute: false,
+      volume: 70,
+      isPlaying: false,
+      currentSong: {
+        image:
+          'https://i.scdn.co/image/ab67706f000000021cb21db1932b5c9139bbf136',
+        name: 'Mock Song',
+        albumId: '3jdskfn3k3jj3nknk2',
+        artist: 'Test Artist',
+        artistId: 'jjd3jhjh234ug543hhj',
+      },
     },
   },
 
@@ -37,8 +47,11 @@ export default new Vuex.Store({
     changeLiked() {
       this.state.liked = !this.state.liked;
     },
-    toggleSound() {
-      this.state.MusicPlayer.isMute = !this.state.MusicPlayer.isMute;
+    toggleSound(state) {
+      state.MusicPlayer.isMute = !state.MusicPlayer.isMute;
+    },
+    togglePlay(state) {
+      state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
     },
   },
 

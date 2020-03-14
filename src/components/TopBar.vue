@@ -5,6 +5,7 @@
         <v-btn color="#040404" small fab class="mx-2">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
+
         <v-btn color="#040404" small fab class="mx-2">
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
@@ -21,6 +22,7 @@
         </v-text-field>
 
         <v-spacer></v-spacer>
+
         <v-btn
           rounded
           depressed
@@ -30,6 +32,7 @@
           id="upgrade-btn"
           >Upgrade</v-btn
         >
+
         <div class="text-center" id="user-btn">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -45,13 +48,14 @@
                   ><v-img :src="UserInfo.photo"></v-img
                 ></v-avatar>
                 <div>
-                  {{ UserInfo.name }}
+                  {{ $store.state.currentUser.username }}
                 </div>
                 <v-avatar size="20" class="mx-1">
                   <v-icon>mdi-chevron-down</v-icon>
                 </v-avatar>
               </v-btn>
             </template>
+
             <v-list dense color="grey darken-4" dark>
               <v-list-item
                 v-for="(item, index) in items"
