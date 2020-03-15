@@ -68,6 +68,7 @@ const routes = [
         path: '/home/artist/:id',
         name: 'artist',
         component: Artist,
+        redirect: { name: 'artistOverview' },
         children: [
           {
             path: '/home/artist/:id',
