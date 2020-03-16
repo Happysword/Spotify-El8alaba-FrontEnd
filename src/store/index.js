@@ -24,6 +24,7 @@ export default new Vuex.Store({
     MusicPlayer: {
       isMute: false,
       volume: 70,
+      bufferValue: 0,
       isPlaying: false,
       currentSong: {
         image:
@@ -32,6 +33,7 @@ export default new Vuex.Store({
         albumId: '3jdskfn3k3jj3nknk2',
         artist: 'Test Artist',
         artistId: 'jjd3jhjh234ug543hhj',
+        totalTime: 130,
       },
     },
   },

@@ -45,16 +45,25 @@
     <v-row align-content="center" justify="center" class="mx-0" no-gutters>
       <v-layout justify-center align-center row>
         <v-col class="ml-5 mr-0 pa-0 " cols="1">
-          <div class="number-div mx-0 pa-0">0:10</div>
+          <div class="number-div mx-0 pa-0">
+            {{ $store.state.MusicPlayer.currentSong.totalTime }}
+          </div>
         </v-col>
 
         <v-col class="mt-3 mb-3 mr-5 pa-0">
-          <v-progress-linear background-color="grey" color="green" rounded>
+          <v-progress-linear
+            background-color="grey"
+            color="green"
+            rounded
+            v-model="$store.state.MusicPlayer.bufferValue"
+          >
           </v-progress-linear>
         </v-col>
 
         <v-col class=" pa-0 " cols="1">
-          <div class="number-div">2:10</div>
+          <div class="number-div">
+            {{ $store.state.MusicPlayer.currentSong.totalTime }}
+          </div>
         </v-col>
       </v-layout>
     </v-row>
