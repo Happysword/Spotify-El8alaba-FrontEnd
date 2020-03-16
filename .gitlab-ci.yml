@@ -3,8 +3,14 @@ stages:
   - build
   - test
 
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - .npm/
+
 before_script:
-  - npm install
+  - npm ci --cache .npm --prefer-offline
     
 build code:
   stage: build
