@@ -1,5 +1,5 @@
 import users from './data/users.json';
-
+import currentSong from './data/MusicPlayer/currentSong.json';
 /**
  * Fetches mock data after a given timeout.
  * @param  {JSON}   mockData The Object containing the data
@@ -19,5 +19,13 @@ export default {
    */
   fetchUsers() {
     return fetch(users, 1000);
+  },
+
+  /**
+   * Fetches Current Song in the mock data
+   * @return {Promise} A promise containing info about current Track
+   */
+  fetchCurrentSong() {
+    return fetch(currentSong[0], 1000);
   },
 };

@@ -1,18 +1,18 @@
 <template>
   <v-layout column>
-    <v-row align="alignment" justify="justify" class="mx-0">
+    <v-row class="mx-0">
       <v-layout row align-center justify-center>
-        <v-icon color="grey" class="mx-4" dense small>
+        <v-icon color="grey" class="mx-4 player-buttons" dense small>
           mdi-shuffle-variant
         </v-icon>
 
-        <v-icon color="grey" class="mx-4" dense medium>
+        <v-icon color="grey" class="mx-4 player-buttons" dense medium>
           mdi-skip-previous
         </v-icon>
 
         <v-icon
           color="grey"
-          class="mx-4"
+          class="mx-4 player-buttons"
           dense
           x-large
           v-if="$store.state.MusicPlayer.isPlaying"
@@ -23,7 +23,7 @@
 
         <v-icon
           color="grey"
-          class="mx-4"
+          class="mx-4 player-buttons"
           dense
           x-large
           v-else
@@ -32,11 +32,11 @@
           mdi-play-circle-outline
         </v-icon>
 
-        <v-icon color="grey" class="mx-4" dense medium>
+        <v-icon color="grey" class="mx-4 player-buttons" dense medium>
           mdi-skip-next
         </v-icon>
 
-        <v-icon color="grey" class="mx-4" dense small>
+        <v-icon color="grey" class="mx-4 player-buttons" dense small>
           mdi-repeat
         </v-icon>
       </v-layout>
@@ -44,13 +44,13 @@
 
     <v-row align-content="center" justify="center" class="mx-0" no-gutters>
       <v-layout justify-center align-center row>
-        <v-col class="ml-5 mr-0 pa-0 " cols="1">
-          <div class="number-div mx-0 pa-0">
-            {{ $store.state.MusicPlayer.currentSong.totalTime }}
+        <v-col class="ml-5 mr-0 pa-0 justify-space-between" cols="1">
+          <div class="mx-3 pa-0" id="number-div-left">
+            {{ currentSongTime }}
           </div>
         </v-col>
 
-        <v-col class="mt-3 mb-3 mr-5 pa-0">
+        <v-col class="mt-3 mb-3 mr-0 pa-0">
           <v-progress-linear
             background-color="grey"
             color="green"
@@ -60,9 +60,9 @@
           </v-progress-linear>
         </v-col>
 
-        <v-col class=" pa-0 " cols="1">
-          <div class="number-div">
-            {{ $store.state.MusicPlayer.currentSong.totalTime }}
+        <v-col class="pa-0" cols="1">
+          <div id="number-div-right" class="mx-3 mb-0">
+            {{ totalSongTime }}
           </div>
         </v-col>
       </v-layout>
@@ -77,15 +77,45 @@ export default {
   methods: {
     ...mapMutations(['togglePlay']),
   },
+  computed: {
+    totalSongTime() {
+      const SongTimeinS = Math.floor(
+        this.$store.state.MusicPlayer.currentSong.item.duration_ms / 1000,
+      );
+      const TimeString = `${Math.floor(
+        SongTimeinS / 60,
+      ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+      return TimeString;
+    },
+
+    currentSongTime() {
+      const SongTimeinS = Math.floor(
+        this.$store.state.MusicPlayer.currentSong.progress_ms / 1000,
+      );
+      const TimeString = `${Math.floor(
+        SongTimeinS / 60,
+      ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+      return TimeString;
+    },
+  },
 };
 </script>
 
 <style scoped>
-.number-div {
-  width: 20px;
-  height: 20px;
+#number-div-left {
   color: rgb(146, 145, 145);
   font-size: 12px;
+  text-align: end;
+  font-family: Helvetica Neue, Helvetica, Arial, Hiragino Kaku Gothic Pro,
+    Meiryo, MS Gothic, sans-serif;
+}
+.player-buttons:hover {
+  color: white !important;
+}
+#number-div-right {
+  color: rgb(146, 145, 145);
+  font-size: 12px;
+  text-align: start;
   font-family: Helvetica Neue, Helvetica, Arial, Hiragino Kaku Gothic Pro,
     Meiryo, MS Gothic, sans-serif;
 }

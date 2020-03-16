@@ -19,12 +19,19 @@
 import LMusicP from './musicplayer/LeftPartMPlayer.vue';
 import RMusicP from './musicplayer/RightPartMPlayer.vue';
 import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
+import Requests from '../store/modules/MusicPlayer/Requests';
 
 export default {
   components: {
     LMusicP,
     RMusicP,
     MMusicP,
+  },
+
+  async created() {
+    this.$store.state.MusicPlayer.currentSong = await Requests.fetchCurrentSong();
+    // eslint-disable-next-line no-console
+    console.log(this.$store.state.MusicPlayer.currentSong);
   },
 };
 </script>

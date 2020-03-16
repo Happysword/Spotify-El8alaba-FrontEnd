@@ -1,5 +1,5 @@
 <template>
-  <v-layout align-center row justify-center>
+  <v-layout align-content-center row justify-center>
     <v-spacer></v-spacer>
     <v-flex shrink>
       <v-btn to="/home/queue" @click="queueChange" text x-small>

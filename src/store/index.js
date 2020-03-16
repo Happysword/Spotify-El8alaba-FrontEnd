@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import * as currentSongMock from '../api/mock/data/MusicPlayer/currentSong.json';
 
 Vue.use(Vuex);
 
@@ -26,15 +27,7 @@ export default new Vuex.Store({
       volume: 70,
       bufferValue: 0,
       isPlaying: false,
-      currentSong: {
-        image:
-          'https://i.scdn.co/image/ab67706f000000021cb21db1932b5c9139bbf136',
-        name: 'Mock Song',
-        albumId: '3jdskfn3k3jj3nknk2',
-        artist: 'Test Artist',
-        artistId: 'jjd3jhjh234ug543hhj',
-        totalTime: 130,
-      },
+      currentSong: currentSongMock[0],
     },
   },
 

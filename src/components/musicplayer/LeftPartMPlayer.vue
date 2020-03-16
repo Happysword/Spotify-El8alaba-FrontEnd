@@ -11,13 +11,13 @@
           <v-flex align-self-center shrink class="mx-1">
             <router-link
               :to="
-                '/home/album/' + $store.state.MusicPlayer.currentSong.albumId
+                '/home/album/' + $store.state.MusicPlayer.currentSong.item.album.artists[0].id
               "
             >
               <v-img
                 max-height="60"
                 max-width="60"
-                :src="$store.state.MusicPlayer.currentSong.image"
+                :src="$store.state.MusicPlayer.currentSong.item.album.images[0].url"
                 contain
               ></v-img>
             </router-link>
@@ -27,35 +27,35 @@
             <v-layout justify-center align-center column>
               <router-link
                 :to="
-                  '/home/album/' + $store.state.MusicPlayer.currentSong.albumId
+                  '/home/album/' + $store.state.MusicPlayer.currentSong.item.album.artists[0].id
                 "
                 id="song-name"
               >
-                {{ $store.state.MusicPlayer.currentSong.name }}
+                {{ $store.state.MusicPlayer.currentSong.item.name }}
               </router-link>
 
               <router-link
                 :to="
                   '/home/artist/' +
-                    $store.state.MusicPlayer.currentSong.artistId
+                    $store.state.MusicPlayer.currentSong.item.album.artists[0].id
                 "
                 id="artist-name"
               >
-                {{ $store.state.MusicPlayer.currentSong.artist }}
+                {{ $store.state.MusicPlayer.currentSong.item.album.artists[0].name }}
               </router-link>
             </v-layout>
           </v-flex>
 
           <v-flex align-self-center shrink class="mx-1 ml-5">
-            <v-icon color="grey" class="mx-2" dense medium>
+            <v-icon color="grey" class="mx-2 info-buttons" dense medium>
               mdi-heart-outline
             </v-icon>
 
-            <v-icon color="grey" class="mx-2" dense medium>
+            <v-icon color="grey" class="mx-2 info-buttons" dense medium>
               mdi-alpha-x-circle-outline
             </v-icon>
 
-            <v-icon color="grey" class="mx-2" dense medium>
+            <v-icon color="grey" class="mx-2 info-buttons" dense medium>
               mdi-shape-rectangle-plus
             </v-icon>
           </v-flex>
@@ -80,6 +80,9 @@ export default {};
   text-decoration: none;
   text-align: left;
 }
+#song-name:hover {
+  text-decoration: underline;
+}
 #artist-name {
   font-size: 13px;
   color: grey;
@@ -87,6 +90,12 @@ export default {};
     Meiryo, MS Gothic, sans-serif;
   text-decoration: none;
   text-align: left;
+}
+#artist-name:hover {
+  color: white;
+}
+.info-buttons:hover {
+  color: white !important;
 }
 #info-card {
   background-color: transparent;

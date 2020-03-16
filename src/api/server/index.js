@@ -8,4 +8,14 @@ export default {
     // TODO[@XL3]: Replace this with our server
     return axios.get(api).then((response) => response.data);
   },
+
+
+  // TODO[@Seif]: Check that the endpoint is correct
+  /**
+   * Fetches Current Song in the mock data
+   * @return {Promise} A promise containing info about current Track
+   */
+  async fetchCurrentSong() {
+    return axios.get(`${api}/api/v1/me/player/currently-playing `).then((response) => response.data);
+  },
 };
