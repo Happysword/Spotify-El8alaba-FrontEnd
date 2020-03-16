@@ -1,5 +1,9 @@
 import users from './data/users.json';
 import currentUserAlbum from './data/Get-Current-User-Album.json';
+import currentUserPlaylists from './data/Get-Current-User-Playlists.json';
+import currentUserArtists from './data/Get-User-Followed-Artists.json';
+import getAnArtist from './data/Get-An-Artist.json';
+
 
 /**
  * Fetches mock data after a given timeout.
@@ -21,8 +25,16 @@ export default {
   fetchUsers() {
     return fetch(users, 1000);
   },
-
   fetchCurrentUserAlbum() {
-    return fetch(currentUserAlbum, 1000);
+    return fetch(currentUserAlbum, 100);
+  },
+  fetchCurrentUserPlaylists() {
+    return fetch(currentUserPlaylists, 100);
+  },
+  fetchCurrentUserArtists() {
+    return fetch(currentUserArtists, 100);
+  },
+  fetchAnArtist() {
+    return fetch(getAnArtist, 100);
   },
 };

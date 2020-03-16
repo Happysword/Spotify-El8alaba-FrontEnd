@@ -13,17 +13,29 @@
 </template>
 
 <script>
+import client from '../../api/mock';
 import ArtistCard from '../../components/ArtistCard.vue';
-import JsonArtists from '../../json/Get-User-Followed-Artists.json';
 
 export default {
   data() {
     return {
-      artistsJson: JsonArtists,
+      artistsJson: JSON,
     };
   },
   components: {
     ArtistCard,
   },
+  created() {
+    this.fetchUserArtists();
+  },
+  methods: {
+    fetchUserArtists() {
+      client.fetchCurrentUserArtists()
+        .then((response) => {
+          this.artistsJson = response;
+        });
+    },
+  },
+
 };
 </script>

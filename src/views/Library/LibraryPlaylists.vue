@@ -12,17 +12,28 @@
 </template>
 
 <script>
+import client from '../../api/mock';
 import SongCard from '../../components/SongCard.vue';
-import JsonPlaylists from '../../json/Get-Current-User-Playlists.json';
 
 export default {
   data() {
     return {
-      playlists: JsonPlaylists,
+      playlists: JSON,
     };
   },
   components: {
     SongCard,
+  },
+  created() {
+    this.fetchUserPlaylists();
+  },
+  methods: {
+    fetchUserPlaylists() {
+      client.fetchCurrentUserPlaylists()
+        .then((response) => {
+          this.playlists = response;
+        });
+    },
   },
 };
 </script>

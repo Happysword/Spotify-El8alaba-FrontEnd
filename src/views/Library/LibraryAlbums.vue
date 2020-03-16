@@ -29,12 +29,10 @@ export default {
     this.fetchUserAlbums();
   },
   methods: {
-    // TODO: fix this function
     fetchUserAlbums() {
-      client.getUserAlbums()
-        .then((response) => response.json)
-        .then((data) => {
-          this.albums = data;
+      client.fetchCurrentUserAlbum()
+        .then((response) => {
+          this.albums = response;
         });
     },
   },

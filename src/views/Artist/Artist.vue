@@ -81,17 +81,26 @@
 </template>
 
 <script>
-import JsonGetAnArtist from '../../json/Get-An-Artist.json';
+import client from '../../api/mock';
 
 export default {
   data() {
     return {
-      artist: JsonGetAnArtist,
+      artist: JSON,
     };
   },
-  components: {
-    // SelectBar,
+  created() {
+    this.fetchAnArtist();
   },
+  methods: {
+    fetchAnArtist() {
+      client.fetchAnArtist()
+        .then((response) => {
+          this.artist = response;
+        });
+    },
+  },
+
 };
 </script>
 

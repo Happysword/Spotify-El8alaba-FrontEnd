@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <h1>Artist Related</h1>
+        <h1 class="white--text">Artist Related</h1>
     </v-container>
 </template>
 
