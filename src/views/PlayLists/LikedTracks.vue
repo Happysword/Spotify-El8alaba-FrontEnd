@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import getSongs from '@/store/getSongs';
+import Song from '@/api/mock';
 import playlistCard from '../../components/playlistCard.vue';
 import songsCard from '../../components/SongsBar.vue';
 
@@ -27,7 +27,7 @@ export default {
     songsCard,
   },
   async created() {
-    this.songs = await getSongs.getSongs('123');
+    this.songs = await Song.fetchSongs('123');
   },
 };
 </script>

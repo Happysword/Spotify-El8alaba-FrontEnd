@@ -4,7 +4,6 @@
         color="#60606010"
         flat
         height="64"
-        active-class
         @mouseover="changeicon(1)"
         @mouseleave="changeicon(0)"
         @click="changeicon(2)"

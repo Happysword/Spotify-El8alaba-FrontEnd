@@ -20,7 +20,8 @@ export default {
   fetchUsers() {
     return fetch(users, 1000);
   },
-  fetchSongs() {
-    return fetch(songs, 1000);
+  async fetchSongs(id) {
+    const allSongs = await fetch(songs, 1000);
+    return allSongs[id];
   },
 };
