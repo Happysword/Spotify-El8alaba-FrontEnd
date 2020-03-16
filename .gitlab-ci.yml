@@ -1,0 +1,20 @@
+image: node:13-alpine3.10
+stages:
+  - pre-build
+  - build
+  - test
+
+install dependencies:
+  stage: prebuild
+  script:
+    - npm install
+    
+build code:
+  stage: build
+  script:
+    - npm run build
+  
+run unit tests:
+  stage: test
+  script:
+    - npm run test
