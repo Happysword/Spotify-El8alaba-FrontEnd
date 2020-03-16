@@ -5,7 +5,7 @@ stages:
   - test
 
 install dependencies:
-  stage: prebuild
+  stage: pre-build
   script:
     - npm install
     
