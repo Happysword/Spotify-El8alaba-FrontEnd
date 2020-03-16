@@ -7,6 +7,12 @@
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
             <v-img src="../../assets/imgs/El-8alaba.png" contain height="140" />
+            <!-- Error bar -->
+            <p
+              class="caption red darken-1 white--text text-center py-3 mb-8"
+              v-if="userInput.incorrect"
+              >Error. Something went wrong.
+            </p>
             <!-- Email -->
             <v-form ref="signupForm">
               <v-text-field
@@ -95,9 +101,9 @@
                 </v-col>
               </v-row>
               <!-- Gender -->
-              <v-radio-group row v-model="userInput.gender">
-                <v-radio label="Male" value="male"/>
-                <v-radio label="Female" value="female"/>
+              <v-radio-group mandatory row v-model="userInput.gender">
+                <v-radio label="Male" value="m"/>
+                <v-radio label="Female" value="f"/>
               </v-radio-group>
 
               <!-- Sign Up -->
@@ -136,6 +142,8 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import api from 'api-client';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'SignUp',
@@ -170,6 +178,7 @@ export default {
         },
         gender: '',
         onLogin: false,
+        incorrect: false,
       },
 
       validation,
@@ -177,10 +186,54 @@ export default {
   },
 
   methods: {
-    // @todo[XL3]: Implement this
+    ...mapMutations(['setCurrentUser']),
+
+    /**
+     * Signups the user and re-routes them to Home
+     */
     async submit() {
-      console.log('submit!');
+      if (!this.$refs.signupForm.validate()) return;
+
+      /**
+       * UNIX Timestamp helper function
+       *
+       * @note[XL3]: 02:00:00 for timezone offset
+       * See MDN Date.prototype.getTimezoneOffset()
+       *
+       * @param  {Object} dob The object containing the Date of Birth
+       * @return {Number}     The UNIX timestamp in seconds
+       */
+      const dobTimestamp = (dob) => new Date(`${dob.day} ${dob.day} ${dob.day} 02:00:00`)
+        .getTime() / 1000;
+
+      // Send the request
+      const response = await api.signupUser({
+        name: this.userInput.name,
+        email: this.userInput.email,
+        password: this.userInput.password,
+        // @todo[XL3]: See if we're going to add this
+        passwordConfirm: this.userInput.password,
+        gender: this.userInput.gender,
+        birthdate: dobTimestamp(this.userInput.dob),
+        type: 'user',
+      });
+
+      /**
+       * If the request was successful,
+       * set the current user's token and data
+       * and route to home
+       */
+      if (response.status === 'success') {
+        this.setCurrentUser({
+          token: response.token,
+          data: response.data,
+        });
+        this.$router.push('/home');
+      } else {
+        this.userInput.incorrect = true;
+      }
     },
+
     /**
      * Validates that both email fields match
      */

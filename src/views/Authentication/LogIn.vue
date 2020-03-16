@@ -12,8 +12,7 @@
             <p
               class="caption red darken-1 white--text text-center py-3 mb-8"
               v-if="userInput.incorrect"
-            >
-              Incorrect username or password.
+              >Incorrect username or password.
             </p>
 
             <v-form ref="loginForm">
@@ -116,7 +115,7 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
-import authentication from '@/store/modules/auth/authentication';
+import api from 'api-client';
 import { mapMutations } from 'vuex';
 
 export default {
@@ -146,16 +145,22 @@ export default {
       // Validate the form
       if (!this.$refs.loginForm.validate()) return;
 
-      // Locate the user
-      const user = await authentication.authenticateUser(
-        this.userInput.username,
-        this.userInput.password,
-      );
+      // Send the request
+      const response = await api.loginUser({
+        email: this.userInput.username,
+        password: this.userInput.password,
+      });
 
-      // If the user's found, redirect to home
-      // @todo[XL3]: Keep an authorization token
-      if (user.found) {
-        this.setCurrentUser(user.data);
+      /**
+       * If the request was successful,
+       * set the current user's token and data
+       * and route to home
+       */
+      if (response.status === 'success') {
+        this.setCurrentUser({
+          token: response.token,
+          data: response.data,
+        });
         this.$router.push('/home');
       } else {
         this.userInput.incorrect = true;

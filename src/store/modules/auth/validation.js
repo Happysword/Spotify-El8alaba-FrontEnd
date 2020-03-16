@@ -52,11 +52,19 @@ export default {
       || 'Not a valid email address';
   },
 
+  /**
+   * Validates that the provided data matches a day of the month
+   * @return {function} The function that does the validation
+   */
   validDay() {
     return (day) => (!!day && day >= 1 && day <= 31)
       || 'Please enter a valid day of the month';
   },
 
+  /**
+   * Validates that the provided data matches a year
+   * @return {function} The function that does the validation
+   */
   validYear() {
     // @todo[XL3]: Validate this year range
     return (year) => (!!year && year >= 1920 && year <= 2020)
