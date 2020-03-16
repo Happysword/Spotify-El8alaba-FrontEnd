@@ -8,4 +8,8 @@ export default {
     // TODO[@XL3]: Replace this with our server
     return axios.get(api).then((response) => response.data);
   },
+  fetchSongs() {
+    // TODO[Naiera]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
 };

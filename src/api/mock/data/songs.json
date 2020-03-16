@@ -1,0 +1,108 @@
+{
+    "123": [
+        {
+            "songname": "Mutlu Sonuz (Delibal Original Sountrack)",
+            "artist": "Çağatay Ulusoy ",
+            "album": " Mutlu Sonsuz (Delibal Original Soundtrack)",
+            "duration": "2:15"
+        },
+        {
+            "songname": "Bohemian Rhapsody-2011 Mix",
+            "artist": "Queen ",
+            "album": " A Night At The Opera (2011 Remaster)",
+            "duration": "5:54"
+        },
+        {
+            "songname": "I Want To Break Free",
+            "artist": "Queen ",
+            "album": " The Works",
+            "duration": "4:18"
+        },
+        {
+            "songname": "Faded",
+            "artist": "Alan Walker ",
+            "album": " Different World",
+            "duration": "3:50"
+        },
+        {
+            "songname": "Hymn for the Weekend",
+            "artist": "Coldplay ",
+            "album": " A Head Full of Dreams",
+            "duration": "4:20"
+        },
+        {
+            "songname": "Shape of You",
+            "artist": "Ed Sheeran ",
+            "album": " ÷ (Deluxe)",
+            "duration": "2:47"
+        },
+        {
+            "songname": "Skyfall",
+            "artist": "Adele ",
+            "album": " Skyfall",
+            "duration": "3:36"
+        },
+        {
+            "songname": "Human",
+            "artist": "Rag'n'Bone Man ",
+            "album": " Human (Deluxe)",
+            "duration": "3:20"
+        },
+        {
+            "songname": "Memories",
+            "artist": "Maroon 5 ",
+            "album": " Memories",
+            "duration": "4:47"
+        },
+        {
+            "songname": "Mey",
+            "artist": "Model ",
+            "album": " Mey",
+            "duration": "4:47"
+        },
+        {
+            "songname": "bad guy",
+            "artist": "Billie Eilish ",
+            "album": " WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
+            "duration": "3:14"
+        },
+        {
+            "songname": "New Rules",
+            "artist": "Dua Lipa ",
+            "album": " Dua Lipa(Complete Edition)",
+            "duration": "3:29"
+        },
+        {
+            "songname": "Skin",
+            "artist": "Rag'n'Bone Man ",
+            "album": " Human (Deluxe)",
+            "duration": "3:59"
+        },
+        {
+            "songname": "FRIENDS",
+            "artist": "Marshmello, Anne-Marie ",
+            "album": " FRIENDS",
+            "duration": "3:22"
+        },
+        {
+            "songname": "Starboy",
+            "artist": "The Weeknd ",
+            "album": " Starboy",
+            "duration": "3:50"
+        }
+    ],
+    "222":[
+        {
+            "songname": "Starboy",
+            "artist": "The Weeknd ",
+            "album": " Starboy",
+            "duration": "3:50"
+        },
+        {
+            "songname": "FRIENDS",
+            "artist": "Marshmello, Anne-Marie ",
+            "album": " FRIENDS",
+            "duration": "3:22"
+        }
+    ]  
+}

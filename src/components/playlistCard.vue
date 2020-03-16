@@ -2,7 +2,7 @@
         <v-card class="mx-auto px-5 white--text"
         color="#00000000" flat max-width="344">
             <v-img  @mouseover="overlay=true" @mouseout="overlay= store.state.play"
-                :src="store.state.playlistImg">
+                :src="store.state.playlistImg" class="mt-1">
                 <v-overlay v-show="overlay" absolute>
                     <v-icon size="70" color="white"
                     v-if="!store.state.play" @click="changeStatus">
@@ -94,11 +94,6 @@ export default {
   methods: {
     changeStatus() {
       store.commit('changePlay');
-      if (store.state.play === true) {
-        this.playSong = 'Pause';
-      } else {
-        this.playSong = 'Play';
-      }
     },
     changeLiked() {
       store.commit('changeLiked');
@@ -110,7 +105,13 @@ export default {
       }
     },
   },
-
+  updated() {
+    if (store.state.play === true) {
+      this.playSong = 'Pause';
+    } else {
+      this.playSong = 'Play';
+    }
+  },
   components: {
     dropDown,
   },

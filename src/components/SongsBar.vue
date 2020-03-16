@@ -4,6 +4,7 @@
         color="#60606010"
         flat
         height="64"
+        active-class
         @mouseover="changeicon(1)"
         @mouseleave="changeicon(0)"
         @click="changeicon(2)"
@@ -15,10 +16,10 @@
                 <v-list-item two-line>
                   <v-list-item-content>
                     <v-list-item-title class="white--text mx-2 subtitle">
-                      {{songName}}
+                      {{song.songname}}
                     </v-list-item-title>
                     <v-list-item-subtitle class="grey--text mx-2 text">
-                      Artist . Album
+                      {{ song.artist }} . {{song.album}}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
@@ -35,7 +36,7 @@
                   </template>
                   <dropDown></dropDown>
                 </v-menu>
-                <label class="grey--text mx-2">{{SongTime}}</label>
+                <label class="grey--text mx-2">{{song.duration}}</label>
               </v-card-text>
             </v-card-actions>
         </v-card>
@@ -43,6 +44,7 @@
 
 <script>
 import store from '../store';
+import dropDown from './mockDropdown.vue';
 
 export default {
   data: () => ({
@@ -50,11 +52,10 @@ export default {
     dotsIcon: '',
   }),
   props: {
-    songName: String,
-    SongTime: String,
+    song: Object,
   },
   components: {
-
+    dropDown,
   },
   methods: {
     changeicon(hover) {
@@ -75,3 +76,8 @@ export default {
 
 };
 </script>
+<style scoped>
+:hover{
+  background-color: #38050520;
+}
+</style>
