@@ -127,7 +127,7 @@
           :key="playlist.id"
           dense
           route
-          :to="'/home/playlist/' + playlist.id"
+          :to="'/playlist/' + playlist.id"
         >
           <v-list-item-content>
             <v-list-item-title class="subtitle-2">{{

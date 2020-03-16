@@ -37,6 +37,16 @@ const routes = [
         component: LikedTracks,
       },
       {
+        path: '/playlist/:id',
+        name: 'playlist',
+        component: LikedTracks,
+      },
+      {
+        path: '/album/:id',
+        name: 'album',
+        component: LikedTracks,
+      },
+      {
         path: '/home/library',
         name: 'library',
         component: Library,

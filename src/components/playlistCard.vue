@@ -1,15 +1,15 @@
 <template>
         <v-card class="mx-auto px-5 white--text"
         color="#00000000" flat max-width="344">
-            <v-img  @mouseover="overlay=true" @mouseout="overlay= store.state.play"
+            <v-img  @mouseover="overlay=true" @mouseout="overlay= play"
                 :src="store.state.playlistImg" class="mt-1">
                 <v-overlay v-show="overlay" absolute>
                     <v-icon size="70" color="white"
-                    v-if="!store.state.play" @click="changeStatus">
+                    v-if="!play" @click="changeStatus">
                     mdi-play-circle-outline
                     </v-icon>
                     <v-icon size="70" color="white"
-                    v-if="store.state.play" @click="changeStatus">
+                    v-if="play" @click="changeStatus">
                     mdi-pause-circle-outline
                     </v-icon>
                 </v-overlay>
@@ -68,13 +68,14 @@
               </v-tooltip>
             </v-card-actions>
             <p class="text-center grey--text">
-               {{store.state.numberOfLikedSongs}} Songs
+               {{songsNum}} Songs
             </p>
         </v-card>
 </template>
 <script>
 import store from '../store';
 import dropDown from './mockDropdown.vue';
+import EventBus from '../EventBus';
 
 export default {
   name: 'LikedTracks',
@@ -88,12 +89,16 @@ export default {
     text: '',
     timeout: 2000,
     tooltip: false,
+    play: false,
 
   }),
-
+  props: {
+    songsNum: Number,
+  },
   methods: {
     changeStatus() {
-      store.commit('changePlay');
+      this.play = !this.play;
+      EventBus.$emit('pause', this.play);
     },
     changeLiked() {
       store.commit('changeLiked');
@@ -105,8 +110,13 @@ export default {
       }
     },
   },
+  mounted() {
+    EventBus.$on('changePlay', (play) => {
+      this.play = play;
+    });
+  },
   updated() {
-    if (store.state.play === true) {
+    if (this.play === true) {
       this.playSong = 'Pause';
     } else {
       this.playSong = 'Play';

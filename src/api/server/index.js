@@ -13,4 +13,18 @@ export default {
       .then((response) => response);
     return songs;
   },
+
+  async fetchList(id) {
+    const lists = await axios.get(`${api}v1/playlists/${id}?fields=name`)
+      .then((response) => response);
+    return lists;
+  },
+
+  async fetchListCover(id) {
+    const img = await axios.get(`${api}v1/playlists/${id}/images`)
+      .then((response) => response);
+    return img;
+  },
+
+
 };

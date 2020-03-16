@@ -2,10 +2,11 @@
   <v-container fluid>
     <v-row justify="center">
       <v-col sm='12' md='6' lg="4" class="my-2 pr-0">
-        <playlistCard></playlistCard>
+        <playlistCard :songsNum="songsNum"></playlistCard>
       </v-col>
       <v-col sm='12' md='6' lg="8" class="my-1 pl-0">
-        <songsCard v-for="song in songs" :key="song.id" :song="song"></songsCard>
+        <songsCard v-for="(song,index) in songs" :key="song.id"
+          :counter="index" :song="song"></songsCard>
       </v-col>
     </v-row>
   </v-container>
@@ -20,6 +21,7 @@ export default {
   data() {
     return {
       songs: [],
+      songsNum: 0,
     };
   },
   components: {
@@ -28,6 +30,7 @@ export default {
   },
   async created() {
     this.songs = await Song.fetchSongs('123');
+    this.songsNum = this.songs.length;
   },
 };
 </script>

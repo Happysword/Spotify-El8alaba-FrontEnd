@@ -42,16 +42,18 @@
 </template>
 
 <script>
-import store from '../store';
 import dropDown from './mockDropdown.vue';
+import EventBus from '../EventBus';
 
 export default {
   data: () => ({
     showIcon: 'mdi-music-note-outline',
     dotsIcon: '',
+    play: false,
   }),
   props: {
     song: Object,
+    counter: Number,
   },
   components: {
     dropDown,
@@ -60,19 +62,26 @@ export default {
     changeicon(hover) {
       this.dotsIcon = 'mdi-dots-horizontal';
       if (hover === 2) {
-        store.commit('changePlay');
+        this.play = !this.play;
+        EventBus.$emit('changePlay', this.play);
       }
       if (hover === 0) {
         this.showIcon = 'mdi-music-note-outline';
         this.dotsIcon = '';
-      } else if (store.state.play === true) {
+      } else if (this.play === true) {
         this.showIcon = 'mdi-pause';
       } else {
         this.showIcon = 'mdi-play';
       }
     },
   },
-
+  mounted() {
+    EventBus.$on('pause', (play) => {
+      if ((this.play === true && play === false) || this.counter === 0) {
+        this.play = play;
+      }
+    });
+  },
 };
 </script>
 <style scoped>
