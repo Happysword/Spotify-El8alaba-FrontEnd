@@ -1,0 +1,41 @@
+<template>
+    <v-container fluid="">
+        <v-row>
+            <v-col  xs="12" sm="6" md="4" lg="2"
+            v-for="card in artistsJson.artists.items" :key="card.id">
+                   <artist-card :id="card.id" :profileName="card.name"
+                   :images="card.images"
+                   :type="card.type"
+                   ></artist-card>
+            </v-col>
+        </v-row>
+    </v-container>
+</template>
+
+<script>
+import client from '../../api/mock';
+import ArtistCard from '../../components/ArtistCard.vue';
+
+export default {
+  data() {
+    return {
+      artistsJson: JSON,
+    };
+  },
+  components: {
+    ArtistCard,
+  },
+  created() {
+    this.fetchUserArtists();
+  },
+  methods: {
+    fetchUserArtists() {
+      client.fetchCurrentUserArtists()
+        .then((response) => {
+          this.artistsJson = response;
+        });
+    },
+  },
+
+};
+</script>

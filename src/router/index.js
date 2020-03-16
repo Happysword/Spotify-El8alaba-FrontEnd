@@ -13,6 +13,11 @@ import Library from '../views/Library/Library.vue';
 import LibraryPlaylists from '../views/Library/LibraryPlaylists.vue';
 import LibraryAlbums from '../views/Library/LibraryAlbums.vue';
 import LibraryArtists from '../views/Library/LibraryArtists.vue';
+import Artist from '../views/Artist/Artist.vue';
+import ArtistOverview from '../views/Artist/ArtistOverview.vue';
+import ArtistRelated from '../views/Artist/ArtistRelated.vue';
+import ArtistAbout from '../views/Artist/ArtistAbout.vue';
+
 
 Vue.use(VueRouter);
 
@@ -37,7 +42,7 @@ const routes = [
         component: LikedTracks,
       },
       {
-        path: '/home/library',
+        path: '/home/library/playlists',
         name: 'library',
         component: Library,
         redirect: { name: 'libraryplaylists' },
@@ -56,6 +61,29 @@ const routes = [
             path: '/home/library/artists',
             name: 'libraryartists',
             component: LibraryArtists,
+          },
+        ],
+      },
+      {
+        path: '/home/artist/:id',
+        name: 'artist',
+        component: Artist,
+        redirect: { name: 'artistOverview' },
+        children: [
+          {
+            path: '/home/artist/:id',
+            name: 'artistOverview',
+            component: ArtistOverview,
+          },
+          {
+            path: '/home/artist/:id/related',
+            name: 'artistRelated',
+            component: ArtistRelated,
+          },
+          {
+            path: '/home/artist/:id/about',
+            name: 'artistAbout',
+            component: ArtistAbout,
           },
         ],
       },
