@@ -1,25 +1,33 @@
 <template>
   <v-container fluid>
-    <v-row justify="space-around">
-      <v-col xs='12' md='6' lg="4">
+    <v-row justify="center">
+      <v-col sm='12' md='6' lg="4" class="my-2 pr-0">
         <playlistCard></playlistCard>
       </v-col>
-      <v-col xs='12' md='6' lg="8" class="my-8">
-        <songsCard></songsCard>
+      <v-col sm='12' md='6' lg="8" class="my-1 pl-0">
+        <songsCard v-for="song in songs" :key="song.id" :song="song"></songsCard>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import Song from '@/api/mock';
 import playlistCard from '../../components/playlistCard.vue';
-import songsCard from '../../components/mockSongsCard.vue';
+import songsCard from '../../components/SongsBar.vue';
 
 export default {
-  name: 'Home',
+  data() {
+    return {
+      songs: [],
+    };
+  },
   components: {
     playlistCard,
     songsCard,
+  },
+  async created() {
+    this.songs = await Song.fetchSongs('123');
   },
 };
 </script>

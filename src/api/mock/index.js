@@ -1,5 +1,5 @@
 import users from './data/users.json';
-
+import songs from './data/songs.json';
 /**
  * Fetches mock data after a given timeout.
  * @param  {JSON}   mockData The Object containing the data
@@ -19,5 +19,9 @@ export default {
    */
   fetchUsers() {
     return fetch(users, 1000);
+  },
+  async fetchSongs(id) {
+    const allSongs = await fetch(songs, 1000);
+    return allSongs[id];
   },
 };
