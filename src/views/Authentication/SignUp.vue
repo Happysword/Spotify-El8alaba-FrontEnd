@@ -6,16 +6,26 @@
         <v-row justify="center" align="center">
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
-            <v-img src="../../assets/imgs/El-8alaba.png" contain height="140" />
+            <v-img
+              id="logo"
+              src="../../assets/imgs/El-8alaba.png"
+              contain
+              height="140"
+            />
+
             <!-- Error bar -->
             <p
+              id="errorBar"
               class="caption red darken-1 white--text text-center py-3 mb-8"
               v-if="userInput.incorrect"
               >Error. Something went wrong.
             </p>
-            <!-- Email -->
+
+            <!-- Form -->
             <v-form ref="signupForm">
+              <!-- Email -->
               <v-text-field
+                id="emailField"
                 color="#1DB954"
                 outlined
                 placeholder="Email"
@@ -27,8 +37,10 @@
                 ]"
                 @change="validateConfirmEmail"
               />
+
               <!-- Confirm Email -->
               <v-text-field
+                id="confirmEmailField"
                 color="#1DB954"
                 outlined
                 placeholder="Confirm email"
@@ -40,11 +52,12 @@
                 ]"
                 @change="validateConfirmEmail"
               />
+
               <!-- Password -->
               <!-- Minimum password length is 8 -->
               <v-text-field
+                id="passwordField"
                 color="#1DB954"
-                clearable
                 outlined
                 placeholder="Password"
                 v-model="userInput.password"
@@ -56,8 +69,10 @@
                 :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="userInput.showPassword = !userInput.showPassword"
               />
+
               <!-- What should we call you? -->
               <v-text-field
+                id="nameField"
                 color="#1DB954"
                 outlined
                 placeholder="What should we call you?"
@@ -71,6 +86,7 @@
                 <!-- Day -->
                 <v-col cols="3">
                   <v-text-field
+                    id="dobDayField"
                     color="#1DB954"
                     outlined
                     placeholder="Day"
@@ -81,6 +97,7 @@
                 <!-- Month -->
                 <v-col>
                   <v-select
+                    id="dobMonthSelect"
                     color="#1DB954"
                     outlined
                     placeholder="Month"
@@ -92,6 +109,7 @@
                 <!-- Year -->
                 <v-col cols="3">
                   <v-text-field
+                    id="dobYearField"
                     color="#1DB954"
                     outlined
                     placeholder="Year"
@@ -100,15 +118,17 @@
                   />
                 </v-col>
               </v-row>
+
               <!-- Gender -->
               <v-radio-group mandatory row v-model="userInput.gender">
-                <v-radio label="Male" value="m"/>
-                <v-radio label="Female" value="f"/>
+                <v-radio id="maleRadio" label="Male" value="m"/>
+                <v-radio id="femaleRadio" label="Female" value="f"/>
               </v-radio-group>
 
               <!-- Sign Up -->
               <v-row justify="center" align="center">
                 <v-btn
+                  id="signupBtn"
                   color="#1DB954"
                   rounded
                   dark
@@ -120,14 +140,14 @@
               </v-row>
             </v-form>
 
-            <p class="text-center mt-4">
+            <p id="loginPrompt" class="text-center mt-4">
               Already have an account?
               <span>
                 <a
-                  href="/login"
                   :class="userInput.onLogin ? 'font-weight-bold' : ''"
                   @mouseover="userInput.onLogin = true"
                   @mouseleave="userInput.onLogin = false"
+                  @click="$router.push('/login')"
                   >Log in
                 </a>
               </span>
