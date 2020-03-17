@@ -24,4 +24,8 @@ export default {
     // TODO[@ahmedx3]: Replace this with our server
     return axios.get(api).then((response) => response.data);
   },
+  fetchArtistRelatedArtists() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
 };

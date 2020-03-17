@@ -3,6 +3,7 @@ import currentUserAlbum from './data/Get-Current-User-Album.json';
 import currentUserPlaylists from './data/Get-Current-User-Playlists.json';
 import currentUserArtists from './data/Get-User-Followed-Artists.json';
 import getAnArtist from './data/Get-An-Artist.json';
+import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
 
 
 /**
@@ -36,5 +37,8 @@ export default {
   },
   fetchAnArtist() {
     return fetch(getAnArtist, 100);
+  },
+  fetchArtistRelatedArtists() {
+    return fetch(getArtistRelatedArtists, 100);
   },
 };
