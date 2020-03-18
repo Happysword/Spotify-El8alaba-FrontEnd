@@ -107,6 +107,7 @@ export default {
   methods: {
     changeStatus() {
       this.play = !this.play;
+      this.overlay = this.play;
       EventBus.$emit('pause', this.play);
     },
     changeLiked() {
@@ -114,13 +115,16 @@ export default {
       this.snackbar = true;
       if (store.state.liked === true) {
         this.text = 'Saved to Your Library';
+        // TODO[Naiera]: Add Save to Your library Request
       } else {
         this.text = 'Removed from Your Library';
+        // TODO[Naiera]: Add Save to Your library Request
       }
     },
   },
   mounted() {
     EventBus.$on('changePlay', (play) => {
+      this.overlay = play;
       this.play = play;
     });
   },

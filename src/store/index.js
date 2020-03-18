@@ -19,6 +19,7 @@ export default new Vuex.Store({
       { title: 'Click Me' },
       { title: 'Click Me' },
     ],
+    currentSong: {},
   },
 
   mutations: {
