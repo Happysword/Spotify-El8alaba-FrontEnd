@@ -70,7 +70,10 @@
     "last 2 versions"
   ],
   "jest": {
-    "preset": "@vue/cli-plugin-unit-jest"
+    "preset": "@vue/cli-plugin-unit-jest",
+    "moduleNameMapper": {
+      "api-client": "<rootDir>/src/api/mock/index.js"
+    }
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

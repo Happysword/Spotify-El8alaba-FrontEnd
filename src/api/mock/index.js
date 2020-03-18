@@ -18,7 +18,7 @@ export default {
    * @return {Promise} A promise containing all users
    */
   fetchUsers() {
-    return fetch(users, 1000);
+    return fetch(users, 50);
   },
 
   /**
@@ -28,7 +28,7 @@ export default {
    */
   async loginUser(body) {
     // Get all users
-    const allUsers = await fetch(users, 1000);
+    const allUsers = await fetch(users, 50);
 
     // Search all users for our user
     let found = false;
@@ -55,7 +55,7 @@ export default {
    */
   async signupUser(body) {
     // Get all users
-    const allUsers = await fetch(users, 1000);
+    const allUsers = await fetch(users, 50);
 
     // Search all users for our user
     let found = false;

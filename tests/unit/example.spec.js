@@ -10,3 +10,7 @@
 //     expect(wrapper.text()).toMatch(msg);
 //   });
 // });
+
+it('Example test', () => {
+  expect(1 + 1).toEqual(2);
+});
