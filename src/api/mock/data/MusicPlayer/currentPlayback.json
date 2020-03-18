@@ -1,0 +1,127 @@
+[
+    {
+        "device": {
+          "id": "8c6d92c58bd16bdc1c25a2ca4fcc9a95a791c40e",
+          "is_active": true,
+          "is_private_session": false,
+          "is_restricted": false,
+          "name": "Web Player (Opera)",
+          "type": "Computer",
+          "volume_percent": 50
+        },
+        "shuffle_state": false,
+        "repeat_state": "off",
+        "timestamp": 1583448229088,
+        "context": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXd3AhRYJnfcl"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXd3AhRYJnfcl",
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DXd3AhRYJnfcl"
+        },
+        "progress_ms": 54712,
+        "item": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/62IUrFqq28x2SbRdzm9sQt"
+                },
+                "href": "https://api.spotify.com/v1/artists/62IUrFqq28x2SbRdzm9sQt",
+                "id": "62IUrFqq28x2SbRdzm9sQt",
+                "name": "Hassan Shakosh",
+                "type": "artist",
+                "uri": "spotify:artist:62IUrFqq28x2SbRdzm9sQt"
+              },
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/054D7n62qxjhkfcBZhdRSI"
+                },
+                "href": "https://api.spotify.com/v1/artists/054D7n62qxjhkfcBZhdRSI",
+                "id": "054D7n62qxjhkfcBZhdRSI",
+                "name": "Hamo Bika",
+                "type": "artist",
+                "uri": "spotify:artist:054D7n62qxjhkfcBZhdRSI"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/4fWILcF0PV8ahDZYkfriuK"
+            },
+            "href": "https://api.spotify.com/v1/albums/4fWILcF0PV8ahDZYkfriuK",
+            "id": "4fWILcF0PV8ahDZYkfriuK",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273e6d07917e41791e928faf317",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02e6d07917e41791e928faf317",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851e6d07917e41791e928faf317",
+                "width": 64
+              }
+            ],
+            "name": "Mahragan Ana Alby Dab",
+            "release_date": "2019-07-07",
+            "release_date_precision": "day",
+            "total_tracks": 1,
+            "type": "album",
+            "uri": "spotify:album:4fWILcF0PV8ahDZYkfriuK"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/62IUrFqq28x2SbRdzm9sQt"
+              },
+              "href": "https://api.spotify.com/v1/artists/62IUrFqq28x2SbRdzm9sQt",
+              "id": "62IUrFqq28x2SbRdzm9sQt",
+              "name": "Hassan Shakosh",
+              "type": "artist",
+              "uri": "spotify:artist:62IUrFqq28x2SbRdzm9sQt"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/054D7n62qxjhkfcBZhdRSI"
+              },
+              "href": "https://api.spotify.com/v1/artists/054D7n62qxjhkfcBZhdRSI",
+              "id": "054D7n62qxjhkfcBZhdRSI",
+              "name": "Hamo Bika",
+              "type": "artist",
+              "uri": "spotify:artist:054D7n62qxjhkfcBZhdRSI"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 290296,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "EGA0S1903364"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0kKMVXyA5NVOzx7SKHyWIt"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0kKMVXyA5NVOzx7SKHyWIt",
+          "id": "0kKMVXyA5NVOzx7SKHyWIt",
+          "is_local": false,
+          "name": "Mahragan Ana Alby Dab",
+          "popularity": 47,
+          "preview_url": "https://p.scdn.co/mp3-preview/13dedab05c30f0178f0c034a337252f6f662c062?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:0kKMVXyA5NVOzx7SKHyWIt"
+        },
+        "currently_playing_type": "track",
+        "actions": {
+          "disallows": {
+            "resuming": true
+          }
+        },
+        "is_playing": true
+      }
+]

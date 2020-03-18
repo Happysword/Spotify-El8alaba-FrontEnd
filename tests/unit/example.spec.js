@@ -10,3 +10,9 @@
 //     expect(wrapper.text()).toMatch(msg);
 //   });
 // });
+
+describe('example', () => {
+  it('should be implemented', () => {
+    expect(true).toBe(true);
+  });
+});

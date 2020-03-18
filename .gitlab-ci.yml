@@ -1,0 +1,23 @@
+image: node:13-alpine3.10
+stages:
+  - build
+  - test
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+    
+build code:
+  stage: build
+  script:
+    - npm run build
+  
+run unit tests:
+  stage: test
+  script:
+    - npm run test

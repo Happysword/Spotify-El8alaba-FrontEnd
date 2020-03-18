@@ -1,33 +1,15 @@
-import users from './data/users.json';
-import currentSong from './data/MusicPlayer/currentSong.json';
-import currentPlayback from './data/MusicPlayer/currentPlayback.json';
-/**
- * Fetches mock data after a given timeout.
- * @param  {JSON}   mockData The Object containing the data
- * @param  {Number} time     The amount in seconds to timeout
- * @return {Promise}         A promise containing the mockData
- */
-const fetch = (mockData, time = 0) => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve(mockData);
-  }, time);
-});
+import client from 'api-client';
 
 export default {
-  /**
-   * Fetches all users in the mock data
-   * @return {Promise} A promise containing all users
-   */
-  fetchUsers() {
-    return fetch(users, 1000);
-  },
-
   /**
    * Fetches Current Song in the mock data
    * @return {Object} An object containing info about current Track
    */
-  fetchCurrentSong() {
-    return fetch(currentSong[0], 1000).then((Promisedata) => Promisedata);
+  async fetchCurrentSong() {
+    const data = await client
+      .fetchCurrentSong()
+      .then((Promisedata) => Promisedata);
+    return data;
   },
 
   /**
@@ -35,7 +17,10 @@ export default {
    * @return {Object} An Object Containing info about the User's Current playback
    */
   async fetchCurrentPlayback() {
-    return fetch(currentPlayback[0], 1000).then((Promisedata) => Promisedata);
+    const data = await client
+      .fetchCurrentPlayback()
+      .then((Promisedata) => Promisedata);
+    return data;
   },
 
   /**
@@ -43,23 +28,32 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async pausePlayback() {
-    return fetch(true, 1000).then((Promisedata) => Promisedata);
+    const response = await client
+      .pausePlayback()
+      .then((Promisedata) => Promisedata);
+    return response;
   },
 
   /**
    * Start/Resume a User's Playback
    * @return {Boolean} a Boolean True if successful and false if failed
    */
+
   async startPlayback() {
-    return fetch(true, 1000).then((Promisedata) => Promisedata);
+    const response = await client
+      .startPlayback()
+      .then((Promisedata) => Promisedata);
+    return response;
   },
 
   /**
    * Skip User’s Playback To Next Track
    * @return {Boolean} a Boolean True if successful and false if failed
    */
+
   async skipNext() {
-    return fetch(true, 1000).then((Promisedata) => Promisedata);
+    const response = await client.skipNext().then((Promisedata) => Promisedata);
+    return response;
   },
 
   /**
@@ -67,7 +61,10 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async skipPrevious() {
-    return fetch(true, 1000).then((Promisedata) => Promisedata);
+    const response = await client
+      .skipPrevious()
+      .then((Promisedata) => Promisedata);
+    return response;
   },
 
   /**
@@ -76,8 +73,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async toggleShuffle(state) {
-    const dummytrue = state || true; // for mocking purposes of matching the server api
-    return fetch(dummytrue, 1000).then((Promisedata) => Promisedata);
+    if (typeof state === 'boolean') {
+      const response = await client
+        .toggleShuffle(state)
+        .then((Promisedata) => Promisedata);
+      return response;
+    }
+    return false;
   },
 
   /**
@@ -86,9 +88,13 @@ export default {
    * context: will repeat the current context. off: will turn repeat off.
    * @return {Boolean} a Boolean True if successful and false if failed
    */
+
   async toggleRepeat(state) {
     if (state === 'track' || state === 'off' || state === 'context') {
-      return fetch(true, 1000).then((Promisedata) => Promisedata);
+      const response = await client
+        .toggleRepeat(state)
+        .then((Promisedata) => Promisedata);
+      return response;
     }
     return false;
   },
@@ -99,8 +105,11 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async seekPosition(positionMs) {
-    if (positionMs > 0) {
-      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    if (typeof positionMs === 'number' && positionMs > 0) {
+      const response = await client
+        .seekPosition(positionMs)
+        .then((Promisedata) => Promisedata);
+      return response;
     }
     return false;
   },
@@ -110,9 +119,13 @@ export default {
    * @param {Number} volumePercent the Volume percentage wanted from the player
    * @return {Boolean} a Boolean True if successful and false if failed
    */
+
   async setVolume(volumePercent) {
-    if (volumePercent > 0) {
-      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    if (typeof volumePercent === 'number' && volumePercent > 0 && volumePercent <= 100) {
+      const response = await client
+        .setVolume(volumePercent)
+        .then((Promisedata) => Promisedata);
+      return response;
     }
     return false;
   },
