@@ -1,30 +1,31 @@
 <template>
-  <div class="ml-6">
+  <v-container fluid="">
     <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
-    <v-layout row wrap>
-      <pref
-        v-for="i in 3"
-        :key="genres[i].text"
-        class="mt-3"
-        :source="genres[i].src"
-        :title="genres[i].text"
-        :route="genres[i].route"
-        :color="genres[i].color"
-      ></pref>
-    </v-layout>
+    <v-row>
+        <v-col  xs="12" sm="12" md="12" lg="4"  v-for="i in 3" :key="genres[i].text">
+          <pref
+            class="mt-3"
+            :source="genres[i].src"
+            :title="genres[i].text"
+            :route="genres[i].route"
+            :color="genres[i].color"
+          ></pref>
+         </v-col>
+    </v-row>
     <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
-    <v-layout row wrap>
+    <v-row>
+      <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
+      :key="genre.text">
       <Genres
-        v-for="genre in genres"
-        :key="genre.text"
         class="mt-3"
         :source="genre.src"
         :title="genre.text"
         :route="genre.route"
         :color="genre.color"
       ></Genres>
-    </v-layout>
-  </div>
+    </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

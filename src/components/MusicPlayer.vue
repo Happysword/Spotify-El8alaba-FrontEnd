@@ -11,8 +11,7 @@
           </v-btn>
         </v-col>
       </v-row>
-    </v-container></v-footer
-  >
+    </v-container></v-footer>
 </template>
 
 <script>

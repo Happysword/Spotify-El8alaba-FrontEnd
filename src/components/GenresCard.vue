@@ -1,7 +1,7 @@
 <template>
     <div absolute >
-        <v-card class="d-inline-block mr-3 text-xs-top white--text"
-        route :to="route" width=190 height="190" :color=color overflow="hidden">
+        <v-card class="d-inline-block mr-3 white--text GCard"
+        route :to="route" width="190" height="190" :color=color>
             <v-card-title class="font-weight-bold headline">{{ title }}</v-card-title>
             <v-img :src=source class="rotatedImg">
             </v-img>
@@ -13,10 +13,10 @@
 export default {
   name: 'Genres',
   props: {
-    source: { },
-    title: { },
-    route: { },
-    color: { },
+    source: String,
+    title: String,
+    route: String,
+    color: String,
   },
 };
 </script>
@@ -25,9 +25,9 @@ export default {
 .rotatedImg {
   height: 80px;
   width: 80px;
-  transform: translate( 96px , 32px ) rotate( -25deg );
-},
+  transform: translate( 160% , 60% ) rotate( 25deg );
+}
 .GCard{
- background: linear-gradient(0deg,rgba(0,0,0,1) 50%, rgba(1,1,1,1) 100%);
+ clip-path: inset(0 0 0 0 round 5%);
 }
 </style>

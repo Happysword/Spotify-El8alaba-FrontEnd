@@ -1,0 +1,66 @@
+[
+    {
+        "id": "dafsghj36gfhndm",
+     "image": "https://i.scdn.co/image/5ac491f3bf789a7a1491b20de5e83006e0ef2ba0",
+     "name": "Amr Diab",
+     "track": "LOL",
+     "type": "artist",
+     "artistName": "Amr Diab",
+     "owner": "Amr"
+    },
+    {
+     "id": "dafsghj36gfhndm",
+     "image": "https://i.scdn.co/image/b792412da65e330f8315c185fac23009b024e9dc",
+     "name": "Abyusif",
+     "track": "LOL",
+     "type": "artist",
+     "artistName": "Abyusif",
+     "owner": "Amr"
+    },
+    {
+     "id": "erwfghd5dsafeg",
+     "image": "https://i.scdn.co/image/ab67616d0000b2731f631fe49edd09de5e7b4a78",
+     "name": "Birds of Prey",
+     "track": "LOL",
+     "type": "album",
+     "artistName": "Ghali",
+     "owner": "Ghali"
+    },
+    {
+     "id": "asfv2bags27b",
+     "image": "https://i.scdn.co/image/ab67616d0000b2732f44aec83b20e40f3baef73c",
+     "name": "Godzilla",
+     "track": "LOL",
+     "type": "track",
+     "artistName": "Eminem",
+     "owner": "Eminem"
+    },
+    {
+     "id": "asfch2tygbnds2yn",
+     "image": "https://i.scdn.co/image/ab67706f000000021e5c29ed09e1bce33e8a6ea6",
+     "name": "El Donia Helwa",
+     "track": "LOL",
+     "type": "playlist",
+     "artistName": "Spotify",
+     "owner": "Spotify"
+    },
+    {
+     "id": "fahevgb26b32",
+     "image": "",
+     "name": "Happy Sword",
+     "track": "LOL",
+     "type": "profile",
+     "artistName": "",
+     "owner": "Happy Sword"
+    },
+    {
+     "id": "fahevgb26b32",
+     "image": "http://assets.vg247.com/current//2014/11/human_element_nov_14.jpg",
+     "name": "Happy Sword",
+     "track": "LOL",
+     "type": "profile",
+     "artistName": "",
+     "owner": "Happy Sword"
+    }
+
+]

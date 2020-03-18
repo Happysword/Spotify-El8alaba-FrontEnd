@@ -1,4 +1,5 @@
 import users from './data/users.json';
+import genres from './data/genres.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -19,5 +20,8 @@ export default {
    */
   fetchUsers() {
     return fetch(users, 1000);
+  },
+  fetchGenres() {
+    return fetch(genres, 1000);
   },
 };
