@@ -15,6 +15,7 @@
               src="../assets/imgs/El-8alaba.png"
               contain
               height="120"
+              @click="$router.push('/home')"
             ></v-img>
           </v-list-item-content>
           <v-list-item

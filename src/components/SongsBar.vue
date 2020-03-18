@@ -1,6 +1,6 @@
 <template>
         <v-card
-        class="d-block ml-5"
+        class="d-block ml-5 text-truncate"
         color="#60606010"
         flat
         height="64"
@@ -12,18 +12,18 @@
                 <v-icon color="grey">
                  {{showIcon}}
                 </v-icon>
-                <v-list-item two-line>
+                <v-list-item two-line class="text-truncate d-inline-block">
                   <v-list-item-content>
-                    <v-list-item-title class="white--text mx-2 subtitle">
+                    <v-list-item-title class="white--text mx-2 subtitle text-truncate">
                       {{song.songname}}
                     </v-list-item-title>
-                    <v-list-item-subtitle class="grey--text mx-2 text">
+                    <v-list-item-subtitle class="grey--text mx-2 text text-truncate">
                       {{ song.artist }} . {{song.album}}
                     </v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
-                <v-card-text  align="end">
-                  <v-menu absolute>
+                <v-card-text  align="end" style="width: 20%">
+                  <v-menu absolute left>
                   <template v-slot:activator="{ on }">
                     <v-icon
                       size="20"
@@ -84,8 +84,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-:hover{
-  background-color: #38050520;
-}
-</style>
