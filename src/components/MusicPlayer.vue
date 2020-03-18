@@ -1,22 +1,38 @@
 <template>
   <v-footer app dark class="mock-player" height="90">
-    <v-container>
+    <v-container fluid class="mx-0 pa-0">
       <v-row>
-        <v-col justify="center" align-self="center">
-          <h1 id="mock-div">Music Player Mock</h1>
+        <v-col align-self="center" class="pa-0" cols="3">
+          <LMusicP></LMusicP>
         </v-col>
-        <v-col justify="center" align-self="center">
-          <v-btn to="/home/queue">
-            <v-icon>mdi-playlist-play</v-icon>
-          </v-btn>
+        <v-col align-self="center" class="pa-0" cols="6">
+          <MMusicP></MMusicP>
         </v-col>
-      </v-row>
-    </v-container></v-footer
-  >
+        <v-col align-self="center" class="pa-0" cols="3">
+          <RMusicP></RMusicP>
+        </v-col>
+      </v-row> </v-container
+  ></v-footer>
 </template>
 
 <script>
-export default {};
+import LMusicP from './musicplayer/LeftPartMPlayer.vue';
+import RMusicP from './musicplayer/RightPartMPlayer.vue';
+import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
+import Requests from '../store/modules/MusicPlayer/Requests';
+
+export default {
+  components: {
+    LMusicP,
+    RMusicP,
+    MMusicP,
+  },
+
+  async created() {
+    this.$store.state.MusicPlayer.currentSong = await Requests.fetchCurrentSong();
+    this.$store.state.MusicPlayer.currentPlayback = await Requests.fetchCurrentPlayback();
+  },
+};
 </script>
 
 <style scoped>
