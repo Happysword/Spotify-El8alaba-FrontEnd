@@ -1,11 +1,10 @@
 <template>
-  <v-app>
+  <v-app :style="
+        `background: linear-gradient(0deg,rgba(0,0,0,1) 56%, ${color} 100%);`
+      ">
     <Navbar></Navbar>
     <Topbar></Topbar>
     <v-content
-      :style="
-        `background: linear-gradient(0deg,rgba(0,0,0,1) 56%, ${store.state.styling[1]} 100%);`
-      "
     >
       <router-view></router-view>
     </v-content>
@@ -14,10 +13,10 @@
 </template>
 
 <script>
+import EventBus from '../../EventBus';
 import Navbar from '../../components/NavBar.vue';
 import Topbar from '../../components/TopBar.vue';
 import MusicPlayer from '../../components/MusicPlayer.vue';
-import store from '../../store';
 
 export default {
   name: 'Main',
@@ -27,9 +26,21 @@ export default {
     Topbar,
     MusicPlayer,
   },
-
   data: () => ({
-    store,
+    color: 'rgba(10,10,10,255)',
   }),
+  methods: {
+    restoreColor() {
+      this.color = 'rgba(10,10,10,255)';
+    },
+  },
+  mounted() {
+    EventBus.$on('changeColor', (color) => {
+      this.color = color;
+    });
+  },
+  watch: {
+    $route: 'restoreColor',
+  },
 };
 </script>

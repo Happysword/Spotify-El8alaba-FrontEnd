@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="#0C0C0C" dense dark app height="60">
+  <v-app-bar color="#0C0C0C00" flat dense dark app height="60">
     <v-container>
       <v-row>
         <v-btn color="#040404" small fab class="mx-2" @click="changeRoute(-1)">
@@ -27,7 +27,7 @@
 
         <v-btn
           rounded
-          depressed
+          outlined
           class="mx-4"
           route
           to="/premium"
@@ -41,7 +41,7 @@
               <v-btn
                 rounded
                 depressed
-                color="#272727"
+                color="#27272797"
                 v-on="on"
                 class=" text-user text-none ml-0"
                 small
@@ -121,19 +121,19 @@ export default {
 #upgrade-btn {
   border: 2px solid white;
   font-size: 12px;
-  background-color: black;
   width: 12%;
   float: right;
 }
 #upgrade-btn:hover {
-  background-color: rgba(48, 46, 46, 0.329);
+  background-color: rgba(43, 43, 43, 0.329);
 }
 #user-btn {
   display: flex;
   align-items: center;
 }
 #inner-user-btn {
-  padding: 3px;
+  padding: 5px 3px 5px 3px;
+  height: 90%;
 }
 .div {
   font-family: spotify-circular, spotify-circular-cyrillic,

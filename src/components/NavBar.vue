@@ -15,6 +15,7 @@
               src="../assets/imgs/El-8alaba.png"
               contain
               height="120"
+              @click="$router.push('/home')"
             ></v-img>
           </v-list-item-content>
           <v-list-item
@@ -127,7 +128,7 @@
           :key="playlist.id"
           dense
           route
-          :to="'/home/playlist/' + playlist.id"
+          :to="'/playlist/' + playlist.id"
         >
           <v-list-item-content>
             <v-list-item-title class="subtitle-2">{{
@@ -152,6 +153,7 @@ export default {
         { icon: 'mdi-home', text: 'Home', route: '/home' },
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
         { icon: 'mdi-book', text: 'Your Library', route: '/home/library/playlists' },
+        { icon: 'mdi-bookshelf', text: 'Your Library', route: '/home/library' },
       ],
       playlists: Jsonplaylists,
       dialog: false,

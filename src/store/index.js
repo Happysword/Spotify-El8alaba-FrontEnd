@@ -12,13 +12,12 @@ export default new Vuex.Store({
     searching: false,
     InputSearch: '',
     styling: ['rgba(66,17,121,1)', 'rgba(143,0,0,1)'],
+    // styling: ['rgba(66,17,121,1)', 'rgba(143,0,0,1)'],
     // playlistImg: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
-    playlistImg:
-      'https://i.scdn.co/image/ab67706f00000002aa93fe4e8c2d24fc62556cba',
-    play: false,
-    playListName: 'Liked Songs',
+    // playlistImg:
+    // 'https://i.scdn.co/image/ab67706f00000002aa93fe4e8c2d24fc62556cba',
+    // playListName: 'Liked Songs',
     liked: false,
-    numberOfLikedSongs: '95',
     items: [
       { title: 'Click Me' },
       { title: 'Click Me' },
@@ -31,16 +30,13 @@ export default new Vuex.Store({
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
     },
+    currentSong: {},
   },
 
   mutations: {
     setCurrentUser(state, user) {
       state.currentUser = user;
     },
-    changePlay() {
-      this.state.play = !this.state.play;
-    },
-
     changeLiked() {
       this.state.liked = !this.state.liked;
     },
