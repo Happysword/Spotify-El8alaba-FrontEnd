@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot:default="{ hover }">
     <v-card
-    id="card"
+    id="songBar"
     :elevation="hover ? 15 : 0"
     :class="{ 'on-hover': hover }"
     class="d-block ml-5 pt-0 text-truncate"
@@ -13,12 +13,12 @@
     @dblclick="changeicon(2)"
     >
         <v-card-actions>
-            <v-icon color="grey" @click="changeicon(2)">
+            <v-icon :color="color" @click="changeicon(2)">
              {{showIcon}}
             </v-icon>
             <v-list-item two-line class="text-truncate d-inline-block">
               <v-list-item-content>
-                <v-list-item-title class="white--text mx-2 subtitle text-truncate">
+                <v-list-item-title class="mx-2 subtitle text-truncate" :style="`color:${color2} `">
                   {{song.songname}}
                 </v-list-item-title>
                 <v-list-item-subtitle class="grey--text mx-2 text text-truncate">
@@ -39,7 +39,7 @@
               </template>
               <dropDown></dropDown>
             </v-menu>
-            <label class="grey--text mx-2">{{song.duration}}</label>
+            <label class="mx-2" :style="`color:${color} `">{{song.duration}} </label>
           </v-card-text>
         </v-card-actions>
     </v-card>
@@ -54,8 +54,11 @@ import EventBus from '../EventBus';
 export default {
   data: () => ({
     showIcon: 'mdi-music-note-outline',
+    songIcon: 'mdi-music-note-outline',
     dotsIcon: '',
     play: false,
+    color: 'grey',
+    color2: 'white',
   }),
   props: {
     song: Object,
@@ -71,13 +74,19 @@ export default {
         this.play = !this.play;
         if (this.play === true) {
           store.state.currentSong = this.song;
+          this.color = '#1ED760';
+          this.color2 = '#1ED760';
+          this.songIcon = 'mdi-volume-high';
         } else {
           store.state.currentSong = {};
+          this.color = 'grey';
+          this.color2 = 'white';
+          this.songIcon = 'mdi-music-note-outline';
         }
         EventBus.$emit('changePlay', this.play);
       }
       if (hover === 0) {
-        this.showIcon = 'mdi-music-note-outline';
+        this.showIcon = this.songIcon;
         this.dotsIcon = '';
       } else if (this.play === true) {
         this.showIcon = 'mdi-pause';
@@ -100,11 +109,12 @@ export default {
     EventBus.$on('changePlay', () => {
       if (this.song !== store.state.currentSong) {
         this.play = false;
+        this.color = 'grey';
+        this.color2 = 'white';
+        this.songIcon = 'mdi-music-note-outline';
+        this.showIcon = 'mdi-music-note-outline';
       }
     });
   },
 };
 </script>
-<style scoped>
-
-</style>

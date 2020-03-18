@@ -1,11 +1,10 @@
 <template>
-  <v-app>
+  <v-app :style="
+        `background: linear-gradient(0deg,rgba(0,0,0,1) 56%, ${color} 100%);`
+      ">
     <Navbar></Navbar>
     <Topbar></Topbar>
     <v-content
-      :style="
-        `background: linear-gradient(0deg,rgba(0,0,0,1) 56%, ${color} 100%);`
-      "
     >
       <router-view></router-view>
     </v-content>
@@ -28,11 +27,11 @@ export default {
     MusicPlayer,
   },
   data: () => ({
-    color: 'rgba(10,10,10,1)',
+    color: 'rgba(10,10,10,255)',
   }),
   methods: {
     restoreColor() {
-      this.color = 'rgba(10,10,10,1)';
+      this.color = 'rgba(10,10,10,255)';
     },
   },
   mounted() {

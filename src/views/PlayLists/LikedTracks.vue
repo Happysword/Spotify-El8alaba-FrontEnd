@@ -3,11 +3,13 @@
     <v-row justify="center">
       <v-col sm='12' md='6' lg="4" class="my-2 pr-0">
         <playlistCard :songsNum="songsNum" :images="listInfo.images"
-          :name="listInfo.name" :owners="listInfo.artists" :show="show"></playlistCard>
+          :name="listInfo.name" :owners="listInfo.artists" :show="show">
+        </playlistCard>
       </v-col>
       <v-col sm='12' md='6' lg="8" class="my-1 pl-0 text-truncate">
         <songsCard v-for="(song,index) in songs" :key="song.id"
-          :counter="index" :song="song"></songsCard>
+          :counter="index" :song="song">
+        </songsCard>
       </v-col>
     </v-row>
   </v-container>
@@ -44,6 +46,7 @@ export default {
       this.ready = false;
       this.show = true;
       this.songs = [];
+
       if (this.$route.name === 'LikedTracks') {
         this.listInfo = await List.fetchList('LikedTracks');
         this.show = false;
@@ -54,6 +57,7 @@ export default {
       } else {
         return;
       }
+
       const result = await analyze(this.listInfo.images.url);
       EventBus.$emit('changeColor', result[2].color);
       this.ready = true;
