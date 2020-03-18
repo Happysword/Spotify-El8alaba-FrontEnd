@@ -129,7 +129,6 @@
 <script>
 import validation from '@/store/modules/auth/validation';
 import api from 'api-client';
-import { mapMutations } from 'vuex';
 
 export default {
   name: 'LogIn',
@@ -149,8 +148,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setCurrentUser']),
-
     /**
      * Authenticates the user and re-routes them to Home
      */
@@ -166,14 +163,16 @@ export default {
 
       /**
        * If the request was successful,
-       * set the current user's token and data
+       * add the currentUser to localStorage
        * and route to home
        */
       if (response.status === 'success') {
-        this.setCurrentUser({
+        const currentUser = {
           token: response.token,
           data: response.data,
-        });
+        };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
         this.$router.push('/home');
       } else {
         this.userInput.incorrect = true;

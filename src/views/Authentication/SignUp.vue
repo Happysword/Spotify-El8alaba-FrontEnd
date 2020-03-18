@@ -120,9 +120,9 @@
               </v-row>
 
               <!-- Gender -->
-              <v-radio-group mandatory row v-model="userInput.gender">
-                <v-radio id="maleRadio" label="Male" value="m"/>
-                <v-radio id="femaleRadio" label="Female" value="f"/>
+              <v-radio-group id="genderRadio" mandatory row v-model="userInput.gender">
+                <v-radio label="Male" value="m"/>
+                <v-radio label="Female" value="f"/>
               </v-radio-group>
 
               <!-- Sign Up -->
@@ -163,7 +163,6 @@
 <script>
 import validation from '@/store/modules/auth/validation';
 import api from 'api-client';
-import { mapMutations } from 'vuex';
 
 export default {
   name: 'SignUp',
@@ -206,8 +205,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['setCurrentUser']),
-
     /**
      * Signups the user and re-routes them to Home
      */
@@ -240,14 +237,16 @@ export default {
 
       /**
        * If the request was successful,
-       * set the current user's token and data
+       * add the currentUser to localStorage
        * and route to home
        */
       if (response.status === 'success') {
-        this.setCurrentUser({
+        const currentUser = {
           token: response.token,
           data: response.data,
-        });
+        };
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
         this.$router.push('/home');
       } else {
         this.userInput.incorrect = true;
