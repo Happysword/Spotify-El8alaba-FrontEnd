@@ -1,11 +1,12 @@
 <template>
-  <v-app-bar color="#0C0C0C" dense dark app height="60">
+  <v-app-bar color="#0C0C0C00" flat dense dark app height="60">
     <v-container>
       <v-row>
-        <v-btn color="#040404" small fab class="mx-2">
+        <v-btn color="#04040470" small fab class="mx-2" @click="changeRoute(-1)">
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
-        <v-btn color="#040404" small fab class="mx-2">
+
+        <v-btn color="#04040470" small fab class="mx-2" @click="changeRoute(1)">
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
 
@@ -17,26 +18,30 @@
           class="searchbar-pos"
           light
           v-show="$store.state.searching"
+          v-model="$store.state.InputSearch"
+          v-on:input="searching()"
         >
         </v-text-field>
 
         <v-spacer></v-spacer>
+
         <v-btn
           rounded
-          depressed
+          outlined
           class="mx-4"
           route
           to="/premium"
           id="upgrade-btn"
           >Upgrade</v-btn
         >
+
         <div class="text-center" id="user-btn">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
               <v-btn
                 rounded
                 depressed
-                color="#272727"
+                color="#27272797"
                 v-on="on"
                 class=" text-user text-none ml-0"
                 small
@@ -45,13 +50,14 @@
                   ><v-img :src="UserInfo.photo"></v-img
                 ></v-avatar>
                 <div>
-                  {{ UserInfo.name }}
+                  {{ $store.state.currentUser.username }}
                 </div>
                 <v-avatar size="20" class="mx-1">
                   <v-icon>mdi-chevron-down</v-icon>
                 </v-avatar>
               </v-btn>
             </template>
+
             <v-list dense color="grey darken-4" dark>
               <v-list-item
                 v-for="(item, index) in items"
@@ -72,6 +78,7 @@
 export default {
   name: 'Topbar',
   data: () => ({
+    input: '',
     UserInfo: {
       name: 'John Doe',
       photo:
@@ -88,6 +95,15 @@ export default {
       },
     ],
   }),
+  methods: {
+    changeRoute(direction) {
+      this.$router.go(direction);
+    },
+    searching() {
+      this.input = this.$store.state.InputSearch;
+      this.$router.push(`/home/search/${this.input}`);
+    },
+  },
 };
 </script>
 
@@ -105,19 +121,19 @@ export default {
 #upgrade-btn {
   border: 2px solid white;
   font-size: 12px;
-  background-color: black;
   width: 12%;
   float: right;
 }
 #upgrade-btn:hover {
-  background-color: rgba(48, 46, 46, 0.329);
+  background-color: rgba(43, 43, 43, 0.329);
 }
 #user-btn {
   display: flex;
   align-items: center;
 }
 #inner-user-btn {
-  padding: 3px;
+  padding: 5px 3px 5px 3px;
+  height: 90%;
 }
 .div {
   font-family: spotify-circular, spotify-circular-cyrillic,

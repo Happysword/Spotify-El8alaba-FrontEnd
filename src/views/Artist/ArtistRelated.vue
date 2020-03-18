@@ -1,8 +1,8 @@
 <template>
-    <v-container fluid="">
+    <v-container mx-5>
         <v-row>
             <v-col  xs="12" sm="6" md="4" lg="2"
-            v-for="card in artistsJson.artists.items" :key="card.id">
+            v-for="card in artistRelatedArtists.artists" :key="card.id">
                    <artist-card :id="card.id" :profileName="card.name"
                    :images="card.images"
                    :type="card.type"
@@ -16,23 +16,24 @@
 import client from '../../api/mock';
 import ArtistCard from '../../components/ArtistCard.vue';
 
+
 export default {
   data() {
     return {
-      artistsJson: JSON,
+      artistRelatedArtists: JSON,
     };
+  },
+  created() {
+    this.fetchArtistRelatedArtists();
   },
   components: {
     ArtistCard,
   },
-  created() {
-    this.fetchUserArtists();
-  },
   methods: {
-    fetchUserArtists() {
-      client.fetchCurrentUserArtists()
+    fetchArtistRelatedArtists() {
+      client.fetchArtistRelatedArtists()
         .then((response) => {
-          this.artistsJson = response;
+          this.artistRelatedArtists = response;
         });
     },
   },

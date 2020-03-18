@@ -6,7 +6,7 @@ export default {
    * @return {function}            The function that does the validation
    */
   minLength(propertyName, len) {
-    return (data) => data.length >= len
+    return (data) => (!!data && data.length >= len)
       || `Minimum character length for ${propertyName} is ${len}`;
   },
 
@@ -17,7 +17,7 @@ export default {
    * @return {function}            The function that does the validation
    */
   maxLength(propertyName, len) {
-    return (data) => data.length <= len
+    return (data) => (!!data && data.length <= len)
       || `Maximum character length for ${propertyName} is ${len}`;
   },
 
@@ -37,7 +37,37 @@ export default {
    * @return {function}            The function that does the validation
    */
   noSpecialCharacters(propertyName) {
-    return (data) => (!!data && data.search(/[^a-zA-Z0-9_@\-.]/g) === -1)
+    // Validate that this RegExp isn't found in the string
+    return (data) => (!!data && data.search(/[^\w@\-.]/g) === -1)
       || `${propertyName} doesn't allow special characters`;
+  },
+
+  /**
+   * Validates that the provided data matches an email address pattern
+   * @return {function} The function that does the validation
+   */
+  validEmail() {
+    // Validate that this RegExp matches the full string
+    return (email) => (!!email && email.search(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === 0)
+      || 'Not a valid email address';
+  },
+
+  /**
+   * Validates that the provided data matches a day of the month
+   * @return {function} The function that does the validation
+   */
+  validDay() {
+    return (day) => (!!day && day >= 1 && day <= 31)
+      || 'Please enter a valid day of the month';
+  },
+
+  /**
+   * Validates that the provided data matches a year
+   * @return {function} The function that does the validation
+   */
+  validYear() {
+    // @todo[XL3]: Validate this year range
+    return (year) => (!!year && year >= 1920 && year <= 2020)
+      || 'Please enter a valid year';
   },
 };
