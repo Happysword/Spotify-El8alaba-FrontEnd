@@ -101,8 +101,16 @@ export default {
         this.play = play;
         if (this.play === true) {
           store.state.currentSong = this.song;
+          this.color = '#1ED760';
+          this.color2 = '#1ED760';
+          this.songIcon = 'mdi-volume-high';
+          this.showIcon = 'mdi-volume-high';
         } else {
           store.state.currentSong = {};
+          this.color = 'grey';
+          this.color2 = 'white';
+          this.songIcon = 'mdi-music-note-outline';
+          this.showIcon = 'mdi-music-note-outline';
         }
       }
     });
