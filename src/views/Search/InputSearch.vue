@@ -119,6 +119,7 @@ export default {
   },
   destroyed() {
     this.$store.state.searching = false;
+    this.$store.state.InputSearch = '';
   },
 };
 </script>

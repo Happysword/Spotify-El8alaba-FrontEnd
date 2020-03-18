@@ -18,7 +18,7 @@
           class="searchbar-pos"
           light
           v-show="$store.state.searching"
-          v-model="input"
+          v-model="$store.state.InputSearch"
           v-on:input="searching()"
         >
         </v-text-field>
@@ -100,7 +100,7 @@ export default {
       this.$router.go(direction);
     },
     searching() {
-      this.$store.state.InputSearch = this.input;
+      this.input = this.$store.state.InputSearch;
       this.$router.push(`/home/search/${this.input}`);
     },
   },

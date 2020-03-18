@@ -45,9 +45,14 @@ export default {
     };
   },
 
-  created() {
+  mounted() {
     this.$store.state.searching = true;
   },
+
+  updated() {
+    this.$store.state.searching = true;
+  },
+
   destroyed() {
     this.$store.state.searching = false;
   },
