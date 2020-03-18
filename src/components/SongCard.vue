@@ -67,9 +67,9 @@ export default {
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
       if (this.type === 'playlist') {
-        this.$router.push(`/home/playlist/${this.id}`);
+        this.$router.push(`/playlist/${this.id}`);
       } else if (this.type === 'album') {
-        this.$router.push(`/home/album/${this.id}`);
+        this.$router.push(`/album/${this.id}`);
       }
     },
   },

@@ -152,8 +152,7 @@ export default {
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/home' },
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
-        { icon: 'mdi-book', text: 'Your Library', route: '/home/library/playlists' },
-        { icon: 'mdi-bookshelf', text: 'Your Library', route: '/home/library' },
+        { icon: 'mdi-bookshelf', text: 'Your Library', route: '/home/library/playlists' },
       ],
       playlists: Jsonplaylists,
       dialog: false,
