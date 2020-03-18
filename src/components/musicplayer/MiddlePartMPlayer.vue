@@ -74,6 +74,7 @@
           </div>
         </v-col>
 
+        <!-- TODO[@Seif] Fix the V-model with the correct property when streaming works  -->
         <v-col class="mt-3 mb-3 mr-0 pa-0">
           <v-progress-linear
             background-color="grey"
@@ -108,13 +109,9 @@ export default {
     ...mapActions(['togglePlayact']),
     async skipNext() {
       await PlayerRequests.skipNext();
-      // eslint-disable-next-line no-console
-      console.log(this.shuffleState);
     },
     async skipPrevious() {
       await PlayerRequests.skipPrevious();
-      // eslint-disable-next-line no-console
-      console.log(this.shuffleState);
     },
     async toggleRepeat() {
       const Response = await PlayerRequests.toggleRepeat(this.repeatState);
@@ -123,16 +120,12 @@ export default {
       } else if (Response && this.repeatState === 'track') {
         this.repeatState = 'off';
       }
-      // eslint-disable-next-line no-console
-      console.log(this.repeatState);
     },
     async toggleShuffle() {
       const Response = await PlayerRequests.toggleShuffle(this.shuffleState);
       if (Response) {
         this.shuffleState = !this.shuffleState;
       }
-      // eslint-disable-next-line no-console
-      console.log(this.shuffleState);
     },
   },
 

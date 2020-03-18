@@ -38,7 +38,6 @@ export default {
     return fetch(currentPlayback[0], 1000).then((Promisedata) => Promisedata);
   },
 
-
   /**
    * Pause a User's Playback
    * @return {Boolean} a Boolean True if successful and false if failed
