@@ -13,6 +13,7 @@ import Library from '../views/Library/Library.vue';
 import LibraryPlaylists from '../views/Library/LibraryPlaylists.vue';
 import LibraryAlbums from '../views/Library/LibraryAlbums.vue';
 import LibraryArtists from '../views/Library/LibraryArtists.vue';
+import InputSearch from '../views/Search/InputSearch.vue';
 
 Vue.use(VueRouter);
 
@@ -30,7 +31,13 @@ const routes = [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
+      { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/home/genre/:id', name: 'genres', component: Genres },
+      { path: '/artist/:id', name: 'artist' },
+      { path: '/album/:id', name: 'album' },
+      { path: '/playlist/:id', name: 'playlist' },
+      { path: '/profile/:id', name: 'profile' },
+      { path: '/track/:id', name: 'track' },
       {
         path: '/home/library/tracks',
         name: 'LikedTracks',

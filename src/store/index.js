@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     currentUser: {},
     searching: false,
+    InputSearch: '',
     styling: ['rgba(66,17,121,1)', 'rgba(143,0,0,1)'],
     // playlistImg: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
     playlistImg:

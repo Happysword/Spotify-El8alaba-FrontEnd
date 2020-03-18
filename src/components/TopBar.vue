@@ -18,6 +18,8 @@
           class="searchbar-pos"
           light
           v-show="$store.state.searching"
+          v-model="input"
+          v-on:input="searching()"
         >
         </v-text-field>
 
@@ -78,6 +80,7 @@ export default {
   data: () => ({
     UserInfo: {
       name: 'John Doe',
+      input: '',
       photo:
         'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     },
@@ -95,6 +98,10 @@ export default {
   methods: {
     changeRoute(direction) {
       this.$router.go(direction);
+    },
+    searching() {
+      this.$store.state.InputSearch = this.input;
+      this.$router.push(`/home/search/${this.input}`);
     },
   },
 };

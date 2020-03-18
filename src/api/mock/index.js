@@ -1,6 +1,8 @@
 import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
 import currentPlayback from './data/MusicPlayer/currentPlayback.json';
+import genres from './data/genres.json';
+
 /**
  * Fetches mock data after a given timeout.
  * @param  {JSON}   mockData The Object containing the data
@@ -115,5 +117,8 @@ export default {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
     return false;
+  },
+  fetchGenres() {
+    return fetch(genres, 1000);
   },
 };
