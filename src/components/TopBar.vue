@@ -78,9 +78,9 @@
 export default {
   name: 'Topbar',
   data: () => ({
+    input: '',
     UserInfo: {
       name: 'John Doe',
-      input: '',
       photo:
         'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     },

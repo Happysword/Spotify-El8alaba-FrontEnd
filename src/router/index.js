@@ -38,7 +38,6 @@ const routes = [
       { path: '/home/search', name: 'search', component: Search },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/home/genre/:id', name: 'genres', component: Genres },
-      { path: '/artist/:id', name: 'artist' },
       { path: '/album/:id', name: 'album' },
       { path: '/playlist/:id', name: 'playlist' },
       { path: '/profile/:id', name: 'profile' },
