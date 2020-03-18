@@ -117,6 +117,9 @@ export default {
   mounted() {
     this.$store.state.searching = true;
   },
+  destroyed() {
+    this.$store.state.searching = false;
+  },
 };
 </script>
 
