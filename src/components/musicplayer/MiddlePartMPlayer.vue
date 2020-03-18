@@ -2,11 +2,23 @@
   <v-layout column>
     <v-row class="mx-0">
       <v-layout row align-center justify-center>
-        <v-icon color="grey" class="mx-4 player-buttons" dense small>
+        <v-icon
+          color="grey"
+          class="mx-4 player-buttons"
+          dense
+          small
+          @click="toggleShuffle"
+        >
           mdi-shuffle-variant
         </v-icon>
 
-        <v-icon color="grey" class="mx-4 player-buttons" dense medium>
+        <v-icon
+          color="grey"
+          class="mx-4 player-buttons"
+          dense
+          medium
+          @click="skipPrevious"
+        >
           mdi-skip-previous
         </v-icon>
 
@@ -16,7 +28,7 @@
           dense
           x-large
           v-if="$store.state.MusicPlayer.isPlaying"
-          @click="togglePlay"
+          @click="togglePlayact"
         >
           mdi-pause-circle-outline
         </v-icon>
@@ -27,16 +39,28 @@
           dense
           x-large
           v-else
-          @click="togglePlay"
+          @click="togglePlayact"
         >
           mdi-play-circle-outline
         </v-icon>
 
-        <v-icon color="grey" class="mx-4 player-buttons" dense medium>
+        <v-icon
+          color="grey"
+          class="mx-4 player-buttons"
+          dense
+          medium
+          @click="skipNext"
+        >
           mdi-skip-next
         </v-icon>
 
-        <v-icon color="grey" class="mx-4 player-buttons" dense small>
+        <v-icon
+          color="grey"
+          class="mx-4 player-buttons"
+          dense
+          small
+          @click="toggleRepeat"
+        >
           mdi-repeat
         </v-icon>
       </v-layout>
@@ -55,7 +79,7 @@
             background-color="grey"
             color="green"
             rounded
-            v-model="$store.state.MusicPlayer.bufferValue"
+            v-model="$store.state.MusicPlayer.currentPlayback.progress_ms"
           >
           </v-progress-linear>
         </v-col>
@@ -71,12 +95,47 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
+import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
 
 export default {
+  data: () => ({
+    shuffleState: false,
+    repeatState: 'off',
+  }),
+
   methods: {
-    ...mapMutations(['togglePlay']),
+    ...mapActions(['togglePlayact']),
+    async skipNext() {
+      await PlayerRequests.skipNext();
+      // eslint-disable-next-line no-console
+      console.log(this.shuffleState);
+    },
+    async skipPrevious() {
+      await PlayerRequests.skipPrevious();
+      // eslint-disable-next-line no-console
+      console.log(this.shuffleState);
+    },
+    async toggleRepeat() {
+      const Response = await PlayerRequests.toggleRepeat(this.repeatState);
+      if (Response && this.repeatState === 'off') {
+        this.repeatState = 'track';
+      } else if (Response && this.repeatState === 'track') {
+        this.repeatState = 'off';
+      }
+      // eslint-disable-next-line no-console
+      console.log(this.repeatState);
+    },
+    async toggleShuffle() {
+      const Response = await PlayerRequests.toggleShuffle(this.shuffleState);
+      if (Response) {
+        this.shuffleState = !this.shuffleState;
+      }
+      // eslint-disable-next-line no-console
+      console.log(this.shuffleState);
+    },
   },
+
   computed: {
     totalSongTime() {
       const SongTimeinS = Math.floor(
@@ -90,7 +149,7 @@ export default {
 
     currentSongTime() {
       const SongTimeinS = Math.floor(
-        this.$store.state.MusicPlayer.currentSong.progress_ms / 1000,
+        this.$store.state.MusicPlayer.currentPlayback.progress_ms / 1000,
       );
       const TimeString = `${Math.floor(
         SongTimeinS / 60,

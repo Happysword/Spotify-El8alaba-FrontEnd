@@ -30,8 +30,7 @@ export default {
 
   async created() {
     this.$store.state.MusicPlayer.currentSong = await Requests.fetchCurrentSong();
-    // eslint-disable-next-line no-console
-    console.log(this.$store.state.MusicPlayer.currentSong);
+    this.$store.state.MusicPlayer.currentPlayback = await Requests.fetchCurrentPlayback();
   },
 };
 </script>

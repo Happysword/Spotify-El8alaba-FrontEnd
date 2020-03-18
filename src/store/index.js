@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as currentSongMock from '../api/mock/data/MusicPlayer/currentSong.json';
+import * as currentPlaybackMock from '../api/mock/data/MusicPlayer/currentPlayback.json';
+import PlayerRequests from './modules/MusicPlayer/Requests';
 
 Vue.use(Vuex);
 
@@ -24,10 +26,9 @@ export default new Vuex.Store({
     ],
     MusicPlayer: {
       isMute: false,
-      volume: 70,
-      bufferValue: 0,
       isPlaying: false,
       currentSong: currentSongMock[0],
+      currentPlayback: currentPlaybackMock[0],
     },
   },
 
@@ -50,6 +51,24 @@ export default new Vuex.Store({
     },
   },
 
-  actions: {},
+  getters: {
+    getisPlaying: (state) => state.MusicPlayer.isPlaying,
+  },
+
+  actions: {
+    async togglePlayact({ commit, getters }) {
+      if (getters.getisPlaying) {
+        const requestAnswer = await PlayerRequests.pausePlayback();
+        if (requestAnswer) {
+          commit('togglePlay');
+        }
+      } else {
+        const requestAnswer = await PlayerRequests.startPlayback();
+        if (requestAnswer) {
+          commit('togglePlay');
+        }
+      }
+    },
+  },
   modules: {},
 });

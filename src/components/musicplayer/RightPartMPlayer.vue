@@ -26,7 +26,7 @@
         background-color="grey"
         color="green"
         rounded
-        v-model="$store.state.MusicPlayer.volume"
+        v-model="$store.state.MusicPlayer.currentPlayback.device.volume_percent"
       >
       </v-progress-linear>
     </v-flex>
