@@ -147,4 +147,24 @@ export default {
       })
       .catch(() => false);
   },
+  fetchCurrentUserAlbum() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
+  fetchCurrentUserPlaylists() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
+  fetchCurrentUserArtists() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
+  fetchAnArtist() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
+  fetchArtistRelatedArtists() {
+    // TODO[@ahmedx3]: Replace this with our server
+    return axios.get(api).then((response) => response.data);
+  },
 };

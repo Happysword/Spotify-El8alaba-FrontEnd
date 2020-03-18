@@ -1,6 +1,7 @@
 <template>
   <v-layout align-content-center row justify-center>
     <v-spacer></v-spacer>
+    <!-- TODO[@Seif] fix queue bug that is caused by variable-->
     <v-flex shrink>
       <v-btn to="/home/queue" @click="queueChange" text x-small>
         <v-icon color="grey" dense medium>mdi-playlist-play</v-icon>

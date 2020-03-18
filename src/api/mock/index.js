@@ -2,6 +2,12 @@ import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
 import currentPlayback from './data/MusicPlayer/currentPlayback.json';
 import genres from './data/genres.json';
+import currentUserAlbum from './data/Get-Current-User-Album.json';
+import currentUserPlaylists from './data/Get-Current-User-Playlists.json';
+import currentUserArtists from './data/Get-User-Followed-Artists.json';
+import getAnArtist from './data/Get-An-Artist.json';
+import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
+
 
 /**
  * Fetches mock data after a given timeout.
@@ -120,5 +126,20 @@ export default {
   },
   fetchGenres() {
     return fetch(genres, 1000);
+  },
+  fetchCurrentUserAlbum() {
+    return fetch(currentUserAlbum, 100);
+  },
+  fetchCurrentUserPlaylists() {
+    return fetch(currentUserPlaylists, 100);
+  },
+  fetchCurrentUserArtists() {
+    return fetch(currentUserArtists, 100);
+  },
+  fetchAnArtist() {
+    return fetch(getAnArtist, 100);
+  },
+  fetchArtistRelatedArtists() {
+    return fetch(getArtistRelatedArtists, 100);
   },
 };
