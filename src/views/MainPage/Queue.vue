@@ -1,9 +1,9 @@
 <template>
   <div class="cover-color">
-    <v-container class="cover-color">
+    <v-container class="cover-color ml-5 ">
       <v-row no-gutters>
         <v-col cols="12">
-          <h1 class="header-one header">
+          <h1 class="header-one header mb-0">
             Play Queue
           </h1>
         </v-col>
@@ -13,17 +13,17 @@
           </h2>
         </v-col>
         <v-col>
-          <m-song></m-song>
+          <s-card :song="QueueArray[0]" :counter="0"></s-card>
         </v-col>
       </v-row>
-      <v-row no-gutters
+      <v-row no-gutters v-if="QueueArray.length > 1"
         ><v-col cols="12">
           <h2 class="header header-two">
             Next Up
           </h2>
         </v-col>
-        <v-col v-for="i in 10" :key="i" cols="12">
-          <m-song></m-song>
+        <v-col v-for="i in QueueArray.length-1" :key="i" cols="12">
+          <s-card :song="QueueArray[i]" :counter="i"></s-card>
         </v-col>
       </v-row>
     </v-container>
@@ -31,11 +31,28 @@
 </template>
 
 <script>
-import mSong from '../../components/MockSongQ.vue';
+import sCard from '../../components/SongsBar.vue';
 
+// TODO[@Seif] Add the Queue from requests and fix queue color
 export default {
   name: 'Queue',
-  components: { mSong },
+  components: { sCard },
+  data: () => ({
+    QueueArray: [
+      {
+        songname: 'Mutlu Sonuz (Delibal Original Sountrack)',
+        artist: 'Çağatay Ulusoy ',
+        album: ' Mutlu Sonsuz (Delibal Original Soundtrack)',
+        duration: '2:15',
+      },
+      {
+        songname: 'Mutlu Sonuz (Delibal Original Sountrack)',
+        artist: 'Second song ',
+        album: ' Mutlu Sonsuz (Delibal Original Soundtrack)',
+        duration: '2:15',
+      },
+    ],
+  }),
 };
 </script>
 
@@ -60,6 +77,8 @@ export default {
 }
 .cover-color {
   color: black;
-  background-color: #121212;
+  width: 100%;
+  height: 100%;
+  background:#60606017;
 }
 </style>

@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import LMusicP from './musicplayer/LeftPartMPlayer.vue';
 import RMusicP from './musicplayer/RightPartMPlayer.vue';
 import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
@@ -27,10 +28,18 @@ export default {
     RMusicP,
     MMusicP,
   },
+  methods: {
+    ...mapActions(['togglePlayact']),
+  },
 
   async created() {
-    this.$store.state.MusicPlayer.currentSong = await Requests.fetchCurrentSong();
     this.$store.state.MusicPlayer.currentPlayback = await Requests.fetchCurrentPlayback();
+    this.$store.state.MusicPlayer.AudioPlayer = new Audio(
+      'https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3',
+    );
+    this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
+      this.$store.dispatch('togglePlayact');
+    };
   },
 };
 </script>

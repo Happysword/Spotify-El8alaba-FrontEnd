@@ -3,7 +3,7 @@
     <v-row class="mx-0">
       <v-layout row align-center justify-center>
         <v-icon
-          color="grey"
+          :color="shuffleState === true ? 'green' : 'grey'"
           class="mx-4 player-buttons"
           dense
           small
@@ -55,7 +55,7 @@
         </v-icon>
 
         <v-icon
-          color="grey"
+          :color="repeatState === 'track' ? 'green' : 'grey'"
           class="mx-4 player-buttons"
           dense
           small
@@ -104,7 +104,6 @@ export default {
     shuffleState: false,
     repeatState: 'off',
   }),
-
   methods: {
     ...mapActions(['togglePlayact']),
     async skipNext() {
@@ -117,8 +116,10 @@ export default {
       const Response = await PlayerRequests.toggleRepeat(this.repeatState);
       if (Response && this.repeatState === 'off') {
         this.repeatState = 'track';
+        this.$store.state.MusicPlayer.AudioPlayer.loop = true;
       } else if (Response && this.repeatState === 'track') {
         this.repeatState = 'off';
+        this.$store.state.MusicPlayer.AudioPlayer.loop = false;
       }
     },
     async toggleShuffle() {

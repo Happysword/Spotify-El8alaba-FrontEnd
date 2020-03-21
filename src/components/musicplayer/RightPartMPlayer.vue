@@ -1,9 +1,8 @@
 <template>
   <v-layout align-content-center row justify-center>
     <v-spacer></v-spacer>
-    <!-- TODO[@Seif] fix queue bug that is caused by variable-->
     <v-flex shrink>
-      <v-btn to="/home/queue" @click="queueChange" text x-small>
+      <v-btn @click="queueChange" text x-small>
         <v-icon color="grey" dense medium>mdi-playlist-play</v-icon>
       </v-btn>
     </v-flex>
@@ -27,6 +26,7 @@
         background-color="grey"
         color="green"
         rounded
+        @change="setVolume"
         v-model="$store.state.MusicPlayer.currentPlayback.device.volume_percent"
       >
       </v-progress-linear>
@@ -44,12 +44,16 @@ export default {
   methods: {
     ...mapMutations(['toggleSound']),
     queueChange() {
-      if (this.isInQueue) {
+      if (this.$router.currentRoute.name === 'queue') {
         this.$router.go(-1);
-        this.isInQueue = false;
       } else {
-        this.isInQueue = true;
+        this.$router.push({ name: 'queue' });
       }
+    },
+    setVolume() {
+      this.$store.state.MusicPlayer.AudioPlayer.volume = this.$store.state.MusicPlayer
+        .currentPlayback.device.volume_percent
+        / 100;
     },
   },
 };

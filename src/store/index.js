@@ -23,6 +23,7 @@ export default new Vuex.Store({
       isPlaying: false,
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
+      AudioPlayer: Audio,
     },
     currentSong: {},
   },
@@ -47,16 +48,18 @@ export default new Vuex.Store({
   },
 
   actions: {
-    async togglePlayact({ commit, getters }) {
-      if (getters.getisPlaying) {
+    async togglePlayact({ commit, state }) {
+      if (state.MusicPlayer.isPlaying) {
         const requestAnswer = await PlayerRequests.pausePlayback();
         if (requestAnswer) {
           commit('togglePlay');
+          state.MusicPlayer.AudioPlayer.pause();
         }
       } else {
         const requestAnswer = await PlayerRequests.startPlayback();
         if (requestAnswer) {
           commit('togglePlay');
+          state.MusicPlayer.AudioPlayer.play();
         }
       }
     },
