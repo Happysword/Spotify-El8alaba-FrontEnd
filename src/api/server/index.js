@@ -192,6 +192,20 @@ export default {
 
     return response;
   },
+
+  /**
+   * Sends a POST request to the server for a Reset Password token
+   * @param  {Object} body The user's email
+   * @return {Object}      The corresponding response
+   */
+  async forgotPassword(body) {
+    const response = await axios.post(`${api}/api/v1/authentication/forgotPassword`, body)
+      .then((res) => res)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
   async fetchSongs(id) {
     const songs = await axios.get(`${api}v1/playlists/${id}/tracks?fields=&limit=&offset=`)
       .then((response) => response);

@@ -4,6 +4,7 @@ import Main from '../views/MainPage/Main.vue';
 import Home from '../views/MainPage/Home.vue';
 import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
+import PasswordReset from '../views/Authentication/PasswordReset.vue';
 import Landing from '../views/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
@@ -104,6 +105,11 @@ const routes = [
     path: '/login',
     name: 'LogIn',
     component: LogIn,
+  },
+  {
+    path: '/password-reset',
+    name: 'PasswordReset',
+    component: PasswordReset,
   },
 ];
 

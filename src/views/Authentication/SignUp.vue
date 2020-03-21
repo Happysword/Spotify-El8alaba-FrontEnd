@@ -1,163 +1,165 @@
 <template>
-  <v-app>
-    <v-content>
-      <v-container class="SignUp_root py-0">
-        <!-- Main row -->
-        <v-row justify="center" align="center">
-          <v-col sm="8" lg="6" xl="4" class="px-8">
-            <!-- Logo -->
-            <v-img
-              id="logo"
-              src="../../assets/imgs/El-8alaba.png"
-              contain
-              height="140"
-            />
+<v-app>
+<v-content>
+  <v-container id="SignUp_root" class="py-0">
+    <!-- Main row -->
+    <v-row justify="center" align="center">
+      <v-col sm="8" lg="6" xl="4" class="px-8">
+        <!-- Logo -->
+        <a><v-img
+          id="logo"
+          src="../../assets/imgs/El-8alaba.png"
+          contain
+          height="140"
+          @click="$router.push('/')"
+        /></a>
 
-            <!-- Error bar -->
-            <p
-              id="errorBar"
-              class="caption red darken-1 white--text text-center py-3 mb-8"
-              v-if="userInput.incorrect"
-              >Error. Something went wrong.
-            </p>
+        <!-- Error bar -->
+        <p
+          id="errorBar"
+          class="caption red darken-1 white--text text-center py-3 mb-8"
+          v-if="userInput.incorrect"
+          >Error. Something went wrong.
+        </p>
 
-            <!-- Form -->
-            <v-form ref="signupForm">
-              <!-- Email -->
+        <!-- Form -->
+        <v-form ref="signupForm">
+          <!-- Email -->
+          <v-text-field
+            id="emailField"
+            color="#1DB954"
+            outlined
+            label="Email"
+            v-model="userInput.email"
+            :rules="[
+              validation.required('Email'),
+              validation.minLength('Email', 3),
+              validation.validEmail(),
+            ]"
+            @change="validateConfirmEmail"
+          />
+
+          <!-- Confirm Email -->
+          <v-text-field
+            id="confirmEmailField"
+            color="#1DB954"
+            outlined
+            label="Confirm email"
+            ref="confirmEmail"
+            v-model="userInput.confirmEmail"
+            :rules="[
+              (data) => (!!data && data === userInput.email)
+                || 'Email address doesn\'t match',
+            ]"
+            @change="validateConfirmEmail"
+          />
+
+          <!-- Password -->
+          <!-- Minimum password length is 8 -->
+          <v-text-field
+            id="passwordField"
+            color="#1DB954"
+            outlined
+            label="Password"
+            v-model="userInput.password"
+            :rules="[
+              validation.required('Password'),
+              validation.minLength('Password', 8),
+            ]"
+            :type="userInput.showPassword ? 'text' : 'password'"
+            :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="userInput.showPassword = !userInput.showPassword"
+          />
+
+          <!-- What should we call you? -->
+          <v-text-field
+            id="nameField"
+            color="#1DB954"
+            outlined
+            label="Name"
+            placeholder="What should we call you?"
+            v-model="userInput.name"
+            :rules="[validation.required('This field')]"
+          />
+
+          <!-- Date of Birth -->
+          <p class="subtitle-2 grey--text text--darken-1">Date of Birth</p>
+          <v-row class="mt-n6 mb-n10">
+            <!-- Day -->
+            <v-col cols="3">
               <v-text-field
-                id="emailField"
+                id="dobDayField"
                 color="#1DB954"
                 outlined
-                placeholder="Email"
-                v-model="userInput.email"
-                :rules="[
-                  validation.required('Email'),
-                  validation.minLength('Email', 3),
-                  validation.validEmail(),
-                ]"
-                @change="validateConfirmEmail"
+                label="Day"
+                v-model="userInput.dob.day"
+                :rules="[validation.validDay()]"
               />
-
-              <!-- Confirm Email -->
-              <v-text-field
-                id="confirmEmailField"
+            </v-col>
+            <!-- Month -->
+            <v-col>
+              <v-select
+                id="dobMonthSelect"
                 color="#1DB954"
                 outlined
-                placeholder="Confirm email"
-                ref="confirmEmail"
-                v-model="userInput.confirmEmail"
-                :rules="[
-                  (data) => (!!data && data === userInput.email)
-                    || 'Email address doesn\'t match',
-                ]"
-                @change="validateConfirmEmail"
+                label="Month"
+                :items="months"
+                v-model="userInput.dob.month"
+                :rules="[validation.required('Month')]"
               />
-
-              <!-- Password -->
-              <!-- Minimum password length is 8 -->
+            </v-col>
+            <!-- Year -->
+            <v-col cols="3">
               <v-text-field
-                id="passwordField"
+                id="dobYearField"
                 color="#1DB954"
                 outlined
-                placeholder="Password"
-                v-model="userInput.password"
-                :rules="[
-                  validation.required('Password'),
-                  validation.minLength('Password', 8),
-                ]"
-                :type="userInput.showPassword ? 'text' : 'password'"
-                :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                @click:append="userInput.showPassword = !userInput.showPassword"
+                label="Year"
+                v-model="userInput.dob.year"
+                :rules="[validation.validYear()]"
               />
+            </v-col>
+          </v-row>
 
-              <!-- What should we call you? -->
-              <v-text-field
-                id="nameField"
-                color="#1DB954"
-                outlined
-                placeholder="What should we call you?"
-                v-model="userInput.name"
-                :rules="[validation.required('This field')]"
-              />
+          <!-- Gender -->
+          <v-radio-group id="genderRadio" mandatory row v-model="userInput.gender">
+            <v-radio label="Male" value="m"/>
+            <v-radio label="Female" value="f"/>
+          </v-radio-group>
 
-              <!-- Date of Birth -->
-              <p class="subtitle-2 grey--text text--darken-1">Date of Birth</p>
-              <v-row class="mt-n6 mb-n10">
-                <!-- Day -->
-                <v-col cols="3">
-                  <v-text-field
-                    id="dobDayField"
-                    color="#1DB954"
-                    outlined
-                    placeholder="Day"
-                    v-model="userInput.dob.day"
-                    :rules="[validation.validDay()]"
-                  />
-                </v-col>
-                <!-- Month -->
-                <v-col>
-                  <v-select
-                    id="dobMonthSelect"
-                    color="#1DB954"
-                    outlined
-                    placeholder="Month"
-                    :items="months"
-                    v-model="userInput.dob.month"
-                    :rules="[validation.required('Month')]"
-                  />
-                </v-col>
-                <!-- Year -->
-                <v-col cols="3">
-                  <v-text-field
-                    id="dobYearField"
-                    color="#1DB954"
-                    outlined
-                    placeholder="Year"
-                    v-model="userInput.dob.year"
-                    :rules="[validation.validYear()]"
-                  />
-                </v-col>
-              </v-row>
+          <!-- Sign Up -->
+          <v-row justify="center" align="center">
+            <v-btn
+              id="signupBtn"
+              color="#1DB954"
+              rounded
+              dark
+              @click="submit"
+              min-width="60%"
+              x-large
+              >Sign Up
+            </v-btn>
+          </v-row>
+        </v-form>
 
-              <!-- Gender -->
-              <v-radio-group id="genderRadio" mandatory row v-model="userInput.gender">
-                <v-radio label="Male" value="m"/>
-                <v-radio label="Female" value="f"/>
-              </v-radio-group>
+        <p id="loginPrompt" class="text-center mt-4">
+          Already have an account?
+          <span>
+            <a
+              :class="userInput.onLogin ? 'font-weight-bold' : ''"
+              @mouseover="userInput.onLogin = true"
+              @mouseleave="userInput.onLogin = false"
+              @click="$router.push('/login')"
+              >Log in
+            </a>
+          </span>
+        </p>
 
-              <!-- Sign Up -->
-              <v-row justify="center" align="center">
-                <v-btn
-                  id="signupBtn"
-                  color="#1DB954"
-                  rounded
-                  dark
-                  @click="submit"
-                  min-width="60%"
-                  x-large
-                  >Sign Up
-                </v-btn>
-              </v-row>
-            </v-form>
-
-            <p id="loginPrompt" class="text-center mt-4">
-              Already have an account?
-              <span>
-                <a
-                  :class="userInput.onLogin ? 'font-weight-bold' : ''"
-                  @mouseover="userInput.onLogin = true"
-                  @mouseleave="userInput.onLogin = false"
-                  @click="$router.push('/login')"
-                  >Log in
-                </a>
-              </span>
-            </p>
-
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
-  </v-app>
+      </v-col>
+    </v-row>
+  </v-container>
+</v-content>
+</v-app>
 </template>
 
 <script>
@@ -166,6 +168,9 @@ import api from 'api-client';
 
 export default {
   name: 'SignUp',
+  created() {
+    document.title = 'Sign up - Spotify El8alaba';
+  },
 
   data() {
     return {
