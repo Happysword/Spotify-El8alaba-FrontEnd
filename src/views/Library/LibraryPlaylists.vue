@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     fetchUserPlaylists() {
-      client.fetchCurrentUserPlaylists()
+      // TODO: Add localStorage.getItem('currentUser').data.id to work
+      client.fetchCurrentUserPlaylists(localStorage.getItem('currentUser'))
         .then((response) => {
           this.playlists = response;
         });

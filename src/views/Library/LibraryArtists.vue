@@ -25,7 +25,7 @@ export default {
   components: {
     ArtistCard,
   },
-  created() {
+  mounted() {
     this.fetchUserArtists();
   },
   methods: {

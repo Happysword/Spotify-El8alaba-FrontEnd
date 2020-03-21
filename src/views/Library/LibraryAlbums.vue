@@ -25,7 +25,7 @@ export default {
   components: {
     SongCard,
   },
-  created() {
+  mounted() {
     this.fetchUserAlbums();
   },
   methods: {

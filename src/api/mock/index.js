@@ -186,16 +186,28 @@ export default {
   fetchCurrentUserAlbum() {
     return fetch(currentUserAlbum, 100);
   },
-  fetchCurrentUserPlaylists() {
+  async fetchCurrentUserPlaylists(userID) {
+    let dummy = userID || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(currentUserPlaylists, 100);
   },
   fetchCurrentUserArtists() {
     return fetch(currentUserArtists, 100);
   },
-  fetchAnArtist() {
+  async fetchAnArtist(id) {
+    let dummy = id || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(getAnArtist, 100);
   },
-  fetchArtistRelatedArtists() {
+  async fetchArtistRelatedArtists(id) {
+    let dummy = id || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(getArtistRelatedArtists, 100);
   },
   /**

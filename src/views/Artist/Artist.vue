@@ -89,12 +89,12 @@ export default {
       artist: JSON,
     };
   },
-  created() {
+  mounted() {
     this.fetchAnArtist();
   },
   methods: {
     fetchAnArtist() {
-      client.fetchAnArtist()
+      client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           this.artist = response;
         });

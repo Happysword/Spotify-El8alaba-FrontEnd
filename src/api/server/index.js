@@ -147,25 +147,53 @@ export default {
       })
       .catch(() => false);
   },
-  fetchCurrentUserAlbum() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
+  /**
+   * Get all the albums saved by the user
+   */
+  async fetchCurrentUserAlbum() {
+    const userAlbum = await axios
+      .get(`${api}/api/v1/me/albums?limit&offset`)
+      .then((response) => response.data);
+    return userAlbum;
   },
-  fetchCurrentUserPlaylists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
+  /**
+   * Get All the playlists of the current user
+   * @param {string} userID Current User ID
+   */
+  async fetchCurrentUserPlaylists(userID) {
+    const userPlaylists = await axios
+      .get(`${api}v1/users/${userID}/playlists?limit=&offset=`)
+      .then((response) => response.data);
+    return userPlaylists;
   },
-  fetchCurrentUserArtists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
+  /**
+   * Get all the Artist followed by the user
+   */
+  async fetchCurrentUserArtists() {
+    const userArtists = await axios
+      .get(`${api}v1/me/following?`)
+      .then((response) => response.data);
+    return userArtists;
   },
-  fetchAnArtist() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
+  /**
+   * Get all the info about specific artist
+   * @param {string} id The artist ID
+   */
+  async fetchAnArtist(id) {
+    const artists = await axios
+      .get(`${api}v1/artists/${id}`)
+      .then((response) => response.data);
+    return artists;
   },
-  fetchArtistRelatedArtists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
+  /**
+   * Get the artist related artist by passing the artist's ID
+   * @param {string} id The artist ID that has other related artists
+   */
+  async fetchArtistRelatedArtists(id) {
+    const related = await axios
+      .get(`${api}v1/artists/${id}/related-artists`)
+      .then((response) => response.data);
+    return related;
   },
   /**
    * Sends a POST request to the server to login the user

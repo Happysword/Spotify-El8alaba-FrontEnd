@@ -23,7 +23,7 @@ export default {
       artistRelatedArtists: JSON,
     };
   },
-  created() {
+  mounted() {
     this.fetchArtistRelatedArtists();
   },
   components: {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     fetchArtistRelatedArtists() {
-      client.fetchArtistRelatedArtists()
+      client.fetchArtistRelatedArtists(this.$route.params.id)
         .then((response) => {
           this.artistRelatedArtists = response;
         });
