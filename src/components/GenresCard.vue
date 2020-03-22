@@ -1,7 +1,8 @@
 <template>
-    <div absolute >
+    <div absolute v-show="ready">
         <v-card class="d-inline-block mr-3 white--text GCard"
-        route :to="route" width="190" height="190" :color=color>
+         width="190" height="190" @click="routing()"
+         :style="`background: linear-gradient(0deg, ${color} 40%, rgba(30,30,30,1) 100%);`">
             <v-card-title class="font-weight-bold headline">{{ title }}</v-card-title>
             <v-img :src=source class="rotatedImg">
             </v-img>
@@ -10,13 +11,33 @@
 </template>
 
 <script>
+import analyze from 'rgbaster';
+
 export default {
   name: 'Genres',
   props: {
     source: String,
     title: String,
     route: String,
-    color: String,
+  },
+  data() {
+    return {
+      color: '',
+      ready: false,
+    };
+  },
+  methods: {
+    routing() {
+      this.$router.push(`/genre/${this.route}-page`);
+    },
+    async getcolor(x) {
+      const result = await analyze(x);
+      this.color = result[100].color;
+      this.ready = true;
+    },
+  },
+  created() {
+    this.getcolor(this.source);
   },
 };
 </script>

@@ -2,6 +2,7 @@ import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
 import currentPlayback from './data/MusicPlayer/currentPlayback.json';
 import genres from './data/genres.json';
+import PrefGenres from './data/PrefGenres.json';
 import currentUserAlbum from './data/Get-Current-User-Album.json';
 import currentUserPlaylists from './data/Get-Current-User-Playlists.json';
 import currentUserArtists from './data/Get-User-Followed-Artists.json';
@@ -180,8 +181,20 @@ export default {
     }
     return false;
   },
-  fetchGenres() {
+
+  /**
+   * Fetches all genres in the mock data
+   * @return {object} an object that contains all genres in the mock data
+   */
+  async fetchGenres() {
     return fetch(genres, 1000);
+  },
+  /**
+  * Fetches all prefered genres for a user
+  * @return {object} an object that contains all preferred genres.
+  */
+  async fetchPrefGenres() {
+    return fetch(PrefGenres, 1000);
   },
   fetchCurrentUserAlbum() {
     return fetch(currentUserAlbum, 100);

@@ -1,27 +1,75 @@
 [
       {
-        "src" : "https://t.scdn.co/images/47d9e28592b64a95a60bdbe9ae7fb2c8.jpeg",
-        "text" : "Arabic",
-        "route" : "genre/arabic",
-        "color" : "blue"
+  "categories": {
+    "href": "https://api.spotify.com/v1/browse/categories?offset=0&limit=20",
+    "items": [
+      {
+        "href": "https://api.spotify.com/v1/browse/categories/ambiance",
+        "icons": [
+          {
+            "height": 275,
+            "url": "https://t.scdn.co/images/baf681efc57145e180589e027496b101.jpeg",
+            "width": 275
+          }
+        ],
+        "id": "ambiance",
+        "name": "Ambiance"
       },
       {
-        "src" : "https://t.scdn.co/images/9676cef74ec147a48607c737c4f93943.jpeg",
-        "text" : "Hip-Hop",
-        "route" : "genre/Hip-Hop",
-        "color" : "red"
+        "href": "https://api.spotify.com/v1/browse/categories/gaming",
+        "icons": [
+          {
+            "height": 274,
+            "url": "https://t.scdn.co/images/9192497802994b7f886599883ce080f8.jpeg",
+            "width": 274
+          }
+        ],
+        "id": "gaming",
+        "name": "Gaming"
       },
       {
-        "src" : "https://t.scdn.co/images/47d9e28592b64a95a60bdbe9ae7fb2c8.jpeg",
-        "text" : "Arabic",
-        "route" : "genre/arabic",
-        "color" : "blue"
+        "href": "https://api.spotify.com/v1/browse/categories/soul",
+        "icons": [
+          {
+            "height": 274,
+            "url": "https://t.scdn.co/images/aa6811c21031431b817f5f152e93701f.jpeg",
+            "width": 274
+          }
+        ],
+        "id": "soul",
+        "name": "Soul"
       },
       {
-        "src" : "https://t.scdn.co/images/9676cef74ec147a48607c737c4f93943.jpeg",
-        "text" : "Hip-Hop",
-        "route" : "genre/Hip-Hop",
-        "color" : "red"
+        "href": "https://api.spotify.com/v1/browse/categories/punk",
+        "icons": [
+          {
+            "height": 274,
+            "url": "https://t.scdn.co/images/46e47036f0ae4608a61c68b65750610f.jpeg",
+            "width": 274
+          }
+        ],
+        "id": "punk",
+        "name": "Punk"
+      },
+      {
+        "href": "https://api.spotify.com/v1/browse/categories/country",
+        "icons": [
+          {
+            "height": 275,
+            "url": "https://t.scdn.co/images/4afff64d33e74356905bc257646d476c.jpeg",
+            "width": 275
+          }
+        ],
+        "id": "country",
+        "name": "Country"
       }
+    ],
+    "limit": 20,
+    "next": "https://api.spotify.com/v1/browse/categories?offset=20&limit=20",
+    "offset": 0,
+    "previous": null,
+    "total": 31
+  }
+}
      
 ]

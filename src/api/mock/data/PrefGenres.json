@@ -1,0 +1,51 @@
+[
+    {
+"categories": {
+  "href": "https://api.spotify.com/v1/browse/categories?offset=0&limit=20",
+  "items": [
+    {
+      "href": "https://api.spotify.com/v1/browse/categories/ambiance",
+      "icons": [
+        {
+          "height": 275,
+          "url": "https://t.scdn.co/images/baf681efc57145e180589e027496b101.jpeg",
+          "width": 275
+        }
+      ],
+      "id": "ambiance",
+      "name": "Ambiance"
+    },
+    {
+      "href": "https://api.spotify.com/v1/browse/categories/gaming",
+      "icons": [
+        {
+          "height": 274,
+          "url": "https://t.scdn.co/images/9192497802994b7f886599883ce080f8.jpeg",
+          "width": 274
+        }
+      ],
+      "id": "gaming",
+      "name": "Gaming"
+    },
+    {
+      "href": "https://api.spotify.com/v1/browse/categories/soul",
+      "icons": [
+        {
+          "height": 274,
+          "url": "https://t.scdn.co/images/aa6811c21031431b817f5f152e93701f.jpeg",
+          "width": 274
+        }
+      ],
+      "id": "soul",
+      "name": "Soul"
+    }
+  ],
+  "limit": 20,
+  "next": "https://api.spotify.com/v1/browse/categories?offset=20&limit=20",
+  "offset": 0,
+  "previous": null,
+  "total": 31
+}
+}
+   
+]
