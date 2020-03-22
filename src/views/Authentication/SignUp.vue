@@ -175,18 +175,18 @@ export default {
   data() {
     return {
       months: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        { text: 'January', value: '01' },
+        { text: 'February', value: '02' },
+        { text: 'March', value: '03' },
+        { text: 'April', value: '04' },
+        { text: 'May', value: '05' },
+        { text: 'June', value: '06' },
+        { text: 'July', value: '07' },
+        { text: 'August', value: '08' },
+        { text: 'September', value: '09' },
+        { text: 'October', value: '10' },
+        { text: 'November', value: '11' },
+        { text: 'December', value: '12' },
       ],
 
       userInput: {
@@ -217,16 +217,19 @@ export default {
       if (!this.$refs.signupForm.validate()) return;
 
       /**
-       * UNIX Timestamp helper function
-       *
-       * @note[XL3]: 02:00:00 for timezone offset
-       * See MDN Date.prototype.getTimezoneOffset()
-       *
-       * @param  {Object} dob The object containing the Date of Birth
-       * @return {Number}     The UNIX timestamp in seconds
+       * Utility function to format the Date of Birth
+       * @param  {Object} dob The object containing the Date of birth
+       * @return {String}     The formatted Date of Birth
        */
-      const dobTimestamp = (dob) => new Date(`${dob.day} ${dob.month} ${dob.year} 02:00:00`)
-        .getTime() / 1000;
+      const formatDob = (dob) => {
+        let { day } = dob;
+
+        if (parseInt(day, 10) < 10) {
+          day = `0${day}`;
+        }
+
+        return `${dob.year}-${dob.month}-${day}`;
+      };
 
       // Send the request
       const response = await api.signupUser({
@@ -236,7 +239,7 @@ export default {
         // @todo[XL3] See if we're going to add this
         passwordConfirm: this.userInput.password,
         gender: this.userInput.gender,
-        birthdate: dobTimestamp(this.userInput.dob),
+        birthdate: formatDob(this.userInput.dob),
         type: 'user',
       });
 
