@@ -1,7 +1,16 @@
 <template>
-  <v-menu offset-y absolute=""
-  dark=""
-  >
+  <div>
+    <v-snackbar
+    v-model="snackbar"
+    color="#2E77D0"
+    timeout="3000"
+    class="mb-12 pb-12 text-center"
+    >
+    <h1 class="text-center subtitle-1">Link copied to clipboard</h1>
+    </v-snackbar>
+    <v-menu offset-y absolute=""
+    dark=""
+    >
     <template v-slot:activator="{ on }">
         <v-card
           class="mx-auto"
@@ -47,11 +56,13 @@
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
+          @click="menuLogic(index)"
         >
           <v-list-item-title class="grey--text">{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
+  </div>
 </template>
 
 <script>
@@ -59,6 +70,7 @@ export default {
   props: {
     description: String,
     href: String,
+    external_urls: String,
     id: String,
     images: Array,
     name: String,
@@ -71,6 +83,7 @@ export default {
     return {
       showActionButton: false,
       showPlayButton: true,
+      snackbar: false,
       items: [
         { title: 'Start Radio' },
         { title: 'Save to Your Library' },
@@ -85,6 +98,17 @@ export default {
         this.$router.push(`/playlist/${this.id}`);
       } else if (this.type === 'album') {
         this.$router.push(`/album/${this.id}`);
+      }
+    },
+    menuLogic(index) {
+      if (index === 0) {
+        console.log('Start Radio');
+      } else if (index === 1) {
+        console.log('Save to Your Library');
+      } else if (index === 2) {
+        this.$copyText(this.external_urls);
+        this.snackbar = true;
+        console.log(this.snackbar);
       }
     },
   },

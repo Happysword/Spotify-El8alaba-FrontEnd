@@ -1,4 +1,13 @@
 <template>
+<div>
+          <v-snackbar
+          v-model="snackbar"
+          color="#2E77D0"
+          timeout="3000"
+          class="mb-12 pb-12 text-center"
+          >
+          <h1 class="text-center subtitle-1">Link copied to clipboard</h1>
+          </v-snackbar>
           <v-menu offset-y absolute=""
           dark=""
           >
@@ -45,17 +54,20 @@
                   <v-list-item
                     v-for="(item, index) in items"
                     :key="index"
+                    @click="menuLogic(index)"
                   >
                     <v-list-item-title class="grey--text">{{ item.title }}</v-list-item-title>
                   </v-list-item>
                 </v-list>
           </v-menu>
+          </div>
 </template>
 
 <script>
 export default {
   props: {
     href: String,
+    external_urls: String,
     id: String,
     images: Array,
     public: Boolean,
@@ -67,6 +79,7 @@ export default {
     return {
       showActionButton: false,
       showPlayButton: true,
+      snackbar: false,
       items: [
         { title: 'Start Radio' },
         { title: 'Follow' },
@@ -79,6 +92,17 @@ export default {
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
       this.$router.push(`/home/artist/${this.id}`);
+    },
+    menuLogic(index) {
+      if (index === 0) {
+        console.log('Start Radio');
+      } else if (index === 1) {
+        console.log('Follow');
+      } else if (index === 2) {
+        this.$copyText(this.external_urls);
+        this.snackbar = true;
+        console.log(this.snackbar);
+      }
     },
   },
 };

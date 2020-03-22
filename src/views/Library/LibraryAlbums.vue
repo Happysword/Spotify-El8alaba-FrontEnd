@@ -6,6 +6,7 @@
                    <song-card :id="card.album.id" :name="card.album.name"
                    :images="card.album.images" :artistName="card.album.artists[0].name"
                    :type="card.album.type"
+                   :external_urls="card.album.external_urls.spotify"
                    ></song-card>
             </v-col>
         </v-row>

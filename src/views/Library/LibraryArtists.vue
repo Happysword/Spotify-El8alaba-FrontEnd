@@ -5,7 +5,7 @@
             v-for="card in artistsJson.artists.items" :key="card.id">
                    <artist-card :id="card.id" :profileName="card.name"
                    :images="card.images"
-                   :type="card.type"
+                   :type="card.type" :external_urls="card.external_urls.spotify"
                    ></artist-card>
             </v-col>
         </v-row>

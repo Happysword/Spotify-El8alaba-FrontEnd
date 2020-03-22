@@ -5,6 +5,7 @@
                    <song-card :id="card.id" :name="card.name"
                    :description="card.description" :images="card.images"
                    :type="card.type"
+                   :external_urls="card.external_urls.spotify"
                    ></song-card>
             </v-col>
         </v-row>
