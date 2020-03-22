@@ -225,7 +225,7 @@ export default {
        * @param  {Object} dob The object containing the Date of Birth
        * @return {Number}     The UNIX timestamp in seconds
        */
-      const dobTimestamp = (dob) => new Date(`${dob.day} ${dob.day} ${dob.day} 02:00:00`)
+      const dobTimestamp = (dob) => new Date(`${dob.day} ${dob.month} ${dob.year} 02:00:00`)
         .getTime() / 1000;
 
       // Send the request
@@ -233,7 +233,7 @@ export default {
         name: this.userInput.name,
         email: this.userInput.email,
         password: this.userInput.password,
-        // @todo[XL3]: See if we're going to add this
+        // @todo[XL3] See if we're going to add this
         passwordConfirm: this.userInput.password,
         gender: this.userInput.gender,
         birthdate: dobTimestamp(this.userInput.dob),
@@ -245,10 +245,11 @@ export default {
        * add the currentUser to localStorage
        * and route to home
        */
-      if (response.status === 'success') {
+      // 200 OK
+      if (response.status === 200) {
         const currentUser = {
-          token: response.token,
-          data: response.data,
+          token: response.data.token,
+          data: response.data.data,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 

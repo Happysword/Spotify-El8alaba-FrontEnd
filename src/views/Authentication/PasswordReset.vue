@@ -24,7 +24,7 @@
           </p>
 
           <!-- Error bar -->
-          <!-- @todo[XL3]: Change this error message -->
+          <!-- @todo[XL3] Change this error message -->
           <p
             id="errorBar"
             class="caption red darken-1 white--text text-center py-3 mb-8"
@@ -110,7 +110,8 @@ export default {
        * display the success message, and
        * clear input data.
        */
-      if (response.status === 'success') {
+      // 200 OK
+      if (response.status === 200) {
         this.succeeded = true;
 
         this.userInput.email = '';

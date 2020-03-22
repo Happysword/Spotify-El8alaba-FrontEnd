@@ -109,7 +109,7 @@
         </v-form>
         <!-- 'Forgot your password' link -->
         <v-container class="text-center">
-          <!-- TODO[@XL3]: Replace 'font-weight-bold' with a lightening of color -->
+          <!-- @todo[XL3] Replace 'font-weight-bold' with a lightening of color -->
           <a
             id="forgotPasswordPrompt"
             :class="userInput.onForgot ? 'font-weight-bold' : ''"
@@ -125,7 +125,7 @@
           Don't have an account?
         </p>
         <!-- 'Signup' button -->
-        <!-- TODO[@XL3]: Replace 'route to' with a method -->
+        <!-- @todo[XL3] Replace 'route to' with a method -->
         <v-btn
           id="signupBtn"
           color="secondary"
@@ -203,10 +203,11 @@ export default {
        * add the currentUser to localStorage
        * and route to home
        */
-      if (response.status === 'success') {
+      // 200 OK
+      if (response.status === 200) {
         const currentUser = {
-          token: response.token,
-          data: response.data,
+          token: response.data.token,
+          data: response.data.data,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 

@@ -53,7 +53,7 @@ export default {
 
     // Succeed if the user is found
     return {
-      status: found ? 'success' : '400 Bad Request',
+      status: found ? 200 : 400,
       token: '',
       data: {},
     };
@@ -80,7 +80,7 @@ export default {
 
     // Succeed if the user isn't found
     return {
-      status: !found ? 'success' : '400 Bad Request',
+      status: !found ? 200 : 400,
       token: '',
       data: {},
     };
@@ -106,7 +106,7 @@ export default {
     });
 
     // Succeed if the user is found
-    return { status: found ? 'success' : '404 Not Found' };
+    return { status: found ? 200 : 400 };
   },
 
   /**
