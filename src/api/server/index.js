@@ -195,6 +195,7 @@ export default {
       .then((response) => response.data);
     return related;
   },
+
   /**
    * Sends a POST request to the server to login the user
    * @param  {Object} body The user's credentials
@@ -203,6 +204,18 @@ export default {
   async loginUser(body) {
     const response = await axios.post(`${api}/api/v1/authentication/login`, body)
       .then((res) => res)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  /**
+ * Creates a new playlists
+ * @param {OBJECT} createdPlaylist The created playlist object
+ */
+  async createNewPlayList(createdPlaylist) {
+    const response = await axios.post(`${api}/api/v1/users/playlists`, createdPlaylist)
+      .then((res) => res.body)
       .catch((err) => console.log(err));
 
     return response;

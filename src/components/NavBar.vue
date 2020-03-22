@@ -82,6 +82,9 @@
                       <v-text-field
                         label="New Playlist"
                         required
+                        outlined=""
+                        v-model="createdPlaylistName"
+                        :rules="[rules.required]"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -104,7 +107,7 @@
                   depressed
                   color="success white--text"
                   class="mx-4"
-                  @click="dialog = false"
+                  @click="dialog = false;createNewPlaylist();"
                   >Create</v-btn
                 >
               </v-row>
@@ -142,7 +145,7 @@
 </template>
 
 <script>
-import Jsonplaylists from '../json/Get-Current-User-Playlists.json';
+import client from '../api/mock/index';
 
 export default {
   name: 'Navbar',
@@ -154,14 +157,41 @@ export default {
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
         { icon: 'mdi-bookshelf', text: 'Your Library', route: '/home/library/playlists' },
       ],
-      playlists: Jsonplaylists,
+      playlists: JSON,
+      createdPlaylistName: '',
       dialog: false,
+      rules: {
+        required: (value) => !!value || 'Required.',
+      },
     };
   },
   props: {
     searching: {
       type: Boolean,
       default: false,
+    },
+  },
+  mounted() {
+    this.fetchUserPlaylists();
+  },
+  methods: {
+    fetchUserPlaylists() {
+      // TODO: Add localStorage.getItem('currentUser').data.id to work
+      client.fetchCurrentUserPlaylists(localStorage.getItem('currentUser'))
+        .then((response) => {
+          this.playlists = response;
+        });
+    },
+    /** Create a new playlist */
+    createNewPlaylist() {
+      client.createNewPlayList({
+        name: this.createdPlaylistName,
+        public: 'true',
+        description: '',
+      }).then((r) => {
+        console.log(r);
+        this.fetchUserPlaylists();
+      });
     },
   },
 };

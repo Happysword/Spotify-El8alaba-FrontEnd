@@ -28,7 +28,7 @@
           <v-card-title class="font-weight-bold subtitle-2">{{name}}</v-card-title>
 
           <v-card-subtitle class="caption" v-if="!showActionButton && type === 'playlist'">
-            {{description}}
+            {{description | shorten}}
           </v-card-subtitle>
 
           <v-card-subtitle class="caption" v-if="!showActionButton && type === 'album'">

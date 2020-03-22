@@ -60,6 +60,14 @@ export default {
   },
 
   /**
+ * Creates a new playlists
+ * @param {OBJECT} createdPlaylist The created playlist object
+ */
+  async createNewPlayList(createdPlaylist) {
+    console.log(createdPlaylist);
+  },
+
+  /**
    * Fetches all users in the mock data and ensures that a certain user isn't among them
    * @param  {Object} body The user's signup data
    * @return {Object}      The corresponding response
