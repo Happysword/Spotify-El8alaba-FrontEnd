@@ -19,10 +19,10 @@
             <v-list-item two-line class="text-truncate d-inline-block">
               <v-list-item-content>
                 <v-list-item-title class="mx-2 subtitle text-truncate" :style="`color:${color2} `">
-                  {{song.songname}}
+                  {{song.track.name}}
                 </v-list-item-title>
                 <v-list-item-subtitle class="grey--text mx-2 text text-truncate">
-                  {{ song.artist }} . {{song.album}}
+                  {{ song.track.artists[0].name }} . {{song.track.album.name}}
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>

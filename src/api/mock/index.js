@@ -10,6 +10,7 @@ import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
 import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
+import playlistSongs from './data/playlistSongs.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -204,8 +205,22 @@ export default {
    * @return {Object}  An object containing all songs in a given list of ID equals to id
    */
   async fetchSongs(id) {
-    const allSongs = await fetch(songs, 500);
+    const allSongs = await fetch(songs, 200);
     return allSongs[id];
+  },
+  /**
+   * Fetches all songs of a playlist in the mock data
+   * @param  {Number}  id The id of playlist
+   * @return {Object}  An object containing all songs in a given playlist of ID equals to id
+   */
+  async fetchPlaylistSongs(id) {
+    const allSongs = await fetch(playlistSongs, 200);
+    for (let i = 0; i < allSongs.length; i += 1) {
+      if (allSongs[i].id === id) {
+        return allSongs[i].items;
+      }
+    }
+    return {};
   },
   /**
    * Fetches a list from the mock data
@@ -213,7 +228,7 @@ export default {
    * @return {Object} An object containing all information about the list of ID equals to id
    */
   async fetchList(id) {
-    const allLists = await fetch(lists, 1000);
+    const allLists = await fetch(lists, 200);
     for (let i = 0; i < allLists.length; i += 1) {
       if (allLists[i].id === id) {
         return allLists[i];
@@ -227,7 +242,7 @@ export default {
    * @return {Object} An object containing all information about the album of ID equals to id
    */
   async fetchAlbum(id) {
-    const allAlbums = await fetch(albums, 1000);
+    const allAlbums = await fetch(albums, 200);
     for (let i = 0; i < allAlbums.length; i += 1) {
       for (let j = 0; j < allAlbums[i].items.length; j += 1) {
         if (allAlbums[i].items[j].album.id === id) {

@@ -176,7 +176,6 @@ export default {
     const response = await axios.post(`${api}/api/v1/authentication/login`, body)
       .then((res) => res)
       .catch((err) => console.log(err));
-
     return response;
   },
 
@@ -192,20 +191,25 @@ export default {
 
     return response;
   },
-  async fetchSongs(id) {
-    const songs = await axios.get(`${api}v1/playlists/${id}/tracks?fields=&limit=&offset=`)
-      .then((response) => response);
-    return songs;
+  async fetchSongs(id, token) {
+    const songs = await axios.get(`${api}/api/v1/playlists/${id}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response)
+      .catch((err) => console.log(err));
+    return songs.data.items;
   },
 
   async fetchList(id) {
-    const lists = await axios.get(`${api}v1/playlists/${id}?fields=name`)
+    const lists = await axios.get(`${api}/api/v1/playlists/${id}`)
       .then((response) => response);
     return lists;
   },
 
   async fetchListCover(id) {
-    const img = await axios.get(`${api}v1/playlists/${id}/images`)
+    const img = await axios.get(`${api}/api/v1/playlists/${id}/images`)
       .then((response) => response);
     return img;
   },
