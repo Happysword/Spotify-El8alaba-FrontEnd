@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
 
 // Components
 import LogIn from '@/views/Authentication/LogIn.vue';
@@ -10,34 +9,19 @@ import LogIn from '@/views/Authentication/LogIn.vue';
 // Utilities
 import { mount, createLocalVue } from '@vue/test-utils';
 
-/**
- * @todo[XL3]: Add an alias resolver to Jest
- *   because it fails to resolve the 'api-client' alias
- */
-
 Vue.use(Vuetify);
 
 const localVue = createLocalVue();
 localVue.use(Vuetify);
 localVue.use(VueRouter);
-localVue.use(Vuex);
 
 const vuetify = new Vuetify();
 const router = new VueRouter();
-const store = new Vuex.Store({
-  state: {
-    currentUser: {},
-  },
-  mutations: {
-    setCurrentUser() {},
-  },
-});
 
 describe('LogIn.vue', () => {
   test('All data fields are clear on mount', () => {
     // Mount the component
     const wrapper = mount(LogIn, {
-      store,
       localVue,
       vuetify,
       router,
@@ -71,7 +55,6 @@ describe('LogIn.vue', () => {
   test('Logging in as a fake user fails', async () => {
     // Mount the component
     const wrapper = mount(LogIn, {
-      store,
       localVue,
       vuetify,
       router,
@@ -107,7 +90,6 @@ describe('LogIn.vue', () => {
   test('Logging in as a real user succeeds', async () => {
     // Mount the component
     const wrapper = mount(LogIn, {
-      store,
       localVue,
       vuetify,
       router,
@@ -137,5 +119,55 @@ describe('LogIn.vue', () => {
     await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
+  });
+
+  test('Entering invalid data triggers the validation properly', () => {
+    // Mount the component
+    const wrapper = mount(LogIn, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    // Assert that the button exists
+    const loginBtn = wrapper.find('#loginBtn');
+    expect(loginBtn.exists()).toEqual(true);
+
+    // Assert that both input fields exist
+    const emailField = wrapper.find('#emailField');
+    const passwordField = wrapper.find('#passwordField');
+    expect(emailField.exists()).toEqual(true);
+    expect(passwordField.exists()).toEqual(true);
+
+    // Set the invalid data
+    emailField.setValue('This is an invalid email.');
+    passwordField.setValue('invpw');
+
+    expect(wrapper.vm.$refs.loginForm.validate()).toEqual(false);
+  });
+
+  test('Entering valid data triggers the validation properly', () => {
+    // Mount the component
+    const wrapper = mount(LogIn, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    // Assert that the button exists
+    const loginBtn = wrapper.find('#loginBtn');
+    expect(loginBtn.exists()).toEqual(true);
+
+    // Assert that both input fields exist
+    const emailField = wrapper.find('#emailField');
+    const passwordField = wrapper.find('#passwordField');
+    expect(emailField.exists()).toEqual(true);
+    expect(passwordField.exists()).toEqual(true);
+
+    // Set the valid data
+    emailField.setValue('valid@valid.com');
+    passwordField.setValue('validvalid');
+
+    expect(wrapper.vm.$refs.loginForm.validate()).toEqual(true);
   });
 });

@@ -5,6 +5,11 @@ import Home from '../views/MainPage/Home.vue';
 import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
 import PasswordReset from '../views/Authentication/PasswordReset.vue';
+import Account from '../views/Account/Account.vue';
+import AccountOverview from '../components/Account/AccountOverview.vue';
+import EditProfile from '../components/Account/EditProfile.vue';
+import ChangePassword from '../components/Account/ChangePassword.vue';
+import NotificationSettings from '../components/Account/NotificationSettings.vue';
 import Landing from '../views/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
@@ -110,6 +115,18 @@ const routes = [
     path: '/password-reset',
     name: 'PasswordReset',
     component: PasswordReset,
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: Account,
+    redirect: { name: 'AccountOverview' },
+    children: [
+      { path: 'overview', name: 'AccountOverview', component: AccountOverview },
+      { path: 'edit-profile', name: 'EditProfile', component: EditProfile },
+      { path: 'change-password', name: 'ChangePassword', component: ChangePassword },
+      { path: 'notifications', name: 'NotificationSettings', component: NotificationSettings },
+    ],
   },
 ];
 
