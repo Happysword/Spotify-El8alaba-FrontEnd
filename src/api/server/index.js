@@ -191,6 +191,12 @@ export default {
 
     return response;
   },
+  /**
+   * Fetches all songs of a playlist
+   * @param  {Number}  id The id of playlist
+   * @param  {string}  token The token of user
+   * @return {Object}  An object containing all songs in a given playlist of ID equals to id
+   */
   async fetchSongs(id, token) {
     const songs = await axios.get(`${api}/api/v1/playlists/${id}/tracks`, {
       headers: {
@@ -201,18 +207,19 @@ export default {
       .catch((err) => console.log(err));
     return songs.data.items;
   },
-
-  async fetchList(id) {
-    const lists = await axios.get(`${api}/api/v1/playlists/${id}`)
-      .then((response) => response);
-    return lists;
+  /**
+   * Fetches List info
+   * @param  {Number}  id The id of the desired list
+   * @return {Object} An object containing all information about the list of ID equals to id
+   */
+  async fetchList(id, token) {
+    const lists = await axios.get(`${api}/api/v1/playlists/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response)
+      .catch((err) => console.log(err));
+    return lists.data;
   },
-
-  async fetchListCover(id) {
-    const img = await axios.get(`${api}/api/v1/playlists/${id}/images`)
-      .then((response) => response);
-    return img;
-  },
-
-
 };

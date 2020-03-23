@@ -1,200 +1,693 @@
 [
-    {   "id": "53Y8wT46QIMz5HqWQ8O22c" ,
-        "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a/playlists/21THa8j9TaSGuXYNBU5tsC/tracks",
-        "items": [
-          {
-            "added_at": "2016-10-11T13:44:40Z",
-            "added_by": {
-              "external_urls": {
-                "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
-              },
-              "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
-              "id": "spotify_españa",
-              "type": "user",
-              "uri": "spotify:user:spotify_espa%C3%B1a"
-            },
-            "is_local": false,
-            "track": {
-              "album": {
-                "album_type": "single",
-                "artists": [
-                  {
-                    "external_urls": {
-                      "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
-                    },
-                    "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
-                    "id": "21451j1KhjAiaYKflxBjr1",
-                    "name": "Zion & Lennox",
-                    "type": "artist",
-                    "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
-                  }
-                ],
-                "external_urls": {
-                  "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
-                },
-                "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
-                "id": "5GjKG3Y8OvSVJO55dQTFyD",
-                "images": [
-                  {
-                    "height": 640,
-                    "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
-                    "width": 640
-                  },
-                  {
-                    "height": 300,
-                    "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
-                    "width": 300
-                  },
-                  {
-                    "height": 64,
-                    "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
-                    "width": 64
-                  }
-                ],
-                "name": "Otra Vez (feat. J Balvin)",
-                "type": "album",
-                "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
-              },
-              "artists": [
-                {
-                  "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
-                  },
-                  "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
-                  "id": "21451j1KhjAiaYKflxBjr1",
-                  "name": "Zion & Lennox",
-                  "type": "artist",
-                  "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
-                },
-                {
-                  "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
-                  },
-                  "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
-                  "id": "1vyhD5VmyZ7KMfW5gqLgo5",
-                  "name": "J Balvin",
-                  "type": "artist",
-                  "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
-                }
-              ],
-              "disc_number": 1,
-              "duration_ms": 209453,
-              "explicit": false,
-              "external_ids": {
-                "isrc": "USWL11600423"
-              },
-              "external_urls": {
-                "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
-              },
-              "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
-              "id": "7pk3EpFtmsOdj8iUhjmeCM",
-              "name": "Otra Vez (feat. J Balvin)",
-              "popularity": 85,
-              "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
-              "track_number": 1,
-              "type": "track",
-              "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
-            }
+  {   
+    "id": "53Y8wT46QIMz5HqWQ8O22c" ,
+    "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a/playlists/21THa8j9TaSGuXYNBU5tsC/tracks",
+    "items": [
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
           },
-          {
-            "added_at": "2016-10-11T13:44:40Z",
-            "added_by": {
-              "external_urls": {
-                "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
-              },
-              "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
-              "id": "spotify_españa",
-              "type": "user",
-              "uri": "spotify:user:spotify_espa%C3%B1a"
-            },
-            "is_local": false,
-            "track": {
-              "album": {
-                "album_type": "single",
-                "artists": [
-                  {
-                    "external_urls": {
-                      "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
-                    },
-                    "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
-                    "id": "21451j1KhjAiaYKflxBjr1",
-                    "name": "Zion & Lennox",
-                    "type": "artist",
-                    "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
-                  }
-                ],
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
                 "external_urls": {
-                  "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
                 },
-                "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
-                "id": "5GjKG3Y8OvSVJO55dQTFyD",
-                "images": [
-                  {
-                    "height": 640,
-                    "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
-                    "width": 640
-                  },
-                  {
-                    "height": 300,
-                    "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
-                    "width": 300
-                  },
-                  {
-                    "height": 64,
-                    "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
-                    "width": 64
-                  }
-                ],
-                "name": "Otra Vez (feat. J Balvin)",
-                "type": "album",
-                "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
               },
-              "artists": [
-                {
-                  "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
-                  },
-                  "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
-                  "id": "21451j1KhjAiaYKflxBjr1",
-                  "name": "Zion & Lennox",
-                  "type": "artist",
-                  "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
-                },
-                {
-                  "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
-                  },
-                  "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
-                  "id": "1vyhD5VmyZ7KMfW5gqLgo5",
-                  "name": "J Balvin",
-                  "type": "artist",
-                  "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
-                }
-              ],
-              "disc_number": 1,
-              "duration_ms": 209453,
-              "explicit": false,
-              "external_ids": {
-                "isrc": "USWL11600423"
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
               },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "Otra Vez (feat. J Balvin)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
               "external_urls": {
-                "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
               },
-              "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
-              "id": "7pk3EpFtmsOdj8iUhjmeCM",
-              "name": "Otra Vez 2 (feat. J Balvin)",
-              "popularity": 85,
-              "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
-              "track_number": 1,
-              "type": "track",
-              "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Zion & Lennox",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
             }
-          }
-        ],
-        "limit": 100,
-        "next": null,
-        "offset": 0,
-        "previous": null,
-        "total": 58
+          ],
+          "disc_number": 1,
+          "duration_ms": 209453,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Otra Vez (feat. J Balvin)",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      },
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "Otra Vez (feat. J Balvin)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Zion & Lennox",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 255000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Otra Vez 2 (feat. J Balvin)",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
       }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 58
+  },
+  { 
+    "id": "LikedTracks" ,
+    "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a/playlists/21THa8j9TaSGuXYNBU5tsC/tracks",
+    "items": [
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Çağatay Ulusoy",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "Mutlu Sonuz (Delibal Original Sountrack)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Çağatay Ulusoy",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 135000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Mutlu Sonuz (Delibal Original Sountrack)",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      },
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "A Head Full of Dreams",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Coldplay",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 260000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Hymn for the Weekend",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      },
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "÷ (Deluxe)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Ed Sheeran",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 167000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Shape of You",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 58
+  },
+  {   
+    "id": "1AwZz0mBuGbCEoNRQdYQju" ,
+    "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a/playlists/21THa8j9TaSGuXYNBU5tsC/tracks",
+    "items": [
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "Otra Vez (feat. J Balvin)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Zion & Lennox",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 209453,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Otra Vez (feat. J Balvin)",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      },
+      {
+        "added_at": "2016-10-11T13:44:40Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "http://open.spotify.com/user/spotify_espa%C3%B1a"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify_espa%C3%B1a",
+          "id": "spotify_españa",
+          "type": "user",
+          "uri": "spotify:user:spotify_espa%C3%B1a"
+        },
+        "is_local": false,
+        "track": {
+          "album": {
+            "album_type": "single",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+                },
+                "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+                "id": "21451j1KhjAiaYKflxBjr1",
+                "name": "Zion & Lennox",
+                "type": "artist",
+                "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/5GjKG3Y8OvSVJO55dQTFyD"
+            },
+            "href": "https://api.spotify.com/v1/albums/5GjKG3Y8OvSVJO55dQTFyD",
+            "id": "5GjKG3Y8OvSVJO55dQTFyD",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/9f05124de35d807b78563ea2ca69550325081747",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/863c805b580a29c184fc447327e28af5dac9490b",
+                "width": 64
+              }
+            ],
+            "name": "Otra Vez (feat. J Balvin)",
+            "type": "album",
+            "uri": "spotify:album:5GjKG3Y8OvSVJO55dQTFyD"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/21451j1KhjAiaYKflxBjr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/21451j1KhjAiaYKflxBjr1",
+              "id": "21451j1KhjAiaYKflxBjr1",
+              "name": "Zion & Lennox",
+              "type": "artist",
+              "uri": "spotify:artist:21451j1KhjAiaYKflxBjr1"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1vyhD5VmyZ7KMfW5gqLgo5"
+              },
+              "href": "https://api.spotify.com/v1/artists/1vyhD5VmyZ7KMfW5gqLgo5",
+              "id": "1vyhD5VmyZ7KMfW5gqLgo5",
+              "name": "J Balvin",
+              "type": "artist",
+              "uri": "spotify:artist:1vyhD5VmyZ7KMfW5gqLgo5"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 255000,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USWL11600423"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7pk3EpFtmsOdj8iUhjmeCM"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7pk3EpFtmsOdj8iUhjmeCM",
+          "id": "7pk3EpFtmsOdj8iUhjmeCM",
+          "name": "Otra Vez 2 (feat. J Balvin)",
+          "popularity": 85,
+          "preview_url": "https://p.scdn.co/mp3-preview/79c8c9edc4f1ced9dbc368f24374421ed0a33005",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:7pk3EpFtmsOdj8iUhjmeCM"
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 58
+  } 
 ]
