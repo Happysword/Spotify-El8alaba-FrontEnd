@@ -105,7 +105,7 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async seekPosition(positionMs) {
-    if (typeof positionMs === 'number' && positionMs > 0) {
+    if (typeof positionMs === 'number' && positionMs >= 0) {
       const response = await client
         .seekPosition(positionMs)
         .then((Promisedata) => Promisedata);
@@ -121,7 +121,9 @@ export default {
    */
 
   async setVolume(volumePercent) {
-    if (typeof volumePercent === 'number' && volumePercent > 0 && volumePercent <= 100) {
+    if (
+      typeof volumePercent === 'number' && volumePercent >= 0 && volumePercent <= 100
+    ) {
       const response = await client
         .setVolume(volumePercent)
         .then((Promisedata) => Promisedata);

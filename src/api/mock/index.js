@@ -163,7 +163,7 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async seekPosition(positionMs) {
-    if (positionMs > 0) {
+    if (positionMs >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
     return false;
@@ -175,7 +175,7 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async setVolume(volumePercent) {
-    if (volumePercent > 0) {
+    if (volumePercent >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
     return false;

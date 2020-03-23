@@ -3,7 +3,12 @@
     <v-spacer></v-spacer>
     <v-flex shrink>
       <v-btn @click="queueChange" text x-small>
-        <v-icon color="grey" dense medium>mdi-playlist-play</v-icon>
+        <v-icon
+          :color="isInQueue === true ? 'green' : 'grey'"
+          dense
+          medium
+          >mdi-playlist-play</v-icon
+        >
       </v-btn>
     </v-flex>
 
@@ -35,25 +40,22 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   data: () => ({
     isInQueue: false,
   }),
   methods: {
-    ...mapMutations(['toggleSound']),
+    ...mapActions(['setVolume', 'toggleSound']),
     queueChange() {
       if (this.$router.currentRoute.name === 'queue') {
         this.$router.go(-1);
+        this.isInQueue = false;
       } else {
         this.$router.push({ name: 'queue' });
+        this.isInQueue = true;
       }
-    },
-    setVolume() {
-      this.$store.state.MusicPlayer.AudioPlayer.volume = this.$store.state.MusicPlayer
-        .currentPlayback.device.volume_percent
-        / 100;
     },
   },
 };

@@ -4,19 +4,24 @@ import axios from 'axios';
 import api from '../../common/config';
 
 export default {
+
   fetchUsers() {
     // TODO[@XL3]: Replace this with our server
     return axios.get(api).then((response) => response.data);
   },
 
-  // TODO[@Seif]: Check for status and Add Tokens for ALL and check if device Id is needed
   /**
    * Get the User's Currently Playing Track
    * @return {Object} An Object Containing info about the User's Current Playing Track
    */
   async fetchCurrentSong() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .get(`${api}/api/v1/me/player/currently-playing `)
+      .get(`${api}/api/v1/me/player/currently-playing `, {}, config)
       .then((response) => response.data);
   },
 
@@ -25,8 +30,13 @@ export default {
    * @return {Object} An Object Containing info about the User's Current playback
    */
   async fetchCurrentPlayback() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .get(`${api}/api/v1/me/player`)
+      .get(`${api}/api/v1/me/player`, {}, config)
       .then((response) => response.data);
   },
 
@@ -36,8 +46,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async pausePlayback() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/pause`)
+      .put(`${api}/api/v1/me/player/pause`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -50,8 +65,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async startPlayback() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/play`)
+      .put(`${api}/api/v1/me/player/play`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -78,8 +98,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async skipPrevious() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .post(`${api}/api/v1/me/player/previous`)
+      .post(`${api}/api/v1/me/player/previous`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -93,8 +118,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async toggleShuffle(state) {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/shuffle?state=${state}`)
+      .put(`${api}/api/v1/me/player/shuffle?state=${state}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -109,8 +139,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async toggleRepeat(state) {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/repeat?state=${state}`)
+      .put(`${api}/api/v1/me/player/repeat?state=${state}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -124,8 +159,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async seekPosition(positionMs) {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/repeat?seek=${positionMs}`)
+      .put(`${api}/api/v1/me/player/repeat?seek=${positionMs}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -139,14 +179,20 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async setVolume(volumePercent) {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+      },
+    };
     return axios
-      .put(`${api}/api/v1/me/player/repeat?seek=${volumePercent}`)
+      .put(`${api}/api/v1/me/player/repeat?seek=${volumePercent}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
       })
       .catch(() => false);
   },
+
   fetchCurrentUserAlbum() {
     // TODO[@ahmedx3]: Replace this with our server
     return axios.get(api).then((response) => response.data);

@@ -14,16 +14,16 @@
             <v-spacer></v-spacer>
             <ul>
               <v-btn
-                v-for="button in buttons"
-                :key="button"
+                v-for="i in buttons.length"
+                :key="i"
                 class="btn-green text-none d-none d-sm-table-cell"
                 type="li"
                 left
                 text
                 large
-                :to="button.route"
+                :to="buttons[i-1].route"
               >
-                {{ button.name }}</v-btn
+                {{ buttons[i-1].name }}</v-btn
               >
             </ul>
           </v-app-bar>

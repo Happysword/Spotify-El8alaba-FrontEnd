@@ -1,5 +1,5 @@
 <template>
-  <v-footer app dark class="mock-player" height="90">
+  <v-footer app dark class="player" height="90">
     <v-container fluid class="mx-0 pa-0">
       <v-row>
         <v-col align-self="center" class="pa-0" cols="3">
@@ -33,23 +33,34 @@ export default {
   },
 
   async created() {
+    // TODO[@Seif] check from where to play and how to get songs
+    // TODO[@Seif] Refactor Play to another file
     this.$store.state.MusicPlayer.currentPlayback = await Requests.fetchCurrentPlayback();
     this.$store.state.MusicPlayer.AudioPlayer = new Audio(
-      'https://interactive-examples.mdn.mozilla.net/media/examples/t-rex-roar.mp3',
+      'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3',
     );
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
       this.$store.dispatch('togglePlayact');
+    };
+    this.$store.state.MusicPlayer.AudioPlayer.ontimeupdate = () => {
+      this.$store.state.MusicPlayer.currentBufferPerc = (this.$store.state.MusicPlayer
+        .AudioPlayer.currentTime / this.$store.state.MusicPlayer.AudioPlayer.duration) * 100;
+
+      const SongTimeinS = Math.floor(
+        this.$store.state.MusicPlayer.AudioPlayer.currentTime,
+      );
+      const TimeString = `${Math.floor(
+        SongTimeinS / 60,
+      ).toString()}:${Math.floor((SongTimeinS % 60) / 10).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
+      this.$store.state.MusicPlayer.currentSongTime = TimeString;
     };
   },
 };
 </script>
 
 <style scoped>
-.mock-player {
+.player {
   color: white;
   width: 100%;
-}
-#mock-div {
-  text-align: center;
 }
 </style>

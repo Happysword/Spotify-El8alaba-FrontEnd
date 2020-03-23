@@ -70,17 +70,17 @@
       <v-layout justify-center align-center row>
         <v-col class="ml-5 mr-0 pa-0 justify-space-between" cols="1">
           <div class="mx-3 pa-0" id="number-div-left">
-            {{ currentSongTime }}
+            {{ $store.state.MusicPlayer.currentSongTime }}
           </div>
         </v-col>
 
-        <!-- TODO[@Seif] Fix the V-model with the correct property when streaming works  -->
         <v-col class="mt-3 mb-3 mr-0 pa-0">
           <v-progress-linear
             background-color="grey"
             color="green"
             rounded
-            v-model="$store.state.MusicPlayer.currentPlayback.progress_ms"
+            @change="seekPosition"
+            v-model="$store.state.MusicPlayer.currentBufferPerc"
           >
           </v-progress-linear>
         </v-col>
@@ -128,6 +128,14 @@ export default {
         this.shuffleState = !this.shuffleState;
       }
     },
+    async seekPosition() {
+      const seekedTime = (this.$store.state.MusicPlayer.currentBufferPerc / 100)
+      * this.$store.state.MusicPlayer.AudioPlayer.duration;
+      const Response = await PlayerRequests.seekPosition(seekedTime / 1000);
+      if (Response) {
+        this.$store.state.MusicPlayer.AudioPlayer.currentTime = seekedTime;
+      }
+    },
   },
 
   computed: {
@@ -141,14 +149,17 @@ export default {
       return TimeString;
     },
 
-    currentSongTime() {
-      const SongTimeinS = Math.floor(
-        this.$store.state.MusicPlayer.currentPlayback.progress_ms / 1000,
-      );
-      const TimeString = `${Math.floor(
-        SongTimeinS / 60,
-      ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
-      return TimeString;
+    currentSongTime: {
+      get() {
+        console.log('hello');
+        const SongTimeinS = Math.floor(
+          this.$store.state.MusicPlayer.AudioPlayer.currentTime,
+        );
+        const TimeString = `${Math.floor(
+          SongTimeinS / 60,
+        ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+        return TimeString;
+      },
     },
   },
 };
