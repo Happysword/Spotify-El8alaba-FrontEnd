@@ -1,6 +1,6 @@
 <template>
   <v-container fluid="">
-    <div>
+    <div v-show="PGenresExist">
     <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
     <v-row>
         <v-col  xs="12" sm="12" md="12" lg="4"
@@ -14,7 +14,7 @@
          </v-col>
     </v-row>
     </div>
-    <div>
+    <div v-show="genresExist">
     <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
     <v-row>
       <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
@@ -47,20 +47,24 @@ export default {
     return {
       genres: [],
       PGenres: [],
+      genresExist: false,
+      PGenresExist: false,
     };
   },
   methods: {
-    fetchAllGenres() {
-      client.fetchGenres()
-        .then((response) => {
-          this.genres = response[0].categories.items;
-        });
+    async fetchAllGenres() {
+      this.genres = await client.fetchGenres();
+      if (this.genres) {
+        this.genres = this.genres.categories.items;
+        this.genresExist = true;
+      } else this.genres = {};
     },
-    fetchAllPrefG() {
-      client.fetchPrefGenres()
-        .then((response) => {
-          this.PGenres = response[0].categories.items;
-        });
+    async fetchAllPrefG() {
+      this.PGenres = await client.fetchPrefGenres();
+      if (this.PGenres) {
+        this.PGenres = this.PGenres.categories.items;
+        this.PGenresExist = true;
+      } else this.PGenres = {};
     },
   },
   async created() {
@@ -77,7 +81,6 @@ export default {
 
   destroyed() {
     this.$store.state.searching = false;
-    console.log(this.colorp);
   },
 };
 </script>

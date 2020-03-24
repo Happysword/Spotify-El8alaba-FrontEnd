@@ -2,7 +2,7 @@
     <div absolute v-show="ready">
         <v-card class="d-inline-block mr-3 white--text GCard"
          width="190" height="190" @click="routing()"
-         :style="`background: linear-gradient(0deg, ${color} 40%, rgba(30,30,30,1) 100%);`">
+         :style="`background: linear-gradient(0deg, ${color} 30%, rgba(60,60,60,1) 100%);`">
             <v-card-title class="font-weight-bold headline">{{ title }}</v-card-title>
             <v-img :src=source class="rotatedImg">
             </v-img>

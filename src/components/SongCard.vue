@@ -13,12 +13,13 @@
           @click="CardClickLink()"
           @contextmenu.prevent="on.click"
         >
-          <v-container fluid>
+          <v-container fluid v-show="images != []">
             <v-img :src="images[0].url" height="150px"></v-img>
           </v-container>
           <v-card-title class="font-weight-bold subtitle-2">{{name}}</v-card-title>
 
-          <v-card-subtitle class="caption" v-if="!showActionButton && type === 'playlist'">
+          <v-card-subtitle class="caption text-truncate"
+          v-if="!showActionButton && type === 'playlist'">
             {{description}}
           </v-card-subtitle>
 

@@ -11,6 +11,9 @@ import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
 import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
+import genresPlaylists1 from './data/Genres-Playlists.json';
+import genresPlaylists2 from './data/Genres-Playlists2.json';
+import search from './data/Search.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -187,14 +190,84 @@ export default {
    * @return {object} an object that contains all genres in the mock data
    */
   async fetchGenres() {
-    return fetch(genres, 1000);
+    const g = await fetch(genres, 1000);
+    return g;
+  },
+  /**
+   * Fetch a specific genre in the mock data
+   * @param {string} id a string that contains the id of the genre
+   * @return {object} an object containing necessary data about genre
+   */
+  async fetchGenre(id) {
+    let i;
+    const list = await fetch(genres, 10);
+    for (i = 0; i < list.categories.limit; i += 1) {
+      if (id === list.categories.items[i].id) {
+        return list.categories.items[i];
+      }
+    }
+    return {};
   },
   /**
   * Fetches all prefered genres for a user
   * @return {object} an object that contains all preferred genres.
+  * TODO[@Francois]: make sure it will be done because it doesn't have an endpoint
   */
   async fetchPrefGenres() {
-    return fetch(PrefGenres, 1000);
+    const g = await fetch(PrefGenres, 50);
+    return g;
+  },
+  /**
+   * Fetches all playlists related to a specific Category
+   * @param {string} id string that contains the id of the category
+   * @return {Array} an Array containing all playlists
+   */
+  async fetchCategoryPlaylists(id) {
+    let playlist;
+    if (id === 'gaming') {
+      playlist = await fetch(genresPlaylists1, 50);
+      return playlist;
+    }
+    if (id === 'soul') {
+      playlist = await fetch(genresPlaylists2, 100);
+      return playlist;
+    }
+    return {};
+  },
+  /**
+   * Fetches all new releases related to a specific Category
+   * @param {string} id string that contains the id of the category
+   * @return {Array} an Array containing all the releases
+   * TODO[@Francois] make sure it will get an id for category and return the playlists
+   */
+  async fetchCategoryReleases(id) {
+    let release;
+    if (id === 'gaming') {
+      release = await fetch(genresPlaylists1, 50);
+      return release.playlists.items;
+    }
+    if (id === 'soul') {
+      release = await fetch(genresPlaylists2, 100);
+      return release.playlists.items;
+    }
+    return {};
+  },
+  /**
+ * Fetch related data to the user input for search
+ * @param {string} x a string that contains the data the user search for
+ * @return {object} an object that may have related data to user search
+ */
+  async fetchSearch(x) {
+    let obj;
+    if (x.match(/Amr Diab.*/)) {
+      obj = await fetch(search[0], 50);
+      return obj;
+    }
+    if (x.match(/Godzilla.*/)) {
+      obj = await fetch(search[1], 100);
+      return obj;
+    }
+    return null;
   },
   fetchCurrentUserAlbum() {
     return fetch(currentUserAlbum, 100);
