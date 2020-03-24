@@ -54,8 +54,10 @@ export default {
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
-      token: '',
-      data: {},
+      data: {
+        token: '',
+        data: {},
+      },
     };
   },
 
@@ -81,8 +83,10 @@ export default {
     // Succeed if the user isn't found
     return {
       status: !found ? 200 : 400,
-      token: '',
-      data: {},
+      data: {
+        token: '',
+        data: {},
+      },
     };
   },
 
@@ -107,6 +111,29 @@ export default {
 
     // Succeed if the user is found
     return { status: found ? 200 : 400 };
+  },
+
+  /**
+   * Returns mock user profile data
+   * @return {Object} The mock data
+   */
+  async getCurrentUserProfile() {
+    /**
+     * @note[XL3] Adding 2 hours to compensate for timezone
+     * @see MDN Date.prototype.getTimezoneOffset()
+     */
+    const userProfile = {
+      id: '5e6fc6ebb8715b3f1dc40b80',
+      email: 'admin@admin.com',
+      birthdate: new Date('1/1/1991 02:00'),
+      country: 'EG',
+      product: 'free',
+    };
+
+    return {
+      status: 200,
+      data: userProfile,
+    };
   },
 
   /**

@@ -4,21 +4,21 @@
   <!-- Main app bar -->
   <v-app-bar color="black" class="trans-bar">
     <router-link to="/">
-      <v-img  src="../../assets/imgs/El-8alaba.png"
-              max-height="200"
-              max-width="200"
+      <v-img src="../../assets/imgs/El-8alaba.png"
+             max-height="200"
+             max-width="200"
       />
     </router-link>
     <v-spacer/>
     <ul>
       <v-btn v-for="button in buttons"
-              :key="button"
-              class="btn-green text-none d-none d-sm-table-cell"
-              type="li"
-              left
-              text
-              large
-              :to="button.route">
+             :key="button"
+             class="btn-green text-none d-none d-sm-table-cell"
+             type="li"
+             left
+             text
+             large
+             :to="button.route">
         {{ button.name }}
       </v-btn>
     </ul>
@@ -46,8 +46,7 @@
             <v-spacer/>
           </v-tab>
 
-          <v-tab-item v-for="(tab, i) in tabs"
-                      :key="i">
+          <v-tab-item v-for="(tab, i) in tabs" :key="i">
             <v-card class="pa-4" flat tile>
               <router-view/>
             </v-card>

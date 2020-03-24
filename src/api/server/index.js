@@ -239,6 +239,28 @@ export default {
     return response;
   },
 
+  /**
+   * Sends a GET request to the server for the current user's profile information
+   * @return {Object} The corresponding response
+   */
+  async getCurrentUserProfile() {
+    // Obtain the token from localStorage
+    const { token } = JSON.parse(localStorage.getItem('currentUser'));
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/users/me`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
   async fetchSongs(id) {
     const songs = await axios.get(`${api}v1/playlists/${id}/tracks?fields=&limit=&offset=`)
       .then((response) => response);
