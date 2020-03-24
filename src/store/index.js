@@ -19,9 +19,10 @@ export default new Vuex.Store({
       { title: 'Click Me' },
     ],
     MusicPlayer: {
+      isFirstPlay: true,
       isMute: false,
       currentBufferPerc: 0,
-      lastVolrecord: 50,
+      lastVolrecord: 100,
       isPlaying: false,
       currentSongTime: '0:00',
       currentSong: currentSongMock[0],

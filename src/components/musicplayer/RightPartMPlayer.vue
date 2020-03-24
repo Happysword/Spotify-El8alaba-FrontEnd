@@ -28,8 +28,11 @@
     <v-flex>
       <v-progress-linear
         id="volume-bar"
-        background-color="grey"
-        color="green"
+        background-color="grey darken-3"
+        :color="barHover ? 'green' : 'grey'"
+        @mouseenter="barHover = true"
+        @mouseleave="barHover = false"
+        height="5"
         rounded
         @change="setVolume"
         v-model="$store.state.MusicPlayer.currentPlayback.device.volume_percent"
@@ -45,6 +48,7 @@ import { mapActions } from 'vuex';
 export default {
   data: () => ({
     isInQueue: false,
+    barHover: false,
   }),
   methods: {
     ...mapActions(['setVolume', 'toggleSound']),

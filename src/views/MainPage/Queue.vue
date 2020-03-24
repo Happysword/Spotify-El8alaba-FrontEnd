@@ -33,7 +33,7 @@
 <script>
 import sCard from '../../components/SongsBar.vue';
 
-// TODO[@Seif] Add the Queue from requests and fix queue color
+// TODO[@Seif] Add Queue from store arrays and fix queue color
 export default {
   name: 'Queue',
   components: { sCard },

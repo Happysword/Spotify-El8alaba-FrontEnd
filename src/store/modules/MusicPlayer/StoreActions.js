@@ -2,6 +2,13 @@ import PlayerRequests from './Requests';
 
 export default {
   async togglePlayact({ commit, state }) {
+    // TODO[@Seif] check from where to play and how to get songs
+    if (state.MusicPlayer.isFirstPlay) {
+      state.MusicPlayer.currentPlayback = await PlayerRequests.fetchCurrentPlayback();
+      state.MusicPlayer.AudioPlayer.src = state.MusicPlayer.currentPlayback.item.href;
+      // this one here above
+      state.MusicPlayer.isFirstPlay = false;
+    }
     if (state.MusicPlayer.isPlaying) {
       const requestAnswer = await PlayerRequests.pausePlayback();
       if (requestAnswer) {

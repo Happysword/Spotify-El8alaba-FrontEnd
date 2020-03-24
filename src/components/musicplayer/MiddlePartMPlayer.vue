@@ -76,8 +76,11 @@
 
         <v-col class="mt-3 mb-3 mr-0 pa-0">
           <v-progress-linear
-            background-color="grey"
-            color="green"
+            background-color="grey darken-3"
+            :color="barHover ? 'green' : 'grey'"
+            @mouseenter="barHover = true"
+            @mouseleave="barHover = false"
+            height="5"
             rounded
             @change="seekPosition"
             v-model="$store.state.MusicPlayer.currentBufferPerc"
@@ -103,9 +106,11 @@ export default {
   data: () => ({
     shuffleState: false,
     repeatState: 'off',
+    barHover: false,
   }),
   methods: {
     ...mapActions(['togglePlayact']),
+    // TODO[@Seif] add here create a new audio for every skip from their respected lists
     async skipNext() {
       await PlayerRequests.skipNext();
     },

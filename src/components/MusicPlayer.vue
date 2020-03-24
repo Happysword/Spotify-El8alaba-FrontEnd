@@ -20,7 +20,6 @@ import { mapActions } from 'vuex';
 import LMusicP from './musicplayer/LeftPartMPlayer.vue';
 import RMusicP from './musicplayer/RightPartMPlayer.vue';
 import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
-import Requests from '../store/modules/MusicPlayer/Requests';
 
 export default {
   components: {
@@ -33,14 +32,11 @@ export default {
   },
 
   async created() {
-    // TODO[@Seif] check from where to play and how to get songs
-    // TODO[@Seif] Refactor Play to another file
-    this.$store.state.MusicPlayer.currentPlayback = await Requests.fetchCurrentPlayback();
-    this.$store.state.MusicPlayer.AudioPlayer = new Audio(
-      'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3',
-    );
+    this.$store.state.MusicPlayer.AudioPlayer = new Audio();
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
       this.$store.dispatch('togglePlayact');
+      this.$store.state.MusicPlayer.isFirstPlay = true;
+      console.log(this.$store.state.MusicPlayer.isFirstPlay);
     };
     this.$store.state.MusicPlayer.AudioPlayer.ontimeupdate = () => {
       this.$store.state.MusicPlayer.currentBufferPerc = (this.$store.state.MusicPlayer
@@ -53,6 +49,7 @@ export default {
         SongTimeinS / 60,
       ).toString()}:${Math.floor((SongTimeinS % 60) / 10).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
       this.$store.state.MusicPlayer.currentSongTime = TimeString;
+      console.log(this.$store.state.MusicPlayer.isFirstPlay);
     };
   },
 };

@@ -54,9 +54,15 @@
               </router-link>
             </v-layout>
           </v-flex>
-
+          <!-- TODO[@Seif] check heart add to liked and ask others about the hovering picture -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
-            <v-icon color="grey" class="mx-2 info-buttons" dense medium>
+            <v-icon
+              :color="heartcolor ? 'green' : 'grey'"
+              @click="changeHeart"
+              class="mx-2 info-buttons"
+              dense
+              medium
+            >
               mdi-heart-outline
             </v-icon>
             <!-- Removed in new update
@@ -64,7 +70,13 @@
               mdi-alpha-x-circle-outline
             </v-icon>
 -->
-            <v-icon color="grey" class="mx-2 info-buttons" dense medium>
+            <v-icon
+              :color="hoverPic ? 'green' : 'grey'"
+              @click="changeHoverPic"
+              class="mx-2 info-buttons"
+              dense
+              medium
+            >
               mdi-shape-rectangle-plus
             </v-icon>
           </v-flex>
@@ -77,7 +89,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data: () => ({
+    heartcolor: false,
+    hoverPic: false,
+  }),
+  methods: {
+    changeHeart() {
+      this.heartcolor = !this.heartcolor; // add request or whatever adds this to liked
+    },
+    changeHoverPic() {
+      this.hoverPic = !this.hoverPic; // implement this
+    },
+  },
+};
 </script>
 
 <style scoped>
