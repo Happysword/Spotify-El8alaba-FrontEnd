@@ -208,6 +208,21 @@ export default {
     return songs.data.items;
   },
   /**
+   * Fetches user's saved tracks
+   * @param  {string}  token The token of user
+   * @return {Object}  An object containing all saved songs of the user
+   */
+  async fetchSavedTracks(token) {
+    const songs = await axios.get(`${api}/api/v1/me/tracks`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response)
+      .catch((err) => console.log(err));
+    return songs.data.items;
+  },
+  /**
    * Fetches List info
    * @param  {Number}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
@@ -221,5 +236,20 @@ export default {
       .then((response) => response)
       .catch((err) => console.log(err));
     return lists.data;
+  },
+  /**
+   * Fetches Album info
+   * @param  {Number}  id The id of the desired Album
+   * @return {Object} An object containing all information about the album of ID equals to id
+   */
+  async fetchAlbum(id, token) {
+    const Album = await axios.get(`${api}/api/v1/albums/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response)
+      .catch((err) => console.log(err));
+    return Album.data;
   },
 };
