@@ -172,12 +172,6 @@ export default {
     },
   },
   mounted() {
-    client.loginUser(
-      {
-        email: 'hmada.mks@gmail.com',
-        password: 'googleYahoo3223',
-      },
-    );
     this.fetchUserPlaylists();
   },
   methods: {
