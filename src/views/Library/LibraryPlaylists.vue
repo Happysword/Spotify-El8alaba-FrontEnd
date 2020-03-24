@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import client from '../../api/mock';
+import client from 'api-client';
 import SongCard from '../../components/SongCard.vue';
 
 export default {

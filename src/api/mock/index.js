@@ -10,6 +10,7 @@ import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
 import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
+import Boolean from './data/Boolean.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -57,6 +58,31 @@ export default {
       token: '',
       data: {},
     };
+  },
+
+  /**
+   * Check if Current User Follows Artists or Users
+   * @param {String} ids IDs of artists or user which current user follows
+   */
+  async ifCurrentUserFollowsArtistsOrUsers(ids) {
+    console.log(ids);
+    return fetch(Boolean, 100);
+  },
+
+  /**
+   * Follow Artists or Users
+   * @param {String} ids IDs of artists or Users to follow
+   */
+  async followArtistsOrUsers(ids) {
+    console.log(ids);
+  },
+
+  /**
+   * UnFollow Artists or Users
+   * @param {String} ids IDs of artists or Users to Unfollow
+   */
+  async unfollowArtistsOrUsers(ids) {
+    console.log(ids);
   },
 
   /**

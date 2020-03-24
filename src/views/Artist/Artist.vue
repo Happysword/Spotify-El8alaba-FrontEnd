@@ -31,7 +31,8 @@
                     route
                     outlined=""
                     dark=""
-                    >FOLLOW</v-btn
+                    @click="followLogic()"
+                    >{{followStatus}}</v-btn
                     >
                 </v-card-actions>
                 <v-container class="mt-5" fluid="">
@@ -81,15 +82,19 @@
 </template>
 
 <script>
-import client from '../../api/mock';
+import client from 'api-client';
 
 export default {
   data() {
     return {
       artist: JSON,
+      followStatus: '',
+      FollowJSON: JSON,
+      isFollowing: Boolean,
     };
   },
   mounted() {
+    this.fetchFollowStatus();
     this.fetchAnArtist();
   },
   methods: {
@@ -98,6 +103,37 @@ export default {
         .then((response) => {
           this.artist = response;
         });
+    },
+    fetchFollowStatus() {
+      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id)
+        .then((res) => {
+          this.FollowJSON = res;
+          [this.isFollowing] = this.FollowJSON;
+          if (this.isFollowing === true) {
+            this.followStatus = 'UNFOLLOW';
+          } else {
+            this.followStatus = 'FOLLOW';
+          }
+        });
+    },
+    followLogic() {
+      if (this.isFollowing === false) {
+        client.followArtistsOrUsers({
+          ids: [this.$route.params.id],
+        }).then((res) => {
+          console.log(res);
+          this.isFollowing = true;
+          this.followStatus = 'UNFOLLOW';
+        });
+      } else {
+        client.unfollowArtistsOrUsers({
+          ids: [this.$route.params.id],
+        }).then((res) => {
+          console.log(res);
+          this.isFollowing = false;
+          this.followStatus = 'FOLLOW';
+        });
+      }
     },
   },
 

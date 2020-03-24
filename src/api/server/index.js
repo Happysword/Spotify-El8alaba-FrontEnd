@@ -162,7 +162,7 @@ export default {
    */
   async fetchCurrentUserPlaylists(userID) {
     const userPlaylists = await axios
-      .get(`${api}v1/users/${userID}/playlists?limit=&offset=`)
+      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`)
       .then((response) => response.data);
     return userPlaylists;
   },
@@ -171,7 +171,7 @@ export default {
    */
   async fetchCurrentUserArtists() {
     const userArtists = await axios
-      .get(`${api}v1/me/following?`)
+      .get(`${api}/api/v1/me/following?`)
       .then((response) => response.data);
     return userArtists;
   },
@@ -181,7 +181,7 @@ export default {
    */
   async fetchAnArtist(id) {
     const artists = await axios
-      .get(`${api}v1/artists/${id}`)
+      .get(`${api}/api/v1/artists/${id}`)
       .then((response) => response.data);
     return artists;
   },
@@ -191,7 +191,7 @@ export default {
    */
   async fetchArtistRelatedArtists(id) {
     const related = await axios
-      .get(`${api}v1/artists/${id}/related-artists`)
+      .get(`${api}/api/v1/artists/${id}/related-artists`)
       .then((response) => response.data);
     return related;
   },
@@ -219,6 +219,36 @@ export default {
       .catch((err) => console.log(err));
 
     return response;
+  },
+
+  /**
+   * Follow Artists or Users
+   * @param {String} ids IDs of artists or Users to follow
+   */
+  async followArtistsOrUsers(ids) {
+    const response = await axios.put(`${api}/api/v1/me/following?type=artist`, ids)
+      .then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * UnFollow Artists or Users
+   * @param {String} ids IDs of artists or Users to Unfollow
+   */
+  async unfollowArtistsOrUsers(ids) {
+    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, ids)
+      .then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Check if Current User Follows Artists or Users
+   * @param {String} ids IDs of artists or user which current user follows
+   */
+  async ifCurrentUserFollowsArtistsOrUsers(ids) {
+    const resopnse = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`)
+      .then((res) => res.body);
+    return resopnse;
   },
 
   /**

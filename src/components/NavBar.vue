@@ -145,7 +145,7 @@
 </template>
 
 <script>
-import client from '../api/mock/index';
+import client from 'api-client';
 
 export default {
   name: 'Navbar',
@@ -172,6 +172,12 @@ export default {
     },
   },
   mounted() {
+    client.loginUser(
+      {
+        email: 'hmada.mks@gmail.com',
+        password: 'googleYahoo3223',
+      },
+    );
     this.fetchUserPlaylists();
   },
   methods: {
@@ -190,6 +196,7 @@ export default {
         description: '',
       }).then((r) => {
         console.log(r);
+        this.createdPlaylistName = '';
         this.fetchUserPlaylists();
       });
     },
