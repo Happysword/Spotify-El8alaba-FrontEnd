@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
-import Vuex from 'vuex';
 
 // Components
 import SignUp from '@/views/Authentication/SignUp.vue';
@@ -10,34 +9,19 @@ import SignUp from '@/views/Authentication/SignUp.vue';
 // Utilities
 import { mount, createLocalVue } from '@vue/test-utils';
 
-/**
- * @todo[XL3]: Add an alias resolver to Jest
- *   because it fails to resolve the 'api-client' alias
- */
-
 Vue.use(Vuetify);
 
 const localVue = createLocalVue();
 localVue.use(Vuetify);
 localVue.use(VueRouter);
-localVue.use(Vuex);
 
 const vuetify = new Vuetify();
 const router = new VueRouter();
-const store = new Vuex.Store({
-  state: {
-    currentUser: {},
-  },
-  mutations: {
-    setCurrentUser() {},
-  },
-});
 
 describe('SignUp.vue', () => {
   test('All data fields are clear on mount', () => {
     // Mount the component
     const wrapper = mount(SignUp, {
-      store,
       localVue,
       vuetify,
       router,
@@ -81,7 +65,6 @@ describe('SignUp.vue', () => {
   test('Signing up as an existing user fails', async () => {
     // Mount the component
     const wrapper = mount(SignUp, {
-      store,
       localVue,
       vuetify,
       router,
@@ -137,7 +120,6 @@ describe('SignUp.vue', () => {
   test('Signing up as a new user succeeds', async () => {
     // Mount the component
     const wrapper = mount(SignUp, {
-      store,
       localVue,
       vuetify,
       router,
@@ -187,5 +169,95 @@ describe('SignUp.vue', () => {
     await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
+  });
+
+  test('Entering invalid data triggers the validation properly', () => {
+    // Mount the component
+    const wrapper = mount(SignUp, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    // Assert that the button exists
+    const signupBtn = wrapper.find('#signupBtn');
+    expect(signupBtn.exists()).toEqual(true);
+
+    // Assert that all input fields exist
+    const emailField = wrapper.find('#emailField');
+    expect(emailField.exists()).toEqual(true);
+    const passwordField = wrapper.find('#passwordField');
+    expect(passwordField.exists()).toEqual(true);
+    const confirmEmailField = wrapper.find('#confirmEmailField');
+    expect(confirmEmailField.exists()).toEqual(true);
+    const nameField = wrapper.find('#nameField');
+    expect(nameField.exists()).toEqual(true);
+
+    const dobDayField = wrapper.find('#dobDayField');
+    expect(dobDayField.exists()).toEqual(true);
+    const dobMonthSelect = wrapper.find('#dobMonthSelect');
+    expect(dobMonthSelect.exists()).toEqual(true);
+    const dobYearField = wrapper.find('#dobYearField');
+    expect(dobYearField.exists()).toEqual(true);
+
+    const genderRadio = wrapper.find('#genderRadio');
+    expect(genderRadio.exists()).toEqual(true);
+
+    // Set the invalid data
+    emailField.setValue('This is an invalid email.');
+    passwordField.setValue('invpw');
+    confirmEmailField.setValue('This is another invalid email.');
+    nameField.setValue('');
+
+    dobDayField.setValue('One');
+    dobMonthSelect.setValue('');
+    dobYearField.setValue('2');
+
+    expect(wrapper.vm.$refs.signupForm.validate()).toEqual(false);
+  });
+
+  test('Entering valid data triggers the validation properly', () => {
+    // Mount the component
+    const wrapper = mount(SignUp, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    // Assert that the button exists
+    const signupBtn = wrapper.find('#signupBtn');
+    expect(signupBtn.exists()).toEqual(true);
+
+    // Assert that all input fields exist
+    const emailField = wrapper.find('#emailField');
+    expect(emailField.exists()).toEqual(true);
+    const passwordField = wrapper.find('#passwordField');
+    expect(passwordField.exists()).toEqual(true);
+    const confirmEmailField = wrapper.find('#confirmEmailField');
+    expect(confirmEmailField.exists()).toEqual(true);
+    const nameField = wrapper.find('#nameField');
+    expect(nameField.exists()).toEqual(true);
+
+    const dobDayField = wrapper.find('#dobDayField');
+    expect(dobDayField.exists()).toEqual(true);
+    const dobMonthSelect = wrapper.find('#dobMonthSelect');
+    expect(dobMonthSelect.exists()).toEqual(true);
+    const dobYearField = wrapper.find('#dobYearField');
+    expect(dobYearField.exists()).toEqual(true);
+
+    const genderRadio = wrapper.find('#genderRadio');
+    expect(genderRadio.exists()).toEqual(true);
+
+    // Set the valid data
+    emailField.setValue('newAdmin@newAdmin.com');
+    passwordField.setValue('newAdmin:newAdmin');
+    confirmEmailField.setValue('newAdmin@newAdmin.com');
+    nameField.setValue('New Admin');
+
+    dobDayField.setValue('1');
+    dobMonthSelect.setValue('January');
+    dobYearField.setValue('1991');
+
+    expect(wrapper.vm.$refs.signupForm.validate()).toEqual(true);
   });
 });

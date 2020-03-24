@@ -4,11 +4,10 @@ import axios from 'axios';
 import api from '../../common/config';
 
 export default {
-
-  fetchUsers() {
-    // TODO[@XL3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
+  // @todo[XL3] See if this method will be removed
+  // fetchUsers() {
+  //   return axios.get(api).then((response) => response.data);
+  // },
 
   /**
    * Get the User's Currently Playing Track
@@ -215,29 +214,76 @@ export default {
   },
   /**
    * Sends a POST request to the server to login the user
-   * @param  {Object} body The user's credentials
+   * @param  {Object} data The user's credentials
    * @return {Object}      The corresponding response
    */
-  async loginUser(body) {
-    const response = await axios.post(`${api}/api/v1/authentication/login`, body)
+  async loginUser(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/login`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
       .then((res) => res)
-      .catch((err) => console.log(err));
+      .catch((err) => err.response);
 
     return response;
   },
 
   /**
    * Sends a POST request to the server to signup the user
-   * @param  {Object} body The user's signup data
+   * @param  {Object} data The user's signup data
    * @return {Object}      The corresponding response
    */
-  async signupUser(body) {
-    const response = await axios.post(`${api}/api/v1/authentication/signup`, body)
+  async signupUser(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/signup`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+        /**
+         * @author XL3
+         * This is my public IP address
+         * @todo[XL3] Change this for production
+         */
+        'X-Forwarded-For': '156.215.87.252',
+      },
+    };
+
+    const response = await axios(request)
       .then((res) => res)
-      .catch((err) => console.log(err));
+      .catch((err) => err.response);
 
     return response;
   },
+
+  /**
+   * Sends a POST request to the server for a Reset Password token
+   * @param  {Object} data The user's email
+   * @return {Object}      The corresponding response
+   */
+  async forgotPassword(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/forgotPassword`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
   async fetchSongs(id) {
     const songs = await axios.get(`${api}v1/playlists/${id}/tracks?fields=&limit=&offset=`)
       .then((response) => response);

@@ -53,7 +53,7 @@ export default {
 
     // Succeed if the user is found
     return {
-      status: found ? 'success' : '400 Bad Request',
+      status: found ? 200 : 400,
       token: '',
       data: {},
     };
@@ -80,10 +80,33 @@ export default {
 
     // Succeed if the user isn't found
     return {
-      status: !found ? 'success' : '400 Bad Request',
+      status: !found ? 200 : 400,
       token: '',
       data: {},
     };
+  },
+
+  /**
+   * Fetches all users in the mock data and ensures that a certain user is among them
+   * @param  {Object} body The user's signup data
+   * @return {Object}      The corresponding response
+   */
+  async forgotPassword(body) {
+    // Get all users
+    const allUsers = await fetch(users, 50);
+
+    // Search all users for our user
+    let found = false;
+    allUsers.some((user) => {
+      if (user.email === body.email) {
+        found = true;
+      }
+      // Breaking condition
+      return user.email === body.email;
+    });
+
+    // Succeed if the user is found
+    return { status: found ? 200 : 400 };
   },
 
   /**
