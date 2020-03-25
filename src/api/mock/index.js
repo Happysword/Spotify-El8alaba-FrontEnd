@@ -43,20 +43,23 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email && user.password === body.password) {
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email && u.password === body.password) {
         found = true;
+        user = u.user;
       }
       // Breaking condition
-      return user.email === body.email && user.password === body.password;
+      return u.user.userInfo.email === body.email && u.password === body.password;
     });
 
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
       data: {
-        token: '',
-        data: {},
+        token: 'mock_token',
+        data: { user },
       },
     };
   },
@@ -72,20 +75,47 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email) {
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return user.email === body.email;
+      return u.user.userInfo.email === body.email;
     });
+
+    // Add the user data to the mock database
+    const user = {
+      external_urls: [],
+      genres: [],
+      _id: '5e6b95fda1903935ccb355a3',
+      userInfo: {
+        type: 'user',
+        product: 'free',
+        image: null,
+        currentlyPlaying: null,
+        followers: null,
+        _id: '5e6b95fda1903935ccb355a3',
+        name: body.name,
+        email: body.email,
+        gender: body.gender,
+        birthdate: new Date(`${body.birthdate} GMT+0`),
+        country: 'EG',
+        devices: [],
+        __v: 0,
+        uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+        id: '5e6b95fda1903935ccb355a3',
+      },
+      followers: [],
+      images: [],
+      uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+    };
 
     // Succeed if the user isn't found
     return {
       status: !found ? 200 : 400,
       data: {
-        token: '',
-        data: {},
+        token: 'mock_token',
+        data: { user },
       },
     };
   },
@@ -101,12 +131,12 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email) {
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return user.email === body.email;
+      return u.user.userInfo.email === body.email;
     });
 
     // Succeed if the user is found
@@ -119,20 +149,16 @@ export default {
    */
   async getCurrentUserProfile() {
     /**
-     * @note[XL3] Adding 2 hours to compensate for timezone
+     * @note[XL3] Setting timezone
      * @see MDN Date.prototype.getTimezoneOffset()
      */
-    const userProfile = {
-      id: '5e6fc6ebb8715b3f1dc40b80',
-      email: 'admin@admin.com',
-      birthdate: new Date('1/1/1991 02:00'),
-      country: 'EG',
-      product: 'free',
-    };
+    const user = JSON.parse(localStorage.getItem('currentUser')).data.userInfo;
 
     return {
       status: 200,
-      data: userProfile,
+      data: {
+        data: { user },
+      },
     };
   },
 

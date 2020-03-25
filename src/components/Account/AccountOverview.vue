@@ -2,11 +2,13 @@
 <v-app>
 <v-content>
   <!-- Title -->
-  <p class="display-2 font-weight-bold pt-6 mb-12">
+  <p class="display-2 font-weight-bold pt-6 pl-3 mb-12">
     Account Overview
   </p>
 
+  <!-- Main column -->
   <v-col>
+    <!-- Profile -->
     <p class="title font-weight-bold">
       Profile
     </p>
@@ -23,19 +25,22 @@
         <v-divider class="mb-3"/>
       </div>
     </v-col>
+
     <p class="my-8"></p>
+
+    <!-- Plan details -->
     <p class="title font-weight-bold">
       Your plan
     </p>
     <v-card flat outlined>
-      <div class="purpleGradient mb-n6">
-        <p class="ml-4 font-weight-bold display-1 planType text-capitalize">
+      <div class="purple-gradient mb-n6">
+        <p class="ml-4 font-weight-bold display-1 plan-type text-capitalize">
           Spotify {{ plan }}
         </p>
       </div>
       <v-card-text class="black--text">
         <p class="my-8">
-          {{ plans[plan] }}
+          {{ description[plan] }}
         </p>
         <v-divider/>
         <p class="my-8 font-weight-bold title text-capitalize">
@@ -49,8 +54,8 @@
           class="mt-3">
       Join Premium
     </v-btn>
-  </v-col>
 
+  </v-col>
 </v-content>
 </v-app>
 </template>
@@ -60,6 +65,9 @@ import api from 'api-client';
 
 export default {
   name: 'AccountOverview',
+  created() {
+    document.title = 'Account Overview - Spotify El8alaba';
+  },
   data: () => ({
     profileInfo: [
       { name: 'Username', data: 'lorem' },
@@ -70,13 +78,13 @@ export default {
 
     plan: '',
 
-    plans: {
+    description: {
       free: 'Free plan description',
       premium: 'Premium plan description',
     },
   }),
 
-  async beforeMount() {
+  async beforeCreate() {
     // Request the user's info
     const response = await api.getCurrentUserProfile();
 
@@ -107,13 +115,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.purpleGradient {
+.purple-gradient {
   margin-top: 0px;
   background-color: #9C27B0;
   background: linear-gradient(#AB47BC, #9C27B0, #AB47BC)
 }
 
-.planType {
+.plan-type {
   color: white;
   line-height: 150px !important;
 }

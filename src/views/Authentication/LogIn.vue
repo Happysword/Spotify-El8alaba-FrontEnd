@@ -207,7 +207,7 @@ export default {
       if (response.status === 200) {
         const currentUser = {
           token: response.data.token,
-          data: response.data.data,
+          data: response.data.data.user,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
