@@ -38,7 +38,7 @@ export default {
    */
   noSpecialCharacters(propertyName) {
     // Validate that this RegExp isn't found in the string
-    return (data) => (!!data && data.search(/[^\w@\-.]/g) === -1)
+    return (data) => (!!data && data.search(/[^\w\-.]/g) === -1)
       || `${propertyName} doesn't allow special characters`;
   },
 

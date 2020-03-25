@@ -2,7 +2,8 @@
 <v-app>
 <v-content>
   <!-- Title -->
-  <p class="display-2 font-weight-bold pt-6 pl-3 mb-12">
+  <p id="title"
+     class="display-2 font-weight-bold pt-6 pl-3 mb-12">
     Account Overview
   </p>
 
@@ -13,7 +14,8 @@
       Profile
     </p>
     <v-col>
-      <div v-for="(entry, i) in profileInfo" :key="i">
+      <div v-for="(entry, i) in profileInfo" :key="i"
+           :id="`${entry.id}Entry`">
         <v-row justify="space-between">
           <p class="subtitle-1 grey--text">
             {{ entry.name }}
@@ -32,7 +34,7 @@
     <p class="title font-weight-bold">
       Your plan
     </p>
-    <v-card flat outlined>
+    <v-card flat outlined id="planCard">
       <div class="purple-gradient mb-n6">
         <p class="ml-4 font-weight-bold display-1 plan-type text-capitalize">
           Spotify {{ plan }}
@@ -48,10 +50,12 @@
         </p>
       </v-card-text>
     </v-card>
-    <v-btn v-if="plan === 'free'"
-          x-large rounded outlined dark
-          color="secondary"
-          class="mt-3">
+    <v-btn id="toPremiumBtn"
+           v-if="plan === 'free'"
+           x-large rounded outlined dark
+           color="secondary"
+           class="mt-3"
+           to="/premium">
       Join Premium
     </v-btn>
 
@@ -70,10 +74,10 @@ export default {
   },
   data: () => ({
     profileInfo: [
-      { name: 'Username', data: 'lorem' },
-      { name: 'Email', data: 'lorem' },
-      { name: 'Date of Birth', data: 'lorem' },
-      { name: 'Country', data: 'lorem' },
+      { id: 'username', name: 'Username', data: 'lorem' },
+      { id: 'email', name: 'Email', data: 'lorem' },
+      { id: 'dob', name: 'Date of Birth', data: 'lorem' },
+      { id: 'country', name: 'Country', data: 'lorem' },
     ],
 
     plan: '',

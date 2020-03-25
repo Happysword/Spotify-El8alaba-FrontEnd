@@ -4,7 +4,8 @@
   <!-- Main app bar -->
   <v-app-bar color="black" class="trans-bar">
     <router-link to="/">
-      <v-img src="../../assets/imgs/El-8alaba.png"
+      <v-img id="logo"
+             src="../../assets/imgs/El-8alaba.png"
              class="mt-4"
              contain
              max-height="200"
@@ -14,13 +15,14 @@
     <v-spacer/>
     <ul>
       <v-btn v-for="(button, i) in buttons" :key="i"
+             :id="`${button.name}Btn`"
              class="btn-green text-none d-none d-sm-table-cell"
              type="li"
              left
              text
              large
              :to="button.route">
-        {{ button.name }}
+        <span class="text-uppercase">{{ button.name }}</span>
       </v-btn>
     </ul>
   </v-app-bar>
@@ -31,13 +33,15 @@
       <v-col lg="10" xl="8" class="px-0">
         <!-- Tab layout -->
         <!-- Vertical on medium and higher breakpoints -->
-        <v-tabs v-model="currentTab"
+        <v-tabs id="tabs"
+                v-model="currentTab"
                 dark
                 color="#1DB954"
                 :vertical="$vuetify.breakpoint.mdAndUp"
                 show-arrows>
           <!-- Avatar -->
-          <v-img :src="image"
+          <v-img id="avatar"
+                 :src="image"
                  class="my-4 rounded-img d-none d-md-flex"
                  contain
                  max-height="64"
@@ -45,7 +49,9 @@
           </v-img>
 
           <!-- Route each tab to its respective path -->
+          <!-- For example: change-password-tab -->
           <v-tab v-for="(tab, i) in tabs" :key="i"
+                 :id="`${tab.link}-tab`"
                  @click="$router.push(tab.link)">
             <!-- Display only on md+ -->
             <v-icon class="mr-3 d-none d-md-flex">
@@ -58,7 +64,7 @@
 
           <!-- Route content -->
           <v-tab-item v-for="(tab, i) in tabs" :key="i">
-            <v-card class="pa-4" flat tile>
+            <v-card class="pa-4" flat tile id="tab-content">
               <router-view/>
             </v-card>
           </v-tab-item>
@@ -91,15 +97,12 @@ export default {
     }
   },
 
-  mounted() {
-  },
-
   data: () => ({
     image: avatar,
     buttons: [
-      { name: 'HOME', route: '/home' },
-      { name: 'DOWNLOAD', route: '/download' },
-      { name: 'PREMIUM', route: '/premium' },
+      { name: 'home', route: '/home' },
+      { name: 'download', route: '/download' },
+      { name: 'premium', route: '/premium' },
     ],
     currentTab: -1,
     tabs: [

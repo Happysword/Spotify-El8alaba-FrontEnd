@@ -179,10 +179,6 @@ describe('SignUp.vue', () => {
       router,
     });
 
-    // Assert that the button exists
-    const signupBtn = wrapper.find('#signupBtn');
-    expect(signupBtn.exists()).toEqual(true);
-
     // Assert that all input fields exist
     const emailField = wrapper.find('#emailField');
     expect(emailField.exists()).toEqual(true);
@@ -223,10 +219,6 @@ describe('SignUp.vue', () => {
       vuetify,
       router,
     });
-
-    // Assert that the button exists
-    const signupBtn = wrapper.find('#signupBtn');
-    expect(signupBtn.exists()).toEqual(true);
 
     // Assert that all input fields exist
     const emailField = wrapper.find('#emailField');
