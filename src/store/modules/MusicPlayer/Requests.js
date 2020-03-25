@@ -73,7 +73,6 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async toggleShuffle(state) {
-    console.log('sent');
     if (typeof state === 'boolean') {
       const response = await client
         .toggleShuffle(state)

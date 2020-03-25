@@ -16,12 +16,12 @@ export default {
   async fetchCurrentSong() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
-      .get(`${api}/api/v1/me/player/currently-playing `, {}, config)
-      .then((response) => response.data);
+      .get(`${api}/api/v1/me/player/currently-playing`, {}, config)
+      .then((response) => response.data).catch(() => false);
   },
 
   /**
@@ -31,12 +31,12 @@ export default {
   async fetchCurrentPlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
       .get(`${api}/api/v1/me/player`, {}, config)
-      .then((response) => response.data);
+      .then((response) => response.data).catch(() => false);
   },
 
 
@@ -47,7 +47,7 @@ export default {
   async pausePlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -66,7 +66,7 @@ export default {
   async startPlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -83,8 +83,13 @@ export default {
    * @return {Boolean} a Boolean True if successful and false if failed
    */
   async skipNext() {
+    const config = {
+      headers: {
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
     return axios
-      .post(`${api}/api/v1/me/player/next`)
+      .post(`${api}/api/v1/me/player/next`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -99,7 +104,7 @@ export default {
   async skipPrevious() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -119,7 +124,7 @@ export default {
   async toggleShuffle(state) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -140,7 +145,7 @@ export default {
   async toggleRepeat(state) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -160,11 +165,11 @@ export default {
   async seekPosition(positionMs) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
-      .put(`${api}/api/v1/me/player/repeat?seek=${positionMs}`, {}, config)
+      .put(`${api}/api/v1/me/player/seek?position_ms=${positionMs}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -180,11 +185,11 @@ export default {
   async setVolume(volumePercent) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${localStorage.getItem('currentUser').token} `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
-      .put(`${api}/api/v1/me/player/repeat?seek=${volumePercent}`, {}, config)
+      .put(`${api}/api/v1/me/player/volume?volume_percent=${volumePercent}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;

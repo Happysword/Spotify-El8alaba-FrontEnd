@@ -36,7 +36,6 @@ export default {
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
       this.$store.dispatch('togglePlayact');
       this.$store.state.MusicPlayer.isFirstPlay = true;
-      console.log(this.$store.state.MusicPlayer.isFirstPlay);
     };
     this.$store.state.MusicPlayer.AudioPlayer.ontimeupdate = () => {
       this.$store.state.MusicPlayer.currentBufferPerc = (this.$store.state.MusicPlayer
@@ -49,7 +48,6 @@ export default {
         SongTimeinS / 60,
       ).toString()}:${Math.floor((SongTimeinS % 60) / 10).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
       this.$store.state.MusicPlayer.currentSongTime = TimeString;
-      console.log(this.$store.state.MusicPlayer.isFirstPlay);
     };
   },
 };

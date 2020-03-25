@@ -107,6 +107,7 @@ export default {
     shuffleState: false,
     repeatState: 'off',
     barHover: false,
+    valueFalseBuffer: 0,
   }),
   methods: {
     ...mapActions(['togglePlayact']),
@@ -139,7 +140,8 @@ export default {
       const Response = await PlayerRequests.seekPosition(seekedTime / 1000);
       if (Response) {
         this.$store.state.MusicPlayer.AudioPlayer.currentTime = seekedTime;
-      }
+        this.valueFalseBuffer = this.$store.state.MusicPlayer.currentBufferPerc;
+      } else { this.$store.state.MusicPlayer.currentBufferPerc = this.valueFalseBuffer; }
     },
   },
 
@@ -156,7 +158,6 @@ export default {
 
     currentSongTime: {
       get() {
-        console.log('hello');
         const SongTimeinS = Math.floor(
           this.$store.state.MusicPlayer.AudioPlayer.currentTime,
         );

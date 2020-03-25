@@ -1,11 +1,17 @@
 import PlayerRequests from './Requests';
+import api from '../../../common/config';
 
 export default {
   async togglePlayact({ commit, state }) {
-    // TODO[@Seif] check from where to play and how to get songs
+    // TODO[@Seif] check from where to play and how to get songs and write comments
     if (state.MusicPlayer.isFirstPlay) {
-      state.MusicPlayer.currentPlayback = await PlayerRequests.fetchCurrentPlayback();
-      state.MusicPlayer.AudioPlayer.src = state.MusicPlayer.currentPlayback.item.href;
+      const Response = await PlayerRequests.fetchCurrentPlayback();
+      if (Response !== false) { state.MusicPlayer.currentPlayback = Response; }
+      let SongURL = '';
+      if (process.env.VUE_APP_API_CLIENT === 'server') {
+        SongURL = `${api}api/v1/streaming/${state.MusicPlayer.currentPlayback.item.id}`;
+      } else if (process.env.VUE_APP_API_CLIENT === 'mock') { SongURL = state.MusicPlayer.currentPlayback.item.href; }
+      state.MusicPlayer.AudioPlayer.src = SongURL;
       // this one here above
       state.MusicPlayer.isFirstPlay = false;
     }
