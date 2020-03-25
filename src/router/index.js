@@ -4,6 +4,7 @@ import Main from '../views/MainPage/Main.vue';
 import Home from '../views/MainPage/Home.vue';
 import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
+import LogOut from '../views/Authentication/LogOut.vue';
 import PasswordReset from '../views/Authentication/PasswordReset.vue';
 import Account from '../views/Account/Account.vue';
 import AccountOverview from '../components/Account/AccountOverview.vue';
@@ -127,6 +128,11 @@ const routes = [
       { path: 'change-password', name: 'ChangePassword', component: ChangePassword },
       { path: 'notifications', name: 'NotificationSettings', component: NotificationSettings },
     ],
+  },
+  {
+    path: '/logout',
+    name: 'LogOut',
+    component: LogOut,
   },
 ];
 

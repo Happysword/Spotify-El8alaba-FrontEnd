@@ -82,6 +82,18 @@ import avatar from '../../assets/imgs/avatar.png';
 
 export default {
   name: 'Account',
+  // Re-route to login if no user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (!currentUser) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  },
+
   created() {
     // Set the chosen tab to the current route
     const route = this.$route.name;
@@ -91,7 +103,10 @@ export default {
       return t.title.replace(' ', '') === route;
     });
 
-    const { image } = JSON.parse(localStorage.getItem('currentUser')).data.userInfo;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) return;
+
+    const { image } = currentUser.data.userInfo;
     if (image) {
       this.image = image;
     }

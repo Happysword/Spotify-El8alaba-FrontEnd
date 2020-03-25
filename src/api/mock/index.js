@@ -152,10 +152,14 @@ export default {
      * @note[XL3] Setting timezone
      * @see MDN Date.prototype.getTimezoneOffset()
      */
-    const user = JSON.parse(localStorage.getItem('currentUser')).data.userInfo;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let user = {};
+    if (currentUser) {
+      user = await fetch(currentUser.data.userInfo, 50);
+    }
 
     return {
-      status: 200,
+      status: currentUser ? 200 : 404,
       data: {
         data: { user },
       },

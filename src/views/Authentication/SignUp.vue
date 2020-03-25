@@ -6,13 +6,14 @@
     <v-row justify="center" align="center">
       <v-col sm="8" lg="6" xl="4" class="px-8">
         <!-- Logo -->
-        <a><v-img
-          id="logo"
-          src="../../assets/imgs/El-8alaba.png"
-          contain
-          height="140"
-          @click="$router.push('/')"
-        /></a>
+        <router-link to="/">
+          <v-img
+            id="logo"
+            src="../../assets/imgs/El-8alaba.png"
+            contain
+            height="140">
+          </v-img>
+        </router-link>
 
         <!-- Error bar -->
         <p
@@ -170,6 +171,18 @@ export default {
   name: 'SignUp',
   created() {
     document.title = 'Sign up - Spotify El8alaba';
+  },
+
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        next('/home');
+      } else {
+        next();
+      }
+    });
   },
 
   data() {

@@ -154,6 +154,18 @@ export default {
     document.title = 'Log in - Spotify El8alaba';
   },
 
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        next('/home');
+      } else {
+        next();
+      }
+    });
+  },
+
   mounted() {
     // Import the Google Platform Library
     const googlePlatformLibrary = document.createElement('script');
