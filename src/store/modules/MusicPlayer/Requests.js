@@ -131,4 +131,30 @@ export default {
     }
     return false;
   },
+
+  /**
+   * Save a Liked Track to Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async saveTrack(ID) {
+    if (typeof ID === 'string') {
+      const response = await client.saveTrack(ID).then((Promisedata) => Promisedata);
+      return response;
+    }
+    return false;
+  },
+
+  /**
+   * Delete a Liked Track from Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async deleteTrack(ID) {
+    if (typeof ID === 'string') {
+      const response = await client.deleteTrack(ID).then((Promisedata) => Promisedata);
+      return response;
+    }
+    return false;
+  },
 };

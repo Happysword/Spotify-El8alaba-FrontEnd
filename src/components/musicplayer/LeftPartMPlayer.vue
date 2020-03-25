@@ -8,12 +8,19 @@
         elevation="0"
       >
         <v-layout justify-start align-center class="mx-0">
-          <v-flex align-self-center shrink class="mx-1">
+          <v-flex
+            align-self-center
+            shrink
+            class="mx-1"
+            v-if="!$store.state.MusicPlayer.navBarImage"
+          >
             <router-link
               :to="
                 '/home/album/' +
                   $store.state.MusicPlayer.currentSong.item.album.artists[0].id
               "
+              tag="button"
+              :disabled="isLinkDisabled"
             >
               <v-img
                 max-height="60"
@@ -22,7 +29,21 @@
                   $store.state.MusicPlayer.currentSong.item.album.images[0].url
                 "
                 contain
-              ></v-img>
+                @mouseenter="imageButton = true"
+                @mouseleave="imageButton = false"
+              >
+                <v-icon
+                  color="grey"
+                  v-show="imageButton"
+                  @click="
+                    ($store.state.MusicPlayer.navBarImage = true),
+                      (isLinkDisabled = false)
+                  "
+                  @mouseenter="isLinkDisabled = true"
+                  @mouseleave="isLinkDisabled = false"
+                  >mdi-chevron-up-circle</v-icon
+                ></v-img
+              >
             </router-link>
           </v-flex>
 
@@ -54,7 +75,7 @@
               </router-link>
             </v-layout>
           </v-flex>
-          <!-- TODO[@Seif] check heart add to liked and ask others about the hovering picture -->
+          <!-- TODO[@Seif] ask others about the hovering picture -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
             <v-icon
               :color="heartcolor ? 'green' : 'grey'"
@@ -89,14 +110,24 @@
 </template>
 
 <script>
+import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
+
 export default {
   data: () => ({
     heartcolor: false,
     hoverPic: false,
+    imageButton: false,
+    isLinkDisabled: false,
   }),
   methods: {
-    changeHeart() {
-      this.heartcolor = !this.heartcolor; // add request or whatever adds this to liked
+    async changeHeart() {
+      let R;
+      if (this.heartcolor) {
+        R = await PlayerRequests.deleteTrack(this.$store.state.MusicPlayer.currentPlayback.item.id);
+      } else {
+        R = await PlayerRequests.saveTrack(this.$store.state.MusicPlayer.currentPlayback.item.id);
+      }
+      if (R) this.heartcolor = !this.heartcolor;
     },
     changeHoverPic() {
       this.hoverPic = !this.hoverPic; // implement this

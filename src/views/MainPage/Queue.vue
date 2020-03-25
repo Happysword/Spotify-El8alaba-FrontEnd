@@ -53,6 +53,11 @@ export default {
       },
     ],
   }),
+  created() {
+    document.title = 'Play Queue - Spotify El8alaba';
+  },
+  destroyed() {
+  },
 };
 </script>
 

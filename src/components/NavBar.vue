@@ -123,19 +123,37 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-list-item
-          v-for="playlist in playlists.items"
-          :key="playlist.id"
-          dense
-          route
-          :to="'/playlist/' + playlist.id"
+        <v-list v-if="!$store.state.MusicPlayer.navBarImage">
+          <v-list-item
+            v-for="playlist in playlists.items"
+            :key="playlist.id"
+            dense
+            route
+            :to="'/playlist/' + playlist.id"
+          >
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">{{
+                playlist.name
+              }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-img
+          v-else
+          class="mt-2"
+          max-height="180"
+          max-width="200"
+          :src="$store.state.MusicPlayer.currentSong.item.album.images[0].url"
+          contain
+          @mouseenter="imageButton = true"
+          @mouseleave="imageButton = false"
+          ><v-icon
+            color="grey"
+            v-show="imageButton"
+            @click="$store.state.MusicPlayer.navBarImage = false"
+            >mdi-chevron-down-circle</v-icon
+          ></v-img
         >
-          <v-list-item-content>
-            <v-list-item-title class="subtitle-2">{{
-              playlist.name
-            }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
       </v-container>
     </v-navigation-drawer>
   </nav>
@@ -152,10 +170,15 @@ export default {
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/home' },
         { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
-        { icon: 'mdi-bookshelf', text: 'Your Library', route: '/home/library/playlists' },
+        {
+          icon: 'mdi-bookshelf',
+          text: 'Your Library',
+          route: '/home/library/playlists',
+        },
       ],
       playlists: Jsonplaylists,
       dialog: false,
+      imageButton: false,
     };
   },
   props: {

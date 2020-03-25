@@ -28,6 +28,7 @@ export default new Vuex.Store({
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
       AudioPlayer: Audio,
+      navBarImage: false,
     },
     currentSong: {},
   },

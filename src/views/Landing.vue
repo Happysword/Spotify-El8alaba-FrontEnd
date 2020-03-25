@@ -96,7 +96,11 @@ export default {
       },
     ],
   }),
+  created() {
+    document.title = 'Welcome - Spotify El8alaba';
+  },
 };
+
 </script>
 
 <style scoped>

@@ -203,6 +203,30 @@ export default {
     }
     return false;
   },
+  /**
+   * Save a Liked Track to Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async saveTrack(ID) {
+    if (ID) {
+      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    }
+    return false;
+  },
+
+  /**
+   * Delete a Liked Track
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async deleteTrack(ID) {
+    if (ID) {
+      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    }
+    return false;
+  },
+
   fetchGenres() {
     return fetch(genres, 1000);
   },

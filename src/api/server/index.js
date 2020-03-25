@@ -197,6 +197,46 @@ export default {
       .catch(() => false);
   },
 
+  /**
+   * Save a Liked Track to Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async saveTrack(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .put(`${api}/api/v1/me/tracks?ids=${ID}`, '', config)
+      .then((response) => {
+        if (response.status === 201) return true;
+        return false;
+      })
+      .catch(() => false);
+  },
+
+  /**
+   * Delete a Liked Track from Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async deleteTrack(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .delete(`${api}/api/v1/me/tracks?ids=${ID}`, config)
+      .then((response) => {
+        if (response.status === 200) return true;
+        return false;
+      })
+      .catch(() => false);
+  },
+
   fetchCurrentUserAlbum() {
     // TODO[@ahmedx3]: Replace this with our server
     return axios.get(api).then((response) => response.data);
