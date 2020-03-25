@@ -47,11 +47,11 @@ describe('Testing the player components', () => {
     });
     const data = wrapper.vm.$data;
 
-    it('Change Heart Method test', () => {
+    it('Change Heart Method test', async () => {
       expect(data.heartcolor).toBe(false);
-      wrapper.vm.changeHeart();
+      await wrapper.vm.changeHeart();
       expect(data.heartcolor).toBe(true);
-      wrapper.vm.changeHeart();
+      await wrapper.vm.changeHeart();
       expect(data.heartcolor).toBe(false);
     });
     it('ChangeHoverPic Method test', () => {
@@ -79,8 +79,8 @@ describe('Testing the player components', () => {
 
     it('Toggle Shuffle tests', async () => {
       expect(data.shuffleState).toBe(false);
-      await wrapper.vm.toggleShuffle;
-      // expect(data.shuffleState).toBe(true);
+      await wrapper.vm.toggleShuffle();
+      expect(data.shuffleState).toBe(true);
     });
   });
 
