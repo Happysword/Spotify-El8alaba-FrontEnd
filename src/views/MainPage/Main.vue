@@ -8,7 +8,7 @@
     >
       <router-view></router-view>
     </v-content>
-    <!--<music-player></music-player>-->
+    <music-player></music-player>
   </v-app>
 </template>
 
@@ -16,7 +16,7 @@
 import EventBus from '../../EventBus';
 import Navbar from '../../components/NavBar.vue';
 import Topbar from '../../components/TopBar.vue';
-// import MusicPlayer from '../../components/MusicPlayer.vue';
+import MusicPlayer from '../../components/MusicPlayer.vue';
 
 export default {
   name: 'Main',
@@ -24,7 +24,7 @@ export default {
   components: {
     Navbar,
     Topbar,
-    // MusicPlayer,
+    MusicPlayer,
   },
   data: () => ({
     color: 'rgba(10,10,10,255)',

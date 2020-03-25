@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import server from 'api-client';
 import store from '../store';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
@@ -141,17 +142,29 @@ export default {
       this.overlay = this.play;
       EventBus.$emit('pause', this.play);
     },
-    changeLiked() {
+    async changeLiked() {
       store.commit('changeLiked');
       this.snackbar = true;
       if (store.state.liked === true) {
         this.text = 'Saved to Your Library';
         // TODO[Naiera]: Add Save to Your library Request
+        const response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
+        console.log(response);
       } else {
         this.text = 'Removed from Your Library';
-        // TODO[Naiera]: Add Save to Your library Request
+        // TODO[Naiera]: Add Remove to Your library Request
+        const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
+        console.log(response);
       }
     },
+  },
+  async created() {
+    const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
+    if (response.data.length !== 0 && response.data[0] === true) {
+      store.state.liked = true;
+    } else {
+      store.state.liked = false;
+    }
   },
   mounted() {
     EventBus.$on('changePlay', (play) => {

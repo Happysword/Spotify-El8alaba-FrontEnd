@@ -197,14 +197,12 @@ export default {
    * @param  {string}  token The token of user
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
-  async fetchSongs(id, token) {
+  async fetchSongs(id) {
     const songs = await axios.get(`${api}/api/v1/playlists/${id}/tracks`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    })
-      .then((response) => response)
-      .catch((err) => console.log(err));
+    });
     return songs.data.items;
   },
   /**
@@ -212,14 +210,34 @@ export default {
    * @param  {string}  token The token of user
    * @return {Object}  An object containing all saved songs of the user
    */
-  async fetchSavedTracks(token) {
+  async fetchSavedTracks() {
     const songs = await axios.get(`${api}/api/v1/me/tracks`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     })
-      .then((response) => response)
-      .catch((err) => console.log(err));
+      .then((res) => {
+        if (res.status === 200) {
+          return res;
+        }
+        return {
+          data: {
+            items: [
+              {
+                track: {
+                  artists: [
+                    { name: '' },
+                  ],
+                  album: {},
+                  name: '',
+                  duration_ms: 0,
+                },
+              },
+            ],
+          },
+        };
+      })
+      .catch((error) => console.log(error));
     return songs.data.items;
   },
   /**
@@ -227,14 +245,12 @@ export default {
    * @param  {Number}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
    */
-  async fetchList(id, token) {
+  async fetchList(id) {
     const lists = await axios.get(`${api}/api/v1/playlists/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    })
-      .then((response) => response)
-      .catch((err) => console.log(err));
+    });
     return lists.data;
   },
   /**
@@ -242,14 +258,84 @@ export default {
    * @param  {Number}  id The id of the desired Album
    * @return {Object} An object containing all information about the album of ID equals to id
    */
-  async fetchAlbum(id, token) {
+  async fetchAlbum(id) {
     const Album = await axios.get(`${api}/api/v1/albums/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return Album.data;
+  },
+  /**
+   * Save Track for the Current User
+   * @param  {Number}  id The id of the Track
+   * @return {Object}  The corresponding response
+   */
+  async SaveTrack(id) {
+    const res = await axios.put(`${api}/api/v1/me/tracks?ids=${id}`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+  /**
+   * Remove Track for the Current User
+   * @param  {Number}  id The id of the Track
+   * @return {Object}  The corresponding response
+   */
+  async RemoveTrack(id) {
+    const res = await axios.delete(`${api}/api/v1/me/tracks?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+  /**
+   * Save Album for the Current User
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async SaveAlbum(id) {
+    const res = await axios.put(`${api}/api/v1/me/albums?ids=${id}`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+  /**
+   * Remove Album for the Current User
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async RemoveAlbum(id) {
+    const res = await axios.delete(`${api}/api/v1/me/albums?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+  /**
+   * Check if Album is Saved for the Current User or not
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async CheckAlbum(id) {
+    const response = await axios.get(`${api}/api/v1/me/albums/contains?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     })
-      .then((response) => response)
-      .catch((err) => console.log(err));
-    return Album.data;
+      .then((res) => {
+        if (res.status === 200) {
+          return res;
+        }
+        return [false];
+      })
+      .catch(() => [false]);
+    return response;
   },
 };
