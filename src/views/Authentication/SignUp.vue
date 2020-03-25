@@ -145,15 +145,9 @@
 
         <p id="loginPrompt" class="text-center mt-4">
           Already have an account?
-          <span>
-            <a
-              :class="userInput.onLogin ? 'font-weight-bold' : ''"
-              @mouseover="userInput.onLogin = true"
-              @mouseleave="userInput.onLogin = false"
-              @click="$router.push('/login')"
-              >Log in
-            </a>
-          </span>
+          <router-link to="/login">
+            <span class="link">Log in</span>
+          </router-link>
         </p>
 
       </v-col>
@@ -214,7 +208,6 @@ export default {
           year: '',
         },
         gender: '',
-        onLogin: false,
         incorrect: false,
       },
 
@@ -287,7 +280,14 @@ export default {
 
 <style lang="css" scoped>
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.link {
   color: #1db954 !important;
+}
+
+.link:hover {
+  color: #2bdb69 !important;
 }
 </style>

@@ -33,7 +33,6 @@ describe('LogIn.vue', () => {
     expect(input.password).toEqual('');
     expect(input.showPassword).toEqual(false);
     expect(input.rememberMe).toEqual(false);
-    expect(input.onForgot).toEqual(false);
     expect(input.incorrect).toEqual(false);
   });
 

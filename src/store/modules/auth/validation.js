@@ -66,7 +66,6 @@ export default {
    * @return {function} The function that does the validation
    */
   validYear() {
-    // @todo[XL3] Validate this year range
     return (year) => (!!year && year >= 1920 && year <= 2020)
       || 'Please enter a valid year';
   },

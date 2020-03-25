@@ -4,11 +4,6 @@ import axios from 'axios';
 import api from '../../common/config';
 
 export default {
-  // @todo[XL3] See if this method will be removed
-  // fetchUsers() {
-  //   return axios.get(api).then((response) => response.data);
-  // },
-
   // TODO[@Seif]: Check for status and Add Tokens for ALL and check if device Id is needed
   /**
    * Get the User's Currently Playing Track

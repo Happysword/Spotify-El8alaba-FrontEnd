@@ -37,7 +37,6 @@ describe('SignUp.vue', () => {
     expect(input.dob.month).toEqual('');
     expect(input.dob.year).toEqual('');
     expect(input.gender).toEqual('');
-    expect(input.onLogin).toEqual(false);
     expect(input.incorrect).toEqual(false);
   });
 
