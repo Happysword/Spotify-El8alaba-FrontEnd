@@ -84,6 +84,18 @@ export default {
     document.title = 'Reset your password - Spotify El8alaba';
   },
 
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        next('/home');
+      } else {
+        next();
+      }
+    });
+  },
+
   data() {
     return {
       userInput: {

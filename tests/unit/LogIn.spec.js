@@ -19,6 +19,18 @@ const vuetify = new Vuetify();
 const router = new VueRouter();
 
 describe('LogIn.vue', () => {
+  test('localStorage is empty, no user is logged in', () => {
+    // Mount the component
+    const wrapper = mount(LogIn, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    wrapper.vm.$router.push('/login');
+    expect(localStorage.currentUser).toEqual(undefined);
+  });
+
   test('All data fields are clear on mount', () => {
     // Mount the component
     const wrapper = mount(LogIn, {

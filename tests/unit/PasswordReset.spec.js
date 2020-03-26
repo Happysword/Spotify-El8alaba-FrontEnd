@@ -19,6 +19,18 @@ const vuetify = new Vuetify();
 const router = new VueRouter();
 
 describe('PasswordReset.vue', () => {
+  test('localStorage is empty, no user is logged in', () => {
+    // Mount the component
+    const wrapper = mount(PasswordReset, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    wrapper.vm.$router.push('/password-reset');
+    expect(localStorage.currentUser).toEqual(undefined);
+  });
+
   test('All data fields are clear on mount', () => {
     // Mount the component
     const wrapper = mount(PasswordReset, {
