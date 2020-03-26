@@ -2,11 +2,8 @@
   <v-layout align-content-center row justify-center>
     <v-spacer></v-spacer>
     <v-flex shrink>
-      <v-btn @click="queueChange" text x-small>
-        <v-icon
-          :color="isInQueue === true ? 'green' : 'grey'"
-          dense
-          medium
+      <v-btn @click="queueChange" text x-small id="queue-btn">
+        <v-icon :color="isInQueue === true ? 'green' : 'grey'" dense medium
           >mdi-playlist-play</v-icon
         >
       </v-btn>
@@ -18,10 +15,13 @@
           color="grey"
           dense
           medium
+          id="not-mute-btn"
           v-if="!$store.state.MusicPlayer.isMute"
           >mdi-volume-medium</v-icon
         >
-        <v-icon color="grey" dense medium v-else>mdi-volume-mute</v-icon>
+        <v-icon color="grey" dense medium v-else id="mute-btn"
+          >mdi-volume-mute</v-icon
+        >
       </v-btn>
     </v-flex>
 

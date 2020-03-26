@@ -8,7 +8,7 @@ import * as currentSongMock from '../../src/api/mock/data/MusicPlayer/currentSon
 import * as currentPlaybackMock from '../../src/api/mock/data/MusicPlayer/currentPlayback.json';
 import MMPlayer from '../../src/components/musicplayer/MiddlePartMPlayer.vue';
 import LMPlayer from '../../src/components/musicplayer/LeftPartMPlayer.vue';
-// import RMPlayer from '../../src/components/musicplayer/RightPartMPlayer.vue';
+import RMPlayer from '../../src/components/musicplayer/RightPartMPlayer.vue';
 
 // TODO[@Seif] complete the unit tests
 describe('Testing the player components', () => {
@@ -34,6 +34,14 @@ describe('Testing the player components', () => {
     mutations: {
       setCurrentUser() {},
     },
+    actions: {
+      toggleSound({ state }) {
+        state.MusicPlayer.isMute = !state.MusicPlayer.isMute;
+      },
+      togglePlayact({ state }) {
+        state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
+      },
+    },
   });
 
   // Test suites
@@ -46,6 +54,20 @@ describe('Testing the player components', () => {
       store,
     });
     const data = wrapper.vm.$data;
+
+    // check that data is correct at begin
+    expect(data.heartcolor).toBe(false);
+    expect(data.hoverPic).toBe(false);
+    expect(data.imageButton).toBe(false);
+    expect(data.isLinkDisabled).toBe(false);
+
+    it('Checks for Loading of Page Components', async () => {
+      expect(wrapper.find('#image-album').exists()).toBe(true);
+      expect(wrapper.find('#song-name').exists()).toBe(true);
+      expect(wrapper.find('#artist-name').exists()).toBe(true);
+      expect(wrapper.find('#heart-outline').exists()).toBe(true);
+      expect(wrapper.find('#rectangle-plus').exists()).toBe(true);
+    });
 
     it('Change Heart Method test', async () => {
       expect(data.heartcolor).toBe(false);
@@ -76,15 +98,57 @@ describe('Testing the player components', () => {
     expect(data.shuffleState).toBe(false);
     expect(data.repeatState).toBe('off');
     expect(data.barHover).toBe(false);
+    expect(data.valueFalseBuffer).toBe(0);
+
+    it('Checks for Loading of Page Components', async () => {
+      expect(wrapper.find('#shuffle-btn').exists()).toBe(true);
+      expect(wrapper.find('#repeat-btn').exists()).toBe(true);
+      expect(wrapper.find('#skip-previous-btn').exists()).toBe(true);
+      expect(wrapper.find('#skip-next-btn').exists()).toBe(true);
+      expect(wrapper.find('#play-btn').exists()).toBe(true);
+      expect(wrapper.find('#seek-bar').exists()).toBe(true);
+    });
 
     it('Toggle Shuffle tests', async () => {
       expect(data.shuffleState).toBe(false);
       await wrapper.vm.toggleShuffle();
       expect(data.shuffleState).toBe(true);
     });
+
+    it('Toggle Repeat tests', async () => {
+      expect(data.repeatState).toBe('off');
+      await wrapper.vm.toggleRepeat();
+      expect(data.repeatState).toBe('track');
+    });
+
+    it('checks toggle play and pause', async () => {
+      expect(wrapper.find('#play-btn').exists()).toBe(true);
+      await wrapper.vm.togglePlayact();
+      expect(wrapper.find('#pause-btn').exists()).toBe(true);
+    });
   });
 
   describe('Testing RightPartMPlayer component', () => {
-    it('', () => {});
+    const wrapper = shallowMount(RMPlayer, {
+      localVue,
+      store,
+    });
+    const data = wrapper.vm.$data;
+
+    // check that data is correct at begin
+    expect(data.isInQueue).toBe(false);
+    expect(data.barHover).toBe(false);
+
+    it('Checks for Loading of Page Components', async () => {
+      expect(wrapper.find('#queue-btn').exists()).toBe(true);
+      expect(wrapper.find('#not-mute-btn').exists()).toBe(true);
+      expect(wrapper.find('#volume-bar').exists()).toBe(true);
+    });
+
+    it('Checks that toggle sound changes button', async () => {
+      expect(wrapper.find('#not-mute-btn').exists()).toBe(true);
+      await wrapper.vm.toggleSound();
+      expect(wrapper.find('#not-mute-btn').exists()).toBe(false);
+    });
   });
 });

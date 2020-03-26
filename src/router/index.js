@@ -25,7 +25,6 @@ import ArtistOverview from '../views/Artist/ArtistOverview.vue';
 import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
 
-
 Vue.use(VueRouter);
 
 const routes = [
@@ -40,7 +39,12 @@ const routes = [
     component: Main,
     children: [
       { path: '/home', name: 'home', component: Home },
-      { path: '/home/queue', name: 'queue', component: Queue },
+      {
+        path: '/home/queue',
+        name: 'queue',
+        component: Queue,
+        meta: { title: 'Play Queue - Spotify el8alaba' },
+      },
       { path: '/home/search', name: 'search', component: Search },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/home/genre/:id', name: 'genres', component: Genres },
@@ -124,8 +128,16 @@ const routes = [
     children: [
       { path: 'overview', name: 'AccountOverview', component: AccountOverview },
       { path: 'edit-profile', name: 'EditProfile', component: EditProfile },
-      { path: 'change-password', name: 'ChangePassword', component: ChangePassword },
-      { path: 'notifications', name: 'NotificationSettings', component: NotificationSettings },
+      {
+        path: 'change-password',
+        name: 'ChangePassword',
+        component: ChangePassword,
+      },
+      {
+        path: 'notifications',
+        name: 'NotificationSettings',
+        component: NotificationSettings,
+      },
     ],
   },
 ];
@@ -134,6 +146,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
+});
+
+router.afterEach((to) => {
+  const defaultTitle = 'Spotify El8alaba';
+  Vue.nextTick(() => {
+    document.title = to.meta.title || defaultTitle;
+  });
 });
 
 export default router;

@@ -7,6 +7,7 @@
           class="mx-4 player-buttons"
           dense
           small
+          id="shuffle-btn"
           @click="toggleShuffle"
         >
           mdi-shuffle-variant
@@ -17,6 +18,7 @@
           class="mx-4 player-buttons"
           dense
           medium
+          id="skip-previous-btn"
           @click="skipPrevious"
         >
           mdi-skip-previous
@@ -27,6 +29,7 @@
           class="mx-4 player-buttons"
           dense
           x-large
+          id="pause-btn"
           v-if="$store.state.MusicPlayer.isPlaying"
           @click="togglePlayact"
         >
@@ -37,6 +40,7 @@
           color="grey"
           class="mx-4 player-buttons"
           dense
+          id="play-btn"
           x-large
           v-else
           @click="togglePlayact"
@@ -49,6 +53,7 @@
           class="mx-4 player-buttons"
           dense
           medium
+          id="skip-next-btn"
           @click="skipNext"
         >
           mdi-skip-next
@@ -59,6 +64,7 @@
           class="mx-4 player-buttons"
           dense
           small
+          id="repeat-btn"
           @click="toggleRepeat"
         >
           mdi-repeat
@@ -82,6 +88,7 @@
             @mouseleave="barHover = false"
             height="5"
             rounded
+            id="seek-bar"
             @change="seekPosition"
             v-model="$store.state.MusicPlayer.currentBufferPerc"
           >

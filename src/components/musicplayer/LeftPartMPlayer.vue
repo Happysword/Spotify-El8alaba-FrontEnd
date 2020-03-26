@@ -21,6 +21,7 @@
               "
               tag="button"
               :disabled="isLinkDisabled"
+              id="image-album"
             >
               <v-img
                 max-height="60"
@@ -75,16 +76,29 @@
               </router-link>
             </v-layout>
           </v-flex>
-          <!-- TODO[@Seif] ask others about the hovering picture -->
+          <!-- TODO[@Seif] picture in picture api for hovering picture -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
             <v-icon
-              :color="heartcolor ? 'green' : 'grey'"
+              v-if="!heartcolor"
+              color="grey"
               @click="changeHeart"
               class="mx-2 info-buttons"
               dense
               medium
+              id="heart-outline"
             >
               mdi-heart-outline
+            </v-icon>
+            <v-icon
+              v-else
+              color="green"
+              @click="changeHeart"
+              class="mx-2 info-buttons"
+              dense
+              medium
+              id="heart"
+            >
+              mdi-heart
             </v-icon>
             <!-- Removed in new update
             <v-icon color="grey" class="mx-2 info-buttons" dense medium>
@@ -97,6 +111,7 @@
               class="mx-2 info-buttons"
               dense
               medium
+              id="rectangle-plus"
             >
               mdi-shape-rectangle-plus
             </v-icon>
@@ -123,9 +138,13 @@ export default {
     async changeHeart() {
       let R;
       if (this.heartcolor) {
-        R = await PlayerRequests.deleteTrack(this.$store.state.MusicPlayer.currentPlayback.item.id);
+        R = await PlayerRequests.deleteTrack(
+          this.$store.state.MusicPlayer.currentPlayback.item.id,
+        );
       } else {
-        R = await PlayerRequests.saveTrack(this.$store.state.MusicPlayer.currentPlayback.item.id);
+        R = await PlayerRequests.saveTrack(
+          this.$store.state.MusicPlayer.currentPlayback.item.id,
+        );
       }
       if (R) this.heartcolor = !this.heartcolor;
     },
