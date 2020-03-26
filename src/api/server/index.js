@@ -149,30 +149,45 @@ export default {
   },
   /**
    * Get all the albums saved by the user
+   * @param {String} token Token of the current user
    */
-  async fetchCurrentUserAlbum() {
+  async fetchCurrentUserAlbum(token) {
     const userAlbum = await axios
-      .get(`${api}/api/v1/me/albums?limit&offset`)
+      .get(`${api}/api/v1/me/albums?limit&offset`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => response.data);
     return userAlbum;
   },
   /**
    * Get All the playlists of the current user
    * @param {string} userID Current User ID
+   * @param {string} token Token of the current user
    */
-  async fetchCurrentUserPlaylists(userID) {
+  async fetchCurrentUserPlaylists(userID, token) {
     const userPlaylists = await axios
-      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`)
+      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => response.data);
     return userPlaylists;
   },
   /**
    * Get all the Artist followed by the user
+   * @param {string} token Token of the current user
    */
-  async fetchCurrentUserArtists() {
+  async fetchCurrentUserArtists(token) {
     const userArtists = await axios
-      .get(`${api}/api/v1/me/following?`)
-      .then((response) => response.data);
+      .get(`${api}/api/v1/me/following?`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => console.log(response.data));
     return userArtists;
   },
   /**
@@ -188,10 +203,15 @@ export default {
   /**
    * Get the artist related artist by passing the artist's ID
    * @param {string} id The artist ID that has other related artists
+   * @param {string} token Token of the current user
    */
-  async fetchArtistRelatedArtists(id) {
+  async fetchArtistRelatedArtists(id, token) {
     const related = await axios
-      .get(`${api}/api/v1/artists/${id}/related-artists`)
+      .get(`${api}/api/v1/artists/${id}/related-artists`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => response.data);
     return related;
   },
@@ -222,8 +242,12 @@ export default {
  * Creates a new playlists
  * @param {OBJECT} createdPlaylist The created playlist object
  */
-  async createNewPlayList(createdPlaylist) {
-    const response = await axios.post(`${api}/api/v1/users/playlists`, createdPlaylist)
+  async createNewPlayList(createdPlaylist, token) {
+    const response = await axios.post(`${api}/api/v1/users/playlists`, createdPlaylist, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.body)
       .catch((err) => console.log(err));
 
@@ -233,9 +257,14 @@ export default {
   /**
    * Follow Artists or Users
    * @param {String} ids IDs of artists or Users to follow
+   * @param {String} token Token of current user
    */
-  async followArtistsOrUsers(ids) {
-    const response = await axios.put(`${api}/api/v1/me/following?type=artist`, ids)
+  async followArtistsOrUsers(ids, token) {
+    const response = await axios.put(`${api}/api/v1/me/following?type=artist`, ids, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.body);
     return response;
   },
@@ -243,9 +272,14 @@ export default {
   /**
    * UnFollow Artists or Users
    * @param {String} ids IDs of artists or Users to Unfollow
+   * @param {String} token Token of current user
    */
-  async unfollowArtistsOrUsers(ids) {
-    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, ids)
+  async unfollowArtistsOrUsers(ids, token) {
+    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, ids, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.body);
     return response;
   },
@@ -253,9 +287,14 @@ export default {
   /**
    * Check if Current User Follows Artists or Users
    * @param {String} ids IDs of artists or user which current user follows
+   * @param {String} token Token of current user
    */
-  async ifCurrentUserFollowsArtistsOrUsers(ids) {
-    const resopnse = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`)
+  async ifCurrentUserFollowsArtistsOrUsers(ids, token) {
+    const resopnse = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.body);
     return resopnse;
   },

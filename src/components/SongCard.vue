@@ -32,7 +32,7 @@
           </v-card-subtitle>
 
           <v-card-subtitle class="caption" v-if="!showActionButton && type === 'album'">
-            {{artistName}}
+            {{name}}
           </v-card-subtitle>
 
           <v-card-actions>
@@ -69,15 +69,18 @@
 export default {
   props: {
     description: String,
+    collaborative: Boolean,
+    external_urls: Object,
     href: String,
-    external_urls: String,
     id: String,
     images: Array,
     name: String,
+    owner: [],
     public: Boolean,
+    snapshot_id: String,
     tracks: Object,
     type: String,
-    artistName: String,
+    uri: String,
   },
   data() {
     return {
@@ -106,9 +109,8 @@ export default {
       } else if (index === 1) {
         console.log('Save to Your Library');
       } else if (index === 2) {
-        this.$copyText(this.external_urls);
+        this.$copyText(this.external_urls.spotify);
         this.snackbar = true;
-        console.log(this.snackbar);
       }
     },
   },

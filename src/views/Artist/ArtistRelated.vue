@@ -30,8 +30,17 @@ export default {
     ArtistCard,
   },
   methods: {
+    /** Fetches artist related artist */
     fetchArtistRelatedArtists() {
-      client.fetchArtistRelatedArtists(this.$route.params.id)
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchArtistRelatedArtists(this.$route.params.id, token)
         .then((response) => {
           this.artistRelatedArtists = response;
         });

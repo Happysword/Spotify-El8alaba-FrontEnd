@@ -1,5 +1,13 @@
 <template>
     <div>
+      <v-snackbar
+      v-model="snackbar"
+      color="#2E77D0"
+      :timeout="3000"
+      class="mb-12 pb-12 text-center"
+      >
+      <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
+      </v-snackbar>
         <v-card>
             <v-img :src="artist.images[1].url"
             gradient="rgba(255,255,255,0) 0%,rgba(0,0,0,1) 100%"
@@ -91,6 +99,8 @@ export default {
       followStatus: '',
       FollowJSON: JSON,
       isFollowing: Boolean,
+      notificationMsg: String,
+      snackbar: false,
     };
   },
   mounted() {
@@ -98,14 +108,24 @@ export default {
     this.fetchAnArtist();
   },
   methods: {
+    /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           this.artist = response;
         });
     },
+    /** Fetches the current following status */
     fetchFollowStatus() {
-      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id)
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id, token)
         .then((res) => {
           this.FollowJSON = res;
           [this.isFollowing] = this.FollowJSON;
@@ -116,14 +136,25 @@ export default {
           }
         });
     },
+    /** Responsible for the follow logic */
     followLogic() {
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
       if (this.isFollowing === false) {
         client.followArtistsOrUsers({
           ids: [this.$route.params.id],
-        }).then((res) => {
+        }, this.token).then((res) => {
           console.log(res);
           this.isFollowing = true;
           this.followStatus = 'UNFOLLOW';
+          this.notificationMsg = 'Saved to Your Library';
+          this.snackbar = true;
         });
       } else {
         client.unfollowArtistsOrUsers({
@@ -132,6 +163,8 @@ export default {
           console.log(res);
           this.isFollowing = false;
           this.followStatus = 'FOLLOW';
+          this.notificationMsg = 'Removed from Your Library';
+          this.snackbar = true;
         });
       }
     },

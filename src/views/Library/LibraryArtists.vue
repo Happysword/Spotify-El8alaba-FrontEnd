@@ -3,9 +3,10 @@
         <v-row>
             <v-col  xs="12" sm="6" md="4" lg="2"
             v-for="card in artistsJson.artists.items" :key="card.id">
-                   <artist-card :id="card.id" :profileName="card.name"
+                   <artist-card
+                   :id="card.id" :profileName="card.name"
                    :images="card.images"
-                   :type="card.type" :external_urls="card.external_urls.spotify"
+                   :type="card.type" :external_urls="card.external_urls"
                    ></artist-card>
             </v-col>
         </v-row>
@@ -19,7 +20,7 @@ import ArtistCard from '../../components/ArtistCard.vue';
 export default {
   data() {
     return {
-      artistsJson: JSON,
+      artistsJson: [],
     };
   },
   components: {
@@ -29,8 +30,17 @@ export default {
     this.fetchUserArtists();
   },
   methods: {
+    /** Fetches current user artists upon entry */
     fetchUserArtists() {
-      client.fetchCurrentUserArtists()
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchCurrentUserArtists(this.token)
         .then((response) => {
           this.artistsJson = response;
         });

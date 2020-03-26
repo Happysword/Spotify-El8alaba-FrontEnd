@@ -6,7 +6,7 @@
                    <song-card :id="card.album.id" :name="card.album.name"
                    :images="card.album.images" :artistName="card.album.artists[0].name"
                    :type="card.album.type"
-                   :external_urls="card.album.external_urls.spotify"
+                   :external_urls="card.album.external_urls"
                    ></song-card>
             </v-col>
         </v-row>
@@ -20,7 +20,7 @@ import SongCard from '../../components/SongCard.vue';
 export default {
   data() {
     return {
-      albums: JSON,
+      albums: [],
     };
   },
   components: {
@@ -30,8 +30,18 @@ export default {
     this.fetchUserAlbums();
   },
   methods: {
+
+    /** Fetches current user albums upon entry */
     fetchUserAlbums() {
-      client.fetchCurrentUserAlbum()
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchCurrentUserAlbum(this.token)
         .then((response) => {
           this.albums = response;
         });

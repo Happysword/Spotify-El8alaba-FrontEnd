@@ -5,7 +5,7 @@
                    <song-card :id="card.id" :name="card.name"
                    :description="card.description" :images="card.images"
                    :type="card.type"
-                   :external_urls="card.external_urls.spotify"
+                   :external_urls="card.external_urls"
                    ></song-card>
             </v-col>
         </v-row>
@@ -19,7 +19,7 @@ import SongCard from '../../components/SongCard.vue';
 export default {
   data() {
     return {
-      playlists: JSON,
+      playlists: [],
     };
   },
   components: {
@@ -29,9 +29,22 @@ export default {
     this.fetchUserPlaylists();
   },
   methods: {
+
+    /** Fetches current user playlists upon entry */
     fetchUserPlaylists() {
-      // TODO: Add localStorage.getItem('currentUser').data.id to work
-      client.fetchCurrentUserPlaylists(localStorage.getItem('currentUser'))
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      const userID = JSON.parse(localStorage.getItem('currentUser'));
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (userID === null && token === null) {
+        this.userID = 'user';
+        this.token = 'token';
+      } else {
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchCurrentUserPlaylists(this.userID, this.token)
         .then((response) => {
           this.playlists = response;
         });
