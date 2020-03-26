@@ -68,6 +68,63 @@ export default {
     console.log(ids + token);
     return fetch(Boolean, 100);
   },
+  /**
+   * Check if Users Follows a playlist
+   * @param {String} userID ID of current user
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async ifUsersFollowsaPlaylist(userID, playlistID, token) {
+    console.log(userID + playlistID + token);
+    return fetch(Boolean, 100);
+  },
+
+
+  /**
+   * Follow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async followaPlaylist(playlistID, token) {
+    console.log(playlistID + token);
+  },
+
+  /**
+   * unFollow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async UnfollowaPlaylist(playlistID, token) {
+    console.log(playlistID + token);
+  },
+
+  /**
+   * Check if Users Follows an Album
+   * @param {String} albumID ID of current album
+   * @param {String} token Token of current user
+   */
+  async ifUserFollowsAlbums(albumID, token) {
+    console.log(albumID + token);
+    return fetch(Boolean, 100);
+  },
+
+  /**
+   * Save an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async saveAlbumsForCurrentUser(albumsID, token) {
+    console.log(albumsID, token);
+  },
+
+  /**
+   * Delete an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async deleteAlbumsForCurrentUser(albumsID, token) {
+    console.log(albumsID, token);
+  },
 
   /**
    * Follow Artists or Users

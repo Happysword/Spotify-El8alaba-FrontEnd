@@ -290,13 +290,98 @@ export default {
    * @param {String} token Token of current user
    */
   async ifCurrentUserFollowsArtistsOrUsers(ids, token) {
-    const resopnse = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
+    const response = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.body);
-    return resopnse;
+    return response;
+  },
+
+  /**
+   * Check if Users Follows a playlist
+   * @param {String} userID ID of current user
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async ifUsersFollowsaPlaylist(userID, playlistID, token) {
+    const response = await axios.get(`${api}/api/v1/playlists/${playlistID}/followers/contains?ids=${userID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Follow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async followaPlaylist(playlistID, token) {
+    const response = await axios.put(`${api}/api/v1/playlists/${playlistID}/followers`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * unFollow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async UnfollowaPlaylist(playlistID, token) {
+    const response = await axios.delete(`${api}/api/v1/playlists/${playlistID}/followers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Check if Users Follows an Album
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async ifUserFollowsAlbums(albumID, token) {
+    const response = await axios.get(`${api}/api/v1/me/albums/contains?ids=${albumID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Save an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async saveAlbumsForCurrentUser(albumsID, token) {
+    const response = await axios.put(`${api}/api/v1/me/albums?ids=${albumsID}`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Delete an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async deleteAlbumsForCurrentUser(albumsID, token) {
+    const response = await axios.delete(`${api}/api/v1/me/albums?ids=${albumsID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
   },
 
   /**

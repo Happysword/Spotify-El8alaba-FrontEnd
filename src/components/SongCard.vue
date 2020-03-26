@@ -3,10 +3,10 @@
     <v-snackbar
     v-model="snackbar"
     color="#2E77D0"
-    timeout="3000"
+    :timeout="3000"
     class="mb-12 pb-12 text-center"
     >
-    <h1 class="text-center subtitle-1">Link copied to clipboard</h1>
+    <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
     </v-snackbar>
     <v-menu offset-y absolute=""
     dark=""
@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import client from 'api-client';
+
 export default {
   props: {
     description: String,
@@ -87,12 +89,18 @@ export default {
       showActionButton: false,
       showPlayButton: true,
       snackbar: false,
+      notificationMsg: String,
+      isFollowing: Boolean,
+      FollowJSON: JSON,
       items: [
         { title: 'Start Radio' },
-        { title: 'Save to Your Library' },
+        { title: '' },
         { title: 'Copy link' },
       ],
     };
+  },
+  mounted() {
+    this.fetchFollowStatus();
   },
   methods: {
     /** When a card is clicked it go to route of playlist or album depending on its type */
@@ -103,14 +111,99 @@ export default {
         this.$router.push(`/album/${this.id}`);
       }
     },
+    /** Performs menu logic
+     * @param {string} index Index of the Sub menu
+     */
     menuLogic(index) {
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
       if (index === 0) {
         console.log('Start Radio');
       } else if (index === 1) {
-        console.log('Save to Your Library');
+        if (this.type === 'playlist') {
+          if (this.isFollowing === false) {
+            client.followaPlaylist(this.id, this.token).then((res) => {
+              console.log(res);
+              this.isFollowing = true;
+              this.items[1].title = 'Unfollow';
+              this.notificationMsg = 'Saved to Your Library';
+              this.snackbar = true;
+            });
+          } else {
+            client.UnfollowaPlaylist(this.id, this.token).then((res) => {
+              console.log(res);
+              this.isFollowing = false;
+              this.items[1].title = 'Follow';
+              this.notificationMsg = 'Removed from Your Library';
+              this.snackbar = true;
+            });
+          }
+        } else if (this.type === 'album') {
+          if (this.isFollowing === false) {
+            client.saveAlbumsForCurrentUser(this.id, this.token).then((res) => {
+              console.log(res);
+              this.isFollowing = true;
+              this.items[1].title = 'Unfollow';
+              this.notificationMsg = 'Saved to Your Library';
+              this.snackbar = true;
+            });
+          } else {
+            client.UnfollowaPlaylist(this.id, this.token).then((res) => {
+              console.log(res);
+              this.isFollowing = false;
+              this.items[1].title = 'Follow';
+              this.notificationMsg = 'Removed from Your Library';
+              this.snackbar = true;
+            });
+          }
+        }
       } else if (index === 2) {
         this.$copyText(this.external_urls.spotify);
         this.snackbar = true;
+      }
+    },
+    /** Fetches the current following status */
+    fetchFollowStatus() {
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      const userID = JSON.parse(localStorage.getItem('currentUser'));
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (userID === null && token === null) {
+        this.userID = 'user';
+        this.token = 'token';
+      } else {
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      if (this.type === 'playlist') {
+        client.ifUsersFollowsaPlaylist(userID, this.id, this.token)
+          .then((res) => {
+            this.FollowJSON = res;
+            [this.isFollowing] = this.FollowJSON;
+            if (this.isFollowing === true) {
+              this.items[1].title = 'Unfollow';
+            } else {
+              this.items[1].title = 'Follow';
+            }
+          });
+      } else {
+        client.ifUserFollowsAlbums(this.id, this.token)
+          .then((res) => {
+            this.FollowJSON = res;
+            [this.isFollowing] = this.FollowJSON;
+            if (this.isFollowing === true) {
+              this.items[1].title = 'Unfollow';
+            } else {
+              this.items[1].title = 'Follow';
+            }
+          });
       }
     },
   },
