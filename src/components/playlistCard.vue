@@ -137,24 +137,33 @@ export default {
     listInfo: Object,
   },
   methods: {
+    /**
+     * Change status of the current song
+     */
     changeStatus() {
       this.play = !this.play;
       this.overlay = this.play;
       EventBus.$emit('pause', this.play);
     },
+    /**
+     * Add or remove Current List to/from user's library
+     */
     async changeLiked() {
       store.commit('changeLiked');
-      this.snackbar = true;
       if (store.state.liked === true) {
-        this.text = 'Saved to Your Library';
-        // TODO[Naiera]: Add Save to Your library Request
         const response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
         console.log(response);
+        if (response.status === 201) {
+          this.snackbar = true;
+          this.text = 'Saved to Your Library';
+        }
       } else {
-        this.text = 'Removed from Your Library';
-        // TODO[Naiera]: Add Remove to Your library Request
         const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
         console.log(response);
+        if (response.status === 200) {
+          this.snackbar = true;
+          this.text = 'Removed from Your Library';
+        }
       }
     },
   },
