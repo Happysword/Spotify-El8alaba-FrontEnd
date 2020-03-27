@@ -16,6 +16,7 @@
               contain
               height="120"
               @click="$router.push('/home')"
+              id="logo"
             ></v-img>
           </v-list-item-content>
           <v-list-item
@@ -24,6 +25,7 @@
             route
             exact
             :to="link.route"
+            id="mainLinks"
           >
             <v-list-item-icon>
               <v-icon>{{ link.icon }}</v-icon>
@@ -55,7 +57,7 @@
                   <v-icon>mdi-plus</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="subtitle-2"
+                  <v-list-item-title class="subtitle-2" id="createPlaylist"
                     >Create Playlist</v-list-item-title
                   >
                 </v-list-item-content>
@@ -82,6 +84,10 @@
                       <v-text-field
                         label="New Playlist"
                         required
+                        outlined=""
+                        v-model="createdPlaylistName"
+                        :rules="[rules.required]"
+                        id="createNewPlaylist"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -104,7 +110,7 @@
                   depressed
                   color="success white--text"
                   class="mx-4"
-                  @click="dialog = false"
+                  @click="dialog = false;createNewPlaylist();"
                   >Create</v-btn
                 >
               </v-row>
@@ -116,7 +122,7 @@
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2"
+              <v-list-item-title class="subtitle-2" id="likedSongs"
                 >Liked Songs</v-list-item-title
               >
             </v-list-item-content>
@@ -160,7 +166,7 @@
 </template>
 
 <script>
-import Jsonplaylists from '../json/Get-Current-User-Playlists.json';
+import client from 'api-client';
 
 export default {
   name: 'Navbar',
@@ -176,15 +182,63 @@ export default {
           route: '/home/library/playlists',
         },
       ],
-      playlists: Jsonplaylists,
+      playlists: JSON,
+      createdPlaylistName: '',
       dialog: false,
       imageButton: false,
+      rules: {
+        required: (value) => !!value || 'Required.',
+      },
     };
   },
   props: {
     searching: {
       type: Boolean,
       default: false,
+    },
+  },
+  mounted() {
+    this.fetchUserPlaylists();
+  },
+  methods: {
+    /** Fetches current user playlists upon entry */
+    fetchUserPlaylists() {
+      /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+      const userID = JSON.parse(localStorage.getItem('currentUser'));
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (userID === null && token === null) {
+        this.userID = 'user';
+        this.token = 'token';
+      } else {
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchCurrentUserPlaylists(this.userID, this.token)
+        .then((response) => {
+          this.playlists = response;
+        });
+    },
+    /** Create a new playlist */
+    createNewPlaylist() {
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.createNewPlayList({
+        name: this.createdPlaylistName,
+        public: 'true',
+        description: '',
+      }, this.token).then((r) => {
+        console.log(r);
+        this.createdPlaylistName = '';
+        this.fetchUserPlaylists();
+      });
     },
   },
 };

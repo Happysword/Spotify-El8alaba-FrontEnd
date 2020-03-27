@@ -5,7 +5,7 @@
             v-for="card in artistRelatedArtists.artists" :key="card.id">
                    <artist-card :id="card.id" :profileName="card.name"
                    :images="card.images"
-                   :type="card.type"
+                   :type="card.type" :external_urls="card.external_urls"
                    ></artist-card>
             </v-col>
         </v-row>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import client from '../../api/mock';
+import client from 'api-client';
 import ArtistCard from '../../components/ArtistCard.vue';
 
 
@@ -23,15 +23,24 @@ export default {
       artistRelatedArtists: JSON,
     };
   },
-  created() {
+  mounted() {
     this.fetchArtistRelatedArtists();
   },
   components: {
     ArtistCard,
   },
   methods: {
+    /** Fetches artist related artist */
     fetchArtistRelatedArtists() {
-      client.fetchArtistRelatedArtists()
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.fetchArtistRelatedArtists(this.$route.params.id, token)
         .then((response) => {
           this.artistRelatedArtists = response;
         });

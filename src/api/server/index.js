@@ -236,27 +236,75 @@ export default {
       })
       .catch(() => false);
   },
+  /**
+   * Get all the albums saved by the user
+   * @param {String} token Token of the current user
+   */
+  async fetchCurrentUserAlbum(token) {
+    const userAlbum = await axios
+      .get(`${api}/api/v1/me/albums?limit&offset`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data);
+    return userAlbum;
+  },
+  /**
+   * Get All the playlists of the current user
+   * @param {string} userID Current User ID
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserPlaylists(userID, token) {
+    const userPlaylists = await axios
+      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data);
+    return userPlaylists;
+  },
+  /**
+   * Get all the Artist followed by the user
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserArtists(token) {
+    const userArtists = await axios
+      .get(`${api}/api/v1/me/following?`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => console.log(response.data));
+    return userArtists;
+  },
+  /**
+   * Get all the info about specific artist
+   * @param {string} id The artist ID
+   */
+  async fetchAnArtist(id) {
+    const artists = await axios
+      .get(`${api}/api/v1/artists/${id}`)
+      .then((response) => response.data);
+    return artists;
+  },
+  /**
+   * Get the artist related artist by passing the artist's ID
+   * @param {string} id The artist ID that has other related artists
+   * @param {string} token Token of the current user
+   */
+  async fetchArtistRelatedArtists(id, token) {
+    const related = await axios
+      .get(`${api}/api/v1/artists/${id}/related-artists`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data);
+    return related;
+  },
 
-  fetchCurrentUserAlbum() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
-  fetchCurrentUserPlaylists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
-  fetchCurrentUserArtists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
-  fetchAnArtist() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
-  fetchArtistRelatedArtists() {
-    // TODO[@ahmedx3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
   /**
    * Sends a POST request to the server to login the user
    * @param  {Object} data The user's credentials
@@ -276,6 +324,152 @@ export default {
       .then((res) => res)
       .catch((err) => err.response);
 
+    return response;
+  },
+
+  /**
+ * Creates a new playlists
+ * @param {OBJECT} createdPlaylist The created playlist object
+ */
+  async createNewPlayList(createdPlaylist, token) {
+    const response = await axios.post(`${api}/api/v1/users/playlists`, createdPlaylist, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  /**
+   * Follow Artists or Users
+   * @param {String} ids IDs of artists or Users to follow
+   * @param {String} token Token of current user
+   */
+  async followArtistsOrUsers(ids, token) {
+    const response = await axios.put(`${api}/api/v1/me/following?type=artist`, ids, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * UnFollow Artists or Users
+   * @param {String} ids IDs of artists or Users to Unfollow
+   * @param {String} token Token of current user
+   */
+  async unfollowArtistsOrUsers(ids, token) {
+    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, ids, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Check if Current User Follows Artists or Users
+   * @param {String} ids IDs of artists or user which current user follows
+   * @param {String} token Token of current user
+   */
+  async ifCurrentUserFollowsArtistsOrUsers(ids, token) {
+    const response = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Check if Users Follows a playlist
+   * @param {String} userID ID of current user
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async ifUsersFollowsaPlaylist(userID, playlistID, token) {
+    const response = await axios.get(`${api}/api/v1/playlists/${playlistID}/followers/contains?ids=${userID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Follow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async followaPlaylist(playlistID, token) {
+    const response = await axios.put(`${api}/api/v1/playlists/${playlistID}/followers`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * unFollow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async UnfollowaPlaylist(playlistID, token) {
+    const response = await axios.delete(`${api}/api/v1/playlists/${playlistID}/followers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Check if Users Follows an Album
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async ifUserFollowsAlbums(albumID, token) {
+    const response = await axios.get(`${api}/api/v1/me/albums/contains?ids=${albumID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Save an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async saveAlbumsForCurrentUser(albumsID, token) {
+    const response = await axios.put(`${api}/api/v1/me/albums?ids=${albumsID}`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
+    return response;
+  },
+
+  /**
+   * Delete an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async deleteAlbumsForCurrentUser(albumsID, token) {
+    const response = await axios.delete(`${api}/api/v1/me/albums?ids=${albumsID}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => res.body);
     return response;
   },
 

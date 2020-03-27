@@ -10,6 +10,7 @@ import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
 import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
+import Boolean from './data/Boolean.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -57,6 +58,97 @@ export default {
       token: '',
       data: {},
     };
+  },
+
+  /**
+   * Check if Current User Follows Artists or Users
+   * @param {String} ids IDs of artists or user which current user follows
+   */
+  async ifCurrentUserFollowsArtistsOrUsers(ids, token) {
+    console.log(ids + token);
+    return fetch(Boolean, 100);
+  },
+  /**
+   * Check if Users Follows a playlist
+   * @param {String} userID ID of current user
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async ifUsersFollowsaPlaylist(userID, playlistID, token) {
+    console.log(userID + playlistID + token);
+    return fetch(Boolean, 100);
+  },
+
+
+  /**
+   * Follow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async followaPlaylist(playlistID, token) {
+    console.log(playlistID + token);
+  },
+
+  /**
+   * unFollow a playlist
+   * @param {String} playlistID ID of certain playlist
+   * @param {String} token Token of current user
+   */
+  async UnfollowaPlaylist(playlistID, token) {
+    console.log(playlistID + token);
+  },
+
+  /**
+   * Check if Users Follows an Album
+   * @param {String} albumID ID of current album
+   * @param {String} token Token of current user
+   */
+  async ifUserFollowsAlbums(albumID, token) {
+    console.log(albumID + token);
+    return fetch(Boolean, 100);
+  },
+
+  /**
+   * Save an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async saveAlbumsForCurrentUser(albumsID, token) {
+    console.log(albumsID, token);
+  },
+
+  /**
+   * Delete an album for current user
+   * @param {String} albumID ID of album
+   * @param {String} token Token of current user
+   */
+  async deleteAlbumsForCurrentUser(albumsID, token) {
+    console.log(albumsID, token);
+  },
+
+  /**
+   * Follow Artists or Users
+   * @param {String} ids IDs of artists or Users to follow
+   */
+  async followArtistsOrUsers(ids, token) {
+    console.log(ids + token);
+  },
+
+  /**
+   * UnFollow Artists or Users
+   * @param {String} ids IDs of artists or Users to Unfollow
+   */
+  async unfollowArtistsOrUsers(ids, token) {
+    console.log(ids + token);
+  },
+
+  /**
+ * Creates a new playlists
+ * @param {OBJECT} createdPlaylist The created playlist object
+ */
+  async createNewPlayList(createdPlaylist, token) {
+    console.log(token);
+    console.log(createdPlaylist);
   },
 
   /**
@@ -230,19 +322,48 @@ export default {
   fetchGenres() {
     return fetch(genres, 1000);
   },
-  fetchCurrentUserAlbum() {
+  /**
+   * Get all the albums saved by the user
+   * @param {String} token Token of the current user
+   */
+  fetchCurrentUserAlbum(token) {
+    console.log(token);
     return fetch(currentUserAlbum, 100);
   },
-  fetchCurrentUserPlaylists() {
+  /**
+   * Get All the playlists of the current user
+   * @param {string} userID Current User ID
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserPlaylists(userID, token) {
+    console.log(token);
+    let dummy = userID || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(currentUserPlaylists, 100);
   },
-  fetchCurrentUserArtists() {
+  /**
+   * Get all the Artist followed by the user
+   * @param {string} token Token of the current user
+   */
+  fetchCurrentUserArtists(token) {
+    console.log(token);
     return fetch(currentUserArtists, 100);
   },
-  fetchAnArtist() {
+  async fetchAnArtist(id) {
+    let dummy = id || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(getAnArtist, 100);
   },
-  fetchArtistRelatedArtists() {
+  async fetchArtistRelatedArtists(id, token) {
+    console.log(token);
+    let dummy = id || true;
+    if (dummy) {
+      dummy += dummy;
+    }
     return fetch(getArtistRelatedArtists, 100);
   },
   /**

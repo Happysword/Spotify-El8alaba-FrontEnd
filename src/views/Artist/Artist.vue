@@ -1,5 +1,13 @@
 <template>
     <div>
+      <v-snackbar
+      v-model="snackbar"
+      color="#2E77D0"
+      :timeout="3000"
+      class="mb-12 pb-12 text-center"
+      >
+      <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
+      </v-snackbar>
         <v-card>
             <v-img :src="artist.images[1].url"
             gradient="rgba(255,255,255,0) 0%,rgba(0,0,0,1) 100%"
@@ -31,7 +39,8 @@
                     route
                     outlined=""
                     dark=""
-                    >FOLLOW</v-btn
+                    @click="followLogic()"
+                    >{{followStatus}}</v-btn
                     >
                 </v-card-actions>
                 <v-container class="mt-5" fluid="">
@@ -81,23 +90,83 @@
 </template>
 
 <script>
-import client from '../../api/mock';
+import client from 'api-client';
 
 export default {
   data() {
     return {
       artist: JSON,
+      followStatus: '',
+      FollowJSON: JSON,
+      isFollowing: Boolean,
+      notificationMsg: String,
+      snackbar: false,
     };
   },
-  created() {
+  mounted() {
+    this.fetchFollowStatus();
     this.fetchAnArtist();
   },
   methods: {
+    /** Get current artist info */
     fetchAnArtist() {
-      client.fetchAnArtist()
+      client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           this.artist = response;
         });
+    },
+    /** Fetches the current following status */
+    fetchFollowStatus() {
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id, token)
+        .then((res) => {
+          this.FollowJSON = res;
+          [this.isFollowing] = this.FollowJSON;
+          if (this.isFollowing === true) {
+            this.followStatus = 'UNFOLLOW';
+          } else {
+            this.followStatus = 'FOLLOW';
+          }
+        });
+    },
+    /** Responsible for the follow logic */
+    followLogic() {
+      const token = JSON.parse(localStorage.getItem('currentUser'));
+
+      if (token === null) {
+        this.token = 'token';
+      } else {
+        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+      }
+
+      if (this.isFollowing === false) {
+        client.followArtistsOrUsers({
+          ids: [this.$route.params.id],
+        }, this.token).then((res) => {
+          console.log(res);
+          this.isFollowing = true;
+          this.followStatus = 'UNFOLLOW';
+          this.notificationMsg = 'Saved to Your Library';
+          this.snackbar = true;
+        });
+      } else {
+        client.unfollowArtistsOrUsers({
+          ids: [this.$route.params.id],
+        }).then((res) => {
+          console.log(res);
+          this.isFollowing = false;
+          this.followStatus = 'FOLLOW';
+          this.notificationMsg = 'Removed from Your Library';
+          this.snackbar = true;
+        });
+      }
     },
   },
 
