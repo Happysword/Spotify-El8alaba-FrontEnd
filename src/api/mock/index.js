@@ -44,19 +44,24 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email && user.password === body.password) {
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email && u.password === body.password) {
         found = true;
+        user = u.user;
       }
       // Breaking condition
-      return user.email === body.email && user.password === body.password;
+      return u.user.userInfo.email === body.email && u.password === body.password;
     });
 
     // Succeed if the user is found
     return {
-      status: found ? 'success' : '400 Bad Request',
-      token: '',
-      data: {},
+      status: found ? 200 : 400,
+      data: {
+        token: 'mock_token',
+        data: { user },
+      },
     };
   },
 
@@ -71,19 +76,94 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email) {
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return user.email === body.email;
+      return u.user.userInfo.email === body.email;
     });
+
+    // Add the user data to the mock database
+    const user = {
+      external_urls: [],
+      genres: [],
+      _id: '5e6b95fda1903935ccb355a3',
+      userInfo: {
+        type: 'user',
+        product: 'free',
+        image: null,
+        currentlyPlaying: null,
+        followers: null,
+        _id: '5e6b95fda1903935ccb355a3',
+        name: body.name,
+        email: body.email,
+        gender: body.gender,
+        birthdate: new Date(`${body.birthdate} GMT+0`),
+        country: 'EG',
+        devices: [],
+        __v: 0,
+        uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+        id: '5e6b95fda1903935ccb355a3',
+      },
+      followers: [],
+      images: [],
+      uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+    };
 
     // Succeed if the user isn't found
     return {
-      status: !found ? 'success' : '400 Bad Request',
-      token: '',
-      data: {},
+      status: !found ? 200 : 400,
+      data: {
+        token: 'mock_token',
+        data: { user },
+      },
+    };
+  },
+
+  /**
+   * Fetches all users in the mock data and ensures that a certain user is among them
+   * @param  {Object} body The user's signup data
+   * @return {Object}      The corresponding response
+   */
+  async forgotPassword(body) {
+    // Get all users
+    const allUsers = await fetch(users, 50);
+
+    // Search all users for our user
+    let found = false;
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
+        found = true;
+      }
+      // Breaking condition
+      return u.user.userInfo.email === body.email;
+    });
+
+    // Succeed if the user is found
+    return { status: found ? 200 : 400 };
+  },
+
+  /**
+   * Returns mock user profile data
+   * @return {Object} The mock data
+   */
+  async getCurrentUserProfile() {
+    /**
+     * @note[XL3] Setting timezone
+     * @see MDN Date.prototype.getTimezoneOffset()
+     */
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let user = {};
+    if (currentUser) {
+      user = await fetch(currentUser.data.userInfo, 50);
+    }
+
+    return {
+      status: currentUser ? 200 : 404,
+      data: {
+        data: { user },
+      },
     };
   },
 
