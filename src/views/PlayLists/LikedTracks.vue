@@ -96,21 +96,21 @@ export default {
     songsCard,
   },
   async created() {
-    const data = {
-      email: 'ahisham360@gmail.com',
-      password: 'shoma123',
-      // email: 'user1@spotify.com',
-      // password: '12345678',
-    };
-    const response = await server.loginUser(data);
-    console.log(response);
-    if (response.status === 200) {
-      const currentUser = {
-        token: response.data.token,
-        data: response.data.data,
-      };
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    }
+    // const data = {
+    //   email: 'ahisham360@gmail.com',
+    //   password: 'shoma123',
+    //   // email: 'user1@spotify.com',
+    //   // password: '12345678',
+    // };
+    // const response = await server.loginUser(data);
+    // console.log(response);
+    // if (response.status === 200) {
+    //   const currentUser = {
+    //     token: response.data.token,
+    //     data: response.data.data,
+    //   };
+    //   localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    // }
     this.fetchSongs();
   },
 
