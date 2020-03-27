@@ -131,7 +131,7 @@ export default {
             client.followaPlaylist(this.id, this.token).then((res) => {
               console.log(res);
               this.isFollowing = true;
-              this.items[1].title = 'Unfollow';
+              this.items[1].title = 'Remove from Your Library';
               this.notificationMsg = 'Saved to Your Library';
               this.snackbar = true;
             });
@@ -139,7 +139,7 @@ export default {
             client.UnfollowaPlaylist(this.id, this.token).then((res) => {
               console.log(res);
               this.isFollowing = false;
-              this.items[1].title = 'Follow';
+              this.items[1].title = 'Save to Your Library';
               this.notificationMsg = 'Removed from Your Library';
               this.snackbar = true;
             });
@@ -149,7 +149,7 @@ export default {
             client.saveAlbumsForCurrentUser(this.id, this.token).then((res) => {
               console.log(res);
               this.isFollowing = true;
-              this.items[1].title = 'Unfollow';
+              this.items[1].title = 'Remove from Your Library';
               this.notificationMsg = 'Saved to Your Library';
               this.snackbar = true;
             });
@@ -157,13 +157,14 @@ export default {
             client.UnfollowaPlaylist(this.id, this.token).then((res) => {
               console.log(res);
               this.isFollowing = false;
-              this.items[1].title = 'Follow';
+              this.items[1].title = 'Save to Your Library';
               this.notificationMsg = 'Removed from Your Library';
               this.snackbar = true;
             });
           }
         }
       } else if (index === 2) {
+        this.notificationMsg = 'Copied to clipboard';
         this.$copyText(this.external_urls.spotify);
         this.snackbar = true;
       }
@@ -188,9 +189,9 @@ export default {
             this.FollowJSON = res;
             [this.isFollowing] = this.FollowJSON;
             if (this.isFollowing === true) {
-              this.items[1].title = 'Unfollow';
+              this.items[1].title = 'Remove from Your Library';
             } else {
-              this.items[1].title = 'Follow';
+              this.items[1].title = 'Save to Your Library';
             }
           });
       } else {
@@ -199,9 +200,9 @@ export default {
             this.FollowJSON = res;
             [this.isFollowing] = this.FollowJSON;
             if (this.isFollowing === true) {
-              this.items[1].title = 'Unfollow';
+              this.items[1].title = 'Remove from Your Library';
             } else {
-              this.items[1].title = 'Follow';
+              this.items[1].title = 'Save to Your Library';
             }
           });
       }

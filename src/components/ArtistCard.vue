@@ -3,7 +3,7 @@
      <v-snackbar
       v-model="snackbar"
       color="#2E77D0"
-      timeout="3000"
+      :timeout="3000"
       class="mb-12 pb-12 text-center"
       >
       <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>

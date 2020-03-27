@@ -16,6 +16,7 @@
               contain
               height="120"
               @click="$router.push('/home')"
+              id="logo"
             ></v-img>
           </v-list-item-content>
           <v-list-item
@@ -24,6 +25,7 @@
             route
             exact
             :to="link.route"
+            id="mainLinks"
           >
             <v-list-item-icon>
               <v-icon>{{ link.icon }}</v-icon>
@@ -55,7 +57,7 @@
                   <v-icon>mdi-plus</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="subtitle-2"
+                  <v-list-item-title class="subtitle-2" id="createPlaylist"
                     >Create Playlist</v-list-item-title
                   >
                 </v-list-item-content>
@@ -85,6 +87,7 @@
                         outlined=""
                         v-model="createdPlaylistName"
                         :rules="[rules.required]"
+                        id="createNewPlaylist"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -119,7 +122,7 @@
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2"
+              <v-list-item-title class="subtitle-2" id="likedSongs"
                 >Liked Songs</v-list-item-title
               >
             </v-list-item-content>

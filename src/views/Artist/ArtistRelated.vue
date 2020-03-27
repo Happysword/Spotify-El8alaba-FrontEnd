@@ -5,7 +5,7 @@
             v-for="card in artistRelatedArtists.artists" :key="card.id">
                    <artist-card :id="card.id" :profileName="card.name"
                    :images="card.images"
-                   :type="card.type"
+                   :type="card.type" :external_urls="card.external_urls"
                    ></artist-card>
             </v-col>
         </v-row>
