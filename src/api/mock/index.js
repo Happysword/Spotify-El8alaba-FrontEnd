@@ -11,6 +11,7 @@ import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
 import Boolean from './data/Boolean.json';
+import playlistSongs from './data/playlistSongs.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -44,19 +45,24 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email && user.password === body.password) {
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email && u.password === body.password) {
         found = true;
+        user = u.user;
       }
       // Breaking condition
-      return user.email === body.email && user.password === body.password;
+      return u.user.userInfo.email === body.email && u.password === body.password;
     });
 
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
-      token: '',
-      data: {},
+      data: {
+        token: 'mock_token',
+        data: { user },
+      },
     };
   },
 
@@ -162,19 +168,48 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email) {
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return user.email === body.email;
+      return u.user.userInfo.email === body.email;
     });
+
+    // Add the user data to the mock database
+    const user = {
+      external_urls: [],
+      genres: [],
+      _id: '5e6b95fda1903935ccb355a3',
+      userInfo: {
+        type: 'user',
+        product: 'free',
+        image: null,
+        currentlyPlaying: null,
+        followers: null,
+        _id: '5e6b95fda1903935ccb355a3',
+        name: body.name,
+        email: body.email,
+        gender: body.gender,
+        birthdate: new Date(`${body.birthdate} GMT+0`),
+        country: 'EG',
+        devices: [],
+        __v: 0,
+        uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+        id: '5e6b95fda1903935ccb355a3',
+      },
+      followers: [],
+      images: [],
+      uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+    };
 
     // Succeed if the user isn't found
     return {
       status: !found ? 200 : 400,
-      token: '',
-      data: {},
+      data: {
+        token: 'mock_token',
+        data: { user },
+      },
     };
   },
 
@@ -189,16 +224,39 @@ export default {
 
     // Search all users for our user
     let found = false;
-    allUsers.some((user) => {
-      if (user.email === body.email) {
+    allUsers.some((u) => {
+      if (u.user.userInfo.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return user.email === body.email;
+      return u.user.userInfo.email === body.email;
     });
 
     // Succeed if the user is found
     return { status: found ? 200 : 400 };
+  },
+
+  /**
+   * Returns mock user profile data
+   * @return {Object} The mock data
+   */
+  async getCurrentUserProfile() {
+    /**
+     * @note[XL3] Setting timezone
+     * @see MDN Date.prototype.getTimezoneOffset()
+     */
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    let user = {};
+    if (currentUser) {
+      user = await fetch(currentUser.data.userInfo, 50);
+    }
+
+    return {
+      status: currentUser ? 200 : 404,
+      data: {
+        data: { user },
+      },
+    };
   },
 
   /**
@@ -372,8 +430,22 @@ export default {
    * @return {Object}  An object containing all songs in a given list of ID equals to id
    */
   async fetchSongs(id) {
-    const allSongs = await fetch(songs, 500);
+    const allSongs = await fetch(songs, 200);
     return allSongs[id];
+  },
+  /**
+   * Fetches all songs of a playlist in the mock data
+   * @param  {Number}  id The id of playlist
+   * @return {Object}  An object containing all songs in a given playlist of ID equals to id
+   */
+  async fetchPlaylistSongs(id) {
+    const allSongs = await fetch(playlistSongs, 200);
+    for (let i = 0; i < allSongs.length; i += 1) {
+      if (allSongs[i].id === id) {
+        return allSongs[i].items;
+      }
+    }
+    return {};
   },
   /**
    * Fetches a list from the mock data
@@ -381,7 +453,7 @@ export default {
    * @return {Object} An object containing all information about the list of ID equals to id
    */
   async fetchList(id) {
-    const allLists = await fetch(lists, 1000);
+    const allLists = await fetch(lists, 200);
     for (let i = 0; i < allLists.length; i += 1) {
       if (allLists[i].id === id) {
         return allLists[i];
@@ -395,7 +467,7 @@ export default {
    * @return {Object} An object containing all information about the album of ID equals to id
    */
   async fetchAlbum(id) {
-    const allAlbums = await fetch(albums, 1000);
+    const allAlbums = await fetch(albums, 200);
     for (let i = 0; i < allAlbums.length; i += 1) {
       for (let j = 0; j < allAlbums[i].items.length; j += 1) {
         if (allAlbums[i].items[j].album.id === id) {

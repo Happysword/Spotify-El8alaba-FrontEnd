@@ -6,13 +6,14 @@
     <v-row justify="center" align="center">
       <v-col sm="8" lg="6" xl="4" class="px-8">
         <!-- Logo -->
-        <a><v-img
-          id="logo"
-          src="../../assets/imgs/El-8alaba.png"
-          contain
-          height="140"
-          @click="$router.push('/')"
-        /></a>
+        <router-link to="/">
+          <v-img
+            id="logo"
+            src="../../assets/imgs/El-8alaba.png"
+            contain
+            height="140">
+          </v-img>
+        </router-link>
 
         <!-- Error bar -->
         <p
@@ -144,15 +145,9 @@
 
         <p id="loginPrompt" class="text-center mt-4">
           Already have an account?
-          <span>
-            <a
-              :class="userInput.onLogin ? 'font-weight-bold' : ''"
-              @mouseover="userInput.onLogin = true"
-              @mouseleave="userInput.onLogin = false"
-              @click="$router.push('/login')"
-              >Log in
-            </a>
-          </span>
+          <router-link to="/login">
+            <span class="link">Log in</span>
+          </router-link>
         </p>
 
       </v-col>
@@ -170,6 +165,18 @@ export default {
   name: 'SignUp',
   created() {
     document.title = 'Sign up - Spotify El8alaba';
+  },
+
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        next('/home');
+      } else {
+        next();
+      }
+    });
   },
 
   data() {
@@ -201,7 +208,6 @@ export default {
           year: '',
         },
         gender: '',
-        onLogin: false,
         incorrect: false,
       },
 
@@ -252,7 +258,7 @@ export default {
       if (response.status === 200) {
         const currentUser = {
           token: response.data.token,
-          data: response.data.data,
+          data: response.data.data.user,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
@@ -274,7 +280,14 @@ export default {
 
 <style lang="css" scoped>
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.link {
   color: #1db954 !important;
+}
+
+.link:hover {
+  color: #2bdb69 !important;
 }
 </style>

@@ -49,6 +49,7 @@
                 ><v-avatar size="25" class="mr-1 ml-0"
                   ><v-img :src="UserInfo.photo"></v-img
                 ></v-avatar>
+                <!--TODO[@Seif] fix the data for the user -->
                 <div>
                   {{ $store.state.currentUser.username }}
                 </div>

@@ -6,13 +6,14 @@
     <v-row justify="center" align="center">
       <v-col sm="8" lg="6" xl="4" class="px-8">
         <!-- Logo -->
-        <a><v-img
-          id="logo"
-          src="../../assets/imgs/El-8alaba.png"
-          contain
-          height="140"
-          @click="$router.push('/')"
-        /></a>
+        <router-link to="/">
+          <v-img
+            id="logo"
+            src="../../assets/imgs/El-8alaba.png"
+            contain
+            height="140">
+          </v-img>
+        </router-link>
 
         <v-col>
           <v-btn
@@ -109,15 +110,11 @@
         </v-form>
         <!-- 'Forgot your password' link -->
         <v-container class="text-center">
-          <!-- @todo[XL3] Replace 'font-weight-bold' with a lightening of color -->
-          <a
-            id="forgotPasswordPrompt"
-            :class="userInput.onForgot ? 'font-weight-bold' : ''"
-            @mouseover="userInput.onForgot = true"
-            @mouseleave="userInput.onForgot = false"
-            @click="$router.push('/password-reset')"
-            >Forgot your password?
-          </a>
+          <router-link to="/password-reset">
+            <span id="forgotPasswordPrompt" class="link">
+              Forgot your password?
+            </span>
+          </router-link>
         </v-container>
 
         <v-divider class="my-3"/>
@@ -125,17 +122,11 @@
           Don't have an account?
         </p>
         <!-- 'Signup' button -->
-        <!-- @todo[XL3] Replace 'route to' with a method -->
-        <v-btn
-          id="signupBtn"
-          color="secondary"
-          rounded
-          outlined
-          block
-          large
-          route
-          to="/signup"
-          >Sign Up
+        <v-btn id="signupBtn"
+               color="secondary"
+               rounded outlined block large
+               to="/signup">
+          Sign Up
         </v-btn>
       </v-col>
     </v-row>
@@ -152,6 +143,18 @@ export default {
   name: 'LogIn',
   created() {
     document.title = 'Log in - Spotify El8alaba';
+  },
+
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (currentUser) {
+        next('/home');
+      } else {
+        next();
+      }
+    });
   },
 
   mounted() {
@@ -177,7 +180,6 @@ export default {
         password: '',
         showPassword: false,
         rememberMe: false,
-        onForgot: false,
         incorrect: false,
       },
       validation,
@@ -207,7 +209,7 @@ export default {
       if (response.status === 200) {
         const currentUser = {
           token: response.data.token,
-          data: response.data.data,
+          data: response.data.data.user,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
@@ -231,7 +233,15 @@ export default {
 
 <style lang="css" scoped>
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.link {
+  text-decoration: none !important;
   color: #1db954 !important;
+}
+
+.link:hover {
+  color: #2bdb69 !important;
 }
 </style>

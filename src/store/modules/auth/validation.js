@@ -38,7 +38,7 @@ export default {
    */
   noSpecialCharacters(propertyName) {
     // Validate that this RegExp isn't found in the string
-    return (data) => (!!data && data.search(/[^\w@\-.]/g) === -1)
+    return (data) => (!!data && data.search(/[^\w\-.]/g) === -1)
       || `${propertyName} doesn't allow special characters`;
   },
 
@@ -66,7 +66,6 @@ export default {
    * @return {function} The function that does the validation
    */
   validYear() {
-    // @todo[XL3] Validate this year range
     return (year) => (!!year && year >= 1920 && year <= 2020)
       || 'Please enter a valid year';
   },

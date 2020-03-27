@@ -1,6 +1,6 @@
 <template>
   <v-app :style="
-        `background: linear-gradient(0deg,rgba(0,0,0,1) 56%, ${color} 100%);`
+        `background: linear-gradient(0deg,rgba(0,0,0,1) 70%, ${color} 100%);`
       ">
     <Navbar></Navbar>
     <Topbar></Topbar>

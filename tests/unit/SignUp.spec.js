@@ -19,6 +19,18 @@ const vuetify = new Vuetify();
 const router = new VueRouter();
 
 describe('SignUp.vue', () => {
+  test('localStorage is empty, no user is logged in', () => {
+    // Mount the component
+    const wrapper = mount(SignUp, {
+      localVue,
+      vuetify,
+      router,
+    });
+
+    wrapper.vm.$router.push('/signup');
+    expect(localStorage.currentUser).toEqual(undefined);
+  });
+
   test('All data fields are clear on mount', () => {
     // Mount the component
     const wrapper = mount(SignUp, {
@@ -37,7 +49,6 @@ describe('SignUp.vue', () => {
     expect(input.dob.month).toEqual('');
     expect(input.dob.year).toEqual('');
     expect(input.gender).toEqual('');
-    expect(input.onLogin).toEqual(false);
     expect(input.incorrect).toEqual(false);
   });
 
@@ -179,10 +190,6 @@ describe('SignUp.vue', () => {
       router,
     });
 
-    // Assert that the button exists
-    const signupBtn = wrapper.find('#signupBtn');
-    expect(signupBtn.exists()).toEqual(true);
-
     // Assert that all input fields exist
     const emailField = wrapper.find('#emailField');
     expect(emailField.exists()).toEqual(true);
@@ -223,10 +230,6 @@ describe('SignUp.vue', () => {
       vuetify,
       router,
     });
-
-    // Assert that the button exists
-    const signupBtn = wrapper.find('#signupBtn');
-    expect(signupBtn.exists()).toEqual(true);
 
     // Assert that all input fields exist
     const emailField = wrapper.find('#emailField');

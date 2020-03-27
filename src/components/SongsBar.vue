@@ -5,7 +5,7 @@
     :elevation="hover ? 15 : 0"
     :class="{ 'on-hover': hover }"
     class="d-block ml-5 pt-0 text-truncate"
-    color="#60606010"
+    color="#60606000"
     flat
     height="64"
     @mouseover="changeicon(1)"
@@ -19,10 +19,10 @@
             <v-list-item two-line class="text-truncate d-inline-block">
               <v-list-item-content>
                 <v-list-item-title class="mx-2 subtitle text-truncate" :style="`color:${color2} `">
-                  {{song.songname}}
+                  {{song.track.name}}
                 </v-list-item-title>
                 <v-list-item-subtitle class="grey--text mx-2 text text-truncate">
-                  {{ song.artist }} . {{song.album}}
+                  {{ song.track.artists[0].name }} . {{song.track.album.name}}
                 </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
@@ -39,7 +39,9 @@
               </template>
               <dropDown></dropDown>
             </v-menu>
-            <label class="mx-2" :style="`color:${color} `">{{song.duration}} </label>
+            <label class="mx-2" :style="`color:${color} `">
+              {{ parseInt(song.track.duration_ms / 60000) }} :
+              {{ parseInt(song.track.duration_ms / 1000) % 60 }}</label>
           </v-card-text>
         </v-card-actions>
     </v-card>
@@ -63,6 +65,7 @@ export default {
   props: {
     song: Object,
     counter: Number,
+    list: Array,
   },
   components: {
     dropDown,
@@ -73,17 +76,19 @@ export default {
       if (hover === 2) {
         this.play = !this.play;
         if (this.play === true) {
-          store.state.currentSong = this.song;
+          store.state.MusicPlayer.currentSong = this.song;
+          store.state.MusicPlayer.currentList = this.list;
           this.color = '#1ED760';
           this.color2 = '#1ED760';
           this.songIcon = 'mdi-volume-high';
         } else {
-          store.state.currentSong = {};
           this.color = 'grey';
           this.color2 = 'white';
           this.songIcon = 'mdi-music-note-outline';
         }
         EventBus.$emit('changePlay', this.play);
+        console.log(store.state.MusicPlayer.currentSong);
+        console.log(store.state.MusicPlayer.currentList);
       }
       if (hover === 0) {
         this.showIcon = this.songIcon;
@@ -100,13 +105,13 @@ export default {
       if ((this.play === true && play === false) || this.counter === 0) {
         this.play = play;
         if (this.play === true) {
-          store.state.currentSong = this.song;
+          store.state.MusicPlayer.currentSong = this.song;
+          store.state.MusicPlayer.currentList = this.list;
           this.color = '#1ED760';
           this.color2 = '#1ED760';
           this.songIcon = 'mdi-volume-high';
           this.showIcon = 'mdi-volume-high';
         } else {
-          store.state.currentSong = {};
           this.color = 'grey';
           this.color2 = 'white';
           this.songIcon = 'mdi-music-note-outline';
@@ -115,7 +120,7 @@ export default {
       }
     });
     EventBus.$on('changePlay', () => {
-      if (this.song !== store.state.currentSong) {
+      if (this.song !== store.state.MusicPlayer.currentSong) {
         this.play = false;
         this.color = 'grey';
         this.color2 = 'white';
