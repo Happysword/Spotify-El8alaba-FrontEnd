@@ -100,6 +100,11 @@
             >
               mdi-heart
             </v-icon>
+            <v-snackbar v-model="snackbar" :timeout="timeout" color="#1DB954" id="snack-bar">
+              <h3 class="white--text title font-weight-light mx-auto">
+                {{ text }}
+              </h3>
+            </v-snackbar>
             <!-- Removed in new update
             <v-icon color="grey" class="mx-2 info-buttons" dense medium>
               mdi-alpha-x-circle-outline
@@ -113,7 +118,7 @@
               medium
               id="rectangle-plus"
             >
-              mdi-shape-rectangle-plus
+              mdi-picture-in-picture-bottom-right
             </v-icon>
           </v-flex>
         </v-layout>
@@ -133,6 +138,9 @@ export default {
     hoverPic: false,
     imageButton: false,
     isLinkDisabled: false,
+    snackbar: false,
+    text: '',
+    timeout: 2000,
   }),
   methods: {
     async changeHeart() {
@@ -146,7 +154,12 @@ export default {
           this.$store.state.MusicPlayer.currentPlayback.item.id,
         );
       }
-      if (R) this.heartcolor = !this.heartcolor;
+      if (R) {
+        this.heartcolor = !this.heartcolor;
+        this.snackbar = true;
+        if (this.heartcolor) this.text = 'Added to your Liked Songs';
+        else this.text = 'Removed from your Liked Songs';
+      }
     },
     changeHoverPic() {
       this.hoverPic = !this.hoverPic; // implement this
@@ -184,5 +197,11 @@ export default {
 #info-card {
   background-color: transparent;
   border-color: transparent;
+}
+#snack-bar {
+  bottom: 10%;
+  left: 38%;
+  height: 100px;
+  width: 200px;
 }
 </style>

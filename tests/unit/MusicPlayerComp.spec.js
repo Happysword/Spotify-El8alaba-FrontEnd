@@ -10,7 +10,6 @@ import MMPlayer from '../../src/components/musicplayer/MiddlePartMPlayer.vue';
 import LMPlayer from '../../src/components/musicplayer/LeftPartMPlayer.vue';
 import RMPlayer from '../../src/components/musicplayer/RightPartMPlayer.vue';
 
-// TODO[@Seif] complete the unit tests
 describe('Testing the player components', () => {
   // Setting up The Vue instances configs
   Vue.use(Vuetify);
