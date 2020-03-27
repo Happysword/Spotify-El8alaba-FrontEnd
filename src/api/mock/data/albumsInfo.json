@@ -28,11 +28,11 @@
                 "href": "https://api.spotify.com/v1/albums/5m4VYOPoIpkV0XgOiRKkWC",
                 "id": "5m4VYOPoIpkV0XgOiRKkWC",
                 "images":
-                    {
+                    [{
                     "height": 640,
                     "url": "https://i.scdn.co/image/ccbb1e3bea2461e69783895e880965b171e29f4c",
                     "width": 640
-                    },
+                    }],
                 "name": "In & out",
                 "popularity": 49,
                 "release_date": "2013-01-01",

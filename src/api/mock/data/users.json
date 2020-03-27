@@ -1,27 +1,86 @@
 [
 	{ 
-		"username": "admin",
-		"email": "admin@admin.com",
-		"password": "admin:admin"
+		"password": "admin:admin",
+		"user": {
+      "external_urls": [],
+      "genres": [],
+      "_id": "5e6b95fda1903935ccb355a0",
+      "userInfo": {
+        "type": "user",
+        "product": "free",
+        "image": null,
+        "currentlyPlaying": null,
+        "followers": null,
+        "_id": "5e6b95fda1903935ccb355a0",
+        "name": "Admin",
+        "email": "admin@admin.com",
+        "gender": "m",
+        "birthdate": "1999-01-25T00:00:00.000Z",
+        "country": "EG",
+        "devices": [],
+        "__v": 0,
+        "uri": "spotify:user:5e6b95fda1903935ccb355a0",
+        "id": "5e6b95fda1903935ccb355a0"
+      },
+      "followers": [],
+      "images": [],
+      "uri": "spotify:user:5e6b95fda1903935ccb355a0"
+		}
 	},
 	{
-		"username": "admin1",
-		"email": "admin1@admin.com",
-		"password": "admin:admin1"
+		"password": "admin:admin1",
+		"user": {
+      "external_urls": [],
+      "genres": [],
+      "_id": "5e6b95fda1903935ccb355a1",
+      "userInfo": {
+        "type": "user",
+        "product": "free",
+        "image": null,
+        "currentlyPlaying": null,
+        "followers": null,
+        "_id": "5e6b95fda1903935ccb355a1",
+        "name": "Admin1",
+        "email": "admin1@admin.com",
+        "gender": "m",
+        "birthdate": "1999-02-25T00:00:00.000Z",
+        "country": "EG",
+        "devices": [],
+        "__v": 0,
+        "uri": "spotify:user:5e6b95fda1903935ccb355a1",
+        "id": "5e6b95fda1903935ccb355a1"
+      },
+      "followers": [],
+      "images": [],
+      "uri": "spotify:user:5e6b95fda1903935ccb355a1"
+    }
 	},
 	{
-		"username": "admin2",
-		"email": "admin2@admin.com",
-		"password": "admin:admin2"
-	},
-	{
-		"username": "admin3",
-		"email": "admin3@admin.com",
-		"password": "admin:admin3"
-	},
-	{
-		"username": "admin4",
-		"email": "admin4@admin.com",
-		"password": "admin:admin4"
+		"password": "admin:admin2",
+		"user": {
+      "external_urls": [],
+      "genres": [],
+      "_id": "5e6b95fda1903935ccb355a2",
+      "userInfo": {
+        "type": "user",
+        "product": "free",
+        "image": null,
+        "currentlyPlaying": null,
+        "followers": null,
+        "_id": "5e6b95fda1903935ccb355a2",
+        "name": "Admin2",
+        "email": "admin2@admin.com",
+        "gender": "f",
+        "birthdate": "1999-03-25T00:00:00.000Z",
+        "country": "EG",
+        "devices": [],
+        "__v": 0,
+        "uri": "spotify:user:5e6b95fda1903935ccb355a2",
+        "id": "5e6b95fda1903935ccb355a2"
+      },
+      "followers": [],
+      "images": [],
+      "uri": "spotify:user:5e6b95fda1903935ccb355a2"
+    }
 	}
 ]

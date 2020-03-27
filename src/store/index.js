@@ -23,8 +23,8 @@ export default new Vuex.Store({
       isPlaying: false,
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
+      currentList: {},
     },
-    currentSong: {},
   },
 
   mutations: {

@@ -4,11 +4,6 @@ import axios from 'axios';
 import api from '../../common/config';
 
 export default {
-  fetchUsers() {
-    // TODO[@XL3]: Replace this with our server
-    return axios.get(api).then((response) => response.data);
-  },
-
   // TODO[@Seif]: Check for status and Add Tokens for ALL and check if device Id is needed
   /**
    * Get the User's Currently Playing Track
@@ -169,46 +164,251 @@ export default {
   },
   /**
    * Sends a POST request to the server to login the user
-   * @param  {Object} body The user's credentials
+   * @param  {Object} data The user's credentials
    * @return {Object}      The corresponding response
    */
-  async loginUser(body) {
-    const response = await axios.post(`${api}/api/v1/authentication/login`, body)
+  async loginUser(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/login`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
       .then((res) => res)
-      .catch((err) => console.log(err));
+      .catch((err) => err.response);
 
     return response;
   },
 
   /**
    * Sends a POST request to the server to signup the user
-   * @param  {Object} body The user's signup data
+   * @param  {Object} data The user's signup data
    * @return {Object}      The corresponding response
    */
-  async signupUser(body) {
-    const response = await axios.post(`${api}/api/v1/authentication/signup`, body)
+  async signupUser(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/signup`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+        /**
+         * @author XL3
+         * This is my public IP address
+         * @todo[XL3] Change this for production
+         */
+        'X-Forwarded-For': '156.215.87.252',
+      },
+    };
+
+    const response = await axios(request)
       .then((res) => res)
-      .catch((err) => console.log(err));
+      .catch((err) => err.response);
 
     return response;
   },
+
+  /**
+   * Sends a POST request to the server for a Reset Password token
+   * @param  {Object} data The user's email
+   * @return {Object}      The corresponding response
+   */
+  async forgotPassword(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/authentication/forgotPassword`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Sends a GET request to the server for the current user's profile information
+   * @return {Object} The corresponding response
+   */
+  async getCurrentUserProfile() {
+    // Obtain the token from localStorage
+    const { token } = JSON.parse(localStorage.getItem('currentUser'));
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/users/me`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Fetches all songs of a playlist
+   * @param  {Number}  id The id of playlist
+   * @param  {string}  token The token of user
+   * @return {Object}  An object containing all songs in a given playlist of ID equals to id
+   */
   async fetchSongs(id) {
-    const songs = await axios.get(`${api}v1/playlists/${id}/tracks?fields=&limit=&offset=`)
-      .then((response) => response);
-    return songs;
+    const songs = await axios.get(`${api}/api/v1/playlists/${id}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return songs.data.items;
   },
 
+  /**
+   * Fetches user's saved tracks
+   * @param  {string}  token The token of user
+   * @return {Object}  An object containing all saved songs of the user
+   */
+  async fetchSavedTracks() {
+    const songs = await axios.get(`${api}/api/v1/me/tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res;
+        }
+        return {
+          data: {
+            items: [
+              {
+                track: {
+                  artists: [
+                    { name: '' },
+                  ],
+                  album: {},
+                  name: '',
+                  duration_ms: 0,
+                },
+              },
+            ],
+          },
+        };
+      })
+      .catch((error) => console.log(error));
+    return songs.data.items;
+  },
+
+  /**
+   * Fetches List info
+   * @param  {Number}  id The id of the desired list
+   * @return {Object} An object containing all information about the list of ID equals to id
+   */
   async fetchList(id) {
-    const lists = await axios.get(`${api}v1/playlists/${id}?fields=name`)
-      .then((response) => response);
-    return lists;
+    const lists = await axios.get(`${api}/api/v1/playlists/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return lists.data;
   },
 
-  async fetchListCover(id) {
-    const img = await axios.get(`${api}v1/playlists/${id}/images`)
-      .then((response) => response);
-    return img;
+  /**
+   * Fetches Album info
+   * @param  {Number}  id The id of the desired Album
+   * @return {Object} An object containing all information about the album of ID equals to id
+   */
+  async fetchAlbum(id) {
+    const Album = await axios.get(`${api}/api/v1/albums/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return Album.data;
   },
 
+  /**
+   * Save Track for the Current User
+   * @param  {Number}  id The id of the Track
+   * @return {Object}  The corresponding response
+   */
+  async SaveTrack(id) {
+    const res = await axios.put(`${api}/api/v1/me/tracks?ids=${id}`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
 
+  /**
+   * Remove Track for the Current User
+   * @param  {Number}  id The id of the Track
+   * @return {Object}  The corresponding response
+   */
+  async RemoveTrack(id) {
+    const res = await axios.delete(`${api}/api/v1/me/tracks?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+
+  /**
+   * Save Album for the Current User
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async SaveAlbum(id) {
+    const res = await axios.put(`${api}/api/v1/me/albums?ids=${id}`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+
+  /**
+   * Remove Album for the Current User
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async RemoveAlbum(id) {
+    const res = await axios.delete(`${api}/api/v1/me/albums?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+
+  /**
+   * Check if Album is Saved for the Current User or not
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async CheckAlbum(id) {
+    const response = await axios.get(`${api}/api/v1/me/albums/contains?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          return res;
+        }
+        return [false];
+      })
+      .catch(() => [false]);
+    return response;
+  },
 };
