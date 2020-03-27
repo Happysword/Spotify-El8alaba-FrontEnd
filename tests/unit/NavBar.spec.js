@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 import { mount, createLocalVue } from '@vue/test-utils';
 import NavBar from '../../src/components/NavBar.vue';
 
@@ -9,9 +10,18 @@ Vue.use(Vuetify);
 const localVue = createLocalVue();
 localVue.use(Vuetify);
 localVue.use(VueRouter);
+localVue.use(Vuex);
 
 const vuetify = new Vuetify();
 const router = new VueRouter();
+const store = new Vuex.Store({
+  state: {
+    MusicPlayer: {
+      navBarImage: '',
+    },
+  },
+});
+
 
 describe('NavBar.vue', () => {
   test('Data to be correct on mounted', () => {
@@ -19,6 +29,7 @@ describe('NavBar.vue', () => {
       localVue,
       vuetify,
       router,
+      store,
     });
 
     const { createdPlaylistName } = wrapper.vm.$data;
@@ -33,6 +44,7 @@ describe('NavBar.vue', () => {
       localVue,
       vuetify,
       router,
+      store,
     });
 
     expect(wrapper.find('#logo').exists()).toEqual(true);
@@ -46,6 +58,7 @@ describe('NavBar.vue', () => {
       localVue,
       vuetify,
       router,
+      store,
     });
 
     const createPlaylist = wrapper.find('#createPlaylist');
