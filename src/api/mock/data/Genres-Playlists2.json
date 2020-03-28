@@ -1,0 +1,732 @@
+{
+    "playlists": {
+      "href": "https://api.spotify.com/v1/browse/categories/soul/playlists?offset=0&limit=20",
+      "items": [
+        {
+          "collaborative": false,
+          "description": "Chart topping hits from the legendary label.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX8xV1CEmgc1h"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX8xV1CEmgc1h",
+          "id": "37i9dQZF1DX8xV1CEmgc1h",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000024a06592bc687857f20882f5a",
+              "width": null
+            }
+          ],
+          "name": "Motown Soul Number Ones",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4MzQ4NzI3NywwMDAwMDAwYTAwMDAwMTZiYWQ4ZTJkNmMwMDAwMDE3MGFmMzI1OTBi",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX8xV1CEmgc1h/tracks",
+            "total": 65
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX8xV1CEmgc1h"
+        },
+        {
+          "collaborative": false,
+          "description": "Celebrating 60 years of Motown with the music that broke barriers and moved the soul.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWYC7CaxNgoCg"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYC7CaxNgoCg",
+          "id": "37i9dQZF1DWYC7CaxNgoCg",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000277ab13db6fcf9f8a46d7946d",
+              "width": null
+            }
+          ],
+          "name": "Sound Of Motown",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4MzMxNTUwNCwwMDAwMDAwNzAwMDAwMTZiOTA3ZmI4YmQwMDAwMDE3MGE0ZjU0ZWU5",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYC7CaxNgoCg/tracks",
+            "total": 29
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWYC7CaxNgoCg"
+        },
+        {
+          "collaborative": false,
+          "description": "For Motown, diversity and equality wasn’t just a goal, it was the key to success. These women brought Motown into the hearts of many.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX3z6D2ln0Hqx"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX3z6D2ln0Hqx",
+          "id": "37i9dQZF1DX3z6D2ln0Hqx",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002397ee737b2fda75786271086",
+              "width": null
+            }
+          ],
+          "name": "Women Of Motown",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4MzQ4ODA3MCwwMDAwMDAwOTAwMDAwMTZiOWZkMmVkYWMwMDAwMDE3MGFmM2U3NDQz",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX3z6D2ln0Hqx/tracks",
+            "total": 22
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX3z6D2ln0Hqx"
+        },
+        {
+          "collaborative": false,
+          "description": "These artists changed the world by changing their tune.  Their music not only grooved but moved the world with personal and political messages.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX8YFIEyRvxXj"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX8YFIEyRvxXj",
+          "id": "37i9dQZF1DX8YFIEyRvxXj",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002936d2ce54a5ef5ca7e964633",
+              "width": null
+            }
+          ],
+          "name": "Soul Resistance",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzg0Njc1MCwwMDAwMDAwNzAwMDAwMTZiOTA3ZWNmY2UwMDAwMDE3MGM0OWY3YjA1",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX8YFIEyRvxXj/tracks",
+            "total": 22
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX8YFIEyRvxXj"
+        },
+        {
+          "collaborative": false,
+          "description": "From the past to the present, soul music has evolved into many different sounds and Motown has been at the forefront.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWVGLWeeMNGcG"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVGLWeeMNGcG",
+          "id": "37i9dQZF1DWVGLWeeMNGcG",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000021bd7ba844c955f9d2f7a122a",
+              "width": null
+            }
+          ],
+          "name": "Evolution Of Soul",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzg0Njc5NSwwMDAwMDAwNzAwMDAwMTZiOTA3YTBmMDEwMDAwMDE3MGM0YTAyOTAz",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVGLWeeMNGcG/tracks",
+            "total": 31
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWVGLWeeMNGcG"
+        },
+        {
+          "collaborative": false,
+          "description": "Discover hits signed Smokey Robinson that shaped the early sound of Motown.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX6eUekrgxJ8J"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX6eUekrgxJ8J",
+          "id": "37i9dQZF1DX6eUekrgxJ8J",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000247803d1bd8cec1835ed952fc",
+              "width": null
+            }
+          ],
+          "name": "Smokey's Songbook",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzg0NDc1NSwwMDAwMDAwOTAwMDAwMTZiOTA3ZGJjMTYwMDAwMDE3MGM0ODEwNmZh",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX6eUekrgxJ8J/tracks",
+            "total": 25
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX6eUekrgxJ8J"
+        },
+        {
+          "collaborative": false,
+          "description": "Chill out to the sweetest soul songs.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXbcgQ8d7s0A0"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXbcgQ8d7s0A0",
+          "id": "37i9dQZF1DXbcgQ8d7s0A0",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002d6554631a83f1e2b1207934f",
+              "width": null
+            }
+          ],
+          "name": "Sweet Soul Chillout",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTg1MywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXbcgQ8d7s0A0/tracks",
+            "total": 65
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DXbcgQ8d7s0A0"
+        },
+        {
+          "collaborative": false,
+          "description": "A selection of the greatest funk & soul records ever made.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWWvhKV4FBciw"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWWvhKV4FBciw",
+          "id": "37i9dQZF1DWWvhKV4FBciw",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002c98a8e76cd6a249c74a46431",
+              "width": null
+            }
+          ],
+          "name": "Funk & Soul Classics",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTg4OCwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWWvhKV4FBciw/tracks",
+            "total": 80
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWWvhKV4FBciw"
+        },
+        {
+          "collaborative": false,
+          "description": "Here are 50 of the greatest female singers of all time. Enjoy!",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX9loJQLuEvap"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX9loJQLuEvap",
+          "id": "37i9dQZF1DX9loJQLuEvap",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000021b6f6189928384510f6e05ad",
+              "width": null
+            }
+          ],
+          "name": "50 Great Female Voices",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTkwNywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX9loJQLuEvap/tracks",
+            "total": 50
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX9loJQLuEvap"
+        },
+        {
+          "collaborative": false,
+          "description": "A collection of the hottest soul tracks from the early '70s.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWULEW2RfoSCi"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWULEW2RfoSCi",
+          "id": "37i9dQZF1DWULEW2RfoSCi",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000273e99a396317d1227aec88a3",
+              "width": null
+            }
+          ],
+          "name": "35 Soul Classics 1970–1975",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTkwNywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWULEW2RfoSCi/tracks",
+            "total": 35
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWULEW2RfoSCi"
+        },
+        {
+          "collaborative": false,
+          "description": "Alternative soul, hip-hop and all that jazz. Cover: Masego",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWVzZlRWgqAGH"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVzZlRWgqAGH",
+          "id": "37i9dQZF1DWVzZlRWgqAGH",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002fd94cb4611f8105fd45ee4ed",
+              "width": null
+            }
+          ],
+          "name": "Butter",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDY5MzM4NiwwMDAwMDBmZDAwMDAwMTcwZjcxNjFiMjYwMDAwMDE3MGU4ZmM5ZTNm",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVzZlRWgqAGH/tracks",
+            "total": 50
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWVzZlRWgqAGH"
+        },
+        {
+          "collaborative": false,
+          "description": "Soul, R'n'B all with a tinge of electronic goodness. Cover: TOKiMONSTA",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXdc0DUqaW3MZ"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdc0DUqaW3MZ",
+          "id": "37i9dQZF1DXdc0DUqaW3MZ",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000249060ef7b51e8eb4a63eb549",
+              "width": null
+            }
+          ],
+          "name": "Soultronic",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDY2MjQ2MCwwMDAwMDA4MjAwMDAwMTcwZjUzZTM2YjcwMDAwMDE3MGY0MTdhODcz",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXdc0DUqaW3MZ/tracks",
+            "total": 104
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DXdc0DUqaW3MZ"
+        },
+        {
+          "collaborative": false,
+          "description": "When your soul needs to get a little funked up, check out these funky soul classics.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX70TzPK5buVf"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX70TzPK5buVf",
+          "id": "37i9dQZF1DX70TzPK5buVf",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000021680a8b576d55e90a1122fcb",
+              "width": null
+            }
+          ],
+          "name": "Funk Outta Here",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU2NzY3NTYyMSwwMDAwMDAxYjAwMDAwMTYzZTA5OGQ5NTMwMDAwMDE2ZDAwYmY5ZTll",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX70TzPK5buVf/tracks",
+            "total": 50
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX70TzPK5buVf"
+        },
+        {
+          "collaborative": false,
+          "description": "Relax to these acoustic soul songs. Cover: Sinead Harnett.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX5lDysu4GbKR"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5lDysu4GbKR",
+          "id": "37i9dQZF1DX5lDysu4GbKR",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000274a2e5a33072ba9bb3d80f78",
+              "width": null
+            }
+          ],
+          "name": "Acoustic Soul",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4MjIyNjcwOCwwMDAwMDA0MDAwMDAwMTcwNjQwZjk4MTIwMDAwMDE2ZWRhYWY1NjA0",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX5lDysu4GbKR/tracks",
+            "total": 65
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX5lDysu4GbKR"
+        },
+        {
+          "collaborative": false,
+          "description": "Your daily dose of Soul-infused music! Cover: <a href=\"spotify:artist:1QfEfvB62EEl4upf2ANKkR\">Pip Millett</a>.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWSXWSaQmvWOB"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWSXWSaQmvWOB",
+          "id": "37i9dQZF1DWSXWSaQmvWOB",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000028f619868a8326e9896296b92",
+              "width": null
+            }
+          ],
+          "name": "Soul 'n' the City",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDExNDA4NiwwMDAwMDA4NTAwMDAwMTcwZDQ4ZWIzZmIwMDAwMDE3MGQ0OGI5ODcy",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWSXWSaQmvWOB/tracks",
+            "total": 66
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWSXWSaQmvWOB"
+        },
+        {
+          "collaborative": false,
+          "description": "Some heart and soul for those up late—with midnight cravings or lingering thoughts.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXea80XwOJRgD"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXea80XwOJRgD",
+          "id": "37i9dQZF1DXea80XwOJRgD",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000022b78fa935780f3c487b3c3ba",
+              "width": null
+            }
+          ],
+          "name": "The Midnight Hour",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU2ODAyMDQ5NCwwMDAwMDAxZDAwMDAwMTYxNGExNGJmZDMwMDAwMDE2ZDE1NGRmODNh",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXea80XwOJRgD/tracks",
+            "total": 46
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DXea80XwOJRgD"
+        },
+        {
+          "collaborative": false,
+          "description": "Soulful tracks to help you get through your day.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX4GMJS146m00"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX4GMJS146m00",
+          "id": "37i9dQZF1DX4GMJS146m00",
+          "images": [
+            {
+              "height": null,
+              "url": "https://pl.scdn.co/images/pl/default/e36a421af4abe4645dcd62f4b2674be73fbd2766",
+              "width": null
+            }
+          ],
+          "name": "Workday Soul",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzg0ODA4OCwwMDAwMDAxOTAwMDAwMTZiOGI2YzFkNGEwMDAwMDE3MGM0YjNlMjg2",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX4GMJS146m00/tracks",
+            "total": 126
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX4GMJS146m00"
+        },
+        {
+          "collaborative": false,
+          "description": "Uplifting soul classics to energize you whenever you feel for a soulful boost full of positive energy.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWTx0xog3gN3q"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWTx0xog3gN3q",
+          "id": "37i9dQZF1DWTx0xog3gN3q",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002dd9bd386a29775a4e0600df9",
+              "width": null
+            }
+          ],
+          "name": "Uplifting Soul Classics",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTg5NCwwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWTx0xog3gN3q/tracks",
+            "total": 47
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWTx0xog3gN3q"
+        },
+        {
+          "collaborative": false,
+          "description": "Funk to the good ol' tunes!",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWVKqzBo1JsCN"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVKqzBo1JsCN",
+          "id": "37i9dQZF1DWVKqzBo1JsCN",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f00000002903461e057e055e7b89aaa98",
+              "width": null
+            }
+          ],
+          "name": "Let's Get Funky",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzc0ODk5MCwwMDAwMDAwZjAwMDAwMTcwYmVjYmM3NGYwMDAwMDE3MDFjMTlkZDc3",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVKqzBo1JsCN/tracks",
+            "total": 80
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWVKqzBo1JsCN"
+        },
+        {
+          "collaborative": false,
+          "description": "Get down and jam out to these throwback '80s R&B tunes!",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX0H8hDpv38Ju"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0H8hDpv38Ju",
+          "id": "37i9dQZF1DX0H8hDpv38Ju",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f0000000210da591feb2751dfca8852a4",
+              "width": null
+            }
+          ],
+          "name": "’80s Jam Session",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4NDkwOTkwMywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX0H8hDpv38Ju/tracks",
+            "total": 40
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DX0H8hDpv38Ju"
+        }
+      ],
+      "limit": 20,
+      "next": "https://api.spotify.com/v1/browse/categories/soul/playlists?offset=20&limit=20",
+      "offset": 0,
+      "previous": null,
+      "total": 24
+    }
+  }

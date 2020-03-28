@@ -9,19 +9,22 @@
         <v-btn color="#04040470" small fab class="mx-2" @click="changeRoute(1)">
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
-
-        <v-text-field
-          prepend-inner-icon="mdi-magnify"
-          rounded
-          background-color="white"
-          height="30"
-          class="searchbar-pos"
-          light
-          v-show="$store.state.searching"
-          v-model="$store.state.InputSearch"
-          v-on:input="searching()"
-        >
-        </v-text-field>
+        <v-col cols="12" xs="12" sm="6" md="3" lg="4" justify>
+          <v-text-field
+            prepend-inner-icon="mdi-magnify"
+            rounded
+            label="Search for artists or tracks"
+            background-color="white"
+            height="30"
+            class="searchbar-pos"
+            light
+            v-show="$store.state.searching"
+            v-model="$route.params.id"
+            v-on:input="searching()"
+          >
+          </v-text-field>
+          <span>{{ this.$store.state.InputSearch }}</span>
+        </v-col>
 
         <v-spacer></v-spacer>
 
@@ -101,7 +104,7 @@ export default {
       this.$router.go(direction);
     },
     searching() {
-      this.input = this.$store.state.InputSearch;
+      this.input = this.$route.params.id;
       this.$router.push(`/home/search/${this.input}`);
     },
   },
@@ -115,9 +118,9 @@ export default {
   float: right;
 }
 .searchbar-pos {
+  transform: translate(0,-10px);
   position: fixed;
-  margin-left: 120px;
-  width: 400px;
+  max-width: 400px;
 }
 #upgrade-btn {
   border: 2px solid white;

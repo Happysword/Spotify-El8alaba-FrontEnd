@@ -1,50 +1,76 @@
 <template>
   <v-container fluid="">
+    <div v-show="PGenresExist">
     <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
     <v-row>
-        <v-col  xs="12" sm="12" md="12" lg="4"  v-for="i in 3" :key="genres[i].text">
+        <v-col  xs="12" sm="12" md="12" lg="4"
+        v-for="PGenre in PGenres" :key="PGenre.id">
           <pref
             class="mt-3"
-            :source="genres[i].src"
-            :title="genres[i].text"
-            :route="genres[i].route"
-            :color="genres[i].color"
+            :source="PGenre.icons[0].url"
+            :title="PGenre.name"
+            :route="PGenre.id"
           ></pref>
          </v-col>
     </v-row>
+    </div>
+    <div v-show="genresExist">
     <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
     <v-row>
       <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
-      :key="genre.text">
+      :key="genre.id">
       <Genres
         class="mt-3"
-        :source="genre.src"
-        :title="genre.text"
-        :route="genre.route"
-        :color="genre.color"
+        :source="genre.icons[0].url"
+        :title="genre.name"
+        :route="genre.id"
       ></Genres>
     </v-col>
     </v-row>
+    </div>
   </v-container>
 </template>
 
 <script>
-import g from '@/api/mock/data/genres.json';
+import client from '../../api/mock';
 import Genres from '../../components/GenresCard.vue';
 import pref from '../../components/prefGenres.vue';
 
+
 export default {
-  name: 'Home',
+  name: 'Search',
   components: {
     Genres,
     pref,
   },
   data() {
     return {
-      genres: g,
+      genres: [],
+      PGenres: [],
+      genresExist: false,
+      PGenresExist: false,
     };
   },
-
+  methods: {
+    async fetchAllGenres() {
+      this.genres = await client.fetchGenres();
+      if (this.genres) {
+        this.genres = this.genres.categories.items;
+        this.genresExist = true;
+      } else this.genres = {};
+    },
+    async fetchAllPrefG() {
+      this.PGenres = await client.fetchPrefGenres();
+      if (this.PGenres) {
+        this.PGenres = this.PGenres.categories.items;
+        this.PGenresExist = true;
+      } else this.PGenres = {};
+    },
+  },
+  async created() {
+    this.fetchAllGenres();
+    this.fetchAllPrefG();
+  },
   mounted() {
     this.$store.state.searching = true;
   },

@@ -1,68 +1,60 @@
 <template>
-   <v-card
-                            class="mx-auto"
-                            max-width="450"
-                            dark=""
-                            @mouseover="showActionButton = true"
-                            @mouseleave="showActionButton = false"
-                            height="250"
-                            @click="CardClickLink()"
-                        >
-                          <v-container fluid="">
-                              <v-img
-                              :src=image
-                              height="100px"
-                              width="100px"
-                              v-if="type === 'artist'"
-                              class="artistImage"
-                              ></v-img>
-                              <v-img
-                              :src=image
-                              height="100px"
-                              max-width="100px"
-                              v-if="type != 'artist'&& image!=''"
-                              class="mt-2 ml-2 contain"
-                              ></v-img>
-                              <v-icon v-if="type=='profile'&& image==''"
-                              size="100" class="Picon" dark>mdi-account</v-icon>
-                          </v-container>
-                            <v-card-title class="font-weight-bold display-1 d-inline-block">
-                            {{name}}
-                            </v-card-title>
+    <v-card
+      class="mx-auto"
+      max-width="450"
+      dark=""
+      @mouseover="showActionButton = true"
+      @mouseleave="showActionButton = false"
+      height="250"
+      @click="CardClickLink()"
+       >
+      <v-container fluid="">
+        <v-img
+        :src=image
+        height="100px"
+        width="100px"
+        v-if="type === 'artist'"
+        class="artistImage"></v-img>
+        <v-img
+        :src=image
+        height="100px"
+        max-width="100px"
+        v-if="type != 'artist'&& image!=''"
+        class="mt-2 ml-2 contain"></v-img>
+        <v-icon v-if="type=='profile'&& image==''"
+        size="100" class="Picon" dark>mdi-account</v-icon>
+      </v-container>
+      <v-card-title class="font-weight-bold d-inline-block na">
+          {{name}}
+      </v-card-title>
+        <template v-if="type != 'profile'">
+          <v-card-subtitle class="white--text">
+            <span v-if="type=='playlist'">by </span>
+            <span class="name"
+              @click="artistLink()"
+              v-if="type != 'artist' && type !='playlist'">{{ artistName }}</span>
+            <span class="name" @click="artistLink()"
+              v-if="type=='playlist'">{{ owner }}</span>
+            <span class="TYPE">{{ type }}</span>
+          </v-card-subtitle>
+        </template>
 
-                            <template v-if="type != 'profile'">
-                            <v-card-subtitle class="white--text">
-                            <span v-if="type=='playlist'">by </span>
-                            <span class="name"
-                            @click="artistLink()"
-                            v-if="type != 'artist' && type !='playlist'">{{ artistName }}</span>
-                            <span class="name"
-                            @click="artistLink()"
-                            v-if="type=='playlist'">{{ owner }}</span>
-                            <span class="TYPE">{{ type }}</span>
-                            </v-card-subtitle>
-                            </template>
+        <template v-if="type == 'profile'">
+          <v-card-subtitle class="white--text">
+            <span class="TYPE">{{ type }}</span>
+          </v-card-subtitle>
+        </template>
 
-                            <template v-if="type == 'profile'">
-                            <v-card-subtitle class="white--text">
-                            <span class="TYPE">{{ type }}</span>
-                            </v-card-subtitle>
-                            </template>
-
-                            <v-card-actions>
-
-                            <v-spacer></v-spacer>
-
-                            <v-btn fab big color="#1ED760" class="btn"
-                            v-if="showActionButton && type!='profile'"
-                            @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
-                                <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>
-                                <v-icon color="white" v-show="!showPlayButton">mdi-pause</v-icon>
-                            </v-btn>
-
-                            </v-card-actions>
-
-                        </v-card>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn fab big color="#1ED760" class="btn"
+            v-if="showActionButton && type!='profile'"
+            @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
+              <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>
+              <v-icon color="white" v-show="!showPlayButton">mdi-pause</v-icon>
+          </v-btn>
+        </v-card-actions>
+    </v-card>
 </template>
 
 <script>
@@ -85,22 +77,22 @@ export default {
   methods: {
     CardClickLink() {
       if (this.type === 'playlist') {
-        this.$router.push(`/playlist/${this.id}`);
+        this.$router.push(`/home/playlist/${this.id}`);
       } else if (this.type === 'track') {
-        this.$router.push(`/track/${this.id}`);
+        this.$router.push(`/home/track/${this.id}`);
       } else if (this.type === 'artist') {
-        this.$router.push(`/artist/${this.id}`);
+        this.$router.push(`/home/artist/${this.id}`);
       } else if (this.type === 'profile') {
-        this.$router.push(`/profile/${this.id}`);
+        this.$router.push(`/home/profile/${this.id}`);
       } else if (this.type === 'album') {
-        this.$router.push(`/album/${this.id}`);
+        this.$router.push(`/home/album/${this.id}`);
       }
     },
     artistLink() {
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');
       } else {
-        this.$router.push(`/artist/${this.artistName}`);
+        this.$router.push(`/home/artist/${this.artistName}`);
       }
     },
   },

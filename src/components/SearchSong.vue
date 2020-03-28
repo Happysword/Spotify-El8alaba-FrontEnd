@@ -55,10 +55,10 @@ export default {
   },
   methods: {
     clickArtist() {
-      this.$router.push(`/artist/${this.artistName}`);
+      this.$router.push(`/home/artist/${this.artistName}`);
     },
     clickSong() {
-      this.$router.push(`/track/${this.SongName}`);
+      this.$router.push(`/home/track/${this.SongName}`);
     },
   },
 };

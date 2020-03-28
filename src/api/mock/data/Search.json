@@ -1,0 +1,2605 @@
+[
+    {
+    "albums": {
+      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=album&offset=0&limit=3",
+      "items": [
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "EG"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/2IV13wMMDBs2OyqNdAswSP"
+          },
+          "href": "https://api.spotify.com/v1/albums/2IV13wMMDBs2OyqNdAswSP",
+          "id": "2IV13wMMDBs2OyqNdAswSP",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273abf13a20e745572fc39f939b",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02abf13a20e745572fc39f939b",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851abf13a20e745572fc39f939b",
+              "width": 64
+            }
+          ],
+          "name": "Sahran",
+          "release_date": "2020-02-17",
+          "release_date_precision": "day",
+          "total_tracks": 16,
+          "type": "album",
+          "uri": "spotify:album:2IV13wMMDBs2OyqNdAswSP"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/7eFyrxZRPqw8yvZXMUm88A"
+          },
+          "href": "https://api.spotify.com/v1/albums/7eFyrxZRPqw8yvZXMUm88A",
+          "id": "7eFyrxZRPqw8yvZXMUm88A",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273b4df726e2f184eacb95261a9",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02b4df726e2f184eacb95261a9",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851b4df726e2f184eacb95261a9",
+              "width": 64
+            }
+          ],
+          "name": "Kol Hayaty",
+          "release_date": "2018-10-03",
+          "release_date_precision": "day",
+          "total_tracks": 13,
+          "type": "album",
+          "uri": "spotify:album:7eFyrxZRPqw8yvZXMUm88A"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1qmAaW25CPUyam9Wrp9ZEu"
+          },
+          "href": "https://api.spotify.com/v1/albums/1qmAaW25CPUyam9Wrp9ZEu",
+          "id": "1qmAaW25CPUyam9Wrp9ZEu",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732a37edda69e67266f05a9753",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022a37edda69e67266f05a9753",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512a37edda69e67266f05a9753",
+              "width": 64
+            }
+          ],
+          "name": "تملى معاك",
+          "release_date": "2000-01-01",
+          "release_date_precision": "day",
+          "total_tracks": 10,
+          "type": "album",
+          "uri": "spotify:album:1qmAaW25CPUyam9Wrp9ZEu"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=album&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 51
+    },
+    "artists": {
+      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=artist&offset=0&limit=3",
+      "items": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+          },
+          "followers": {
+            "href": null,
+            "total": 1463379
+          },
+          "genres": [
+            "arab pop",
+            "belly dance",
+            "egyptian pop",
+            "persian pop",
+            "rif"
+          ],
+          "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+          "id": "5abSRg0xN1NV3gLbuvX24M",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ee11ffb4c0f334e4c958ed051bbaf5f720751c9d",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/c4818b1f9d0c7a793d421b51c63d82c8c768795c",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/f3faab75ae00902f4cbb00e00a9876fbcba41a29",
+              "width": 160
+            }
+          ],
+          "name": "Amr Diab",
+          "popularity": 61,
+          "type": "artist",
+          "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/78wrVCzFASer7FOoqQNHhs"
+          },
+          "followers": {
+            "href": null,
+            "total": 37
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/78wrVCzFASer7FOoqQNHhs",
+          "id": "78wrVCzFASer7FOoqQNHhs",
+          "images": [],
+          "name": "Amr Diab - Angila Deimetry",
+          "popularity": 2,
+          "type": "artist",
+          "uri": "spotify:artist:78wrVCzFASer7FOoqQNHhs"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/28hufYOqPAxtt17zkg2zwX"
+          },
+          "followers": {
+            "href": null,
+            "total": 39
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/28hufYOqPAxtt17zkg2zwX",
+          "id": "28hufYOqPAxtt17zkg2zwX",
+          "images": [],
+          "name": "Amr Diab - Khalied",
+          "popularity": 1,
+          "type": "artist",
+          "uri": "spotify:artist:28hufYOqPAxtt17zkg2zwX"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=artist&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 9
+    },
+    "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=track&offset=0&limit=3",
+      "items": [
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+                },
+                "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+                "id": "5abSRg0xN1NV3gLbuvX24M",
+                "name": "Amr Diab",
+                "type": "artist",
+                "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3qZ0kZ8d3F8EpvEyx0yemA"
+            },
+            "href": "https://api.spotify.com/v1/albums/3qZ0kZ8d3F8EpvEyx0yemA",
+            "id": "3qZ0kZ8d3F8EpvEyx0yemA",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273d352e68d3f9ef21f6d167a96",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02d352e68d3f9ef21f6d167a96",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851d352e68d3f9ef21f6d167a96",
+                "width": 64
+              }
+            ],
+            "name": "نور العين",
+            "release_date": "1996-01-01",
+            "release_date_precision": "day",
+            "total_tracks": 8,
+            "type": "album",
+            "uri": "spotify:album:3qZ0kZ8d3F8EpvEyx0yemA"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 307762,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "EGA020501535"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/3ZTuYuaV1fhdNnuIBuzTYy"
+          },
+          "href": "https://api.spotify.com/v1/tracks/3ZTuYuaV1fhdNnuIBuzTYy",
+          "id": "3ZTuYuaV1fhdNnuIBuzTYy",
+          "is_local": false,
+          "name": "نور العين",
+          "popularity": 54,
+          "preview_url": "https://p.scdn.co/mp3-preview/540c4bd92fb5dc37f5a98c9cff482565c920c360?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:3ZTuYuaV1fhdNnuIBuzTYy"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+                },
+                "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+                "id": "5abSRg0xN1NV3gLbuvX24M",
+                "name": "Amr Diab",
+                "type": "artist",
+                "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1qmAaW25CPUyam9Wrp9ZEu"
+            },
+            "href": "https://api.spotify.com/v1/albums/1qmAaW25CPUyam9Wrp9ZEu",
+            "id": "1qmAaW25CPUyam9Wrp9ZEu",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2732a37edda69e67266f05a9753",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e022a37edda69e67266f05a9753",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048512a37edda69e67266f05a9753",
+                "width": 64
+              }
+            ],
+            "name": "تملى معاك",
+            "release_date": "2000-01-01",
+            "release_date_precision": "day",
+            "total_tracks": 10,
+            "type": "album",
+            "uri": "spotify:album:1qmAaW25CPUyam9Wrp9ZEu"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 269232,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "EGA020501614"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6TYFcqqQVQPb3YsgfRhvqs"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6TYFcqqQVQPb3YsgfRhvqs",
+          "id": "6TYFcqqQVQPb3YsgfRhvqs",
+          "is_local": false,
+          "name": "تملى معاك",
+          "popularity": 53,
+          "preview_url": "https://p.scdn.co/mp3-preview/9861692925b7a6d4f9f113f6af012a99a88247b5?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 2,
+          "type": "track",
+          "uri": "spotify:track:6TYFcqqQVQPb3YsgfRhvqs"
+        },
+        {
+          "album": {
+            "album_type": "compilation",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+                },
+                "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+                "id": "0LyfQWJT6nXafLPZqxe9Of",
+                "name": "Various Artists",
+                "type": "artist",
+                "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1rhwjore04STMhDGzVvIeE"
+            },
+            "href": "https://api.spotify.com/v1/albums/1rhwjore04STMhDGzVvIeE",
+            "id": "1rhwjore04STMhDGzVvIeE",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2737e6e6d8ffdd9597a96ab019e",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e027e6e6d8ffdd9597a96ab019e",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048517e6e6d8ffdd9597a96ab019e",
+                "width": 64
+              }
+            ],
+            "name": "Oriental Rainbow",
+            "release_date": "2018-06-08",
+            "release_date_precision": "day",
+            "total_tracks": 14,
+            "type": "album",
+            "uri": "spotify:album:1rhwjore04STMhDGzVvIeE"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
+              },
+              "href": "https://api.spotify.com/v1/artists/5abSRg0xN1NV3gLbuvX24M",
+              "id": "5abSRg0xN1NV3gLbuvX24M",
+              "name": "Amr Diab",
+              "type": "artist",
+              "uri": "spotify:artist:5abSRg0xN1NV3gLbuvX24M"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 246026,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "FR43D1712040"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/72HOx5h43VZMsbM6VI3J3G"
+          },
+          "href": "https://api.spotify.com/v1/tracks/72HOx5h43VZMsbM6VI3J3G",
+          "id": "72HOx5h43VZMsbM6VI3J3G",
+          "is_local": false,
+          "name": "Leily nahary",
+          "popularity": 51,
+          "preview_url": "https://p.scdn.co/mp3-preview/9c65235c4d5e0e0bea8c1b772faa0a696932eb68?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:72HOx5h43VZMsbM6VI3J3G"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=track&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 289
+    },
+    "playlists": {
+      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=playlist&offset=0&limit=3",
+      "items": [
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/2itwfkiP3cz0a8WZaV1mZV"
+          },
+          "href": "https://api.spotify.com/v1/playlists/2itwfkiP3cz0a8WZaV1mZV",
+          "id": "2itwfkiP3cz0a8WZaV1mZV",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://mosaic.scdn.co/640/ab67616d0000b2735daf0e9343f3b4824001ea14ab67616d0000b273abf13a20e745572fc39f939bab67616d0000b273ad64655edf4c0efeaadf8bb6ab67616d0000b273c5a226da2167649b08555b1c",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://mosaic.scdn.co/300/ab67616d0000b2735daf0e9343f3b4824001ea14ab67616d0000b273abf13a20e745572fc39f939bab67616d0000b273ad64655edf4c0efeaadf8bb6ab67616d0000b273c5a226da2167649b08555b1c",
+              "width": 300
+            },
+            {
+              "height": 60,
+              "url": "https://mosaic.scdn.co/60/ab67616d0000b2735daf0e9343f3b4824001ea14ab67616d0000b273abf13a20e745572fc39f939bab67616d0000b273ad64655edf4c0efeaadf8bb6ab67616d0000b273c5a226da2167649b08555b1c",
+              "width": 60
+            }
+          ],
+          "name": "Amr Diab 2020",
+          "owner": {
+            "display_name": "Yasser Nfa",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/21fosz6japfcdp3qabqjs5dgq"
+            },
+            "href": "https://api.spotify.com/v1/users/21fosz6japfcdp3qabqjs5dgq",
+            "id": "21fosz6japfcdp3qabqjs5dgq",
+            "type": "user",
+            "uri": "spotify:user:21fosz6japfcdp3qabqjs5dgq"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTIsYmE3YTAyYTc5ZjI4NzY4OTU4NGZjZWY2OGM3Njg1MTRlODgwZWQ0Yg==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/2itwfkiP3cz0a8WZaV1mZV/tracks",
+            "total": 20
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:2itwfkiP3cz0a8WZaV1mZV"
+        },
+        {
+          "collaborative": false,
+          "description": "Amr Diab's new tracks plus all the essential hits.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWVEXqdaECSwo"
+          },
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVEXqdaECSwo",
+          "id": "37i9dQZF1DWVEXqdaECSwo",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706f000000021f3fdf37fb637b3005ed6e1b",
+              "width": null
+            }
+          ],
+          "name": "This Is Amr Diab",
+          "owner": {
+            "display_name": "Spotify",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/spotify"
+            },
+            "href": "https://api.spotify.com/v1/users/spotify",
+            "id": "spotify",
+            "type": "user",
+            "uri": "spotify:user:spotify"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MTU4Mzg0NDY5OCwwMDAwMDAwZDAwMDAwMTcwNTQ0OTkzMjkwMDAwMDE3MGM0ODAyYWFj",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWVEXqdaECSwo/tracks",
+            "total": 70
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:37i9dQZF1DWVEXqdaECSwo"
+        },
+        {
+          "collaborative": false,
+          "description": "Last update: February 18, 2020.",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/5iKYvhddpkuAOzOvrLRznN"
+          },
+          "href": "https://api.spotify.com/v1/playlists/5iKYvhddpkuAOzOvrLRznN",
+          "id": "5iKYvhddpkuAOzOvrLRznN",
+          "images": [
+            {
+              "height": null,
+              "url": "https://i.scdn.co/image/ab67706c0000da84dce3aaac74841633ffc94b07",
+              "width": null
+            }
+          ],
+          "name": "Amr Diab Essentials & Best Of عمرو دياب",
+          "owner": {
+            "display_name": "bashbenn",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/bashbenn"
+            },
+            "href": "https://api.spotify.com/v1/users/bashbenn",
+            "id": "bashbenn",
+            "type": "user",
+            "uri": "spotify:user:bashbenn"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "NDQyLGY1ODQ0MDZlOTI4YzUyMTFhNDc2NjViNTIxMTU0ZWVjMDU5OWNiNTg=",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/5iKYvhddpkuAOzOvrLRznN/tracks",
+            "total": 167
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:5iKYvhddpkuAOzOvrLRznN"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=playlist&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 951
+    }
+  },
+  {
+    "albums": {
+      "href": "https://api.spotify.com/v1/search?query=godzilla&type=album&offset=0&limit=3",
+      "items": [
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2ifvIECHAlEgPMBuBOJ0lG"
+              },
+              "href": "https://api.spotify.com/v1/artists/2ifvIECHAlEgPMBuBOJ0lG",
+              "id": "2ifvIECHAlEgPMBuBOJ0lG",
+              "name": "Bear McCreary",
+              "type": "artist",
+              "uri": "spotify:artist:2ifvIECHAlEgPMBuBOJ0lG"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/6VQkLK6fJO8hFJmEF5dJz4"
+          },
+          "href": "https://api.spotify.com/v1/albums/6VQkLK6fJO8hFJmEF5dJz4",
+          "id": "6VQkLK6fJO8hFJmEF5dJz4",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273b219af484df7512472cfae4e",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02b219af484df7512472cfae4e",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851b219af484df7512472cfae4e",
+              "width": 64
+            }
+          ],
+          "name": "Godzilla: King of the Monsters (Original Motion Picture Soundtrack)",
+          "release_date": "2019-05-24",
+          "release_date_precision": "day",
+          "total_tracks": 26,
+          "type": "album",
+          "uri": "spotify:album:6VQkLK6fJO8hFJmEF5dJz4"
+        },
+        {
+          "album_type": "album",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1TKaUU8ooBgSW9TlyKsw6k"
+              },
+              "href": "https://api.spotify.com/v1/artists/1TKaUU8ooBgSW9TlyKsw6k",
+              "id": "1TKaUU8ooBgSW9TlyKsw6k",
+              "name": "Fu Manchu",
+              "type": "artist",
+              "uri": "spotify:artist:1TKaUU8ooBgSW9TlyKsw6k"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/7GyCk26ieCcV2CAtheDuYF"
+          },
+          "href": "https://api.spotify.com/v1/albums/7GyCk26ieCcV2CAtheDuYF",
+          "id": "7GyCk26ieCcV2CAtheDuYF",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732ee16776f180081db67652fe",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022ee16776f180081db67652fe",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512ee16776f180081db67652fe",
+              "width": 64
+            }
+          ],
+          "name": "Godzilla's / Eatin' Dust",
+          "release_date": "2010-08-14",
+          "release_date_precision": "day",
+          "total_tracks": 8,
+          "type": "album",
+          "uri": "spotify:album:7GyCk26ieCcV2CAtheDuYF"
+        },
+        {
+          "album_type": "single",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1akll7SRGZblDrbCF5eqYW"
+              },
+              "href": "https://api.spotify.com/v1/artists/1akll7SRGZblDrbCF5eqYW",
+              "id": "1akll7SRGZblDrbCF5eqYW",
+              "name": "Moro",
+              "type": "artist",
+              "uri": "spotify:artist:1akll7SRGZblDrbCF5eqYW"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/0ITqrQGD4pHItdHKudeOQx"
+          },
+          "href": "https://api.spotify.com/v1/albums/0ITqrQGD4pHItdHKudeOQx",
+          "id": "0ITqrQGD4pHItdHKudeOQx",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273b1663a1cf2bb5b1210d427ef",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02b1663a1cf2bb5b1210d427ef",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851b1663a1cf2bb5b1210d427ef",
+              "width": 64
+            }
+          ],
+          "name": "Godzilla",
+          "release_date": "2019-05-25",
+          "release_date_precision": "day",
+          "total_tracks": 1,
+          "type": "album",
+          "uri": "spotify:album:0ITqrQGD4pHItdHKudeOQx"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=godzilla&type=album&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 464
+    },
+    "artists": {
+      "href": "https://api.spotify.com/v1/search?query=godzilla&type=artist&offset=0&limit=3",
+      "items": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6deipnUB2sIBMQWZzBoJVP"
+          },
+          "followers": {
+            "href": null,
+            "total": 1585
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/6deipnUB2sIBMQWZzBoJVP",
+          "id": "6deipnUB2sIBMQWZzBoJVP",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/add781a1ef05d516672f0e197b25e4d5afdd6318",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/0f25c37e0b89bea38a1817f2115f6f1b1d1b85fc",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/84d7de796fedf5e7451d7e8aa6e78874d74b863f",
+              "width": 160
+            }
+          ],
+          "name": "GodZilla",
+          "popularity": 9,
+          "type": "artist",
+          "uri": "spotify:artist:6deipnUB2sIBMQWZzBoJVP"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/47ZKPShVy1Kovq8j9xN0NF"
+          },
+          "followers": {
+            "href": null,
+            "total": 57
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/47ZKPShVy1Kovq8j9xN0NF",
+          "id": "47ZKPShVy1Kovq8j9xN0NF",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/078d2d985ca4c7684fa9c4d63f9defd2950e2582",
+              "width": 640
+            },
+            {
+              "height": 320,
+              "url": "https://i.scdn.co/image/1a08d6104ee618e32dbd1d294c1c9ed3204ed557",
+              "width": 320
+            },
+            {
+              "height": 160,
+              "url": "https://i.scdn.co/image/47c38262e76aa51d56c9d7a2c4d19b5218661391",
+              "width": 160
+            }
+          ],
+          "name": "Godzillasexbike",
+          "popularity": 1,
+          "type": "artist",
+          "uri": "spotify:artist:47ZKPShVy1Kovq8j9xN0NF"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0Wvs7Vo7Bk8CoXCyOX8oj2"
+          },
+          "followers": {
+            "href": null,
+            "total": 5
+          },
+          "genres": [],
+          "href": "https://api.spotify.com/v1/artists/0Wvs7Vo7Bk8CoXCyOX8oj2",
+          "id": "0Wvs7Vo7Bk8CoXCyOX8oj2",
+          "images": [],
+          "name": "Godzilla Pelotão",
+          "popularity": 4,
+          "type": "artist",
+          "uri": "spotify:artist:0Wvs7Vo7Bk8CoXCyOX8oj2"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=godzilla&type=artist&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 55
+    },
+    "tracks": {
+      "href": "https://api.spotify.com/v1/search?query=godzilla&type=track&offset=0&limit=3",
+      "items": [
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+                },
+                "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR",
+                "id": "7dGJo4pcD2V6oG8kP0tJRR",
+                "name": "Eminem",
+                "type": "artist",
+                "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/4otkd9As6YaxxEkIjXPiZ6"
+            },
+            "href": "https://api.spotify.com/v1/albums/4otkd9As6YaxxEkIjXPiZ6",
+            "id": "4otkd9As6YaxxEkIjXPiZ6",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2732f44aec83b20e40f3baef73c",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e022f44aec83b20e40f3baef73c",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048512f44aec83b20e40f3baef73c",
+                "width": 64
+              }
+            ],
+            "name": "Music To Be Murdered By",
+            "release_date": "2020-01-17",
+            "release_date_precision": "day",
+            "total_tracks": 20,
+            "type": "album",
+            "uri": "spotify:album:4otkd9As6YaxxEkIjXPiZ6"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+              },
+              "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR",
+              "id": "7dGJo4pcD2V6oG8kP0tJRR",
+              "name": "Eminem",
+              "type": "artist",
+              "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4MCBfE4596Uoi2O4DtmEMz"
+              },
+              "href": "https://api.spotify.com/v1/artists/4MCBfE4596Uoi2O4DtmEMz",
+              "id": "4MCBfE4596Uoi2O4DtmEMz",
+              "name": "Juice WRLD",
+              "type": "artist",
+              "uri": "spotify:artist:4MCBfE4596Uoi2O4DtmEMz"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 210800,
+          "explicit": true,
+          "external_ids": {
+            "isrc": "USUM72000788"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7FIWs0pqAYbP91WWM0vlTQ"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7FIWs0pqAYbP91WWM0vlTQ",
+          "id": "7FIWs0pqAYbP91WWM0vlTQ",
+          "is_local": false,
+          "name": "Godzilla (feat. Juice WRLD)",
+          "popularity": 94,
+          "preview_url": null,
+          "track_number": 7,
+          "type": "track",
+          "uri": "spotify:track:7FIWs0pqAYbP91WWM0vlTQ"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/00tVTdpEhQQw1bqdu8RCx2"
+                },
+                "href": "https://api.spotify.com/v1/artists/00tVTdpEhQQw1bqdu8RCx2",
+                "id": "00tVTdpEhQQw1bqdu8RCx2",
+                "name": "Blue Öyster Cult",
+                "type": "artist",
+                "uri": "spotify:artist:00tVTdpEhQQw1bqdu8RCx2"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/105oUsR7H8AJNELy43XF3w"
+            },
+            "href": "https://api.spotify.com/v1/albums/105oUsR7H8AJNELy43XF3w",
+            "id": "105oUsR7H8AJNELy43XF3w",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2735e045d1e56f161d40c9acf8d",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e025e045d1e56f161d40c9acf8d",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048515e045d1e56f161d40c9acf8d",
+                "width": 64
+              }
+            ],
+            "name": "Spectres",
+            "release_date": "1977",
+            "release_date_precision": "year",
+            "total_tracks": 10,
+            "type": "album",
+            "uri": "spotify:album:105oUsR7H8AJNELy43XF3w"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/00tVTdpEhQQw1bqdu8RCx2"
+              },
+              "href": "https://api.spotify.com/v1/artists/00tVTdpEhQQw1bqdu8RCx2",
+              "id": "00tVTdpEhQQw1bqdu8RCx2",
+              "name": "Blue Öyster Cult",
+              "type": "artist",
+              "uri": "spotify:artist:00tVTdpEhQQw1bqdu8RCx2"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 221400,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "USSM19917720"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/6N0AnkdDFZUetw8KAGHV7e"
+          },
+          "href": "https://api.spotify.com/v1/tracks/6N0AnkdDFZUetw8KAGHV7e",
+          "id": "6N0AnkdDFZUetw8KAGHV7e",
+          "is_local": false,
+          "name": "Godzilla",
+          "popularity": 61,
+          "preview_url": "https://p.scdn.co/mp3-preview/d2d3b68640372b30a461037807a0b0e46f4d23d4?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 1,
+          "type": "track",
+          "uri": "spotify:track:6N0AnkdDFZUetw8KAGHV7e"
+        },
+        {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/5Hsv8dUHHOdnn72q4XIVz7"
+                },
+                "href": "https://api.spotify.com/v1/artists/5Hsv8dUHHOdnn72q4XIVz7",
+                "id": "5Hsv8dUHHOdnn72q4XIVz7",
+                "name": "Leiva",
+                "type": "artist",
+                "uri": "spotify:artist:5Hsv8dUHHOdnn72q4XIVz7"
+              }
+            ],
+            "available_markets": [
+              "AD",
+              "AE",
+              "AR",
+              "AT",
+              "AU",
+              "BE",
+              "BG",
+              "BH",
+              "BO",
+              "BR",
+              "CA",
+              "CH",
+              "CL",
+              "CO",
+              "CR",
+              "CY",
+              "CZ",
+              "DE",
+              "DK",
+              "DO",
+              "DZ",
+              "EC",
+              "EE",
+              "EG",
+              "ES",
+              "FI",
+              "FR",
+              "GB",
+              "GR",
+              "GT",
+              "HK",
+              "HN",
+              "HU",
+              "ID",
+              "IE",
+              "IL",
+              "IN",
+              "IS",
+              "IT",
+              "JO",
+              "JP",
+              "KW",
+              "LB",
+              "LI",
+              "LT",
+              "LU",
+              "LV",
+              "MA",
+              "MC",
+              "MT",
+              "MX",
+              "MY",
+              "NI",
+              "NL",
+              "NO",
+              "NZ",
+              "OM",
+              "PA",
+              "PE",
+              "PH",
+              "PL",
+              "PS",
+              "PT",
+              "PY",
+              "QA",
+              "RO",
+              "SA",
+              "SE",
+              "SG",
+              "SK",
+              "SV",
+              "TH",
+              "TN",
+              "TR",
+              "TW",
+              "US",
+              "UY",
+              "VN",
+              "ZA"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1T2uKSyUf7DBWOABtsmYLM"
+            },
+            "href": "https://api.spotify.com/v1/albums/1T2uKSyUf7DBWOABtsmYLM",
+            "id": "1T2uKSyUf7DBWOABtsmYLM",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27313c4ca893a92d3a81e0cb3e8",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0213c4ca893a92d3a81e0cb3e8",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485113c4ca893a92d3a81e0cb3e8",
+                "width": 64
+              }
+            ],
+            "name": "Nuclear",
+            "release_date": "2019-03-22",
+            "release_date_precision": "day",
+            "total_tracks": 12,
+            "type": "album",
+            "uri": "spotify:album:1T2uKSyUf7DBWOABtsmYLM"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5Hsv8dUHHOdnn72q4XIVz7"
+              },
+              "href": "https://api.spotify.com/v1/artists/5Hsv8dUHHOdnn72q4XIVz7",
+              "id": "5Hsv8dUHHOdnn72q4XIVz7",
+              "name": "Leiva",
+              "type": "artist",
+              "uri": "spotify:artist:5Hsv8dUHHOdnn72q4XIVz7"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4uqzzJg3ww5eH7IgGV7DMT"
+              },
+              "href": "https://api.spotify.com/v1/artists/4uqzzJg3ww5eH7IgGV7DMT",
+              "id": "4uqzzJg3ww5eH7IgGV7DMT",
+              "name": "Bunbury",
+              "type": "artist",
+              "uri": "spotify:artist:4uqzzJg3ww5eH7IgGV7DMT"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7plUpXSFcSJUZSiZAoXqr1"
+              },
+              "href": "https://api.spotify.com/v1/artists/7plUpXSFcSJUZSiZAoXqr1",
+              "id": "7plUpXSFcSJUZSiZAoXqr1",
+              "name": "Ximena Sariñana",
+              "type": "artist",
+              "uri": "spotify:artist:7plUpXSFcSJUZSiZAoXqr1"
+            }
+          ],
+          "available_markets": [
+            "AD",
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BH",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CL",
+            "CO",
+            "CR",
+            "CY",
+            "CZ",
+            "DE",
+            "DK",
+            "DO",
+            "DZ",
+            "EC",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GR",
+            "GT",
+            "HK",
+            "HN",
+            "HU",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IS",
+            "IT",
+            "JO",
+            "JP",
+            "KW",
+            "LB",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MC",
+            "MT",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "OM",
+            "PA",
+            "PE",
+            "PH",
+            "PL",
+            "PS",
+            "PT",
+            "PY",
+            "QA",
+            "RO",
+            "SA",
+            "SE",
+            "SG",
+            "SK",
+            "SV",
+            "TH",
+            "TN",
+            "TR",
+            "TW",
+            "US",
+            "UY",
+            "VN",
+            "ZA"
+          ],
+          "disc_number": 1,
+          "duration_ms": 314665,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "ES5021801189"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/7rbsQlwPWCnz72GdzVOi9h"
+          },
+          "href": "https://api.spotify.com/v1/tracks/7rbsQlwPWCnz72GdzVOi9h",
+          "id": "7rbsQlwPWCnz72GdzVOi9h",
+          "is_local": false,
+          "name": "Godzilla (feat. Enrique Bunbury & Ximena Sariñana)",
+          "popularity": 54,
+          "preview_url": "https://p.scdn.co/mp3-preview/7d7a05bd6712d0e1554229cdaca9673948054fed?cid=774b29d4f13844c495f206cafdad9c86",
+          "track_number": 10,
+          "type": "track",
+          "uri": "spotify:track:7rbsQlwPWCnz72GdzVOi9h"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=godzilla&type=track&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 3369
+    },
+    "playlists": {
+      "href": "https://api.spotify.com/v1/search?query=godzilla&type=playlist&offset=0&limit=3",
+      "items": [
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/4z1sqetlyzn9FyVCvazJa6"
+          },
+          "href": "https://api.spotify.com/v1/playlists/4z1sqetlyzn9FyVCvazJa6",
+          "id": "4z1sqetlyzn9FyVCvazJa6",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://mosaic.scdn.co/640/ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b2736eedaf5db12d672200ba088bab67616d0000b273a3236fc863cbffd82beffe21ab67616d0000b273a64978548dc5642cc37ebcf4",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://mosaic.scdn.co/300/ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b2736eedaf5db12d672200ba088bab67616d0000b273a3236fc863cbffd82beffe21ab67616d0000b273a64978548dc5642cc37ebcf4",
+              "width": 300
+            },
+            {
+              "height": 60,
+              "url": "https://mosaic.scdn.co/60/ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b2736eedaf5db12d672200ba088bab67616d0000b273a3236fc863cbffd82beffe21ab67616d0000b273a64978548dc5642cc37ebcf4",
+              "width": 60
+            }
+          ],
+          "name": "Godzilla Themes (1954-2014)",
+          "owner": {
+            "display_name": "Jack2020",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/hp2rtv1evys8frq0705r8yak8"
+            },
+            "href": "https://api.spotify.com/v1/users/hp2rtv1evys8frq0705r8yak8",
+            "id": "hp2rtv1evys8frq0705r8yak8",
+            "type": "user",
+            "uri": "spotify:user:hp2rtv1evys8frq0705r8yak8"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "MzYsYWJjYzg3YmM0M2JjMjEwNmQyNzRlZGJjYTAxZDU2MWE5M2NiYTZmNw==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/4z1sqetlyzn9FyVCvazJa6/tracks",
+            "total": 18
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:4z1sqetlyzn9FyVCvazJa6"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/75yhZZJoznOEuo2ZId3xra"
+          },
+          "href": "https://api.spotify.com/v1/playlists/75yhZZJoznOEuo2ZId3xra",
+          "id": "75yhZZJoznOEuo2ZId3xra",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2730429acbae0f120c8841a9b16",
+              "width": 640
+            }
+          ],
+          "name": "GODZILLA 2014/2019",
+          "owner": {
+            "display_name": "daina_l",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/eflno3iu8lwjk200yri45omb7"
+            },
+            "href": "https://api.spotify.com/v1/users/eflno3iu8lwjk200yri45omb7",
+            "id": "eflno3iu8lwjk200yri45omb7",
+            "type": "user",
+            "uri": "spotify:user:eflno3iu8lwjk200yri45omb7"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "NDgsNTFjZDJiMzA5YmQzN2U2ZjVjYTgzZTdiMDViMmZjNzIwYTM4YmI3Yw==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/75yhZZJoznOEuo2ZId3xra/tracks",
+            "total": 47
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:75yhZZJoznOEuo2ZId3xra"
+        },
+        {
+          "collaborative": false,
+          "description": "",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/playlist/5jxJgNqtMTLYisOSNBFr4D"
+          },
+          "href": "https://api.spotify.com/v1/playlists/5jxJgNqtMTLYisOSNBFr4D",
+          "id": "5jxJgNqtMTLYisOSNBFr4D",
+          "images": [
+            {
+              "height": 640,
+              "url": "https://mosaic.scdn.co/640/ab67616d0000b2730429acbae0f120c8841a9b16ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b273a64978548dc5642cc37ebcf4ab67616d0000b273b219af484df7512472cfae4e",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://mosaic.scdn.co/300/ab67616d0000b2730429acbae0f120c8841a9b16ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b273a64978548dc5642cc37ebcf4ab67616d0000b273b219af484df7512472cfae4e",
+              "width": 300
+            },
+            {
+              "height": 60,
+              "url": "https://mosaic.scdn.co/60/ab67616d0000b2730429acbae0f120c8841a9b16ab67616d0000b27320237131b3d16dbacac1e6d2ab67616d0000b273a64978548dc5642cc37ebcf4ab67616d0000b273b219af484df7512472cfae4e",
+              "width": 60
+            }
+          ],
+          "name": "Godzilla Songs",
+          "owner": {
+            "display_name": "aesantalo",
+            "external_urls": {
+              "spotify": "https://open.spotify.com/user/aesantalo"
+            },
+            "href": "https://api.spotify.com/v1/users/aesantalo",
+            "id": "aesantalo",
+            "type": "user",
+            "uri": "spotify:user:aesantalo"
+          },
+          "primary_color": null,
+          "public": null,
+          "snapshot_id": "ODUsOWRkMmExMDBkMmZhODM3NDZhYzQ5MjI3NGIxOTNmMjkyNDI2Y2RhZQ==",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/playlists/5jxJgNqtMTLYisOSNBFr4D/tracks",
+            "total": 111
+          },
+          "type": "playlist",
+          "uri": "spotify:playlist:5jxJgNqtMTLYisOSNBFr4D"
+        }
+      ],
+      "limit": 3,
+      "next": "https://api.spotify.com/v1/search?query=godzilla&type=playlist&offset=3&limit=3",
+      "offset": 0,
+      "previous": null,
+      "total": 3378
+    }
+  }
+]

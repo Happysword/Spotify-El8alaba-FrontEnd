@@ -10,7 +10,6 @@ export default new Vuex.Store({
   state: {
     currentUser: { username: 'Spotify user' },
     searching: false,
-    InputSearch: '',
     liked: false,
     items: [
       { title: 'Click Me' },

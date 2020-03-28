@@ -701,4 +701,71 @@ export default {
       .catch(() => [false]);
     return response;
   },
+  /**
+   * Gets all categories (genres)
+   * @return {object} an object containing all the genres
+   */
+  async fetchGenres() {
+    return axios
+      .get(`${api}/v1/browse/categories`)
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  },
+  /**
+   * Fetch a specific genre in the mock data
+   * @param {string} id a string that contains the id of the genre
+   * @return {object} an object containing necessary data about genre
+   */
+  async fetchGenre(id) {
+    return axios
+      .get(`${api}/v1/browse/categories/${id}`)
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  },
+  /**
+   * Fetches all playlists related to a specific Category
+   * @param {string} id string that contains the id of the category
+   * @return {Array} an Array containing all playlists
+   */
+  async fetchCategoryPlaylists(id) {
+    return axios
+      .get(`${api}/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`)
+      .then((response) => response.data)
+      .catch((error) => console.log(error));
+  },
+  /**
+ * Fetch related data to the user input for search
+ * @param {string} x a string that contains the data the user search for
+ * @return {object} an aboject that may have related data to user search
+ */
+  async fetchSearch(x) {
+    let z = 'track,artist,album,playlist';
+    if (x.includes('track')) {
+      z = 'track';
+    }
+    if (x.includes('artist')) {
+      if (z === 'track,artist,album,playlist') {
+        z = 'artist';
+      } else {
+        z += ',artist';
+      }
+    }
+    if (x.includes('album')) {
+      if (z === 'track,artist,album,playlist') {
+        z = 'album';
+      } else {
+        z += ',album';
+      }
+    }
+    if (x.includes('playlist')) {
+      if (z === 'track,artist,album,playlist') {
+        z = 'playlist';
+      } else {
+        z += ',playlist';
+      }
+    }
+    return axios
+      .get(`${api}/v1/search?q=${x}&type=${z}&limit=6&offset=0`)
+      .catch((error) => console.log(error));
+  },
 };
