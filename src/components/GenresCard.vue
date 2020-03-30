@@ -1,5 +1,5 @@
 <template>
-    <div absolute v-show="ready">
+    <div absolute v-if="ready">
         <v-card class="d-inline-block mr-3 white--text GCard"
          width="190" height="190" @click="routing()"
          :style="`background: linear-gradient(0deg, ${color} 30%, rgba(60,60,60,1) 100%);`">

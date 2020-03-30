@@ -559,6 +559,15 @@ export default {
     });
     return songs.data.items;
   },
+  /**
+   * fetch a specific song
+   * @param {string} id the id of the track
+   * @return {object} object containing track info
+   */
+  async fetchTrack(id) {
+    const res = await axios.get(`${api}/api/v1/tracks/${id}`);
+    return res;
+  },
 
   /**
    * Fetches user's saved tracks
@@ -669,6 +678,15 @@ export default {
     });
     return res;
   },
+  /**
+   * Get a playlist
+   * @param {string} id the id of the playlist
+   * @return {object} object containing the playlist infos.
+   */
+  async fetchPlaylist(id) {
+    const res = await axios.get(`${api}/api/v1/playlists/${id}`);
+    return res;
+  },
 
   /**
    * Save Album for the Current User
@@ -724,7 +742,7 @@ export default {
    */
   async fetchGenres() {
     return axios
-      .get(`${api}/v1/browse/categories`)
+      .get(`${api}/api/v1/browse/categories`)
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -735,7 +753,7 @@ export default {
    */
   async fetchGenre(id) {
     return axios
-      .get(`${api}/v1/browse/categories/${id}`)
+      .get(`${api}/api/v1/browse/categories/${id}`)
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -746,7 +764,7 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(`${api}/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`)
+      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`)
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -782,7 +800,7 @@ export default {
       }
     }
     return axios
-      .get(`${api}/v1/search?q=${x}&type=${z}&limit=6&offset=0`)
+      .get(`${api}/api/v1/search?q=${x}&type=${z}&limit=6&offset=0`)
       .catch((error) => console.log(error));
   },
 };

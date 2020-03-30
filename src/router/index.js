@@ -25,6 +25,8 @@ import Artist from '../views/Artist/Artist.vue';
 import ArtistOverview from '../views/Artist/ArtistOverview.vue';
 import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
+import SearchType from '../views/Search/SearchType.vue';
+import RecentSearch from '../views/Search/RecentSearch.vue';
 
 Vue.use(VueRouter);
 
@@ -40,42 +42,39 @@ const routes = [
     component: Main,
     children: [
       { path: '/home', name: 'home', component: Home },
-      {
-        path: '/home/queue',
-        name: 'queue',
-        component: Queue,
-        meta: { title: 'Play Queue - Spotify el8alaba' },
-      },
-      { path: '/home/search', name: 'search', component: Search },
-      { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
+      { path: '/home/queue', name: 'queue', component: Queue },
+      { path: '/search', name: 'search', component: Search },
+      { path: '/search/history/showRecent', name: 'recentSearch', component: RecentSearch },
+      { path: '/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/genre/:id-page', name: 'genres', component: Genres },
+      { path: '/search/:id/:type', name: 'searchType', component: SearchType },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/profile/:id', name: 'profile' },
       { path: '/track/:id', name: 'track' },
       {
-        path: '/home/library/tracks',
+        path: '/library/tracks',
         name: 'LikedTracks',
         component: LikedTracks,
       },
       {
-        path: '/home/library/playlists',
+        path: '/library/playlists',
         name: 'library',
         component: Library,
         redirect: { name: 'libraryplaylists' },
         children: [
           {
-            path: '/home/library/playlists',
+            path: '/library/playlists',
             name: 'libraryplaylists',
             component: LibraryPlaylists,
           },
           {
-            path: '/home/library/albums',
+            path: '/library/albums',
             name: 'libraryalbums',
             component: LibraryAlbums,
           },
           {
-            path: '/home/library/artists',
+            path: '/library/artists',
             name: 'libraryartists',
             component: LibraryArtists,
           },

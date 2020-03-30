@@ -23,7 +23,6 @@
             v-for="link in links"
             :key="link.text"
             route
-            exact
             :to="link.route"
             id="mainLinks"
           >
@@ -117,7 +116,7 @@
             </v-container>
           </v-dialog>
 
-          <v-list-item route to="/home/library/tracks">
+          <v-list-item route to="/library/tracks">
             <v-list-item-icon>
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
@@ -175,11 +174,11 @@ export default {
       drawer: true,
       links: [
         { icon: 'mdi-home', text: 'Home', route: '/home' },
-        { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
+        { icon: 'mdi-magnify', text: 'Search', route: '/search' },
         {
           icon: 'mdi-bookshelf',
           text: 'Your Library',
-          route: '/home/library/playlists',
+          route: '/library/playlists',
         },
       ],
       playlists: JSON,
