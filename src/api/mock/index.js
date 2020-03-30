@@ -8,7 +8,6 @@ import currentUserPlaylists from './data/Get-Current-User-Playlists.json';
 import currentUserArtists from './data/Get-User-Followed-Artists.json';
 import getAnArtist from './data/Get-An-Artist.json';
 import getArtistRelatedArtists from './data/Get-Artist-Related-Artists.json';
-import songs from './data/songs.json';
 import lists from './data/listsInfo.json';
 import albums from './data/albumsInfo.json';
 import Boolean from './data/Boolean.json';
@@ -54,7 +53,7 @@ export default {
     allUsers.some((u) => {
       if (u.user.userInfo.email === body.email && u.password === body.password) {
         found = true;
-        user = u.user;
+        user = u;
       }
       // Breaking condition
       return u.user.userInfo.email === body.email && u.password === body.password;
@@ -510,20 +509,25 @@ export default {
     return fetch(getArtistRelatedArtists, 100);
   },
   /**
-   * Fetches all songs in the mock data
-   * @param  {Number}  id The id of a list
-   * @return {Object}  An object containing all songs in a given list of ID equals to id
-   */
-  async fetchSongs(id) {
-    const allSongs = await fetch(songs, 200);
-    return allSongs[id];
-  },
-  /**
    * Fetches all songs of a playlist in the mock data
    * @param  {Number}  id The id of playlist
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
-  async fetchPlaylistSongs(id) {
+  async fetchSongs(id) {
+    const allSongs = await fetch(playlistSongs, 200);
+    for (let i = 0; i < allSongs.length; i += 1) {
+      if (allSongs[i].id === id) {
+        return allSongs[i].items;
+      }
+    }
+    return {};
+  },
+  /**
+   * Fetches all songs of an album in the mock data
+   * @param  {Number}  id The id of album
+   * @return {Object}  An object containing all songs in a given album of ID equals to id
+   */
+  async fetchAlbumSongs(id) {
     const allSongs = await fetch(playlistSongs, 200);
     for (let i = 0; i < allSongs.length; i += 1) {
       if (allSongs[i].id === id) {
@@ -561,5 +565,55 @@ export default {
       }
     }
     return {};
+  },
+
+  /**
+   * Fetches saved Songs from the mock data
+   * @return {Object} An object containing all saved songs
+   */
+  async fetchSavedTracks() {
+    const allSongs = await fetch(playlistSongs, 200);
+    for (let i = 0; i < allSongs.length; i += 1) {
+      if (allSongs[i].id === 'LikedTracks') {
+        return allSongs[i].items;
+      }
+    }
+    return {};
+  },
+
+  /**
+   * Checks if An album is saved in user's library or not
+   * @param  {Number}  id The id of the desired album
+   * @return {Object} An object containing value refers if it's saved or not
+   */
+  async CheckAlbum(id) {
+    if (id) {
+      return { data: [false] };
+    }
+    return {};
+  },
+
+  /**
+   * Save An album to user's library
+   * @param  {Number}  id The id of the album
+   * @return {Object} An object containing the status of the request
+   */
+  async SaveAlbum(id) {
+    if (id) {
+      return { status: 201 };
+    }
+    return { status: 0 };
+  },
+
+  /**
+   * Remove An album from user's library
+   * @param  {Number}  id The id of the album
+   * @return {Object} An object containing the status of the request
+   */
+  async RemoveAlbum(id) {
+    if (id) {
+      return { status: 200 };
+    }
+    return { status: 0 };
   },
 };

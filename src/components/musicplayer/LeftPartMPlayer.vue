@@ -17,7 +17,7 @@
             <router-link
               :to="
                 '/home/album/' +
-                  $store.state.MusicPlayer.currentSong.item.album.artists[0].id
+                  $store.state.MusicPlayer.currentSong.track.album.artists[0].id
               "
               tag="button"
               :disabled="isLinkDisabled"
@@ -27,7 +27,7 @@
                 max-height="60"
                 max-width="60"
                 :src="
-                  $store.state.MusicPlayer.currentSong.item.album.images[0].url
+                  $store.state.MusicPlayer.currentSong.track.album.images[0].url
                 "
                 contain
                 @mouseenter="imageButton = true"
@@ -53,24 +53,24 @@
               <router-link
                 :to="
                   '/home/album/' +
-                    $store.state.MusicPlayer.currentSong.item.album.artists[0]
+                    $store.state.MusicPlayer.currentSong.track.album.artists[0]
                       .id
                 "
                 id="song-name"
               >
-                {{ $store.state.MusicPlayer.currentSong.item.name }}
+                {{ $store.state.MusicPlayer.currentSong.track.name }}
               </router-link>
 
               <router-link
                 :to="
                   '/home/artist/' +
-                    $store.state.MusicPlayer.currentSong.item.album.artists[0]
+                    $store.state.MusicPlayer.currentSong.track.album.artists[0]
                       .id
                 "
                 id="artist-name"
               >
                 {{
-                  $store.state.MusicPlayer.currentSong.item.album.artists[0]
+                  $store.state.MusicPlayer.currentSong.track.album.artists[0]
                     .name
                 }}
               </router-link>
@@ -116,7 +116,7 @@
               class="mx-2 info-buttons"
               dense
               medium
-              id="rectangle-plus"
+              id="pipButton"
             >
               mdi-picture-in-picture-bottom-right
             </v-icon>

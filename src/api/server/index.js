@@ -9,7 +9,6 @@ export default {
   //   return axios.get(api).then((response) => response.data);
   // },
 
-  // TODO[@Seif]: Check for status and Add Tokens for ALL and check if device Id is needed
   /**
    * Get the User's Currently Playing Track
    * @return {Object} An Object Containing info about the User's Current Playing Track
@@ -623,6 +622,24 @@ export default {
       },
     });
     return Album.data;
+  },
+
+  /**
+   * Fetches Album songs
+   * @param  {Number}  id The id of the desired Album
+   * @return {Object} An object containing all songs of the album of ID equals to id
+   */
+  async fetchAlbumSongs(id) {
+    // eslint-disable-next-line no-undef
+    const album = await fetchAlbum(id);
+    // TODO:: Remove this loop
+    const songs = [];
+    for (let i = 0; i < album.tracks.length; i += 1) {
+      album.tracks[i].artists = [{ name: 'Artist' }];
+      album.tracks[i].album = { name: 'Album' };
+      songs[i] = { track: album.tracks[i] };
+    }
+    return songs;
   },
 
   /**

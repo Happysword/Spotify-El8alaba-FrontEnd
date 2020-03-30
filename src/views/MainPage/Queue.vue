@@ -13,17 +13,29 @@
           </h2>
         </v-col>
         <v-col>
-          <s-card :song="QueueArray[0]" :counter="0"></s-card>
+          <s-card
+            :song="$store.state.MusicPlayer.currentSong"
+            :list="$store.state.MusicPlayer.currentList"
+            :counter="0"
+          ></s-card>
         </v-col>
       </v-row>
-      <v-row no-gutters v-if="QueueArray.length > 1"
+      <v-row no-gutters v-if="$store.state.MusicPlayer.currentList.length > 1"
         ><v-col cols="12">
           <h2 class="header header-two">
             Next Up
           </h2>
         </v-col>
-        <v-col v-for="i in QueueArray.length-1" :key="i" cols="12">
-          <s-card :song="QueueArray[i]" :counter="i"></s-card>
+        <v-col
+          v-for="i in $store.state.MusicPlayer.currentList.length"
+          :key="i"
+          cols="12"
+        >
+          <s-card
+            :song="$store.state.MusicPlayer.currentList[i]"
+            :counter="i"
+            :list="$store.state.MusicPlayer.currentList"
+          ></s-card>
         </v-col>
       </v-row>
     </v-container>
@@ -33,31 +45,11 @@
 <script>
 import sCard from '../../components/SongsBar.vue';
 
-// TODO[@Seif] Add Queue from store arrays and fix queue color
+// TODO[@Seif]  fix queue color
+
 export default {
   name: 'Queue',
   components: { sCard },
-  data: () => ({
-    QueueArray: [
-      {
-        songname: 'Mutlu Sonuz (Delibal Original Sountrack)',
-        artist: 'Çağatay Ulusoy ',
-        album: ' Mutlu Sonsuz (Delibal Original Soundtrack)',
-        duration: '2:15',
-      },
-      {
-        songname: 'Mutlu Sonuz (Delibal Original Sountrack)',
-        artist: 'Second song ',
-        album: ' Mutlu Sonsuz (Delibal Original Soundtrack)',
-        duration: '2:15',
-      },
-    ],
-  }),
-  created() {
-    document.title = 'Play Queue - Spotify El8alaba';
-  },
-  destroyed() {
-  },
 };
 </script>
 
@@ -84,6 +76,6 @@ export default {
   color: black;
   width: 100%;
   height: 100%;
-  background:#60606017;
+  background: #60606017;
 }
 </style>

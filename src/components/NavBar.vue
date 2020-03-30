@@ -149,7 +149,7 @@
           class="mt-2"
           max-height="180"
           max-width="200"
-          :src="$store.state.MusicPlayer.currentSong.item.album.images[0].url"
+          :src="$store.state.MusicPlayer.currentSong.track.album.images[0].url"
           contain
           @mouseenter="imageButton = true"
           @mouseleave="imageButton = false"

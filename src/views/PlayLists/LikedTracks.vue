@@ -16,7 +16,7 @@
 
 <script>
 // eslint-disable-next-line import/no-duplicates
-import List from '@/api/mock';
+// import List from '@/api/mock';
 // eslint-disable-next-line import/no-duplicates
 import server from 'api-client';
 import analyze from 'rgbaster';
@@ -35,7 +35,10 @@ export default {
     };
   },
   methods: {
-    async fetchSongs() {
+    /**
+     * Load view data depending on the route id
+     */
+    async LoadPage() {
       this.ready = false;
       this.show = true;
       this.songs = [];
@@ -54,39 +57,33 @@ export default {
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
-        console.log(tracks);
-        if (tracks !== {}) {
-          for (let i = 0; i < tracks.length; i += 1) {
-            tracks[i].track.artists = [{ name: 'Artist' }];
-            tracks[i].track.album = { name: 'Album' };
-          }
-        }
+        // if (tracks !== {}) {
+        //   for (let i = 0; i < tracks.length; i += 1) {
+        //     tracks[i].track.artists = [{ name: 'Artist' }];
+        //     tracks[i].track.album = { name: 'Album' };
+        //   }
+        // }
         this.songs = tracks;
       } else if (this.$route.name === 'playlist') {
-        this.listInfo = await List.fetchList(this.$route.params.id);
-        this.songs = await List.fetchPlaylistSongs(this.listInfo.id);
+        this.listInfo = await server.fetchList(this.$route.params.id);
+        this.songs = await server.fetchSongs(this.listInfo.id);
       } else if (this.$route.name === 'album') {
-        // this.listInfo = await List.fetchAlbum(this.$route.params.id);
-        const album = await server.fetchAlbum('5e71de1c7e4ff73544999694');
-        // console.log(album);
+        const album = await server.fetchAlbum(this.$route.params.id);
         this.listInfo = album;
-        this.listInfo.images = [{ url: 'https://i.scdn.co/image/ccbb1e3bea2461e69783895e880965b171e29f4c' }];
-        for (let i = 0; i < album.tracks.length; i += 1) {
-          album.tracks[i].artists = [{ name: 'Artist' }];
-          album.tracks[i].album = { name: 'Album' };
-          this.songs[i] = { track: album.tracks[i] };
-        }
-        // this.songs = await List.fetchPlaylistSongs(this.listInfo.id);
+        // this.listInfo.images = [{ url: 'https://i.scdn.co/image/ccbb1e3bea2461e69783895e880965b171e29f4c' }];
+        // for (let i = 0; i < album.tracks.length; i += 1) {
+        //   album.tracks[i].artists = [{ name: 'Artist' }];
+        //   album.tracks[i].album = { name: 'Album' };
+        //   this.songs[i] = { track: album.tracks[i] };
+        // }
+        this.songs = await server.fetchAlbumSongs(this.listInfo.id);
       } else {
         return;
       }
+
       const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
       EventBus.$emit('changeColor', result[0].color);
-      // console.log(result[0].color);
       this.ready = true;
-      // const data = await Server.fetchSongs('5e71dd4d7e4ff73544999691', this.response.data.token);
-      // this.songs = data;
-      // console.log(this.songs[0].track.name);
       if (!Array.isArray(this.songs)) {
         return;
       }
@@ -98,26 +95,11 @@ export default {
     songsCard,
   },
   async created() {
-    // const data = {
-    //   email: 'ahisham360@gmail.com',
-    //   password: 'shoma123',
-    //   // email: 'user1@spotify.com',
-    //   // password: '12345678',
-    // };
-    // const response = await server.loginUser(data);
-    // console.log(response);
-    // if (response.status === 200) {
-    //   const currentUser = {
-    //     token: response.data.token,
-    //     data: response.data.data,
-    //   };
-    //   localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    // }
-    this.fetchSongs();
+    this.LoadPage();
   },
 
   watch: {
-    $route: 'fetchSongs',
+    $route: 'LoadPage',
   },
 };
 </script>

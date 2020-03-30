@@ -28,7 +28,7 @@ export default new Vuex.Store({
       currentPlayback: currentPlaybackMock[0],
       AudioPlayer: Audio,
       navBarImage: false,
-      currentList: {},
+      currentList: [],
     },
   },
 

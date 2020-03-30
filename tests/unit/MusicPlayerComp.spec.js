@@ -65,7 +65,7 @@ describe('Testing the player components', () => {
       expect(wrapper.find('#song-name').exists()).toBe(true);
       expect(wrapper.find('#artist-name').exists()).toBe(true);
       expect(wrapper.find('#heart-outline').exists()).toBe(true);
-      expect(wrapper.find('#rectangle-plus').exists()).toBe(true);
+      expect(wrapper.find('#pipButton').exists()).toBe(true);
     });
 
     it('Change Heart Method test', async () => {

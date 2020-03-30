@@ -155,7 +155,7 @@ export default {
   computed: {
     totalSongTime() {
       const SongTimeinS = Math.floor(
-        this.$store.state.MusicPlayer.currentSong.item.duration_ms / 1000,
+        this.$store.state.MusicPlayer.currentSong.track.duration_ms / 1000,
       );
       const TimeString = `${Math.floor(
         SongTimeinS / 60,

@@ -2,7 +2,13 @@
   <v-app-bar color="#0C0C0C00" flat dense dark app height="60">
     <v-container>
       <v-row>
-        <v-btn color="#04040470" small fab class="mx-2" @click="changeRoute(-1)">
+        <v-btn
+          color="#04040470"
+          small
+          fab
+          class="mx-2"
+          @click="changeRoute(-1)"
+        >
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
 
@@ -52,9 +58,8 @@
                 ><v-avatar size="25" class="mr-1 ml-0"
                   ><v-img :src="UserInfo.photo"></v-img
                 ></v-avatar>
-                <!--TODO[@Seif] fix the data for the user -->
                 <div>
-                  {{ $store.state.currentUser.username }}
+                  {{ userName }}
                 </div>
                 <v-avatar size="20" class="mx-1">
                   <v-icon>mdi-chevron-down</v-icon>
@@ -108,6 +113,19 @@ export default {
       this.$router.push(`/home/search/${this.input}`);
     },
   },
+  computed: {
+    userName: {
+      get() {
+        let name;
+        try {
+          name = JSON.parse(localStorage.getItem('currentUser')).data.user.name;
+        } catch (error) {
+          name = this.$store.state.currentUser.username;
+        }
+        return name;
+      },
+    },
+  },
 };
 </script>
 
@@ -118,7 +136,7 @@ export default {
   float: right;
 }
 .searchbar-pos {
-  transform: translate(0,-10px);
+  transform: translate(0, -10px);
   position: fixed;
   max-width: 400px;
 }

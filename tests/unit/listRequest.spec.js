@@ -1,11 +1,11 @@
 import request from '../../src/api/mock/index';
 import albums from '../../src/api/mock/data/albumsInfo.json';
 import lists from '../../src/api/mock/data/listsInfo.json';
-import songs from '../../src/api/mock/data/songs.json';
+// import songs from '../../src/api/mock/data/songs.json';
 
 const Album = albums[0].items[0].album;
 const list = lists[0];
-const songlist = songs[list.id];
+// const songlist = songs[list.id];
 
 describe('Requests of lists', () => {
   it('Get List info request test', async () => {
@@ -20,9 +20,11 @@ describe('Requests of lists', () => {
     expect(data).toEqual(Album);
   });
 
+  /*
   it('Get list of songs request test', async () => {
     expect.assertions(1);
     const data = await request.fetchSongs(list.id);
     expect(data).toEqual(songlist);
   });
+  */
 });
