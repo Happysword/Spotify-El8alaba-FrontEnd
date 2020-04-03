@@ -397,7 +397,8 @@ export default {
     let i;
     const list = await fetch(genres, 10);
     for (i = 0; i < list.categories.limit; i += 1) {
-      if (id === list.categories.items[i].id) {
+      // eslint-disable-next-line no-underscore-dangle
+      if (id === list.categories.items[i]._id) {
         return list.categories.items[i];
       }
     }
@@ -471,6 +472,72 @@ export default {
   fetchCurrentUserAlbum(token) {
     console.log(token);
     return fetch(currentUserAlbum, 100);
+  },
+  /**
+ * Fetch related data to the user input for search
+ * @param {string} id a string that contains the data the user search for
+ * @return {object} an object that may have related data of the playlist
+ */
+  async fetchPlaylist(id) {
+    let PL = await fetch(search[0], 1000);
+    PL = PL.playlists.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    PL = await fetch(search[1], 500);
+    PL = PL.playlists.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    return {};
+  },
+  /**
+ * Fetch related data to the user input for search
+ * @param {string} id a string that contains the data the user search for
+ * @return {object} an object that may have related data of the playlist
+ */
+  async fetchTrack(id) {
+    let PL = await fetch(search[0], 1000);
+    PL = PL.tracks.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    PL = await fetch(search[1], 500);
+    PL = PL.tracks.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    return {};
+  },
+  /**
+ * Fetch related data to the user input for search
+ * @param {string} id a string that contains the data the user search for
+ * @return {object} an object that may have related data of the artist
+ */
+  async fetchArtist(id) {
+    let PL = await fetch(search[0], 1000);
+    PL = PL.artists.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    PL = await fetch(search[1], 500);
+    PL = PL.artists.items;
+    for (let j = 0; j < PL.length; j += 1) {
+      if (PL[j].id === id) {
+        return PL[j];
+      }
+    }
+    return {};
   },
   /**
    * Get All the playlists of the current user

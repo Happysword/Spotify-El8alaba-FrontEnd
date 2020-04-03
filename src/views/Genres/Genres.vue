@@ -1,5 +1,5 @@
 <template>
-  <v-container v-show="ready">
+  <v-container v-if="ready">
     <br><br><br><br><br>
     <h1 class="white--text display-3 font-weight-bold">
     {{ title }}</h1>
@@ -29,9 +29,9 @@
 </template>
 
 <script>
+import Client from 'api-client';
 import analyze from 'rgbaster';
 import EventBus from '../../EventBus';
-import Client from '../../api/mock';
 import SongCard from '../../components/SongCard.vue';
 
 export default {
@@ -60,7 +60,8 @@ export default {
       EventBus.$emit('changeColor', result[100].color);
       this.title = this.category.name;
       this.ready = true;
-      this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.category.id);
+      // eslint-disable-next-line no-underscore-dangle
+      this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.category._id);
       if ('playlists' in this.PopularPlaylists) {
         this.PopularPlaylists = this.PopularPlaylists.playlists.items;
         this.PopularExist = true;

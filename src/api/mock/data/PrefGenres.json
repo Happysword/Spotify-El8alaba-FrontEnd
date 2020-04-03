@@ -12,7 +12,7 @@
           "width": 275
         }
       ],
-      "id": "ambiance",
+      "_id": "ambiance",
       "name": "Ambiance"
     },
     {
@@ -24,7 +24,7 @@
           "width": 274
         }
       ],
-      "id": "gaming",
+      "_id": "gaming",
       "name": "Gaming"
     },
     {
@@ -36,7 +36,7 @@
           "width": 274
         }
       ],
-      "id": "soul",
+      "_id": "soul",
       "name": "Soul"
     }
   ],

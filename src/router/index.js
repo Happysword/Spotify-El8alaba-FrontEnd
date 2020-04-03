@@ -25,6 +25,8 @@ import Artist from '../views/Artist/Artist.vue';
 import ArtistOverview from '../views/Artist/ArtistOverview.vue';
 import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
+import SearchType from '../views/Search/SearchType.vue';
+import RecentSearch from '../views/Search/RecentSearch.vue';
 
 Vue.use(VueRouter);
 
@@ -40,15 +42,12 @@ const routes = [
     component: Main,
     children: [
       { path: '/home', name: 'home', component: Home },
-      {
-        path: '/home/queue',
-        name: 'queue',
-        component: Queue,
-        meta: { title: 'Play Queue - Spotify el8alaba' },
-      },
+      { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
+      { path: '/home/search/history/showRecent', name: 'recentSearch', component: RecentSearch },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/genre/:id-page', name: 'genres', component: Genres },
+      { path: '/home/search/:id/:type', name: 'searchType', component: SearchType },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/profile/:id', name: 'profile' },

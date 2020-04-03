@@ -45,13 +45,13 @@
           </v-card-subtitle>
         </template>
 
-        <v-card-actions>
+        <v-card-actions v-if="showActionButton && type != 'profile'">
           <v-spacer></v-spacer>
-          <v-btn fab big color="#1ED760" class="btn"
-            v-if="showActionButton && type!='profile'"
+          <v-btn fab big color="#1ED760" id="btn"
+            v-if="showActionButton && type != 'profile'"
             @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
-              <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>
-              <v-icon color="white" v-show="!showPlayButton">mdi-pause</v-icon>
+              <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
+              <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
           </v-btn>
         </v-card-actions>
     </v-card>
@@ -112,7 +112,7 @@ export default {
         object-fit: center;
         object-position: center center;
     }
-.btn{
+#btn{
         transform: translate(-40% , -110%);
     }
 .TYPE{
