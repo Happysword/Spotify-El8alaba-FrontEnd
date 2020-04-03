@@ -1,25 +1,29 @@
 <template>
     <v-container fluid="" class="cont">
-      <v-row v-show="artistsExist || tracksExist">
+      <v-row v-if="artistsExist || tracksExist">
         <v-col xs="12" sm="12" md="6" lg="5">
           <span class="white--text mt-10 ml-10 display-1 font-weight-bold">Best result</span>
+          <div @click="local(top.id, top.type)">
             <top-result
-            v-show="top.type === 'track'"
+            v-if="top.type === 'track'"
             :id="top.id"
             :name="top.name"
             :image="imageTop"
             :type="top.type"
             :artists="top.artists"
             class="a"></top-result>
+          </div>
+          <div @click="local(top.id, top.type)">
             <top-result
-            v-show="top.type === 'artist'"
+            v-if="top.type === 'artist'"
             :id="top.id"
             :image="imageTop"
             :name="top.name"
             :type="top.type"
             class="a"></top-result>
+          </div>
             </v-col>
-<div class="ss ml-6" v-show="tracksExist">
+<div class="ss ml-6" v-if="tracksExist">
   <v-row class="mb-1 mt-2 head" >
   <span class="white--text display-1 font-weight-bold z">Tracks</span>
 <v-spacer></v-spacer>
@@ -27,17 +31,21 @@
 </v-row>
   <v-row class="sect"  v-for="x in tracks" :key="x.id">
           <v-col  xs="12" sm="12" md="6" lg="6" class="ss">
+            <div @click="local(x.id, 'track')">
         <search-song
             :id="x.id"
             :image="x.album.images[0].url"
             :SongName="x.name"
             :artists="x.artists"
+            :albumID="x.album.id"
+            :uri="x.uri"
             class="ss"></search-song>
+            </div>
         </v-col>
         </v-row>
         </div>
       </v-row>
-      <v-row v-show="artistsExist">
+      <v-row v-if="artistsExist">
         <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
           <span class="white--text display-1 font-weight-bold z"
            >Artists</span>
@@ -47,13 +55,15 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in artists" :key="card.id">
-                   <song-card :id="card.id" :name="card.name"
+                  <div @click="local(card.id, card.type)">
+                   <ArtistCard :id="card.id" :profileName="card.name"
                    :images="card.images"
                    :type="card.type"
-                   ></song-card>
+                   ></ArtistCard>
+                  </div>
             </v-col>
       </v-row>
-       <v-row v-show="albumsExist">
+       <v-row v-if="albumsExist">
         <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
           <span class="white--text display-1 font-weight-bold z"
           >Albums</span>
@@ -63,33 +73,36 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in albums" :key="card.id">
+                  <div @click="local(card.id, card.type)">
                    <song-card :id="card.id" :name="card.name"
                    :description="card.description" :images="card.images"
                    :type="card.type"
                    ></song-card>
-            </v-col>
+                  </div>
+          </v-col>
       </v-row>
-      <v-row v-show="playlistsExist">
+      <v-row v-if="playlistsExist">
         <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
           <span class="white--text display-1 font-weight-bold z"
           >Playlists</span>
            <v-spacer></v-spacer>
           <span class="seeAll" @click="spanClicked()"
-          @mouseover="typeToSee= 'albums'">See All</span>
+          @mouseover="typeToSee= 'playlists'">See All</span>
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in playlists" :key="card.id">
+                  <div @click="local(card.id, card.type)">
                    <song-card :id="card.id" :name="card.name"
                    :description="card.description" :images="card.images"
                    :type="card.type"
+                   @click="local(card.id, card.type)"
                    ></song-card>
+                  </div>
             </v-col>
       </v-row>
-      <v-container v-show="NoResult" id="NO">
+      <v-container v-if="NoResult" id="NO">
           <span class="white--text display-1 font-weight-bold">
-            No results for </span>
-          <span class="white--text display-1 font-weight-bold" id="results">
-            "&nbsp;{{ this.$route.params.id }}&nbsp;" </span>
+            No results for "{{ this.$route.params.id }}"</span>
             <p class="white--text">Please check the spelling of the words.
               You can also try to use fewer keywords or other keywords.</p>
       </v-container>
@@ -97,20 +110,20 @@
 </template>
 
 <script>
-// import top from '@/api/mock/data/top.json';
-// import Tracks from '../../api/mock/data/SearchSong.json';
+import Client from 'api-client';
+import ArtistCard from '../../components/ArtistCard.vue';
 import TopResult from '../../components/TopResult.vue';
 import SearchSong from '../../components/SearchSong.vue';
 import SongCard from '../../components/SongCard.vue';
-// import JsonPlaylists from '../../json/Get-Current-User-Playlists.json';
-import Client from '../../api/mock';
-// :image="top.images[0].url"
+
+
 export default {
   name: 'InputSearch',
   components: {
     TopResult,
     SearchSong,
     SongCard,
+    ArtistCard,
   },
   data() {
     return {
@@ -126,9 +139,43 @@ export default {
       albumsExist: false,
       artistsExist: false,
       imageTop: '',
+      SearchHistory: [],
+      SavedData: {
+        id: '',
+        name: '',
+        uri: '',
+        images: '',
+        type: '',
+      },
     };
   },
   methods: {
+    async local(id, type) {
+      let data;
+      if (type === 'track') {
+        data = await Client.fetchTrack(id);
+      } else if (this.type === 'album') {
+        data = await Client.fetchAlbum(id);
+      } else if (type === 'artist') {
+        data = await Client.fetchAnArtist(id);
+      } else if (type === 'playlist') {
+        data = await Client.fetchPlaylist(id);
+      }
+      this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
+      if (!(this.SearchHistory.some((x) => x.id === data.id))) {
+        this.SavedData.id = data.id;
+        this.SavedData.name = data.name;
+        this.SavedData.type = data.type;
+        this.SavedData.uri = data.uri;
+        if (data.type === 'track') {
+          this.SavedData.images = data.album.images;
+        } else if (data.images[0]) {
+          this.SavedData.images = data.images;
+        }
+        this.SearchHistory.push(this.SavedData);
+        localStorage.setItem('SearchHistory', JSON.stringify(this.SearchHistory));
+      }
+    },
     spanClicked() {
       if (this.typeToSee === 'tracks') {
         this.$router.push(`/home/search/${this.$route.params.id}/tracks`);
@@ -136,6 +183,8 @@ export default {
         this.$router.push(`/home/search/${this.$route.params.id}/albums`);
       } else if (this.typeToSee === 'artists') {
         this.$router.push(`/home/search/${this.$route.params.id}/artists`);
+      } else if (this.typeToSee === 'playlists') {
+        this.$router.push(`/home/search/${this.$route.params.id}/playlists`);
       }
     },
     async fetchSearch() {

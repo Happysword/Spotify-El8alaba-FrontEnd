@@ -22,7 +22,7 @@
           @click="CardClickLink()"
           @contextmenu.prevent="on.click"
         >
-          <v-container fluid v-show="images != []">
+          <v-container fluid v-if="imagesExist">
             <v-img :src="images[0].url" height="150px"></v-img>
           </v-container>
           <v-card-title class="font-weight-bold subtitle-2">{{name}}</v-card-title>
@@ -92,6 +92,7 @@ export default {
       notificationMsg: String,
       isFollowing: Boolean,
       FollowJSON: JSON,
+      imagesExist: false,
       items: [
         { title: 'Start Radio' },
         { title: '' },
@@ -207,6 +208,12 @@ export default {
           });
       }
     },
+  },
+  created() {
+    this.imagesExist = false;
+    if (this.images[0]) {
+      this.imagesExist = true;
+    }
   },
 };
 </script>

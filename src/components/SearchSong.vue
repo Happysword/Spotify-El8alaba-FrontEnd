@@ -1,24 +1,27 @@
 <template>
 <div class="d-inline-block container">
-  <v-layout row @mouseover="overlay = true" @mouseleave=" overlay = false">
+  <v-layout row @mouseover="overlay = true" @mouseleave=" overlay = false" id="layout">
     <v-img
       :src=image
       max-height="80px"
       max-width="80px"
       class="img">
-        <v-overlay v-show="overlay" absolute>
+        <v-overlay v-if="overlay" absolute>
           <v-btn fab small color="#1ED760" class="btn"
             v-if="overlay"
             @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
-            <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>
-            <v-icon color="white" v-show="!showPlayButton">mdi-pause</v-icon>
+            <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
+            <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
         </v-btn>
 
         </v-overlay>
     </v-img>
   <div>
-     <span class="white--text song" @click="clickSong()">{{ SongName }}</span>
-     <span class="disabled artist" @click="clickArtist()">{{ artistName }}</span>
+    <span class="white--text song" @click="clickSong()">{{ SongName }}</span>
+    <div>
+      <span class="disabled artist d-inline-block" v-for="artist in artists" :key="artist.id"
+      @click="clickArtist(artist.name)" @ >{{ artist.name }}</span>
+    </div>
   </div>
      <v-spacer></v-spacer>
      <v-menu offset-x>
@@ -51,14 +54,20 @@ export default {
     image: String,
     SongName: String,
     track: Object,
-    artistName: String,
+    artists: Array,
+    albumID: String,
+    uri: String,
   },
   methods: {
-    clickArtist() {
-      this.$router.push(`/home/artist/${this.artistName}`);
+    clickArtist(y) {
+      for (let i = 0; i < this.artists.length; i += 1) {
+        if (y === this.artists[i].name) {
+          this.$router.push(`/home/artist/${this.artists[i].id}`);
+        }
+      }
     },
     clickSong() {
-      this.$router.push(`/home/track/${this.SongName}`);
+      this.$router.push(`/home/track/${this.albumID}?/highlight=${this.uri}`);
     },
   },
 };
@@ -88,7 +97,6 @@ background-color: #1a1a1a;
 .artist{
   margin-left: 10px;
   color: #b3b3b3;
-  display: block;
 }
 .artist:hover{
 cursor: pointer;

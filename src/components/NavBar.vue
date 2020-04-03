@@ -23,7 +23,7 @@
             v-for="link in links"
             :key="link.text"
             route
-            exact
+            :exact="link.exact"
             :to="link.route"
             id="mainLinks"
           >
@@ -174,12 +174,23 @@ export default {
     return {
       drawer: true,
       links: [
-        { icon: 'mdi-home', text: 'Home', route: '/home' },
-        { icon: 'mdi-magnify', text: 'Search', route: '/home/search' },
+        {
+          icon: 'mdi-home',
+          text: 'Home',
+          route: '/home',
+          exact: true,
+        },
+        {
+          icon: 'mdi-magnify',
+          text: 'Search',
+          route: '/home/search',
+          exact: false,
+        },
         {
           icon: 'mdi-bookshelf',
           text: 'Your Library',
           route: '/home/library/playlists',
+          exact: false,
         },
       ],
       playlists: JSON,

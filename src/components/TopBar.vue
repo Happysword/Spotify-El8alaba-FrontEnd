@@ -24,7 +24,7 @@
             height="30"
             class="searchbar-pos"
             light
-            v-show="$store.state.searching"
+            v-if="$store.state.searching"
             v-model="$route.params.id"
             v-on:input="searching()"
           >
@@ -110,7 +110,7 @@ export default {
     },
     searching() {
       this.input = this.$route.params.id;
-      this.$router.push(`/home/search/${this.input}`);
+      this.$router.replace(`/home/search/${this.input}`);
     },
   },
   computed: {
