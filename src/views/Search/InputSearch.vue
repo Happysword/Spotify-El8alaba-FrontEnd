@@ -178,13 +178,13 @@ export default {
     },
     spanClicked() {
       if (this.typeToSee === 'tracks') {
-        this.$router.push(`/search/${this.$route.params.id}/tracks`);
+        this.$router.push(`/home/search/${this.$route.params.id}/tracks`);
       } else if (this.typeToSee === 'albums') {
-        this.$router.push(`/search/${this.$route.params.id}/albums`);
+        this.$router.push(`/home/search/${this.$route.params.id}/albums`);
       } else if (this.typeToSee === 'artists') {
-        this.$router.push(`/search/${this.$route.params.id}/artists`);
+        this.$router.push(`/home/search/${this.$route.params.id}/artists`);
       } else if (this.typeToSee === 'playlists') {
-        this.$router.push(`/search/${this.$route.params.id}/playlists`);
+        this.$router.push(`/home/search/${this.$route.params.id}/playlists`);
       }
     },
     async fetchSearch() {

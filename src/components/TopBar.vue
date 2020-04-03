@@ -110,7 +110,7 @@ export default {
     },
     searching() {
       this.input = this.$route.params.id;
-      this.$router.replace(`/search/${this.input}`);
+      this.$router.replace(`/home/search/${this.input}`);
     },
   },
   computed: {

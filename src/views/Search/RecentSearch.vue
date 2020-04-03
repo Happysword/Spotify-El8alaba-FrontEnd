@@ -52,7 +52,7 @@ export default {
     ClearAll() {
       this.Recent = [];
       localStorage.setItem('SearchHistory', JSON.stringify(this.Recent));
-      this.$router.push('/search');
+      this.$router.push('/home/search');
     },
   },
   created() {

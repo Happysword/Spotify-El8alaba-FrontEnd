@@ -94,7 +94,7 @@ export default {
       } else this.PGenres = {};
     },
     History() {
-      this.$router.push('/search/history/showRecent');
+      this.$router.push('/home/search/history/showRecent');
     },
   },
   async created() {
