@@ -9,6 +9,7 @@
                 src="../assets/imgs/El-8alaba.png"
                 max-height="200"
                 max-width="200"
+                id="logo-img"
               ></v-img>
             </router-link>
             <v-spacer></v-spacer>
@@ -21,6 +22,7 @@
                 left
                 text
                 large
+                :id="buttons[i-1].id"
                 :to="buttons[i-1].route"
               >
                 {{ buttons[i-1].name }}</v-btn
@@ -34,6 +36,7 @@
                   cols="12"
                   justify="center"
                   class="font-weight-bold "
+                  id="welcome-text-1"
                   :class="{
                     'display-1': $vuetify.breakpoint.xs,
                     'display-3': $vuetify.breakpoint.sm,
@@ -44,6 +47,7 @@
                 </v-col>
                 <v-col
                   justify="center"
+                  id="welcome-text-2"
                   :class="{
                     title: $vuetify.breakpoint.smAndDown,
                     'display-1': $vuetify.breakpoint.mdAndUp,
@@ -60,6 +64,7 @@
                     rounded
                     depressed
                     large
+                    id="Big-download-btn"
                   >
                     Get spotify el8alaba free
                   </v-btn>
@@ -81,18 +86,22 @@ export default {
       {
         name: 'DOWNLOAD',
         route: '/download',
+        id: 'download-btn',
       },
       {
         name: 'PREMIUM',
         route: '/premium',
+        id: 'premium-btn',
       },
       {
         name: 'LOGIN',
         route: '/login',
+        id: 'login-btn',
       },
       {
         name: 'SIGN UP',
         route: '/signup',
+        id: 'signup-btn',
       },
     ],
   }),

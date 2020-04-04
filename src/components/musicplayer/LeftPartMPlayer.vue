@@ -76,7 +76,7 @@
               </router-link>
             </v-layout>
           </v-flex>
-          <!-- TODO[@Seif] picture in picture api for hovering picture -->
+          <!-- TODO[@Seif] picture in picture api for hovering picture and delete button -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
             <v-icon
               v-if="!heartcolor"

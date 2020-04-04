@@ -17,6 +17,7 @@ describe('Testing the player components', () => {
   localVue.use(Vuetify);
   localVue.use(VueRouter);
   localVue.use(Vuex);
+  const router = new VueRouter();
   const store = new Vuex.Store({
     state: {
       MusicPlayer: {
@@ -131,6 +132,7 @@ describe('Testing the player components', () => {
     const wrapper = shallowMount(RMPlayer, {
       localVue,
       store,
+      router,
     });
     const data = wrapper.vm.$data;
 

@@ -2,6 +2,11 @@ import PlayerRequests from './Requests';
 import api from '../../../common/config';
 
 export default {
+  /**
+   * it toggles the play and pause using the mutation in the store after checking
+   * that the song was already playing else it fetches the song from server and starts playing it
+   * @param {*} VuexStore the current store used for the app
+   */
   async togglePlayact({ commit, state }) {
     // TODO[@Seif] check from where to play and how to get songs
 
@@ -10,13 +15,16 @@ export default {
       // fetch the current song from server
       const Response = await PlayerRequests.fetchCurrentPlayback();
       // check if the response was correct
-      if (Response !== false) { state.MusicPlayer.currentPlayback = Response; }
+      if (Response !== false) {
+        state.MusicPlayer.currentPlayback = Response;
+      }
       // get song URL from mock or server
       let SongURL = '';
       if (process.env.VUE_APP_API_CLIENT === 'server') {
         SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentPlayback.item.id}`;
-        console.log(SongURL);
-      } else if (process.env.VUE_APP_API_CLIENT === 'mock') { SongURL = state.MusicPlayer.currentPlayback.item.href; }
+      } else if (process.env.VUE_APP_API_CLIENT === 'mock') {
+        SongURL = state.MusicPlayer.currentPlayback.item.href;
+      }
       state.MusicPlayer.AudioPlayer.src = SongURL;
       // this one here above
       state.MusicPlayer.isFirstPlay = false;
@@ -37,7 +45,10 @@ export default {
       }
     }
   },
-
+  /**
+   * it sets the player volume using the value set in store and sends the request to the server
+   * @param {*} VeuxStore the current store used for the app
+   */
   async setVolume({ state }) {
     // Send the server a request
     const Response = await PlayerRequests.setVolume(
@@ -54,7 +65,11 @@ export default {
       }
     }
   },
-
+  /**
+   * it sets the player volume to muted or not, if not muted it sets it to the last recorded value
+   * from the store and sends the requests to the server
+   * @param {*} VeuxStore the current store used for the app
+   */
   async toggleSound({ state }) {
     // Check if the Volume is Muted and Send request if it is with last recorded value
     if (state.MusicPlayer.currentPlayback.device.volume_percent === 0) {
@@ -75,6 +90,16 @@ export default {
         state.MusicPlayer.currentPlayback.device.volume_percent = 0;
         state.MusicPlayer.isMute = true;
       }
+    }
+  },
+  async playpauseplaylist({ state, dispatch }, playstatus, song) {
+    if (song === state.MusicPlayer.currentSong) {
+      dispatch('togglePlayact');
+    } else {
+      state.MusicPlayer.isFirstPlay = true;
+      state.MusicPlayer.isPlaying = false;
+      state.MusicPlayer.AudioPlayer.pause();
+      dispatch('togglePlayact');
     }
   },
 };

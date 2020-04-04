@@ -3,7 +3,10 @@
     <v-spacer></v-spacer>
     <v-flex shrink>
       <v-btn @click="queueChange" text x-small id="queue-btn">
-        <v-icon :color="isInQueue === true ? 'green' : 'grey'" dense medium
+        <v-icon
+          :color="$route.name === 'queue' ? 'green' : 'grey'"
+          dense
+          medium
           >mdi-playlist-play</v-icon
         >
       </v-btn>
