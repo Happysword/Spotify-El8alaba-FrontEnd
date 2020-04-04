@@ -53,7 +53,7 @@ export default {
     allUsers.some((u) => {
       if (u.user.userInfo.email === body.email && u.password === body.password) {
         found = true;
-        user = u;
+        user = u.user;
       }
       // Breaking condition
       return u.user.userInfo.email === body.email && u.password === body.password;

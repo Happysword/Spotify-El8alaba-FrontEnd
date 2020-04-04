@@ -37,8 +37,9 @@ export default {
    * @return {function}            The function that does the validation
    */
   noSpecialCharacters(propertyName) {
-    // Validate that this RegExp isn't found in the string
-    return (data) => (!!data && data.search(/[^\w\-.]/g) === -1)
+    const invalidRegex = /[^\w\-.]/g;
+    // Validate that this Regex isn't found in the string
+    return (data) => (!!data && data.search(invalidRegex) === -1)
       || `${propertyName} doesn't allow special characters`;
   },
 
@@ -47,8 +48,9 @@ export default {
    * @return {function} The function that does the validation
    */
   validEmail() {
-    // Validate that this RegExp matches the full string
-    return (email) => (!!email && email.search(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) === 0)
+    const validRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/g;
+    // Validate that this Regex matches the full string
+    return (email) => (!!email && email.search(validRegex) === 0)
       || 'Not a valid email address';
   },
 
@@ -68,5 +70,17 @@ export default {
   validYear() {
     return (year) => (!!year && year >= 1920 && year <= 2020)
       || 'Please enter a valid year';
+  },
+
+  /**
+   * Validates that the provided data matches an international phone number format
+   * @todo[XL3] Reach out to the team leaders and decide how to implement this
+   * @return {function} The function that does the validation
+   */
+  validMobilePhoneNumber() {
+    const validRegex = /^01\d{9}$/g;
+    // Validate that this Regex matches the full string
+    return (phone) => (!!phone && phone.search(validRegex) === 0)
+      || 'Please enter a valid phone number';
   },
 };

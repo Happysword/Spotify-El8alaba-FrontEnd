@@ -15,7 +15,8 @@
           </v-img>
         </router-link>
 
-        <v-col>
+        <!-- @todo[XL3] Remove this -->
+        <!-- <v-col>
           <v-btn
             id="googleSignInBtn"
             color="secondary"
@@ -39,7 +40,7 @@
           <v-col>
             <v-divider class="my-3 mb-6"/>
           </v-col>
-        </v-row>
+        </v-row> -->
 
         <!-- Incorrect password bar -->
         <p
@@ -158,19 +159,20 @@ export default {
   },
 
   mounted() {
-    // Import the Google Platform Library
-    const googlePlatformLibrary = document.createElement('script');
-    googlePlatformLibrary.src = 'https://apis.google.com/js/platform.js';
-    /* eslint-disable */
-    googlePlatformLibrary.onload = () => gapi.load('auth2', () => gapi.auth2.init());
-    /* eslint-enable */
-    document.head.appendChild(googlePlatformLibrary);
+    /** @todo[XL3] Remove this */
+    // // Import the Google Platform Library
+    // const googlePlatformLibrary = document.createElement('script');
+    // googlePlatformLibrary.src = 'https://apis.google.com/js/platform.js';
+    // /* eslint-disable */
+    // googlePlatformLibrary.onload = () => gapi.load('auth2', () => gapi.auth2.init());
+    // /* eslint-enable */
+    // document.head.appendChild(googlePlatformLibrary);
 
-    // Add the Client ID meta tag
-    const loginClientID = document.createElement('meta');
-    loginClientID.name = 'google-signin-client_id';
-    loginClientID.content = `${process.env.VUE_APP_GOOGLE_SIGNIN_CLIENT_ID}`;
-    document.head.appendChild(loginClientID);
+    // // Add the Client ID meta tag
+    // const loginClientID = document.createElement('meta');
+    // loginClientID.name = 'google-signin-client_id';
+    // loginClientID.content = `${process.env.VUE_APP_GOOGLE_SIGNIN_CLIENT_ID}`;
+    // document.head.appendChild(loginClientID);
   },
 
   data() {
@@ -219,14 +221,15 @@ export default {
       }
     },
 
-    async googleSignIn() {
-      /* eslint-disable */
-      const auth2 = gapi.auth2.getAuthInstance();
-      /* eslint-enable */
-      const googleUser = await auth2.signIn();
+    /** @todo[XL3] Remove this */
+    // async googleSignIn() {
+    //   /* eslint-disable */
+    //   const auth2 = gapi.auth2.getAuthInstance();
+    //   /* eslint-enable */
+    //   const googleUser = await auth2.signIn();
 
-      console.log(googleUser.getBasicProfile());
-    },
+    //   console.log(googleUser.getBasicProfile());
+    // },
   },
 };
 </script>

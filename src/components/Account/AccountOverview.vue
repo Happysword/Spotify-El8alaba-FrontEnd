@@ -1,6 +1,6 @@
 <template>
 <v-app>
-<v-content>
+<v-content class="pa-4">
   <!-- Title -->
   <p id="title"
      class="display-2 font-weight-bold pt-6 pl-3 mb-12">
