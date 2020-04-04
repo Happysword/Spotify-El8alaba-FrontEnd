@@ -7,7 +7,7 @@
       </v-col>
       <v-col sm='12' md='6' lg="8" class="my-1 pl-0 text-truncate">
         <songsCard v-for="(song,index) in songs" :key="index"
-          :counter="index" :song="song" :list="songs">
+          :counter="index" :song="song" :list="songs" :listid="listInfo.id">
         </songsCard>
       </v-col>
     </v-row>
