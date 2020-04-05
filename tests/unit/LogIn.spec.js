@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 // Libraries
 import Vue from 'vue';
 import Vuetify from 'vuetify';

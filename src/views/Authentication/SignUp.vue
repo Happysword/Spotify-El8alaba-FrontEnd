@@ -161,6 +161,9 @@
 import validation from '@/store/modules/auth/validation';
 import api from 'api-client';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'SignUp',
   created() {

@@ -3,6 +3,9 @@
 </template>
 
 <script>
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'LogOut',
   // Re-route to login if no user is logged in

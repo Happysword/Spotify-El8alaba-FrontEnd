@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   /**
    * Validates that the provided data is above a minimum length of characters.

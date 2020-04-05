@@ -123,6 +123,9 @@
 <script>
 import validation from '@/store/modules/auth/validation';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'EditProfile',
   data: () => ({

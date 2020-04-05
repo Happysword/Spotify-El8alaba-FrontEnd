@@ -141,6 +141,9 @@ import validation from '@/store/modules/auth/validation';
 import api from 'api-client';
 
 export default {
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
   name: 'LogIn',
   created() {
     document.title = 'Log in - Spotify El8alaba';

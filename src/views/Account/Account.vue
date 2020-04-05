@@ -80,6 +80,9 @@
 <script>
 import avatar from '../../assets/imgs/avatar.png';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'Account',
   // Re-route to login if no user is logged in
