@@ -71,9 +71,6 @@ import sCard from '../../components/SongsBar.vue';
 export default {
   name: 'Queue',
   components: { sCard },
-  mounted() {
-    console.log(this.$store.state.MusicPlayer.currentList);
-  },
 };
 </script>
 

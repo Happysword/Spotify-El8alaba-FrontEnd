@@ -38,7 +38,7 @@
         height="5"
         rounded
         @change="setVolume"
-        v-model="$store.state.MusicPlayer.currentPlayback.device.volume_percent"
+        v-model="$store.state.MusicPlayer.volumePercent"
       >
       </v-progress-linear>
     </v-flex>

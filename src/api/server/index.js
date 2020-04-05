@@ -35,7 +35,7 @@ export default {
       },
     };
     return axios
-      .get(`${api}/api/v1/me/player`, {}, config)
+      .get(`${api}/api/v1/me/player`, config)
       .then((response) => response.data).catch(() => false);
   },
 
@@ -148,8 +148,12 @@ export default {
         Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
+    // to be removed if changed later
+    let statetemp;
+    if (state === 'off') statetemp = false;
+    else if (state === 'track') statetemp = true;
     return axios
-      .put(`${api}/api/v1/me/player/repeat?state=${state}`, {}, config)
+      .put(`${api}/api/v1/me/player/repeat?state=${statetemp}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -217,6 +221,27 @@ export default {
       .catch(() => false);
   },
 
+  /**
+   * it sends a request to the server to set the current playing track
+   * @param {string} ID the ID of the song played
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async playTrack(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .post(`${api}/api/v1/me/player/track`, {
+        trackId: ID,
+      }, config)
+      .then((response) => {
+        if (response.status === 204) return true;
+        return false;
+      })
+      .catch(() => false);
+  },
   /**
    * Delete a Liked Track from Server
    * @param {string} ID the id of the track to be saved
@@ -318,8 +343,8 @@ export default {
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true,
     };
-
     const response = await axios(request)
       .then((res) => res)
       .catch((err) => err.response);

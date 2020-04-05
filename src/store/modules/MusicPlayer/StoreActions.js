@@ -8,22 +8,27 @@ export default {
    * @param {*} VuexStore the current store used for the app
    */
   async togglePlayact({ commit, state }) {
-    // TODO[@Seif] check from where to play and how to get songs
-
     // check if this is the first time to play this song i.e. not paused before
     if (state.MusicPlayer.isFirstPlay) {
-      // fetch the current song from server
-      const Response = await PlayerRequests.fetchCurrentPlayback();
+      // on error of loading reset the song controlling parameters
+      state.MusicPlayer.AudioPlayer.onerror = () => {
+        state.MusicPlayer.isFirstPlay = true;
+        state.MusicPlayer.isPlaying = false;
+      };
+      // send the request to server that we want to play this song
+      const Response = await PlayerRequests.playTrack(
+        // eslint-disable-next-line no-underscore-dangle
+        state.MusicPlayer.currentSong.track._id,
+      );
       // check if the response was correct
-      if (Response !== false) {
-        state.MusicPlayer.currentPlayback = Response;
-      }
+      if (Response === false) return;
       // get song URL from mock or server
       let SongURL = '';
       if (process.env.VUE_APP_API_CLIENT === 'server') {
-        SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentPlayback.item.id}`;
+        // eslint-disable-next-line no-underscore-dangle
+        SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentSong.track._id}`;
       } else if (process.env.VUE_APP_API_CLIENT === 'mock') {
-        SongURL = state.MusicPlayer.currentPlayback.item.href;
+        SongURL = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3';
       }
       state.MusicPlayer.AudioPlayer.src = SongURL;
       // this one here above
@@ -38,10 +43,12 @@ export default {
       }
     } else {
       const requestAnswer = await PlayerRequests.startPlayback();
-      state.MusicPlayer.AudioPlayer.play();
       if (requestAnswer) {
         commit('togglePlay');
-        state.MusicPlayer.AudioPlayer.play();
+        state.MusicPlayer.AudioPlayer.play().catch(() => {
+          state.MusicPlayer.isFirstPlay = true;
+          state.MusicPlayer.isPlaying = false;
+        });
       }
     }
   },
@@ -52,12 +59,11 @@ export default {
   async setVolume({ state }) {
     // Send the server a request
     const Response = await PlayerRequests.setVolume(
-      state.MusicPlayer.currentPlayback.device.volume_percent,
+      state.MusicPlayer.volumePercent,
     );
     // if the response was correct we change the volume and set isMute respectively
     if (Response) {
-      state.MusicPlayer.AudioPlayer.volume = state.MusicPlayer
-        .currentPlayback.device.volume_percent / 100;
+      state.MusicPlayer.AudioPlayer.volume = state.MusicPlayer.volumePercent / 100;
       if (state.MusicPlayer.AudioPlayer.volume === 0) {
         state.MusicPlayer.isMute = true;
       } else {
@@ -72,13 +78,13 @@ export default {
    */
   async toggleSound({ state }) {
     // Check if the Volume is Muted and Send request if it is with last recorded value
-    if (state.MusicPlayer.currentPlayback.device.volume_percent === 0) {
+    if (state.MusicPlayer.volumePercent === 0) {
       const Response = await PlayerRequests.setVolume(
         state.MusicPlayer.lastVolrecord,
       );
       if (Response) {
         state.MusicPlayer.AudioPlayer.volume = state.MusicPlayer.lastVolrecord / 100;
-        state.MusicPlayer.currentPlayback.device.volume_percent = state.MusicPlayer.lastVolrecord;
+        state.MusicPlayer.volumePercent = state.MusicPlayer.lastVolrecord;
         state.MusicPlayer.isMute = false;
       }
     } else {
@@ -87,7 +93,7 @@ export default {
       if (Response) {
         state.MusicPlayer.lastVolrecord = state.MusicPlayer.AudioPlayer.volume * 100;
         state.MusicPlayer.AudioPlayer.volume = 0;
-        state.MusicPlayer.currentPlayback.device.volume_percent = 0;
+        state.MusicPlayer.volumePercent = 0;
         state.MusicPlayer.isMute = true;
       }
     }
@@ -101,5 +107,11 @@ export default {
       state.MusicPlayer.AudioPlayer.pause();
       dispatch('togglePlayact');
     }
+  },
+  async playNewSong({ state, dispatch }) {
+    state.MusicPlayer.isFirstPlay = true;
+    state.MusicPlayer.isPlaying = false;
+    state.MusicPlayer.AudioPlayer.pause();
+    dispatch('togglePlayact');
   },
 };

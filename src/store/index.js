@@ -22,6 +22,7 @@ export default new Vuex.Store({
       isMute: false,
       currentBufferPerc: 0,
       lastVolrecord: 100,
+      volumePercent: 100,
       isPlaying: false,
       currentSongTime: '0:00',
       currentSong: currentSongMock[0],

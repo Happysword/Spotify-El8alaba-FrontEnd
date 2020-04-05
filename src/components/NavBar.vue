@@ -110,7 +110,10 @@
                   depressed
                   color="success white--text"
                   class="mx-4"
-                  @click="dialog = false;createNewPlaylist();"
+                  @click="
+                    dialog = false;
+                    createNewPlaylist();
+                  "
                   >Create</v-btn
                 >
               </v-row>
@@ -149,7 +152,11 @@
           class="mt-2"
           max-height="180"
           max-width="200"
-          :src="$store.state.MusicPlayer.currentSong.track.album.images[0].url"
+          :src="
+            $store.state.MusicPlayer.currentSong.track.album.images.length !== 0
+              ? $store.state.MusicPlayer.currentSong.track.album.images[0].url
+              : 'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
+          "
           contain
           @mouseenter="imageButton = true"
           @mouseleave="imageButton = false"
@@ -222,11 +229,14 @@ export default {
         this.userID = 'user';
         this.token = 'token';
       } else {
-        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        this.userID = JSON.parse(
+          localStorage.getItem('currentUser'),
+        ).data.user._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchCurrentUserPlaylists(this.userID, this.token)
+      client
+        .fetchCurrentUserPlaylists(this.userID, this.token)
         .then((response) => {
           this.playlists = response;
         });
@@ -241,15 +251,20 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.createNewPlayList({
-        name: this.createdPlaylistName,
-        public: 'true',
-        description: '',
-      }, this.token).then((r) => {
-        console.log(r);
-        this.createdPlaylistName = '';
-        this.fetchUserPlaylists();
-      });
+      client
+        .createNewPlayList(
+          {
+            name: this.createdPlaylistName,
+            public: 'true',
+            description: '',
+          },
+          this.token,
+        )
+        .then((r) => {
+          console.log(r);
+          this.createdPlaylistName = '';
+          this.fetchUserPlaylists();
+        });
     },
   },
 };

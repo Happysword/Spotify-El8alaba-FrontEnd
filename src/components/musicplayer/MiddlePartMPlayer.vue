@@ -115,12 +115,13 @@ export default {
     repeatState: 'off',
     barHover: false,
     valueFalseBuffer: 0,
+    songList: [],
+    songindex: 0,
   }),
   methods: {
-    ...mapActions(['togglePlayact']),
-    // TODO[@Seif] Refactor this code to another file to be used for others
+    ...mapActions(['togglePlayact', 'playNewSong']),
     async skipNext() {
-      await PlayerRequests.skipNext();
+      // await PlayerRequests.skipNext();
       const listlen = this.$store.state.MusicPlayer.currentList.length;
       let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
       listindex += 1;
@@ -131,13 +132,10 @@ export default {
         listindex
       ];
       // the song is played for the first time and play it
-      this.$store.state.MusicPlayer.isFirstPlay = true;
-      this.$store.state.MusicPlayer.isPlaying = false;
-      this.$store.state.MusicPlayer.AudioPlayer.pause();
-      this.togglePlayact();
+      this.$store.dispatch('playNewSong');
     },
     async skipPrevious() {
-      await PlayerRequests.skipPrevious();
+      // await PlayerRequests.skipPrevious();
       const listlen = this.$store.state.MusicPlayer.currentList.length;
       let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
       listindex -= 1;
@@ -148,13 +146,15 @@ export default {
         listindex
       ];
       // the song is played for the first time and play it
-      this.$store.state.MusicPlayer.isFirstPlay = true;
-      this.$store.state.MusicPlayer.isPlaying = false;
-      this.$store.state.MusicPlayer.AudioPlayer.pause();
-      this.togglePlayact();
+      this.$store.dispatch('playNewSong');
     },
     async toggleRepeat() {
-      const Response = await PlayerRequests.toggleRepeat(this.repeatState);
+      let Response;
+      if (this.repeatState === 'off') {
+        Response = await PlayerRequests.toggleRepeat('track');
+      } else if (this.repeatState === 'track') {
+        Response = await PlayerRequests.toggleRepeat('off');
+      }
       if (Response && this.repeatState === 'off') {
         this.repeatState = 'track';
         this.$store.state.MusicPlayer.AudioPlayer.loop = true;
@@ -164,15 +164,36 @@ export default {
       }
     },
     async toggleShuffle() {
-      const Response = await PlayerRequests.toggleShuffle(this.shuffleState);
+      const Response = await PlayerRequests.toggleShuffle(!this.shuffleState);
       if (Response) {
         this.shuffleState = !this.shuffleState;
       }
+      if (this.shuffleState) {
+        // shuffle the array song list using sort method
+        this.songList = this.$store.state.MusicPlayer.currentList;
+        this.songList.sort(() => Math.random() - 0.5);
+        // save the index in the data
+        this.songindex = this.songList.indexOf(this.$store.state.MusicPlayer.currentSong);
+        this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
+        // swaping the values of the lists to be saved in the data
+        const temp = this.$store.state.MusicPlayer.currentList;
+        this.$store.state.MusicPlayer.currentList = this.songList;
+        this.songList = temp;
+      } else {
+        // swaping the values of the lists to get the old list values
+        const temp = this.$store.state.MusicPlayer.currentList;
+        this.$store.state.MusicPlayer.currentList = this.songList;
+        this.songList = temp;
+        // save the index in the data
+        this.songindex = this.songList.indexOf(this.$store.state.MusicPlayer.currentSong);
+        this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
+      }
     },
+    // TODO[@Seif] check why seek bar doesnt work after sometime
     async seekPosition() {
       const seekedTime = (this.$store.state.MusicPlayer.currentBufferPerc / 100)
       * this.$store.state.MusicPlayer.AudioPlayer.duration;
-      const Response = await PlayerRequests.seekPosition(seekedTime / 1000);
+      const Response = await PlayerRequests.seekPosition(Math.floor(seekedTime * 1000));
       if (Response) {
         this.$store.state.MusicPlayer.AudioPlayer.currentTime = seekedTime;
         this.valueFalseBuffer = this.$store.state.MusicPlayer.currentBufferPerc;
@@ -204,6 +225,28 @@ export default {
         return TimeString;
       },
     },
+  },
+  async created() {
+    // TODO[@Seif] later: fetch current playback and check if the song is not null
+    // play track with faded for now and get current playback
+    // maybe add that the Music player is empty at first like spotify
+    this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
+      if (this.$store.state.MusicPlayer.currentSongIndexinList === this
+        .$store.state.MusicPlayer.currentList.length - 1) {
+        this.$store.state.MusicPlayer.isFirstPlay = true;
+        this.$store.state.MusicPlayer.isPlaying = false;
+      } else {
+        this.$store.dispatch('togglePlayact');
+        this.$store.state.MusicPlayer.isFirstPlay = true;
+        this.skipNext();
+      }
+    };
+    // to be removed later plays faded
+    await PlayerRequests.playTrack('5e89e3032e9acf202cc3f28a');
+    if (process.VUE_APP_API_CLIENT === 'server') {
+      this.$store.state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback()
+        .then((data) => data.currentlyPlaying);
+    }
   },
 };
 </script>

@@ -17,7 +17,7 @@
             <router-link
               :to="
                 '/home/album/' +
-                  $store.state.MusicPlayer.currentSong.track.album.artists[0].id
+                  $store.state.MusicPlayer.currentSong.track.album._id
               "
               tag="button"
               :disabled="isLinkDisabled"
@@ -26,8 +26,9 @@
               <v-img
                 max-height="60"
                 max-width="60"
-                :src="
-                  $store.state.MusicPlayer.currentSong.track.album.images[0].url
+                :src=" $store.state.MusicPlayer.currentSong.track.album.images.length !== 0 ?
+                  $store.state.MusicPlayer.currentSong.track.album.images[0].url :
+                  'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
                 "
                 contain
                 @mouseenter="imageButton = true"
@@ -53,8 +54,7 @@
               <router-link
                 :to="
                   '/home/album/' +
-                    $store.state.MusicPlayer.currentSong.track.album.artists[0]
-                      .id
+                    $store.state.MusicPlayer.currentSong.track.album._id
                 "
                 id="song-name"
               >
@@ -65,7 +65,6 @@
                 :to="
                   '/home/artist/' +
                     $store.state.MusicPlayer.currentSong.track.album.artists[0]
-                      .id
                 "
                 id="artist-name"
               >
@@ -76,7 +75,7 @@
               </router-link>
             </v-layout>
           </v-flex>
-          <!-- TODO[@Seif] picture in picture api for hovering picture and delete button -->
+          <!-- TODO[@Seif] picture in picture api for hovering picture -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
             <v-icon
               v-if="!heartcolor"
@@ -143,15 +142,18 @@ export default {
     timeout: 2000,
   }),
   methods: {
+    // TODO[@Seif] Change the heart from the liked songs request and change the playback id to song
     async changeHeart() {
       let R;
       if (this.heartcolor) {
         R = await PlayerRequests.deleteTrack(
-          this.$store.state.MusicPlayer.currentPlayback.item.id,
+          // eslint-disable-next-line no-underscore-dangle
+          this.$store.state.MusicPlayer.currentSong.track._id,
         );
       } else {
         R = await PlayerRequests.saveTrack(
-          this.$store.state.MusicPlayer.currentPlayback.item.id,
+          // eslint-disable-next-line no-underscore-dangle
+          this.$store.state.MusicPlayer.currentSong.track._id,
         );
       }
       if (R) {

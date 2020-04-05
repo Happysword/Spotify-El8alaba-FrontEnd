@@ -53,7 +53,7 @@
             >Upgrade</v-btn
           >
         </v-col>
-        <v-col md="1" sm="4" xs="12" class="pr-0 mr-0">
+        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
         <div class="text-center" id="user-btn">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
