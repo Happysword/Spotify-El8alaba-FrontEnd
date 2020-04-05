@@ -315,6 +315,7 @@ export default {
       method: 'POST',
       url: `${api}/api/v1/authentication/login`,
       data,
+      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -97,7 +97,7 @@ export default {
 
     // 200 OK
     if (response.status === 200) {
-      const userProfile = response.data.data.user;
+      const userProfile = response.data;
 
       // Username
       this.profileInfo[0].data = userProfile.id;

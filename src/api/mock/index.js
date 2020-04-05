@@ -256,9 +256,7 @@ export default {
 
     return {
       status: currentUser ? 200 : 404,
-      data: {
-        data: { user },
-      },
+      data: user,
     };
   },
 
