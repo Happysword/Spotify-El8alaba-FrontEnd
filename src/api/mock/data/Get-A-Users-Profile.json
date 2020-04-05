@@ -1,0 +1,21 @@
+{
+    "display_name": "Lilla Namo",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/user/tuggareutangranser"
+    },
+    "followers": {
+      "href": null,
+      "total": 4561
+    },
+    "href": "https://api.spotify.com/v1/users/tuggareutangranser",
+    "id": "tuggareutangranser",
+    "images": [
+      {
+        "height": null,
+        "url": "https://profile-images.scdn.co/images/userprofile/default/3cad0ea34efbd3e31ed652c07a4282c0abc95b87",
+        "width": null
+      }
+    ],
+    "type": "user",
+    "uri": "spotify:user:tuggareutangranser"
+  }

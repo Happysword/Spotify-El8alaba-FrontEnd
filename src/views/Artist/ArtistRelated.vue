@@ -40,7 +40,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchArtistRelatedArtists(this.$route.params.id, token)
+      client.fetchArtistRelatedArtists(this.$route.params.id, this.token)
         .then((response) => {
           this.artistRelatedArtists = response;
         });

@@ -266,6 +266,21 @@ export default {
     return userPlaylists;
   },
   /**
+   * Return the data of a specific user
+   * @param {string} userID A user id
+   * @param {string} token Token of the current user
+   */
+  async fetchaUserProfile(userID, token) {
+    const userProfile = await axios
+      .get(`${api}/api/v1/users/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data);
+    return userProfile;
+  },
+  /**
    * Get all the Artist followed by the user
    * @param {string} token Token of the current user
    */
