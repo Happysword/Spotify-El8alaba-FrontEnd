@@ -3,7 +3,8 @@
     class="mx-auto px-5 white--text"
     color="#00000000"
     flat
-    max-width="344">
+    max-width="344"
+    v-on:="changePlayEvent">
     <v-img
       @mouseover="overlay=true"
       @mouseout="overlay= play"
@@ -199,18 +200,17 @@ export default {
     }
   },
 
-  /**
-   * Check if there is an event
-   */
-  mounted() {
-    EventBus.$on('changePlay', (play, id) => {
-      console.log(id);
-      if (this.listInfo.id === id) {
-        this.overlay = play;
-        this.play = play;
-      }
-    });
-  },
+  // /**
+  //  * Check if there is an event
+  //  */
+  // mounted() {
+  //   EventBus.$on('changePlay', (play, id) => {
+  //     if (this.listInfo.id === id) {
+  //       this.overlay = play;
+  //       this.play = play;
+  //     }
+  //   });
+  // },
 
   /**
    * Update play icon
@@ -222,6 +222,7 @@ export default {
       this.playSong = 'Play';
     }
   },
+
   components: {
     dropDown,
   },
@@ -232,18 +233,14 @@ export default {
      */
     changePlayEvent() {
       EventBus.$on('changePlay', (play, id) => {
-        console.log(id);
         if (this.listInfo.id === id) {
           this.overlay = play;
           this.play = play;
+          console.log('hi');
         }
       });
       return true;
     },
-  },
-
-  watch: {
-    changePlayEvent: {},
   },
 };
 </script>

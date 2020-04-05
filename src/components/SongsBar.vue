@@ -26,7 +26,8 @@
               {{ song.track.name }}
             </v-list-item-title>
             <v-list-item-subtitle class="grey--text mx-2 text text-truncate" id="songInfo">
-              {{ song.track.artists[0].name }} . {{ song.track.album.name }}
+              {{ song.track.artists[0].name }}
+              <span v-if="listType !== 'album'"> . {{ song.track.album.name }}</span>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -68,10 +69,7 @@ export default {
     counter: Number,
     list: Array,
     listid: String,
-    playprop: {
-      default: false,
-      type: Boolean,
-    },
+    listType: String,
   },
   components: {
     dropDown,
@@ -82,11 +80,11 @@ export default {
      */
     playSong() {
       store.state.MusicPlayer.isPlaying = true;
+      this.play = true;
       this.color = '#1ED760';
       this.color2 = '#1ED760';
       this.songIcon = 'mdi-volume-high';
       this.showIcon = this.songIcon;
-      this.play = true;
     },
 
     /**
@@ -94,11 +92,11 @@ export default {
      */
     pauseSong() {
       store.state.MusicPlayer.isPlaying = false;
+      this.play = false;
       this.color = 'grey';
       this.color2 = 'white';
       this.songIcon = 'mdi-music-note-outline';
       this.showIcon = this.songIcon;
-      this.play = false;
     },
 
     /**
@@ -138,6 +136,8 @@ export default {
       } else {
         this.showIcon = 'mdi-play';
       }
+      console.log(this.play);
+      console.log(store.state.MusicPlayer.isPlaying);
     },
   },
 

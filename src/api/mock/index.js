@@ -595,13 +595,25 @@ export default {
    * @return {Object}  An object containing all songs in a given album of ID equals to id
    */
   async fetchAlbumSongs(id) {
-    const allSongs = await fetch(playlistSongs, 200);
-    for (let i = 0; i < allSongs.length; i += 1) {
-      if (allSongs[i].id === id) {
-        return allSongs[i].items;
+    // const allSongs = await fetch(playlistSongs, 200);
+    // for (let i = 0; i < allSongs.length; i += 1) {
+    //   if (allSongs[i].id === id) {
+    //     return allSongs[i].items;
+    //   }
+    // }
+    // return {};
+    const album = await fetch(albums, 200);
+    const songs = [];
+    if (album[0].items[0].album.id === id) {
+      for (let i = 0; i < album[0].items[0].album.tracks.items.length; i += 1) {
+        album[0].items[0].album.tracks.items[i].album = {
+          artists: album[0].items[0].album.artists,
+          images: album[0].items[0].album.images,
+        };
+        songs[i] = { track: album[0].items[0].album.tracks.items[i] };
       }
     }
-    return {};
+    return songs;
   },
   /**
    * Fetches a list from the mock data

@@ -644,8 +644,12 @@ export default {
     // TODO:: Remove this loop
     const songs = [];
     for (let i = 0; i < album.tracks.length; i += 1) {
-      album.tracks[i].artists = [{ name: 'Artist' }];
-      album.tracks[i].album = { name: 'Album' };
+      // album.tracks[i].artists = [{ name: 'Artist' }];
+      album.tracks[i].album = {
+        artists: album.tracks[i].artists,
+        images: album.images,
+        name: album.name,
+      };
       songs[i] = { track: album.tracks[i] };
     }
     return songs;
