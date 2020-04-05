@@ -138,11 +138,14 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 
 export default {
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ * @todo[XL3] Change processing of currentUser from localStorage to cookies
+ * to leverage the 'expiration' property
  */
   name: 'LogIn',
   created() {
@@ -152,30 +155,23 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser) {
+      // Find the jwt cookie
+      const jwt = document.cookie.split(';')
+        .find((c) => c.search('jwt') !== -1);
+
+      if (jwt) {
         next('/home');
       } else {
+        // Remove the current user
+        // Remove all cookies
+        // Continue
+        cookies.clearData(['currentUser'], ['jwt']);
         next();
       }
     });
   },
 
   mounted() {
-    /** @todo[XL3] Remove this */
-    // // Import the Google Platform Library
-    // const googlePlatformLibrary = document.createElement('script');
-    // googlePlatformLibrary.src = 'https://apis.google.com/js/platform.js';
-    // /* eslint-disable */
-    // googlePlatformLibrary.onload = () => gapi.load('auth2', () => gapi.auth2.init());
-    // /* eslint-enable */
-    // document.head.appendChild(googlePlatformLibrary);
-
-    // // Add the Client ID meta tag
-    // const loginClientID = document.createElement('meta');
-    // loginClientID.name = 'google-signin-client_id';
-    // loginClientID.content = `${process.env.VUE_APP_GOOGLE_SIGNIN_CLIENT_ID}`;
-    // document.head.appendChild(loginClientID);
   },
 
   data() {
@@ -205,11 +201,9 @@ export default {
         password: this.userInput.password,
       });
 
-      /**
-       * If the request was successful,
-       * add the currentUser to localStorage
-       * and route to home
-       */
+      // If the request was successful,
+      // add the currentUser to localStorage
+      // and route to home
       // 200 OK
       if (response.status === 200) {
         const currentUser = {
@@ -218,21 +212,17 @@ export default {
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
+        // If the user didn't opt to be remembered
+        // Set the expiration date of the cookie to session
+        if (!this.userInput.rememberMe) {
+          cookies.setCookiesToSession(['jwt']);
+        }
+
         this.$router.push('/home');
       } else {
         this.userInput.incorrect = true;
       }
     },
-
-    /** @todo[XL3] Remove this */
-    // async googleSignIn() {
-    //   /* eslint-disable */
-    //   const auth2 = gapi.auth2.getAuthInstance();
-    //   /* eslint-enable */
-    //   const googleUser = await auth2.signIn();
-
-    //   console.log(googleUser.getBasicProfile());
-    // },
   },
 };
 </script>

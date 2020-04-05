@@ -6,6 +6,8 @@
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  */
+import cookies from '@/store/modules/auth/cookies';
+
 export default {
   name: 'LogOut',
   // Re-route to login if no user is logged in
@@ -22,14 +24,9 @@ export default {
 
   mounted() {
     // Remove the current user
-    localStorage.removeItem('currentUser');
-
     // Remove all cookies
-    const cookies = document.cookie;
-    cookies.split(';').forEach((cookie) => {
-      const key = cookie.split('=')[0];
-      document.cookie = `${key}=; expires = Thu, 01 Jan 1970 00:00:00 UTC`;
-    });
+    cookies.clearData(['currentUser'], ['jwt']);
+
     this.$router.push('/');
   },
 };

@@ -51,8 +51,8 @@ describe('LogOut.vue', () => {
       },
     };
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    document.cookie = 'key=value;';
-    expect(document.cookie).not.toEqual('');
+    document.cookie = 'jwt=mock_token;';
+    expect(document.cookie.search('jwt')).not.toEqual(-1);
     expect(localStorage.currentUser).not.toEqual(undefined);
 
     // Mount the component
@@ -62,7 +62,7 @@ describe('LogOut.vue', () => {
       router,
     });
 
-    expect(document.cookie).toEqual('');
+    expect(document.cookie.search('jwt')).toEqual(-1);
     expect(localStorage.currentUser).toEqual(undefined);
   });
 });

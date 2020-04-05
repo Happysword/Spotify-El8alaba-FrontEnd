@@ -76,6 +76,7 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 
 /**
@@ -90,10 +91,17 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser) {
+      // Find the jwt cookie
+      const jwt = document.cookie.split(';')
+        .find((c) => c.search('jwt') !== -1);
+
+      if (jwt) {
         next('/home');
       } else {
+        // Remove the current user
+        // Remove all cookies
+        // Continue
+        cookies.clearData(['currentUser'], ['jwt']);
         next();
       }
     });
