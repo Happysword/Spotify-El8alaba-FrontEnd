@@ -28,6 +28,7 @@ describe('Testing the player components', () => {
         currentSongTime: '0:00',
         currentSong: currentSongMock[0],
         currentPlayback: currentPlaybackMock[0],
+        currentList: [currentSongMock[0]],
         AudioPlayer: Audio,
       },
     },

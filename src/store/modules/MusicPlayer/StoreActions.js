@@ -15,11 +15,14 @@ export default {
         state.MusicPlayer.isFirstPlay = true;
         state.MusicPlayer.isPlaying = false;
       };
-      // send the request to server that we want to play this song
-      const Response = await PlayerRequests.playTrack(
+      let trackid;
+      if (process.env.VUE_APP_API_CLIENT === 'server') {
         // eslint-disable-next-line no-underscore-dangle
-        state.MusicPlayer.currentSong.track._id,
-      );
+        trackid = state.MusicPlayer.currentSong.track._id;
+      } else if (process.env.VUE_APP_API_CLIENT === 'mock') {
+        trackid = state.MusicPlayer.currentSong.track.id;
+      }
+      const Response = await PlayerRequests.playTrack(trackid);
       // check if the response was correct
       if (Response === false) return;
       // get song URL from mock or server
