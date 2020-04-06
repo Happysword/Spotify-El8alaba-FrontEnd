@@ -3,13 +3,20 @@
 </template>
 
 <script>
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
+import api from 'api-client';
+
 export default {
   name: 'LogOut',
   // Re-route to login if no user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (!currentUser) {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
+
+      if (notLoggedIn) {
         next('/login');
       } else {
         next();
@@ -17,17 +24,14 @@ export default {
     });
   },
 
-  mounted() {
+  async mounted() {
     // Remove the current user
-    localStorage.removeItem('currentUser');
-
     // Remove all cookies
-    const cookies = document.cookie;
-    cookies.split(';').forEach((cookie) => {
-      const key = cookie.split('=')[0];
-      document.cookie = `${key}=; expires = Thu, 01 Jan 1970 00:00:00 UTC`;
-    });
-    this.$router.push('/');
+    const response = await api.logoutUser();
+
+    if (response.status === 200) {
+      this.$router.push('/');
+    }
   },
 };
 </script>

@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 import validation from '@/store/modules/auth/validation';
 
 describe('validation.js', () => {

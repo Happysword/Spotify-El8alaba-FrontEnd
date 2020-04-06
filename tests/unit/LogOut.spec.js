@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 // Libraries
 import Vue from 'vue';
 import Vuetify from 'vuetify';
@@ -22,34 +25,26 @@ describe('LogOut.vue', () => {
   test('localStorage is empty and all cookies are deleted', () => {
     const currentUser = {
       data: {
-        external_urls: [],
-        genres: [],
+        type: 'user',
+        product: 'free',
+        image: null,
+        currentlyPlaying: null,
+        followers: null,
         _id: '5e6b95fda1903935ccb355a0',
-        userInfo: {
-          type: 'user',
-          product: 'free',
-          image: null,
-          currentlyPlaying: null,
-          followers: null,
-          _id: '5e6b95fda1903935ccb355a0',
-          name: 'Admin',
-          email: 'admin@admin.com',
-          gender: 'm',
-          birthdate: '1999-01-25T00:00:00.000Z',
-          country: 'EG',
-          devices: [],
-          __v: 0,
-          uri: 'spotify:user:5e6b95fda1903935ccb355a0',
-          id: '5e6b95fda1903935ccb355a0',
-        },
-        followers: [],
-        images: [],
+        name: 'Admin',
+        email: 'admin@admin.com',
+        gender: 'm',
+        birthdate: '1999-01-25T00:00:00.000Z',
+        country: 'EG',
+        devices: [],
+        __v: 0,
         uri: 'spotify:user:5e6b95fda1903935ccb355a0',
+        id: '5e6b95fda1903935ccb355a0',
       },
     };
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    document.cookie = 'key=value;';
-    expect(document.cookie).not.toEqual('');
+    document.cookie = 'loggedIn=mock_token;';
+    expect(document.cookie.search('loggedIn')).not.toEqual(-1);
     expect(localStorage.currentUser).not.toEqual(undefined);
 
     // Mount the component
@@ -59,7 +54,7 @@ describe('LogOut.vue', () => {
       router,
     });
 
-    expect(document.cookie).toEqual('');
+    expect(document.cookie.search('loggedIn')).toEqual(-1);
     expect(localStorage.currentUser).toEqual(undefined);
   });
 });

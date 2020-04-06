@@ -3,7 +3,7 @@
 <v-content class="wrap cover">
   <!-- Main app bar -->
   <v-app-bar color="black" class="trans-bar">
-    <router-link to="/">
+    <router-link to="/home">
       <v-img id="logo"
              src="../../assets/imgs/El-8alaba.png"
              class="mt-4"
@@ -64,7 +64,7 @@
 
           <!-- Route content -->
           <v-tab-item v-for="(tab, i) in tabs" :key="i">
-            <v-card class="pa-4" flat tile id="tab-content">
+            <v-card class="pa-0" flat tile id="tab-content">
               <router-view/>
             </v-card>
           </v-tab-item>
@@ -80,18 +80,36 @@
 <script>
 import avatar from '../../assets/imgs/avatar.png';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'Account',
   // Re-route to login if no user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (!currentUser) {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
+
+      if (notLoggedIn) {
         next('/login');
       } else {
         next();
       }
     });
+  },
+
+  beforeRouteUpdate(to, from, next) {
+    // Set the chosen tab to the current route
+    const route = to.name;
+
+    this.currentTab = -1;
+    this.tabs.some((t) => {
+      this.currentTab += 1;
+      return t.title.replace(' ', '') === route;
+    });
+
+    next();
   },
 
   created() {
@@ -106,10 +124,8 @@ export default {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
 
-    const { image } = currentUser.data.userInfo;
-    if (image) {
-      this.image = image;
-    }
+    const { image } = currentUser.data;
+    if (image) this.image = image;
   },
 
   data: () => ({

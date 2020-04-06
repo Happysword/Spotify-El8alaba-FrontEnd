@@ -1,6 +1,6 @@
 <template>
 <v-app>
-<v-content>
+<v-content class="pa-4">
   <!-- Title -->
   <p id="title"
      class="display-2 font-weight-bold pt-6 pl-3 mb-12">
@@ -67,8 +67,24 @@
 <script>
 import api from 'api-client';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'AccountOverview',
+  // Re-route to login if no user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
+
+      if (notLoggedIn) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  },
   created() {
     document.title = 'Account Overview - Spotify El8alaba';
   },
@@ -94,7 +110,7 @@ export default {
 
     // 200 OK
     if (response.status === 200) {
-      const userProfile = response.data.data.user;
+      const userProfile = response.data;
 
       // Username
       this.profileInfo[0].data = userProfile.id;

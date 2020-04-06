@@ -79,8 +79,29 @@
 </template>
 
 <script>
+import cookies from '@/store/modules/auth/cookies';
+
 export default {
   name: 'Landing',
+
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
+
+      if (loggedIn) {
+        next('/home');
+      } else {
+        // Remove the current user
+        // Remove the loggedIn cookie
+        // Continue
+        cookies.clearData(['currentUser'], ['loggedIn']);
+        next();
+      }
+    });
+  },
+
   data: () => ({
     buttons: [
       {
