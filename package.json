@@ -11,6 +11,8 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "register-service-worker": "^1.6.2",
     "rgbaster": "^2.1.1",
     "vue": "^2.6.11",
@@ -34,6 +36,7 @@
     "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-vue": "^6.1.2",
+    "jsdoc": "^3.6.4",
     "lint-staged": "^9.5.0",
     "null-loader": "^3.0.0",
     "sass": "^1.25.0",

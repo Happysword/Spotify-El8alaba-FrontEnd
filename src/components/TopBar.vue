@@ -6,16 +6,24 @@
           color="#04040470"
           small
           fab
-          class="mx-2"
+          id="left-chevron"
+          class="mx-2 mt-2"
           @click="changeRoute(-1)"
         >
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
 
-        <v-btn color="#04040470" small fab class="mx-2" @click="changeRoute(1)">
+        <v-btn
+          color="#04040470"
+          small
+          fab
+          class="mx-2 mt-2"
+          id="right-chevron"
+          @click="changeRoute(1)"
+        >
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
-        <v-col cols="12" xs="12" sm="6" md="3" lg="4" justify>
+        <v-col cols="12" xs="12" sm="6" md="3" lg="4" justify class="mt-3">
           <v-text-field
             prepend-inner-icon="mdi-magnify"
             rounded
@@ -24,6 +32,7 @@
             height="30"
             class="searchbar-pos"
             light
+            id="search-bar"
             v-if="$store.state.searching"
             v-model="$route.params.id"
             v-on:input="searching()"
@@ -33,17 +42,18 @@
         </v-col>
 
         <v-spacer></v-spacer>
-
-        <v-btn
-          rounded
-          outlined
-          class="mx-4"
-          route
-          to="/premium"
-          id="upgrade-btn"
-          >Upgrade</v-btn
-        >
-
+        <v-col lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
+          <v-btn
+            rounded
+            outlined
+            class="mx-4"
+            route
+            to="/premium"
+            id="upgrade-btn"
+            >Upgrade</v-btn
+          >
+        </v-col>
+        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
         <div class="text-center" id="user-btn">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
@@ -72,12 +82,14 @@
                 v-for="(item, index) in items"
                 :key="index"
                 :to="item.route"
+                :id="item.id"
               >
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
         </div>
+        </v-col>
       </v-row>
     </v-container>
   </v-app-bar>
@@ -97,17 +109,25 @@ export default {
       {
         title: 'Account',
         route: '/account',
+        id: 'account-item',
       },
       {
         title: 'Log Out',
         route: '/logout',
+        id: 'logout-item',
       },
     ],
   }),
   methods: {
+    /**
+     * Changes the Route to forwad or backward for the Arrows
+     */
     changeRoute(direction) {
       this.$router.go(direction);
     },
+    /**
+     * Changes the Route to Search for the Input
+     */
     searching() {
       this.input = this.$route.params.id;
       this.$router.replace(`/home/search/${this.input}`);
@@ -122,6 +142,7 @@ export default {
         } catch (error) {
           name = this.$store.state.currentUser.username;
         }
+        if (name === undefined) name = 'User';
         return name;
       },
     },
@@ -143,7 +164,7 @@ export default {
 #upgrade-btn {
   border: 2px solid white;
   font-size: 12px;
-  width: 12%;
+  width: 70%;
   float: right;
 }
 #upgrade-btn:hover {

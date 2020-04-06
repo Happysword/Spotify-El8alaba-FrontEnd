@@ -3,7 +3,10 @@
     <v-spacer></v-spacer>
     <v-flex shrink>
       <v-btn @click="queueChange" text x-small id="queue-btn">
-        <v-icon :color="isInQueue === true ? 'green' : 'grey'" dense medium
+        <v-icon
+          :color="$route.name === 'queue' ? 'green' : 'grey'"
+          dense
+          medium
           >mdi-playlist-play</v-icon
         >
       </v-btn>
@@ -35,7 +38,7 @@
         height="5"
         rounded
         @change="setVolume"
-        v-model="$store.state.MusicPlayer.currentPlayback.device.volume_percent"
+        v-model="$store.state.MusicPlayer.volumePercent"
       >
       </v-progress-linear>
     </v-flex>
@@ -52,6 +55,9 @@ export default {
   }),
   methods: {
     ...mapActions(['setVolume', 'toggleSound']),
+    /**
+     * Changes the Route to Queue or to the Previos route if in Queue
+     */
     queueChange() {
       if (this.$router.currentRoute.name === 'queue') {
         this.$router.go(-1);

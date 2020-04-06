@@ -17,9 +17,9 @@ export default {
   data() {
     return {
       libraryLinks: [
-        { value: 'Playlists', route: '/library/playlists' },
-        { value: 'Albums', route: '/library/albums' },
-        { value: 'Artists', route: '/library/artists' },
+        { value: 'Playlists', route: '/home/library/playlists' },
+        { value: 'Albums', route: '/home/library/albums' },
+        { value: 'Artists', route: '/home/library/artists' },
       ],
     };
   },

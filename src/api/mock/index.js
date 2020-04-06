@@ -27,7 +27,10 @@ const fetch = (mockData, time = 0) => new Promise((resolve) => {
     resolve(mockData);
   }, time);
 });
-
+/**
+ * @module
+ * Mock Requests
+ */
 export default {
   /**
    * Fetches all users in the mock data
@@ -357,6 +360,17 @@ export default {
     return false;
   },
   /**
+   * it sends a request to the server to set the current playing track
+   * @param {string} ID the ID of the song played
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async playTrack(ID) {
+    if (ID) {
+      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    }
+    return false;
+  },
+  /**
    * Save a Liked Track to Server
    * @param {string} ID the id of the track to be saved
    * @return {Boolean} a Boolean True if successful and false if failed
@@ -595,13 +609,25 @@ export default {
    * @return {Object}  An object containing all songs in a given album of ID equals to id
    */
   async fetchAlbumSongs(id) {
-    const allSongs = await fetch(playlistSongs, 200);
-    for (let i = 0; i < allSongs.length; i += 1) {
-      if (allSongs[i].id === id) {
-        return allSongs[i].items;
+    // const allSongs = await fetch(playlistSongs, 200);
+    // for (let i = 0; i < allSongs.length; i += 1) {
+    //   if (allSongs[i].id === id) {
+    //     return allSongs[i].items;
+    //   }
+    // }
+    // return {};
+    const album = await fetch(albums, 200);
+    const songs = [];
+    if (album[0].items[0].album.id === id) {
+      for (let i = 0; i < album[0].items[0].album.tracks.items.length; i += 1) {
+        album[0].items[0].album.tracks.items[i].album = {
+          artists: album[0].items[0].album.artists,
+          images: album[0].items[0].album.images,
+        };
+        songs[i] = { track: album[0].items[0].album.tracks.items[i] };
       }
     }
-    return {};
+    return songs;
   },
   /**
    * Fetches a list from the mock data

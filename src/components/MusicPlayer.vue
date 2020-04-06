@@ -30,13 +30,8 @@ export default {
   methods: {
     ...mapActions(['togglePlayact']),
   },
-
   async created() {
     this.$store.state.MusicPlayer.AudioPlayer = new Audio();
-    this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
-      this.$store.dispatch('togglePlayact');
-      this.$store.state.MusicPlayer.isFirstPlay = true;
-    };
     this.$store.state.MusicPlayer.AudioPlayer.ontimeupdate = () => {
       this.$store.state.MusicPlayer.currentBufferPerc = (this.$store.state.MusicPlayer
         .AudioPlayer.currentTime / this.$store.state.MusicPlayer.AudioPlayer.duration) * 100;

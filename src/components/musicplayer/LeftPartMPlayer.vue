@@ -17,7 +17,7 @@
             <router-link
               :to="
                 '/home/album/' +
-                  $store.state.MusicPlayer.currentSong.track.album.artists[0].id
+                  $store.state.MusicPlayer.currentSong.track.album._id
               "
               tag="button"
               :disabled="isLinkDisabled"
@@ -26,8 +26,9 @@
               <v-img
                 max-height="60"
                 max-width="60"
-                :src="
-                  $store.state.MusicPlayer.currentSong.track.album.images[0].url
+                :src=" $store.state.MusicPlayer.currentSong.track.album.images.length !== 0 ?
+                  $store.state.MusicPlayer.currentSong.track.album.images[0].url :
+                  'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
                 "
                 contain
                 @mouseenter="imageButton = true"
@@ -53,8 +54,7 @@
               <router-link
                 :to="
                   '/home/album/' +
-                    $store.state.MusicPlayer.currentSong.track.album.artists[0]
-                      .id
+                    $store.state.MusicPlayer.currentSong.track.album._id
                 "
                 id="song-name"
               >
@@ -65,7 +65,6 @@
                 :to="
                   '/home/artist/' +
                     $store.state.MusicPlayer.currentSong.track.album.artists[0]
-                      .id
                 "
                 id="artist-name"
               >
@@ -143,15 +142,22 @@ export default {
     timeout: 2000,
   }),
   methods: {
+    // TODO[@Seif] Change the heart from the liked songs request and change the playback id to song
+
+    /**
+    *Changes the Like State of the Song In the Player and sends the request to the server
+    */
     async changeHeart() {
       let R;
       if (this.heartcolor) {
         R = await PlayerRequests.deleteTrack(
-          this.$store.state.MusicPlayer.currentPlayback.item.id,
+          // eslint-disable-next-line no-underscore-dangle
+          this.$store.state.MusicPlayer.currentSong.track._id,
         );
       } else {
         R = await PlayerRequests.saveTrack(
-          this.$store.state.MusicPlayer.currentPlayback.item.id,
+          // eslint-disable-next-line no-underscore-dangle
+          this.$store.state.MusicPlayer.currentSong.track._id,
         );
       }
       if (R) {
@@ -161,6 +167,9 @@ export default {
         else this.text = 'Removed from your Liked Songs';
       }
     },
+    /**
+     *Changes Whether the pip shows or dissapears **still no implemented**
+     */
     changeHoverPic() {
       this.hoverPic = !this.hoverPic; // implement this
     },

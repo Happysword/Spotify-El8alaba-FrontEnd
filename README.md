@@ -1,4 +1,4 @@
-# front
+# Spotify-el8alaba
 
 ## Project setup
 ```
@@ -23,6 +23,14 @@ npm run test
 ### Lints and fixes files
 ```
 npm run lint
+```
+### Runs Unit Tests and Creates the Coverage Reports
+```
+npx jest --coverage
+```
+### Functional Documentation
+```
+./node_modules/.bin/jsdoc --readme README.md -r src -d doc
 ```
 
 ### Customize configuration

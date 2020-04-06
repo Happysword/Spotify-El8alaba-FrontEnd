@@ -1,5 +1,9 @@
 import client from 'api-client';
 
+/**
+ * @module
+ * Player Requests
+ */
 export default {
   /**
    * Fetches Current Song in the mock data
@@ -127,6 +131,19 @@ export default {
       const response = await client
         .setVolume(volumePercent)
         .then((Promisedata) => Promisedata);
+      return response;
+    }
+    return false;
+  },
+
+  /**
+   * it sends a request to the server to set the current playing track
+   * @param {string} ID the ID of the song played
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async playTrack(ID) {
+    if (typeof ID === 'string') {
+      const response = await client.playTrack(ID).then((Promisedata) => Promisedata);
       return response;
     }
     return false;

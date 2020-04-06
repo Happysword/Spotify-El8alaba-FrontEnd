@@ -6,8 +6,14 @@
         </playlistCard>
       </v-col>
       <v-col sm='12' md='6' lg="8" class="my-1 pl-0 text-truncate">
-        <songsCard v-for="(song,index) in songs" :key="index"
-          :counter="index" :song="song" :list="songs">
+        <songsCard v-for="(song,index) in songs"
+          :key="index"
+          :counter="index"
+          :song="song"
+          :list="songs"
+          :listid="listInfo.id"
+          :listType="listInfo.type"
+        >
         </songsCard>
       </v-col>
     </v-row>
@@ -54,6 +60,7 @@ export default {
             },
           ],
           name: 'Liked Songs',
+          type: 'Liked',
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
@@ -77,6 +84,7 @@ export default {
         //   this.songs[i] = { track: album.tracks[i] };
         // }
         this.songs = await server.fetchAlbumSongs(this.listInfo.id);
+        console.log(this.songs);
       } else {
         return;
       }
