@@ -3,7 +3,8 @@
     class="mx-auto px-5 white--text"
     color="#00000000"
     flat
-    max-width="344">
+    max-width="344"
+    v-on:="changePlayEvent">
     <v-img
       @mouseover="overlay=true"
       @mouseout="overlay= play"
@@ -102,6 +103,9 @@
       </v-tooltip>
     </v-card-actions>
     <p class="text-center grey--text" id="songNum">
+      <span class="text-center grey--text" id="albumDate" v-if="listInfo.type === 'album'">
+        {{listInfo.release_date.split('-')[0]}} .
+      </span>
       {{songsNum}} Songs
     </p>
   </v-card>
@@ -128,6 +132,7 @@ export default {
     play: false,
 
   }),
+
   props: {
     songsNum: Number,
     show: Boolean,
@@ -136,6 +141,7 @@ export default {
     owners: Array,
     listInfo: Object,
   },
+
   methods: {
     /**
      * Change status of the current song
@@ -145,42 +151,70 @@ export default {
       this.overlay = this.play;
       EventBus.$emit('pause', this.play);
     },
+
     /**
      * Add or remove Current List to/from user's library
      */
     async changeLiked() {
       store.commit('changeLiked');
       if (store.state.liked === true) {
-        const response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
-        console.log(response);
-        if (response.status === 201) {
-          this.snackbar = true;
-          this.text = 'Saved to Your Library';
+        if (this.listInfo.type === 'album') {
+          // const response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
+          const response = await server.SaveAlbum(this.listInfo.id);
+          console.log(response);
+          if (response.status === 201) {
+            this.snackbar = true;
+            this.text = 'Saved to Your Library';
+          }
+        } else if (this.listInfo.type === 'playlist') {
+          // TODO[@Naiera]: Follow this playlist
         }
-      } else {
-        const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
-        console.log(response);
-        if (response.status === 200) {
-          this.snackbar = true;
-          this.text = 'Removed from Your Library';
+      } else if (store.state.liked === false) {
+        if (this.listInfo.type === 'album') {
+          // const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
+          const response = await server.RemoveAlbum(this.listInfo.id);
+          console.log(response);
+          if (response.status === 200) {
+            this.snackbar = true;
+            this.text = 'Removed from Your Library';
+          }
+        } else if (this.listInfo.type === 'playlist') {
+          // TODO[@Naiera]: Unfollow this playlist
         }
       }
     },
   },
+
   async created() {
-    const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
-    if (response.data.length !== 0 && response.data[0] === true) {
-      store.state.liked = true;
-    } else {
+    if (this.listInfo.type === 'album') {
+      // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
+      const response = await server.CheckAlbum(this.listInfo.id);
+      if (response.data.length !== 0 && response.data[0] === true) {
+        store.state.liked = true;
+      } else {
+        store.state.liked = false;
+      }
+    } else if (this.listInfo.type === 'playlist') {
+      // TODO[@Naiera]: Check if the playlist is followed or not
       store.state.liked = false;
     }
   },
-  mounted() {
-    EventBus.$on('changePlay', (play) => {
-      this.overlay = play;
-      this.play = play;
-    });
-  },
+
+  // /**
+  //  * Check if there is an event
+  //  */
+  // mounted() {
+  //   EventBus.$on('changePlay', (play, id) => {
+  //     if (this.listInfo.id === id) {
+  //       this.overlay = play;
+  //       this.play = play;
+  //     }
+  //   });
+  // },
+
+  /**
+   * Update play icon
+   */
   updated() {
     if (this.play === true) {
       this.playSong = 'Pause';
@@ -188,8 +222,25 @@ export default {
       this.playSong = 'Play';
     }
   },
+
   components: {
     dropDown,
+  },
+
+  computed: {
+    /**
+     * Check if this list is the current list or not then set the status of it
+     */
+    changePlayEvent() {
+      EventBus.$on('changePlay', (play, id) => {
+        if (this.listInfo.id === id) {
+          this.overlay = play;
+          this.play = play;
+          console.log('hi');
+        }
+      });
+      return true;
+    },
   },
 };
 </script>
