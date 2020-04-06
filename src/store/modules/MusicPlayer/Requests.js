@@ -1,5 +1,9 @@
 import client from 'api-client';
 
+/**
+ * @module
+ * Player Requests
+ */
 export default {
   /**
    * Fetches Current Song in the mock data

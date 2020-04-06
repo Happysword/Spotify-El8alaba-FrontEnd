@@ -3,6 +3,10 @@ import axios from 'axios';
 // HmanA6399: Please use this whenever you want to communicate with the server
 import api from '../../common/config';
 
+/**
+ * @module
+ * Server Requests
+ */
 export default {
   // @todo[XL3] See if this method will be removed
   // fetchUsers() {

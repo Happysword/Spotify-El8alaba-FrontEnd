@@ -136,8 +136,6 @@ export default {
       } else {
         this.showIcon = 'mdi-play';
       }
-      console.log(this.play);
-      console.log(store.state.MusicPlayer.isPlaying);
     },
   },
 

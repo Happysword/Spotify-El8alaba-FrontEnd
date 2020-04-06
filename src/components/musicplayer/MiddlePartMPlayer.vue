@@ -120,6 +120,9 @@ export default {
   }),
   methods: {
     ...mapActions(['togglePlayact', 'playNewSong']),
+    /**
+     * Skips to the Next Song in the queue
+     */
     async skipNext() {
       // await PlayerRequests.skipNext();
       const listlen = this.$store.state.MusicPlayer.currentList.length;
@@ -134,6 +137,9 @@ export default {
       // the song is played for the first time and play it
       this.$store.dispatch('playNewSong');
     },
+    /**
+     * Skips to the previous Song in the queue
+     */
     async skipPrevious() {
       // await PlayerRequests.skipPrevious();
       const listlen = this.$store.state.MusicPlayer.currentList.length;
@@ -148,6 +154,9 @@ export default {
       // the song is played for the first time and play it
       this.$store.dispatch('playNewSong');
     },
+    /**
+     * Toggles Repeat to One Song or Off
+     */
     async toggleRepeat() {
       let Response;
       if (this.repeatState === 'off') {
@@ -163,6 +172,9 @@ export default {
         this.$store.state.MusicPlayer.AudioPlayer.loop = false;
       }
     },
+    /**
+     * Toggles the Shuffle State of the Queue to On or Off
+     */
     async toggleShuffle() {
       const Response = await PlayerRequests.toggleShuffle(!this.shuffleState);
       if (Response) {
@@ -190,6 +202,9 @@ export default {
       }
     },
     // TODO[@Seif] check why seek bar doesnt work after sometime
+    /**
+     * Seeks the Bar of the Player to the Position clicked by the User
+     */
     async seekPosition() {
       const seekedTime = (this.$store.state.MusicPlayer.currentBufferPerc / 100)
       * this.$store.state.MusicPlayer.AudioPlayer.duration;
@@ -236,8 +251,6 @@ export default {
         this.$store.state.MusicPlayer.isFirstPlay = true;
         this.$store.state.MusicPlayer.isPlaying = false;
       } else {
-        this.$store.dispatch('togglePlayact');
-        this.$store.state.MusicPlayer.isFirstPlay = true;
         this.skipNext();
       }
     };

@@ -143,6 +143,10 @@ export default {
   }),
   methods: {
     // TODO[@Seif] Change the heart from the liked songs request and change the playback id to song
+
+    /**
+    *Changes the Like State of the Song In the Player and sends the request to the server
+    */
     async changeHeart() {
       let R;
       if (this.heartcolor) {
@@ -163,6 +167,9 @@ export default {
         else this.text = 'Removed from your Liked Songs';
       }
     },
+    /**
+     *Changes Whether the pip shows or dissapears **still no implemented**
+     */
     changeHoverPic() {
       this.hoverPic = !this.hoverPic; // implement this
     },

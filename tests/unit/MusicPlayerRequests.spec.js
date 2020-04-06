@@ -1,33 +1,35 @@
 import Requests from '../../src/store/modules/MusicPlayer/Requests';
 
 describe('Requests of Player', () => {
+  it('Checks that objects are returned from the requests', async () => {
+    let data = await Requests.fetchCurrentPlayback();
+    expect(typeof data).toBe('object');
+    data = await Requests.fetchCurrentSong();
+    expect(typeof data).toBe('object');
+  });
+
   it('startPlayback request test', async () => {
-    expect.assertions(1);
     const data = await Requests.startPlayback();
     expect(data).toEqual(true);
   });
 
   it('pausePlayback request test', async () => {
-    expect.assertions(1);
     const data = await Requests.pausePlayback();
     expect(data).toEqual(true);
   });
 
   it('skipNext request test', async () => {
-    expect.assertions(1);
     const data = await Requests.skipNext();
     expect(data).toEqual(true);
   });
 
   it('skipPrevious request test', async () => {
-    expect.assertions(1);
     const data = await Requests.skipPrevious();
     expect(data).toEqual(true);
   });
 
   describe('toggleShuffle request test', () => {
     let data;
-    expect.assertions(3);
 
     it('Sends true to toggleShuffle', async () => {
       data = await Requests.toggleShuffle(true);
@@ -47,7 +49,6 @@ describe('Requests of Player', () => {
 
   describe('toggleRepeat request test', () => {
     let data;
-    expect.assertions(3);
 
     it('Sends off to toggleRepeat', async () => {
       data = await Requests.toggleRepeat('off');
@@ -67,7 +68,6 @@ describe('Requests of Player', () => {
 
   describe('seekPosition request test', () => {
     let data;
-    expect.assertions(3);
 
     it('Sends correct value to seekPosition', async () => {
       data = await Requests.seekPosition(12);
@@ -87,7 +87,6 @@ describe('Requests of Player', () => {
 
   describe('setVolume request test', () => {
     let data;
-    expect.assertions(4);
 
     it('Sends correct value to setVolume', async () => {
       data = await Requests.setVolume(20);

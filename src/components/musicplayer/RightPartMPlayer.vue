@@ -55,6 +55,9 @@ export default {
   }),
   methods: {
     ...mapActions(['setVolume', 'toggleSound']),
+    /**
+     * Changes the Route to Queue or to the Previos route if in Queue
+     */
     queueChange() {
       if (this.$router.currentRoute.name === 'queue') {
         this.$router.go(-1);

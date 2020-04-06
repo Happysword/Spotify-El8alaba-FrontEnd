@@ -1,6 +1,9 @@
 import PlayerRequests from './Requests';
 import api from '../../../common/config';
-
+/**
+ * @module
+ * Store Actions For asynchronus Global Methods
+ */
 export default {
   /**
    * it toggles the play and pause using the mutation in the store after checking
@@ -15,14 +18,9 @@ export default {
         state.MusicPlayer.isFirstPlay = true;
         state.MusicPlayer.isPlaying = false;
       };
-      let trackid;
-      if (process.env.VUE_APP_API_CLIENT === 'server') {
-        // eslint-disable-next-line no-underscore-dangle
-        trackid = state.MusicPlayer.currentSong.track._id;
-      } else if (process.env.VUE_APP_API_CLIENT === 'mock') {
-        trackid = state.MusicPlayer.currentSong.track.id;
-      }
-      const Response = await PlayerRequests.playTrack(trackid);
+      // eslint-disable-next-line no-underscore-dangle
+      let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track._id);
+      if (process.env.VUE_APP_API_CLIENT === 'mock') Response = true;
       // check if the response was correct
       if (Response === false) return;
       // get song URL from mock or server
@@ -30,7 +28,7 @@ export default {
       if (process.env.VUE_APP_API_CLIENT === 'server') {
         // eslint-disable-next-line no-underscore-dangle
         SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentSong.track._id}`;
-      } else if (process.env.VUE_APP_API_CLIENT === 'mock') {
+      } else {
         SongURL = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3';
       }
       state.MusicPlayer.AudioPlayer.src = SongURL;
@@ -101,16 +99,26 @@ export default {
       }
     }
   },
-  async playpauseplaylist({ state, dispatch }, playstatus, song) {
-    if (song === state.MusicPlayer.currentSong) {
-      dispatch('togglePlayact');
-    } else {
+  /**
+   *It changes the current Playback for a song played from a playlist
+   * @param {*} VeuxStore the current store used for the app
+   * @param {*} param an On=bject containing the current state of playback and the song to be played
+   */
+  async playpauseplaylist({ state, dispatch }, param) {
+    if (param.playstatus === true && param.song === state.MusicPlayer.currentSong) {
       state.MusicPlayer.isFirstPlay = true;
       state.MusicPlayer.isPlaying = false;
       state.MusicPlayer.AudioPlayer.pause();
       dispatch('togglePlayact');
+    } else {
+      state.MusicPlayer.isPlaying = true;
+      dispatch('togglePlayact');
     }
   },
+  /**
+   * It Playes the Song in the Store from the Start as a New Song
+   * @param {*} VeuxStore the current store used for the app
+   */
   async playNewSong({ state, dispatch }) {
     state.MusicPlayer.isFirstPlay = true;
     state.MusicPlayer.isPlaying = false;

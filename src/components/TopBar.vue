@@ -119,9 +119,15 @@ export default {
     ],
   }),
   methods: {
+    /**
+     * Changes the Route to forwad or backward for the Arrows
+     */
     changeRoute(direction) {
       this.$router.go(direction);
     },
+    /**
+     * Changes the Route to Search for the Input
+     */
     searching() {
       this.input = this.$route.params.id;
       this.$router.replace(`/home/search/${this.input}`);

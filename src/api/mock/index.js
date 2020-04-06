@@ -27,7 +27,10 @@ const fetch = (mockData, time = 0) => new Promise((resolve) => {
     resolve(mockData);
   }, time);
 });
-
+/**
+ * @module
+ * Mock Requests
+ */
 export default {
   /**
    * Fetches all users in the mock data

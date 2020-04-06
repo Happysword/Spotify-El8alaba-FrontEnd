@@ -15,8 +15,8 @@ describe('Testing the player components', () => {
   Vue.use(Vuetify);
   const localVue = createLocalVue();
   localVue.use(Vuetify);
-  localVue.use(VueRouter);
   localVue.use(Vuex);
+  localVue.use(VueRouter);
   const router = new VueRouter();
   const store = new Vuex.Store({
     state: {
@@ -28,7 +28,8 @@ describe('Testing the player components', () => {
         currentSongTime: '0:00',
         currentSong: currentSongMock[0],
         currentPlayback: currentPlaybackMock[0],
-        currentList: [currentSongMock[0]],
+        currentList: [currentSongMock[0], currentSongMock[0]],
+        currentSongIndexinList: 0,
         AudioPlayer: Audio,
       },
     },
@@ -42,6 +43,7 @@ describe('Testing the player components', () => {
       togglePlayact({ state }) {
         state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
       },
+      playNewSong() {},
     },
   });
 
@@ -100,6 +102,7 @@ describe('Testing the player components', () => {
     expect(data.repeatState).toBe('off');
     expect(data.barHover).toBe(false);
     expect(data.valueFalseBuffer).toBe(0);
+    expect(typeof wrapper.vm.currentSongTime).toBe('string');
 
     it('Checks for Loading of Page Components', async () => {
       expect(wrapper.find('#shuffle-btn').exists()).toBe(true);
@@ -114,18 +117,36 @@ describe('Testing the player components', () => {
       expect(data.shuffleState).toBe(false);
       await wrapper.vm.toggleShuffle();
       expect(data.shuffleState).toBe(true);
+      await wrapper.vm.toggleShuffle();
+      expect(data.shuffleState).toBe(false);
     });
 
     it('Toggle Repeat tests', async () => {
       expect(data.repeatState).toBe('off');
       await wrapper.vm.toggleRepeat();
       expect(data.repeatState).toBe('track');
+      await wrapper.vm.toggleRepeat();
+      expect(data.repeatState).toBe('off');
     });
 
     it('checks toggle play and pause', async () => {
       expect(wrapper.find('#play-btn').exists()).toBe(true);
       await wrapper.vm.togglePlayact();
       expect(wrapper.find('#pause-btn').exists()).toBe(true);
+    });
+
+    it('checks seek to position', async () => {
+      expect(wrapper.vm.$data.valueFalseBuffer).toBe(0);
+      wrapper.vm.seekPosition();
+      expect(wrapper.vm.$data.valueFalseBuffer).toBe(0);
+    });
+
+    it('checks skip next and skip previous', async () => {
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
+      wrapper.vm.skipNext();
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
+      wrapper.vm.skipPrevious();
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
     });
   });
 
@@ -142,6 +163,7 @@ describe('Testing the player components', () => {
     expect(data.barHover).toBe(false);
 
     it('Checks for Loading of Page Components', async () => {
+      wrapper.vm.queueChange();
       expect(wrapper.find('#queue-btn').exists()).toBe(true);
       expect(wrapper.find('#not-mute-btn').exists()).toBe(true);
       expect(wrapper.find('#volume-bar').exists()).toBe(true);

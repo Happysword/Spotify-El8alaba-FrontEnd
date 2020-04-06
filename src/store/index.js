@@ -27,7 +27,7 @@ export default new Vuex.Store({
       currentSongTime: '0:00',
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
-      AudioPlayer: Audio,
+      AudioPlayer: new Audio('http://soundbible.com/grab.php?id=2108&type=wav'),
       navBarImage: false,
       currentList: [currentSongMock[0]],
       currentSongIndexinList: 0,
@@ -35,15 +35,31 @@ export default new Vuex.Store({
   },
 
   mutations: {
+    /**
+     * Sets the Current user to the Store
+     * @param {*} state the State of the Store
+     * @param {*} user The User Object to be Set
+     */
     setCurrentUser(state, user) {
       state.currentUser = user;
     },
+    /**
+     * Toggles the Liked State
+     */
     changeLiked() {
       this.state.liked = !this.state.liked;
     },
+    /**
+     * Toggles the Sound of the Player On or Off
+     * @param {*} state The State of the Store
+     */
     toggleSound(state) {
       state.MusicPlayer.isMute = !state.MusicPlayer.isMute;
     },
+    /**
+     * Toggles the Playback State of the Player
+     * @param {*} state The State of the Store
+     */
     togglePlay(state) {
       state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
     },
