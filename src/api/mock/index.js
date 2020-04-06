@@ -717,4 +717,40 @@ export default {
     }
     return { status: 0 };
   },
+
+  /**
+   * Check if a Playlist is Saved for the Current User or not
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async CheckPlaylist(id) {
+    if (id) {
+      return { data: [false] };
+    }
+    return {};
+  },
+
+  /**
+   * Follow a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async FollowPlaylist(id) {
+    if (id) {
+      return { status: 200 };
+    }
+    return { status: 0 };
+  },
+
+  /**
+   * Unfollow a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async UnfollowPlaylist(id) {
+    if (id) {
+      return { status: 200 };
+    }
+    return { status: 0 };
+  },
 };

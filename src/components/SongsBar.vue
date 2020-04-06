@@ -65,7 +65,19 @@ export default {
     play: false,
   }),
   props: {
-    song: Object,
+    song: {
+      type: Object,
+      default() {
+        return {
+          track: {
+            name: '',
+            album: { name: '' },
+            artists: [{ name: '' }],
+            duration_ms: 0,
+          },
+        };
+      },
+    },
     counter: Number,
     list: Array,
     listid: String,
