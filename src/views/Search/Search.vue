@@ -89,15 +89,14 @@ export default {
   methods: {
     async fetchAllGenres() {
       this.genres = await client.fetchGenres();
+      console.log(this.genres);
       if (this.genres) {
-        this.genres = this.genres.categories.items;
         this.genresExist = true;
       } else this.genres = {};
     },
     async fetchAllPrefG() {
       this.PGenres = await client.fetchPrefGenres();
       if (this.PGenres) {
-        this.PGenres = this.PGenres.categories.items;
         this.PGenresExist = true;
       } else this.PGenres = {};
     },
@@ -107,7 +106,7 @@ export default {
   },
   async created() {
     this.fetchAllGenres();
-    this.fetchAllPrefG();
+    // this.fetchAllPrefG();
     this.RecentSearch = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
     if (this.RecentSearch.length !== 0) {
       this.RecentExist = true;

@@ -742,8 +742,15 @@ export default {
    */
   async fetchGenres() {
     return axios
-      .get(`${api}/api/v1/browse/categories`)
-      .then((response) => response.data)
+      .get(`${api}/api/v1/browse/categories`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        return response.data;
+      })
       .catch((error) => console.log(error));
   },
   /**
@@ -807,7 +814,15 @@ export default {
       }
     }
     return axios
-      .get(`${api}/api/v1/search?q=${x}&type=${z}&limit=6&offset=0`)
+      .get(`${api}/api/v1/search?q=${x}&type=${z}&limit=6&offset=0`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        return response.data;
+      })
       .catch((error) => console.log(error));
   },
 };

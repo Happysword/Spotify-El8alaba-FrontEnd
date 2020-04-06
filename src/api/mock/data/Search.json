@@ -1,8 +1,6 @@
 [
     {
-    "albums": {
-      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=album&offset=0&limit=3",
-      "items": [
+    "albums":  [
         {
           "album_type": "album",
           "artists": [
@@ -298,15 +296,7 @@
           "uri": "spotify:album:1qmAaW25CPUyam9Wrp9ZEu"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=album&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 51
-    },
-    "artists": {
-      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=artist&offset=0&limit=3",
-      "items": [
+    "artists": [
         {
           "external_urls": {
             "spotify": "https://open.spotify.com/artist/5abSRg0xN1NV3gLbuvX24M"
@@ -381,15 +371,7 @@
           "uri": "spotify:artist:28hufYOqPAxtt17zkg2zwX"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=artist&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 9
-    },
-    "tracks": {
-      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=track&offset=0&limit=3",
-      "items": [
+    "tracks":[
         {
           "album": {
             "album_type": "album",
@@ -1102,15 +1084,7 @@
           "uri": "spotify:track:72HOx5h43VZMsbM6VI3J3G"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=track&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 289
-    },
-    "playlists": {
-      "href": "https://api.spotify.com/v1/search?query=amrdiab&type=playlist&offset=0&limit=3",
-      "items": [
+    "playlists": [
         {
           "collaborative": false,
           "description": "",
@@ -1229,13 +1203,7 @@
           "type": "playlist",
           "uri": "spotify:playlist:5iKYvhddpkuAOzOvrLRznN"
         }
-      ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=amrdiab&type=playlist&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 951
-    }
+      ]
   },
   {
     "albums": {

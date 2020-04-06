@@ -217,31 +217,43 @@ export default {
       this.albumsExist = false;
       this.NoResult = false;
       const response = await Client.fetchSearch(this.$route.params.id);
+      console.log(response.albums.length);
       if (response) {
         if (response.artists) {
-          this.artists = response.artists.items;
-          this.artistsExist = true;
+          if (response.artists.length > 0) {
+            this.artists = response.artists;
+            this.artistsExist = true;
+          }
         }
         if (response.albums) {
-          this.albums = response.albums.items;
-          this.albumsExist = true;
+          if (response.albums.length > 0) {
+            this.albums = response.albums;
+            this.albumsExist = true;
+            console.log(this.albumsExist);
+          }
         }
         if (response.playlists) {
-          this.playlists = response.playlists.items;
-          this.playlistsExist = true;
+          if (response.playlists.length > 0) {
+            this.playlists = response.playlists;
+            this.playlistsExist = true;
+          }
         }
         if (response.tracks) {
-          this.tracks = response.tracks.items;
-          this.tracksExist = true;
+          if (response.tracks.length > 0) {
+            this.tracks = response.tracks;
+            this.tracksExist = true;
+          }
         }
-        if (this.artists[0].popularity >= this.tracks[0].popularity) {
-          const top = this.artists[0];
-          this.top = top;
-          this.imageTop = this.top.images[0].url;
-        } else {
-          const top = this.tracks[0];
-          this.top = top;
-          this.imageTop = this.top.album.images[0].url;
+        if (this.tracksExist && this.artistsExist) {
+          if (this.artists[0].popularity >= this.tracks[0].popularity) {
+            const top = this.artists[0];
+            this.top = top;
+            this.imageTop = this.top.images[0].url;
+          } else {
+            const top = this.tracks[0];
+            this.top = top;
+            this.imageTop = this.top.album.images[0].url;
+          }
         }
       } else {
         this.NoResult = true;
