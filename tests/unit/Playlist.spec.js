@@ -33,7 +33,7 @@ describe('SongsBar.vue', () => {
     expect(wrapper.find('#showIcon').exists()).toEqual(true);
     expect(wrapper.find('#songName').exists()).toEqual(true);
     expect(wrapper.find('#songInfo').exists()).toEqual(true);
-    expect(wrapper.find('#dotsIcon').exists()).toEqual(false);
+    expect(wrapper.find('#dotsIcon').exists()).toEqual(true);
     expect(wrapper.find('#duration').exists()).toEqual(true);
   });
 });
