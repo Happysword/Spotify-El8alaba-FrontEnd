@@ -217,12 +217,12 @@ export default {
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
       const userID = JSON.parse(localStorage.getItem('currentUser'));
       const token = JSON.parse(localStorage.getItem('currentUser'));
-
       if (userID === null && token === null) {
         this.userID = 'user';
         this.token = 'token';
       } else {
-        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        console.log(JSON.parse(localStorage.getItem('currentUser')));
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.userInfo._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 

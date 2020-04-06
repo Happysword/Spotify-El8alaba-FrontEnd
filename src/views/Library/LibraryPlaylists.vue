@@ -40,7 +40,7 @@ export default {
         this.userID = 'user';
         this.token = 'token';
       } else {
-        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.user._id;
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.userInfo._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 

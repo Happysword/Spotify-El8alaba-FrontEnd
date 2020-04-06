@@ -62,10 +62,10 @@ export default {
           name: 'Liked Songs',
           type: 'Liked',
         };
-        this.show = false;
-        const tracks = await server.fetchSavedTracks();
-        // this.listInfo = await server.fetchList('5e889f20e45776773ac89009');
-        // this.songs = await server.fetchSongs('5e889f20e45776773ac89009');
+        // this.show = false;
+        // const tracks = await server.fetchSavedTracks();
+        this.listInfo = await server.fetchList('5e889f20e45776773ac89009');
+        this.songs = await server.fetchSongs('5e889f20e45776773ac89009');
         // this.songs = this.listInfo.tracks.items;
         // if (tracks !== {}) {
         //   for (let i = 0; i < tracks.length; i += 1) {
@@ -73,7 +73,7 @@ export default {
         //     tracks[i].track.album = { name: 'Album' };
         //   }
         // }
-        this.songs = tracks;
+        // this.songs = tracks;
       } else if (this.$route.name === 'playlist') {
         this.listInfo = await server.fetchList(this.$route.params.id);
         this.songs = await server.fetchSongs(this.listInfo.id);
@@ -93,8 +93,8 @@ export default {
       if (this.listInfo.images.length === 0) {
         this.listInfo.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
       }
-      console.log(this.songs);
-      console.log(this.listInfo);
+      // console.log(this.songs);
+      // console.log(this.listInfo);
       const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
       EventBus.$emit('changeColor', result[0].color);
       this.ready = true;

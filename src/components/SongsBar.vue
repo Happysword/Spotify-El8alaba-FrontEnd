@@ -13,7 +13,7 @@
       @dblclick="changeicon(0)"
     >
       <v-card-actions>
-        <v-icon id= "showIcon" :color="color" @click="changeicon(2)">
+        <v-icon id= "showIcon" :color="color" @click="changeicon(0)">
           {{ showIcon }}
         </v-icon>
         <v-list-item two-line class="text-truncate d-inline-block">
@@ -136,8 +136,6 @@ export default {
       } else {
         this.showIcon = 'mdi-play';
       }
-      console.log(this.play);
-      console.log(store.state.MusicPlayer.isPlaying);
     },
   },
 

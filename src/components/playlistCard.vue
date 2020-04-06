@@ -195,6 +195,9 @@ export default {
       response = await server.CheckAlbum(this.listInfo.id);
     } else if (this.listInfo.type === 'playlist') {
       response = await server.CheckPlaylist(this.listInfo.id);
+      console.log(response);
+    } else {
+      return;
     }
     if (response.data.length !== 0 && response.data[0] === true) {
       store.state.liked = true;
@@ -239,7 +242,6 @@ export default {
         if (this.listInfo.id === id) {
           this.overlay = play;
           this.play = play;
-          console.log('hi');
         }
       });
       return true;
