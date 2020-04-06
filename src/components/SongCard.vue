@@ -4,7 +4,7 @@
     v-model="snackbar"
     color="#2E77D0"
     :timeout="3000"
-    class="mb-12 pb-12 text-center"
+    class="mb-12 pb-12 text-center" id="snackbarID"
     >
     <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
     </v-snackbar>
@@ -21,18 +21,21 @@
           height="285"
           @click="CardClickLink()"
           @contextmenu.prevent="on.click"
+          id="cardID"
         >
           <v-container fluid v-if="imagesExist">
-            <v-img :src="images[0].url" height="150px"></v-img>
+            <v-img :src="images[0].url" id="imageID" height="150px"></v-img>
           </v-container>
-          <v-card-title class="font-weight-bold subtitle-2">{{name}}</v-card-title>
+          <v-card-title id="nameID" class="font-weight-bold subtitle-2">{{name}}</v-card-title>
 
-          <v-card-subtitle class="caption" v-if="!showActionButton && type === 'playlist'">
+          <v-card-subtitle id="descriptionID"
+           class="caption" v-if="!showActionButton && type === 'playlist'">
             {{description | shorten}}
           </v-card-subtitle>
 
-          <v-card-subtitle class="caption" v-if="!showActionButton && type === 'album'">
-            {{name}}
+          <v-card-subtitle class="caption" id="artistNameID"
+           v-if="!showActionButton && type === 'album'">
+            {{artistName}}
           </v-card-subtitle>
 
           <v-card-actions>
@@ -46,8 +49,8 @@
               @mousedown.stop
               @click.stop="showPlayButton = !showPlayButton"
             >
-              <v-icon color="white" v-show="showPlayButton">mdi-play</v-icon>
-              <v-icon color="white" v-show="!showPlayButton">mdi-pause</v-icon>
+              <v-icon color="white" id="playID" v-show="showPlayButton">mdi-play</v-icon>
+              <v-icon color="white" id="pauseID" v-show="!showPlayButton">mdi-pause</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -83,6 +86,7 @@ export default {
     tracks: Object,
     type: String,
     uri: String,
+    artistName: String, // For Albums only
   },
   data() {
     return {
@@ -124,9 +128,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      if (index === 0) {
-        console.log('Start Radio');
-      } else if (index === 1) {
+      if (index === 1) {
         if (this.type === 'playlist') {
           if (this.isFollowing === false) {
             client.followaPlaylist(this.id, this.token).then((res) => {
@@ -211,8 +213,10 @@ export default {
   },
   created() {
     this.imagesExist = false;
-    if (this.images[0]) {
-      this.imagesExist = true;
+    if (this.images) {
+      if (this.images[0]) {
+        this.imagesExist = true;
+      }
     }
   },
 };
