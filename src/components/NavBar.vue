@@ -221,12 +221,11 @@ export default {
         this.userID = 'user';
         this.token = 'token';
       } else {
-        console.log(JSON.parse(localStorage.getItem('currentUser')));
-        this.userID = JSON.parse(localStorage.getItem('currentUser')).data.userInfo._id;
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchCurrentUserPlaylists(this.userID, this.token)
+      client.fetchCurrentUserPlaylists(this.token)
         .then((response) => {
           this.playlists = response;
         });

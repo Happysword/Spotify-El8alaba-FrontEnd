@@ -15,6 +15,7 @@ import playlistSongs from './data/playlistSongs.json';
 import genresPlaylists1 from './data/Genres-Playlists.json';
 import genresPlaylists2 from './data/Genres-Playlists2.json';
 import search from './data/Search.json';
+import getaUsersProfile from './data/Get-A-Users-Profile.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -541,16 +542,37 @@ export default {
   },
   /**
    * Get All the playlists of the current user
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserPlaylists(token) {
+    console.log(token);
+    return fetch(currentUserPlaylists, 100);
+  },
+  /**
+   * Get All the playlists of the certain user
    * @param {string} userID Current User ID
    * @param {string} token Token of the current user
    */
-  async fetchCurrentUserPlaylists(userID, token) {
+  async fetchaListOfUserPlaylists(userID, token) {
     console.log(token);
     let dummy = userID || true;
     if (dummy) {
       dummy += dummy;
     }
     return fetch(currentUserPlaylists, 100);
+  },
+  /**
+   * Return the data of a specific user
+   * @param {string} userID A user id
+   * @param {string} token Token of the current user
+   */
+  async fetchUserProfile(userID, token) {
+    console.log(token);
+    let dummy = userID || true;
+    if (dummy) {
+      dummy += dummy;
+    }
+    return fetch(getaUsersProfile, 500);
   },
   /**
    * Get all the Artist followed by the user
