@@ -542,10 +542,18 @@ export default {
   },
   /**
    * Get All the playlists of the current user
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserPlaylists(token) {
+    console.log(token);
+    return fetch(currentUserPlaylists, 100);
+  },
+  /**
+   * Get All the playlists of the certain user
    * @param {string} userID Current User ID
    * @param {string} token Token of the current user
    */
-  async fetchCurrentUserPlaylists(userID, token) {
+  async fetchaListOfUserPlaylists(userID, token) {
     console.log(token);
     let dummy = userID || true;
     if (dummy) {

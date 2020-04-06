@@ -252,12 +252,26 @@ export default {
   },
   /**
    * Get All the playlists of the current user
+   * @param {string} token Token of the current user
+   */
+  async fetchCurrentUserPlaylists(token) {
+    const userPlaylists = await axios
+      .get(`${api}/api/v1/me/playlists?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => response.data);
+    return userPlaylists;
+  },
+  /**
+   * Get All the playlists of the certain user
    * @param {string} userID Current User ID
    * @param {string} token Token of the current user
    */
-  async fetchCurrentUserPlaylists(userID, token) {
+  async fetchaListOfUserPlaylists(userID, token) {
     const userPlaylists = await axios
-      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`, {
+      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=1`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -291,7 +305,7 @@ export default {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => console.log(response.data));
+      .then((response) => response.data);
     return userArtists;
   },
   /**

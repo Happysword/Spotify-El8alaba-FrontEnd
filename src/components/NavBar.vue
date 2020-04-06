@@ -226,7 +226,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchCurrentUserPlaylists(this.userID, this.token)
+      client.fetchCurrentUserPlaylists(this.token)
         .then((response) => {
           this.playlists = response;
         });

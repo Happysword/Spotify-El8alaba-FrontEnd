@@ -68,7 +68,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchCurrentUserPlaylists(this.$route.params.id, this.token)
+      client.fetchaListOfUserPlaylists(this.$route.params.id, this.token)
         .then((response) => {
           this.playlists = response;
         });
