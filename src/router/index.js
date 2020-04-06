@@ -27,6 +27,7 @@ import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
 import SearchType from '../views/Search/SearchType.vue';
 import RecentSearch from '../views/Search/RecentSearch.vue';
+import UserPage from '../views/Users/UserPage.vue';
 
 Vue.use(VueRouter);
 
@@ -52,6 +53,7 @@ const routes = [
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/profile/:id', name: 'profile' },
       { path: '/track/:id', name: 'track' },
+      { path: '/home/user/:id', name: 'user', component: UserPage },
       {
         path: '/home/library/tracks',
         name: 'LikedTracks',

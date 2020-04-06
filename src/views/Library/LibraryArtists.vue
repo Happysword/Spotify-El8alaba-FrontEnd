@@ -4,7 +4,7 @@
             <v-col  xs="12" sm="6" md="4" lg="2"
             v-for="card in artistsJson.artists.items" :key="card.id">
                    <artist-card
-                   :id="card.id" :profileName="card.name"
+                   :id="card.id" :name="card.name"
                    :images="card.images"
                    :type="card.type" :external_urls="card.external_urls"
                    ></artist-card>

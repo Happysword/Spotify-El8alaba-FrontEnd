@@ -13,7 +13,7 @@
       @dblclick="changeicon(0)"
     >
       <v-card-actions>
-        <v-icon id= "showIcon" :color="color" @click="changeicon(2)">
+        <v-icon id= "showIcon" :color="color" @click="changeicon(0)">
           {{ showIcon }}
         </v-icon>
         <v-list-item two-line class="text-truncate d-inline-block">
@@ -65,7 +65,19 @@ export default {
     play: false,
   }),
   props: {
-    song: Object,
+    song: {
+      type: Object,
+      default() {
+        return {
+          track: {
+            name: '',
+            album: { name: '' },
+            artists: [{ name: '' }],
+            duration_ms: 0,
+          },
+        };
+      },
+    },
     counter: Number,
     list: Array,
     listid: String,

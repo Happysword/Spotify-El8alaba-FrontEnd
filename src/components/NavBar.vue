@@ -224,7 +224,6 @@ export default {
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
       const userID = JSON.parse(localStorage.getItem('currentUser'));
       const token = JSON.parse(localStorage.getItem('currentUser'));
-
       if (userID === null && token === null) {
         this.userID = 'user';
         this.token = 'token';
@@ -235,8 +234,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client
-        .fetchCurrentUserPlaylists(this.userID, this.token)
+      client.fetchCurrentUserPlaylists(this.token)
         .then((response) => {
           this.playlists = response;
         });
