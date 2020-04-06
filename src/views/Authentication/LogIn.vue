@@ -16,15 +16,21 @@
         </router-link>
 
         <!-- @todo[XL3] Remove this -->
-        <!-- <v-col>
-          <v-btn
-            id="googleSignInBtn"
-            color="secondary"
-            rounded
-            block
-            x-large
-            @click="googleSignIn"
-            >Sign in using Google
+        <v-col class="text-center">
+          <v-btn id="fbLoginBtn"
+                 color="#1877F2"
+                 rounded
+                 x-large
+                 dark
+                 @click="fbLogin">
+            <v-img
+              src="../../assets/imgs/fb-logo.png"
+              class="mr-4 mt-n1 ml-n4"
+              contain
+              max-height="38"
+              max-width="38">
+            </v-img>
+            Log in with Facebook
           </v-btn>
         </v-col>
 
@@ -40,7 +46,7 @@
           <v-col>
             <v-divider class="my-3 mb-6"/>
           </v-col>
-        </v-row> -->
+        </v-row>
 
         <!-- Incorrect password bar -->
         <p
@@ -150,6 +156,37 @@ export default {
   name: 'LogIn',
   created() {
     document.title = 'Log in - Spotify El8alaba';
+
+    /* eslint-disable */
+    // Import the Facebook SDK
+    const inject = (d, s, id) => {
+      let js, fjs = d.getElementsByTagName(s)[0];
+      if (!fjs) return;
+
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    };
+    inject(document, 'script', 'facebook-jssdk');
+
+    window.fbAsyncInit = () => {
+      FB.init({
+        appId: '929150884179574',
+        cookie: true,
+        xfbml: true,
+        version: 'v6.0',
+      });
+
+      FB.AppEvents.logPageView();
+
+      // Get Facebook login status
+      FB.getLoginStatus((res) => {
+        if (res.status === 'unknown') return;
+        // @todo[XL3] Implement backend processing
+      });
+    };
+    /* eslint-enable */
   },
 
   // Re-route to home if a user is logged in
@@ -222,6 +259,22 @@ export default {
       } else {
         this.userInput.incorrect = true;
       }
+    },
+
+    // @todo[XL3] Integrate with the backend
+    async fbLogin() {
+      /* eslint-disable */
+      FB.login((res) => {
+        if (res.status === 'connected') {
+          if (res.authResponse) {
+            console.log(res.authResponse);
+            FB.api('/me', (res) => console.log(res));
+          } else {
+            console.log('Failed to authorize');
+          }
+        }
+      }, { scope: 'public_profile, email' });
+      /* eslint-enable */
     },
   },
 };
