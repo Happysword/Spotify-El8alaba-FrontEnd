@@ -2,11 +2,11 @@
     <v-container fluid="">
         <v-row>
             <v-col  xs="12" sm="6" md="4" lg="2"
-            v-for="card in artistsJson.artists.items" :key="card.id">
+            v-for="card in artistsJson" :key="card.id">
                    <artist-card
                    :id="card.id" :name="card.name"
-                   :images="card.images"
-                   :type="card.type" :external_urls="card.external_urls"
+                   :images="card.image"
+                   :type="card.type" :external_urls="card.uri"
                    ></artist-card>
             </v-col>
         </v-row>

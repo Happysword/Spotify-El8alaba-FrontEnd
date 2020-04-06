@@ -300,7 +300,7 @@ export default {
    */
   async fetchCurrentUserArtists(token) {
     const userArtists = await axios
-      .get(`${api}/api/v1/me/following?`, {
+      .get(`${api}/api/v1/me/following?type=artist&limit=20`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
