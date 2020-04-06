@@ -77,22 +77,22 @@ export default {
   methods: {
     CardClickLink() {
       if (this.type === 'playlist') {
-        this.$router.push(`/home/playlist/${this.id}`);
+        this.$router.push(`/playlist/${this.id}`);
       } else if (this.type === 'track') {
-        this.$router.push(`/home/track/${this.id}`);
+        this.$router.push(`/track/${this.id}`);
       } else if (this.type === 'artist') {
-        this.$router.push(`/home/artist/${this.id}`);
+        this.$router.push(`/artist/${this.id}`);
       } else if (this.type === 'profile') {
-        this.$router.push(`/home/profile/${this.id}`);
+        this.$router.push(`/profile/${this.id}`);
       } else if (this.type === 'album') {
-        this.$router.push(`/home/album/${this.id}`);
+        this.$router.push(`/album/${this.id}`);
       }
     },
     artistLink() {
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');
       } else {
-        this.$router.push(`/home/artist/${this.artistName}`);
+        this.$router.push(`/artist/${this.artistName}`);
       }
     },
   },

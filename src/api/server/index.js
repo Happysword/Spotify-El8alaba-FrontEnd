@@ -774,29 +774,36 @@ export default {
  * @return {object} an aboject that may have related data to user search
  */
   async fetchSearch(x) {
-    let z = 'track,artist,album,playlist';
+    let z = 'track,artist,album,playlist,user';
     if (x.includes('track')) {
       z = 'track';
     }
     if (x.includes('artist')) {
-      if (z === 'track,artist,album,playlist') {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'artist';
       } else {
         z += ',artist';
       }
     }
     if (x.includes('album')) {
-      if (z === 'track,artist,album,playlist') {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'album';
       } else {
         z += ',album';
       }
     }
     if (x.includes('playlist')) {
-      if (z === 'track,artist,album,playlist') {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'playlist';
       } else {
         z += ',playlist';
+      }
+    }
+    if (x.includes('user')) {
+      if (z === 'track,artist,album,playlist,user') {
+        z = 'user';
+      } else {
+        z += ',user';
       }
     }
     return axios

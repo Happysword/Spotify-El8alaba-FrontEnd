@@ -56,9 +56,12 @@
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in artists" :key="card.id">
                   <div @click="local(card.id, card.type)">
-                   <ArtistCard :id="card.id" :profileName="card.name"
+                   <ArtistCard
+                   :id="card.id"
+                   :profileName="card.name"
                    :images="card.images"
                    :type="card.type"
+                   :href="card.href"
                    ></ArtistCard>
                   </div>
             </v-col>
@@ -74,10 +77,20 @@
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in albums" :key="card.id">
                   <div @click="local(card.id, card.type)">
-                   <song-card :id="card.id" :name="card.name"
-                   :description="card.description" :images="card.images"
-                   :type="card.type"
-                   ></song-card>
+                    <song-card
+                     :id="card.id"
+                     :name="card.name"
+                     :description="card.description"
+                     :images="card.images"
+                     :type="card.type"
+                     :collaborative="card.collaborative"
+                     :external_urls="card.external_urls"
+                     :href="card.href"
+                     :public="card.public"
+                     :snapshot_id="card.snapshot_id"
+                     :tracks="card.tracks"
+                     :uri="card.uri">
+                    </song-card>
                   </div>
           </v-col>
       </v-row>
@@ -92,11 +105,19 @@
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in playlists" :key="card.id">
                   <div @click="local(card.id, card.type)">
-                   <song-card :id="card.id" :name="card.name"
-                   :description="card.description" :images="card.images"
-                   :type="card.type"
-                   @click="local(card.id, card.type)"
-                   ></song-card>
+                   <song-card
+                    :id="card.id"
+                    :name="card.name"
+                    :description="card.description"
+                    :images="card.images"
+                    :type="card.type"
+                    :collaborative="card.collaborative"
+                    :external_urls="card.external_urls"
+                    :href="card.href"
+                    :public="card.public"
+                    :snapshot_id="card.snapshot_id"
+                    :tracks="card.tracks"
+                    :uri="card.uri"></song-card>
                   </div>
             </v-col>
       </v-row>
@@ -140,13 +161,7 @@ export default {
       artistsExist: false,
       imageTop: '',
       SearchHistory: [],
-      SavedData: {
-        id: '',
-        name: '',
-        uri: '',
-        images: '',
-        type: '',
-      },
+      SavedData: { },
     };
   },
   methods: {
@@ -154,18 +169,26 @@ export default {
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
-      } else if (this.type === 'album') {
+      } else if (type === 'album') {
         data = await Client.fetchAlbum(id);
       } else if (type === 'artist') {
-        data = await Client.fetchAnArtist(id);
+        data = await Client.fetchArtist(id);
       } else if (type === 'playlist') {
         data = await Client.fetchPlaylist(id);
       }
       this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
+      console.log(this.SearchHistory);
       if (!(this.SearchHistory.some((x) => x.id === data.id))) {
-        this.SavedData.id = data.id;
         this.SavedData.name = data.name;
+        this.SavedData.id = data.id;
+        this.SavedData.description = data.description;
         this.SavedData.type = data.type;
+        this.SavedData.collaborative = data.collaborative;
+        this.SavedData.external_urls = data.external_urls;
+        this.SavedData.href = data.href;
+        this.SavedData.public = data.public;
+        this.SavedData.snapshot_id = data.snapshot_id;
+        this.SavedData.tracks = data.tracks;
         this.SavedData.uri = data.uri;
         if (data.type === 'track') {
           this.SavedData.images = data.album.images;
