@@ -79,8 +79,30 @@
 </template>
 
 <script>
+import cookies from '@/store/modules/auth/cookies';
+
 export default {
   name: 'Landing',
+
+  // Re-route to home if a user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      // Find the jwt cookie
+      const jwt = document.cookie.split(';')
+        .find((c) => c.search('jwt') !== -1);
+
+      if (jwt) {
+        next('/home');
+      } else {
+        // Remove the current user
+        // Remove all cookies
+        // Continue
+        cookies.clearData(['currentUser'], ['jwt']);
+        next();
+      }
+    });
+  },
+
   data: () => ({
     buttons: [
       {

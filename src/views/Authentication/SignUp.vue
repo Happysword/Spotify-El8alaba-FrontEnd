@@ -80,7 +80,10 @@
             label="Name"
             placeholder="What should we call you?"
             v-model="userInput.name"
-            :rules="[validation.required('This field')]"
+            :rules="[
+              validation.required('This field'),
+              validation.noSpecialCharacters('This field'),
+            ]"
           />
 
           <!-- Date of Birth -->
@@ -159,8 +162,12 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'SignUp',
   created() {
@@ -170,10 +177,17 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser) {
+      // Find the jwt cookie
+      const jwt = document.cookie.split(';')
+        .find((c) => c.search('jwt') !== -1);
+
+      if (jwt) {
         next('/home');
       } else {
+        // Remove the current user
+        // Remove all cookies
+        // Continue
+        cookies.clearData(['currentUser'], ['jwt']);
         next();
       }
     });
@@ -249,11 +263,10 @@ export default {
         type: 'user',
       });
 
-      /**
-       * If the request was successful,
-       * add the currentUser to localStorage
-       * and route to home
-       */
+      // If the request was successful,
+      // add the currentUser to localStorage,
+      // set the JWT token to session
+      // and route to home
       // 200 OK
       if (response.status === 200) {
         const currentUser = {
@@ -261,6 +274,7 @@ export default {
           data: response.data.data.user,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        cookies.setCookiesToSession(['jwt']);
 
         this.$router.push('/home');
       } else {

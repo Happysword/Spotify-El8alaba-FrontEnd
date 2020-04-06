@@ -1,6 +1,6 @@
 <template>
 <v-app>
-<v-content>
+<v-content class="pa-4">
   <!-- Title -->
   <p id="title"
      class="display-2 font-weight-bold pt-6 pl-3 mb-12">
@@ -67,6 +67,9 @@
 <script>
 import api from 'api-client';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'AccountOverview',
   created() {
@@ -94,7 +97,7 @@ export default {
 
     // 200 OK
     if (response.status === 200) {
-      const userProfile = response.data.data.user;
+      const userProfile = response.data;
 
       // Username
       this.profileInfo[0].data = userProfile.id;
