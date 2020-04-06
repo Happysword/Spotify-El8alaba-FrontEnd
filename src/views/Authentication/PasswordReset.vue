@@ -91,17 +91,16 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      // Find the jwt cookie
-      const jwt = document.cookie.split(';')
-        .find((c) => c.search('jwt') !== -1);
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
 
-      if (jwt) {
+      if (loggedIn) {
         next('/home');
       } else {
         // Remove the current user
         // Remove all cookies
         // Continue
-        cookies.clearData(['currentUser'], ['jwt']);
+        cookies.clearData(['currentUser'], ['loggedIn']);
         next();
       }
     });

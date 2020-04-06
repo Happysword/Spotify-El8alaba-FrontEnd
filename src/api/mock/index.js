@@ -1,3 +1,4 @@
+import cookies from '@/store/modules/auth/cookies';
 import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
 import currentPlayback from './data/MusicPlayer/currentPlayback.json';
@@ -67,6 +68,17 @@ export default {
         data: { user },
       },
     };
+  },
+
+  /**
+   * Removes the current user's data
+   * @return {Object} The corresponding response
+   */
+  async logoutUser() {
+    // Remove the current user
+    // Remove all cookies
+    cookies.clearData(['currentUser'], ['loggedIn']);
+    return { status: 200 };
   },
 
   /**

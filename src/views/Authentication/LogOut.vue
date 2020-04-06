@@ -6,15 +6,17 @@
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  */
-import cookies from '@/store/modules/auth/cookies';
+import api from 'api-client';
 
 export default {
   name: 'LogOut',
   // Re-route to login if no user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (!currentUser) {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
+
+      if (notLoggedIn) {
         next('/login');
       } else {
         next();
@@ -22,12 +24,14 @@ export default {
     });
   },
 
-  mounted() {
+  async mounted() {
     // Remove the current user
     // Remove all cookies
-    cookies.clearData(['currentUser'], ['jwt']);
+    const response = await api.logoutUser();
 
-    this.$router.push('/');
+    if (response.status === 200) {
+      this.$router.push('/');
+    }
   },
 };
 </script>

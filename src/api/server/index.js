@@ -3,6 +3,12 @@ import axios from 'axios';
 // HmanA6399: Please use this whenever you want to communicate with the server
 import api from '../../common/config';
 
+axios.interceptors.request.use((config) => {
+  const credConfig = config;
+  credConfig.withCredentials = true;
+  return credConfig;
+}, (err) => Promise.reject(err));
+
 export default {
   // @todo[XL3] See if this method will be removed
   // fetchUsers() {
@@ -315,7 +321,6 @@ export default {
       method: 'POST',
       url: `${api}/api/v1/authentication/login`,
       data,
-      withCredentials: true,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -529,14 +534,9 @@ export default {
    * @return {Object} The corresponding response
    */
   async getCurrentUserProfile() {
-    // Obtain the token from localStorage
-    const { token } = JSON.parse(localStorage.getItem('currentUser'));
     const request = {
       method: 'GET',
       url: `${api}/api/v1/users/me`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
     };
 
     const response = await axios(request)
@@ -552,16 +552,30 @@ export default {
    * @return {Object} The corresponding response
    */
   async editProfile(data) {
-    // Obtain the token from localStorage
-    const { token } = JSON.parse(localStorage.getItem('currentUser'));
     const request = {
       method: 'PATCH',
       url: `${api}/api/v1/users`,
       data,
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Sends a **GET** request to the server to log out the current user
+   * @return {Object} The corresponding response
+   */
+  async logoutUser() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/authentication/logout`,
     };
 
     const response = await axios(request)

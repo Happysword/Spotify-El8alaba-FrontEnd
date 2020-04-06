@@ -22,7 +22,7 @@ export default {
    */
   setCookiesToSession(cookieKeys) {
     cookieKeys.forEach((cookieKey) => {
-      let cookieValue = '';
+      let cookieValue = null;
       document.cookie.split(';').some((c) => {
         const [key, value] = c.split('=');
         if (key === cookieKey) {
@@ -32,7 +32,9 @@ export default {
         return false;
       });
 
-      document.cookie = `${cookieKey}=${cookieValue}`;
+      if (cookieValue) {
+        document.cookie = `${cookieKey}=${cookieValue}`;
+      }
     });
   },
 };

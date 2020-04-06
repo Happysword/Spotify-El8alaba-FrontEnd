@@ -15,7 +15,6 @@
           </v-img>
         </router-link>
 
-        <!-- @todo[XL3] Remove this -->
         <v-col class="text-center">
           <v-btn id="fbLoginBtn"
                  color="#1877F2"
@@ -146,6 +145,7 @@
 import validation from '@/store/modules/auth/validation';
 import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
+import apiURL from '../../common/config';
 
 export default {
 /**
@@ -156,53 +156,21 @@ export default {
   name: 'LogIn',
   created() {
     document.title = 'Log in - Spotify El8alaba';
-
-    /* eslint-disable */
-    // Import the Facebook SDK
-    const inject = (d, s, id) => {
-      let js, fjs = d.getElementsByTagName(s)[0];
-      if (!fjs) return;
-
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    };
-    inject(document, 'script', 'facebook-jssdk');
-
-    window.fbAsyncInit = () => {
-      FB.init({
-        appId: '929150884179574',
-        cookie: true,
-        xfbml: true,
-        version: 'v6.0',
-      });
-
-      FB.AppEvents.logPageView();
-
-      // Get Facebook login status
-      FB.getLoginStatus((res) => {
-        if (res.status === 'unknown') return;
-        // @todo[XL3] Implement backend processing
-      });
-    };
-    /* eslint-enable */
   },
 
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      // Find the jwt cookie
-      const jwt = document.cookie.split(';')
-        .find((c) => c.search(/jwt=.+/) !== -1);
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
 
-      if (jwt) {
+      if (loggedIn) {
         next('/home');
       } else {
         // Remove the current user
-        // Remove all cookies
+        // Remove the loggedIn cookie
         // Continue
-        cookies.clearData(['currentUser'], ['jwt']);
+        cookies.clearData(['currentUser'], ['loggedIn']);
         next();
       }
     });
@@ -252,7 +220,7 @@ export default {
         // If the user didn't opt to be remembered
         // Set the expiration date of the cookie to session
         if (!this.userInput.rememberMe) {
-          cookies.setCookiesToSession(['jwt']);
+          cookies.setCookiesToSession(['loggedIn']);
         }
 
         this.$router.push('/home');
@@ -262,19 +230,8 @@ export default {
     },
 
     // @todo[XL3] Integrate with the backend
-    async fbLogin() {
-      /* eslint-disable */
-      FB.login((res) => {
-        if (res.status === 'connected') {
-          if (res.authResponse) {
-            console.log(res.authResponse);
-            FB.api('/me', (res) => console.log(res));
-          } else {
-            console.log('Failed to authorize');
-          }
-        }
-      }, { scope: 'public_profile, email' });
-      /* eslint-enable */
+    fbLogin() {
+      window.open(`${apiURL}/api/v1/authentication/facebook`, '_self');
     },
   },
 };

@@ -113,6 +113,19 @@ import api from 'api-client';
  */
 export default {
   name: 'EditProfile',
+  // Re-route to login if no user is logged in
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
+
+      if (notLoggedIn) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  },
   data: () => ({
     months: [
       { text: 'January', value: '01' },
