@@ -15,15 +15,21 @@
           </v-img>
         </router-link>
 
-        <v-col>
-          <v-btn
-            id="googleSignInBtn"
-            color="secondary"
-            rounded
-            block
-            x-large
-            @click="googleSignIn"
-            >Sign in using Google
+        <v-col class="text-center">
+          <v-btn id="fbLoginBtn"
+                 color="#1877F2"
+                 rounded
+                 x-large
+                 dark
+                 @click="fbLogin">
+            <v-img
+              src="../../assets/imgs/fb-logo.png"
+              class="mr-4 mt-n1 ml-n4"
+              contain
+              max-height="38"
+              max-width="38">
+            </v-img>
+            Log in with Facebook
           </v-btn>
         </v-col>
 
@@ -137,9 +143,16 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
+import apiURL from '../../common/config';
 
 export default {
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ * @todo[XL3] Change processing of currentUser from localStorage to cookies
+ * to leverage the 'expiration' property
+ */
   name: 'LogIn',
   created() {
     document.title = 'Log in - Spotify El8alaba';
@@ -148,29 +161,22 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser) {
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
+
+      if (loggedIn) {
         next('/home');
       } else {
+        // Remove the current user
+        // Remove the loggedIn cookie
+        // Continue
+        cookies.clearData(['currentUser'], ['loggedIn']);
         next();
       }
     });
   },
 
   mounted() {
-    // Import the Google Platform Library
-    const googlePlatformLibrary = document.createElement('script');
-    googlePlatformLibrary.src = 'https://apis.google.com/js/platform.js';
-    /* eslint-disable */
-    googlePlatformLibrary.onload = () => gapi.load('auth2', () => gapi.auth2.init());
-    /* eslint-enable */
-    document.head.appendChild(googlePlatformLibrary);
-
-    // Add the Client ID meta tag
-    const loginClientID = document.createElement('meta');
-    loginClientID.name = 'google-signin-client_id';
-    loginClientID.content = `${process.env.VUE_APP_GOOGLE_SIGNIN_CLIENT_ID}`;
-    document.head.appendChild(loginClientID);
   },
 
   data() {
@@ -200,11 +206,9 @@ export default {
         password: this.userInput.password,
       });
 
-      /**
-       * If the request was successful,
-       * add the currentUser to localStorage
-       * and route to home
-       */
+      // If the request was successful,
+      // add the currentUser to localStorage
+      // and route to home
       // 200 OK
       if (response.status === 200) {
         const currentUser = {
@@ -213,19 +217,21 @@ export default {
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
+        // If the user didn't opt to be remembered
+        // Set the expiration date of the cookie to session
+        if (!this.userInput.rememberMe) {
+          cookies.setCookiesToSession(['loggedIn']);
+        }
+
         this.$router.push('/home');
       } else {
         this.userInput.incorrect = true;
       }
     },
 
-    async googleSignIn() {
-      /* eslint-disable */
-      const auth2 = gapi.auth2.getAuthInstance();
-      /* eslint-enable */
-      const googleUser = await auth2.signIn();
-
-      console.log(googleUser.getBasicProfile());
+    // @todo[XL3] Integrate with the backend
+    fbLogin() {
+      window.open(`${apiURL}/api/v1/authentication/facebook`, '_self');
     },
   },
 };

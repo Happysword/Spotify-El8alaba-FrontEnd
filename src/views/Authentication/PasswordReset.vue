@@ -30,7 +30,7 @@
             id="errorBar"
             class="caption red darken-1 white--text text-center py-3 mb-8"
             v-if="userInput.incorrect"
-            >Error. Email address not found.
+            >Error. Something went wrong.
           </p>
 
           <v-form ref="passwordResetForm">
@@ -76,8 +76,12 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'PasswordReset',
   created() {
@@ -87,10 +91,16 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      if (currentUser) {
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
+
+      if (loggedIn) {
         next('/home');
       } else {
+        // Remove the current user
+        // Remove all cookies
+        // Continue
+        cookies.clearData(['currentUser'], ['loggedIn']);
         next();
       }
     });

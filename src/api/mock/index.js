@@ -1,3 +1,4 @@
+import cookies from '@/store/modules/auth/cookies';
 import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
 import currentPlayback from './data/MusicPlayer/currentPlayback.json';
@@ -51,12 +52,12 @@ export default {
     let user = {};
 
     allUsers.some((u) => {
-      if (u.user.userInfo.email === body.email && u.password === body.password) {
+      if (u.user.email === body.email && u.password === body.password) {
         found = true;
-        user = u;
+        user = u.user;
       }
       // Breaking condition
-      return u.user.userInfo.email === body.email && u.password === body.password;
+      return u.user.email === body.email && u.password === body.password;
     });
 
     // Succeed if the user is found
@@ -67,6 +68,26 @@ export default {
         data: { user },
       },
     };
+  },
+
+  /**
+   * Removes the current user's data
+   * @return {Object} The corresponding response
+   */
+  async logoutUser() {
+    // Remove the current user
+    // Remove all cookies
+    cookies.clearData(['currentUser'], ['loggedIn']);
+    return { status: 200 };
+  },
+
+  /**
+   * Returns a mock token
+   * @return {Object} The corresponding response
+   */
+  async fetchToken() {
+    const data = await fetch({ token: 'mock_token' }, 50);
+    return { status: 200, data };
   },
 
   /**
@@ -172,38 +193,30 @@ export default {
     // Search all users for our user
     let found = false;
     allUsers.some((u) => {
-      if (u.user.userInfo.email === body.email) {
+      if (u.user.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return u.user.userInfo.email === body.email;
+      return u.user.email === body.email;
     });
 
     // Add the user data to the mock database
     const user = {
-      external_urls: [],
-      genres: [],
+      type: 'user',
+      product: 'free',
+      image: null,
+      currentlyPlaying: null,
+      followers: null,
       _id: '5e6b95fda1903935ccb355a3',
-      userInfo: {
-        type: 'user',
-        product: 'free',
-        image: null,
-        currentlyPlaying: null,
-        followers: null,
-        _id: '5e6b95fda1903935ccb355a3',
-        name: body.name,
-        email: body.email,
-        gender: body.gender,
-        birthdate: new Date(`${body.birthdate} GMT+0`),
-        country: 'EG',
-        devices: [],
-        __v: 0,
-        uri: 'spotify:user:5e6b95fda1903935ccb355a3',
-        id: '5e6b95fda1903935ccb355a3',
-      },
-      followers: [],
-      images: [],
+      name: body.name,
+      email: body.email,
+      gender: body.gender,
+      birthdate: new Date(`${body.birthdate} GMT+0`),
+      country: 'EG',
+      devices: [],
+      __v: 0,
       uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+      id: '5e6b95fda1903935ccb355a3',
     };
 
     // Succeed if the user isn't found
@@ -228,11 +241,11 @@ export default {
     // Search all users for our user
     let found = false;
     allUsers.some((u) => {
-      if (u.user.userInfo.email === body.email) {
+      if (u.user.email === body.email) {
         found = true;
       }
       // Breaking condition
-      return u.user.userInfo.email === body.email;
+      return u.user.email === body.email;
     });
 
     // Succeed if the user is found
@@ -244,21 +257,38 @@ export default {
    * @return {Object} The mock data
    */
   async getCurrentUserProfile() {
-    /**
-     * @note[XL3] Setting timezone
-     * @see MDN Date.prototype.getTimezoneOffset()
-     */
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let user = {};
-    if (currentUser) {
-      user = await fetch(currentUser.data.userInfo, 50);
-    }
+    if (!currentUser) return { status: 404 };
+
+    const user = await fetch(currentUser.data, 50);
 
     return {
-      status: currentUser ? 200 : 404,
-      data: {
-        data: { user },
-      },
+      status: 200,
+      data: user,
+    };
+  },
+
+  /**
+   * Updates mock user profile data and returns it
+   * @param  {Object} data The mock data to update
+   * @return {Object} The updated mock data
+   */
+  async editProfile(data) {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) return { status: 404 };
+
+    // Set each key
+    Object.keys(data).forEach((key) => {
+      if (currentUser.data[key]) {
+        currentUser.data[key] = data[key];
+      }
+    });
+
+    const user = await fetch(currentUser.data, 50);
+
+    return {
+      status: 200,
+      data: user,
     };
   },
 

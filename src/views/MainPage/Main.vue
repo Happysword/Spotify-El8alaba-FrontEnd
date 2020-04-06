@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import api from 'api-client';
+
 import EventBus from '../../EventBus';
 import Navbar from '../../components/NavBar.vue';
 import Topbar from '../../components/TopBar.vue';
@@ -34,10 +36,21 @@ export default {
       this.color = 'rgba(10,10,10,255)';
     },
   },
-  mounted() {
+  async mounted() {
     EventBus.$on('changeColor', (color) => {
       this.color = color;
     });
+
+    // Update localStorage accordingly
+    if (!localStorage.currentUser) {
+      const tokenRes = await api.fetchToken();
+      const profileRes = await api.getCurrentUserProfile();
+      // 200 OK
+      if (tokenRes.status === 200 && profileRes.status === 200) {
+        const currentUser = { token: tokenRes.data.token, data: profileRes.data };
+        localStorage.currentUser = JSON.stringify(currentUser);
+      }
+    }
   },
   watch: {
     $route: 'restoreColor',

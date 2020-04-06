@@ -3,6 +3,12 @@ import axios from 'axios';
 // HmanA6399: Please use this whenever you want to communicate with the server
 import api from '../../common/config';
 
+axios.interceptors.request.use((config) => {
+  const credConfig = config;
+  credConfig.withCredentials = true;
+  return credConfig;
+}, (err) => Promise.reject(err));
+
 export default {
   // @todo[XL3] See if this method will be removed
   // fetchUsers() {
@@ -474,7 +480,7 @@ export default {
   },
 
   /**
-   * Sends a POST request to the server to signup the user
+   * Sends a **POST** request to the server to signup the user
    * @param  {Object} data The user's signup data
    * @return {Object}      The corresponding response
    */
@@ -502,7 +508,7 @@ export default {
   },
 
   /**
-   * Sends a POST request to the server for a Reset Password token
+   * Sends a **POST** request to the server for a Reset Password token
    * @param  {Object} data The user's email
    * @return {Object}      The corresponding response
    */
@@ -524,18 +530,69 @@ export default {
   },
 
   /**
-   * Sends a GET request to the server for the current user's profile information
+   * Sends a **GET** request to the server for the current user's profile information
    * @return {Object} The corresponding response
    */
   async getCurrentUserProfile() {
-    // Obtain the token from localStorage
-    const { token } = JSON.parse(localStorage.getItem('currentUser'));
     const request = {
       method: 'GET',
       url: `${api}/api/v1/users/me`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Sends a **PATCH** request to the server to update the user's profile data
+   * @param  {Object} data The user's updated profile data
+   * @return {Object} The corresponding response
+   */
+  async editProfile(data) {
+    const request = {
+      method: 'PATCH',
+      url: `${api}/api/v1/users`,
+      data,
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Sends a **GET** request to the server to log out the current user
+   * @return {Object} The corresponding response
+   */
+  async logoutUser() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/authentication/logout`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
+   * Sends a **GET** request to the server to fetch the JWT token
+   * @return {Object} The corresponding response
+   */
+  async fetchToken() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/authentication/token`,
     };
 
     const response = await axios(request)

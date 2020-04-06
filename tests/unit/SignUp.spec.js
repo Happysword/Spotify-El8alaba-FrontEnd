@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 // Libraries
 import Vue from 'vue';
 import Vuetify from 'vuetify';
@@ -112,7 +115,7 @@ describe('SignUp.vue', () => {
     nameField.setValue('Admin');
 
     dobDayField.setValue('1');
-    dobMonthSelect.setValue('January');
+    dobMonthSelect.setValue('01');
     dobYearField.setValue('1991');
 
     // Click the button and wait
@@ -167,7 +170,7 @@ describe('SignUp.vue', () => {
     nameField.setValue('New Admin');
 
     dobDayField.setValue('1');
-    dobMonthSelect.setValue('January');
+    dobMonthSelect.setValue('01');
     dobYearField.setValue('1991');
 
     // Click the button and wait
@@ -258,7 +261,7 @@ describe('SignUp.vue', () => {
     nameField.setValue('New Admin');
 
     dobDayField.setValue('1');
-    dobMonthSelect.setValue('January');
+    dobMonthSelect.setValue('01');
     dobYearField.setValue('1991');
 
     expect(wrapper.vm.$refs.signupForm.validate()).toEqual(true);

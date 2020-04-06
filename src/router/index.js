@@ -128,16 +128,8 @@ const routes = [
     children: [
       { path: 'overview', name: 'AccountOverview', component: AccountOverview },
       { path: 'edit-profile', name: 'EditProfile', component: EditProfile },
-      {
-        path: 'change-password',
-        name: 'ChangePassword',
-        component: ChangePassword,
-      },
-      {
-        path: 'notifications',
-        name: 'NotificationSettings',
-        component: NotificationSettings,
-      },
+      { path: 'change-password', name: 'ChangePassword', component: ChangePassword },
+      { path: 'notifications', name: 'NotificationSettings', component: NotificationSettings },
     ],
   },
   {
