@@ -82,6 +82,15 @@ export default {
   },
 
   /**
+   * Returns a mock token
+   * @return {Object} The corresponding response
+   */
+  async fetchToken() {
+    const data = await fetch({ token: 'mock_token' }, 50);
+    return { status: 200, data };
+  },
+
+  /**
    * Check if Current User Follows Artists or Users
    * @param {String} ids IDs of artists or user which current user follows
    */

@@ -586,6 +586,23 @@ export default {
   },
 
   /**
+   * Sends a **GET** request to the server to fetch the JWT token
+   * @return {Object} The corresponding response
+   */
+  async fetchToken() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/authentication/token`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Fetches all songs of a playlist
    * @param  {Number}  id The id of playlist
    * @param  {string}  token The token of user
