@@ -304,6 +304,11 @@ export default {
           token: response.data.token,
           data: response.data.data.user,
         };
+        if (currentUser.data.userInfo) {
+          Object.keys(currentUser.data.userInfo).forEach((key) => {
+            currentUser.data[key] = currentUser.data.userInfo[key];
+          });
+        }
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         cookies.setCookiesToSession(['loggedIn']);
 
