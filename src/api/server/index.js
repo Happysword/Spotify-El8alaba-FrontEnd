@@ -640,7 +640,7 @@ export default {
    */
   async fetchAlbumSongs(id) {
     // eslint-disable-next-line no-undef
-    const album = await fetchAlbum(id);
+    const album = await this.fetchAlbum(id);
     // TODO:: Remove this loop
     const songs = [];
     for (let i = 0; i < album.tracks.length; i += 1) {
@@ -682,15 +682,19 @@ export default {
     });
     return res;
   },
-  /**
-   * Get a playlist
-   * @param {string} id the id of the playlist
-   * @return {object} object containing the playlist infos.
-   */
-  async fetchPlaylist(id) {
-    const res = await axios.get(`${api}/api/v1/playlists/${id}`);
-    return res;
-  },
+  // /**
+  //  * Get a playlist
+  //  * @param {string} id the id of the playlist
+  //  * @return {object} object containing the playlist infos.
+  //  */
+  // async fetchPlaylist(id) {
+  //   const res = await axios.get(`${api}/api/v1/playlists/${id}`, {
+  //     headers: {
+  //       Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+  //     },
+  //   });
+  //   return res;
+  // },
 
   /**
    * Save Album for the Current User
@@ -740,6 +744,51 @@ export default {
       .catch(() => [false]);
     return response;
   },
+
+  /**
+   * Check if a Playlist is Saved for the Current User or not
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async CheckPlaylist(id) {
+    // eslint-disable-next-line no-underscore-dangle
+    const response = await axios.get(`${api}/api/v1/playlists/${id}/followers/contains?ids=${JSON.parse(localStorage.getItem('currentUser')).data._id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return response;
+  },
+
+  /**
+   * Follow a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async FollowPlaylist(id) {
+    const response = await axios.put(`${api}/api/v1/playlists/${id}/followers`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return response;
+  },
+
+  /**
+   * Unfollow a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @return {Object}  The corresponding response
+   */
+  async UnfollowPlaylist(id) {
+    const response = await axios.delete(`${api}/api/v1/playlists/${id}/followers`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return response;
+  },
+
+
   /**
    * Gets all categories (genres)
    * @return {object} an object containing all the genres

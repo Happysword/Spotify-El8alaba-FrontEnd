@@ -64,6 +64,9 @@ export default {
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
+        // this.listInfo = await server.fetchList('5e889f20e45776773ac89009');
+        // this.songs = await server.fetchSongs('5e889f20e45776773ac89009');
+        // this.songs = this.listInfo.tracks.items;
         // if (tracks !== {}) {
         //   for (let i = 0; i < tracks.length; i += 1) {
         //     tracks[i].track.artists = [{ name: 'Artist' }];
@@ -84,11 +87,14 @@ export default {
         //   this.songs[i] = { track: album.tracks[i] };
         // }
         this.songs = await server.fetchAlbumSongs(this.listInfo.id);
-        console.log(this.songs);
       } else {
         return;
       }
-
+      if (this.listInfo.images.length === 0) {
+        this.listInfo.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
+      }
+      console.log(this.songs);
+      console.log(this.listInfo);
       const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
       EventBus.$emit('changeColor', result[0].color);
       this.ready = true;

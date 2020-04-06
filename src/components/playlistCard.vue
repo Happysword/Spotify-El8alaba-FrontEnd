@@ -156,46 +156,49 @@ export default {
      * Add or remove Current List to/from user's library
      */
     async changeLiked() {
+      let response = {};
       store.commit('changeLiked');
       if (store.state.liked === true) {
         if (this.listInfo.type === 'album') {
-          // const response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
-          const response = await server.SaveAlbum(this.listInfo.id);
-          console.log(response);
-          if (response.status === 201) {
-            this.snackbar = true;
-            this.text = 'Saved to Your Library';
-          }
+          // response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
+          response = await server.SaveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
           // TODO[@Naiera]: Follow this playlist
+          response = await server.FollowPlaylist(this.listInfo.id);
+        }
+        console.log(response);
+        if (response.status === 200 || response.status === 201) {
+          this.snackbar = true;
+          this.text = 'Saved to Your Library';
         }
       } else if (store.state.liked === false) {
         if (this.listInfo.type === 'album') {
           // const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
-          const response = await server.RemoveAlbum(this.listInfo.id);
-          console.log(response);
-          if (response.status === 200) {
-            this.snackbar = true;
-            this.text = 'Removed from Your Library';
-          }
+          response = await server.RemoveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
           // TODO[@Naiera]: Unfollow this playlist
+          response = await server.UnfollowPlaylist(this.listInfo.id);
+        }
+        console.log(response);
+        if (response.status === 200) {
+          this.snackbar = true;
+          this.text = 'Removed from Your Library';
         }
       }
     },
   },
 
   async created() {
+    let response = {};
     if (this.listInfo.type === 'album') {
       // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
-      const response = await server.CheckAlbum(this.listInfo.id);
-      if (response.data.length !== 0 && response.data[0] === true) {
-        store.state.liked = true;
-      } else {
-        store.state.liked = false;
-      }
+      response = await server.CheckAlbum(this.listInfo.id);
     } else if (this.listInfo.type === 'playlist') {
-      // TODO[@Naiera]: Check if the playlist is followed or not
+      response = await server.CheckPlaylist(this.listInfo.id);
+    }
+    if (response.data.length !== 0 && response.data[0] === true) {
+      store.state.liked = true;
+    } else {
       store.state.liked = false;
     }
   },
