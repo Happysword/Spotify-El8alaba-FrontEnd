@@ -15,7 +15,39 @@
           </v-img>
         </router-link>
 
-        <!-- Error bar -->
+        <v-col class="text-center">
+          <v-btn id="fbSignupBtn"
+                 color="#1877F2"
+                 rounded
+                 x-large
+                 dark
+                 @click="fbSignup">
+            <v-img
+              src="../../assets/imgs/fb-logo.png"
+              class="mr-4 mt-n1 ml-n4"
+              contain
+              max-height="38"
+              max-width="38">
+            </v-img>
+            Sign Up with Facebook
+          </v-btn>
+        </v-col>
+
+        <v-row>
+          <v-col>
+            <v-divider class="my-3 mb-6"/>
+          </v-col>
+          <v-col cols="1">
+            <p class="text-center font-weight-bold title"
+              >OR
+            </p>
+          </v-col>
+          <v-col>
+            <v-divider class="my-3 mb-6"/>
+          </v-col>
+        </v-row>
+
+        <!-- Incorrect password bar -->
         <p
           id="errorBar"
           class="caption red darken-1 white--text text-center py-3 mb-8"
@@ -177,17 +209,16 @@ export default {
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
-      // Find the jwt cookie
-      const jwt = document.cookie.split(';')
-        .find((c) => c.search('jwt') !== -1);
+      // Find the loggedIn cookie
+      const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
 
-      if (jwt) {
+      if (loggedIn) {
         next('/home');
       } else {
         // Remove the current user
         // Remove all cookies
         // Continue
-        cookies.clearData(['currentUser'], ['jwt']);
+        cookies.clearData(['currentUser'], ['loggedIn']);
         next();
       }
     });
@@ -265,7 +296,7 @@ export default {
 
       // If the request was successful,
       // add the currentUser to localStorage,
-      // set the JWT token to session
+      // set the loggedIn token to session
       // and route to home
       // 200 OK
       if (response.status === 200) {
@@ -274,7 +305,7 @@ export default {
           data: response.data.data.user,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        cookies.setCookiesToSession(['jwt']);
+        cookies.setCookiesToSession(['loggedIn']);
 
         this.$router.push('/home');
       } else {
@@ -287,6 +318,10 @@ export default {
      */
     validateConfirmEmail() {
       this.$refs.confirmEmail.validate();
+    },
+
+    fbSignup() {
+      window.open('http://localhost:3333/api/v1/authentication/facebook', '_self');
     },
   },
 };
