@@ -12,7 +12,7 @@ export default {
       localStorage.removeItem(key);
     });
     cookieKeys.forEach((key) => {
-      document.cookie = `${key}=; expires = Thu, 01 Jan 1970 00:00:00 UTC`;
+      document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
     });
   },
 

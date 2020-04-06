@@ -80,7 +80,10 @@
             label="Name"
             placeholder="What should we call you?"
             v-model="userInput.name"
-            :rules="[validation.required('This field')]"
+            :rules="[
+              validation.required('This field'),
+              validation.noSpecialCharacters('This field'),
+            ]"
           />
 
           <!-- Date of Birth -->

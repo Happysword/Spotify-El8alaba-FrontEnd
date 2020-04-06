@@ -9,34 +9,23 @@
   </p>
 
   <v-card flat id="formCard">
+    <!-- Error bar -->
+    <p
+      id="errorBar"
+      class="caption red darken-1 white--text text-center py-3 mb-8"
+      v-if="userInput.incorrect"
+      >Error. Please enter valid data.
+    </p>
+
     <!-- Form -->
     <v-form class="py-12 px-12" ref="editProfileForm">
-      <!-- Email -->
-      <v-text-field id="emailField"
+      <!-- Name -->
+      <v-text-field id="nameField"
                     color="#1DB954"
                     outlined
-                    label="Email"
-                    v-model="userInput.email"
-                    :rules="[
-                      validation.required('Email'),
-                      validation.minLength('Email', 3),
-                      validation.validEmail(),
-                    ]"/>
-
-      <!-- Confirm Password -->
-      <!-- Minimum password length is 8 -->
-      <v-text-field id="passwordField"
-                    color="#1DB954"
-                    outlined
-                    label="Password"
-                    v-model="userInput.password"
-                    :rules="[
-                      validation.required('Password'),
-                      validation.minLength('Password', 8),
-                    ]"
-                    :type="userInput.showPassword ? 'text' : 'password'"
-                    :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                    @click:append="userInput.showPassword = !userInput.showPassword"/>
+                    label="Name"
+                    v-model="userInput.name"
+                    :rules="[validation.noSpecialCharacters('Name', true)]"/>
 
       <!-- Gender -->
       <v-select id="genderSelect"
@@ -44,7 +33,6 @@
                 label="Gender"
                 :items="genders"
                 v-model="userInput.gender"
-                :rules="[validation.required('Gender')]"
                 outlined/>
 
       <!-- Date of Birth -->
@@ -57,7 +45,7 @@
                         outlined
                         label="Day"
                         v-model="userInput.dob.day"
-                        :rules="[validation.validDay()]"/>
+                        :rules="[validation.validDay(true)]"/>
         </v-col>
         <!-- Month -->
         <v-col>
@@ -66,8 +54,7 @@
                     outlined
                     label="Month"
                     :items="months"
-                    v-model="userInput.dob.month"
-                    :rules="[validation.required('Month')]"/>
+                    v-model="userInput.dob.month"/>
         </v-col>
         <!-- Year -->
         <v-col cols="3">
@@ -76,7 +63,7 @@
                         outlined
                         label="Year"
                         v-model="userInput.dob.year"
-                        :rules="[validation.validYear()]"/>
+                        :rules="[validation.validYear(true)]"/>
         </v-col>
       </v-row>
 
@@ -86,19 +73,16 @@
                 label="Country"
                 :items="countries"
                 v-model="userInput.country"
-                :rules="[validation.required('Country')]"
                 outlined/>
 
       <!-- Mobile Phone Number -->
       <v-text-field id="phoneField"
                     color="#1DB954"
                     outlined
+                    placeholder="+201XXXXXXXXX"
                     label="Mobile Phone Number"
-                    v-model="userInput.phone"
-                    :rules="[
-                      validation.required('Mobile Phone Number'),
-                      validation.validMobilePhoneNumber(),
-                    ]"/>
+                    v-model="userInput.phoneNumber"
+                    :rules="[validation.validMobilePhoneNumber(true)]"/>
       <v-row justify="end">
         <router-link to="/account/overview">
           <v-btn id="cancelBtn"
@@ -122,6 +106,7 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import api from 'api-client';
 
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
@@ -147,13 +132,13 @@ export default {
       { text: 'Male', value: 'm' },
       { text: 'Female', value: 'f' },
     ],
+    // @todo[XL3] Add more countries
     countries: [
       { text: 'Egypt', value: 'EG' },
+      { text: 'Sweden', value: 'SE' },
     ],
     userInput: {
-      email: '',
-      password: '',
-      showPassword: false,
+      name: '',
       gender: '',
       dob: {
         day: '',
@@ -161,7 +146,7 @@ export default {
         year: '',
       },
       country: '',
-      phone: '',
+      phoneNumber: '',
       incorrect: false,
     },
     validation,
@@ -174,7 +159,53 @@ export default {
     async submit() {
       if (!this.$refs.editProfileForm.validate()) return;
 
-      console.log('success');
+      /**
+       * Utility function to format the Date of Birth
+       * @param  {Object} dob The object containing the Date of birth
+       * @return {String}     The formatted Date of Birth
+       */
+      const formatDob = (dob) => {
+        let { day } = dob;
+
+        if (parseInt(day, 10) < 10) {
+          day = `0${day}`;
+        }
+
+        return `${dob.year}-${dob.month}-${day}`;
+      };
+
+      // Collect edited data
+      // @todo[XL3] Add name
+      const editedData = {};
+      Object.keys(this.userInput).forEach((key) => {
+        if (this.userInput[key] !== '' && this.userInput[key] !== 'incorrect') {
+          if (key === 'dob') {
+            if (this.userInput[key].day && this.userInput[key].month && this.userInput[key].year) {
+              editedData.birthdate = formatDob(this.userInput[key]);
+            }
+          } else {
+            editedData[key] = this.userInput[key];
+          }
+        }
+      });
+
+      // Send the request
+      const response = await api.editProfile(editedData);
+
+      // If the request was successful,
+      // update currentUser,
+      // and reroute to AccountOverview
+      // 200 OK
+      if (response.status === 200) {
+        const userProfile = response.data;
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser.data = userProfile;
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        this.$router.push({ name: 'AccountOverview' });
+      } else {
+        this.userInput.incorrect = true;
+      }
     },
   },
 };

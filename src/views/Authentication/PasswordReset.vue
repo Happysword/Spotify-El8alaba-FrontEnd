@@ -30,7 +30,7 @@
             id="errorBar"
             class="caption red darken-1 white--text text-center py-3 mb-8"
             v-if="userInput.incorrect"
-            >Error. Email address not found.
+            >Error. Something went wrong.
           </p>
 
           <v-form ref="passwordResetForm">

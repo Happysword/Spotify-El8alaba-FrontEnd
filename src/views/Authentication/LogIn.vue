@@ -194,7 +194,7 @@ export default {
     next(() => {
       // Find the jwt cookie
       const jwt = document.cookie.split(';')
-        .find((c) => c.search('jwt') !== -1);
+        .find((c) => c.search(/jwt=.+/) !== -1);
 
       if (jwt) {
         next('/home');
