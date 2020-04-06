@@ -1,83 +1,62 @@
-{
-   "artists":{
-      "items":[
-         {
-            "external_urls":{
-               "spotify":"https://open.spotify.com/artist/0I2XqVXqHScXjHhk6AYYRe"
-            },
-            "followers":{
-               "href":null,
-               "total":7753
-            },
-            "genres":[
-               "swedish hip hop"
-            ],
-            "href":"https://api.spotify.com/v1/artists/0I2XqVXqHScXjHhk6AYYRe",
-            "id":"0I2XqVXqHScXjHhk6AYYRe",
-            "images":[
-               {
-                  "height":640,
-                  "url":"https://i.scdn.co/image/2c8c0cea05bf3d3c070b7498d8d0b957c4cdec20",
-                  "width":640
-               },
-               {
-                  "height":300,
-                  "url":"https://i.scdn.co/image/394302b42c4b894786943e028cdd46d7baaa29b7",
-                  "width":300
-               },
-               {
-                  "height":64,
-                  "url":"https://i.scdn.co/image/ca9df7225ade6e5dfc62e7076709ca3409a7cbbf",
-                  "width":64
-               }
-            ],
-            "name":"Afasi & Filthy",
-            "popularity":54,
-            "type":"artist",
-            "uri":"spotify:artist:0I2XqVXqHScXjHhk6AYYRe"
-         },
-         {
-            "external_urls":{
-               "spotify":"https://open.spotify.com/artist/0I2XqVXqHScXjHhk6AYYRe"
-            },
-            "followers":{
-               "href":null,
-               "total":775300
-            },
-            "genres":[
-               "swedish hip hop"
-            ],
-            "href":"https://api.spotify.com/v1/artists/0I2XqVXqHScXjHhk6AYYRe",
-            "id":"0I2wadXqH2cXjHhk6AYYRe",
-            "images":[
-               {
-                  "height":640,
-                  "url":"https://i.scdn.co/image/ab67616d0000b273a9e0b5757657a42508f4c30a",
-                  "width":640
-               },
-               {
-                  "height":300,
-                  "url":"https://i.scdn.co/image/394302b42c4b894786943e028cdd46d7baaa29b7",
-                  "width":300
-               },
-               {
-                  "height":64,
-                  "url":"https://i.scdn.co/image/ca9df7225ade6e5dfc62e7076709ca3409a7cbbf",
-                  "width":64
-               }
-            ],
-            "name":"Wegz",
-            "popularity":54,
-            "type":"artist",
-            "uri":"spotify:artist:0I2XqVXqHScXjHhk6AYYRe"
-         }
-      ],
-      "next":"https://api.spotify.com/v1/users/thelinmichael/following?type=artist&after=0aV6DOiouImYTqrR5YlIqx&limit=20",
-      "total":183,
-      "cursors":{
-         "after":"0aV6DOiouImYTqrR5YlIqx"
+[
+   {
+      "type": "artist",
+      "product": "free",
+      "image": "https://i.scdn.co/image/2c8c0cea05bf3d3c070b7498d8d0b957c4cdec20",
+      "online": false,
+      "active": true,
+      "currentlyPlaying": {
+      "track": null,
+      "timestamp": null,
+      "repeat_state": false,
+      "shuffle_state": false,
+      "volume_percent": 60,
+      "is_playing": false,
+      "progress_ms": 0
       },
-      "limit":20,
-      "href":"https://api.spotify.com/v1/users/thelinmichael/following?type=artist&limit=20"
+      "followers": 1,
+      "following": [],
+      "_id": "5e86fb05ac4c81eebe6ea41c",
+      "name": "I'm an-artist",
+      "email": "artist16@spotify.com",
+      "password": "$2a$12$zG9i.czl3b0UYuOFBIdTF.bPofhkBDyLylWzg5rSf/yNAoa8xnEAu",
+      "gender": "f",
+      "birthdate": "1999-03-02T00:00:00.000Z",
+      "country": "EG",
+      "devices": [],
+      "followedPlaylists": [],
+      "__v": 0,
+      "uri": "spotify:user:5e86fb05ac4c81eebe6ea41c",
+      "id": "5e86fb05ac4c81eebe6ea41c"
+   },
+   {
+      "type": "artist",
+      "product": "free",
+      "image": "https://i.scdn.co/image/ab67616d0000b2731a7d95b92e8a0efea1e84f1b",
+      "online": false,
+      "active": true,
+      "currentlyPlaying": {
+      "track": null,
+      "timestamp": null,
+      "repeat_state": false,
+      "shuffle_state": false,
+      "volume_percent": 60,
+      "is_playing": false,
+      "progress_ms": 0
+      },
+      "followers": 1,
+      "following": [],
+      "_id": "5e86fb05ac4c81eebe6ea000",
+      "name": "Wegz",
+      "email": "artist16@spotify.com",
+      "password": "$2a$12$zG9i.czl3b0UYuOFBIdTF.bPofhkBDyLylWzg5rSf/yNAoa8xnEAu",
+      "gender": "f",
+      "birthdate": "1999-03-02T00:00:00.000Z",
+      "country": "EG",
+      "devices": [],
+      "followedPlaylists": [],
+      "__v": 0,
+      "uri": "spotify:user:5e86fb05ac4c81eebe6ea000",
+      "id": "5e86fb05ac4c81eebe6ea000"
    }
-}
+]
