@@ -24,7 +24,7 @@
            >
              <v-container fluid="">
                  <v-img class="circle"
-                 :src="images[0].url"
+                 :images="images"
                  height="150px"
                  ></v-img>
              </v-container>
@@ -68,12 +68,12 @@ import client from 'api-client';
 
 export default {
   props: {
-    external_urls: Object,
+    external_urls: String,
     followers: Object,
     genres: [],
     href: String,
     id: String,
-    images: Array,
+    images: String,
     name: String,
     popularity: String,
     type: String,
