@@ -152,11 +152,7 @@
           class="mt-2"
           max-height="180"
           max-width="200"
-          :src="
-            $store.state.MusicPlayer.currentSong.track.album.images.length !== 0
-              ? $store.state.MusicPlayer.currentSong.track.album.images[0].url
-              : 'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
-          "
+          src='https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
           contain
           @mouseenter="imageButton = true"
           @mouseleave="imageButton = false"

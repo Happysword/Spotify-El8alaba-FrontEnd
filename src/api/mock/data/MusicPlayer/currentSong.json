@@ -2,67 +2,12 @@
   {
       "track": {
         "id": "5e89e3032e9acf202cc3f28a",
-        "artists": [
-          {
-            "id": "5e88e82ca532d34e1c8575b5",
-            "external_urls": [],
-            "genres": [],
-            "albums": [],
-            "userInfo": {
-              "_id": "5e88e82ba532d34e1c8575b4",
-              "type": "artist",
-              "product": "free",
-              "image": null,
-              "online": false,
-              "active": true,
-              "currentlyPlaying": {
-                "track": "5e89e3032e9acf202cc3f28a",
-                "timestamp": "2020-04-05T13:57:55.042Z",
-                "repeat_state": false,
-                "shuffle_state": false,
-                "volume_percent": 60,
-                "is_playing": false,
-                "progress_ms": 0
-              },
-              "followers": 0,
-              "following": [],
-              "name": "I'm an-artit",
-              "email": "artist10@spotify.com",
-              "password": "$2a$12$XbsB.o16aYZEtWD5FfIWueZHt30Wll/z6BtnUyfwatnawb0.YSgcy",
-              "gender": "m",
-              "birthdate": "1999-05-09T21:00:00.000Z",
-              "country": "EG",
-              "devices": [],
-              "followedPlaylists": [],
-              "__v": 0
-            },
-            "followers": [],
-            "images": [],
-            "__v": 0
-          }
-        ],
+        "artists":  ["5e88e82ca532d34e1c8575b5"],
         "disc_number": 1,
         "external_urls": [],
         "name": "Faded",
-        "album": {
-          "_id": "5e89e1e22e9acf202cc3f289",
-          "artists": [
-            "5e88e82ca532d34e1c8575b5"
-          ],
-          "genres": [
-            "Rock",
-            "jazz"
-          ],
-          "tracks": [
-            "5e89e3032e9acf202cc3f28a"
-          ],
-          "album_type": "album",
-          "name": "Kings Never Die",
-          "release_date": "2020-04-05T13:49:22.374Z",
-          "images": [],
-          "__v": 1
-        },
-        "duration_ms": 5000,
+        "album": "5e89e1e22e9acf202cc3f289",
+        "duration_ms": 192000,
         "explicit": false,
         "track_number": 1,
         "__v": 0

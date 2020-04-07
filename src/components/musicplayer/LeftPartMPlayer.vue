@@ -17,7 +17,7 @@
             <router-link
               :to="
                 '/album/' +
-                  $store.state.MusicPlayer.currentSong.track.album._id
+                  $store.state.MusicPlayer.currentSong.track.album
               "
               tag="button"
               :disabled="isLinkDisabled"
@@ -52,7 +52,7 @@
               <router-link
                 :to="
                   '/album/' +
-                    $store.state.MusicPlayer.currentSong.track.album._id
+                    $store.state.MusicPlayer.currentSong.track.album
                 "
                 id="song-name"
               >
@@ -150,12 +150,12 @@ export default {
       if (this.heartcolor) {
         R = await PlayerRequests.deleteTrack(
           // eslint-disable-next-line no-underscore-dangle
-          this.$store.state.MusicPlayer.currentSong.track._id,
+          this.$store.state.MusicPlayer.currentSong.track.id,
         );
       } else {
         R = await PlayerRequests.saveTrack(
           // eslint-disable-next-line no-underscore-dangle
-          this.$store.state.MusicPlayer.currentSong.track._id,
+          this.$store.state.MusicPlayer.currentSong.track.id,
         );
       }
       if (R) {
