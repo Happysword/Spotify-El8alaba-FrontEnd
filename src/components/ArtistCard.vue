@@ -24,7 +24,15 @@
            >
              <v-container fluid="">
                  <v-img class="circle"
+                 v-if="images"
                  :images="images"
+                 :src="images.url"
+                 height="150px"
+                 ></v-img>
+                  <v-img class="circle"
+                 v-if="!images"
+                 :images="images"
+                 :src="'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
                  height="150px"
                  ></v-img>
              </v-container>

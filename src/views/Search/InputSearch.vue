@@ -34,12 +34,12 @@
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in artistLength" :key="artists[i-1].id">
-            <div @click="local(artists[i-1].id, artists[i-1].type)">
+          <v-col  xs="12" sm="6" md="3" lg="2" v-for=" i in artistLength" :key="i-1">
+            <div @click="local(artists[i-1].name, artists[i-1].type)">
               <ArtistCard
-                v-if="artistsExist"
-                :id="artists[i-1].id" :profileName="artists[i-1].name"
-                :images="artists[i-1].images"
+                :id="artists[i-1].id"
+                :name="artists[i-1].name"
+                :images="artists[i-1].image"
                 :type="artists[i-1].type"
                 :href="artists[i-1].href"
               >
@@ -56,21 +56,20 @@
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="albums[i].id">
-            <div @click="local(albums[i].id, albums[i].type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="i-1">
+            <div @click="local(albums[i-1].id, albums[i-1].type)">
               <song-card
-               :id="albums[i].id"
-               :name="albums[i].name"
-               :description="albums[i].description"
-               :images="albums[i].images"
-               :type="albums[i].type"
-               :collaborative="albums[i].collaborative"
-               :external_urls="albums[i].external_urls"
-               :href="albums[i].href"
-               :public="albums[i].public"
-               :snapshot_id="albums[i].snapshot_id"
-               :tracks="albums[i].tracks"
-               :uri="albums[i].uri">
+               :id="albums[i-1].id"
+               :name="albums[i-1].name"
+               :description="albums[i-1].description"
+               :images="albums[i-1].images"
+               :type="albums[i-1].type"
+               :collaborative="albums[i-1].collaborative"
+               :external_urls="albums[i-1].external_urls"
+               :href="albums[i-1].href"
+               :public="albums[i-1].public"
+               :snapshot_id="albums[i-1].snapshot_id"
+               :uri="albums[i-1].uri">
               </song-card>
             </div>
           </v-col>
@@ -85,7 +84,7 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i in playlistLength"
-            :key="playlists[i-1].id">
+            :key="i-1">
             <div @click="local(playlists[i-1].id, playlists[i-1].type)">
              <song-card
               :id="playlists[i-1].id"
@@ -98,7 +97,6 @@
               :href="playlists[i-1].href"
               :public="playlists[i-1].public"
               :snapshot_id="playlists[i-1].snapshot_id"
-              :tracks="playlists[i-1].tracks"
               :uri="playlists[i-1].uri"></song-card>
             </div>
           </v-col>
@@ -112,12 +110,12 @@
           @mouseover="typeToSee= 'users'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i  in userLength" :key="users[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="i-1">
                   <div @click="local(users[i-1].id, users[i-1].type)">
                    <ArtistCard
-                   v-if="usersExist"
-                   :id="users[i-1].id" :profileName="users[i-1].name"
-                   :images="users[i-1].images"
+                   :id="users[i-1].id"
+                   :name="users[i-1].name"
+                   :images="users[i-1].image"
                    :type="users[i-1].type"
                    :href="users[i-1].href"
                    ></ArtistCard>
@@ -171,17 +169,19 @@ export default {
       playlistLength: 0,
       userLength: 0,
       albumLength: 0,
+      trackLength: 0,
     };
   },
   methods: {
     async local(id, type) {
+      console.log(id);
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
       } else if (type === 'album') {
         data = await Client.fetchAlbum(id);
       } else if (type === 'artist') {
-        data = await Client.fetchArtist(id);
+        data = await Client.fetchAnArtist(id);
       } else if (type === 'playlist') {
         data = await Client.fetchPlaylist(id);
       }
@@ -231,10 +231,20 @@ export default {
       console.log(response);
       if (response) {
         if (response.artists) {
+          this.artists = [];
+          this.users = [];
           if (response.artists.length > 0) {
-            this.artists = response.artists;
-            this.artistsExist = true;
+            for (let i = 0; i < response.artists.length; i += 1) {
+              if (response.artists[i].type === 'artist') {
+                this.artists.push(response.artists[i]);
+              } else if (response.artists[i].type === 'user') {
+                this.users.push(response.artists[i]);
+              }
+            }
             this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
+            this.artistsExist = this.artistLength ? true : 0;
+            this.userLength = this.users.length < 6 ? this.users.length : 6;
+            this.usersExist = this.userLength ? true : 0;
           }
         }
         if (response.albums) {
@@ -257,44 +267,47 @@ export default {
             this.tracksExist = true;
           }
         }
-        if (response.users) {
-          if (response.users.length > 0) {
-            this.users = response.users;
-            this.usersExist = true;
-            this.usersLength = this.users.length < 6 ? this.users.length : 6;
-          }
-        }
-        console.log(this.artistsExist);
-        console.log(this.tracksExist);
-        console.log(this.playlistsExist);
-        console.log(this.albumsExist);
         if (this.artistsExist && this.tracksExist) {
-          console.log('gowa el 2');
           if (this.artists[0].popularity >= this.tracks[0].popularity) {
             const top = this.artists[0];
             this.top = top;
+            if (this.top.image) {
+              this.imageTop = this.top.image.url;
+            } else {
+              this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+            }
           } else {
             const top = this.tracks[0];
             this.top = top;
+            if (this.top.images.length) {
+              this.imageTop = this.top.images[0].url;
+            } else {
+              this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+            }
           }
         } else if (this.artistsExist && !this.tracksExist) {
-          console.log('gowa el artist');
           const top = this.artists[0];
           this.top = top;
           this.top.type = 'artist';
+          if (this.top.image) {
+            this.imageTop = this.top.image.url;
+          } else {
+            this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+          }
         } else if (!this.artistsExist && this.tracksExist) {
-          console.log('gowa el track');
           const top = this.tracks[0];
           this.top = top;
           this.top.type = 'track';
+          if (this.top.images.length) {
+            this.imageTop = this.top.images[0].url;
+          } else {
+            this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+          }
         }
-        if (this.top.images[0]) {
-          this.imageTop = this.top.images[0].url;
-        } else {
-          this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+        if (!this.artistsExist && !this.usersExist
+        && !this.playlistsExist && !this.albumsExist && !this.tracksExist) {
+          this.NoResult = true;
         }
-        console.log('Top');
-        console.log(this.top);
       } else {
         this.NoResult = true;
       }
@@ -307,14 +320,6 @@ export default {
   },
   async created() {
     await this.fetchSearch(this.$route.params.id);
-    console.log('Top2');
-    console.log(this.top);
-    console.log('Playlist');
-    console.log(this.playlists);
-    console.log('Artists');
-    console.log(this.artists);
-    console.log('Users');
-    console.log(this.users);
   },
   mounted() {
     this.$store.state.searching = true;

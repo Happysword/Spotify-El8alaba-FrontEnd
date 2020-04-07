@@ -17,7 +17,6 @@
                     :href="card.href"
                     :public="card.public"
                     :snapshot_id="card.snapshot_id"
-                    :tracks="card.tracks"
                     :uri="card.uri"></song-card>
             </v-col>
 
