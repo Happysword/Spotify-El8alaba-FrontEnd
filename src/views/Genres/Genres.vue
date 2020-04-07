@@ -7,7 +7,7 @@
     <div v-if="PopularExist">
       <p class="white--text display-1 font-weight-bold">Popular Playlists</p>
       <v-row>
-        <v-col xs="12" sm="6" md="3" lg="2" v-for="(s , i) in PPLength"
+        <v-col xs="12" sm="6" md="3" lg="2" v-for=" i in PPLength"
         :key="PopularPlaylists[i-1].id">
           <SongCard :id="PopularPlaylists[i-1].id" :name="PopularPlaylists[i-1].name"
                 :description="PopularPlaylists[i-1].description"
@@ -20,7 +20,7 @@
     <div v-if="PopularExist">
       <p class="white--text display-1 font-weight-bold">Releases</p>
       <v-row>
-        <v-col xs="12" sm="6" md="3" lg="2" v-for="(s , i) in PPLength"
+        <v-col xs="12" sm="6" md="3" lg="2" v-for="i in PPLength"
         :key="PopularPlaylists[i-1].id">
           <SongCard :id="PopularPlaylists[i-1].id" :name="PopularPlaylists[i-1].name"
                 :description="PopularPlaylists[i-1].description"
