@@ -413,7 +413,7 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => res.body);
+      .then((res) => res.data);
     return response;
   },
 
@@ -428,7 +428,7 @@ export default {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).then((res) => res.body);
+    }).then((res) => res.data);
     return response;
   },
 
@@ -470,7 +470,7 @@ export default {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).then((res) => res.body);
+    }).then((res) => res.data);
     return response;
   },
 

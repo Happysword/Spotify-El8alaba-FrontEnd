@@ -85,7 +85,7 @@ export default {
       showPlayButton: true,
       snackbar: false,
       isFollowing: Boolean,
-      FollowJSON: JSON,
+      FollowJSON: [],
       notificationMsg: String,
       items: [
         { title: 'Start Radio' },
