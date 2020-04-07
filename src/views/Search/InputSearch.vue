@@ -34,7 +34,7 @@
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2" v-for=" i in artistLength" :key="artists[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2" v-for=" i in artistLength" :key="i-1">
             <div @click="local(artists[i-1].name, artists[i-1].type)">
               <ArtistCard
                 :id="artists[i-1].id"
@@ -56,7 +56,7 @@
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="albums[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="i-1">
             <div @click="local(albums[i-1].id, albums[i-1].type)">
               <song-card
                :id="albums[i-1].id"
@@ -84,7 +84,7 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i in playlistLength"
-            :key="playlists[i-1].id">
+            :key="i-1">
             <div @click="local(playlists[i-1].id, playlists[i-1].type)">
              <song-card
               :id="playlists[i-1].id"
@@ -110,7 +110,7 @@
           @mouseover="typeToSee= 'users'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="users[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="i-1">
                   <div @click="local(users[i-1].id, users[i-1].type)">
                    <ArtistCard
                    :id="users[i-1].id"
@@ -181,7 +181,7 @@ export default {
       } else if (type === 'album') {
         data = await Client.fetchAlbum(id);
       } else if (type === 'artist') {
-        data = await Client.fetchArtist(id);
+        data = await Client.fetchAnArtist(id);
       } else if (type === 'playlist') {
         data = await Client.fetchPlaylist(id);
       }
@@ -231,6 +231,8 @@ export default {
       console.log(response);
       if (response) {
         if (response.artists) {
+          this.artists = [];
+          this.users = [];
           if (response.artists.length > 0) {
             for (let i = 0; i < response.artists.length; i += 1) {
               if (response.artists[i].type === 'artist') {
