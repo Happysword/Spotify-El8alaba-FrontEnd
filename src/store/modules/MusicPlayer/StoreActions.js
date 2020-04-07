@@ -19,7 +19,7 @@ export default {
         state.MusicPlayer.isPlaying = false;
       };
       // eslint-disable-next-line no-underscore-dangle
-      let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track._id);
+      let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track.id);
       if (process.env.VUE_APP_API_CLIENT === 'mock') Response = true;
       // check if the response was correct
       if (Response === false) return;
@@ -27,7 +27,7 @@ export default {
       let SongURL = '';
       if (process.env.VUE_APP_API_CLIENT === 'server') {
         // eslint-disable-next-line no-underscore-dangle
-        SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentSong.track._id}`;
+        SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentSong.track.id}`;
       } else {
         SongURL = 'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3';
       }

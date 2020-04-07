@@ -1,10 +1,10 @@
 [
   {
       "track": {
-        "_id": "5e89e3032e9acf202cc3f28a",
+        "id": "5e89e3032e9acf202cc3f28a",
         "artists": [
           {
-            "_id": "5e88e82ca532d34e1c8575b5",
+            "id": "5e88e82ca532d34e1c8575b5",
             "external_urls": [],
             "genres": [],
             "albums": [],

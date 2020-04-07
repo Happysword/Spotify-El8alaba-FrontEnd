@@ -23,13 +23,11 @@
               :disabled="isLinkDisabled"
               id="image-album"
             >
+            <!-- TODO[@Seif] add images from back later -->
               <v-img
                 max-height="60"
                 max-width="60"
-                :src=" $store.state.MusicPlayer.currentSong.track.album.images.length !== 0 ?
-                  $store.state.MusicPlayer.currentSong.track.album.images[0].url :
-                  'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
-                "
+                src= 'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
                 contain
                 @mouseenter="imageButton = true"
                 @mouseleave="imageButton = false"
@@ -64,12 +62,12 @@
               <router-link
                 :to="
                   '/home/artist/' +
-                    $store.state.MusicPlayer.currentSong.track.album.artists[0]
+                    $store.state.MusicPlayer.currentSong.track.artists[0]
                 "
                 id="artist-name"
               >
                 {{
-                  $store.state.MusicPlayer.currentSong.track.album.artists[0]
+                  $store.state.MusicPlayer.currentSong.track.artists[0]
                     .name
                 }}
               </router-link>
