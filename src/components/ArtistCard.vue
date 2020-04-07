@@ -73,7 +73,7 @@ export default {
     genres: [],
     href: String,
     id: String,
-    images: String,
+    images: Object,
     name: String,
     popularity: String,
     type: String,
