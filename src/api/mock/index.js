@@ -59,6 +59,9 @@ export default {
       if (u.user.email === body.email && u.password === body.password) {
         found = true;
         user = u.user;
+        // Set the loggedIn cookie
+        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
       }
       // Breaking condition
       return u.user.email === body.email && u.password === body.password;
@@ -199,6 +202,9 @@ export default {
     allUsers.some((u) => {
       if (u.user.email === body.email) {
         found = true;
+        // Set the loggedIn cookie
+        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
       }
       // Breaking condition
       return u.user.email === body.email;
