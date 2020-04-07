@@ -984,7 +984,7 @@ export default {
       } else {
         z += ',album';
       }
-      const regex = '\\s*\\balbums\\b\\s*';
+      const regex = 'albums';
       q = q.replace(regex, '');
     }
     if (search.includes('playlists')) {
@@ -993,7 +993,7 @@ export default {
       } else {
         z += ',playlist';
       }
-      const regex = '\\s*\\bplaylists\\b\\s*';
+      const regex = 'playlists';
       q = q.replace(regex, '');
     }
     if (search.includes('users')) {
@@ -1002,7 +1002,7 @@ export default {
       } else {
         z += ',user';
       }
-      const regex = '\\s*\\busers\\b\\s*';
+      const regex = 'users';
       q = q.replace(regex, '');
     }
     return axios
