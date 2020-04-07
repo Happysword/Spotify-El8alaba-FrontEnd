@@ -35,7 +35,7 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in artistLength" :key="artists[i-1].id">
-            <div @click="local(artists[i-1].id, artists[i-1].type)">
+            <div @click="local(artists[i-1].name, artists[i-1].type)">
               <ArtistCard
                 v-if="artistsExist"
                 :id="artists[i-1].id" :profileName="artists[i-1].name"
@@ -56,21 +56,21 @@
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="albums[i].id">
-            <div @click="local(albums[i].id, albums[i].type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="albums[i-1].id">
+            <div @click="local(albums[i-1].id, albums[i-1].type)">
               <song-card
-               :id="albums[i].id"
-               :name="albums[i].name"
-               :description="albums[i].description"
-               :images="albums[i].images"
-               :type="albums[i].type"
-               :collaborative="albums[i].collaborative"
-               :external_urls="albums[i].external_urls"
-               :href="albums[i].href"
-               :public="albums[i].public"
-               :snapshot_id="albums[i].snapshot_id"
-               :tracks="albums[i].tracks"
-               :uri="albums[i].uri">
+               :id="albums[i-1].id"
+               :name="albums[i-1].name"
+               :description="albums[i-1].description"
+               :images="albums[i-1].images"
+               :type="albums[i-1].type"
+               :collaborative="albums[i-1].collaborative"
+               :external_urls="albums[i-1].external_urls"
+               :href="albums[i-1].href"
+               :public="albums[i-1].public"
+               :snapshot_id="albums[i-1].snapshot_id"
+               :tracks="albums[i-1].tracks"
+               :uri="albums[i-1].uri">
               </song-card>
             </div>
           </v-col>
@@ -112,11 +112,11 @@
           @mouseover="typeToSee= 'users'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i  in userLength" :key="users[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="users[i-1].id">
                   <div @click="local(users[i-1].id, users[i-1].type)">
                    <ArtistCard
-                   v-if="usersExist"
-                   :id="users[i-1].id" :profileName="users[i-1].name"
+                   :id="users[i-1].id"
+                   :profileName="users[i-1].name"
                    :images="users[i-1].images"
                    :type="users[i-1].type"
                    :href="users[i-1].href"
@@ -171,10 +171,12 @@ export default {
       playlistLength: 0,
       userLength: 0,
       albumLength: 0,
+      trackLength: 0,
     };
   },
   methods: {
     async local(id, type) {
+      console.log(id);
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
@@ -261,15 +263,10 @@ export default {
           if (response.users.length > 0) {
             this.users = response.users;
             this.usersExist = true;
-            this.usersLength = this.users.length < 6 ? this.users.length : 6;
+            this.userLength = this.users.length < 6 ? this.users.length : 6;
           }
         }
-        console.log(this.artistsExist);
-        console.log(this.tracksExist);
-        console.log(this.playlistsExist);
-        console.log(this.albumsExist);
         if (this.artistsExist && this.tracksExist) {
-          console.log('gowa el 2');
           if (this.artists[0].popularity >= this.tracks[0].popularity) {
             const top = this.artists[0];
             this.top = top;
@@ -278,23 +275,20 @@ export default {
             this.top = top;
           }
         } else if (this.artistsExist && !this.tracksExist) {
-          console.log('gowa el artist');
           const top = this.artists[0];
           this.top = top;
           this.top.type = 'artist';
         } else if (!this.artistsExist && this.tracksExist) {
-          console.log('gowa el track');
           const top = this.tracks[0];
           this.top = top;
           this.top.type = 'track';
         }
-        if (this.top.images[0]) {
+        console.log(this.top);
+        if (this.top.image) {
           this.imageTop = this.top.images[0].url;
         } else {
           this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
         }
-        console.log('Top');
-        console.log(this.top);
       } else {
         this.NoResult = true;
       }
