@@ -230,7 +230,7 @@ export default {
       } else {
         this.userID = JSON.parse(
           localStorage.getItem('currentUser'),
-        ).data.user._id;
+        ).data._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 

@@ -98,6 +98,14 @@
 <script>
 export default {
   name: 'Topbar',
+  created() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) return;
+
+    const { image } = currentUser.data;
+    console.log(image);
+    if (image) this.UserInfo.photo = image;
+  },
   data: () => ({
     input: '',
     UserInfo: {
@@ -138,7 +146,7 @@ export default {
       get() {
         let name;
         try {
-          name = JSON.parse(localStorage.getItem('currentUser')).data.user.name;
+          name = JSON.parse(localStorage.getItem('currentUser')).data.name;
         } catch (error) {
           name = this.$store.state.currentUser.username;
         }
