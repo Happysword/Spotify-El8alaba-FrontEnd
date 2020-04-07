@@ -7,16 +7,24 @@
         <v-col  xs="12" sm="6" md="3" lg="2"
         v-for="( s , i ) in RecentLength" :key="RecentSearch[i].id">
          <song-card v-if="RecentSearch[i].type != 'artist'"
-           :id="RecentSearch[i].id"
-           :name="RecentSearch[i].name"
-           :images="RecentSearch[i].images"
-           :type="RecentSearch[i].type"
-         ></song-card>
+          :id="RecentSearch[i].id"
+          :name="RecentSearch[i].name"
+          :description="RecentSearch[i].description"
+          :images="RecentSearch[i].images"
+          :type="RecentSearch[i].type"
+          :collaborative="RecentSearch[i].collaborative"
+          :external_urls="RecentSearch[i].external_urls"
+          :href="RecentSearch[i].href"
+          :public="RecentSearch[i].public"
+          :snapshot_id="RecentSearch[i].snapshot_id"
+          :tracks="RecentSearch[i].tracks"
+          :uri="RecentSearch[i].uri"></song-card>
          <artist-card v-if="RecentSearch[i].type == 'artist'"
           :id="RecentSearch[i].id"
           :profileName="RecentSearch[i].name"
           :images="RecentSearch[i].images"
           :type="RecentSearch[i].type"
+          :href="RecentSearch[i].href"
         ></artist-card>
          </v-col>
     </v-row>
@@ -81,15 +89,13 @@ export default {
   methods: {
     async fetchAllGenres() {
       this.genres = await client.fetchGenres();
-      if (this.genres) {
-        this.genres = this.genres.categories.items;
+      if (this.genres.length > 0) {
         this.genresExist = true;
       } else this.genres = {};
     },
     async fetchAllPrefG() {
       this.PGenres = await client.fetchPrefGenres();
       if (this.PGenres) {
-        this.PGenres = this.PGenres.categories.items;
         this.PGenresExist = true;
       } else this.PGenres = {};
     },
@@ -99,7 +105,7 @@ export default {
   },
   async created() {
     this.fetchAllGenres();
-    this.fetchAllPrefG();
+    // this.fetchAllPrefG();
     this.RecentSearch = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
     if (this.RecentSearch.length !== 0) {
       this.RecentExist = true;

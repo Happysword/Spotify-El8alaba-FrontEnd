@@ -27,7 +27,7 @@
           <v-text-field
             prepend-inner-icon="mdi-magnify"
             rounded
-            label="Search for artists or tracks"
+            placeholder="Search for artists or tracks"
             background-color="white"
             height="30"
             class="searchbar-pos"

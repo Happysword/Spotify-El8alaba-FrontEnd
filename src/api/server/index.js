@@ -349,7 +349,11 @@ export default {
    */
   async fetchAnArtist(id) {
     const artists = await axios
-      .get(`${api}/api/v1/artists/${id}`)
+      .get(`${api}/api/v1/artists/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data);
     return artists;
   },
@@ -679,7 +683,11 @@ export default {
    * @return {object} object containing track info
    */
   async fetchTrack(id) {
-    const res = await axios.get(`${api}/api/v1/tracks/${id}`);
+    const res = await axios.get(`${api}/api/v1/tracks/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
     return res;
   },
 
@@ -909,7 +917,11 @@ export default {
    */
   async fetchGenres() {
     return axios
-      .get(`${api}/api/v1/browse/categories`)
+      .get(`${api}/api/v1/browse/categories`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -920,7 +932,11 @@ export default {
    */
   async fetchGenre(id) {
     return axios
-      .get(`${api}/api/v1/browse/categories/${id}`)
+      .get(`${api}/api/v1/browse/categories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -931,43 +947,71 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`)
+      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
   /**
  * Fetch related data to the user input for search
- * @param {string} x a string that contains the data the user search for
+ * @param {string} search a string that contains the data the user search for
  * @return {object} an aboject that may have related data to user search
  */
-  async fetchSearch(x) {
-    let z = 'track,artist,album,playlist';
-    if (x.includes('track')) {
+  async fetchSearch(search) {
+    let q = search;
+    console.log(q);
+    let z = 'track,artist,album,playlist,user';
+    if (search.includes('tracks')) {
       z = 'track';
+      const regex = 'tracks';
+      q = q.replace(regex, '');
     }
-    if (x.includes('artist')) {
-      if (z === 'track,artist,album,playlist') {
+    if (search.includes('artists')) {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'artist';
       } else {
         z += ',artist';
       }
+      const regex = ' artists';
+      q = q.replace(regex, '');
     }
-    if (x.includes('album')) {
-      if (z === 'track,artist,album,playlist') {
+    if (search.includes('albums')) {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'album';
       } else {
         z += ',album';
       }
+      const regex = '\\s*\\balbums\\b\\s*';
+      q = q.replace(regex, '');
     }
-    if (x.includes('playlist')) {
-      if (z === 'track,artist,album,playlist') {
+    if (search.includes('playlists')) {
+      if (z === 'track,artist,album,playlist,user') {
         z = 'playlist';
       } else {
         z += ',playlist';
       }
+      const regex = '\\s*\\bplaylists\\b\\s*';
+      q = q.replace(regex, '');
+    }
+    if (search.includes('users')) {
+      if (z === 'track,artist,album,playlist,user') {
+        z = 'user';
+      } else {
+        z += ',user';
+      }
+      const regex = '\\s*\\busers\\b\\s*';
+      q = q.replace(regex, '');
     }
     return axios
-      .get(`${api}/api/v1/search?q=${x}&type=${z}&limit=6&offset=0`)
+      .get(`${api}/api/v1/search?q=${q}&type=${z}&limit=6&offset=0`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => response.data)
       .catch((error) => console.log(error));
   },
 };

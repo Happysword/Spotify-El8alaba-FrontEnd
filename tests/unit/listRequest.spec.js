@@ -3,7 +3,7 @@ import albums from '../../src/api/mock/data/albumsInfo.json';
 import lists from '../../src/api/mock/data/listsInfo.json';
 // import songs from '../../src/api/mock/data/songs.json';
 
-const Album = albums[0].items[0].album;
+const Album = albums.items[0];
 const list = lists[0];
 // const songlist = songs[list.id];
 

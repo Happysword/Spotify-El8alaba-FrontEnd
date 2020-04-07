@@ -702,11 +702,9 @@ export default {
    */
   async fetchAlbum(id) {
     const allAlbums = await fetch(albums, 200);
-    for (let i = 0; i < allAlbums.length; i += 1) {
-      for (let j = 0; j < allAlbums[i].items.length; j += 1) {
-        if (allAlbums[i].items[j].album.id === id) {
-          return allAlbums[i].items[j].album;
-        }
+    for (let j = 0; j < allAlbums.items.length; j += 1) {
+      if (allAlbums.items[j].id === id) {
+        return allAlbums.items[j];
       }
     }
     return {};
