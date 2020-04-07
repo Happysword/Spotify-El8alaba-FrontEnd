@@ -255,8 +255,8 @@ export default {
       }
     };
     // to be removed later plays faded
-    await PlayerRequests.playTrack('5e89e3032e9acf202cc3f28a');
-    if (process.VUE_APP_API_CLIENT === 'server') {
+    await PlayerRequests.playTrack('5e8be63be23a0232089b6843');
+    if (process.env.VUE_APP_API_CLIENT === 'server') {
       this.$store.state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback()
         .then((data) => data.currentlyPlaying);
     }

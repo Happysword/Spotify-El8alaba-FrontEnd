@@ -1,22 +1,82 @@
 [
   {
       "track": {
-        "id": "5e89e3032e9acf202cc3f28a",
-        "artists":  ["5e88e82ca532d34e1c8575b5"],
-        "disc_number": 1,
+    "_id": "5e8be63be23a0232089b6843",
+    "artists": [
+      {
+        "id": "5e8be2a8e23a0232089b683f",
         "external_urls": [],
-        "name": "Faded",
-        "album": "5e89e1e22e9acf202cc3f289",
-        "duration_ms": 192000,
-        "explicit": false,
-        "track_number": 1,
-        "__v": 0
-      },
-      "timestamp": "2020-04-05T16:27:57.375Z",
-      "repeat_state": true,
-      "shuffle_state": true,
-      "volume_percent": 15,
-      "is_playing": false,
-      "progress_ms": 10000
-  }
+        "genres": [],
+        "albums": [
+          "5e8be5f7e23a0232089b6842"
+        ],
+        "userInfo": {
+          "_id": "5e8be2a8e23a0232089b683e",
+          "type": "artist",
+          "product": "free",
+          "image": null,
+          "online": false,
+          "active": true,
+          "currentlyPlaying": {
+            "track": "5e8be63be23a0232089b6843",
+            "timestamp": "2020-04-07T02:43:17.626Z",
+            "repeat_state": false,
+            "shuffle_state": false,
+            "volume_percent": 60,
+            "is_playing": false,
+            "progress_ms": 0
+          },
+          "followers": 0,
+          "following": [],
+          "name": "I'm an-artist",
+          "email": "artist1@spotify.com",
+          "password": "$2a$12$fQSo6EUdvbmDaUz2jHZtluTt5UK6qrxGPbHmIKv2B2zrRDw.rOukK",
+          "gender": "m",
+          "birthdate": "1999-05-09T21:00:00.000Z",
+          "country": "EG",
+          "devices": [],
+          "followedPlaylists": [],
+          "__v": 0
+        },
+        "followers": [],
+        "images": [],
+        "__v": 1
+      }
+    ],
+    "disc_number": 1,
+    "external_urls": [],
+    "name": "Faded",
+    "album": {
+      "id": "5e8be5f7e23a0232089b6842",
+      "artists": [
+        "5e8be2a8e23a0232089b683f"
+      ],
+      "genres": [
+        "Rock",
+        "jazz"
+      ],
+      "tracks": [
+        "5e8be63be23a0232089b6843",
+        "5e8bf2f0eba6940f20943a79"
+      ],
+      "album_type": "album",
+      "label": "albumLabel",
+      "name": "Faded album",
+      "release_date": "2020-04-07T02:31:19.683Z",
+      "images": [],
+      "__v": 4
+    },
+    "duration_ms": 192000,
+    "explicit": false,
+    "track_number": 1,
+    "__v": 0,
+    "id": "5e8be63be23a0232089b6843"
+  },
+  "timestamp": "2020-04-07T02:43:17.626Z",
+  "repeat_state": false,
+  "shuffle_state": false,
+  "volume_percent": 60,
+  "is_playing": false,
+  "progress_ms": 0
+}
 ]

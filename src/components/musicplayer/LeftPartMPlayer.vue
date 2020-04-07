@@ -17,7 +17,7 @@
             <router-link
               :to="
                 '/album/' +
-                  $store.state.MusicPlayer.currentSong.track.album
+                  $store.state.MusicPlayer.currentSong.track.album.id
               "
               tag="button"
               :disabled="isLinkDisabled"
@@ -52,7 +52,7 @@
               <router-link
                 :to="
                   '/album/' +
-                    $store.state.MusicPlayer.currentSong.track.album
+                    $store.state.MusicPlayer.currentSong.track.album.id
                 "
                 id="song-name"
               >
