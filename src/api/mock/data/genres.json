@@ -1,8 +1,4 @@
-
-      {
-  "categories": {
-    "href": "https://api.spotify.com/v1/browse/categories?offset=0&limit=20",
-    "items": [
+ [
       {
         "href": "https://api.spotify.com/v1/browse/categories/ambiance",
         "icons": [
@@ -63,11 +59,4 @@
         "_id": "country",
         "name": "Country"
       }
-    ],
-    "limit": 20,
-    "next": "https://api.spotify.com/v1/browse/categories?offset=20&limit=20",
-    "offset": 0,
-    "previous": null,
-    "total": 31
-  }
-}
+    ]

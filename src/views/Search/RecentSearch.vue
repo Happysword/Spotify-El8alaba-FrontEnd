@@ -11,16 +11,24 @@
         <v-col  xs="12" sm="6" md="3" lg="2"
         v-for="d in Recent" :key="d.id">
          <song-card v-if="d.type != 'artist'"
-           :id="d.id"
-           :name="d.name"
-           :images="d.images"
-           :type="d.type"
-         ></song-card>
+          :id="d.id"
+          :name="d.name"
+          :description="d.description"
+          :images="d.images"
+          :type="d.type"
+          :collaborative="d.collaborative"
+          :external_urls="d.external_urls"
+          :href="d.href"
+          :public="d.public"
+          :snapshot_id="d.snapshot_id"
+          :tracks="d.tracks"
+          :uri="d.uri"></song-card>
          <artist-card v-if="d.type == 'artist'"
           :id="d.id"
           :profileName="d.name"
           :images="d.images"
           :type="d.type"
+          :href="d.href"
         ></artist-card>
          </v-col>
     </v-row>
@@ -52,7 +60,7 @@ export default {
     ClearAll() {
       this.Recent = [];
       localStorage.setItem('SearchHistory', JSON.stringify(this.Recent));
-      this.$router.push('/home/search');
+      this.$router.replace('/home/search');
     },
   },
   created() {

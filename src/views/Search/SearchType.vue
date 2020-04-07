@@ -6,10 +6,19 @@
             </p>
             <v-row>
             <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in data" :key="card.id">
-                   <song-card :id="card.id" :name="card.name"
-                   :description="card.description" :images="card.images"
-                   :type="card.type"
-                   ></song-card>
+                   <song-card
+                    :id="card.id"
+                    :name="card.name"
+                    :description="card.description"
+                    :images="card.images"
+                    :type="card.type"
+                    :collaborative="card.collaborative"
+                    :external_urls="card.external_urls"
+                    :href="card.href"
+                    :public="card.public"
+                    :snapshot_id="card.snapshot_id"
+                    :tracks="card.tracks"
+                    :uri="card.uri"></song-card>
             </v-col>
 
             </v-row>
