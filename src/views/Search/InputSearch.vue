@@ -22,7 +22,7 @@
             :type="top.type"
             class="a"></top-result>
           </div>
-            </v-col>
+        </v-col>
 
       </v-row>
       <v-row v-if="artistsExist">
@@ -34,16 +34,17 @@
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="( s , i ) in 6" :key="artists[i].id">
-                  <div @click="local(artists[i].id, artists[i].type)">
-                   <ArtistCard
-                   v-if="artistsExist"
-                   :id="artists[i].id" :profileName="artists[i].name"
-                   :images="artists[i].images"
-                   :type="artists[i].type"
-                   :href="artists[i].href"
-                   ></ArtistCard>
-                  </div>
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in artistLength" :key="artists[i-1].id">
+            <div @click="local(artists[i-1].id, artists[i-1].type)">
+              <ArtistCard
+                v-if="artistsExist"
+                :id="artists[i-1].id" :profileName="artists[i-1].name"
+                :images="artists[i-1].images"
+                :type="artists[i-1].type"
+                :href="artists[i-1].href"
+              >
+              </ArtistCard>
+            </div>
             </v-col>
       </v-row>
        <v-row v-if="albumsExist">
@@ -55,23 +56,23 @@
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="(s,i) in 6" :key="albums[i].id">
-                  <div @click="local(albums[i].id, albums[i].type)">
-                    <song-card
-                     :id="albums[i].id"
-                     :name="albums[i].name"
-                     :description="albums[i].description"
-                     :images="albums[i].images"
-                     :type="albums[i].type"
-                     :collaborative="albums[i].collaborative"
-                     :external_urls="albums[i].external_urls"
-                     :href="albums[i].href"
-                     :public="albums[i].public"
-                     :snapshot_id="albums[i].snapshot_id"
-                     :tracks="albums[i].tracks"
-                     :uri="albums[i].uri">
-                    </song-card>
-                  </div>
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in albumLength" :key="albums[i].id">
+            <div @click="local(albums[i].id, albums[i].type)">
+              <song-card
+               :id="albums[i].id"
+               :name="albums[i].name"
+               :description="albums[i].description"
+               :images="albums[i].images"
+               :type="albums[i].type"
+               :collaborative="albums[i].collaborative"
+               :external_urls="albums[i].external_urls"
+               :href="albums[i].href"
+               :public="albums[i].public"
+               :snapshot_id="albums[i].snapshot_id"
+               :tracks="albums[i].tracks"
+               :uri="albums[i].uri">
+              </song-card>
+            </div>
           </v-col>
       </v-row>
       <v-row v-if="playlistsExist">
@@ -83,23 +84,24 @@
           @mouseover="typeToSee= 'playlists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="(s,i) in 6" :key="playlists[i].id">
-                  <div @click="local(playlists[i].id, playlists[i].type)">
-                   <song-card
-                    :id="playlists[i].id"
-                    :name="playlists[i].name"
-                    :description="playlists[i].description"
-                    :images="playlists[i].images"
-                    :type="playlists[i].type"
-                    :collaborative="playlists[i].collaborative"
-                    :external_urls="playlists[i].external_urls"
-                    :href="playlists[i].href"
-                    :public="playlists[i].public"
-                    :snapshot_id="playlists[i].snapshot_id"
-                    :tracks="playlists[i].tracks"
-                    :uri="playlists[i].uri"></song-card>
-                  </div>
-            </v-col>
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i in playlistLength"
+            :key="playlists[i-1].id">
+            <div @click="local(playlists[i-1].id, playlists[i-1].type)">
+             <song-card
+              :id="playlists[i-1].id"
+              :name="playlists[i-1].name"
+              :description="playlists[i-1].description"
+              :images="playlists[i-1].images"
+              :type="playlists[i-1].type"
+              :collaborative="playlists[i-1].collaborative"
+              :external_urls="playlists[i-1].external_urls"
+              :href="playlists[i-1].href"
+              :public="playlists[i-1].public"
+              :snapshot_id="playlists[i-1].snapshot_id"
+              :tracks="playlists[i-1].tracks"
+              :uri="playlists[i-1].uri"></song-card>
+            </div>
+          </v-col>
       </v-row>
       <v-row v-if="usersExist">
         <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
@@ -110,14 +112,14 @@
           @mouseover="typeToSee= 'users'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="( s , i ) in 5" :key="users[i].id">
-                  <div @click="local(users[i].id, users[i].type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i  in userLength" :key="users[i-1].id">
+                  <div @click="local(users[i-1].id, users[i-1].type)">
                    <ArtistCard
                    v-if="usersExist"
-                   :id="users[i].id" :profileName="users[i].name"
-                   :images="users[i].images"
-                   :type="users[i].type"
-                   :href="users[i].href"
+                   :id="users[i-1].id" :profileName="users[i-1].name"
+                   :images="users[i-1].images"
+                   :type="users[i-1].type"
+                   :href="users[i-1].href"
                    ></ArtistCard>
                   </div>
             </v-col>
@@ -165,6 +167,10 @@ export default {
       imageTop: '',
       SearchHistory: [],
       SavedData: { },
+      artistLength: 0,
+      playlistLength: 0,
+      userLength: 0,
+      albumLength: 0,
     };
   },
   methods: {
@@ -228,18 +234,21 @@ export default {
           if (response.artists.length > 0) {
             this.artists = response.artists;
             this.artistsExist = true;
+            this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
           }
         }
         if (response.albums) {
           if (response.albums.length > 0) {
             this.albums = response.albums;
             this.albumsExist = true;
+            this.albumLength = this.albums.length < 6 ? this.albums.length : 6;
           }
         }
         if (response.playlists) {
           if (response.playlists.length > 0) {
             this.playlists = response.playlists;
             this.playlistsExist = true;
+            this.playlistLength = this.playlists.length < 6 ? this.playlists.length : 6;
           }
         }
         if (response.tracks) {
@@ -252,6 +261,7 @@ export default {
           if (response.users.length > 0) {
             this.users = response.users;
             this.usersExist = true;
+            this.usersLength = this.users.length < 6 ? this.users.length : 6;
           }
         }
         console.log(this.artistsExist);
@@ -283,6 +293,7 @@ export default {
         } else {
           this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
         }
+        console.log('Top');
         console.log(this.top);
       } else {
         this.NoResult = true;
@@ -296,7 +307,14 @@ export default {
   },
   async created() {
     await this.fetchSearch(this.$route.params.id);
+    console.log('Top2');
     console.log(this.top);
+    console.log('Playlist');
+    console.log(this.playlists);
+    console.log('Artists');
+    console.log(this.artists);
+    console.log('Users');
+    console.log(this.users);
   },
   mounted() {
     this.$store.state.searching = true;
