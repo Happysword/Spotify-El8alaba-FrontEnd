@@ -123,9 +123,10 @@ export default {
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
+    if (!currentUser.data.image) return;
 
-    const { image } = currentUser.data;
-    if (image) this.image = image;
+    const { image: { url } } = currentUser.data;
+    if (url) this.image = url;
   },
 
   data: () => ({

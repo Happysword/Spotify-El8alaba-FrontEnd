@@ -101,10 +101,10 @@ export default {
   created() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
+    if (!currentUser.data.image) return;
 
-    const { image } = currentUser.data;
-    console.log(image);
-    if (image) this.UserInfo.photo = image;
+    const { image: { url } } = currentUser.data;
+    if (url) this.UserInfo.photo = url;
   },
   data: () => ({
     input: '',
