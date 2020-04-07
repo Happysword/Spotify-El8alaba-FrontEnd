@@ -95,7 +95,7 @@ export default {
       snackbar: false,
       notificationMsg: String,
       isFollowing: Boolean,
-      FollowJSON: JSON,
+      FollowJSON: [],
       imagesExist: false,
       items: [
         { title: 'Start Radio' },

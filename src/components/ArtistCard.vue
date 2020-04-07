@@ -73,7 +73,7 @@ export default {
     genres: [],
     href: String,
     id: String,
-    images: String,
+    images: Object,
     name: String,
     popularity: String,
     type: String,
@@ -85,7 +85,7 @@ export default {
       showPlayButton: true,
       snackbar: false,
       isFollowing: Boolean,
-      FollowJSON: JSON,
+      FollowJSON: [],
       notificationMsg: String,
       items: [
         { title: 'Start Radio' },
