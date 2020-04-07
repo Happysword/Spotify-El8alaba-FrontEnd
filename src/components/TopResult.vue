@@ -97,6 +97,7 @@ export default {
     },
   },
   created() {
+    console.log('Top');
   },
 };
 </script>

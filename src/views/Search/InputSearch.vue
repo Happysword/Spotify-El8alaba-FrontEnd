@@ -5,7 +5,7 @@
           <span class="white--text mt-10 ml-10 display-1 font-weight-bold">Best result</span>
           <div @click="local(top.id, top.type)">
             <top-result
-            v-if="top.type === 'track'"
+            v-if="top.type === 'track' || top.type === 'album' "
             :id="top.id"
             :name="top.name"
             :image="imageTop"
@@ -34,14 +34,14 @@
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in artists" :key="card.id">
-                  <div @click="local(card.id, card.type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="( s , i ) in 6" :key="artists[i].id">
+                  <div @click="local(artists[i].id, artists[i].type)">
                    <ArtistCard
                    v-if="artistsExist"
-                   :id="card.id" :profileName="card.name"
-                   :images="card.images"
-                   :type="card.type"
-                   :href="card.href"
+                   :id="artists[i].id" :profileName="artists[i].name"
+                   :images="artists[i].images"
+                   :type="artists[i].type"
+                   :href="artists[i].href"
                    ></ArtistCard>
                   </div>
             </v-col>
@@ -55,21 +55,21 @@
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in albums" :key="card.id">
-                  <div @click="local(card.id, card.type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="(s,i) in 6" :key="albums[i].id">
+                  <div @click="local(albums[i].id, albums[i].type)">
                     <song-card
-                     :id="card.id"
-                     :name="card.name"
-                     :description="card.description"
-                     :images="card.images"
-                     :type="card.type"
-                     :collaborative="card.collaborative"
-                     :external_urls="card.external_urls"
-                     :href="card.href"
-                     :public="card.public"
-                     :snapshot_id="card.snapshot_id"
-                     :tracks="card.tracks"
-                     :uri="card.uri">
+                     :id="albums[i].id"
+                     :name="albums[i].name"
+                     :description="albums[i].description"
+                     :images="albums[i].images"
+                     :type="albums[i].type"
+                     :collaborative="albums[i].collaborative"
+                     :external_urls="albums[i].external_urls"
+                     :href="albums[i].href"
+                     :public="albums[i].public"
+                     :snapshot_id="albums[i].snapshot_id"
+                     :tracks="albums[i].tracks"
+                     :uri="albums[i].uri">
                     </song-card>
                   </div>
           </v-col>
@@ -83,21 +83,21 @@
           @mouseover="typeToSee= 'playlists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in playlists" :key="card.id">
-                  <div @click="local(card.id, card.type)">
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="(s,i) in 6" :key="playlists[i].id">
+                  <div @click="local(playlists[i].id, playlists[i].type)">
                    <song-card
-                    :id="card.id"
-                    :name="card.name"
-                    :description="card.description"
-                    :images="card.images"
-                    :type="card.type"
-                    :collaborative="card.collaborative"
-                    :external_urls="card.external_urls"
-                    :href="card.href"
-                    :public="card.public"
-                    :snapshot_id="card.snapshot_id"
-                    :tracks="card.tracks"
-                    :uri="card.uri"></song-card>
+                    :id="playlists[i].id"
+                    :name="playlists[i].name"
+                    :description="playlists[i].description"
+                    :images="playlists[i].images"
+                    :type="playlists[i].type"
+                    :collaborative="playlists[i].collaborative"
+                    :external_urls="playlists[i].external_urls"
+                    :href="playlists[i].href"
+                    :public="playlists[i].public"
+                    :snapshot_id="playlists[i].snapshot_id"
+                    :tracks="playlists[i].tracks"
+                    :uri="playlists[i].uri"></song-card>
                   </div>
             </v-col>
       </v-row>
@@ -114,7 +114,7 @@
 import Client from 'api-client';
 import ArtistCard from '../../components/ArtistCard.vue';
 import TopResult from '../../components/TopResult.vue';
-// import SearchSong from '../../components/SearchSong.vue';
+// import SearchSong from '../../components/SongsBar.vue';
 import SongCard from '../../components/SongCard.vue';
 
 
