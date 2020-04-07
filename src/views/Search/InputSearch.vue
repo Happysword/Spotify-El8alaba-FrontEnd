@@ -101,6 +101,27 @@
                   </div>
             </v-col>
       </v-row>
+      <v-row v-if="usersExist">
+        <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
+          <span class="white--text display-1 font-weight-bold z"
+           >Profiles</span>
+           <v-spacer></v-spacer>
+          <span class="seeAll" @click="spanClicked()"
+          @mouseover="typeToSee= 'users'">See All</span>
+        </v-layout>
+
+          <v-col  xs="12" sm="6" md="3" lg="2"  v-for="( s , i ) in 5" :key="users[i].id">
+                  <div @click="local(users[i].id, users[i].type)">
+                   <ArtistCard
+                   v-if="usersExist"
+                   :id="users[i].id" :profileName="users[i].name"
+                   :images="users[i].images"
+                   :type="users[i].type"
+                   :href="users[i].href"
+                   ></ArtistCard>
+                  </div>
+            </v-col>
+      </v-row>
       <v-container v-if="NoResult" id="NO">
           <span class="white--text display-1 font-weight-bold">
             No results for "{{ this.$route.params.id }}"</span>
@@ -134,11 +155,13 @@ export default {
       typeToSee: '',
       albums: [],
       artists: [],
+      users: [],
       NoResult: false,
       tracksExist: false,
       playlistsExist: false,
       albumsExist: false,
       artistsExist: false,
+      usersExist: false,
       imageTop: '',
       SearchHistory: [],
       SavedData: { },
@@ -188,6 +211,8 @@ export default {
         this.$router.push(`/home/search/${this.$route.params.id}/artists`);
       } else if (this.typeToSee === 'playlists') {
         this.$router.push(`/home/search/${this.$route.params.id}/playlists`);
+      } else if (this.typeToSee === 'users') {
+        this.$router.push(`/home/search/${this.$route.params.id}/users`);
       }
     },
     async fetchSearch() {
@@ -221,6 +246,12 @@ export default {
           if (response.tracks.length > 0) {
             this.tracks = response.tracks;
             this.tracksExist = true;
+          }
+        }
+        if (response.users) {
+          if (response.users.length > 0) {
+            this.users = response.users;
+            this.usersExist = true;
           }
         }
         console.log(this.artistsExist);

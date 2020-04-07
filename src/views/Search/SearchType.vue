@@ -1,7 +1,7 @@
 <template>
     <v-container fluid="" class="cont">
-        <v-row v-if="dataExist">
-            <p class="white--text font-weight-bold display-1">
+      <v-container v-if="dataExist">
+        <p class="white--text font-weight-bold display-1">
                 Viewing {{this.$route.params.type}} for {{this.$route.params.id}}
             </p>
             <v-row>
@@ -22,7 +22,7 @@
             </v-col>
 
             </v-row>
-        </v-row>
+        </v-container>
         <v-container v-if="!dataExist" id="NO">
             <span class="white--text display-1 font-weight-bold" id="results">
             No results for {{ this.$route.params.id }} {{ this.$route.params.type}}</span>
@@ -54,21 +54,17 @@ export default {
       console.log(response);
       if (response) {
         if (response.artists && this.$route.params.type === 'artists') {
-          this.data = response.artists.items;
-          this.dataExist = true;
+          this.data = response.artists;
+        } else if (response.albums && this.$route.params.type === 'albums') {
+          this.data = response.albums;
+        } else if (response.playlists && this.$route.params.type === 'playlists') {
+          this.data = response.playlists;
+        } else if (response.tracks && this.$route.params.type === 'tracks') {
+          this.data = response.tracks;
+        } else if (response.users && this.$route.params.type === 'users') {
+          this.data = response.users;
         }
-        if (response.albums && this.$route.params.type === 'albums') {
-          this.data = response.albums.items;
-          this.dataExist = true;
-        }
-        if (response.playlists && this.$route.params.type === 'playlists') {
-          this.data = response.playlists.items;
-          this.dataExist = true;
-        }
-        if (response.tracks && this.$route.params.type === 'tracks') {
-          this.data = response.tracks.items;
-          this.dataExist = true;
-        }
+        if (this.data.length > 0) { this.dataExist = true; }
       }
     },
   },
