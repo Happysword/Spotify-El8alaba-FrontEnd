@@ -1,6 +1,11 @@
 <template>
-<div class="d-inline-block container">
-  <v-layout row @mouseover="overlay = true" @mouseleave=" overlay = false" id="layout">
+<v-card
+  class="d-block container"
+  dark
+  flat
+  @mouseover="overlay = true"
+  @mouseleave=" overlay = false">
+  <v-card-actions>
     <v-img
       :src=image
       max-height="80px"
@@ -16,24 +21,34 @@
 
         </v-overlay>
     </v-img>
-  <div>
-    <span class="white--text song" @click="clickSong()">{{ SongName }}</span>
-    <div>
-      <span class="disabled artist d-inline-block" v-for="artist in artists" :key="artist.id"
-      @click="clickArtist(artist.name)" @ >{{ artist.name }}</span>
-    </div>
-  </div>
-     <v-spacer></v-spacer>
-     <v-menu offset-x>
+    <v-list-item two-line class="d-inline-block">
+              <v-list-item-content>
+                <v-list-item-title
+                class="mx-2 subtitle song"
+                 @click="clickSong()">
+                  {{ SongName }}
+                </v-list-item-title>
+                <div>
+                <span class="grey--text ml-2 text artist"
+                v-for="artist in artists" :key="artist.id"
+                @click="clickArtist(artist.name)">
+                  {{ artist.name }}
+                </span>
+                </div>
+              </v-list-item-content>
+            </v-list-item>
+  <v-card-text  align="end">
+     <v-menu absolute left>
         <template v-slot:activator="{ on }">
-          <v-icon size="30" class="px-3 dot" v-on="on" color="#E0E0E0">
+          <v-icon size="30" class="px-3 mx-0 dot" v-on="on" color="#E0E0E0">
              mdi-dots-horizontal
           </v-icon>
         </template>
         <drop></drop>
      </v-menu>
-  </v-layout>
-</div>
+  </v-card-text>
+  </v-card-actions>
+</v-card>
 </template>
 
 <script>
@@ -73,12 +88,14 @@ export default {
 };
 </script>
 <style scoped>
-.container{
+.img{
+  align-self: top;
   padding: 0px;
   margin: 0px;
-  max-height: 100px;
-  max-width: 800px;
-  display: inline-flex;
+}
+.container{
+  padding: 0px;
+  margin: 3px;
 }
 .container:hover{
 background-color: #1a1a1a;

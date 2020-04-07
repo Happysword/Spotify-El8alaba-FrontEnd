@@ -10,7 +10,7 @@
        >
       <v-container fluid="">
         <v-img
-        :src=image
+        :src="image? image : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
         height="100px"
         width="100px"
         v-if="type === 'artist'"
@@ -95,6 +95,8 @@ export default {
         this.$router.push(`/artist/${this.artistName}`);
       }
     },
+  },
+  created() {
   },
 };
 </script>

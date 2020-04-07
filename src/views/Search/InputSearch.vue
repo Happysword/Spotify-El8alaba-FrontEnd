@@ -23,27 +23,7 @@
             class="a"></top-result>
           </div>
             </v-col>
-<div class="ss ml-6" v-if="tracksExist">
-  <v-row class="mb-1 mt-2 head" >
-  <span class="white--text display-1 font-weight-bold z">Tracks</span>
-<v-spacer></v-spacer>
-  <span class="seeAll" @click="spanClicked()" @mouseover="typeToSee= 'tracks'">See All</span>
-</v-row>
-  <v-row class="sect"  v-for="x in tracks" :key="x.id">
-          <v-col  xs="12" sm="12" md="6" lg="6" class="ss">
-            <div @click="local(x.id, 'track')">
-        <search-song
-            :id="x.id"
-            :image="x.album.images[0].url"
-            :SongName="x.name"
-            :artists="x.artists"
-            :albumID="x.album.id"
-            :uri="x.uri"
-            class="ss"></search-song>
-            </div>
-        </v-col>
-        </v-row>
-        </div>
+
       </v-row>
       <v-row v-if="artistsExist">
         <v-layout row class="attribute" xs="12" sm="12" md="12" lg="12">
@@ -57,8 +37,8 @@
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in artists" :key="card.id">
                   <div @click="local(card.id, card.type)">
                    <ArtistCard
-                   :id="card.id"
-                   :profileName="card.name"
+                   v-if="artistsExist"
+                   :id="card.id" :profileName="card.name"
                    :images="card.images"
                    :type="card.type"
                    :href="card.href"
@@ -134,7 +114,7 @@
 import Client from 'api-client';
 import ArtistCard from '../../components/ArtistCard.vue';
 import TopResult from '../../components/TopResult.vue';
-import SearchSong from '../../components/SearchSong.vue';
+// import SearchSong from '../../components/SearchSong.vue';
 import SongCard from '../../components/SongCard.vue';
 
 
@@ -142,7 +122,7 @@ export default {
   name: 'InputSearch',
   components: {
     TopResult,
-    SearchSong,
+    // SearchSong,
     SongCard,
     ArtistCard,
   },
@@ -217,7 +197,7 @@ export default {
       this.albumsExist = false;
       this.NoResult = false;
       const response = await Client.fetchSearch(this.$route.params.id);
-      console.log(response.albums.length);
+      console.log(response);
       if (response) {
         if (response.artists) {
           if (response.artists.length > 0) {
@@ -229,7 +209,6 @@ export default {
           if (response.albums.length > 0) {
             this.albums = response.albums;
             this.albumsExist = true;
-            console.log(this.albumsExist);
           }
         }
         if (response.playlists) {
@@ -244,17 +223,36 @@ export default {
             this.tracksExist = true;
           }
         }
-        if (this.tracksExist && this.artistsExist) {
+        console.log(this.artistsExist);
+        console.log(this.tracksExist);
+        console.log(this.playlistsExist);
+        console.log(this.albumsExist);
+        if (this.artistsExist && this.tracksExist) {
+          console.log('gowa el 2');
           if (this.artists[0].popularity >= this.tracks[0].popularity) {
             const top = this.artists[0];
             this.top = top;
-            this.imageTop = this.top.images[0].url;
           } else {
             const top = this.tracks[0];
             this.top = top;
-            this.imageTop = this.top.album.images[0].url;
           }
+        } else if (this.artistsExist && !this.tracksExist) {
+          console.log('gowa el artist');
+          const top = this.artists[0];
+          this.top = top;
+          this.top.type = 'artist';
+        } else if (!this.artistsExist && this.tracksExist) {
+          console.log('gowa el track');
+          const top = this.tracks[0];
+          this.top = top;
+          this.top.type = 'track';
         }
+        if (this.top.images[0]) {
+          this.imageTop = this.top.images[0].url;
+        } else {
+          this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+        }
+        console.log(this.top);
       } else {
         this.NoResult = true;
       }
@@ -267,6 +265,7 @@ export default {
   },
   async created() {
     await this.fetchSearch(this.$route.params.id);
+    console.log(this.top);
   },
   mounted() {
     this.$store.state.searching = true;

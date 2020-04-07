@@ -89,8 +89,7 @@ export default {
   methods: {
     async fetchAllGenres() {
       this.genres = await client.fetchGenres();
-      console.log(this.genres);
-      if (this.genres) {
+      if (this.genres.length > 0) {
         this.genresExist = true;
       } else this.genres = {};
     },

@@ -285,7 +285,11 @@ export default {
    */
   async fetchAnArtist(id) {
     const artists = await axios
-      .get(`${api}/api/v1/artists/${id}`)
+      .get(`${api}/api/v1/artists/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data);
     return artists;
   },
@@ -565,7 +569,11 @@ export default {
    * @return {object} object containing track info
    */
   async fetchTrack(id) {
-    const res = await axios.get(`${api}/api/v1/tracks/${id}`);
+    const res = await axios.get(`${api}/api/v1/tracks/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
     return res;
   },
 
@@ -747,10 +755,7 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => {
-        console.log(response);
-        return response.data;
-      })
+      .then((response) => response.data)
       .catch((error) => console.log(error));
   },
   /**
@@ -760,7 +765,11 @@ export default {
    */
   async fetchGenre(id) {
     return axios
-      .get(`${api}/api/v1/browse/categories/${id}`)
+      .get(`${api}/api/v1/browse/categories/${id}`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -771,7 +780,11 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`)
+      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -819,10 +832,7 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => {
-        console.log(response);
-        return response.data;
-      })
+      .then((response) => response.data)
       .catch((error) => console.log(error));
   },
 };
