@@ -147,7 +147,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id, this.token)
+      client.ifCurrentUserFollowsArtistsOrUsers(this.id, this.token)
         .then((res) => {
           this.FollowJSON = res;
           [this.isFollowing] = this.FollowJSON;

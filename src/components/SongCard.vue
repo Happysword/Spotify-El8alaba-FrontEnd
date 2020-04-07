@@ -187,7 +187,7 @@ export default {
       }
 
       if (this.type === 'playlist') {
-        client.ifUsersFollowsaPlaylist(userID, this.id, this.token)
+        client.ifUsersFollowsaPlaylist(this.userID, this.id, this.token)
           .then((res) => {
             this.FollowJSON = res;
             [this.isFollowing] = this.FollowJSON;
