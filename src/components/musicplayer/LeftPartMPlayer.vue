@@ -149,13 +149,15 @@ export default {
       let R;
       if (this.heartcolor) {
         R = await PlayerRequests.deleteTrack(
+          this.$store.state.MusicPlayer.currentSong.track.id
           // eslint-disable-next-line no-underscore-dangle
-          this.$store.state.MusicPlayer.currentSong.track.id,
+          || this.$store.state.MusicPlayer.currentSong.track._id,
         );
       } else {
         R = await PlayerRequests.saveTrack(
+          this.$store.state.MusicPlayer.currentSong.track.id
           // eslint-disable-next-line no-underscore-dangle
-          this.$store.state.MusicPlayer.currentSong.track.id,
+          || this.$store.state.MusicPlayer.currentSong.track._id,
         );
       }
       if (R) {
