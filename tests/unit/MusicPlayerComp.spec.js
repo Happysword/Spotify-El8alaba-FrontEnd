@@ -112,6 +112,13 @@ describe('Testing the player components', () => {
       expect(wrapper.find('#play-btn').exists()).toBe(true);
       expect(wrapper.find('#seek-bar').exists()).toBe(true);
     });
+    it('checks skip next and skip previous', async () => {
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
+      wrapper.vm.skipNext();
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
+      wrapper.vm.skipPrevious();
+      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
+    });
 
     it('Toggle Shuffle tests', async () => {
       expect(data.shuffleState).toBe(false);
@@ -139,14 +146,6 @@ describe('Testing the player components', () => {
       expect(wrapper.vm.$data.valueFalseBuffer).toBe(0);
       wrapper.vm.seekPosition();
       expect(wrapper.vm.$data.valueFalseBuffer).toBe(0);
-    });
-
-    it('checks skip next and skip previous', async () => {
-      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
-      wrapper.vm.skipNext();
-      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
-      wrapper.vm.skipPrevious();
-      expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
     });
   });
 

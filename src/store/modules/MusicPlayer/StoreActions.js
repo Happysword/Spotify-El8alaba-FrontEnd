@@ -20,7 +20,7 @@ export default {
       };
       // eslint-disable-next-line no-underscore-dangle
       let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track.id);
-      if (process.env.VUE_APP_API_CLIENT === 'mock') Response = true;
+      if (process.env.VUE_APP_API_CLIENT !== 'server') Response = true;
       // check if the response was correct
       if (Response === false) return;
       // get song URL from mock or server
