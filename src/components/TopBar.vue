@@ -138,7 +138,7 @@ export default {
       get() {
         let name;
         try {
-          name = JSON.parse(localStorage.getItem('currentUser')).data.user.name;
+          name = JSON.parse(localStorage.getItem('currentUser')).data.name;
         } catch (error) {
           name = this.$store.state.currentUser.username;
         }

@@ -16,7 +16,7 @@
           >
             <router-link
               :to="
-                '/home/album/' +
+                '/album/' +
                   $store.state.MusicPlayer.currentSong.track.album._id
               "
               tag="button"
@@ -53,7 +53,7 @@
             <v-layout justify-center align-center column>
               <router-link
                 :to="
-                  '/home/album/' +
+                  '/album/' +
                     $store.state.MusicPlayer.currentSong.track.album._id
                 "
                 id="song-name"
