@@ -34,12 +34,12 @@
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
-          <v-col  xs="12" sm="6" md="3" lg="2"  v-for=" i in artistLength" :key="artists[i-1].id">
+          <v-col  xs="12" sm="6" md="3" lg="2" v-for=" i in artistLength" :key="artists[i-1].id">
             <div @click="local(artists[i-1].name, artists[i-1].type)">
               <ArtistCard
-                v-if="artistsExist"
-                :id="artists[i-1].id" :profileName="artists[i-1].name"
-                :images="artists[i-1].images"
+                :id="artists[i-1].id"
+                :name="artists[i-1].name"
+                :images="artists[i-1].image"
                 :type="artists[i-1].type"
                 :href="artists[i-1].href"
               >
@@ -69,7 +69,6 @@
                :href="albums[i-1].href"
                :public="albums[i-1].public"
                :snapshot_id="albums[i-1].snapshot_id"
-               :tracks="albums[i-1].tracks"
                :uri="albums[i-1].uri">
               </song-card>
             </div>
@@ -98,7 +97,6 @@
               :href="playlists[i-1].href"
               :public="playlists[i-1].public"
               :snapshot_id="playlists[i-1].snapshot_id"
-              :tracks="playlists[i-1].tracks"
               :uri="playlists[i-1].uri"></song-card>
             </div>
           </v-col>
@@ -116,8 +114,8 @@
                   <div @click="local(users[i-1].id, users[i-1].type)">
                    <ArtistCard
                    :id="users[i-1].id"
-                   :profileName="users[i-1].name"
-                   :images="users[i-1].images"
+                   :name="users[i-1].name"
+                   :images="users[i-1].image"
                    :type="users[i-1].type"
                    :href="users[i-1].href"
                    ></ArtistCard>
@@ -234,9 +232,17 @@ export default {
       if (response) {
         if (response.artists) {
           if (response.artists.length > 0) {
-            this.artists = response.artists;
-            this.artistsExist = true;
+            for (let i = 0; i < response.artists.length; i += 1) {
+              if (response.artists[i].type === 'artist') {
+                this.artists.push(response.artists[i]);
+              } else if (response.artists[i].type === 'user') {
+                this.users.push(response.artists[i]);
+              }
+            }
             this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
+            this.artistsExist = this.artistLength ? true : 0;
+            this.userLength = this.users.length < 6 ? this.users.length : 6;
+            this.usersExist = this.userLength ? true : 0;
           }
         }
         if (response.albums) {
@@ -259,35 +265,46 @@ export default {
             this.tracksExist = true;
           }
         }
-        if (response.users) {
-          if (response.users.length > 0) {
-            this.users = response.users;
-            this.usersExist = true;
-            this.userLength = this.users.length < 6 ? this.users.length : 6;
-          }
-        }
         if (this.artistsExist && this.tracksExist) {
           if (this.artists[0].popularity >= this.tracks[0].popularity) {
             const top = this.artists[0];
             this.top = top;
+            if (this.top.image) {
+              this.imageTop = this.top.image.url;
+            } else {
+              this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+            }
           } else {
             const top = this.tracks[0];
             this.top = top;
+            if (this.top.images.length) {
+              this.imageTop = this.top.images[0].url;
+            } else {
+              this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+            }
           }
         } else if (this.artistsExist && !this.tracksExist) {
           const top = this.artists[0];
           this.top = top;
           this.top.type = 'artist';
+          if (this.top.image) {
+            this.imageTop = this.top.image.url;
+          } else {
+            this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+          }
         } else if (!this.artistsExist && this.tracksExist) {
           const top = this.tracks[0];
           this.top = top;
           this.top.type = 'track';
+          if (this.top.images.length) {
+            this.imageTop = this.top.images[0].url;
+          } else {
+            this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+          }
         }
-        console.log(this.top);
-        if (this.top.image) {
-          this.imageTop = this.top.images[0].url;
-        } else {
-          this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
+        if (!this.artistsExist && !this.usersExist
+        && !this.playlistsExist && !this.albumsExist && !this.tracksExist) {
+          this.NoResult = true;
         }
       } else {
         this.NoResult = true;
@@ -301,14 +318,6 @@ export default {
   },
   async created() {
     await this.fetchSearch(this.$route.params.id);
-    console.log('Top2');
-    console.log(this.top);
-    console.log('Playlist');
-    console.log(this.playlists);
-    console.log('Artists');
-    console.log(this.artists);
-    console.log('Users');
-    console.log(this.users);
   },
   mounted() {
     this.$store.state.searching = true;

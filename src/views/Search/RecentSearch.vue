@@ -21,7 +21,6 @@
           :href="d.href"
           :public="d.public"
           :snapshot_id="d.snapshot_id"
-          :tracks="d.tracks"
           :uri="d.uri"></song-card>
          <artist-card v-if="d.type == 'artist'"
           :id="d.id"

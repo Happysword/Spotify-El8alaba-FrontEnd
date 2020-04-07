@@ -17,7 +17,6 @@
           :href="RecentSearch[i].href"
           :public="RecentSearch[i].public"
           :snapshot_id="RecentSearch[i].snapshot_id"
-          :tracks="RecentSearch[i].tracks"
           :uri="RecentSearch[i].uri"></song-card>
          <artist-card v-if="RecentSearch[i].type == 'artist'"
           :id="RecentSearch[i].id"
