@@ -75,7 +75,11 @@
     <v-row align-content="center" justify="center" class="mx-0" no-gutters>
       <v-layout justify-center align-center row>
         <v-col class="ml-5 mr-0 pa-0 justify-space-between" cols="1">
-          <div class="mx-3 pa-0" id="number-div-left">
+          <div
+            class="mx-3 pa-0"
+            id="number-div-left"
+            v-if="!(this.$store.state.MusicPlayer.currentSong === false)"
+          >
             {{ $store.state.MusicPlayer.currentSongTime }}
           </div>
         </v-col>
@@ -96,7 +100,11 @@
         </v-col>
 
         <v-col class="pa-0" cols="1">
-          <div id="number-div-right" class="mx-3 mb-0">
+          <div
+            id="number-div-right"
+            class="mx-3 mb-0"
+            v-if="!(this.$store.state.MusicPlayer.currentSong === false)"
+          >
             {{ totalSongTime }}
           </div>
         </v-col>
@@ -185,7 +193,9 @@ export default {
         this.songList = this.$store.state.MusicPlayer.currentList;
         this.songList.sort(() => Math.random() - 0.5);
         // save the index in the data
-        this.songindex = this.songList.indexOf(this.$store.state.MusicPlayer.currentSong);
+        this.songindex = this.songList.indexOf(
+          this.$store.state.MusicPlayer.currentSong,
+        );
         this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
         // swaping the values of the lists to be saved in the data
         const temp = this.$store.state.MusicPlayer.currentList;
@@ -197,7 +207,9 @@ export default {
         this.$store.state.MusicPlayer.currentList = this.songList;
         this.songList = temp;
         // save the index in the data
-        this.songindex = this.songList.indexOf(this.$store.state.MusicPlayer.currentSong);
+        this.songindex = this.songList.indexOf(
+          this.$store.state.MusicPlayer.currentSong,
+        );
         this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
       }
     },
@@ -208,7 +220,9 @@ export default {
     async seekPosition() {
       const seekedTime = (this.$store.state.MusicPlayer.currentBufferPerc / 100)
       * this.$store.state.MusicPlayer.AudioPlayer.duration;
-      const Response = await PlayerRequests.seekPosition(Math.floor(seekedTime * 1000));
+      const Response = await PlayerRequests.seekPosition(
+        Math.floor(seekedTime * 1000),
+      );
       if (Response) {
         this.$store.state.MusicPlayer.AudioPlayer.currentTime = seekedTime;
         this.valueFalseBuffer = this.$store.state.MusicPlayer.currentBufferPerc;
@@ -246,19 +260,26 @@ export default {
     // play track with faded for now and get current playback
     // maybe add that the Music player is empty at first like spotify
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
-      if (this.$store.state.MusicPlayer.currentSongIndexinList === this
-        .$store.state.MusicPlayer.currentList.length - 1) {
+      if (
+        this.$store.state.MusicPlayer.currentSongIndexinList === this
+          .$store.state.MusicPlayer.currentList.length - 1
+      ) {
         this.$store.state.MusicPlayer.isFirstPlay = true;
         this.$store.state.MusicPlayer.isPlaying = false;
       } else {
         this.skipNext();
       }
     };
-    // to be removed later plays faded
-    await PlayerRequests.playTrack('5e8c07b979262d2288571b65');
     if (process.env.VUE_APP_API_CLIENT === 'server') {
-      this.$store.state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback()
-        .then((data) => data.currentlyPlaying);
+      this.$store.state.MusicPlayer.currentSong = false;
+      this.$store.state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback().then(
+        (data) => {
+          if (data.currentlyPlaying.track === null) {
+            return false;
+          }
+          return data.currentlyPlaying;
+        },
+      );
     }
   },
 };

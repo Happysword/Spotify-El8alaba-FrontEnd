@@ -3,7 +3,7 @@
     <v-container fluid class="mx-0 pa-0">
       <v-row>
         <v-col align-self="center" class="pa-0" cols="3">
-          <LMusicP></LMusicP>
+          <LMusicP v-if="!(this.$store.state.MusicPlayer.currentSong === false)"></LMusicP>
         </v-col>
         <v-col align-self="center" class="pa-0" cols="6">
           <MMusicP></MMusicP>
