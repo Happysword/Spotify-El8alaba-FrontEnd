@@ -15,8 +15,8 @@ RUN npm ci  --cache .npm --prefer-offline
 COPY . .
 
 ## Build dist
-ENV VUE_APP_API_HOST=http://172.22.0.3
-ENV VUE_APP_API_PORT=80
+ENV VUE_APP_API_HOST=https://spotify-elghalaba.com
+ENV VUE_APP_API_PORT=443
 RUN npm run build
 
 # production stage
