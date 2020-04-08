@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import store from '../store';
+// import store from '../store';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
@@ -91,7 +91,7 @@ export default {
      * Change the song icon and color to play mode
      */
     playSong() {
-      store.state.MusicPlayer.isPlaying = true;
+      this.$store.state.MusicPlayer.isPlaying = true;
       this.play = true;
       this.color = '#1ED760';
       this.color2 = '#1ED760';
@@ -103,7 +103,7 @@ export default {
      * Change the song icon and color to pause mode
      */
     pauseSong() {
-      store.state.MusicPlayer.isPlaying = false;
+      this.$store.state.MusicPlayer.isPlaying = false;
       this.play = false;
       this.color = 'grey';
       this.color2 = 'white';
@@ -123,17 +123,17 @@ export default {
       if (hover === 0) {
         this.play = !this.play;
         if (this.play === true) {
-          store.state.MusicPlayer.currentSong = this.song;
-          store.state.MusicPlayer.currentList = this.list;
-          store.state.MusicPlayer.currentSongIndexinList = this.counter;
+          this.$store.state.MusicPlayer.currentSong = this.song;
+          this.$store.state.MusicPlayer.currentList = this.list;
+          this.$store.state.MusicPlayer.currentSongIndexinList = this.counter;
           this.playSong();
-          store.dispatch('playpauseplaylist', {
+          this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
             song: this.song,
           });
         } else {
           this.pauseSong();
-          store.dispatch('playpauseplaylist', {
+          this.$store.dispatch('playpauseplaylist', {
             playstatus: false,
             song: this.song,
           });
@@ -159,23 +159,23 @@ export default {
       if ((this.play === true && play === false) || this.counter === 0) {
         this.play = play;
         if (this.play === true) {
-          store.state.MusicPlayer.currentSong = this.song;
-          store.state.MusicPlayer.currentList = this.list;
-          store.state.MusicPlayer.currentSongIndexinList = 0;
+          this.$store.state.MusicPlayer.currentSong = this.song;
+          this.$store.state.MusicPlayer.currentList = this.list;
+          this.$store.state.MusicPlayer.currentSongIndexinList = 0;
           this.playSong();
           this.showIcon = 'mdi-volume-high';
         } else {
           this.pauseSong();
           this.showIcon = 'mdi-music-note-outline';
         }
-        store.dispatch('playpauseplaylist', {
+        this.$store.dispatch('playpauseplaylist', {
           playstatus: this.play,
           song: this.song,
         });
       }
     });
     EventBus.$on('changePlay', () => {
-      if (this.song !== store.state.MusicPlayer.currentSong) {
+      if (this.song !== this.$store.state.MusicPlayer.currentSong) {
         this.play = false;
         this.color = 'grey';
         this.color2 = 'white';
@@ -189,13 +189,13 @@ export default {
      * Check if this song is the current song or not then set the status of it
      */
     checkSong() {
-      if (this.song === store.state.MusicPlayer.currentSong) {
-        if (store.state.MusicPlayer.isPlaying === true) {
+      if (this.song === this.$store.state.MusicPlayer.currentSong) {
+        if (this.$store.state.MusicPlayer.isPlaying === true) {
           this.playSong();
         } else {
           this.pauseSong();
         }
-        EventBus.$emit('changePlay', store.state.MusicPlayer.isPlaying, this.listid);
+        EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
       }
       return true;
     },

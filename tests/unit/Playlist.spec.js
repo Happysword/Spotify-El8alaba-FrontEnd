@@ -5,8 +5,7 @@ import VueRouter from 'vue-router';
 
 // Components
 // import LikedTracks from '@/views/PlayLists/LikedTracks.vue';
-// import PlaylistCard from '@/components/PlaylistCard.vue';
-import SongsBar from '@/components/SongsBar.vue';
+import PlaylistCard from '@/components/playlistCard.vue';
 
 // Utilities
 import { mount, createLocalVue } from '@vue/test-utils';
@@ -20,20 +19,42 @@ localVue.use(VueRouter);
 const vuetify = new Vuetify();
 const router = new VueRouter();
 
-describe('SongsBar.vue', () => {
-  test('All components are loaded', () => {
-    // Mount the component
-    const wrapper = mount(SongsBar, {
-      localVue,
-      vuetify,
-      router,
-    });
+describe('PlaylistCard.vue Component', () => {
+  const wrapper = mount(PlaylistCard, {
+    localVue,
+    vuetify,
+    router,
+  });
 
-    expect(wrapper.find('#songBar').exists()).toEqual(true);
-    expect(wrapper.find('#showIcon').exists()).toEqual(true);
-    expect(wrapper.find('#songName').exists()).toEqual(true);
-    expect(wrapper.find('#songInfo').exists()).toEqual(true);
-    expect(wrapper.find('#dotsIcon').exists()).toEqual(true);
-    expect(wrapper.find('#duration').exists()).toEqual(true);
+  const data = wrapper.vm.$data;
+
+  test('renders a vue instance', () => {
+    expect(mount(PlaylistCard).isVueInstance()).toBe(true);
+  });
+
+  test('All components are loaded', () => {
+    expect(wrapper.find('#playlistCard').exists()).toEqual(true);
+    expect(wrapper.find('#image').exists()).toEqual(true);
+    expect(wrapper.find('#playIcon').exists()).toEqual(true);
+    expect(wrapper.find('#pauseIcon').exists()).toEqual(false);
+    expect(wrapper.find('#listName').exists()).toEqual(true);
+    expect(wrapper.find('#owner').exists()).toEqual(true);
+    expect(wrapper.find('#playBtn').exists()).toEqual(true);
+    expect(wrapper.find('#save').exists()).toEqual(true);
+    expect(wrapper.find('#remove').exists()).toEqual(true);
+    expect(wrapper.find('#snackbar').exists()).toEqual(false);
+    expect(wrapper.find('#more').exists()).toEqual(true);
+    expect(wrapper.find('#tooltip').exists()).toEqual(true);
+    expect(wrapper.find('#songNum').exists()).toEqual(true);
+  });
+
+  test('All default data are correct', () => {
+    expect(data.overlay).toEqual(false);
+    expect(data.playSong).toEqual('Play');
+    expect(data.snackbar).toEqual(false);
+    expect(data.text).toEqual('');
+    expect(data.timeout).toEqual(2000);
+    expect(data.tooltip).toEqual(false);
+    expect(data.play).toEqual(false);
   });
 });
