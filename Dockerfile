@@ -9,12 +9,14 @@ WORKDIR /app
 COPY package*.json ./
 
 ## Install dependencies
-RUN npm install
+RUN npm ci  --cache .npm --prefer-offline
 
 ## Copy project files to the container
 COPY . .
 
 ## Build dist
+ENV VUE_APP_API_HOST=http://172.22.0.3
+ENV VUE_APP_API_PORT=80
 RUN npm run build
 
 # production stage
