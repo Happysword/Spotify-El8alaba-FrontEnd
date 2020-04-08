@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.gitlab-ci.yml
+dist
+coverage
+tests
+
+# Shell scripts
+./*.sh
