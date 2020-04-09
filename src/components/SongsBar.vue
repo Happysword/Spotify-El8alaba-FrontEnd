@@ -78,7 +78,10 @@ export default {
         };
       },
     },
-    counter: Number,
+    counter: {
+      type: Number,
+      default: 0,
+    },
     list: Array,
     listid: String,
     listType: String,

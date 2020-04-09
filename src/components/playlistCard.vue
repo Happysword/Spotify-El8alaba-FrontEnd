@@ -158,6 +158,8 @@ export default {
           images: [{ url: '' }],
           name: '',
           release_date: '',
+          id: '1',
+          type: 'album',
         };
       },
     },

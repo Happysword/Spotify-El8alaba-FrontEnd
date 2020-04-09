@@ -9,6 +9,7 @@ import PlaylistCard from '@/components/playlistCard.vue';
 
 // Utilities
 import { mount, createLocalVue } from '@vue/test-utils';
+import EventBus from '../../src/EventBus';
 
 Vue.use(Vuetify);
 
@@ -58,15 +59,70 @@ describe('PlaylistCard.vue Component', () => {
     expect(data.play).toEqual(false);
   });
 
-  test('Change status of the current song', () => {
-    wrapper.vm.changeStatus();
+  test('Change status of the current song', async () => {
+    wrapper.find('#playBtn').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    // wrapper.vm.changeStatus();
     expect(data.play).toEqual(true);
     expect(data.overlay).toEqual(true);
+    expect(data.playSong).toEqual('Pause');
+
+    wrapper.find('#playBtn').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    // wrapper.vm.changeStatus();
+    expect(data.play).toEqual(false);
+    expect(data.overlay).toEqual(false);
+    expect(data.playSong).toEqual('Play');
+
+    EventBus.$emit('changePlay', false, '1');
+    const ret = wrapper.vm.changePlayEvent;
+    expect(ret).toEqual(true);
+    expect(data.play).toEqual(false);
+    expect(data.overlay).toEqual(false);
   });
 
-  // test('Add or remove list icons changed', () => {
-  //   wrapper.vm.changeLiked();
-  //   expect(data.play).toEqual(true);
-  //   expect(data.overlay).toEqual(true);
-  //  });
+  test('Add or remove list icons changed', async () => {
+    wrapper.find('#save').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
+    // await wrapper.vm.changeLiked();
+    expect(data.store.state.liked).toEqual(true);
+    expect(data.snackbar).toEqual(true);
+    expect(data.text).toEqual('Saved to Your Library');
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 2100);
+    });
+    await wrapper.vm.$nextTick();
+    expect(data.snackbar).toEqual(false);
+
+    wrapper.find('#remove').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    // await wrapper.vm.changeLiked();
+    expect(data.store.state.liked).toEqual(false);
+    expect(data.snackbar).toEqual(true);
+    expect(data.text).toEqual('Removed from Your Library');
+  });
 });

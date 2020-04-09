@@ -3,13 +3,14 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
-import SongsBar from '@/components/SongsBar.vue';
 import { mount, createLocalVue } from '@vue/test-utils';
+import SongsBar from '@/components/SongsBar.vue';
 import Requests from '../../src/store/modules/MusicPlayer/Requests';
 import * as currentSongMock from '../../src/api/mock/data/MusicPlayer/currentSong.json';
 import * as currentPlaybackMock from '../../src/api/mock/data/MusicPlayer/currentPlayback.json';
+import EventBus from '../../src/EventBus';
+
 // Components
-// Utilities
 
 Vue.use(Vuetify);
 const localVue = createLocalVue();
@@ -52,6 +53,7 @@ const store = new Vuex.Store({
 
 describe('SongsBar.vue Component', () => {
   // Mount the component
+
   const wrapper = mount(SongsBar, {
     localVue,
     vuetify,
@@ -59,11 +61,30 @@ describe('SongsBar.vue Component', () => {
     store,
     Requests,
   });
-
   const data = wrapper.vm.$data;
 
   test('renders a vue instance', () => {
     expect(wrapper.isVueInstance()).toBe(true);
+  });
+
+  test('Check Event Bus', () => {
+    EventBus.$emit('changePlay');
+    expect(data.showIcon).toEqual('mdi-music-note-outline');
+    expect(data.songIcon).toEqual('mdi-music-note-outline');
+    expect(data.dotsIcon).toEqual('');
+    expect(data.color).toEqual('grey');
+    expect(data.color2).toEqual('white');
+    expect(data.play).toEqual(false);
+
+    EventBus.$emit('pause', true);
+    expect(data.showIcon).toEqual('mdi-volume-high');
+    expect(data.dotsIcon).toEqual('');
+    expect(data.songIcon).toEqual('mdi-volume-high');
+    expect(data.color).toEqual('#1ED760');
+    expect(data.color2).toEqual('#1ED760');
+    expect(data.play).toEqual(true);
+    expect(wrapper.vm.$store.state.MusicPlayer.isPlaying).toBe(true);
+    EventBus.$emit('pause', false);
   });
 
   test('All components are loaded', () => {
