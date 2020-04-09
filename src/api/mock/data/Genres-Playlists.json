@@ -1,7 +1,4 @@
-{
-    "playlists": {
-      "href": "https://api.spotify.com/v1/browse/categories/gaming/playlists?offset=0&limit=20",
-      "items": [
+[
         {
           "collaborative": false,
           "description": "Soundtrack your gaming with these atmospheric beats.",
@@ -722,11 +719,4 @@
           "type": "playlist",
           "uri": "spotify:playlist:37i9dQZF1DX7UhMBB8rJ6x"
         }
-      ],
-      "limit": 20,
-      "next": "https://api.spotify.com/v1/browse/categories/gaming/playlists?offset=20&limit=20",
-      "offset": 0,
-      "previous": null,
-      "total": 21
-    }
-  }
+      ]

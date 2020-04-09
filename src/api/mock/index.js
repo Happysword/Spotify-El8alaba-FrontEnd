@@ -445,12 +445,16 @@ export default {
    * @return {object} an object containing necessary data about genre
    */
   async fetchGenre(id) {
+    if (id === 'gaming') {
+      const obj = genres[1];
+      return obj;
+    }
     let i;
     const list = await fetch(genres, 10);
-    for (i = 0; i < list.categories.limit; i += 1) {
+    for (i = 0; i < list.length; i += 1) {
       // eslint-disable-next-line no-underscore-dangle
-      if (id === list.categories.items[i]._id) {
-        return list.categories.items[i];
+      if (id === list[i]._id) {
+        return list[i];
       }
     }
     return {};
@@ -506,12 +510,15 @@ export default {
  */
   async fetchSearch(x) {
     let obj;
+    console.log(x);
     if (x.match(/Amr Diab.*/)) {
-      obj = await fetch(search[0], 50);
+      // eslint-disable-next-line prefer-destructuring
+      obj = search[0];
       return obj;
     }
     if (x.match(/Godzilla.*/)) {
-      obj = await fetch(search[1], 100);
+      // eslint-disable-next-line prefer-destructuring
+      obj = search[1];
       return obj;
     }
     return null;
