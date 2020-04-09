@@ -57,4 +57,16 @@ describe('PlaylistCard.vue Component', () => {
     expect(data.tooltip).toEqual(false);
     expect(data.play).toEqual(false);
   });
+
+  test('Change status of the current song', () => {
+    wrapper.vm.changeStatus();
+    expect(data.play).toEqual(true);
+    expect(data.overlay).toEqual(true);
+  });
+
+  // test('Add or remove list icons changed', () => {
+  //   wrapper.vm.changeLiked();
+  //   expect(data.play).toEqual(true);
+  //   expect(data.overlay).toEqual(true);
+  //  });
 });

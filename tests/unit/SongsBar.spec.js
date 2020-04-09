@@ -63,7 +63,7 @@ describe('SongsBar.vue Component', () => {
   const data = wrapper.vm.$data;
 
   test('renders a vue instance', () => {
-    expect(mount(SongsBar).isVueInstance()).toBe(true);
+    expect(wrapper.isVueInstance()).toBe(true);
   });
 
   test('All components are loaded', () => {
@@ -82,16 +82,42 @@ describe('SongsBar.vue Component', () => {
     expect(data.color).toEqual('grey');
     expect(data.color2).toEqual('white');
     expect(data.play).toEqual(false);
+    const song = {
+      track: {
+        name: '',
+        album: { name: '' },
+        artists: [{ name: '' }],
+        duration_ms: 0,
+      },
+    };
+    expect(wrapper.vm.$props.song).toEqual(song);
   });
 
-  test('Check for change icon at hover', () => {
-    wrapper.vm.changeicon(2);
+  test('Check for change icon at mouse over', async () => {
+    // move mouse over the button and wait
+    wrapper.find('#songBar').trigger('mouseover');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
     expect(data.showIcon).toEqual('mdi-play');
     expect(data.dotsIcon).toEqual('mdi-dots-horizontal');
   });
 
-  test('Check for change icon at click', () => {
-    wrapper.vm.changeicon(0);
+  test('Check for change icon at click', async () => {
+    // Click the button and wait
+    wrapper.find('#showIcon').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
+    wrapper.vm.changeicon(2);
     expect(data.showIcon).toEqual('mdi-pause');
     expect(data.dotsIcon).toEqual('mdi-dots-horizontal');
     expect(data.songIcon).toEqual('mdi-volume-high');
@@ -100,7 +126,15 @@ describe('SongsBar.vue Component', () => {
     expect(data.play).toEqual(true);
     expect(wrapper.vm.$store.state.MusicPlayer.isPlaying).toBe(true);
 
-    wrapper.vm.changeicon(0);
+    // Click the button and wait
+    wrapper.find('#showIcon').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    wrapper.vm.changeicon(2);
     expect(data.showIcon).toEqual('mdi-play');
     expect(data.songIcon).toEqual('mdi-music-note-outline');
     expect(data.dotsIcon).toEqual('mdi-dots-horizontal');
@@ -108,5 +142,31 @@ describe('SongsBar.vue Component', () => {
     expect(data.color2).toEqual('white');
     expect(data.play).toEqual(false);
     expect(wrapper.vm.$store.state.MusicPlayer.isPlaying).toBe(false);
+  });
+
+  test('Check for change icon at mouse leave', async () => {
+    wrapper.find('#songBar').trigger('mouseleave');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
+    expect(data.showIcon).toEqual('mdi-music-note-outline');
+    expect(data.dotsIcon).toEqual('');
+  });
+
+  test('Check that dropdown list is existed after click at dots icon', async () => {
+    expect(wrapper.find('#menu').exists()).toEqual(false);
+    // Click the button and wait
+    wrapper.find('#dotsIcon').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.find('#menu').exists()).toEqual(true);
   });
 });
