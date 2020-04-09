@@ -509,17 +509,19 @@ export default {
  * @return {object} an object that may have related data to user search
  */
   async fetchSearch(x) {
-    let obj;
-    console.log(x);
-    if (x.match(/Amr Diab.*/)) {
+    if (x !== undefined) {
+      let obj;
+      console.log(x);
+      if (x.match(/Amr Diab.*/)) {
       // eslint-disable-next-line prefer-destructuring
-      obj = search[0];
-      return obj;
-    }
-    if (x.match(/Godzilla.*/)) {
+        obj = search[0];
+        return obj;
+      }
+      if (x.match(/Godzilla.*/)) {
       // eslint-disable-next-line prefer-destructuring
-      obj = search[1];
-      return obj;
+        obj = search[1];
+        return obj;
+      }
     }
     return null;
   },
@@ -560,14 +562,14 @@ export default {
  */
   async fetchTrack(id) {
     let PL = await fetch(search[0], 1000);
-    PL = PL.tracks.items;
+    PL = PL.tracks;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
     PL = await fetch(search[1], 500);
-    PL = PL.tracks.items;
+    PL = PL.tracks;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
