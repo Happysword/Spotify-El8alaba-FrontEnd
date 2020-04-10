@@ -2,6 +2,7 @@
   <v-container fluid="">
     <div v-if="RecentExist">
       <h2 class="white--text mt-10 font-weight-bold RECENT"
+      id="history"
       @click="History()">Recent searches</h2>
     <v-row>
         <v-col  xs="12" sm="6" md="3" lg="2"
@@ -80,9 +81,9 @@ export default {
       PGenres: [],
       RecentSearch: [],
       genresExist: false,
+      RecentLength: 0,
       PGenresExist: false,
       RecentExist: false,
-      RecentLength: 0,
     };
   },
   methods: {
@@ -91,12 +92,6 @@ export default {
       if (this.genres.length > 0) {
         this.genresExist = true;
       } else this.genres = {};
-    },
-    async fetchAllPrefG() {
-      this.PGenres = await client.fetchPrefGenres();
-      if (this.PGenres) {
-        this.PGenresExist = true;
-      } else this.PGenres = {};
     },
     History() {
       this.$router.push('/home/search/history/showRecent');

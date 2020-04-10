@@ -42,7 +42,10 @@ describe('Testing the existence of components', () => {
     expect(wrapper.find('#account-item').exists()).toBe(true);
   });
   test('check that change route works', async () => {
+    wrapper.vm.$route.params.id = 'Faded';
     wrapper.vm.searching();
+    expect(wrapper.vm.$data.input).toBe('Faded');
+    expect(wrapper.vm.$route.path).toBe('/home/search/Faded');
     expect(typeof wrapper.vm.userName).toBe('string');
   });
 });

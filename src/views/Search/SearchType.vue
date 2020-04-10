@@ -50,7 +50,6 @@ export default {
       this.datasExist = false;
       console.log(`${this.$route.params.id} ${this.$route.params.type}`);
       const response = await Client.fetchSearch(`${this.$route.params.id} ${this.$route.params.type}`);
-      console.log(response);
       if (response) {
         if (response.artists && this.$route.params.type === 'artists') {
           this.data = response.artists;
