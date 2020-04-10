@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import cookies from '@/store/modules/auth/cookies';
 import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
@@ -370,7 +371,6 @@ export default {
     if (state === 'track' || state === 'off' || state === 'context') {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -382,7 +382,6 @@ export default {
     if (positionMs >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -394,7 +393,6 @@ export default {
     if (volumePercent >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
   /**
    * it sends a request to the server to set the current playing track
@@ -405,7 +403,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
   /**
    * Save a Liked Track to Server
@@ -416,7 +413,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -428,7 +424,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**

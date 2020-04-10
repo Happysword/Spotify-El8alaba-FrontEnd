@@ -1,4 +1,5 @@
 import Requests from '../../src/store/modules/MusicPlayer/Requests';
+import mock from '../../src/api/mock/index';
 
 describe('Requests of Player', () => {
   it('Checks that objects are returned from the requests', async () => {
@@ -106,6 +107,12 @@ describe('Requests of Player', () => {
     it('Sends incorrect value to setVolume', async () => {
       data = await Requests.setVolume('test');
       expect(data).toEqual(false);
+    });
+  });
+  describe('it checks for mock functionality', () => {
+    it('tests get user and get token', async () => {
+      expect(typeof await mock.fetchUsers()).toBe('object');
+      expect(typeof await mock.fetchToken()).toBe('object');
     });
   });
 });
