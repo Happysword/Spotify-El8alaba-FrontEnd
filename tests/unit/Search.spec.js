@@ -6,6 +6,7 @@ import Search from '@/views/Search/Search.vue';
 import Genres from '@/api/mock/data/genres.json';
 // import PGenres from '@/api/mock/data/PrefGenres.json';
 import { mount, createLocalVue } from '@vue/test-utils';
+import GenresCard from '../../src/components/GenresCard.vue';
 
 Vue.use(Vuetify);
 
@@ -92,5 +93,16 @@ describe('testing Search', () => {
     expect(wrapper.find('#history').exists()).toEqual(true);
     wrapper.find('#history').trigger('click');
     expect(wrapper.vm.$route.path).toBe('/home/search/history/showRecent');
+  });
+  test('test artist link', () => {
+    const wrapper = mount(GenresCard, {
+      propsData: {
+        route: 'test',
+      },
+      localVue,
+      router,
+    });
+    wrapper.vm.routing();
+    expect(wrapper.vm.$route.path).toBe('/genre/test-page');
   });
 });

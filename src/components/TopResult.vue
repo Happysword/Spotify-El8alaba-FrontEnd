@@ -82,13 +82,14 @@ export default {
         this.$router.push(`/track/${this.IDP}`);
       } else if (this.type === 'artist') {
         this.$router.push(`/artist/${this.IDP}`);
-      } else if (this.type === 'profile') {
-        this.$router.push(`/profile/${this.IDP}`);
+      } else if (this.type === 'user') {
+        this.$router.push(`/user/${this.IDP}`);
       } else if (this.type === 'album') {
         this.$router.push(`/album/${this.IDP}`);
       }
     },
     artistLink() {
+      console.log(this.artistName);
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');
       } else {
