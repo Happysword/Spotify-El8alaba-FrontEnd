@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import InputSearch from '@/views/Search/InputSearch.vue';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 // import S from '@/api/mock/data/Search.json';
-// import Client from '@/api/mock';
+import Client from '@/api/mock';
 
 
 describe('testing Search', () => {
@@ -89,5 +89,34 @@ describe('testing Search', () => {
     await wrapper.vm.local(wrapper.vm.$data.top.id, wrapper.vm.$data.top.type);
     const data = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
     expect(wrapper.vm.$data.SearchHistory[0].id).toStrictEqual(data[0].id);
+  });
+  test('testing other data', async () => {
+    wrapper.vm.$route.params.id = 'Amr Diab';
+    await wrapper.vm.fetchSearch(wrapper.vm.$route.params.id);
+    expect(wrapper.vm.$data.top.name).toBe('Amr Diab');
+    await wrapper.vm.local('5iKYvhddpkuAOzOvrLRznN', 'playlist');
+    expect(wrapper.vm.$data.SavedData.type).toBe('playlist');
+    await wrapper.vm.local('5abSRg0xN1NV3gLbuvX24M', 'artist');
+    expect(wrapper.vm.$data.SavedData.type).toBe('artist');
+    await wrapper.vm.local('2IV13wMMDBs2OyqNdAswSP', 'album');
+    expect(wrapper.vm.$data.SavedData.type).toBe('album');
+    wrapper.vm.$route.params.id = 'Test';
+    await wrapper.vm.fetchSearch(wrapper.vm.$route.params.id);
+    expect(wrapper.vm.$data.NoResult).toBe(true);
+  });
+  test('mock api functions', async () => {
+    let c;
+    c = await Client.fetchTrack('3ZTuYuaV1fhdNnuIBuzTYy');
+    expect(c.type).toBe('track');
+    c = await Client.fetchAlbum('2IV13wMMDBs2OyqNdAswSP');
+    expect(c.type).toBe('album');
+    c = await Client.fetchAnArtist('5abSRg0xN1NV3gLbuvX24M');
+    expect(c.type).toBe('artist');
+    c = await Client.fetchPlaylist('5iKYvhddpkuAOzOvrLRznN');
+    expect(c.type).toBe('playlist');
+    c = await Client.fetchArtist('5abSRg0xN1NV3gLbuvX24M');
+    expect(c.type).toBe('artist');
+    c = await Client.fetchAnArtist('5abSRg0xN1NV3gLbuvX24M');
+    expect(c.type).toBe('artist');
   });
 });

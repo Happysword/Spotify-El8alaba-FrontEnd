@@ -54,20 +54,25 @@ export default {
       PopularPlaylists: [],
       PPLength: 0,
       Releases: [],
+      test: false,
     };
   },
   methods: {
     async fetchGenreReq() {
       this.ready = false;
+      console.log(this.$route.params.id);
       this.category = await Client.fetchGenre(this.$route.params.id);
+      console.log('ana hna');
+      console.log(this.category);
       if (this.category !== undefined && this.category !== {}) {
-        if (this.category.icons) {
+        if (this.category.icons && !this.test) {
           const result = await analyze(this.category.icons[0].url);
           EventBus.$emit('changeColor', result[100].color);
         }
         this.title = this.category.name;
         this.ready = true;
       }
+      console.log('title', this.title);
       // eslint-disable-next-line no-underscore-dangle
       this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.$route.params.id);
       // this.PopularPlaylists = this.category.playlists;

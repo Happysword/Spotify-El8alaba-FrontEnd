@@ -445,6 +445,10 @@ export default {
    * @return {object} an object containing necessary data about genre
    */
   async fetchGenre(id) {
+    console.log(id);
+    if (id === undefined) {
+      return {};
+    }
     if (id === 'gaming') {
       const obj = genres[1];
       return obj;
@@ -474,14 +478,12 @@ export default {
    * @return {Array} an Array containing all playlists
    */
   async fetchCategoryPlaylists(id) {
-    let playlist;
+    console.log(id);
     if (id === 'gaming') {
-      playlist = await fetch(genresPlaylists1, 50);
-      return playlist;
+      return genresPlaylists1;
     }
     if (id === 'soul') {
-      playlist = await fetch(genresPlaylists2, 100);
-      return playlist;
+      return genresPlaylists2;
     }
     return {};
   },
@@ -492,14 +494,11 @@ export default {
    * TODO[@Francois] make sure it will get an id for category and return the playlists
    */
   async fetchCategoryReleases(id) {
-    let release;
     if (id === 'gaming') {
-      release = await fetch(genresPlaylists1, 50);
-      return release.playlists.items;
+      return genresPlaylists1;
     }
     if (id === 'soul') {
-      release = await fetch(genresPlaylists2, 100);
-      return release.playlists.items;
+      return genresPlaylists2;
     }
     return {};
   },
@@ -540,14 +539,14 @@ export default {
  */
   async fetchPlaylist(id) {
     let PL = await fetch(search[0], 1000);
-    PL = PL.playlists.items;
+    PL = PL.playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
     PL = await fetch(search[1], 500);
-    PL = PL.playlists.items;
+    PL = PL.playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
@@ -583,15 +582,14 @@ export default {
  * @return {object} an object that may have related data of the artist
  */
   async fetchArtist(id) {
-    let PL = await fetch(search[0], 1000);
-    PL = PL.artists.items;
+    let PL;
+    PL = search[0].artists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
-    PL = await fetch(search[1], 500);
-    PL = PL.artists.items;
+    PL = search[1].artists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
