@@ -12,6 +12,7 @@ docker image build -t front .
 docker container run -d \
 	 --name front-prod \
 	 --restart on-failure \
+	 --mount type=bind,src="$(pwd)"/default.conf,target=/etc/nginx/conf.d/default.conf \
 	 --network sp8 \
 	 -p 4000:80 \
 	front:latest
