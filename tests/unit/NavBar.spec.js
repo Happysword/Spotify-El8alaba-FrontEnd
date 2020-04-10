@@ -67,4 +67,40 @@ describe('NavBar.vue', () => {
     const createNewPlaylist = wrapper.find('#createNewPlaylist');
     expect(createNewPlaylist.exists()).toEqual(false);
   });
+
+  test('Fetch userplaylist works', () => {
+    const wrapper = mount(NavBar, {
+      localVue,
+      vuetify,
+      router,
+      store,
+    });
+
+    const playlistsJson = wrapper.vm.$data.playlists;
+    expect(playlistsJson).toMatchObject({});
+
+    wrapper.vm.fetchUserPlaylists();
+
+    wrapper.vm.$nextTick(() => {
+      expect(playlistsJson).toMatchObject({});
+    });
+  });
+
+  test('Create playlist works', () => {
+    const wrapper = mount(NavBar, {
+      localVue,
+      vuetify,
+      router,
+      store,
+    });
+
+    const playlistsJson = wrapper.vm.$data.playlists;
+    expect(playlistsJson).toMatchObject({});
+
+    wrapper.vm.createNewPlaylist();
+
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.$data.createdPlaylistName).toEqual('');
+    });
+  });
 });
