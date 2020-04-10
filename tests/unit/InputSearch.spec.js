@@ -114,9 +114,9 @@ describe('testing Search', () => {
     expect(c.type).toBe('artist');
     c = await Client.fetchPlaylist('5iKYvhddpkuAOzOvrLRznN');
     expect(c.type).toBe('playlist');
-    c = await Client.fetchArtist('5abSRg0xN1NV3gLbuvX24M');
-    expect(c.type).toBe('artist');
-    c = await Client.fetchAnArtist('5abSRg0xN1NV3gLbuvX24M');
-    expect(c.type).toBe('artist');
+    c = await Client.fetchPlaylist('4z1sqetlyzn9FyVCvazJa6');
+    expect(c.type).toBe('playlist');
+    c = await Client.fetchPlaylist('test');
+    expect(c).toStrictEqual({});
   });
 });

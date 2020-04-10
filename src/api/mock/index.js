@@ -446,15 +446,13 @@ export default {
    */
   async fetchGenre(id) {
     console.log(id);
+
+    console.log(id);
     if (id === undefined) {
       return {};
     }
-    if (id === 'gaming') {
-      const obj = genres[1];
-      return obj;
-    }
     let i;
-    const list = await fetch(genres, 10);
+    const list = genres;
     for (i = 0; i < list.length; i += 1) {
       // eslint-disable-next-line no-underscore-dangle
       if (id === list[i]._id) {
@@ -538,15 +536,14 @@ export default {
  * @return {object} an object that may have related data of the playlist
  */
   async fetchPlaylist(id) {
-    let PL = await fetch(search[0], 1000);
-    PL = PL.playlists;
+    let PL = search[0].playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
-    PL = await fetch(search[1], 500);
-    PL = PL.playlists;
+
+    PL = search[1].playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
@@ -576,27 +573,27 @@ export default {
     }
     return {};
   },
-  /**
- * Fetch related data to the user input for search
- * @param {string} id a string that contains the data the user search for
- * @return {object} an object that may have related data of the artist
- */
-  async fetchArtist(id) {
-    let PL;
-    PL = search[0].artists;
-    for (let j = 0; j < PL.length; j += 1) {
-      if (PL[j].id === id) {
-        return PL[j];
-      }
-    }
-    PL = search[1].artists;
-    for (let j = 0; j < PL.length; j += 1) {
-      if (PL[j].id === id) {
-        return PL[j];
-      }
-    }
-    return {};
-  },
+  //   /**
+  //  * Fetch related data to the user input for search
+  //  * @param {string} id a string that contains the data the user search for
+  //  * @return {object} an object that may have related data of the artist
+  //  */
+  //   async fetchArtist(id) {
+  //     let PL;
+  //     PL = search[0].artists;
+  //     for (let j = 0; j < PL.length; j += 1) {
+  //       if (PL[j].id === id) {
+  //         return PL[j];
+  //       }
+  //     }
+  //     PL = search[1].artists;
+  //     for (let j = 0; j < PL.length; j += 1) {
+  //       if (PL[j].id === id) {
+  //         return PL[j];
+  //       }
+  //     }
+  //     return {};
+  //   },
   /**
    * Get All the playlists of the current user
    * @param {string} token Token of the current user
