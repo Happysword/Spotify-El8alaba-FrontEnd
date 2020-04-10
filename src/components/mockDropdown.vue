@@ -1,5 +1,5 @@
 <template>
-      <v-list dark>
+      <v-list dark id="menu">
         <v-list-item
           v-for="(item, index) in store.state.items"
           :key="index"
