@@ -1,5 +1,8 @@
 # Spotify-el8alaba
 
+## Prerequisites
+Install `nodejs`. Use this [installation guide](https://nodejs.org/en/download/package-manager/) according to your OS
+
 ## Project setup
 ```
 npm install
@@ -14,6 +17,11 @@ npm run serve
 ```
 npm run build
 ```
+### Configuring env. variables
+The project contains `.env` as a fallback, `.env.development` for `NODE_ENV=development` and `.env.production` for `NODE_ENV=production`. All of them has the following env vars :-
+    
+1. `VUE_APP_API_HOST` : Host of the REST API to use.
+2. `VUE_APP_API_PORT` : Port of the REST API on that host.
 
 ### Run your unit tests
 ```
