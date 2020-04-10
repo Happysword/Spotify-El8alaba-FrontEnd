@@ -129,7 +129,7 @@ export default {
       this.plan = userProfile.product;
     } else {
       // eslint-disable-next-line no-alert
-      alert('Something went wrong.');
+      alert('No user is currently logged in');
     }
   },
 };

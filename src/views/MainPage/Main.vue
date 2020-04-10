@@ -22,7 +22,18 @@ import MusicPlayer from '../../components/MusicPlayer.vue';
 
 export default {
   name: 'Main',
+  beforeRouteEnter(to, from, next) {
+    next(() => {
+      // Find the loggedIn cookie
+      const notLoggedIn = document.cookie.search(/loggedIn=.+/) === -1;
 
+      if (notLoggedIn) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  },
   components: {
     Navbar,
     Topbar,
