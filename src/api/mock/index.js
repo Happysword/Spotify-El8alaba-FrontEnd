@@ -676,13 +676,13 @@ export default {
     // return {};
     const album = await fetch(albums, 200);
     const songs = [];
-    if (album[0].items[0].album.id === id) {
-      for (let i = 0; i < album[0].items[0].album.tracks.items.length; i += 1) {
-        album[0].items[0].album.tracks.items[i].album = {
-          artists: album[0].items[0].album.artists,
-          images: album[0].items[0].album.images,
+    if (album.items[0].id === id) {
+      for (let i = 0; i < album.items[0].tracks.items.length; i += 1) {
+        album.items[0].tracks.items[i].album = {
+          artists: album.items[0].artists,
+          images: album.items[0].images,
         };
-        songs[i] = { track: album[0].items[0].album.tracks.items[i] };
+        songs[i] = { track: album.items[0].tracks.items[i] };
       }
     }
     return songs;
