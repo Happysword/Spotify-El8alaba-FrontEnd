@@ -1206,9 +1206,7 @@
       ]
   },
   {
-    "albums": {
-      "href": "https://api.spotify.com/v1/search?query=godzilla&type=album&offset=0&limit=3",
-      "items": [
+    "albums":  [
         {
           "album_type": "album",
           "artists": [
@@ -1581,15 +1579,7 @@
           "uri": "spotify:album:0ITqrQGD4pHItdHKudeOQx"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=godzilla&type=album&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 464
-    },
-    "artists": {
-      "href": "https://api.spotify.com/v1/search?query=godzilla&type=artist&offset=0&limit=3",
-      "items": [
+    "artists": [
         {
           "external_urls": {
             "spotify": "https://open.spotify.com/artist/6deipnUB2sIBMQWZzBoJVP"
@@ -1674,15 +1664,7 @@
           "uri": "spotify:artist:0Wvs7Vo7Bk8CoXCyOX8oj2"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=godzilla&type=artist&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 55
-    },
-    "tracks": {
-      "href": "https://api.spotify.com/v1/search?query=godzilla&type=track&offset=0&limit=3",
-      "items": [
+    "tracks": [
         {
           "album": {
             "album_type": "album",
@@ -2425,15 +2407,7 @@
           "uri": "spotify:track:7rbsQlwPWCnz72GdzVOi9h"
         }
       ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=godzilla&type=track&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 3369
-    },
-    "playlists": {
-      "href": "https://api.spotify.com/v1/search?query=godzilla&type=playlist&offset=0&limit=3",
-      "items": [
+    "playlists": [
         {
           "collaborative": false,
           "description": "",
@@ -2562,12 +2536,6 @@
           "type": "playlist",
           "uri": "spotify:playlist:5jxJgNqtMTLYisOSNBFr4D"
         }
-      ],
-      "limit": 3,
-      "next": "https://api.spotify.com/v1/search?query=godzilla&type=playlist&offset=3&limit=3",
-      "offset": 0,
-      "previous": null,
-      "total": 3378
+      ]
     }
-  }
 ]

@@ -1,7 +1,4 @@
-{
-    "playlists": {
-      "href": "https://api.spotify.com/v1/browse/categories/soul/playlists?offset=0&limit=20",
-      "items": [
+ [
         {
           "collaborative": false,
           "description": "Chart topping hits from the legendary label.",
@@ -722,11 +719,4 @@
           "type": "playlist",
           "uri": "spotify:playlist:37i9dQZF1DX0H8hDpv38Ju"
         }
-      ],
-      "limit": 20,
-      "next": "https://api.spotify.com/v1/browse/categories/soul/playlists?offset=20&limit=20",
-      "offset": 0,
-      "previous": null,
-      "total": 24
-    }
-  }
+      ]
