@@ -289,7 +289,7 @@ export default {
               this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
             }
           }
-        } else if (this.artistsExist && !this.tracksExist) {
+        } /* istanbul ignore next */ else if (this.artistsExist && !this.tracksExist) {
           const top = this.artists[0];
           this.top = top;
           this.top.type = 'artist';
@@ -328,6 +328,7 @@ export default {
   mounted() {
     this.$store.state.searching = true;
   },
+  /* istanbul ignore next */
   destroyed() {
     this.$store.state.searching = false;
   },

@@ -155,6 +155,7 @@ export default {
     console.log(albumsID, token);
   },
 
+  /* istanbul ignore next */
   /**
    * Delete an album for current user
    * @param {String} albumID ID of album
@@ -269,6 +270,7 @@ export default {
    */
   async getCurrentUserProfile() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    /* istanbul ignore next */
     if (!currentUser) return { status: 404 };
 
     const user = await fetch(currentUser.data, 50);
@@ -286,6 +288,7 @@ export default {
    */
   async editProfile(data) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    /* istanbul ignore next */
     if (!currentUser) return { status: 404 };
 
     // Set each key
@@ -456,6 +459,7 @@ export default {
     }
     return {};
   },
+  /* istanbul ignore next */
   /**
   * Fetches all prefered genres for a user
   * @return {object} an object that contains all preferred genres.

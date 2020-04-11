@@ -87,7 +87,7 @@ export default {
   created() {
     document.title = 'Reset your password - Spotify El8alaba';
   },
-
+  /* istanbul ignore next */
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {

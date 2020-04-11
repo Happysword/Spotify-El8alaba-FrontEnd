@@ -30,6 +30,7 @@ export default {
     routing() {
       this.$router.push(`/genre/${this.route}-page`);
     },
+    /* istanbul ignore next */
     async getcolor(x) {
       const result = await analyze(x);
       this.color = result[100].color;

@@ -108,6 +108,7 @@ export default {
     this.fetchFollowStatus();
   },
   methods: {
+    /* istanbul ignore next */
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
       if (this.type === 'playlist') {
@@ -166,12 +167,13 @@ export default {
             });
           }
         }
-      } else if (index === 2) {
+      } /* istanbul ignore next */ else if (index === 2) {
         this.notificationMsg = 'Copied to clipboard';
         this.$copyText(this.external_urls.spotify);
         this.snackbar = true;
       }
     },
+    /* istanbul ignore next */
     /** Fetches the current following status */
     fetchFollowStatus() {
       /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */

@@ -157,7 +157,7 @@ export default {
   created() {
     document.title = 'Log in - Spotify El8alaba';
   },
-
+  /* istanbul ignore next */
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
@@ -233,7 +233,7 @@ export default {
         this.userInput.incorrect = true;
       }
     },
-
+    /* istanbul ignore next */
     // @todo[XL3] Integrate with the backend
     fbLogin() {
       window.open(`${apiURL}/api/v1/authentication/facebook`, '_self');

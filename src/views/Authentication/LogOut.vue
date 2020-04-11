@@ -10,6 +10,7 @@ import api from 'api-client';
 
 export default {
   name: 'LogOut',
+  /* istanbul ignore next */
   // Re-route to login if no user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {

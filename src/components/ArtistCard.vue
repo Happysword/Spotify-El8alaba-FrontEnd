@@ -107,6 +107,7 @@ export default {
     this.fetchFollowStatus();
   },
   methods: {
+    /* istanbul ignore next */
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
       this.$router.push(`/home/artist/${this.id}`);
@@ -145,6 +146,7 @@ export default {
         this.snackbar = true;
       }
     },
+    /* istanbul ignore next */
     /** Fetches the current following status */
     fetchFollowStatus() {
       const token = JSON.parse(localStorage.getItem('currentUser'));

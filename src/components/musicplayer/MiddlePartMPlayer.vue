@@ -223,6 +223,7 @@ export default {
       const Response = await PlayerRequests.seekPosition(
         Math.floor(seekedTime * 1000),
       );
+      /* istanbul ignore next */
       if (Response) {
         this.$store.state.MusicPlayer.AudioPlayer.currentTime = seekedTime;
         this.valueFalseBuffer = this.$store.state.MusicPlayer.currentBufferPerc;
@@ -255,6 +256,7 @@ export default {
       },
     },
   },
+  /* istanbul ignore next */
   async created() {
     // TODO[@Seif] later: fetch current playback and check if the song is not null
     // play track with faded for now and get current playback
