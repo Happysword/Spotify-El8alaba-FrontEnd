@@ -96,6 +96,7 @@
 </template>
 
 <script>
+/** */
 export default {
   name: 'Topbar',
   /* istanbul ignore next */

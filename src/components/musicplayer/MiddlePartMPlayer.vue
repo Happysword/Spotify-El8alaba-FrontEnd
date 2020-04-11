@@ -116,7 +116,9 @@
 <script>
 import { mapActions } from 'vuex';
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
-
+/**
+ *
+ */
 export default {
   data: () => ({
     shuffleState: false,

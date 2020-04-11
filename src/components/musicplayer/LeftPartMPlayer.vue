@@ -128,7 +128,9 @@
 
 <script>
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
-
+/**
+ *
+ */
 export default {
   data: () => ({
     heartcolor: false,
