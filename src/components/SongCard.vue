@@ -71,6 +71,7 @@
 <script>
 import client from 'api-client';
 
+/** */
 export default {
   props: {
     description: String,

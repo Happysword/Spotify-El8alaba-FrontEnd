@@ -74,6 +74,7 @@
 <script>
 import client from 'api-client';
 
+/** */
 export default {
   props: {
     external_urls: String,
