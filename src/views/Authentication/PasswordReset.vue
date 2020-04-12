@@ -5,6 +5,7 @@
     <v-row justify="center" align="center">
       <v-col sm="8" lg="6" xl="4" class="px-8">
         <!-- Logo -->
+        <!-- @todo[XL3] Process the reset token -->
         <router-link to="/">
           <v-img
             id="logo"
@@ -86,6 +87,8 @@ export default {
   name: 'PasswordReset',
   created() {
     document.title = 'Reset your password - Spotify El8alaba';
+    // Store the reset token
+    this.resetToken = this.$route.params.resetToken;
   },
 
   // Re-route to home if a user is logged in
@@ -106,16 +109,15 @@ export default {
     });
   },
 
-  data() {
-    return {
-      userInput: {
-        email: '',
-        incorrect: false,
-      },
-      succeeded: false,
-      validation,
-    };
-  },
+  data: () => ({
+    userInput: {
+      email: '',
+      incorrect: false,
+    },
+    succeeded: false,
+    resetToken: undefined,
+    validation,
+  }),
 
   methods: {
     /**

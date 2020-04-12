@@ -154,10 +154,6 @@ import apiURL from '../../common/config';
  */
 export default {
   name: 'LogIn',
-  created() {
-    document.title = 'Log in - Spotify El8alaba';
-  },
-
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {
