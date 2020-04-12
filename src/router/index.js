@@ -111,16 +111,19 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp,
+    meta: { title: 'Spotify El8alaba - Sign up' },
   },
   {
     path: '/login',
     name: 'LogIn',
     component: LogIn,
+    meta: { title: 'Spotify El8alaba - Log in' },
   },
   {
-    path: '/password-reset',
+    path: '/password-reset/:resetToken?',
     name: 'PasswordReset',
     component: PasswordReset,
+    meta: { title: 'Spotify El8alaba - Reset your password' },
   },
   {
     path: '/account',
@@ -128,16 +131,37 @@ const routes = [
     component: Account,
     redirect: { name: 'AccountOverview' },
     children: [
-      { path: 'overview', name: 'AccountOverview', component: AccountOverview },
-      { path: 'edit-profile', name: 'EditProfile', component: EditProfile },
-      { path: 'change-password', name: 'ChangePassword', component: ChangePassword },
-      { path: 'notifications', name: 'NotificationSettings', component: NotificationSettings },
+      {
+        path: 'overview',
+        name: 'AccountOverview',
+        component: AccountOverview,
+        meta: { title: 'Spotify El8alaba - Account Overview' },
+      },
+      {
+        path: 'edit-profile',
+        name: 'EditProfile',
+        component: EditProfile,
+        meta: { title: 'Spotify El8alaba - Edit Profile' },
+      },
+      {
+        path: 'change-password',
+        name: 'ChangePassword',
+        component: ChangePassword,
+        meta: { title: 'Spotify El8alaba - Change Password' },
+      },
+      {
+        path: 'notifications',
+        name: 'NotificationSettings',
+        component: NotificationSettings,
+        meta: { title: 'Spotify El8alaba - Notification Settings' },
+      },
     ],
   },
   {
     path: '/logout',
     name: 'LogOut',
     component: LogOut,
+    meta: { title: 'Spotify El8alaba - Log out' },
   },
 ];
 
