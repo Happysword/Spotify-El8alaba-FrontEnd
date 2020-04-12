@@ -147,16 +147,13 @@ import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 import apiURL from '../../common/config';
 
-export default {
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  * @todo[XL3] Change processing of currentUser from localStorage to cookies
  * to leverage the 'expiration' property
  */
+export default {
   name: 'LogIn',
-  created() {
-    document.title = 'Log in - Spotify El8alaba';
-  },
   /* istanbul ignore next */
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {

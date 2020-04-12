@@ -86,9 +86,6 @@ export default {
       }
     });
   },
-  created() {
-    document.title = 'Account Overview - Spotify El8alaba';
-  },
   data: () => ({
     profileInfo: [
       { id: 'username', name: 'Username', data: 'lorem' },
@@ -130,7 +127,7 @@ export default {
       this.plan = userProfile.product;
     } else {
       // eslint-disable-next-line no-alert
-      alert('Something went wrong.');
+      alert('No user is currently logged in');
     }
   },
 };

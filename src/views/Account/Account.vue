@@ -29,47 +29,71 @@
 
   <!-- Root container -->
   <v-container id="Account_root">
-    <v-row justify="center" align="center" class="mt-n6">
-      <v-col lg="10" xl="8" class="px-0">
-        <!-- Tab layout -->
-        <!-- Vertical on medium and higher breakpoints -->
-        <v-tabs id="tabs"
-                v-model="currentTab"
-                dark
-                color="#1DB954"
-                :vertical="$vuetify.breakpoint.mdAndUp"
-                show-arrows>
-          <!-- Avatar -->
-          <v-img id="avatar"
-                 :src="image"
-                 class="my-4 rounded-img d-none d-md-flex"
-                 contain
-                 max-height="64"
-                 max-width="64">
-          </v-img>
+    <v-row justify="center">
+      <v-col xl="10">
+        <v-row justify="center" align="start" class="mt-n6">
+          <!-- <v-col lg="10" xl="8" class="px-0"> -->
+          <v-col md="4" lg="3" v-if="$vuetify.breakpoint.mdAndUp">
+            <!-- Tab layout -->
+            <!-- Vertical on medium and higher breakpoints -->
+            <v-tabs id="tabs"
+                    v-model="currentTab"
+                    dark
+                    color="#1DB954"
+                    vertical
+                    show-arrows>
 
-          <!-- Route each tab to its respective path -->
-          <!-- For example: change-password-tab -->
-          <v-tab v-for="(tab, i) in tabs" :key="i"
-                 :id="`${tab.link}-tab`"
-                 @click="$router.push(tab.link)">
-            <!-- Display only on md+ -->
-            <v-icon class="mr-3 d-none d-md-flex">
-              {{ tab.icon }}
-            </v-icon>
+              <!-- Avatar -->
+              <v-img id="avatar"
+                      :src="image"
+                      class="rounded-img d-none d-md-flex"
+                      width="96"
+                      height="96">
+              </v-img>
+              <!-- Route each tab to its respective path -->
+              <!-- For example: change-password-tab -->
+              <v-tab v-for="(tab, i) in tabs" :key="i"
+                    :id="`${tab.link}-tab`"
+                    :to="tab.link">
+                <!-- Display only on md+ -->
+                <v-icon class="mr-3 d-none d-md-flex">
+                  {{ tab.icon }}
+                </v-icon>
 
-            {{ tab.title }}
-            <v-spacer/>
-          </v-tab>
+                {{ tab.title }}
+                <v-spacer/>
+              </v-tab>
+            </v-tabs>
+          </v-col>
 
-          <!-- Route content -->
-          <v-tab-item v-for="(tab, i) in tabs" :key="i">
+          <v-col class="pl-0">
+            <v-tabs id="tabs"
+                    v-if="$vuetify.breakpoint.smAndDown"
+                    v-model="currentTab"
+                    dark
+                    color="#1DB954"
+                    show-arrows>
+
+              <!-- Route each tab to its respective path -->
+              <!-- For example: change-password-tab -->
+              <v-tab v-for="(tab, i) in tabs" :key="i"
+                    :id="`${tab.link}-tab`"
+                    :to="tab.link">
+                <!-- Display only on md+ -->
+                <v-icon class="mr-3 d-none d-md-flex">
+                  {{ tab.icon }}
+                </v-icon>
+
+                {{ tab.title }}
+                <v-spacer/>
+              </v-tab>
+            </v-tabs>
+            <!-- Route content -->
             <v-card class="pa-0" flat tile id="tab-content">
               <router-view/>
             </v-card>
-          </v-tab-item>
-
-        </v-tabs>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
@@ -150,6 +174,8 @@ export default {
 <style lang="css" scoped>
 .rounded-img {
   margin: auto !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
   border-radius: 50% !important;
 }
 .trans-bar {
