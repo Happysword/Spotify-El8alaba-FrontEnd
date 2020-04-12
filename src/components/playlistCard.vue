@@ -1,17 +1,20 @@
 <template>
   <v-card
+    id="playlistCard"
     class="mx-auto px-5 white--text"
     color="#00000000"
     flat
     max-width="344"
     v-on:="changePlayEvent">
     <v-img
+      id="image"
       @mouseover="overlay=true"
       @mouseout="overlay= play"
       :src="listInfo.images[0].url" class="mt-1"
     >
       <v-overlay v-show="overlay" absolute>
         <v-icon
+          id="playIcon"
           size="70"
           color="white"
           v-if="!play"
@@ -20,6 +23,7 @@
           mdi-play-circle-outline
         </v-icon>
         <v-icon
+          id="pauseIcon"
           size="70"
           color="white"
           v-if="play"
@@ -29,14 +33,15 @@
         </v-icon>
       </v-overlay>
     </v-img>
-    <v-card-title class="justify-center headline font-weight-bold pb-0">
+    <v-card-title id="listName" class="justify-center headline font-weight-bold pb-0">
       {{listInfo.name}}
     </v-card-title>
-    <v-card-title class="justify-center body-2 text grey--text pt-0" v-if="show">
+    <v-card-title id="owner" class="justify-center body-2 text grey--text pt-0" v-if="show">
       <span v-for="(owner,i) in listInfo.artists" :key="i">{{owner.name}}</span>
     </v-card-title>
     <v-card-actions class="justify-center">
       <v-btn
+        id="playBtn"
         rounded
         inline-block
         dark
@@ -50,6 +55,7 @@
     </v-card-actions>
     <v-card-actions class="justify-center">
       <v-icon
+        id="save"
         v-show="!store.state.liked"
         v-if="show" size="30"
         class="px-3"
@@ -59,6 +65,7 @@
         mdi-heart-outline
       </v-icon>
       <v-icon
+        id="remove"
         v-show="store.state.liked"
         v-if="show"
         size="30"
@@ -69,6 +76,7 @@
         mdi-heart
       </v-icon>
       <v-snackbar
+        id="snackbar"
         v-model="snackbar"
         :timeout="timeout"
         color='#1DB954'
@@ -81,6 +89,7 @@
         <v-menu absolute>
           <template v-slot:activator="{ on }">
             <v-icon
+              id="more"
               size="30"
               class="px-3"
               v-on="on"
@@ -95,7 +104,7 @@
           <dropDown></dropDown>
         </v-menu>
       </span>
-      <v-tooltip right v-model="tooltip">
+      <v-tooltip id="tooltip" right v-model="tooltip">
         <template v-slot:activator="{ on1 }">
           <v-icon v-on="on1"></v-icon>
         </template>
@@ -135,11 +144,25 @@ export default {
 
   props: {
     songsNum: Number,
-    show: Boolean,
+    show: {
+      type: Boolean,
+      default: true,
+    },
     images: String,
     name: String,
     owners: Array,
-    listInfo: Object,
+    listInfo: {
+      type: Object,
+      default() {
+        return {
+          images: [{ url: '' }],
+          name: '',
+          release_date: '',
+          id: '1',
+          type: 'album',
+        };
+      },
+    },
   },
 
   methods: {

@@ -47,7 +47,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-
+/** */
 export default {
   data: () => ({
     isInQueue: false,
@@ -55,6 +55,7 @@ export default {
   }),
   methods: {
     ...mapActions(['setVolume', 'toggleSound']),
+    /* istanbul ignore next */
     /**
      * Changes the Route to Queue or to the Previos route if in Queue
      */

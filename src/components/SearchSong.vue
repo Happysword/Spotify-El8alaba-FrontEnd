@@ -52,6 +52,7 @@
 </template>
 
 <script>
+/* istanbul ignore file */
 import drop from './mockDropdown.vue';
 
 export default {

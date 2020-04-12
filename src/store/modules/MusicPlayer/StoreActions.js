@@ -14,6 +14,7 @@ export default {
     // check if this is the first time to play this song i.e. not paused before
     if (state.MusicPlayer.isFirstPlay) {
       // on error of loading reset the song controlling parameters
+      /* istanbul ignore next */
       state.MusicPlayer.AudioPlayer.onerror = () => {
         state.MusicPlayer.isFirstPlay = true;
         state.MusicPlayer.isPlaying = false;
@@ -26,6 +27,7 @@ export default {
       if (Response === false) return;
       // get song URL from mock or server
       let SongURL = '';
+      /* istanbul ignore next */
       if (process.env.VUE_APP_API_CLIENT === 'server') {
         // eslint-disable-next-line no-underscore-dangle
         SongURL = `${api}/api/v1/streaming/${state.MusicPlayer.currentSong.track.id || state.MusicPlayer.currentSong.track._id}`;
@@ -47,6 +49,7 @@ export default {
       const requestAnswer = await PlayerRequests.startPlayback();
       if (requestAnswer) {
         commit('togglePlay');
+        /* istanbul ignore next */
         state.MusicPlayer.AudioPlayer.play().catch(() => {
           state.MusicPlayer.isFirstPlay = true;
           state.MusicPlayer.isPlaying = false;

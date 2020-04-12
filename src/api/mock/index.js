@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import cookies from '@/store/modules/auth/cookies';
 import users from './data/users.json';
 import currentSong from './data/MusicPlayer/currentSong.json';
@@ -154,6 +155,7 @@ export default {
     console.log(albumsID, token);
   },
 
+  /* istanbul ignore next */
   /**
    * Delete an album for current user
    * @param {String} albumID ID of album
@@ -268,6 +270,7 @@ export default {
    */
   async getCurrentUserProfile() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    /* istanbul ignore next */
     if (!currentUser) return { status: 404 };
 
     const user = await fetch(currentUser.data, 50);
@@ -285,6 +288,7 @@ export default {
    */
   async editProfile(data) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    /* istanbul ignore next */
     if (!currentUser) return { status: 404 };
 
     // Set each key
@@ -370,7 +374,6 @@ export default {
     if (state === 'track' || state === 'off' || state === 'context') {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -382,7 +385,6 @@ export default {
     if (positionMs >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -394,7 +396,6 @@ export default {
     if (volumePercent >= 0) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
   /**
    * it sends a request to the server to set the current playing track
@@ -405,7 +406,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
   /**
    * Save a Liked Track to Server
@@ -416,7 +416,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -428,7 +427,6 @@ export default {
     if (ID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
-    return false;
   },
 
   /**
@@ -445,16 +443,23 @@ export default {
    * @return {object} an object containing necessary data about genre
    */
   async fetchGenre(id) {
+    console.log(id);
+
+    console.log(id);
+    if (id === undefined) {
+      return {};
+    }
     let i;
-    const list = await fetch(genres, 10);
-    for (i = 0; i < list.categories.limit; i += 1) {
+    const list = genres;
+    for (i = 0; i < list.length; i += 1) {
       // eslint-disable-next-line no-underscore-dangle
-      if (id === list.categories.items[i]._id) {
-        return list.categories.items[i];
+      if (id === list[i]._id) {
+        return list[i];
       }
     }
     return {};
   },
+  /* istanbul ignore next */
   /**
   * Fetches all prefered genres for a user
   * @return {object} an object that contains all preferred genres.
@@ -470,14 +475,12 @@ export default {
    * @return {Array} an Array containing all playlists
    */
   async fetchCategoryPlaylists(id) {
-    let playlist;
+    console.log(id);
     if (id === 'gaming') {
-      playlist = await fetch(genresPlaylists1, 50);
-      return playlist;
+      return genresPlaylists1;
     }
     if (id === 'soul') {
-      playlist = await fetch(genresPlaylists2, 100);
-      return playlist;
+      return genresPlaylists2;
     }
     return {};
   },
@@ -488,14 +491,11 @@ export default {
    * TODO[@Francois] make sure it will get an id for category and return the playlists
    */
   async fetchCategoryReleases(id) {
-    let release;
     if (id === 'gaming') {
-      release = await fetch(genresPlaylists1, 50);
-      return release.playlists.items;
+      return genresPlaylists1;
     }
     if (id === 'soul') {
-      release = await fetch(genresPlaylists2, 100);
-      return release.playlists.items;
+      return genresPlaylists2;
     }
     return {};
   },
@@ -505,14 +505,19 @@ export default {
  * @return {object} an object that may have related data to user search
  */
   async fetchSearch(x) {
-    let obj;
-    if (x.match(/Amr Diab.*/)) {
-      obj = await fetch(search[0], 50);
-      return obj;
-    }
-    if (x.match(/Godzilla.*/)) {
-      obj = await fetch(search[1], 100);
-      return obj;
+    if (x !== undefined) {
+      let obj;
+      console.log(x);
+      if (x.match(/Amr Diab.*/)) {
+      // eslint-disable-next-line prefer-destructuring
+        obj = search[0];
+        return obj;
+      }
+      if (x.match(/Godzilla.*/)) {
+      // eslint-disable-next-line prefer-destructuring
+        obj = search[1];
+        return obj;
+      }
     }
     return null;
   },
@@ -530,15 +535,14 @@ export default {
  * @return {object} an object that may have related data of the playlist
  */
   async fetchPlaylist(id) {
-    let PL = await fetch(search[0], 1000);
-    PL = PL.playlists.items;
+    let PL = search[0].playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
-    PL = await fetch(search[1], 500);
-    PL = PL.playlists.items;
+
+    PL = search[1].playlists;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
@@ -553,14 +557,14 @@ export default {
  */
   async fetchTrack(id) {
     let PL = await fetch(search[0], 1000);
-    PL = PL.tracks.items;
+    PL = PL.tracks;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
       }
     }
     PL = await fetch(search[1], 500);
-    PL = PL.tracks.items;
+    PL = PL.tracks;
     for (let j = 0; j < PL.length; j += 1) {
       if (PL[j].id === id) {
         return PL[j];
@@ -568,28 +572,27 @@ export default {
     }
     return {};
   },
-  /**
- * Fetch related data to the user input for search
- * @param {string} id a string that contains the data the user search for
- * @return {object} an object that may have related data of the artist
- */
-  async fetchArtist(id) {
-    let PL = await fetch(search[0], 1000);
-    PL = PL.artists.items;
-    for (let j = 0; j < PL.length; j += 1) {
-      if (PL[j].id === id) {
-        return PL[j];
-      }
-    }
-    PL = await fetch(search[1], 500);
-    PL = PL.artists.items;
-    for (let j = 0; j < PL.length; j += 1) {
-      if (PL[j].id === id) {
-        return PL[j];
-      }
-    }
-    return {};
-  },
+  //   /**
+  //  * Fetch related data to the user input for search
+  //  * @param {string} id a string that contains the data the user search for
+  //  * @return {object} an object that may have related data of the artist
+  //  */
+  //   async fetchArtist(id) {
+  //     let PL;
+  //     PL = search[0].artists;
+  //     for (let j = 0; j < PL.length; j += 1) {
+  //       if (PL[j].id === id) {
+  //         return PL[j];
+  //       }
+  //     }
+  //     PL = search[1].artists;
+  //     for (let j = 0; j < PL.length; j += 1) {
+  //       if (PL[j].id === id) {
+  //         return PL[j];
+  //       }
+  //     }
+  //     return {};
+  //   },
   /**
    * Get All the playlists of the current user
    * @param {string} token Token of the current user
@@ -676,13 +679,13 @@ export default {
     // return {};
     const album = await fetch(albums, 200);
     const songs = [];
-    if (album[0].items[0].album.id === id) {
-      for (let i = 0; i < album[0].items[0].album.tracks.items.length; i += 1) {
-        album[0].items[0].album.tracks.items[i].album = {
-          artists: album[0].items[0].album.artists,
-          images: album[0].items[0].album.images,
+    if (album.items[0].id === id) {
+      for (let i = 0; i < album.items[0].tracks.items.length; i += 1) {
+        album.items[0].tracks.items[i].album = {
+          artists: album.items[0].artists,
+          images: album.items[0].images,
         };
-        songs[i] = { track: album[0].items[0].album.tracks.items[i] };
+        songs[i] = { track: album.items[0].tracks.items[i] };
       }
     }
     return songs;

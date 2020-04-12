@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "doc": "./node_modules/.bin/jsdoc -c jsdocconfig.json --readme README.md -r src -d doc"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -37,6 +38,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-vue": "^6.1.2",
     "jsdoc": "^3.6.4",
+    "jsdoc-vuejs": "^3.0.8",
     "lint-staged": "^9.5.0",
     "null-loader": "^3.0.0",
     "sass": "^1.25.0",

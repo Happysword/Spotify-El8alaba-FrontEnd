@@ -83,7 +83,7 @@ import cookies from '@/store/modules/auth/cookies';
 
 export default {
   name: 'Landing',
-
+  /* istanbul ignore next */
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {

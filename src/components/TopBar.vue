@@ -96,8 +96,10 @@
 </template>
 
 <script>
+/** */
 export default {
   name: 'Topbar',
+  /* istanbul ignore next */
   created() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;

@@ -12,6 +12,7 @@
 
 <script>
 import analyze from 'rgbaster';
+/* istanbul ignore file */
 
 export default {
 

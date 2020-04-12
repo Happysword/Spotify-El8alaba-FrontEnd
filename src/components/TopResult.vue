@@ -60,7 +60,7 @@
 <script>
 export default {
   props: {
-    id: String,
+    IDP: String,
     image: String,
     name: String,
     track: Object,
@@ -77,18 +77,19 @@ export default {
   methods: {
     CardClickLink() {
       if (this.type === 'playlist') {
-        this.$router.push(`/playlist/${this.id}`);
+        this.$router.push(`/playlist/${this.IDP}`);
       } else if (this.type === 'track') {
-        this.$router.push(`/track/${this.id}`);
+        this.$router.push(`/track/${this.IDP}`);
       } else if (this.type === 'artist') {
-        this.$router.push(`/artist/${this.id}`);
-      } else if (this.type === 'profile') {
-        this.$router.push(`/profile/${this.id}`);
+        this.$router.push(`/artist/${this.IDP}`);
+      } else if (this.type === 'user') {
+        this.$router.push(`/user/${this.IDP}`);
       } else if (this.type === 'album') {
-        this.$router.push(`/album/${this.id}`);
+        this.$router.push(`/album/${this.IDP}`);
       }
     },
     artistLink() {
+      console.log(this.artistName);
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');
       } else {

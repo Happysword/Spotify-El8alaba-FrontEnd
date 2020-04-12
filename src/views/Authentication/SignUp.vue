@@ -190,7 +190,7 @@ export default {
   created() {
     document.title = 'Sign up - Spotify El8alaba';
   },
-
+  /* istanbul ignore next */
   // Re-route to home if a user is logged in
   beforeRouteEnter(to, from, next) {
     next(() => {

@@ -79,7 +79,7 @@
 
 <script>
 import avatar from '../../assets/imgs/avatar.png';
-
+/* istanbul ignore file */
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  */

@@ -38,7 +38,7 @@ npx jest --coverage
 ```
 ### Functional Documentation
 ```
-./node_modules/.bin/jsdoc --readme README.md -r src -d doc
+npm run doc
 ```
 
 ### Customize configuration

@@ -38,6 +38,7 @@ export default {
       show: true,
       ready: false,
       listInfo: {},
+      test: false,
     };
   },
   methods: {
@@ -48,7 +49,6 @@ export default {
       this.ready = false;
       this.show = true;
       this.songs = [];
-
       if (this.$route.name === 'LikedTracks') {
         this.listInfo = {
           id: 'LikedTracks',
@@ -95,8 +95,10 @@ export default {
       }
       // console.log(this.songs);
       // console.log(this.listInfo);
-      const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
-      EventBus.$emit('changeColor', result[0].color);
+      if (!this.test) {
+        const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
+        EventBus.$emit('changeColor', result[0].color);
+      }
       this.ready = true;
       if (!Array.isArray(this.songs)) {
         return;

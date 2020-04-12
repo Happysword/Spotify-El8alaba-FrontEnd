@@ -54,21 +54,28 @@ export default {
       PopularPlaylists: [],
       PPLength: 0,
       Releases: [],
+      test: false,
     };
   },
   methods: {
     async fetchGenreReq() {
       this.ready = false;
+      console.log(this.$route.params.id);
       this.category = await Client.fetchGenre(this.$route.params.id);
+      console.log('ana hna');
       console.log(this.category);
-      this.color = this.category.icons[0].url;
-      const result = await analyze(this.color);
-      EventBus.$emit('changeColor', result[100].color);
-      this.title = this.category.name;
-      this.ready = true;
+      if (this.category !== undefined && this.category !== {}) {
+        if (this.category.icons && !this.test) {
+          const result = await analyze(this.category.icons[0].url);
+          EventBus.$emit('changeColor', result[100].color);
+        }
+        this.title = this.category.name;
+        this.ready = true;
+      }
+      console.log('title', this.title);
       // eslint-disable-next-line no-underscore-dangle
-      // this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.category._id);
-      this.PopularPlaylists = this.category.playlists;
+      this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.$route.params.id);
+      // this.PopularPlaylists = this.category.playlists;
       if (this.PopularPlaylists.length !== 0) {
         this.PopularExist = true;
         if (this.PopularPlaylists.length > 6) {
@@ -77,11 +84,10 @@ export default {
           this.PPLength = this.PopularPlaylists.length;
         }
       }
-      console.log();
     },
   },
   async created() {
-    this.fetchGenreReq();
+    await this.fetchGenreReq();
   },
 };
 </script>

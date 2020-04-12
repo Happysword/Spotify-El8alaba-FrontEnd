@@ -6,7 +6,8 @@
           <div @click="local(top.id, top.type)">
             <top-result
             v-if="top.type === 'track' || top.type === 'album' "
-            :id="top.id"
+            id="top1"
+            :IDP="top.id"
             :name="top.name"
             :image="imageTop"
             :type="top.type"
@@ -16,7 +17,8 @@
           <div @click="local(top.id, top.type)">
             <top-result
             v-if="top.type === 'artist'"
-            :id="top.id"
+            id="top2"
+            :IDP="top.id"
             :image="imageTop"
             :name="top.name"
             :type="top.type"
@@ -30,7 +32,7 @@
           <span class="white--text display-1 font-weight-bold z"
            >Artists</span>
            <v-spacer></v-spacer>
-          <span class="seeAll" @click="spanClicked()"
+          <span class="seeAll" @click="spanClicked()" id="seeartists"
           @mouseover="typeToSee= 'artists'">See All</span>
         </v-layout>
 
@@ -52,7 +54,7 @@
           <span class="white--text display-1 font-weight-bold z"
           >Albums</span>
            <v-spacer></v-spacer>
-          <span class="seeAll" @click="spanClicked()"
+          <span class="seeAll" @click="spanClicked()" id="seealbums"
           @mouseover="typeToSee= 'albums'">See All</span>
         </v-layout>
 
@@ -79,7 +81,7 @@
           <span class="white--text display-1 font-weight-bold z"
           >Playlists</span>
            <v-spacer></v-spacer>
-          <span class="seeAll" @click="spanClicked()"
+          <span class="seeAll" @click="spanClicked()" id="seeplaylists"
           @mouseover="typeToSee= 'playlists'">See All</span>
         </v-layout>
 
@@ -106,7 +108,7 @@
           <span class="white--text display-1 font-weight-bold z"
            >Profiles</span>
            <v-spacer></v-spacer>
-          <span class="seeAll" @click="spanClicked()"
+          <span class="seeAll" @click="spanClicked()" id="seeusers"
           @mouseover="typeToSee= 'users'">See All</span>
         </v-layout>
 
@@ -223,6 +225,7 @@ export default {
     },
     async fetchSearch() {
       this.artistsExist = false;
+      this.usersExist = false;
       this.tracksExist = false;
       this.playlistsExist = false;
       this.albumsExist = false;
@@ -244,7 +247,7 @@ export default {
             this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
             this.artistsExist = this.artistLength ? true : 0;
             this.userLength = this.users.length < 6 ? this.users.length : 6;
-            this.usersExist = this.userLength ? true : 0;
+            this.usersExist = !!this.userLength;
           }
         }
         if (response.albums) {
@@ -265,6 +268,7 @@ export default {
           if (response.tracks.length > 0) {
             this.tracks = response.tracks;
             this.tracksExist = true;
+            this.trackLength = this.tracks.length < 6 ? this.tracks.length : 6;
           }
         }
         if (this.artistsExist && this.tracksExist) {
@@ -279,13 +283,13 @@ export default {
           } else {
             const top = this.tracks[0];
             this.top = top;
-            if (this.top.images.length) {
+            if (this.top.images && this.top.images.length) {
               this.imageTop = this.top.images[0].url;
             } else {
               this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
             }
           }
-        } else if (this.artistsExist && !this.tracksExist) {
+        } /* istanbul ignore next */ else if (this.artistsExist && !this.tracksExist) {
           const top = this.artists[0];
           this.top = top;
           this.top.type = 'artist';
@@ -324,6 +328,7 @@ export default {
   mounted() {
     this.$store.state.searching = true;
   },
+  /* istanbul ignore next */
   destroyed() {
     this.$store.state.searching = false;
   },

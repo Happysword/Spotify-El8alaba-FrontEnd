@@ -171,6 +171,7 @@
 <script>
 import client from 'api-client';
 
+/** */
 export default {
   name: 'Navbar',
   data() {

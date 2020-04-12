@@ -5,6 +5,7 @@
         <span class="white--text mt-10 display-1 font-weight-bold RECENT">Recent searches</span>
         <v-spacer></v-spacer>
         <span class="deleteAll mt-10 font-weight-bold"
+        id="clear"
         @click="ClearAll()">Delete the last searches</span>
       </v-row>
       <v-row>
