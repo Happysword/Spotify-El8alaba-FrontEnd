@@ -19,7 +19,9 @@ localVue.use(Vuetify);
 localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
-const router = new VueRouter();
+const router = new VueRouter({
+  routes: [{ path: '/logout', name: 'LogOut' }],
+});
 
 describe('LogOut.vue', () => {
   test('localStorage is empty and all cookies are deleted', () => {

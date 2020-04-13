@@ -20,7 +20,9 @@ localVue.use(Vuetify);
 localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
-const router = new VueRouter();
+const router = new VueRouter({
+  routes: [{ path: '/account', name: 'Account' }],
+});
 
 describe('Account.vue', () => {
   const currentUser = { data: { image: null } };

@@ -20,7 +20,10 @@ localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
 const router = new VueRouter({
-  routes: [{ path: '/account/overview', name: 'AccountOverview' }],
+  routes: [
+    { path: '/account/edit-profile', name: 'EditProfile' },
+    { path: '/account/account-overview', name: 'AccountOverview' },
+  ],
 });
 
 describe('EditProfile.vue', () => {
@@ -58,7 +61,7 @@ describe('EditProfile.vue', () => {
   });
 
 
-  test('Entering invalid data triggers the validation properly', () => {
+  test('Entering data triggers the validation properly', () => {
     // Mount the component
     const wrapper = mount(EditProfile, { localVue, vuetify, router });
 
@@ -82,20 +85,29 @@ describe('EditProfile.vue', () => {
 
     // Set the invalid data
     nameField.setValue('This is an invalid name.');
-
     dobDayField.setValue('One');
     dobMonthSelect.setValue('');
     dobYearField.setValue('2');
-
     countrySelect.setValue(1);
     phoneField.setValue('This is an invalid phone number');
-
     expect(wrapper.vm.$refs.editProfileForm.validate()).toEqual(false);
+
+    // Set the valid data
+    nameField.setValue('Valid Name');
+    genderSelect.setValue('m');
+    dobDayField.setValue('1');
+    dobMonthSelect.setValue('01');
+    dobYearField.setValue('1991');
+    countrySelect.setValue('Egypt');
+    phoneField.setValue('+201000000000');
+    expect(wrapper.vm.$refs.editProfileForm.validate()).toEqual(true);
   });
 
-  test('Entering valid data triggers the validation properly', () => {
-    // Mount the component
+  test('Editing with no current user fails', async () => {
     const wrapper = mount(EditProfile, { localVue, vuetify, router });
+    // Assert that the button exists
+    const saveBtn = wrapper.find('#saveBtn');
+    expect(saveBtn.exists()).toEqual(true);
 
     // Assert that all input fields exist
     const nameField = wrapper.find('#nameField');
@@ -115,18 +127,27 @@ describe('EditProfile.vue', () => {
     const phoneField = wrapper.find('#phoneField');
     expect(phoneField.exists()).toEqual(true);
 
-    // Set the valid data
-    nameField.setValue('Valid Name');
-    genderSelect.setValue('m');
+    // Add the new data
+    nameField.setValue('Unit Test');
+    genderSelect.setValue('f');
 
     dobDayField.setValue('1');
     dobMonthSelect.setValue('01');
     dobYearField.setValue('1991');
 
-    countrySelect.setValue('Egypt');
-    phoneField.setValue('+201000000000');
+    countrySelect.setValue('SE');
+    phoneField.setValue('+201111111111');
 
-    expect(wrapper.vm.$refs.editProfileForm.validate()).toEqual(true);
+    // Click the button and wait
+    saveBtn.trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual(true);
   });
 
   test('Editing the current user\'s data works', async () => {
@@ -153,6 +174,7 @@ describe('EditProfile.vue', () => {
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
     // Mount the component
+    router.push({ name: 'EditProfile' });
     const wrapper = mount(EditProfile, { localVue, vuetify, router });
 
     // Assert that the button exists

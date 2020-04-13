@@ -19,7 +19,9 @@ localVue.use(Vuetify);
 localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
-const router = new VueRouter();
+const router = new VueRouter({
+  routes: [{ path: '/signup', name: 'SignUp' }],
+});
 
 describe('SignUp.vue', () => {
   test('localStorage is empty, no user is logged in', () => {
@@ -185,7 +187,7 @@ describe('SignUp.vue', () => {
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
   });
 
-  test('Entering invalid data triggers the validation properly', () => {
+  test('Entering data triggers the validation properly', () => {
     // Mount the component
     const wrapper = mount(SignUp, {
       localVue,
@@ -218,52 +220,20 @@ describe('SignUp.vue', () => {
     passwordField.setValue('invpw');
     confirmEmailField.setValue('This is another invalid email.');
     nameField.setValue('');
-
     dobDayField.setValue('One');
     dobMonthSelect.setValue('');
     dobYearField.setValue('2');
-
+    expect(wrapper.vm.validateConfirmEmail()).toEqual(false);
     expect(wrapper.vm.$refs.signupForm.validate()).toEqual(false);
-  });
-
-  test('Entering valid data triggers the validation properly', () => {
-    // Mount the component
-    const wrapper = mount(SignUp, {
-      localVue,
-      vuetify,
-      router,
-    });
-
-    // Assert that all input fields exist
-    const emailField = wrapper.find('#emailField');
-    expect(emailField.exists()).toEqual(true);
-    const passwordField = wrapper.find('#passwordField');
-    expect(passwordField.exists()).toEqual(true);
-    const confirmEmailField = wrapper.find('#confirmEmailField');
-    expect(confirmEmailField.exists()).toEqual(true);
-    const nameField = wrapper.find('#nameField');
-    expect(nameField.exists()).toEqual(true);
-
-    const dobDayField = wrapper.find('#dobDayField');
-    expect(dobDayField.exists()).toEqual(true);
-    const dobMonthSelect = wrapper.find('#dobMonthSelect');
-    expect(dobMonthSelect.exists()).toEqual(true);
-    const dobYearField = wrapper.find('#dobYearField');
-    expect(dobYearField.exists()).toEqual(true);
-
-    const genderRadio = wrapper.find('#genderRadio');
-    expect(genderRadio.exists()).toEqual(true);
 
     // Set the valid data
     emailField.setValue('newAdmin@newAdmin.com');
     passwordField.setValue('newAdmin:newAdmin');
     confirmEmailField.setValue('newAdmin@newAdmin.com');
     nameField.setValue('New Admin');
-
     dobDayField.setValue('1');
     dobMonthSelect.setValue('01');
     dobYearField.setValue('1991');
-
     expect(wrapper.vm.$refs.signupForm.validate()).toEqual(true);
   });
 });

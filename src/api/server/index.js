@@ -590,6 +590,31 @@ export default {
     return response;
   },
 
+
+  /**
+   * Sends a **PATCH** request to the server to reset the user's password
+   * @param  {Object} data  The user's new password and its confirmation
+   * @param  {Object} token The Password Reset token
+   * @return {Object}       The corresponding response
+   */
+  async resetPassword(data, token) {
+    const request = {
+      method: 'PATCH',
+      url: `${api}/api/v1/authentication/resetPassword/${token}`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+
   /**
    * Sends a **GET** request to the server for the current user's profile information
    * @return {Object} The corresponding response

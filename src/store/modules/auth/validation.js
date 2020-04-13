@@ -3,7 +3,7 @@
  */
 export default {
   /**
-   * Validates that the provided data is above a minimum length of characters.
+   * Validates that the provided data is above a minimum length of characters
    * @param  {String} propertyName The name of the property being validated
    * @param  {Number} len          The length being matched against
    * @return {function}            The function that does the validation
@@ -14,7 +14,7 @@ export default {
   },
 
   /**
-   * Validates that the provided data is below a maximum length of characters.
+   * Validates that the provided data is below a maximum length of characters
    * @param  {String} propertyName The name of the property being validated
    * @param  {Number} len          The length being matched against
    * @return {function}            The function that does the validation
@@ -25,7 +25,7 @@ export default {
   },
 
   /**
-   * Validates that the provided data is not empty.
+   * Validates that the provided data is not empty
    * @param  {String} propertyName The name of the property being validated
    * @return {function}            The function that does the validation
    */
@@ -35,7 +35,7 @@ export default {
   },
 
   /**
-   * Validates that the provided data doesn't contain any special characters.
+   * Validates that the provided data doesn't contain any special characters
    * @param  {String}   propertyName The name of the property being validated
    * @param  {Boolean}  allowEmpty   True allows empty values
    * @return {function} The function that does the validation

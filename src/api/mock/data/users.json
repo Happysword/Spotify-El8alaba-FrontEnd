@@ -1,65 +1,68 @@
 [
-	{ 
-		"password": "admin:admin",
-		"user": {
-         "type": "user",
-         "product": "free",
-         "image": null,
-         "currentlyPlaying": null,
-         "followers": null,
-         "_id": "5e6b95fda1903935ccb355a0",
-         "name": "Admin",
-         "email": "admin@admin.com",
-         "gender": "m",
-         "birthdate": "1999-01-25T00:00:00.000Z",
-         "country": "EG",
-         "devices": [],
-         "__v": 0,
-         "uri": "spotify:user:5e6b95fda1903935ccb355a0",
-         "phoneNumber": "+201000000000",
-         "id": "5e6b95fda1903935ccb355a0"
-		}
-	},
-	{
-		"password": "admin:admin1",
-		"user": {
-         "type": "user",
-         "product": "free",
-         "image": null,
-         "currentlyPlaying": null,
-         "followers": null,
-         "_id": "5e6b95fda1903935ccb355a1",
-         "name": "Admin1",
-         "email": "admin1@admin.com",
-         "gender": "m",
-         "birthdate": "1999-02-25T00:00:00.000Z",
-         "country": "EG",
-         "devices": [],
-         "__v": 0,
-         "uri": "spotify:user:5e6b95fda1903935ccb355a1",
-         "phoneNumber": "+201000000001",
-         "id": "5e6b95fda1903935ccb355a1"
-      }
-	},
-	{
-		"password": "admin:admin2",
-		"user": {
-         "type": "user",
-         "product": "free",
-         "image": null,
-         "currentlyPlaying": null,
-         "followers": null,
-         "_id": "5e6b95fda1903935ccb355a2",
-         "name": "Admin2",
-         "email": "admin2@admin.com",
-         "gender": "f",
-         "birthdate": "1999-03-25T00:00:00.000Z",
-         "country": "EG",
-         "devices": [],
-         "__v": 0,
-         "uri": "spotify:user:5e6b95fda1903935ccb355a2",
-         "phoneNumber": "+201000000002",
-         "id": "5e6b95fda1903935ccb355a2"
-      }
-	}
+  {
+    "password": "admin:admin",
+    "user": {
+      "type": "user",
+      "product": "free",
+      "image": null,
+      "currentlyPlaying": null,
+      "followers": null,
+      "_id": "5e6b95fda1903935ccb355a0",
+      "name": "Admin",
+      "email": "admin@admin.com",
+      "gender": "m",
+      "birthdate": "1999-01-25T00:00:00.000Z",
+      "country": "EG",
+      "devices": [],
+      "__v": 0,
+      "uri": "spotify:user:5e6b95fda1903935ccb355a0",
+      "phoneNumber": "+201000000000",
+      "id": "5e6b95fda1903935ccb355a0"
+    }
+  },
+  {
+    "password": "admin:admin1",
+    "user": {
+      "type": "user",
+      "product": "free",
+      "image": null,
+      "currentlyPlaying": null,
+      "followers": null,
+      "_id": "5e6b95fda1903935ccb355a1",
+      "name": "Admin1",
+      "email": "admin1@admin.com",
+      "gender": "m",
+      "birthdate": "1999-02-25T00:00:00.000Z",
+      "country": "EG",
+      "devices": [],
+      "__v": 0,
+      "uri": "spotify:user:5e6b95fda1903935ccb355a1",
+      "phoneNumber": "+201000000001",
+      "id": "5e6b95fda1903935ccb355a1"
+    }
+  },
+  {
+    "password": "admin:admin2",
+    "user": {
+      "type": "artist",
+      "product": "free",
+      "image": null,
+      "currentlyPlaying": null,
+      "followers": null,
+      "_id": "5e6b95fda1903935ccb355a2",
+      "email": "admin2@admin.com",
+      "userInfo": {
+        "name": "Admin2",
+        "email": "admin2@admin.com",
+        "gender": "f",
+        "birthdate": "1999-03-25T00:00:00.000Z",
+        "phoneNumber": "+201000000002",
+        "country": "EG"
+      },
+      "devices": [],
+      "__v": 0,
+      "uri": "spotify:user:5e6b95fda1903935ccb355a2",
+      "id": "5e6b95fda1903935ccb355a2"
+    }
+  }
 ]

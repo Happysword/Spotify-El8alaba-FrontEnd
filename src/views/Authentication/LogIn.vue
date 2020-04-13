@@ -230,8 +230,8 @@ export default {
         this.userInput.incorrect = true;
       }
     },
+
     /* istanbul ignore next */
-    // @todo[XL3] Integrate with the backend
     fbLogin() {
       window.open(`${apiURL}/api/v1/authentication/facebook`, '_self');
     },

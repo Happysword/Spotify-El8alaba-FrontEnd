@@ -19,7 +19,12 @@ localVue.use(Vuetify);
 localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
-const router = new VueRouter();
+const router = new VueRouter({
+  routes: [
+    { path: '/home', name: 'Main' },
+    { path: '/login', name: 'LogIn' },
+  ],
+});
 
 describe('LogIn.vue', () => {
   test('localStorage is empty, no user is logged in', () => {
@@ -61,7 +66,6 @@ describe('LogIn.vue', () => {
     expect(wrapper.find('#passwordField').exists()).toEqual(true);
     expect(wrapper.find('#rememberCheck').exists()).toEqual(true);
     expect(wrapper.find('#loginBtn').exists()).toEqual(true);
-    // expect(wrapper.find('#loginBtnXS').exists()).toEqual(true);
     expect(wrapper.find('#forgotPasswordPrompt').exists()).toEqual(true);
     expect(wrapper.find('#signupBtn').exists()).toEqual(true);
   });
@@ -120,8 +124,8 @@ describe('LogIn.vue', () => {
     expect(passwordField.exists()).toEqual(true);
 
     // Set the real data
-    emailField.setValue('admin@admin.com');
-    passwordField.setValue('admin:admin');
+    emailField.setValue('admin2@admin.com');
+    passwordField.setValue('admin:admin2');
 
     // Click the button and wait
     loginBtn.trigger('click');
@@ -133,9 +137,38 @@ describe('LogIn.vue', () => {
     await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
+    expect(wrapper.find('#errorBar').exists()).toEqual(false);
+    expect(wrapper.vm.$route.path).toEqual('/home');
+    const expectedUserData = {
+      type: 'artist',
+      product: 'free',
+      image: null,
+      currentlyPlaying: null,
+      followers: null,
+      _id: '5e6b95fda1903935ccb355a2',
+      name: 'Admin2',
+      email: 'admin2@admin.com',
+      gender: 'f',
+      birthdate: '1999-03-25T00:00:00.000Z',
+      phoneNumber: '+201000000002',
+      country: 'EG',
+      devices: [],
+      __v: 0,
+      uri: 'spotify:user:5e6b95fda1903935ccb355a2',
+      id: '5e6b95fda1903935ccb355a2',
+      userInfo: {
+        name: 'Admin2',
+        email: 'admin2@admin.com',
+        gender: 'f',
+        birthdate: '1999-03-25T00:00:00.000Z',
+        phoneNumber: '+201000000002',
+        country: 'EG',
+      },
+    };
+    expect(JSON.parse(localStorage.currentUser).data).toEqual(expectedUserData);
   });
 
-  test('Entering invalid data triggers the validation properly', () => {
+  test('Entering data triggers the validation properly', () => {
     // Mount the component
     const wrapper = mount(LogIn, {
       localVue,
@@ -152,28 +185,11 @@ describe('LogIn.vue', () => {
     // Set the invalid data
     emailField.setValue('This is an invalid email.');
     passwordField.setValue('invpw');
-
     expect(wrapper.vm.$refs.loginForm.validate()).toEqual(false);
-  });
-
-  test('Entering valid data triggers the validation properly', () => {
-    // Mount the component
-    const wrapper = mount(LogIn, {
-      localVue,
-      vuetify,
-      router,
-    });
-
-    // Assert that both input fields exist
-    const emailField = wrapper.find('#emailField');
-    const passwordField = wrapper.find('#passwordField');
-    expect(emailField.exists()).toEqual(true);
-    expect(passwordField.exists()).toEqual(true);
 
     // Set the valid data
     emailField.setValue('valid@valid.com');
     passwordField.setValue('validvalid');
-
     expect(wrapper.vm.$refs.loginForm.validate()).toEqual(true);
   });
 });

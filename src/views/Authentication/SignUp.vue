@@ -51,10 +51,10 @@
                 label="Email"
                 v-model="userInput.email"
                 :rules="[
-              validation.required('Email'),
-              validation.minLength('Email', 3),
-              validation.validEmail(),
-            ]"
+                  validation.required('Email'),
+                  validation.minLength('Email', 3),
+                  validation.validEmail(),
+                ]"
                 @change="validateConfirmEmail"
               />
 
@@ -67,9 +67,9 @@
                 ref="confirmEmail"
                 v-model="userInput.confirmEmail"
                 :rules="[
-              (data) => (!!data && data === userInput.email)
-                || 'Email address doesn\'t match',
-            ]"
+                  (data) => (!!data && data === userInput.email)
+                    || 'Email address doesn\'t match',
+                ]"
                 @change="validateConfirmEmail"
               />
 
@@ -82,9 +82,9 @@
                 label="Password"
                 v-model="userInput.password"
                 :rules="[
-              validation.required('Password'),
-              validation.minLength('Password', 8),
-            ]"
+                  validation.required('Password'),
+                  validation.minLength('Password', 8),
+                ]"
                 :type="userInput.showPassword ? 'text' : 'password'"
                 :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="userInput.showPassword = !userInput.showPassword"
@@ -99,9 +99,9 @@
                 placeholder="What should we call you?"
                 v-model="userInput.name"
                 :rules="[
-              validation.required('This field'),
-              validation.noSpecialCharacters('This field'),
-            ]"
+                  validation.required('This field'),
+                  validation.noSpecialCharacters('This field'),
+                ]"
               />
 
               <!-- Date of Birth -->
@@ -256,11 +256,7 @@ export default {
        */
       const formatDob = (dob) => {
         let { day } = dob;
-
-        if (parseInt(day, 10) < 10) {
-          day = `0${day}`;
-        }
-
+        if (parseInt(day, 10) < 10) day = `0${day}`;
         return `${dob.year}-${dob.month}-${day}`;
       };
 
@@ -286,11 +282,6 @@ export default {
           token: response.data.token,
           data: response.data.data.user,
         };
-        if (currentUser.data.userInfo) {
-          Object.keys(currentUser.data.userInfo).forEach((key) => {
-            currentUser.data[key] = currentUser.data.userInfo[key];
-          });
-        }
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         cookies.setCookiesToSession(['loggedIn']);
 
@@ -304,9 +295,10 @@ export default {
      * Validates that both email fields match
      */
     validateConfirmEmail() {
-      this.$refs.confirmEmail.validate();
+      return this.$refs.confirmEmail.validate();
     },
 
+    /* istanbul ignore next */
     fbSignup() {
       window.open(`${apiURL}/api/v1/authentication/facebook`, '_self');
     },

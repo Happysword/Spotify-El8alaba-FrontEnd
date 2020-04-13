@@ -1,3 +1,6 @@
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 // Libraries
 import Vue from 'vue';
 import Vuetify from 'vuetify';
@@ -16,7 +19,12 @@ localVue.use(Vuetify);
 localVue.use(VueRouter);
 
 const vuetify = new Vuetify();
-const router = new VueRouter();
+const router = new VueRouter({
+  routes: [
+    { path: '/account/edit-profile', name: 'EditProfile' },
+    { path: '/account/account-overview', name: 'AccountOverview' },
+  ],
+});
 
 describe('AccountOverview.vue', () => {
   const currentUser = {
@@ -83,5 +91,27 @@ describe('AccountOverview.vue', () => {
 
     const planCard = wrapper.find('#planCard');
     expect(planCard.text()).toMatch('Spotify free');
+  });
+
+  test('Loading with no current user fails', async () => {
+    localStorage.removeItem('currentUser');
+    // Mount the component
+    const wrapper = mount(AccountOverview, { localVue, vuetify, router });
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+
+    await wrapper.vm.$nextTick();
+    const usernameEntry = wrapper.find('#usernameEntry');
+    const emailEntry = wrapper.find('#emailEntry');
+    const dobEntry = wrapper.find('#dobEntry');
+    const countryEntry = wrapper.find('#countryEntry');
+    expect(usernameEntry.text()).toMatch('lorem');
+    expect(emailEntry.text()).toMatch('lorem');
+    expect(dobEntry.text()).toMatch('lorem');
+    expect(countryEntry.text()).toMatch('lorem');
   });
 });
