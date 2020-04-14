@@ -85,7 +85,6 @@ export default {
 
   /**
    * Validates that the provided data matches an international phone number format
-   * @todo[XL3] Reach out to the team leaders and decide how to implement this
    * @param  {Boolean}  allowEmpty True allows empty values
    * @return {function} The function that does the validation
    */

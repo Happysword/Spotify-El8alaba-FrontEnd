@@ -5,7 +5,7 @@
 <v-container id="EditProfile_root">
   <p id="title"
      class="spotify-green headline pt-6 pl-3 mb-12">
-    Edit Profile
+    Edit profile
   </p>
 
   <v-card flat id="formCard">
@@ -146,10 +146,23 @@ export default {
       { text: 'Male', value: 'm' },
       { text: 'Female', value: 'f' },
     ],
-    // @todo[XL3] Add more countries
     countries: [
+      { text: 'Algeria', value: 'DZ' },
+      { text: 'Bahrain', value: 'BH' },
       { text: 'Egypt', value: 'EG' },
-      { text: 'Sweden', value: 'SE' },
+      { text: 'Iraq', value: 'IQ' },
+      { text: 'Jordan', value: 'JO' },
+      { text: 'Kuwait', value: 'KW' },
+      { text: 'Lebanon', value: 'LB' },
+      { text: 'Libya', value: 'LY' },
+      { text: 'Morocco', value: 'MA' },
+      { text: 'Oman', value: 'OM' },
+      { text: 'Saudi Arabia', value: 'SA' },
+      { text: 'Sudan', value: 'SD' },
+      { text: 'Syria', value: 'SY' },
+      { text: 'Tunisia', value: 'TN' },
+      { text: 'United Arab Emirates', value: 'AE' },
+      { text: 'Yemen', value: 'YE' },
     ],
     userInput: {
       name: '',
@@ -168,7 +181,6 @@ export default {
   methods: {
     /**
      * Submits input and edits the user's profile
-     * @todo[XL3] Implement this after reaching out to backend
      */
     async submit() {
       if (!this.$refs.editProfileForm.validate()) return;
@@ -189,7 +201,7 @@ export default {
       };
 
       // Collect edited data
-      // @todo[XL3] Add name
+      // @extra[XL3] Add name and avatar
       const editedData = {};
       Object.keys(this.userInput).forEach((key) => {
         if (this.userInput[key] !== '' && this.userInput[key] !== 'incorrect') {
@@ -214,6 +226,11 @@ export default {
         const userProfile = response.data;
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         currentUser.data = userProfile;
+        if (currentUser.data.userInfo) {
+          Object.keys(currentUser.data.userInfo).forEach((key) => {
+            currentUser.data[key] = currentUser.data.userInfo[key];
+          });
+        }
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
         this.$router.push({ name: 'AccountOverview' });

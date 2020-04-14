@@ -5,7 +5,6 @@
     <v-row justify="center" align="center">
       <v-col sm="8" lg="6" xl="4" class="px-8">
         <!-- Logo -->
-        <!-- @todo[XL3] Process the reset token -->
         <router-link to="/">
           <v-img
             id="logo"
@@ -18,18 +17,17 @@
         <p class="mb-12 text-center font-weight-bold display-1">
           Password Reset
         </p>
+        <!-- Error bar -->
+        <p
+          id="errorBar"
+          class="caption red darken-1 white--text text-center py-3 mb-8"
+          v-if="!!userInput.incorrect">
+          {{ userInput.incorrect }}
+        </p>
+
         <!-- If the route contains a reset token -->
         <template v-if="!!resetToken">
           <v-form ref="passwordResetForm">
-            <!-- Error bar -->
-            <!-- @todo[XL3] Change this error message -->
-            <p
-              id="errorBar"
-              class="caption red darken-1 white--text text-center py-3 mb-8"
-              v-if="userInput.incorrect">
-              Error. Something went wrong.
-            </p>
-
             <!-- Password -->
             <!-- Minimum password length is 8 -->
             <v-text-field
@@ -87,15 +85,6 @@
               Enter your <span class="font-weight-bold">email address</span>
               that you used to register.
               We'll send you an email with your username and a link to reset your password.
-            </p>
-
-            <!-- Error bar -->
-            <!-- @todo[XL3] Change this error message -->
-            <p
-              id="errorBar"
-              class="caption red darken-1 white--text text-center py-3 mb-8"
-              v-if="userInput.incorrect"
-              >Error. Something went wrong.
             </p>
 
             <v-form ref="passwordResetForm">
@@ -211,7 +200,7 @@ export default {
         this.userInput.email = '';
         this.userInput.incorrect = false;
       } else {
-        this.userInput.incorrect = true;
+        this.userInput.incorrect = response.data.message;
       }
     },
 
@@ -251,7 +240,7 @@ export default {
 
         this.$router.push('/home');
       } else {
-        this.userInput.incorrect = true;
+        this.userInput.incorrect = response.data.message;
       }
     },
 

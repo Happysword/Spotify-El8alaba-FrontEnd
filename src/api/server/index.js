@@ -14,11 +14,6 @@ axios.interceptors.request.use((config) => {
 }, (err) => Promise.reject(err));
 
 export default {
-  // @todo[XL3] See if this method will be removed
-  // fetchUsers() {
-  //   return axios.get(api).then((response) => response.data);
-  // },
-
   /**
    * Get the User's Currently Playing Track
    * @return {Object} An Object Containing info about the User's Current Playing Track
@@ -592,7 +587,7 @@ export default {
 
 
   /**
-   * Sends a **PATCH** request to the server to reset the user's password
+   * Sends a `PATCH` request to the server to reset the user's password
    * @param  {Object} data  The user's new password and its confirmation
    * @param  {Object} token The Password Reset token
    * @return {Object}       The corresponding response
@@ -614,9 +609,32 @@ export default {
     return response;
   },
 
+  /**
+   * Sends a `PATCH` request to the server to update the current user's password
+   * @param  {Object} data  The user's current password, new password and its confirmation
+   * @param  {Object} token The Password Reset token
+   * @return {Object}       The corresponding response
+   * @todo[XL3] Mock this function
+   */
+  async updatePassword(data) {
+    const request = {
+      method: 'PATCH',
+      url: `${api}/api/v1/authentication/updatePassword/`,
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
 
   /**
-   * Sends a **GET** request to the server for the current user's profile information
+   * Sends a `GET` request to the server for the current user's profile information
    * @return {Object} The corresponding response
    */
   async getCurrentUserProfile() {
@@ -633,7 +651,7 @@ export default {
   },
 
   /**
-   * Sends a **PATCH** request to the server to update the user's profile data
+   * Sends a `PATCH` request to the server to update the user's profile data
    * @param  {Object} data The user's updated profile data
    * @return {Object} The corresponding response
    */
@@ -655,7 +673,7 @@ export default {
   },
 
   /**
-   * Sends a **GET** request to the server to log out the current user
+   * Sends a `GET` request to the server to log out the current user
    * @return {Object} The corresponding response
    */
   async logoutUser() {
@@ -672,7 +690,7 @@ export default {
   },
 
   /**
-   * Sends a **GET** request to the server to fetch the JWT token
+   * Sends a `GET` request to the server to fetch the JWT token
    * @return {Object} The corresponding response
    */
   async fetchToken() {

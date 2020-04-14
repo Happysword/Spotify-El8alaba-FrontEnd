@@ -3,11 +3,11 @@
 </template>
 
 <script>
+import api from 'api-client';
+
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  */
-import api from 'api-client';
-
 export default {
   name: 'LogOut',
   /* istanbul ignore next */

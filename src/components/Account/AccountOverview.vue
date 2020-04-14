@@ -4,7 +4,7 @@
   <!-- Title -->
   <p id="title"
      class="display-2 font-weight-bold pt-6 pl-3 mb-12">
-    Account Overview
+    Account overview
   </p>
 
   <!-- Main column -->
@@ -127,7 +127,7 @@ export default {
       this.plan = userProfile.product;
     } else {
       // eslint-disable-next-line no-alert
-      alert('No user is currently logged in');
+      alert('Authorization failure.');
     }
   },
 };

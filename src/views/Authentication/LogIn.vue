@@ -47,12 +47,12 @@
           </v-col>
         </v-row>
 
-        <!-- Incorrect password bar -->
+        <!-- Error bar -->
         <p
           id="errorBar"
           class="caption red darken-1 white--text text-center py-3 mb-8"
-          v-if="userInput.incorrect"
-          >Incorrect email or password.
+          v-if="!!userInput.incorrect">
+          {{ userInput.incorrect }}
         </p>
 
         <!-- Form -->
@@ -227,7 +227,7 @@ export default {
 
         this.$router.push('/home');
       } else {
-        this.userInput.incorrect = true;
+        this.userInput.incorrect = response.data.message;
       }
     },
 

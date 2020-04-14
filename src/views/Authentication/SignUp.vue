@@ -34,12 +34,14 @@
               </v-col>
             </v-row>
 
-            <!-- Incorrect password bar -->
+            <!-- Error bar -->
+            <!-- @todo[XL3] Reach out to BE about error messages -->
             <p
               id="errorBar"
               class="caption red darken-1 white--text text-center py-3 mb-8"
               v-if="userInput.incorrect"
-            >Error. Something went wrong.</p>
+              >{{ userInput.incorrect }}
+            </p>
 
             <!-- Form -->
             <v-form ref="signupForm">
@@ -265,7 +267,6 @@ export default {
         name: this.userInput.name,
         email: this.userInput.email,
         password: this.userInput.password,
-        // @todo[XL3] See if we're going to add this
         passwordConfirm: this.userInput.password,
         gender: this.userInput.gender,
         birthdate: formatDob(this.userInput.dob),
@@ -287,7 +288,8 @@ export default {
 
         this.$router.push('/home');
       } else {
-        this.userInput.incorrect = true;
+        console.log(response.data);
+        this.userInput.incorrect = response.data.message;
       }
     },
 
