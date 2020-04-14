@@ -235,7 +235,7 @@ export default {
 
         this.$router.push({ name: 'AccountOverview' });
       } else {
-        this.userInput.incorrect = true;
+        this.userInput.incorrect = response.data.message;
       }
     },
   },

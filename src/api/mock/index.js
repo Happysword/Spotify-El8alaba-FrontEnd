@@ -71,10 +71,9 @@ export default {
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
-      data: {
-        token: 'mock_token',
-        data: { user },
-      },
+      data: found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
     };
   },
 
@@ -239,10 +238,9 @@ export default {
     // Succeed if the user isn't found
     return {
       status: !found ? 200 : 400,
-      data: {
-        token: 'mock_token',
-        data: { user },
-      },
+      data: !found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
     };
   },
 
@@ -266,7 +264,12 @@ export default {
     });
 
     // Succeed if the user is found
-    return { status: found ? 200 : 400 };
+    return {
+      status: found ? 200 : 400,
+      data: found
+        ? undefined
+        : { message: 'Error. Something went wrong.' },
+    };
   },
 
   /**
@@ -298,10 +301,9 @@ export default {
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
-      data: {
-        token,
-        data: { user },
-      },
+      data: found
+        ? { token, data: { user } }
+        : { message: 'Error. Something went wrong.' },
     };
   },
 
@@ -312,7 +314,12 @@ export default {
   async getCurrentUserProfile() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     /* istanbul ignore next */
-    if (!currentUser) return { status: 404 };
+    if (!currentUser) {
+      return {
+        status: 404,
+        data: { message: 'Error. Something went wrong.' },
+      };
+    }
 
     const user = await fetch(currentUser.data, 50);
 
@@ -330,7 +337,12 @@ export default {
   async editProfile(data) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     /* istanbul ignore next */
-    if (!currentUser) return { status: 404 };
+    if (!currentUser) {
+      return {
+        status: 404,
+        data: { message: 'Error. Something went wrong.' },
+      };
+    }
 
     // Set each key
     Object.keys(data).forEach((key) => {

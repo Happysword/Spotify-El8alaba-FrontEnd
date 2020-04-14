@@ -42,6 +42,7 @@
                     :rules="[
                       validation.required('Password'),
                       validation.minLength('Password', 8),
+                      (data) => (data !== userInput.currentPw) || 'Don\'t use the same password',
                     ]"
                     :type="userInput.showPassword ? 'text' : 'password'"
                     :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -87,6 +88,7 @@
 
 <script>
 import validation from '@/store/modules/auth/validation';
+import cookies from '@/store/modules/auth/cookies';
 import api from 'api-client';
 
 /**
@@ -118,12 +120,33 @@ export default {
       });
 
       // If the request was successful,
-      // reroute to AccountOverview
+      // re-login the user,
+      // update localStorage,
+      // and route to Account Overview
       // 200 OK
       if (response.status === 200) {
-        // @todo[XL3]: Refer to BE about authorization issues
-        console.log(response.data.token);
-        this.$router.push({ name: 'AccountOverview' });
+        const { data: { data: { user } } } = response;
+        // Handling artist objects
+        if (user.userInfo) user.email = user.userInfo.email;
+        const loginRes = await api.loginUser({
+          email: user.email,
+          password: this.userInput.newPw,
+        });
+
+        // Update localStorage token
+        // Set the logged in cookie to session
+        // Route to Account Overview
+        // 200 OK
+        if (loginRes.status === 200) {
+          const currentUser = JSON.parse(localStorage.currentUser);
+          currentUser.token = loginRes.data.token;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+          cookies.setCookiesToSession(['loggedIn']);
+          this.$router.push({ name: 'AccountOverview' });
+        } else {
+          this.userInput.incorrect = response.data.message;
+        }
       } else {
         this.userInput.incorrect = response.data.message;
       }

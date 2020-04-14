@@ -21,12 +21,16 @@ localVue.use(VueRouter);
 const vuetify = new Vuetify();
 const router = new VueRouter({
   routes: [
+    { path: '/', name: 'Landing' },
     { path: '/account/edit-profile', name: 'EditProfile' },
     { path: '/account/account-overview', name: 'AccountOverview' },
   ],
 });
 
 describe('AccountOverview.vue', () => {
+  // Mock the alert function to skip its execution
+  jest.spyOn(window, 'alert')
+    .mockImplementation(() => {});
   const currentUser = {
     data: {
       type: 'user',
@@ -113,5 +117,6 @@ describe('AccountOverview.vue', () => {
     expect(emailEntry.text()).toMatch('lorem');
     expect(dobEntry.text()).toMatch('lorem');
     expect(countryEntry.text()).toMatch('lorem');
+    expect(wrapper.vm.$route.name).toMatch('Landing');
   });
 });

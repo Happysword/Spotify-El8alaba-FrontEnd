@@ -127,7 +127,12 @@ export default {
       this.plan = userProfile.product;
     } else {
       // eslint-disable-next-line no-alert
-      alert('Authorization failure.');
+      alert(`${response.data.message}\nYou will now be redirected.`);
+
+      const { status } = await api.logoutUser();
+      if (status === 200) {
+        this.$router.push('/');
+      }
     }
   },
 };

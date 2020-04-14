@@ -60,4 +60,12 @@ describe('validation.js', () => {
     expect(validFn('Not a phone number')).toEqual('Please enter a valid phone number');
     expect(validFn('+2011001300')).toEqual('Please enter a valid phone number');
   });
+
+  test('Testing validName', () => {
+    const validFn = validation.validName();
+    expect(validFn('Abdelrahman Farid')).toEqual(true);
+    expect(validFn('XL3')).toEqual('Please enter a valid name');
+    expect(validFn('!@#$%^&*()-=')).toEqual('Please enter a valid name');
+    expect(validFn('Sub-Zero')).toEqual('Please enter a valid name');
+  });
 });

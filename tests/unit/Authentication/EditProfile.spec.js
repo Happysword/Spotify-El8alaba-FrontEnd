@@ -147,7 +147,7 @@ describe('EditProfile.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(true);
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
   });
 
   test('Editing the current user\'s data works', async () => {

@@ -216,29 +216,39 @@ export default {
       }, this.resetToken);
 
       // If the request was successful,
-      // add the currentUser to localStorage
+      // re-login the user,
+      // set localStorage,
       // and route to home
       // 200 OK
       if (response.status === 200) {
         const currentUser = {
-          token: response.data.token,
           data: response.data.data.user,
         };
+        // Handling artist objects
         if (currentUser.data.userInfo) {
           Object.keys(currentUser.data.userInfo).forEach((key) => {
             currentUser.data[key] = currentUser.data.userInfo[key];
           });
         }
 
-        await api.loginUser({
+        const loginRes = await api.loginUser({
           email: currentUser.data.email,
           password: this.userInput.password,
         });
 
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        cookies.setCookiesToSession(['loggedIn']);
+        // Set localStorage token
+        // Set the logged in cookie to session
+        // Route to home
+        // 200 OK
+        if (loginRes.status === 200) {
+          currentUser.token = loginRes.data.token;
+          localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
-        this.$router.push('/home');
+          cookies.setCookiesToSession(['loggedIn']);
+          this.$router.push('/home');
+        } else {
+          this.userInput.incorrect = response.data.message;
+        }
       } else {
         this.userInput.incorrect = response.data.message;
       }

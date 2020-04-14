@@ -97,11 +97,11 @@ describe('PasswordReset.vue', () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('done');
-      }, 50);
+      }, 100);
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(true);
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 
@@ -228,7 +228,7 @@ describe('PasswordReset.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(true);
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 

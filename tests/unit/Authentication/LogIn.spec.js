@@ -101,7 +101,7 @@ describe('LogIn.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(true);
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 

@@ -103,6 +103,7 @@
                 :rules="[
                   validation.required('This field'),
                   validation.noSpecialCharacters('This field'),
+                  validation.validName(),
                 ]"
               />
 
@@ -288,7 +289,6 @@ export default {
 
         this.$router.push('/home');
       } else {
-        console.log(response.data);
         this.userInput.incorrect = response.data.message;
       }
     },

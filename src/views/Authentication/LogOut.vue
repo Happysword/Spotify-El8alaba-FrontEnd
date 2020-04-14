@@ -28,9 +28,8 @@ export default {
   async mounted() {
     // Remove the current user
     // Remove all cookies
-    const response = await api.logoutUser();
-
-    if (response.status === 200) {
+    const { status } = await api.logoutUser();
+    if (status === 200) {
       this.$router.push('/');
     }
   },
