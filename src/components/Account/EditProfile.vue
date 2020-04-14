@@ -14,7 +14,7 @@
       id="errorBar"
       class="caption red darken-1 white--text text-center py-3 mb-8"
       v-if="userInput.incorrect"
-      >Error. Please enter valid data.
+      >{{ userInput.incorrect }}
     </p>
 
     <!-- Form -->
@@ -25,7 +25,10 @@
                     outlined
                     label="Name"
                     v-model="userInput.name"
-                    :rules="[validation.noSpecialCharacters('Name', true)]"/>
+                    :rules="[
+                      validation.noSpecialCharacters('Name', true),
+                      validation.validName(true),
+                    ]"/>
 
       <!-- Gender -->
       <v-select id="genderSelect"

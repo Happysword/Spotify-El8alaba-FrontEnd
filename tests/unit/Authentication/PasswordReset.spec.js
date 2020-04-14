@@ -129,7 +129,7 @@ describe('PasswordReset.vue', () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('done');
-      }, 50);
+      }, 100);
     });
     await wrapper.vm.$nextTick();
 
@@ -224,7 +224,7 @@ describe('PasswordReset.vue', () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('done');
-      }, 50);
+      }, 200);
     });
     await wrapper.vm.$nextTick();
 

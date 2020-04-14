@@ -614,7 +614,6 @@ export default {
    * @param  {Object} data  The user's current password, new password and its confirmation
    * @param  {Object} token The Password Reset token
    * @return {Object}       The corresponding response
-   * @todo[XL3] Mock this function
    */
   async updatePassword(data) {
     const request = {

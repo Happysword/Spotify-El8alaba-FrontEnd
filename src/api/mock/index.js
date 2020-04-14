@@ -308,6 +308,40 @@ export default {
   },
 
   /**
+   * Fetches all users in the mock data and ensures that a certain user is among them
+   * @param  {Object} body  The user's current password, new password and its confirmation
+   * @return {Object}       The corresponding response
+   */
+  async updatePassword(body) {
+    // Get all users
+    const allUsers = await fetch(users, 50);
+
+    // Search all users for our user
+    let found = false;
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.password === body.password) {
+        found = true;
+        user = u.user;
+        // Set the loggedIn cookie
+        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
+      }
+      // Breaking condition
+      return u.password === body.password;
+    });
+
+    // Succeed if the user is found
+    return {
+      status: found ? 200 : 400,
+      data: found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
+    };
+  },
+
+  /**
    * Returns mock user profile data
    * @return {Object} The mock data
    */
@@ -858,3 +892,4 @@ export default {
     return { status: 0 };
   },
 };
+/* eslint-enable consistent-return */

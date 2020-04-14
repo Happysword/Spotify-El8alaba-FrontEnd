@@ -143,10 +143,9 @@ describe('EditProfile.vue', () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('done');
-      }, 50);
+      }, 100);
     });
     await wrapper.vm.$nextTick();
-
     expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
   });
 
@@ -215,11 +214,12 @@ describe('EditProfile.vue', () => {
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve('done');
-      }, 50);
+      }, 100);
     });
     await wrapper.vm.$nextTick();
 
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
+    expect(wrapper.vm.$route.name).toMatch('AccountOverview');
 
     currentUser = JSON.parse(localStorage.currentUser);
     expect(currentUser.data.name).toEqual('Unit Test');
