@@ -114,13 +114,12 @@
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="i-1">
                   <div @click="local(users[i-1].id, users[i-1].type)">
-                   <ArtistCard
+                   <profile-card
+                   :profileName="users[i-1].name"
                    :id="users[i-1].id"
-                   :name="users[i-1].name"
-                   :images="users[i-1].image"
+                   :images="users[i-1].image ? users[i-1].image : [{ url:'https://www.scdn.co/i/_global/twitter_card-default.jpg'}]"
                    :type="users[i-1].type"
-                   :href="users[i-1].href"
-                   ></ArtistCard>
+                   ></profile-card>
                   </div>
             </v-col>
       </v-row>
@@ -139,12 +138,13 @@ import ArtistCard from '../../components/ArtistCard.vue';
 import TopResult from '../../components/TopResult.vue';
 // import SearchSong from '../../components/SongsBar.vue';
 import SongCard from '../../components/SongCard.vue';
-
+import ProfileCard from '../../components/ProfileCard.vue';
 
 export default {
   name: 'InputSearch',
   components: {
     TopResult,
+    ProfileCard,
     // SearchSong,
     SongCard,
     ArtistCard,
@@ -248,6 +248,7 @@ export default {
             this.artistsExist = this.artistLength ? true : 0;
             this.userLength = this.users.length < 6 ? this.users.length : 6;
             this.usersExist = !!this.userLength;
+            console.log(this.users);
           }
         }
         if (response.albums) {
@@ -320,6 +321,7 @@ export default {
   watch: {
     $route(to) {
       this.fetchSearch(to.params.id);
+      setTimeout(300);
     },
   },
   async created() {

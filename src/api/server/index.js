@@ -922,7 +922,10 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => response.data)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
       .catch((error) => console.log(error));
   },
   /**
