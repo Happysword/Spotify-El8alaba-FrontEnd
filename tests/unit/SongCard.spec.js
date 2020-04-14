@@ -26,14 +26,12 @@ describe('SongCard.vue', () => {
     const { showActionButton } = wrapper.vm.$data;
     const { showPlayButton } = wrapper.vm.$data;
     const { snackbar } = wrapper.vm.$data;
-    const { imagesExist } = wrapper.vm.$data;
     const item0 = wrapper.vm.$data.items[0].title;
     const item2 = wrapper.vm.$data.items[2].title;
 
     expect(showActionButton).toEqual(false);
     expect(showPlayButton).toEqual(true);
     expect(snackbar).toEqual(false);
-    expect(imagesExist).toEqual(false);
     expect(item0).toEqual('Start Radio');
     expect(item2).toEqual('Copy link');
   });
