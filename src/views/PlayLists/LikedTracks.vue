@@ -5,7 +5,7 @@
         <playlistCard :songsNum="songsNum" :listInfo="listInfo" :show="show">
         </playlistCard>
       </v-col>
-      <v-col sm='12' md='6' lg="8" class="my-1 pl-0 text-truncate">
+      <v-col sm='12' md='6' lg="8" class="my-1 pl-0 text-truncate" v-if="songsNum">
         <songsCard v-for="(song,index) in songs"
           :key="index"
           :counter="index"
@@ -15,6 +15,9 @@
           :listType="listInfo.type"
         >
         </songsCard>
+      </v-col>
+      <v-col sm='12' md='6' lg="8" class="my-6 text-center" v-if="!songsNum">
+        <emptyList></emptyList>
       </v-col>
     </v-row>
   </v-container>
@@ -29,6 +32,7 @@ import analyze from 'rgbaster';
 import EventBus from '../../EventBus';
 import playlistCard from '../../components/playlistCard.vue';
 import songsCard from '../../components/SongsBar.vue';
+import emptyList from '../../components/EmptyList.vue';
 
 export default {
   data() {
@@ -64,6 +68,7 @@ export default {
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
+        console.log(tracks);
         // this.listInfo = await server.fetchList('5e889f20e45776773ac89009');
         // this.songs = await server.fetchSongs('5e889f20e45776773ac89009');
         // this.songs = this.listInfo.tracks.items;
@@ -87,6 +92,7 @@ export default {
         //   this.songs[i] = { track: album.tracks[i] };
         // }
         this.songs = await server.fetchAlbumSongs(this.listInfo.id);
+        console.log(this.songs);
       } else {
         return;
       }
@@ -95,20 +101,26 @@ export default {
       }
       // console.log(this.songs);
       // console.log(this.listInfo);
-      if (!this.test) {
-        const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] });
-        EventBus.$emit('changeColor', result[0].color);
-      }
       this.ready = true;
       if (!Array.isArray(this.songs)) {
         return;
       }
       this.songsNum = this.songs.length;
+      if (this.songsNum === 0) {
+        this.listInfo.images = [{ url: 'https://getdrawings.com/free-icon-bw/black-music-icons-23.png' }];
+        EventBus.$emit('changeColor', 'rgb(50,50,50)');
+        return;
+      }
+      if (!this.test) {
+        const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] }, { scale: 0.6 });
+        EventBus.$emit('changeColor', result[0].color);
+      }
     },
   },
   components: {
     playlistCard,
     songsCard,
+    emptyList,
   },
   async created() {
     this.LoadPage();

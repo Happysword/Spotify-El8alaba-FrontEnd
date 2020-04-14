@@ -12,7 +12,7 @@
       @mouseout="overlay= play"
       :src="listInfo.images[0].url" class="mt-1"
     >
-      <v-overlay v-show="overlay" absolute>
+      <v-overlay v-show="overlay && songsNum > 0" absolute>
         <v-icon
           id="playIcon"
           size="70"
@@ -42,10 +42,11 @@
     <v-card-actions class="justify-center">
       <v-btn
         id="playBtn"
+        :disabled="songsNum === 0"
         rounded
         inline-block
         dark
-        color='#1DB954'
+        :color=btnColor
         class="mt-2 px-10"
         large
         @click="changeStatus"
@@ -57,7 +58,7 @@
       <v-icon
         id="save"
         v-show="!store.state.liked"
-        v-if="show" size="30"
+        v-if="show && songsNum" size="30"
         class="px-3"
         @click="changeLiked"
         color="#E0E0E0"
@@ -67,7 +68,7 @@
       <v-icon
         id="remove"
         v-show="store.state.liked"
-        v-if="show"
+        v-if="show && songsNum"
         size="30"
         color='#1DB954'
         class="px-3"
@@ -111,7 +112,7 @@
         <span>More</span>
       </v-tooltip>
     </v-card-actions>
-    <p class="text-center grey--text" id="songNum">
+    <p class="text-center grey--text" id="songNum" v-if="songsNum">
       <span class="text-center grey--text" id="albumDate" v-if="listInfo.type === 'album'">
         {{listInfo.release_date.split('-')[0]}} .
       </span>
@@ -139,6 +140,7 @@ export default {
     timeout: 2000,
     tooltip: false,
     play: false,
+    btnColor: '#1DB954',
 
   }),
 
@@ -212,6 +214,11 @@ export default {
   },
 
   async created() {
+    // if (this.songsNum === 0) {
+    //   this.btnColor = '#1DB95480';
+    // } else {
+    //   this.btnColor = '#1DB954FF';
+    // }
     let response = {};
     if (this.listInfo.type === 'album') {
       // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
