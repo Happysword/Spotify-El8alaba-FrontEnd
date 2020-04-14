@@ -23,8 +23,11 @@
           @contextmenu.prevent="on.click"
           id="cardID"
         >
-          <v-container fluid v-if="imagesExist">
-            <v-img :src="images[0].url" id="imageID" height="150px"></v-img>
+          <v-container fluid>
+            <v-img v-if="(images === undefined || images.length == 0)"
+            src="https://www.scdn.co/i/_global/twitter_card-default.jpg" id="imageID" height="150px"></v-img>
+            <v-img v-if="!(images === undefined || images.length == 0)"
+            id="imageID" height="150px"></v-img>
           </v-container>
           <v-card-title id="nameID" class="font-weight-bold subtitle-2">{{name}}</v-card-title>
 
@@ -97,7 +100,6 @@ export default {
       notificationMsg: String,
       isFollowing: Boolean,
       FollowJSON: [],
-      imagesExist: false,
       items: [
         { title: 'Start Radio' },
         { title: '' },
@@ -213,14 +215,6 @@ export default {
           });
       }
     },
-  },
-  created() {
-    this.imagesExist = false;
-    if (this.images) {
-      if (this.images[0]) {
-        this.imagesExist = true;
-      }
-    }
   },
 };
 </script>

@@ -306,7 +306,7 @@ export default {
    */
   async fetchaListOfUserPlaylists(userID, token) {
     const userPlaylists = await axios
-      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=1`, {
+      .get(`${api}/api/v1/users/${userID}/playlists?limit=&offset=`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
