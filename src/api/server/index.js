@@ -272,6 +272,26 @@ export default {
       .catch(() => false);
   },
   /**
+   * Check if the User Likes a certain Track
+   * @param {string} ID the id of the track to be checked
+   * @return {Boolean} a Boolean of the State of the track false if failed
+   */
+  async checkLiked(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .get(`${api}/api/v1/me/tracks/contains?ids=${ID}`, '', config)
+      .then((response) => {
+        if (response.status === 200) return response.data[0];
+        return false;
+      })
+      .catch(() => false);
+  },
+
+  /**
    * Get all the albums saved by the user
    * @param {String} token Token of the current user
    */

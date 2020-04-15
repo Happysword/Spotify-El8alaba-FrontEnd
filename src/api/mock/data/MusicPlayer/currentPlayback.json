@@ -10,6 +10,7 @@
       "uri": "spotify:playlist:37i9dQZF1DXd3AhRYJnfcl"
     },
     "progress_ms": 28580,
+    "currentlyPlaying": {
     "track": {
       "album": {
         "album_type": "album",
@@ -90,7 +91,8 @@
       "track_number": 1,
       "type": "track",
       "uri": "spotify:track:2AVA6NJZXA7UERS5nnsTzz"
-    },
+    }
+  },
     "currently_playing_type": "track",
     "actions": {
       "disallows": {

@@ -32,6 +32,7 @@ export default new Vuex.Store({
       currentList: [currentSongMock[0]],
       currentSongIndexinList: 0,
     },
+    prevRoute: '',
   },
 
   mutations: {

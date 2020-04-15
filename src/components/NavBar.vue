@@ -152,7 +152,10 @@
           class="mt-2"
           max-height="180"
           max-width="200"
-          src='https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
+          :src="
+            $store.state.MusicPlayer.currentSong.track.album.images[0] ||
+              'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
+          "
           contain
           @mouseenter="imageButton = true"
           @mouseleave="imageButton = false"
@@ -225,16 +228,13 @@ export default {
         this.userID = 'user';
         this.token = 'token';
       } else {
-        this.userID = JSON.parse(
-          localStorage.getItem('currentUser'),
-        ).data._id;
+        this.userID = JSON.parse(localStorage.getItem('currentUser')).data._id;
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.fetchCurrentUserPlaylists(this.token)
-        .then((response) => {
-          this.playlists = response;
-        });
+      client.fetchCurrentUserPlaylists(this.token).then((response) => {
+        this.playlists = response;
+      });
     },
     /** Create a new playlist */
     createNewPlaylist() {

@@ -28,6 +28,7 @@ import ArtistAbout from '../views/Artist/ArtistAbout.vue';
 import SearchType from '../views/Search/SearchType.vue';
 import RecentSearch from '../views/Search/RecentSearch.vue';
 import UserPage from '../views/Users/UserPage.vue';
+import store from '../store/index';
 
 Vue.use(VueRouter);
 
@@ -171,11 +172,13 @@ const router = new VueRouter({
   routes,
 });
 
-router.afterEach((to) => {
+router.afterEach((to, from) => {
   const defaultTitle = 'Spotify El8alaba';
   Vue.nextTick(() => {
     document.title = to.meta.title || defaultTitle;
   });
+  store.state.prevRoute = from.fullPath;
 });
+
 
 export default router;

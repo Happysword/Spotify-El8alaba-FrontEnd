@@ -116,6 +116,8 @@
 <script>
 import { mapActions } from 'vuex';
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
+/* eslint-disable no-underscore-dangle */
+
 /**
  *
  */
@@ -192,26 +194,23 @@ export default {
       }
       if (this.shuffleState) {
         // shuffle the array song list using sort method
-        this.songList = this.$store.state.MusicPlayer.currentList;
-        this.songList.sort(() => Math.random() - 0.5);
+        this.songList = JSON.parse(JSON.stringify(this.$store.state.MusicPlayer.currentList));
+        const temparray = this.$store.state.MusicPlayer.currentList;
+        temparray.sort(() => Math.random() - 0.5);
         // save the index in the data
-        this.songindex = this.songList.indexOf(
-          this.$store.state.MusicPlayer.currentSong,
-        );
+        const songObj = temparray.filter((song) => song.track.id === this
+          .$store.state.MusicPlayer.currentSong.track.id);
+        this.songindex = temparray.indexOf(songObj[0]);
         this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
         // swaping the values of the lists to be saved in the data
-        const temp = this.$store.state.MusicPlayer.currentList;
-        this.$store.state.MusicPlayer.currentList = this.songList;
-        this.songList = temp;
+        this.$store.state.MusicPlayer.currentList = temparray;
       } else {
         // swaping the values of the lists to get the old list values
-        const temp = this.$store.state.MusicPlayer.currentList;
-        this.$store.state.MusicPlayer.currentList = this.songList;
-        this.songList = temp;
+        this.$store.state.MusicPlayer.currentList = JSON.parse(JSON.stringify(this.songList));
         // save the index in the data
-        this.songindex = this.songList.indexOf(
-          this.$store.state.MusicPlayer.currentSong,
-        );
+        const songObj = this.songList.filter((song) => song.track.id === this
+          .$store.state.MusicPlayer.currentSong.track.id);
+        this.songindex = this.songList.indexOf(songObj[0]);
         this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
       }
     },
@@ -260,9 +259,6 @@ export default {
   },
   /* istanbul ignore next */
   async created() {
-    // TODO[@Seif] later: fetch current playback and check if the song is not null
-    // play track with faded for now and get current playback
-    // maybe add that the Music player is empty at first like spotify
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
       if (
         this.$store.state.MusicPlayer.currentSongIndexinList === this
@@ -276,11 +272,13 @@ export default {
     };
     if (process.env.VUE_APP_API_CLIENT === 'server') {
       this.$store.state.MusicPlayer.currentSong = false;
+      this.$store.state.MusicPlayer.currentList = [this.$store.state.MusicPlayer.currentSong];
       this.$store.state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback().then(
         (data) => {
           if (data.currentlyPlaying.track === null) {
             return false;
           }
+          this.$store.state.MusicPlayer.currentList = [data.currentlyPlaying];
           return data.currentlyPlaying;
         },
       );

@@ -25,6 +25,16 @@ export default {
       if (process.env.VUE_APP_API_CLIENT !== 'server') Response = true;
       // check if the response was correct
       if (Response === false) return;
+      // TODO[@Seif] remove later when naiera changes fetch currentplayback
+      state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback().then(
+        (data) => {
+          if (data.currentlyPlaying.track === null) {
+            return false;
+          }
+          return data.currentlyPlaying;
+        },
+      );
+
       // get song URL from mock or server
       let SongURL = '';
       /* istanbul ignore next */
@@ -113,6 +123,7 @@ export default {
       state.MusicPlayer.isFirstPlay = true;
       state.MusicPlayer.isPlaying = false;
       state.MusicPlayer.AudioPlayer.pause();
+      state.MusicPlayer.unShuffledList = state.MusicPlayer.currentList;
       dispatch('togglePlayact');
     } else {
       state.MusicPlayer.isPlaying = true;
