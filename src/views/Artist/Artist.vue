@@ -8,8 +8,8 @@
       >
       <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
       </v-snackbar>
-        <v-card>
-            <v-img :src="artist.images[1].url"
+        <v-card v-if="artist && artist.followers">
+            <v-img :src="imageURL"
             gradient="rgba(255,255,255,0) 0%,rgba(0,0,0,1) 100%"
             class="align-center"
             height="340px">
@@ -95,24 +95,32 @@ import client from 'api-client';
 export default {
   data() {
     return {
-      artist: JSON,
+      artist: [],
       followStatus: '',
       FollowJSON: JSON,
       isFollowing: Boolean,
       notificationMsg: String,
       snackbar: false,
+      imageURL: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg',
     };
   },
   mounted() {
-    this.fetchFollowStatus();
     this.fetchAnArtist();
+    this.fetchFollowStatus();
   },
   methods: {
+    /** Checks If an image is in the request */
+    checkImage() {
+      if (this.artist.images[0]) {
+        this.imageURL = this.artist.images[0].url;
+      }
+    },
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           this.artist = response;
+          this.checkImage();
         });
     },
     /** Fetches the current following status */

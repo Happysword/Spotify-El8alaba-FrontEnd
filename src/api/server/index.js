@@ -446,13 +446,16 @@ export default {
    * @param {String} token Token of current user
    */
   async ifCurrentUserFollowsArtistsOrUsers(ids, token) {
-    const response = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
+    const isFollowing = await axios.get(`${api}/api/v1/me/following/contains?ids=${ids}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => res.data);
-    return response;
+      .then((response) => response.data)
+      .catch((error) => {
+        console.log(error.response);
+      });
+    return isFollowing;
   },
 
   /**

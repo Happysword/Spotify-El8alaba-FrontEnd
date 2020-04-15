@@ -25,8 +25,9 @@
         >
           <v-container fluid>
             <v-img v-if="(images === undefined || images.length == 0)"
-            src="https://www.scdn.co/i/_global/twitter_card-default.jpg" id="imageID" height="150px"></v-img>
+            src="https://getdrawings.com/free-icon-bw/black-music-icons-23.png" id="imageID" height="150px"></v-img>
             <v-img v-if="!(images === undefined || images.length == 0)"
+            :src="images[0].url"
             id="imageID" height="150px"></v-img>
           </v-container>
           <v-card-title id="nameID" class="font-weight-bold subtitle-2">{{name}}</v-card-title>
