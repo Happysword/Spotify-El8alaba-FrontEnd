@@ -28,6 +28,7 @@ describe('PlaylistCard.vue Component', () => {
   });
 
   const data = wrapper.vm.$data;
+  wrapper.vm.$props.songsNum = 1;
 
   test('renders a vue instance', () => {
     expect(mount(PlaylistCard).isVueInstance()).toBe(true);

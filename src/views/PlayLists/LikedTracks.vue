@@ -97,7 +97,7 @@ export default {
         return;
       }
       if (this.listInfo.images.length === 0) {
-        this.listInfo.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
+        this.listInfo.images = [{ url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/240px-Spotify_logo_without_text.svg.png' }];
       }
       // console.log(this.songs);
       // console.log(this.listInfo);

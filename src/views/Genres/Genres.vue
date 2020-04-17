@@ -65,7 +65,7 @@ export default {
       console.log('ana hna');
       console.log(this.category);
       if (this.category !== undefined && this.category !== {}) {
-        if (this.category.icons && !this.test) {
+        if (this.category.icons && this.category.icons.length && !this.test) {
           const result = await analyze(this.category.icons[0].url);
           EventBus.$emit('changeColor', result[100].color);
         }
