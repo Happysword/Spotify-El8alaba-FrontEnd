@@ -1,14 +1,162 @@
 <template>
-    <p class="headline">Notification Settings</p>
+<v-app>
+<v-content class="grey lighten-4 pa-0 pa-sm-8">
+<!-- Root Container -->
+<v-container id="Notification Settings_root">
+  <p id="title"
+     class="spotify-green headline pt-6 pl-3 mb-12 d-none d-sm-flex">
+    Notification settings
+  </p>
+
+  <v-card flat id="formCard"
+          class="pa-4 pb-8 pa-sm-12">
+    <!-- Header row -->
+    <v-row id="infoBar">
+      <v-col cols="6">
+        <p class="title font-weight-bold">
+          Your Music
+        </p>
+      </v-col>
+      <v-spacer></v-spacer>
+      <v-col cols="2" id="emailColumn" class="low-opacity text-center pa-0 ma-0 mt-1">
+        <v-icon>mdi-email</v-icon>
+        <p class="subtitle-1">EMAIL</p>
+      </v-col>
+      <v-col cols="2" id="pushColumn" class="low-opacity text-center pa-0 ma-0 mt-1">
+        <v-icon>mdi-cellphone-sound</v-icon>
+        <p class="subtitle-1">PUSH</p>
+      </v-col>
+    </v-row>
+    <!-- Settings -->
+    <v-col>
+      <template v-for="(setting, key, i) in settings">
+        <v-row :key="`row-${i}`" :class="
+                  $vuetify.breakpoint.mdAndUp
+                  ? (i % 2 ? 'pa-4': 'pa-4 grey lighten-4')
+                  : ('')
+                ">
+          <!-- Information -->
+          <v-col cols="6" :id="`${key}Text`" class="pa-0 ma-0 mt-4 mb-n3">
+            <p class="subtitle-1 mb-0">
+              {{ setting.title }}
+            </p>
+            <p class="d-none d-md-flex grey--text caption">
+              {{ setting.description }}
+            </p>
+          </v-col>
+          <v-spacer></v-spacer>
+          <!-- Checkboxes -->
+          <v-col cols="2">
+            <v-checkbox :id="`${key}Email`"
+                        color="#1DB954"
+                        class="checkbox-centered"
+                        v-model="setting.checked.email">
+            </v-checkbox>
+          </v-col>
+          <v-col cols="2">
+            <v-checkbox :id="`${key}Push`"
+                        color="#1DB954"
+                        class="checkbox-centered"
+                        v-model="setting.checked.push">
+            </v-checkbox>
+          </v-col>
+        </v-row>
+        <hr class="lower-opacity mx-n4 mt-n2 d-flex d-md-none" :key="`hr-${i}`"/>
+      </template>
+    </v-col>
+    <!-- Buttons -->
+    <v-row justify="end">
+      <router-link to="/account/overview">
+        <v-btn id="cancelBtn" class="mr-4" text rounded>
+          Cancel
+        </v-btn>
+      </router-link>
+      <v-btn id="saveBtn"
+             class="mr-4" color="#1DB954" rounded dark
+             @click="submit">
+        Save
+      </v-btn>
+    </v-row>
+  </v-card>
+</v-container>
+</v-content>
+</v-app>
+
 </template>
 
 <script>
+/**
+ * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'NotificationSettings',
   data: () => ({
+    settings: {
+      recommended: {
+        title: 'Recommended Music',
+        description: 'Music we find that we think you\'ll like',
+        checked: { email: false, push: false },
+      },
+      new: {
+        title: 'New Music',
+        description: 'Fresh tracks from artists you follow or might like',
+        checked: { email: false, push: false },
+      },
+      playlist: {
+        title: 'Playlist Updates',
+        description: 'A playlist you follow is updated',
+        checked: { email: false, push: false },
+      },
+      concert: {
+        title: 'Concert Notifications',
+        description: 'Updates about life shows by artists you like, in places near you',
+        checked: { email: false, push: false },
+      },
+      artist: {
+        title: 'Artist Updates',
+        description: 'Hear about artists you listen to and artists we think you\'ll like',
+        checked: { email: false, push: false },
+      },
+    },
   }),
+  methods: {
+    submit() {
+      Object.keys(this.settings).forEach((setting) => {
+        console.log(
+          this.settings[setting].title,
+          this.settings[setting].checked.email,
+          this.settings[setting].checked.push,
+        );
+      });
+    },
+  },
 };
+
 </script>
 
 <style lang="css" scoped>
+a {
+  text-decoration: none !important;
+}
+
+.checkbox-centered {
+  margin: auto !important;
+  left: 50%;
+  position: relative;
+}
+.smaller-text {
+  font-size: 13px !important;
+}
+
+.low-opacity {
+  opacity: 0.7 !important ;
+}
+
+.lower-opacity {
+  opacity: 0.4 !important;
+}
+
+.spotify-green {
+  color: #1DB954 !important;
+}
 </style>

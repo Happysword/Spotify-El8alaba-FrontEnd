@@ -1,14 +1,15 @@
 <template>
 <v-app>
-<v-content class="grey lighten-4 pa-8">
+<v-content class="grey lighten-4 pa-0 pa-sm-8">
 <!-- Root Container -->
 <v-container id="EditProfile_root">
   <p id="title"
-     class="spotify-green headline pt-6 pl-3 mb-12">
+     class="spotify-green headline pt-6 pl-3 mb-12 d-none d-sm-flex">
     Change your password
   </p>
 
-  <v-card flat id="formCard">
+  <v-card flat id="formCard"
+          class="pa-4 pb-8 pa-sm-12">
     <!-- Error bar -->
     <p
       id="errorBar"
@@ -18,7 +19,7 @@
     </p>
 
     <!-- Form -->
-    <v-form class="py-12 px-12" ref="changePasswordForm">
+    <v-form ref="changePasswordForm">
       <!-- Current password -->
       <v-text-field id="currentPwField"
                     color="#1DB954"
@@ -67,8 +68,7 @@
 
       <v-row justify="end">
         <router-link to="/account/overview">
-          <v-btn id="cancelBtn"
-                 class="mr-4" text rounded>
+          <v-btn id="cancelBtn" class="mr-4" text rounded>
             Cancel
           </v-btn>
         </router-link>

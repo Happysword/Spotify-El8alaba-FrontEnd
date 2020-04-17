@@ -24,7 +24,7 @@
             {{ entry.data }}
           </p>
         </v-row>
-        <v-divider class="mb-3"/>
+        <hr class="lower-opacity mx-n6 mt-0 mb-2" :key="i"/>
       </div>
     </v-col>
 
@@ -139,6 +139,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.lower-opacity {
+  opacity: 0.4 !important;
+}
+
 .purple-gradient {
   margin-top: 0px;
   background-color: #9C27B0;
