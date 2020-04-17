@@ -214,7 +214,6 @@ export default {
         this.$store.state.MusicPlayer.currentSongIndexinList = this.songindex;
       }
     },
-    // TODO[@Seif] check why seek bar doesnt work after sometime
     /**
      * Seeks the Bar of the Player to the Position clicked by the User
      */
@@ -282,6 +281,11 @@ export default {
           return data.currentlyPlaying;
         },
       );
+    }
+  },
+  beforeDestroy() {
+    if (this.$store.state.MusicPlayer.isPlaying === true) {
+      this.$store.dispatch('togglePlayact');
     }
   },
 };

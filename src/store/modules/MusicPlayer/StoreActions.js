@@ -25,7 +25,6 @@ export default {
       if (process.env.VUE_APP_API_CLIENT !== 'server') Response = true;
       // check if the response was correct
       if (Response === false) return;
-      // TODO[@Seif] remove later when naiera changes fetch currentplayback
       state.MusicPlayer.currentSong = await PlayerRequests.fetchCurrentPlayback().then(
         (data) => {
           if (data.currentlyPlaying.track === null) {
@@ -116,14 +115,19 @@ export default {
   /**
    *It changes the current Playback for a song played from a playlist
    * @param {*} VeuxStore the current store used for the app
-   * @param {*} param an On=bject containing the current state of playback and the song to be played
+   * @param {*} param an Object containing the current state of playback and the song to be played
+   * it has song, currentList and playstatus
    */
   async playpauseplaylist({ state, dispatch }, param) {
+    if (param.song !== undefined && param.currentList !== undefined) {
+      state.MusicPlayer.currentSong = param.song;
+      state.MusicPlayer.currentList = param.currentList;
+      state.MusicPlayer.currentSongIndexinList = param.currentList.indexOf(param.song);
+    }
     if (param.playstatus === true && param.song === state.MusicPlayer.currentSong) {
       state.MusicPlayer.isFirstPlay = true;
       state.MusicPlayer.isPlaying = false;
       state.MusicPlayer.AudioPlayer.pause();
-      state.MusicPlayer.unShuffledList = state.MusicPlayer.currentList;
       dispatch('togglePlayact');
     } else {
       state.MusicPlayer.isPlaying = true;

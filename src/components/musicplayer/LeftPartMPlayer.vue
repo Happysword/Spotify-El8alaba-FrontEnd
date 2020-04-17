@@ -181,6 +181,8 @@ export default {
         this.canvas.getContext('2d').drawImage(img, x, y, img.width * scale, img.height * scale);
         await this.video.play();
         await this.video.requestPictureInPicture().catch();
+        navigator.mediaSession.setActionHandler('play', () => {});
+        navigator.mediaSession.setActionHandler('pause', () => {});
         this.hoverPic = true;
       } else {
         document.exitPictureInPicture().catch();

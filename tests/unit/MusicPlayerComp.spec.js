@@ -61,6 +61,12 @@ describe('Testing the player components', () => {
       writable: true,
       value: jest.fn().mockImplementation(() => Promise.resolve()),
     });
+    Object.defineProperty(window.navigator, 'mediaSession', {
+      writable: true,
+      value: {
+        setActionHandler: jest.fn(),
+      },
+    });
     const wrapper = shallowMount(LMPlayer, {
       localVue,
       store,
