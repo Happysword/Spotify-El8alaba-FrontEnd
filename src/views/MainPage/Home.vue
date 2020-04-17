@@ -139,13 +139,19 @@ export default {
     this.getCategories();
   },
   methods: {
+    /**
+     * Route to Genre page
+     * @param Object category object
+     */
     click(category) {
       if (category.playlists.length >= 1) {
         // eslint-disable-next-line no-underscore-dangle
         this.$router.push(`/genre/${category._id}-page`);
       }
     },
-
+    /**
+     * Get list of Categories
+     */
     async getCategories() {
       this.categories = await server.fetchGenres();
     },
