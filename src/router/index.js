@@ -1,3 +1,4 @@
+import api from 'api-client';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Main from '../views/MainPage/Main.vue';
@@ -41,6 +42,7 @@ const routes = [
     path: '/home',
     name: 'Main',
     component: Main,
+    meta: { refreshCurrentUser: true },
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
@@ -126,6 +128,12 @@ const routes = [
     meta: { title: 'Spotify El8alaba - Reset your password' },
   },
   {
+    path: '/logout',
+    name: 'LogOut',
+    component: LogOut,
+    meta: { title: 'Spotify El8alaba - Log out' },
+  },
+  {
     path: '/account',
     name: 'Account',
     component: Account,
@@ -157,12 +165,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/logout',
-    name: 'LogOut',
-    component: LogOut,
-    meta: { title: 'Spotify El8alaba - Log out' },
-  },
 ];
 
 const router = new VueRouter({
@@ -171,6 +173,36 @@ const router = new VueRouter({
   routes,
 });
 
+/**
+ * Refreshes the data stored in localStorage on route enter
+ */
+router.beforeEach(async (to, from, next) => {
+  const refresh = to.matched.some((m) => m.meta.refreshCurrentUser);
+  if (refresh) {
+    const tokenRes = await api.fetchToken();
+    const profileRes = await api.getCurrentUserProfile();
+    if (tokenRes.status === 200 && profileRes.status === 200) {
+      // Processing different user types
+      const currentUser = { token: tokenRes.data.token, data: profileRes.data };
+      if (currentUser.data.userInfo) {
+        Object.keys(currentUser.data.userInfo).forEach((key) => {
+          currentUser.data[key] = currentUser.data.userInfo[key];
+        });
+      }
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+      next();
+    } else {
+      // eslint-disable-next-line no-alert
+      alert(`${tokenRes.data.message || profileRes.data.message}\nYou will now be redirected.`);
+      const { status } = await api.logoutUser();
+      if (status === 200) next('/');
+    }
+  } else next();
+});
+
+/**
+ * Adjusts each route's title in the browser
+ */
 router.afterEach((to) => {
   const defaultTitle = 'Spotify El8alaba';
   Vue.nextTick(() => {
