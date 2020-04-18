@@ -121,9 +121,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
 import notePic from '../../assets/imgs/MusicNote.png';
-
 /* eslint-disable no-underscore-dangle */
 /**
  *
@@ -144,6 +144,7 @@ export default {
     /**
      *Changes the Like State of the Song In the Player and sends the request to the server
      */
+    ...mapActions(['togglePlayact']),
     async changeHeart() {
       let R;
       if (this.heartcolor) {
@@ -181,8 +182,8 @@ export default {
         this.canvas.getContext('2d').drawImage(img, x, y, img.width * scale, img.height * scale);
         await this.video.play();
         await this.video.requestPictureInPicture().catch();
-        navigator.mediaSession.setActionHandler('play', () => {});
-        navigator.mediaSession.setActionHandler('pause', () => {});
+        navigator.mediaSession.setActionHandler('play', () => { this.togglePlayact(); this.video.play(); });
+        navigator.mediaSession.setActionHandler('pause', () => { this.togglePlayact(); this.video.pause(); });
         this.hoverPic = true;
       } else {
         document.exitPictureInPicture().catch();

@@ -1,104 +1,84 @@
 [
   {
-    "timestamp": 1583488271911,
-    "context": {
-      "external_urls": {
-        "spotify": "https://open.spotify.com/playlist/37i9dQZF1DXd3AhRYJnfcl"
-      },
-      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DXd3AhRYJnfcl",
-      "type": "playlist",
-      "uri": "spotify:playlist:37i9dQZF1DXd3AhRYJnfcl"
-    },
-    "progress_ms": 28580,
-    "currentlyPlaying": {
-    "track": {
-      "album": {
-        "album_type": "album",
+    "currentlyPlaying" :{
+      "track": {
+        "_id": "5e8be63be23a0232089b6843",
         "artists": [
           {
-            "external_urls": {
-              "spotify": "https://open.spotify.com/artist/2Wk167T0fY1fABsHM5qFcI"
+            "id": "5e8be2a8e23a0232089b683f",
+            "external_urls": [],
+            "genres": [],
+            "albums": [
+              "5e8be5f7e23a0232089b6842"
+            ],
+            "userInfo": {
+              "_id": "5e8be2a8e23a0232089b683e",
+              "type": "artist",
+              "product": "free",
+              "image": null,
+              "online": false,
+              "active": true,
+              "currentlyPlaying": {
+                "track": "5e8be63be23a0232089b6843",
+                "timestamp": "2020-04-07T02:43:17.626Z",
+                "repeat_state": false,
+                "shuffle_state": false,
+                "volume_percent": 60,
+                "is_playing": false,
+                "progress_ms": 0
+              },
+              "followers": 0,
+              "following": [],
+              "name": "I'm an-artist",
+              "email": "artist1@spotify.com",
+              "password": "$2a$12$fQSo6EUdvbmDaUz2jHZtluTt5UK6qrxGPbHmIKv2B2zrRDw.rOukK",
+              "gender": "m",
+              "birthdate": "1999-05-09T21:00:00.000Z",
+              "country": "EG",
+              "devices": [],
+              "followedPlaylists": [],
+              "__v": 0
             },
-            "href": "https://api.spotify.com/v1/artists/2Wk167T0fY1fABsHM5qFcI",
-            "id": "2Wk167T0fY1fABsHM5qFcI",
-            "name": "Sherine",
-            "type": "artist",
-            "uri": "spotify:artist:2Wk167T0fY1fABsHM5qFcI"
+            "followers": [],
+            "images": [],
+            "__v": 1
           }
         ],
-        "available_markets": [
-          "AD"
-        ],
-        "external_urls": {
-          "spotify": "https://open.spotify.com/album/1aCq7XjXXVc3WxPYYUrbeP"
+        "disc_number": 1,
+        "external_urls": [],
+        "name": "Faded",
+        "album": {
+          "id": "5e8be5f7e23a0232089b6842",
+          "artists": [
+            "5e8be2a8e23a0232089b683f"
+          ],
+          "genres": [
+            "Rock",
+            "jazz"
+          ],
+          "tracks": [
+            "5e8be63be23a0232089b6843",
+            "5e8bf2f0eba6940f20943a79"
+          ],
+          "album_type": "album",
+          "label": "albumLabel",
+          "name": "Faded album",
+          "release_date": "2020-04-07T02:31:19.683Z",
+          "images": [],
+          "__v": 4
         },
-        "href": "https://api.spotify.com/v1/albums/1aCq7XjXXVc3WxPYYUrbeP",
-        "id": "1aCq7XjXXVc3WxPYYUrbeP",
-        "images": [
-          {
-            "height": 640,
-            "url": "https://i.scdn.co/image/ab67616d0000b273cfa4e906cda39d8f62fe81e3",
-            "width": 640
-          },
-          {
-            "height": 300,
-            "url": "https://i.scdn.co/image/ab67616d00001e02cfa4e906cda39d8f62fe81e3",
-            "width": 300
-          },
-          {
-            "height": 64,
-            "url": "https://i.scdn.co/image/ab67616d00004851cfa4e906cda39d8f62fe81e3",
-            "width": 64
-          }
-        ],
-        "name": "نساى",
-        "release_date": "2018-10-24",
-        "release_date_precision": "day",
-        "total_tracks": 12,
-        "type": "album",
-        "uri": "spotify:album:1aCq7XjXXVc3WxPYYUrbeP"
+        "duration_ms": 192000,
+        "explicit": false,
+        "track_number": 1,
+        "__v": 0,
+        "id": "5e8be63be23a0232089b6843"
       },
-      "artists": [
-        {
-          "external_urls": {
-            "spotify": "https://open.spotify.com/artist/2Wk167T0fY1fABsHM5qFcI"
-          },
-          "href": "https://api.spotify.com/v1/artists/2Wk167T0fY1fABsHM5qFcI",
-          "id": "2Wk167T0fY1fABsHM5qFcI",
-          "name": "Sherine",
-          "type": "artist",
-          "uri": "spotify:artist:2Wk167T0fY1fABsHM5qFcI"
-        }
-      ],
-      "available_markets": [
-        "AD"
-      ],
-      "disc_number": 1,
-      "duration_ms": 197302,
-      "explicit": false,
-      "external_ids": {
-        "isrc": "EGA071800041"
-      },
-      "external_urls": {
-        "spotify": "https://open.spotify.com/track/2AVA6NJZXA7UERS5nnsTzz"
-      },
-      "href": "https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3", 
-      "id": "2AVA6NJZXA7UERS5nnsTzz",
-      "is_local": false,
-      "name": "نساى",
-      "popularity": 45,
-      "preview_url": "https://p.scdn.co/mp3-preview/29df7126bd8709e86840947208e906079e8eb533?cid=774b29d4f13844c495f206cafdad9c86",
-      "track_number": 1,
-      "type": "track",
-      "uri": "spotify:track:2AVA6NJZXA7UERS5nnsTzz"
+      "timestamp": "2020-04-07T02:43:17.626Z",
+      "repeat_state": false,
+      "shuffle_state": false,
+      "volume_percent": 60,
+      "is_playing": false,
+      "progress_ms": 0
     }
-  },
-    "currently_playing_type": "track",
-    "actions": {
-      "disallows": {
-        "resuming": true
-      }
-    },
-    "is_playing": true
   }
 ]
