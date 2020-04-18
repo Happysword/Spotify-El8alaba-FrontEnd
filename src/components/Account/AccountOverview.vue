@@ -4,7 +4,7 @@
   <!-- Title -->
   <p id="title"
      class="display-2 font-weight-bold pt-6 pl-3 mb-12">
-    Account Overview
+    Account overview
   </p>
 
   <!-- Main column -->
@@ -24,7 +24,7 @@
             {{ entry.data }}
           </p>
         </v-row>
-        <v-divider class="mb-3"/>
+        <hr class="lower-opacity mx-n6 mt-0 mb-2" :key="i"/>
       </div>
     </v-col>
 
@@ -127,13 +127,22 @@ export default {
       this.plan = userProfile.product;
     } else {
       // eslint-disable-next-line no-alert
-      alert('No user is currently logged in');
+      alert(`${response.data.message}\nYou will now be redirected.`);
+
+      const { status } = await api.logoutUser();
+      if (status === 200) {
+        this.$router.push('/');
+      }
     }
   },
 };
 </script>
 
 <style lang="css" scoped>
+.lower-opacity {
+  opacity: 0.4 !important;
+}
+
 .purple-gradient {
   margin-top: 0px;
   background-color: #9C27B0;

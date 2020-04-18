@@ -1,31 +1,35 @@
 <template>
 <v-app>
-<v-content class="grey lighten-4 pa-8">
+<v-content class="grey lighten-4 pa-0 pa-sm-8">
 <!-- Root Container -->
 <v-container id="EditProfile_root">
   <p id="title"
-     class="spotify-green headline pt-6 pl-3 mb-12">
-    Edit Profile
+     class="spotify-green headline pt-6 pl-3 mb-12 d-none d-sm-flex">
+    Edit profile
   </p>
 
-  <v-card flat id="formCard">
+  <v-card flat id="formCard"
+          class="pa-4 pb-8 pa-sm-12">
     <!-- Error bar -->
     <p
       id="errorBar"
       class="caption red darken-1 white--text text-center py-3 mb-8"
       v-if="userInput.incorrect"
-      >Error. Please enter valid data.
+      >{{ userInput.incorrect }}
     </p>
 
     <!-- Form -->
-    <v-form class="py-12 px-12" ref="editProfileForm">
+    <v-form ref="editProfileForm">
       <!-- Name -->
       <v-text-field id="nameField"
                     color="#1DB954"
                     outlined
                     label="Name"
                     v-model="userInput.name"
-                    :rules="[validation.noSpecialCharacters('Name', true)]"/>
+                    :rules="[
+                      validation.noSpecialCharacters('Name', true),
+                      validation.validName(true),
+                    ]"/>
 
       <!-- Gender -->
       <v-select id="genderSelect"
@@ -85,8 +89,7 @@
                     :rules="[validation.validMobilePhoneNumber(true)]"/>
       <v-row justify="end">
         <router-link to="/account/overview">
-          <v-btn id="cancelBtn"
-                 class="mr-4" text rounded>
+          <v-btn id="cancelBtn" class="mr-4" text rounded>
             Cancel
           </v-btn>
         </router-link>
@@ -146,10 +149,23 @@ export default {
       { text: 'Male', value: 'm' },
       { text: 'Female', value: 'f' },
     ],
-    // @todo[XL3] Add more countries
     countries: [
+      { text: 'Algeria', value: 'DZ' },
+      { text: 'Bahrain', value: 'BH' },
       { text: 'Egypt', value: 'EG' },
-      { text: 'Sweden', value: 'SE' },
+      { text: 'Iraq', value: 'IQ' },
+      { text: 'Jordan', value: 'JO' },
+      { text: 'Kuwait', value: 'KW' },
+      { text: 'Lebanon', value: 'LB' },
+      { text: 'Libya', value: 'LY' },
+      { text: 'Morocco', value: 'MA' },
+      { text: 'Oman', value: 'OM' },
+      { text: 'Saudi Arabia', value: 'SA' },
+      { text: 'Sudan', value: 'SD' },
+      { text: 'Syria', value: 'SY' },
+      { text: 'Tunisia', value: 'TN' },
+      { text: 'United Arab Emirates', value: 'AE' },
+      { text: 'Yemen', value: 'YE' },
     ],
     userInput: {
       name: '',
@@ -168,7 +184,6 @@ export default {
   methods: {
     /**
      * Submits input and edits the user's profile
-     * @todo[XL3] Implement this after reaching out to backend
      */
     async submit() {
       if (!this.$refs.editProfileForm.validate()) return;
@@ -189,7 +204,7 @@ export default {
       };
 
       // Collect edited data
-      // @todo[XL3] Add name
+      // @extra[XL3] Add name and avatar
       const editedData = {};
       Object.keys(this.userInput).forEach((key) => {
         if (this.userInput[key] !== '' && this.userInput[key] !== 'incorrect') {
@@ -214,11 +229,16 @@ export default {
         const userProfile = response.data;
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         currentUser.data = userProfile;
+        if (currentUser.data.userInfo) {
+          Object.keys(currentUser.data.userInfo).forEach((key) => {
+            currentUser.data[key] = currentUser.data.userInfo[key];
+          });
+        }
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
         this.$router.push({ name: 'AccountOverview' });
       } else {
-        this.userInput.incorrect = true;
+        this.userInput.incorrect = response.data.message;
       }
     },
   },

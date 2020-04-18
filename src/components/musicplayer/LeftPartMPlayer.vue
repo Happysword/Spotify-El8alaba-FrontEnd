@@ -213,7 +213,7 @@ export default {
     imgsrc() {
       if (this.$store.state.MusicPlayer.currentSong.track.album.images !== undefined
       && this.$store.state.MusicPlayer.currentSong.track.album.images[0] !== undefined) {
-        return this.$store.state.MusicPlayer.currentSong.track.album.images[0];
+        return this.$store.state.MusicPlayer.currentSong.track.album.images[0].url;
       }
       return notePic;
     },

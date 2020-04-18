@@ -3,11 +3,11 @@
 </template>
 
 <script>
+import api from 'api-client';
+
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
  */
-import api from 'api-client';
-
 export default {
   name: 'LogOut',
   /* istanbul ignore next */
@@ -28,9 +28,8 @@ export default {
   async mounted() {
     // Remove the current user
     // Remove all cookies
-    const response = await api.logoutUser();
-
-    if (response.status === 200) {
+    const { status } = await api.logoutUser();
+    if (status === 200) {
       this.$router.push('/');
     }
   },

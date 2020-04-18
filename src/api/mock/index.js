@@ -71,10 +71,9 @@ export default {
     // Succeed if the user is found
     return {
       status: found ? 200 : 400,
-      data: {
-        token: 'mock_token',
-        data: { user },
-      },
+      data: found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
     };
   },
 
@@ -201,49 +200,53 @@ export default {
 
     // Search all users for our user
     let found = false;
+    let user = {};
+
     allUsers.some((u) => {
       if (u.user.email === body.email) {
         found = true;
-        // Set the loggedIn cookie
-        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
-        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
       }
       // Breaking condition
       return u.user.email === body.email;
     });
 
-    // Add the user data to the mock database
-    const user = {
-      type: 'user',
-      product: 'free',
-      image: null,
-      currentlyPlaying: null,
-      followers: null,
-      _id: '5e6b95fda1903935ccb355a3',
-      name: body.name,
-      email: body.email,
-      gender: body.gender,
-      birthdate: new Date(`${body.birthdate} GMT+0`),
-      country: 'EG',
-      devices: [],
-      __v: 0,
-      uri: 'spotify:user:5e6b95fda1903935ccb355a3',
-      id: '5e6b95fda1903935ccb355a3',
-    };
+    if (!found) {
+      // Set the loggedIn cookie
+      const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+      document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
+
+      // Add the user data to the mock database
+      user = {
+        type: 'user',
+        product: 'free',
+        image: null,
+        currentlyPlaying: null,
+        followers: null,
+        _id: '5e6b95fda1903935ccb355a3',
+        name: body.name,
+        email: body.email,
+        gender: body.gender,
+        birthdate: new Date(`${body.birthdate} GMT+0`),
+        country: 'EG',
+        devices: [],
+        __v: 0,
+        uri: 'spotify:user:5e6b95fda1903935ccb355a3',
+        id: '5e6b95fda1903935ccb355a3',
+      };
+    }
 
     // Succeed if the user isn't found
     return {
       status: !found ? 200 : 400,
-      data: {
-        token: 'mock_token',
-        data: { user },
-      },
+      data: !found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
     };
   },
 
   /**
    * Fetches all users in the mock data and ensures that a certain user is among them
-   * @param  {Object} body The user's signup data
+   * @param  {Object} body The user's email
    * @return {Object}      The corresponding response
    */
   async forgotPassword(body) {
@@ -261,7 +264,81 @@ export default {
     });
 
     // Succeed if the user is found
-    return { status: found ? 200 : 400 };
+    return {
+      status: found ? 200 : 400,
+      data: found
+        ? undefined
+        : { message: 'Error. Something went wrong.' },
+    };
+  },
+
+  /**
+   * Fetches all users in the mock data and ensures that a certain user is among them
+   * @param  {Object} body  The user's password and its confirmation
+   * @param  {Object} token The mock token
+   * @return {Object}       The corresponding response
+   */
+  async resetPassword(body, token) {
+    // Get all users
+    const allUsers = await fetch(users, 50);
+
+    // Search all users for our user
+    let found = false;
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.password === body.password) {
+        found = true;
+        user = u.user;
+        // Set the loggedIn cookie
+        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
+      }
+      // Breaking condition
+      return u.password === body.password;
+    });
+
+    // Succeed if the user is found
+    return {
+      status: found ? 200 : 400,
+      data: found
+        ? { token, data: { user } }
+        : { message: 'Error. Something went wrong.' },
+    };
+  },
+
+  /**
+   * Fetches all users in the mock data and ensures that a certain user is among them
+   * @param  {Object} body  The user's current password, new password and its confirmation
+   * @return {Object}       The corresponding response
+   */
+  async updatePassword(body) {
+    // Get all users
+    const allUsers = await fetch(users, 50);
+
+    // Search all users for our user
+    let found = false;
+    let user = {};
+
+    allUsers.some((u) => {
+      if (u.password === body.password) {
+        found = true;
+        user = u.user;
+        // Set the loggedIn cookie
+        const expiryDate = new Date(Date.now() + 90 * (24 * 60 * 60 * 1000));
+        document.cookie = `loggedIn=true; expires=${expiryDate.toUTCString()}; path=/;`;
+      }
+      // Breaking condition
+      return u.password === body.password;
+    });
+
+    // Succeed if the user is found
+    return {
+      status: found ? 200 : 400,
+      data: found
+        ? { token: 'mock_token', data: { user } }
+        : { message: 'Error. Something went wrong.' },
+    };
   },
 
   /**
@@ -271,7 +348,12 @@ export default {
   async getCurrentUserProfile() {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     /* istanbul ignore next */
-    if (!currentUser) return { status: 404 };
+    if (!currentUser) {
+      return {
+        status: 404,
+        data: { message: 'Error. Something went wrong.' },
+      };
+    }
 
     const user = await fetch(currentUser.data, 50);
 
@@ -289,7 +371,12 @@ export default {
   async editProfile(data) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     /* istanbul ignore next */
-    if (!currentUser) return { status: 404 };
+    if (!currentUser) {
+      return {
+        status: 404,
+        data: { message: 'Error. Something went wrong.' },
+      };
+    }
 
     // Set each key
     Object.keys(data).forEach((key) => {
@@ -816,3 +903,4 @@ export default {
     return { status: 0 };
   },
 };
+/* eslint-enable consistent-return */

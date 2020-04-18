@@ -66,7 +66,7 @@
             </v-tabs>
           </v-col>
 
-          <v-col class="pl-0">
+          <v-col class="px-0">
             <v-tabs id="tabs"
                     v-if="$vuetify.breakpoint.smAndDown"
                     v-model="currentTab"
