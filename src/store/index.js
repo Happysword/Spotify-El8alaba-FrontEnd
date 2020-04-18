@@ -25,6 +25,7 @@ export default new Vuex.Store({
       volumePercent: 100,
       isPlaying: false,
       currentSongTime: '0:00',
+      ID: '',
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
       AudioPlayer: new Audio('http://soundbible.com/grab.php?id=2108&type=wav'),
