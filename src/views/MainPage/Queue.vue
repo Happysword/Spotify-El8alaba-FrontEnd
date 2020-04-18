@@ -1,7 +1,7 @@
 <template>
   <div id="queue-main">
     <v-container class="ml-5">
-      <v-row no-gutters>
+      <v-row no-gutters v-if = "$store.state.MusicPlayer.currentSong != false">
         <v-col cols="12">
           <h1 class="header-one header mb-0">
             Play Queue

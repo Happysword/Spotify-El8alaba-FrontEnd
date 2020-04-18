@@ -430,6 +430,17 @@ export default {
   },
 
   /**
+   * Check if the User Likes a certain Track
+   * @param {string} ID the id of the track to be checked
+   * @return {Boolean} a Boolean of the State of the track false if failed
+   */
+  async checkLiked(ID) {
+    if (ID) {
+      return fetch(true, 1000).then((Promisedata) => Promisedata);
+    }
+  },
+
+  /**
    * Fetches all genres in the mock data
    * @return {object} an object that contains all genres in the mock data
    */

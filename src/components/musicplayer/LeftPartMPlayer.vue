@@ -15,22 +15,20 @@
             v-if="!$store.state.MusicPlayer.navBarImage"
           >
             <router-link
-              :to="
-                '/album/' +
-                  $store.state.MusicPlayer.currentSong.track.album.id
-              "
+              :to="albumid"
               tag="button"
               :disabled="isLinkDisabled"
               id="image-album"
             >
-            <!-- TODO[@Seif] add images from back later -->
+              <!-- TODO[@Seif] add images from back later -->
               <v-img
                 max-height="60"
                 max-width="60"
-                src= 'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
+                :src="imgsrc"
                 contain
                 @mouseenter="imageButton = true"
                 @mouseleave="imageButton = false"
+                id = "inner-image-album"
               >
                 <v-icon
                   color="grey"
@@ -50,26 +48,17 @@
           <v-flex align-self-center shrink class="mx-2">
             <v-layout justify-center align-center column>
               <router-link
-                :to="
-                  '/album/' +
-                    $store.state.MusicPlayer.currentSong.track.album.id
-                "
+                :to="albumid"
                 id="song-name"
               >
                 {{ $store.state.MusicPlayer.currentSong.track.name }}
               </router-link>
 
               <router-link
-                :to="
-                  '/home/artist/' +
-                    $store.state.MusicPlayer.currentSong.track.artists[0]
-                "
+                :to="artistid"
                 id="artist-name"
               >
-                {{
-                  $store.state.MusicPlayer.currentSong.track.artists[0]
-                    .name
-                }}
+                {{ artistname }}
               </router-link>
             </v-layout>
           </v-flex>
@@ -97,7 +86,12 @@
             >
               mdi-heart
             </v-icon>
-            <v-snackbar v-model="snackbar" :timeout="timeout" color="#1DB954" id="snack-bar">
+            <v-snackbar
+              v-model="snackbar"
+              :timeout="timeout"
+              color="#1DB954"
+              id="snack-bar"
+            >
               <h3 class="white--text title font-weight-light mx-auto">
                 {{ text }}
               </h3>
@@ -127,7 +121,10 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
+import notePic from '../../assets/imgs/MusicNote.png';
+/* eslint-disable no-underscore-dangle */
 /**
  *
  */
@@ -140,13 +137,14 @@ export default {
     snackbar: false,
     text: '',
     timeout: 2000,
+    canvas: document.createElement('CANVAS'),
+    video: document.createElement('video'),
   }),
   methods: {
-    // TODO[@Seif] Change the heart from the liked songs request and change the playback id to song
-
     /**
-    *Changes the Like State of the Song In the Player and sends the request to the server
-    */
+     *Changes the Like State of the Song In the Player and sends the request to the server
+     */
+    ...mapActions(['togglePlayact']),
     async changeHeart() {
       let R;
       if (this.heartcolor) {
@@ -172,9 +170,82 @@ export default {
     /**
      *Changes Whether the pip shows or dissapears **still no implemented**
      */
-    changeHoverPic() {
-      this.hoverPic = !this.hoverPic; // implement this
+    async changeHoverPic() {
+      if (!this.hoverPic) {
+        const img = new Image();
+        img.crossOrigin = true;
+        img.src = this.imgsrc;
+        const scale = Math.min(this.canvas.width / img.width, this.canvas.height / img.height);
+        // get the top left position of the image
+        const x = (this.canvas.width / 2) - (img.width / 2) * scale;
+        const y = (this.canvas.height / 2) - (img.height / 2) * scale;
+        this.canvas.getContext('2d').drawImage(img, x, y, img.width * scale, img.height * scale);
+        await this.video.play();
+        await this.video.requestPictureInPicture().catch();
+        navigator.mediaSession.setActionHandler('play', () => { this.togglePlayact(); this.video.play(); });
+        navigator.mediaSession.setActionHandler('pause', () => { this.togglePlayact(); this.video.pause(); });
+        this.hoverPic = true;
+      } else {
+        document.exitPictureInPicture().catch();
+        this.hoverPic = false;
+      }
     },
+  },
+  computed: {
+    albumid() {
+      if (this.$store.state.MusicPlayer.currentSong.track.album._id !== undefined) {
+        return `/album/${this.$store.state.MusicPlayer.currentSong.track.album._id}`;
+      }
+      return `/album/${this.$store.state.MusicPlayer.currentSong.track.album.id}`;
+    },
+    artistid() {
+      if (this.$store.state.MusicPlayer.currentSong.track.artists[0].userInfo !== undefined) {
+        return `/home/artist/${this.$store.state.MusicPlayer.currentSong.track.artists[0].userInfo._id}`;
+      }
+      return `/home/artist/${this.$store.state.MusicPlayer.currentSong.track.artists.id}`;
+    },
+    artistname() {
+      if (this.$store.state.MusicPlayer.currentSong.track.artists[0].userInfo !== undefined) {
+        return this.$store.state.MusicPlayer.currentSong.track.artists[0].userInfo.name;
+      }
+      return '';
+    },
+    imgsrc() {
+      if (this.$store.state.MusicPlayer.currentSong.track.album.images !== undefined
+      && this.$store.state.MusicPlayer.currentSong.track.album.images[0] !== undefined) {
+        return this.$store.state.MusicPlayer.currentSong.track.album.images[0];
+      }
+      return notePic;
+    },
+  },
+  async updated() {
+    this.heartcolor = await PlayerRequests
+      .checkLiked(
+        this.$store.state.MusicPlayer.currentSong.track.id
+        // eslint-disable-next-line no-underscore-dangle
+        || this.$store.state.MusicPlayer.currentSong.track._id,
+      );
+  },
+  async created() {
+    this.heartcolor = await PlayerRequests
+      .checkLiked(
+        this.$store.state.MusicPlayer.currentSong.track.id
+        // eslint-disable-next-line no-underscore-dangle
+        || this.$store.state.MusicPlayer.currentSong.track._id,
+      );
+    this.video.addEventListener('enterpictureinpicture', () => {
+    // Video element entered Picture-In-Picture mode.
+      this.hoverPic = true;
+    });
+
+    this.video.addEventListener('leavepictureinpicture', () => {
+    // Video element left Picture-In-Picture mode.
+      this.hoverPic = false;
+    });
+    this.canvas.height = 1000;
+    this.canvas.width = 1000;
+    this.video.muted = true;
+    this.video.srcObject = this.canvas.captureStream();
   },
 };
 </script>

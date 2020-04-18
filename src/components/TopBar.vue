@@ -9,6 +9,7 @@
           id="left-chevron"
           class="mx-2 mt-2"
           @click="changeRoute(-1)"
+          :disabled="backwardstate"
         >
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
@@ -20,6 +21,7 @@
           class="mx-2 mt-2"
           id="right-chevron"
           @click="changeRoute(1)"
+          :disabled="backtimes == 0"
         >
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
@@ -54,41 +56,41 @@
           >
         </v-col>
         <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
-        <div class="text-center" id="user-btn">
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                rounded
-                depressed
-                color="#27272797"
-                v-on="on"
-                class=" text-user text-none ml-0"
-                small
-                id="inner-user-btn"
-                ><v-avatar size="25" class="mr-1 ml-0"
-                  ><v-img :src="UserInfo.photo"></v-img
-                ></v-avatar>
-                <div>
-                  {{ userName }}
-                </div>
-                <v-avatar size="20" class="mx-1">
-                  <v-icon>mdi-chevron-down</v-icon>
-                </v-avatar>
-              </v-btn>
-            </template>
+          <div class="text-center" id="user-btn">
+            <v-menu offset-y>
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  rounded
+                  depressed
+                  color="#27272797"
+                  v-on="on"
+                  class=" text-user text-none ml-0"
+                  small
+                  id="inner-user-btn"
+                  ><v-avatar size="25" class="mr-1 ml-0"
+                    ><v-img :src="UserInfo.photo"></v-img
+                  ></v-avatar>
+                  <div>
+                    {{ userName }}
+                  </div>
+                  <v-avatar size="20" class="mx-1">
+                    <v-icon>mdi-chevron-down</v-icon>
+                  </v-avatar>
+                </v-btn>
+              </template>
 
-            <v-list dense color="grey darken-4" dark>
-              <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
-                :to="item.route"
-                :id="item.id"
-              >
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </div>
+              <v-list dense color="grey darken-4" dark>
+                <v-list-item
+                  v-for="(item, index) in items"
+                  :key="index"
+                  :to="item.route"
+                  :id="item.id"
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </div>
         </v-col>
       </v-row>
     </v-container>
@@ -105,11 +107,14 @@ export default {
     if (!currentUser) return;
     if (!currentUser.data.image) return;
 
-    const { image: { url } } = currentUser.data;
+    const {
+      image: { url },
+    } = currentUser.data;
     if (url) this.UserInfo.photo = url;
   },
   data: () => ({
     input: '',
+    backtimes: 0,
     UserInfo: {
       name: 'John Doe',
       photo:
@@ -133,6 +138,9 @@ export default {
      * Changes the Route to forwad or backward for the Arrows
      */
     changeRoute(direction) {
+      if (direction === -1) {
+        this.backtimes += 1;
+      } else { this.backtimes -= 1; }
       this.$router.go(direction);
     },
     /**
@@ -155,6 +163,17 @@ export default {
         if (name === undefined) name = 'User';
         return name;
       },
+    },
+    backwardstate() {
+      if (
+        this.$store.state.prevRoute === '/login'
+        || this.$store.state.prevRoute === '/signup'
+        || this.$store.state.prevRoute === '/'
+        || this.$store.state.prevRoute === '/account/overview'
+      ) {
+        return true;
+      }
+      return false;
     },
   },
 };

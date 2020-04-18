@@ -174,4 +174,17 @@ export default {
     }
     return false;
   },
+
+  /**
+   * Check if the User Likes a certain Track
+   * @param {string} ID the id of the track to be checked
+   * @return {Boolean} a Boolean of the State of the track false if failed
+   */
+  async checkLiked(ID) {
+    if (typeof ID === 'string') {
+      const response = await client.checkLiked(ID).then((Promisedata) => Promisedata);
+      return response;
+    }
+    return false;
+  },
 };

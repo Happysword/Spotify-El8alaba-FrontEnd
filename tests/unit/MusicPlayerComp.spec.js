@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
@@ -52,6 +53,20 @@ describe('Testing the player components', () => {
   describe('Testing LeftPartMPlayer component', () => {
     // Adding the store mock for the instance
 
+    Object.defineProperty(HTMLMediaElement.prototype, 'play', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => Promise.resolve()),
+    });
+    Object.defineProperty(HTMLCanvasElement.prototype, 'captureStream', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => Promise.resolve()),
+    });
+    Object.defineProperty(window.navigator, 'mediaSession', {
+      writable: true,
+      value: {
+        setActionHandler: jest.fn(),
+      },
+    });
     const wrapper = shallowMount(LMPlayer, {
       localVue,
       store,
@@ -75,15 +90,23 @@ describe('Testing the player components', () => {
     it('Change Heart Method test', async () => {
       expect(data.heartcolor).toBe(false);
       await wrapper.vm.changeHeart();
-      expect(data.heartcolor).toBe(true);
+      expect(data.heartcolor).toBe(false);
       await wrapper.vm.changeHeart();
       expect(data.heartcolor).toBe(false);
     });
-    it('ChangeHoverPic Method test', () => {
+    it('ChangeHoverPic Method test', async () => {
+      Object.defineProperty(window.HTMLVideoElement.prototype, 'requestPictureInPicture', {
+        writable: true,
+        value: jest.fn().mockImplementation(() => Promise.resolve()),
+      });
+      Object.defineProperty(window.document, 'exitPictureInPicture', {
+        writable: true,
+        value: jest.fn().mockImplementation(() => Promise.resolve()),
+      });
       expect(data.hoverPic).toBe(false);
-      wrapper.vm.changeHoverPic();
+      await wrapper.vm.changeHoverPic();
       expect(data.hoverPic).toBe(true);
-      wrapper.vm.changeHoverPic();
+      await wrapper.vm.changeHoverPic();
       expect(data.hoverPic).toBe(false);
     });
   });
