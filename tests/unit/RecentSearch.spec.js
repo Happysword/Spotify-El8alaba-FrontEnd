@@ -24,13 +24,17 @@ describe('testing Search', () => {
     expect(wrapper.vm.$data.RecentExist).toBe(false);
   });
   test('checking if the local storage has data', () => {
-    const SavedData = {};
-    SavedData.name = 'Godzilla (feat. Juice WRLD)';
-    SavedData.id = '7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.type = 'track';
-    SavedData.external_urls = { spotify: 'https://open.spotify.com/track/7FIWs0pqAYbP91WWM0vlTQ' };
-    SavedData.href = 'https://api.spotify.com/v1/tracks/7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.uri = 'spotify:track:7FIWs0pqAYbP91WWM0vlTQ';
+    const SavedData = [{}, {}];
+    const UserID = { data: { id: '123456' } };
+    localStorage.setItem('currentUser', JSON.stringify(UserID));
+    SavedData[0].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[0].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[0].UserID = '123456';
+    SavedData[0].type = 'track';
+    SavedData[1].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[1].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[1].UserID = '123456';
+    SavedData[1].type = 'track';
     localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
     const wrapper1 = shallowMount(Recent, {
       localVue,
@@ -41,13 +45,17 @@ describe('testing Search', () => {
     expect(wrapper1.vm.$data.Recent).toStrictEqual(data);
   });
   test('clearing Local storage', () => {
-    const SavedData = {};
-    SavedData.name = 'Godzilla (feat. Juice WRLD)';
-    SavedData.id = '7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.type = 'track';
-    SavedData.external_urls = { spotify: 'https://open.spotify.com/track/7FIWs0pqAYbP91WWM0vlTQ' };
-    SavedData.href = 'https://api.spotify.com/v1/tracks/7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.uri = 'spotify:track:7FIWs0pqAYbP91WWM0vlTQ';
+    const SavedData = [{}, {}];
+    const user = { data: { id: '123456' } };
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    SavedData[0].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[0].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[0].UserID = '123456';
+    SavedData[0].type = 'track';
+    SavedData[1].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[1].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[1].UserID = '123456';
+    SavedData[1].type = 'track';
     localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
     const wrapper1 = shallowMount(Recent, {
       localVue,

@@ -497,6 +497,23 @@
             "type": "album",
             "uri": "spotify:album:3qZ0kZ8d3F8EpvEyx0yemA"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b273d352e68d3f9ef21f6d167a96",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e02d352e68d3f9ef21f6d167a96",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d00004851d352e68d3f9ef21f6d167a96",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {
@@ -734,6 +751,23 @@
             "type": "album",
             "uri": "spotify:album:1qmAaW25CPUyam9Wrp9ZEu"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732a37edda69e67266f05a9753",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022a37edda69e67266f05a9753",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512a37edda69e67266f05a9753",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {
@@ -971,6 +1005,23 @@
             "type": "album",
             "uri": "spotify:album:1rhwjore04STMhDGzVvIeE"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2737e6e6d8ffdd9597a96ab019e",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e027e6e6d8ffdd9597a96ab019e",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048517e6e6d8ffdd9597a96ab019e",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {
@@ -1790,6 +1841,23 @@
             "type": "album",
             "uri": "spotify:album:4otkd9As6YaxxEkIjXPiZ6"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2732f44aec83b20e40f3baef73c",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e022f44aec83b20e40f3baef73c",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048512f44aec83b20e40f3baef73c",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {
@@ -2037,6 +2105,23 @@
             "type": "album",
             "uri": "spotify:album:105oUsR7H8AJNELy43XF3w"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b2735e045d1e56f161d40c9acf8d",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e025e045d1e56f161d40c9acf8d",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d000048515e045d1e56f161d40c9acf8d",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {
@@ -2274,6 +2359,23 @@
             "type": "album",
             "uri": "spotify:album:1T2uKSyUf7DBWOABtsmYLM"
           },
+          "images": [
+            {
+              "height": 640,
+              "url": "https://i.scdn.co/image/ab67616d0000b27313c4ca893a92d3a81e0cb3e8",
+              "width": 640
+            },
+            {
+              "height": 300,
+              "url": "https://i.scdn.co/image/ab67616d00001e0213c4ca893a92d3a81e0cb3e8",
+              "width": 300
+            },
+            {
+              "height": 64,
+              "url": "https://i.scdn.co/image/ab67616d0000485113c4ca893a92d3a81e0cb3e8",
+              "width": 64
+            }
+          ],
           "artists": [
             {
               "external_urls": {

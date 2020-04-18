@@ -14,21 +14,14 @@
          <song-card v-if="d.type != 'artist'"
           :id="d.id"
           :name="d.name"
-          :description="d.description"
           :images="d.images"
           :type="d.type"
-          :collaborative="d.collaborative"
-          :external_urls="d.external_urls"
-          :href="d.href"
-          :public="d.public"
-          :snapshot_id="d.snapshot_id"
-          :uri="d.uri"></song-card>
+          ></song-card>
          <artist-card v-if="d.type == 'artist'"
           :id="d.id"
           :profileName="d.name"
           :images="d.images"
           :type="d.type"
-          :href="d.href"
         ></artist-card>
          </v-col>
     </v-row>
@@ -64,9 +57,16 @@ export default {
     },
   },
   created() {
-    this.Recent = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
-    if (this.Recent.length !== 0) {
-      this.RecentExist = true;
+    const temp = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
+    if (temp.length !== 0) {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      for (let i = 0; i < temp.length; i += 1) {
+        if (user.data.id === temp[i].UserID) {
+          this.Recent.push(temp[i]);
+        }
+        // eslint-disable-next-line no-unused-expressions
+        this.Recent.length ? this.RecentExist = true : this.RecentExist = false;
+      }
     }
   },
 };

@@ -1,6 +1,6 @@
 <template>
 <v-card
-  class="d-block container"
+  class="container"
   dark
   flat
   @mouseover="overlay = true"
@@ -78,12 +78,12 @@ export default {
     clickArtist(y) {
       for (let i = 0; i < this.artists.length; i += 1) {
         if (y === this.artists[i].name) {
-          this.$router.push(`/home/artist/${this.artists[i].id}`);
+          this.$router.push(`/artist/${this.artists[i].id}`);
         }
       }
     },
     clickSong() {
-      this.$router.push(`/home/track/${this.albumID}?/highlight=${this.uri}`);
+      this.$router.push(`/track/${this.id}`);
     },
   },
 };
@@ -97,6 +97,8 @@ export default {
 .container{
   padding: 0px;
   margin: 3px;
+  max-width: 7  00px;
+  max-height: 100px;
 }
 .container:hover{
 background-color: #1a1a1a;
@@ -106,7 +108,6 @@ background-color: #1a1a1a;
   margin-left: 10px;
   font-size: large;
   font-weight: bold;
-  display: block;
 }
 .song:hover{
   cursor: pointer;
