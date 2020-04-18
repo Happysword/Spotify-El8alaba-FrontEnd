@@ -119,7 +119,7 @@ export default {
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
-          this.artist = response;
+          [this.artist] = response;
           this.checkImage();
         });
     },
