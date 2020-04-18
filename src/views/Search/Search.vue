@@ -36,7 +36,7 @@
         v-for="PGenre in PGenres" :key="PGenre._id">
           <pref
             class="mt-3"
-            :source="PGenre.icons[0].url"
+            :source="PGenre.icons[0]? PGenre.icons[0].url :'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
             :title="PGenre.name"
             :route="PGenre._id"
           ></pref>
@@ -50,7 +50,7 @@
       :key="genre._id">
       <Genres
         class="mt-3"
-        :source="genre.icons[0].url"
+        :source="genre.icons[0]? genre.icons[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
         :title="genre.name"
         :route="genre._id"
       ></Genres>
@@ -89,7 +89,9 @@ export default {
   methods: {
     async fetchAllGenres() {
       this.genres = await client.fetchGenres();
+      console.log(this.genres);
       if (this.genres.length > 0) {
+        console.log('ana gowa');
         this.genresExist = true;
       } else this.genres = {};
     },

@@ -630,7 +630,7 @@ export default {
    * @param {string} userID A user id
    * @param {string} token Token of the current user
    */
-  async fetchUserProfile(userID, token) {
+  async fetchaUserProfile(userID, token) {
     console.log(token);
     let dummy = userID || true;
     if (dummy) {

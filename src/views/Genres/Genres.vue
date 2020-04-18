@@ -65,7 +65,7 @@ export default {
       console.log('ana hna');
       console.log(this.category);
       if (this.category !== undefined && this.category !== {}) {
-        if (this.category.icons && !this.test) {
+        if (this.category.icons && this.category.icons[0] && !this.test) {
           const result = await analyze(this.category.icons[0].url);
           EventBus.$emit('changeColor', result[100].color);
         }
@@ -76,7 +76,7 @@ export default {
       // eslint-disable-next-line no-underscore-dangle
       this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.$route.params.id);
       // this.PopularPlaylists = this.category.playlists;
-      if (this.PopularPlaylists.length !== 0) {
+      if (this.PopularPlaylists) {
         this.PopularExist = true;
         if (this.PopularPlaylists.length > 6) {
           this.PPLength = 6;

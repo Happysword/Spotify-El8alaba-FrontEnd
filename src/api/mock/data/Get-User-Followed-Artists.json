@@ -2,7 +2,23 @@
    {
       "type": "artist",
       "product": "free",
-      "image": "https://i.scdn.co/image/2c8c0cea05bf3d3c070b7498d8d0b957c4cdec20",
+      "image": [
+         {
+            "height":640,
+            "url":"https://i.scdn.co/image/2c8c0cea05bf3d3c070b7498d8d0b957c4cdec20",
+            "width":640
+         },
+         {
+            "height":300,
+            "url":"https://mosaic.scdn.co/300/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+            "width":300
+         },
+         {
+            "height":60,
+            "url":"https://mosaic.scdn.co/60/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+            "width":60
+         }
+      ],
       "online": false,
       "active": true,
       "currentlyPlaying": {
@@ -32,7 +48,23 @@
    {
       "type": "artist",
       "product": "free",
-      "image": "https://i.scdn.co/image/ab67616d0000b2731a7d95b92e8a0efea1e84f1b",
+      "image": [
+         {
+            "height":640,
+            "url":"https://i.scdn.co/image/ab67616d0000b2731a7d95b92e8a0efea1e84f1b",
+            "width":640
+         },
+         {
+            "height":300,
+            "url":"https://mosaic.scdn.co/300/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+            "width":300
+         },
+         {
+            "height":60,
+            "url":"https://mosaic.scdn.co/60/e337f3661f68bc4d96a554de0ad7988d65edb25a134cd5ccaef9d411eba33df9542db9ba731aaf98ec04f9acee17a7576f939eb5aa317d20c6322494c4b4399d9b7c6f61b6a6ee70c616bc1a985c7ab8",
+            "width":60
+         }
+      ],
       "online": false,
       "active": true,
       "currentlyPlaying": {
