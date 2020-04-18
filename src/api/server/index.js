@@ -987,10 +987,7 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => {
-        console.log(response.data);
-        return response.data;
-      })
+      .then((response) => response.data)
       .catch((error) => console.log(error));
   },
   /**
@@ -1030,7 +1027,6 @@ export default {
  */
   async fetchSearch(search) {
     let q = search;
-    console.log(q);
     let z = 'track,artist,album,playlist,user';
     if (search.includes('tracks')) {
       z = 'track';
@@ -1079,7 +1075,10 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => response.data)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
       .catch((error) => console.log(error));
   },
 };

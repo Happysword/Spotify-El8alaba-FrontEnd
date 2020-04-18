@@ -54,7 +54,6 @@ const routes = [
       { path: '/home/search/:id/:type', name: 'searchType', component: SearchType },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
-      { path: '/profile/:id', name: 'profile' },
       { path: '/track/:id', name: 'track' },
       { path: '/home/user/:id', name: 'user', component: UserPage },
       {
