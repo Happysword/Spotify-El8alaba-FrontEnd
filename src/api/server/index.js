@@ -947,7 +947,7 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
+      .get(`${api}/api/v1/browse/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },

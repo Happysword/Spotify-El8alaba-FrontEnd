@@ -26,8 +26,11 @@
               {{ song.track.name }}
             </v-list-item-title>
             <v-list-item-subtitle class="grey--text mx-2 text text-truncate" id="songInfo">
-              {{ song.track.artists[0].name }}
-              <span v-if="listType !== 'album'"> . {{ song.track.album.name }}</span>
+              <span id="artist" @click="click('artist')">{{ song.track.artists[0].name }}</span>
+              <span id="album" v-if="listType !== 'album'"
+                @click="click('album')">
+                . {{ song.track.album.name }}
+              </span>
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -90,6 +93,14 @@ export default {
     dropDown,
   },
   methods: {
+    /**
+     * Route to artist/album page
+     * @param String type of routing page
+     */
+    click(type) {
+      if (type === 'album') this.$router.push(`/album/${this.song.track.album.id}`);
+      else this.$router.push(`/home/artist/${this.song.track.artists[0].id}`);
+    },
     /**
      * Change the song icon and color to play mode
      */
@@ -205,3 +216,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+#artist:hover,#album:hover {
+  color: rgba(255, 255, 255, 0.911);
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+</style>
