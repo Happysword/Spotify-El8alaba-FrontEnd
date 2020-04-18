@@ -947,7 +947,7 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(`${api}/api/v1/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
+      .get(`${api}/api/v1/browse/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
@@ -962,7 +962,6 @@ export default {
  */
   async fetchSearch(search) {
     let q = search;
-    console.log(q);
     let z = 'track,artist,album,playlist,user';
     if (search.includes('tracks')) {
       z = 'track';
@@ -1011,7 +1010,10 @@ export default {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
-      .then((response) => response.data)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
       .catch((error) => console.log(error));
   },
 };

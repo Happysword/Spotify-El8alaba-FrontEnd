@@ -7,7 +7,8 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 // import S from '@/api/mock/data/Search.json';
 import Client from '@/api/mock';
 
-
+const user = { data: { id: '123456' } };
+localStorage.setItem('currentUser', JSON.stringify(user));
 describe('testing Search', () => {
   Vue.use(Vuetify);
   const localVue = createLocalVue();
@@ -58,17 +59,10 @@ describe('testing Search', () => {
     expect(wrapper.vm.$data.top).toBe(wrapper.vm.$data.tracks[0] || wrapper.vm.$data.artists[0]);
   });
   test('click see all', async () => {
-    wrapper.find('#seeartists').trigger('mouseover');
-    expect(wrapper.vm.$data.typeToSee).toBe('artists');
-    wrapper.find('#seealbums').trigger('mouseover');
-    expect(wrapper.vm.$data.typeToSee).toBe('albums');
-    wrapper.find('#seeplaylists').trigger('mouseover');
-    expect(wrapper.vm.$data.typeToSee).toBe('playlists');
     wrapper.vm.$data.typeToSee = 'artists';
     wrapper.vm.spanClicked();
     expect(wrapper.vm.$route.path).toBe('/home/search/Godzilla/artists');
     wrapper.vm.$route.params.id = 'Godzilla';
-    console.log(wrapper.vm.$route);
     wrapper.vm.$data.typeToSee = 'albums';
     wrapper.vm.spanClicked();
     expect(wrapper.vm.$route.path).toBe('/home/search/Godzilla/albums');

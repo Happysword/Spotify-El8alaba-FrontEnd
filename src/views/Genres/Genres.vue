@@ -9,10 +9,18 @@
       <v-row>
         <v-col xs="12" sm="6" md="3" lg="2" v-for=" i in PPLength"
         :key="PopularPlaylists[i-1].id">
-          <SongCard :id="PopularPlaylists[i-1].id" :name="PopularPlaylists[i-1].name"
-                :description="PopularPlaylists[i-1].description"
-                :images="PopularPlaylists[i-1].images"
-                :type="PopularPlaylists[i-1].type"></SongCard>
+          <SongCard
+          :id="PopularPlaylists[i-1].id"
+          :name="PopularPlaylists[i-1].name"
+          :description="PopularPlaylists[i-1].description"
+          :images="PopularPlaylists[i-1].images"
+          :type="PopularPlaylists[i-1].type"
+          :collaborative="PopularPlaylists[i-1].collaborative"
+          :external_urls="PopularPlaylists[i-1].external_urls"
+          :href="PopularPlaylists[i-1].href"
+          :public="PopularPlaylists[i-1].public"
+          :snapshot_id="PopularPlaylists[i-1].snapshot_id"
+          :uri="PopularPlaylists[i-1].uri"></SongCard>
         </v-col>
       </v-row>
     </div>
@@ -22,10 +30,18 @@
       <v-row>
         <v-col xs="12" sm="6" md="3" lg="2" v-for="i in PPLength"
         :key="PopularPlaylists[i-1].id">
-          <SongCard :id="PopularPlaylists[i-1].id" :name="PopularPlaylists[i-1].name"
-                :description="PopularPlaylists[i-1].description"
-                :images="PopularPlaylists[i-1].images"
-                :type="PopularPlaylists[i-1].type"></SongCard>
+          <SongCard
+            :id="PopularPlaylists[i-1].id"
+            :name="PopularPlaylists[i-1].name"
+            :description="PopularPlaylists[i-1].description"
+            :images="PopularPlaylists[i-1].images"
+            :type="PopularPlaylists[i-1].type"
+            :collaborative="PopularPlaylists[i-1].collaborative"
+            :external_urls="PopularPlaylists[i-1].external_urls"
+            :href="PopularPlaylists[i-1].href"
+            :public="PopularPlaylists[i-1].public"
+            :snapshot_id="PopularPlaylists[i-1].snapshot_id"
+            :uri="PopularPlaylists[i-1].uri"></SongCard>
         </v-col>
       </v-row>
     </div>
@@ -60,23 +76,19 @@ export default {
   methods: {
     async fetchGenreReq() {
       this.ready = false;
-      console.log(this.$route.params.id);
       this.category = await Client.fetchGenre(this.$route.params.id);
-      console.log('ana hna');
-      console.log(this.category);
       if (this.category !== undefined && this.category !== {}) {
-        if (this.category.icons && !this.test) {
+        if (this.category.icons && this.category.icons[0] && !this.test) {
           const result = await analyze(this.category.icons[0].url);
           EventBus.$emit('changeColor', result[100].color);
         }
         this.title = this.category.name;
         this.ready = true;
       }
-      console.log('title', this.title);
       // eslint-disable-next-line no-underscore-dangle
       this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.$route.params.id);
       // this.PopularPlaylists = this.category.playlists;
-      if (this.PopularPlaylists.length !== 0) {
+      if (this.PopularPlaylists) {
         this.PopularExist = true;
         if (this.PopularPlaylists.length > 6) {
           this.PPLength = 6;

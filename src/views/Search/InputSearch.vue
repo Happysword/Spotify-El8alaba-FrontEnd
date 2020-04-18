@@ -2,7 +2,7 @@
     <v-container fluid="" class="cont">
       <v-row v-if="artistsExist || tracksExist">
         <v-col xs="12" sm="12" md="6" lg="5">
-          <span class="white--text mt-10 ml-10 display-1 font-weight-bold">Best result</span>
+          <span class="white--text mt-10 ml-8 display-1 font-weight-bold">Best result</span>
           <div @click="local(top.id, top.type)">
             <top-result
             v-if="top.type === 'track' || top.type === 'album' "
@@ -24,6 +24,27 @@
             :type="top.type"
             class="a"></top-result>
           </div>
+        </v-col>
+        <v-col class="ss ml-6" v-if="tracksExist">
+          <v-row class="mb-1 mt-2 head" >
+            <span class="white--text display-1 font-weight-bold z">Tracks</span>
+            <v-spacer></v-spacer>
+            <span class="seeAll"
+            @click="spanClicked()" @mouseover="typeToSee= 'tracks'">See All</span>
+            </v-row>
+          <v-row v-for="i in trackLength"  :key="i-1">
+            <v-col xs="12" sm="12" md="12" lg="12" class="ss">
+            <div @click="local(tracks[i-1].id, 'track')">
+              <search-song
+                :id="tracks[i-1].id"
+                :image="tracks[i-1].images[0]? tracks[i-1].images[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg' "
+                :SongName="tracks[i-1].name"
+                :artists="tracks[i-1].artists"
+                :uri="tracks[i-1].uri"
+                ></search-song>
+            </div>
+            </v-col>
+          </v-row>
         </v-col>
 
       </v-row>
@@ -114,13 +135,12 @@
 
           <v-col  xs="12" sm="6" md="3" lg="2"  v-for="i  in userLength" :key="i-1">
                   <div @click="local(users[i-1].id, users[i-1].type)">
-                   <ArtistCard
+                   <profile-card
+                   :profileName="users[i-1].name"
                    :id="users[i-1].id"
-                   :name="users[i-1].name"
-                   :images="users[i-1].image"
+                   :images="users[i-1].image ? users[i-1].image : [{ url:'https://www.scdn.co/i/_global/twitter_card-default.jpg'}]"
                    :type="users[i-1].type"
-                   :href="users[i-1].href"
-                   ></ArtistCard>
+                   ></profile-card>
                   </div>
             </v-col>
       </v-row>
@@ -137,15 +157,16 @@
 import Client from 'api-client';
 import ArtistCard from '../../components/ArtistCard.vue';
 import TopResult from '../../components/TopResult.vue';
-// import SearchSong from '../../components/SongsBar.vue';
+import SearchSong from '../../components/SearchSong.vue';
 import SongCard from '../../components/SongCard.vue';
-
+import ProfileCard from '../../components/ProfileCard.vue';
 
 export default {
   name: 'InputSearch',
   components: {
     TopResult,
-    // SearchSong,
+    ProfileCard,
+    SearchSong,
     SongCard,
     ArtistCard,
   },
@@ -176,7 +197,6 @@ export default {
   },
   methods: {
     async local(id, type) {
-      console.log(id);
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
@@ -185,26 +205,20 @@ export default {
       } else if (type === 'artist') {
         data = await Client.fetchAnArtist(id);
       } else if (type === 'playlist') {
-        data = await Client.fetchPlaylist(id);
+        data = await Client.fetchList(id);
       }
       this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
-      console.log(this.SearchHistory);
       if (!(this.SearchHistory.some((x) => x.id === data.id))) {
+        const temp = JSON.parse(localStorage.getItem('currentUser'));
+        this.SavedData.UserID = temp.data.id;
         this.SavedData.name = data.name;
         this.SavedData.id = data.id;
-        this.SavedData.description = data.description;
         this.SavedData.type = data.type;
-        this.SavedData.collaborative = data.collaborative;
-        this.SavedData.external_urls = data.external_urls;
-        this.SavedData.href = data.href;
-        this.SavedData.public = data.public;
-        this.SavedData.snapshot_id = data.snapshot_id;
-        this.SavedData.tracks = data.tracks;
-        this.SavedData.uri = data.uri;
         if (data.type === 'track') {
-          this.SavedData.images = data.album.images;
-        } else if (data.images[0]) {
           this.SavedData.images = data.images;
+        } else {
+          // eslint-disable-next-line no-unused-expressions
+          data.images[0] ? this.SavedData.images = data.images : this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
         }
         this.SearchHistory.push(this.SavedData);
         localStorage.setItem('SearchHistory', JSON.stringify(this.SearchHistory));
@@ -224,6 +238,11 @@ export default {
       }
     },
     async fetchSearch() {
+      this.artists = [];
+      this.users = [];
+      this.tracks = [];
+      this.playlists = [];
+      this.albums = [];
       this.artistsExist = false;
       this.usersExist = false;
       this.tracksExist = false;
@@ -231,7 +250,6 @@ export default {
       this.albumsExist = false;
       this.NoResult = false;
       const response = await Client.fetchSearch(this.$route.params.id);
-      console.log(response);
       if (response) {
         if (response.artists) {
           this.artists = [];
@@ -268,7 +286,7 @@ export default {
           if (response.tracks.length > 0) {
             this.tracks = response.tracks;
             this.tracksExist = true;
-            this.trackLength = this.tracks.length < 6 ? this.tracks.length : 6;
+            this.trackLength = this.tracks.length <= 3 ? this.tracks.length : 3;
           }
         }
         if (this.artistsExist && this.tracksExist) {
@@ -315,15 +333,18 @@ export default {
       } else {
         this.NoResult = true;
       }
+      console.log(this.tracks);
     },
   },
   watch: {
     $route(to) {
       this.fetchSearch(to.params.id);
+      setTimeout(3000);
     },
   },
   async created() {
     await this.fetchSearch(this.$route.params.id);
+    setTimeout(3000);
   },
   mounted() {
     this.$store.state.searching = true;
@@ -342,7 +363,9 @@ export default {
 }
 .seeAll{
  color: #b3b3b3;
- margin-right: 6px;
+ margin-right: 40px;
+ align-self: flex-end;
+ justify-self: end;
 }
 .seeAll:hover{
   text-decoration-line: underline;
@@ -359,12 +382,11 @@ export default {
   width:260%;
 }
 .sect{
-  width: 550%;
-  padding: 00px;
+  padding: 0px;
   }
 .ss{
   padding: 0px;
-  margin: px;
+  margin-right: 60px;
   }
   #NO{
     text-align: center;

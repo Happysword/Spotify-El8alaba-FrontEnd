@@ -6,26 +6,19 @@
       @click="History()">Recent searches</h2>
     <v-row>
         <v-col  xs="12" sm="6" md="3" lg="2"
-        v-for="( s , i ) in RecentLength" :key="RecentSearch[i].id">
-         <song-card v-if="RecentSearch[i].type != 'artist'"
-          :id="RecentSearch[i].id"
-          :name="RecentSearch[i].name"
-          :description="RecentSearch[i].description"
-          :images="RecentSearch[i].images"
-          :type="RecentSearch[i].type"
-          :collaborative="RecentSearch[i].collaborative"
-          :external_urls="RecentSearch[i].external_urls"
-          :href="RecentSearch[i].href"
-          :public="RecentSearch[i].public"
-          :snapshot_id="RecentSearch[i].snapshot_id"
-          :uri="RecentSearch[i].uri"></song-card>
+        v-for="( s , i ) in RecentLength" :key="i">
          <artist-card v-if="RecentSearch[i].type == 'artist'"
           :id="RecentSearch[i].id"
           :profileName="RecentSearch[i].name"
           :images="RecentSearch[i].images"
           :type="RecentSearch[i].type"
-          :href="RecentSearch[i].href"
         ></artist-card>
+        <profile-card
+        v-if="RecentSearch[i].type == 'user'"
+        :profileName="RecentSearch[i].name"
+        :id="RecentSearch[i].id"
+        :images="RecentSearch[i].images"
+        :type="RecentSearch[i].type"></profile-card>
          </v-col>
     </v-row>
     </div>
@@ -36,7 +29,7 @@
         v-for="PGenre in PGenres" :key="PGenre._id">
           <pref
             class="mt-3"
-            :source="PGenre.icons[0].url"
+            :source="PGenre.icons[0]? PGenre.icons[0].url :'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
             :title="PGenre.name"
             :route="PGenre._id"
           ></pref>
@@ -50,7 +43,7 @@
       :key="genre._id">
       <Genres
         class="mt-3"
-        :source="genre.icons[0].url"
+        :source="genre.icons[0]? genre.icons[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
         :title="genre.name"
         :route="genre._id"
       ></Genres>
@@ -64,16 +57,18 @@
 import client from 'api-client';
 import Genres from '../../components/GenresCard.vue';
 import pref from '../../components/prefGenres.vue';
-import SongCard from '../../components/SongCard.vue';
+// import SongCard from '../../components/SongCard.vue';
 import ArtistCard from '../../components/ArtistCard.vue';
+import ProfileCard from '../../components/ProfileCard.vue';
 
 export default {
   name: 'Search',
   components: {
     Genres,
     pref,
-    SongCard,
+    // SongCard,
     ArtistCard,
+    ProfileCard,
   },
   data() {
     return {

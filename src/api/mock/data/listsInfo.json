@@ -169,5 +169,41 @@
       },
       "type":"playlist",
       "uri":"spotify:user:wizzlersmate:playlist:1AVZz0mBuGbCEoNRQdYQju"
-   }
+   },
+   {
+      "collaborative": false,
+      "description": "Last update: February 18, 2020.",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5iKYvhddpkuAOzOvrLRznN"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5iKYvhddpkuAOzOvrLRznN",
+      "id": "5iKYvhddpkuAOzOvrLRznN",
+      "images": [
+        {
+          "height": null,
+          "url": "https://i.scdn.co/image/ab67706c0000da84dce3aaac74841633ffc94b07",
+          "width": null
+        }
+      ],
+      "name": "Amr Diab Essentials & Best Of عمرو دياب",
+      "owner": {
+        "display_name": "bashbenn",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/user/bashbenn"
+        },
+        "href": "https://api.spotify.com/v1/users/bashbenn",
+        "id": "bashbenn",
+        "type": "user",
+        "uri": "spotify:user:bashbenn"
+      },
+      "primary_color": null,
+      "public": null,
+      "snapshot_id": "NDQyLGY1ODQ0MDZlOTI4YzUyMTFhNDc2NjViNTIxMTU0ZWVjMDU5OWNiNTg=",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/playlists/5iKYvhddpkuAOzOvrLRznN/tracks",
+        "total": 167
+      },
+      "type": "playlist",
+      "uri": "spotify:playlist:5iKYvhddpkuAOzOvrLRznN"
+    }
 ]

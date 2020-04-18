@@ -89,16 +89,12 @@ export default {
       }
     },
     artistLink() {
-      console.log(this.artistName);
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');
       } else {
         this.$router.push(`/artist/${this.artistName}`);
       }
     },
-  },
-  created() {
-    console.log('Top');
   },
 };
 </script>
