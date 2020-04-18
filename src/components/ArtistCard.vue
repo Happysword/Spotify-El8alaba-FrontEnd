@@ -25,13 +25,11 @@
              <v-container fluid="">
                  <v-img class="circle"
                  v-if="images"
-                 :images="images"
-                 :src="images.url"
+                 :src="images[0].url"
                  height="150px"
                  ></v-img>
                   <v-img class="circle"
                  v-if="!images"
-                 :images="images"
                  :src="'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
                  height="150px"
                  ></v-img>
@@ -82,7 +80,7 @@ export default {
     genres: [],
     href: String,
     id: String,
-    images: Object,
+    images: [],
     name: String,
     popularity: String,
     type: String,

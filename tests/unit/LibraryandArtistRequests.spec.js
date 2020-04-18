@@ -45,7 +45,7 @@ describe('ArtistCard.vue', () => {
 
   it('Test user profile', async () => {
     const prof = userProfile;
-    const data = await requests.fetchUserProfile('userID', 'token');
+    const data = await requests.fetchaUserProfile('userID', 'token');
 
     expect(data).toEqual(prof);
   });
