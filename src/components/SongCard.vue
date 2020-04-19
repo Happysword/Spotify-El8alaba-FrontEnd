@@ -120,16 +120,17 @@ export default {
   },
   mounted() {
     this.fetchFollowStatus();
+    this.getSongsList();
   },
   methods: {
     playAction() {
-      this.getSongsList();
-
       if (this.$store.state.MusicPlayer.ID === this.id) {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
         });
       } else {
+        this.$store.state.MusicPlayer.currentSong = this.songsList;
+        this.$store.state.MusicPlayer.currentList = this.songsList;
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           currentList: this.songsList,
@@ -140,18 +141,17 @@ export default {
       this.showPlayButton = false;
     },
     pauseAction() {
-      this.getSongsList();
       this.$store.dispatch('playpauseplaylist', {
         playstatus: false,
       });
       this.showPlayButton = true;
     },
     /** Get the song of album or playlist */
-    getSongsList() {
+    async getSongsList() {
       if (this.type === 'playlist') {
-        this.songsList = client.fetchSongs(this.id);
+        this.songsList = await client.fetchSongs(this.id);
       } else {
-        this.songsList = client.fetchAlbumSongs(this.id);
+        this.songsList = await client.fetchAlbumSongs(this.id);
       }
     },
     /* istanbul ignore next */
