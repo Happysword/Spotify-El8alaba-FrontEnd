@@ -89,7 +89,6 @@ export default {
     next(() => {
       // Find the loggedIn cookie
       const loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
-
       if (loggedIn) {
         next('/home');
       } else {
