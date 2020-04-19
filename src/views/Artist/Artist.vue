@@ -106,7 +106,6 @@ export default {
   },
   mounted() {
     this.fetchAnArtist();
-    this.fetchFollowStatus();
   },
   methods: {
     /** Checks If an image is in the request */
@@ -120,6 +119,7 @@ export default {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           [this.artist] = response;
+          this.fetchFollowStatus();
           this.checkImage();
         });
     },
@@ -133,7 +133,7 @@ export default {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
 
-      client.ifCurrentUserFollowsArtistsOrUsers(this.$route.params.id, token)
+      client.ifCurrentUserFollowsArtistsOrUsers(this.artist.userInfo.id, this.token)
         .then((res) => {
           this.FollowJSON = res;
           [this.isFollowing] = this.FollowJSON;
@@ -156,7 +156,7 @@ export default {
 
       if (this.isFollowing === false) {
         client.followArtistsOrUsers({
-          ids: [this.$route.params.id],
+          ids: [this.artist.userInfo.id],
         }, this.token).then((res) => {
           console.log(res);
           this.isFollowing = true;
@@ -165,15 +165,16 @@ export default {
           this.snackbar = true;
         });
       } else {
-        client.unfollowArtistsOrUsers({
-          ids: [this.$route.params.id],
-        }).then((res) => {
-          console.log(res);
-          this.isFollowing = false;
-          this.followStatus = 'FOLLOW';
-          this.notificationMsg = 'Removed from Your Library';
-          this.snackbar = true;
-        });
+        client.unfollowArtistsOrUsers(
+          [this.artist.userInfo.id], this.token,
+        )
+          .then((res) => {
+            console.log(res);
+            this.isFollowing = false;
+            this.followStatus = 'FOLLOW';
+            this.notificationMsg = 'Removed from Your Library';
+            this.snackbar = true;
+          });
       }
     },
   },

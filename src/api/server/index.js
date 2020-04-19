@@ -445,10 +445,13 @@ export default {
    * @param {String} ids IDs of artists or Users to Unfollow
    * @param {String} token Token of current user
    */
-  async unfollowArtistsOrUsers(ids, token) {
-    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, ids, {
+  async unfollowArtistsOrUsers(theid, token) {
+    const response = await axios.delete(`${api}/api/v1/me/following?type=artist`, {
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+      data: {
+        ids: theid,
       },
     })
       .then((res) => res.body);
