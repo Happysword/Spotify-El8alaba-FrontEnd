@@ -127,6 +127,7 @@ export default {
       if (this.$store.state.MusicPlayer.ID === this.id) {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
+          ID: this.id,
         });
       } else {
         this.$store.state.MusicPlayer.currentSong = this.songsList;
