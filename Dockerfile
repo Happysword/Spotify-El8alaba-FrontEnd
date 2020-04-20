@@ -1,6 +1,6 @@
 # build stage
 ## Image 
-FROM node:13-alpine3.11 as build-stage
+FROM node:13-slim as build-stage
 
 ## Working Directory
 WORKDIR /app
@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 ## Install dependencies
-RUN npm ci
+RUN  npm ci --cache .npm --prefer-offline;
 
 ## Copy project files to the container
 COPY . .
