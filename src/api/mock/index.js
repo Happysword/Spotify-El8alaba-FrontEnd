@@ -487,10 +487,12 @@ export default {
   /**
    * it sends a request to the server to set the current playing track
    * @param {string} ID the ID of the song played
+   * @param {string} context The Type of the List played from
+   * @param {string} contextID The ID of the Context
    * @return {Boolean} a Boolean True if successful and false if failed
    */
-  async playTrack(ID) {
-    if (ID) {
+  async playTrack(ID, context, contextID) {
+    if (ID && context && contextID) {
       return fetch(true, 1000).then((Promisedata) => Promisedata);
     }
   },
