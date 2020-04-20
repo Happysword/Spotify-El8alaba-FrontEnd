@@ -35,7 +35,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-card-text align="end" style="width: 20%" v-if="!recommend">
-          <v-menu absolute left offset-overflow>
+          <v-menu absolute left offset-overflow eager>
             <template v-slot:activator="{ on }">
               <v-icon size="20" class="px-2 mx-0" v-on="on" color="#E0E0E0" id="dotsIcon">
                 {{ dotsIcon }}
@@ -183,7 +183,8 @@ export default {
      * Add song to playlist
      */
     async Add() {
-      const response = await server.AddTrackToPlaylist(this.$route.params.id, this.song.track.id);
+      // eslint-disable-next-line no-underscore-dangle
+      const response = await server.AddTrackToPlaylist(this.$route.params.id, this.song.track._id);
       if (response === true) {
         EventBus.$emit('snackbar', {
           show: true,

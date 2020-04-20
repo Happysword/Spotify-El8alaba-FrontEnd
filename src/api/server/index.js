@@ -1023,6 +1023,24 @@ export default {
   },
 
   /**
+   * Change details of a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @param  {Object}  body The data to be changed
+   * @return {Object}  The corresponding response
+   */
+  async ChangeDetailsOfPlaylist(id, body) {
+    const response = axios.put(`${api}/api/v1/playlists/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) return true;
+      return false;
+    }).catch(() => false);
+    return response;
+  },
+
+  /**
    * Gets all categories (genres)
    * @return {object} an object containing all the genres
    */

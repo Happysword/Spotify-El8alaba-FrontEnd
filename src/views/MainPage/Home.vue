@@ -4,7 +4,7 @@
         <template v-if="recentlyPlayed.length > 0">
           <v-row>
             <v-col sm='8' md='10' lg="10">
-              <h1 class="font-weight-bold white--text" id="recently"
+              <h1 class="font-weight-bold white--text"
               >
               <!-- @click="click('RecentlyPlayed',recentlyPlayed.length)" -->
                 Recently Played
