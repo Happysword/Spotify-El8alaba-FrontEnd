@@ -9,6 +9,16 @@
       <router-view></router-view>
     </v-content>
     <music-player></music-player>
+    <v-snackbar
+      id="snackbar"
+      v-model="snackbar.show"
+      :timeout="snackbar.timeout"
+      color='#1DB954'
+    >
+      <h3 class="white--text title font-weight-light mx-auto">
+        {{ snackbar.content }}
+      </h3>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -41,6 +51,11 @@ export default {
   },
   data: () => ({
     color: 'rgba(10,10,10,255)',
+    snackbar: {
+      show: false,
+      timeout: 2000,
+      content: '',
+    },
   }),
   methods: {
     restoreColor() {
@@ -50,6 +65,10 @@ export default {
   async mounted() {
     EventBus.$on('changeColor', (color) => {
       this.color = color;
+    });
+
+    EventBus.$on('snackbar', (snackbar) => {
+      this.snackbar = snackbar;
     });
 
     // Update localStorage accordingly

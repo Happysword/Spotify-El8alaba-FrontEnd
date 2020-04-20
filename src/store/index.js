@@ -31,6 +31,7 @@ export default new Vuex.Store({
       AudioPlayer: new Audio('http://soundbible.com/grab.php?id=2108&type=wav'),
       navBarImage: false,
       currentList: [currentSongMock[0]],
+      currentQueue: [],
       currentSongIndexinList: 0,
     },
     prevRoute: '',

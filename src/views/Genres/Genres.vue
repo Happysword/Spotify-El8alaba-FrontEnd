@@ -19,7 +19,6 @@
           :external_urls="PopularPlaylists[i-1].external_urls"
           :href="PopularPlaylists[i-1].href"
           :public="PopularPlaylists[i-1].public"
-          :snapshot_id="PopularPlaylists[i-1].snapshot_id"
           :uri="PopularPlaylists[i-1].uri"></SongCard>
         </v-col>
       </v-row>
@@ -75,6 +74,22 @@ export default {
   },
   methods: {
     async fetchGenreReq() {
+      if (this.$route.params.id === 'RecentlyPlayed') {
+        this.title = 'Recently Played';
+        this.ready = true;
+        const data = await Client.fetchRecentlyPlayedLists(20);
+        // .then((res) => JSON.parse(JSON.stringify(res)))
+        // .then((res) => { this.PopularPlaylists = res; });
+        // this.PopularPlaylists = JSON.parse(JSON.stringify(data));
+        this.PopularPlaylists = data;
+        console.log(this.PopularPlaylists);
+        console.log(this.PopularPlaylists.length);
+        if (this.PopularPlaylists.length) {
+          this.PopularExist = true;
+          this.PPLength = 4;
+        }
+        return;
+      }
       this.ready = false;
       this.category = await Client.fetchGenre(this.$route.params.id);
       if (this.category !== undefined && this.category !== {}) {
