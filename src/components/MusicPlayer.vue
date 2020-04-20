@@ -3,7 +3,13 @@
     <v-container fluid class="mx-0 pa-0">
       <v-row>
         <v-col align-self="center" class="pa-0" cols="3">
-          <LMusicP v-if="!(this.$store.state.MusicPlayer.currentSong === false)"></LMusicP>
+          <LMusicP
+            v-if="
+              !($store.state.MusicPlayer.currentSong === false) &&
+                !$store.state.MusicPlayer.adTime
+            "
+          ></LMusicP>
+          <div class="mx-5" v-if="$store.state.MusicPlayer.adTime">Advertisement</div>
         </v-col>
         <v-col align-self="center" class="pa-0" cols="6">
           <MMusicP></MMusicP>
@@ -41,7 +47,9 @@ export default {
       );
       const TimeString = `${Math.floor(
         SongTimeinS / 60,
-      ).toString()}:${Math.floor((SongTimeinS % 60) / 10).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
+      ).toString()}:${Math.floor(
+        (SongTimeinS % 60) / 10,
+      ).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
       this.$store.state.MusicPlayer.currentSongTime = TimeString;
     };
   },

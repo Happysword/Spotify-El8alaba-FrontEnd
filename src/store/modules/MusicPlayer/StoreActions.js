@@ -21,7 +21,7 @@ export default {
       };
       let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track.id
       // eslint-disable-next-line no-underscore-dangle
-        || state.MusicPlayer.currentSong.track._id);
+        || state.MusicPlayer.currentSong.track._id, state.MusicPlayer.Type, state.MusicPlayer.ID);
       if (process.env.VUE_APP_API_CLIENT !== 'server') Response = true;
       // check if the response was correct
       if (Response === false) return;
