@@ -94,21 +94,21 @@ describe('Testing the player components', () => {
       await wrapper.vm.changeHeart();
       expect(data.heartcolor).toBe(false);
     });
-    it('ChangeHoverPic Method test', async () => {
-      Object.defineProperty(window.HTMLVideoElement.prototype, 'requestPictureInPicture', {
-        writable: true,
-        value: jest.fn().mockImplementation(() => Promise.resolve()),
-      });
-      Object.defineProperty(window.document, 'exitPictureInPicture', {
-        writable: true,
-        value: jest.fn().mockImplementation(() => Promise.resolve()),
-      });
-      expect(data.hoverPic).toBe(false);
-      await wrapper.vm.changeHoverPic();
-      expect(data.hoverPic).toBe(true);
-      await wrapper.vm.changeHoverPic();
-      expect(data.hoverPic).toBe(false);
-    });
+    // it('ChangeHoverPic Method test', async () => {
+    //   Object.defineProperty(window.HTMLVideoElement.prototype, 'requestPictureInPicture', {
+    //     writable: true,
+    //     value: jest.fn().mockImplementation(() => Promise.resolve()),
+    //   });
+    //   Object.defineProperty(window.document, 'exitPictureInPicture', {
+    //     writable: true,
+    //     value: jest.fn().mockImplementation(() => Promise.resolve()),
+    //   });
+    //   expect(data.hoverPic).toBe(false);
+    //   await wrapper.vm.changeHoverPic();
+    //   expect(data.hoverPic).toBe(true);
+    //   await wrapper.vm.changeHoverPic();
+    //   expect(data.hoverPic).toBe(false);
+    // });
   });
 
   describe('Testing MiddlePartMPlayer component', () => {
