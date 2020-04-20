@@ -9,7 +9,7 @@ WORKDIR /app
 COPY package*.json ./
 
 ## Install dependencies
-RUN npm ci  --cache .npm --prefer-offline
+RUN npm ci
 
 ## Copy project files to the container
 COPY . .
