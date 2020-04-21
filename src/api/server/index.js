@@ -426,6 +426,66 @@ export default {
   },
 
   /**
+   * Creates a new Album
+   * @param {Object} createdAlbum The Created Album object
+   * @param {string} token The token of the user
+   */
+  async createNewAlbum(createdAlbum, token) {
+    const response = await axios.post(`${api}/api/v1/albums`, createdAlbum, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  /**
+   * Create a new Track
+   * @param {object} createdTrack The created Track
+   * @param {String} token Token of current user
+   */
+  async createTrack(createdTrack, token) {
+    const response = await axios.post(`${api}/api/v1/tracks`, createdTrack, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  },
+
+  /**
+   * Upload a track
+   * @param {data} formData The Data of the track
+   * @param {String} token The token of the user
+   */
+  async uploadTrack(formData, token) {
+    const response = await axios.post(`${api}/api/v1/streaming`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  async uploadAlbumImage(formData, id, token) {
+    const response = await axios.post(`${api}/api/v1/albums/${id}/images`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.body)
+      .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  /**
    * Follow Artists or Users
    * @param {String} ids IDs of artists or Users to follow
    * @param {String} token Token of current user
@@ -474,6 +534,24 @@ export default {
         console.log(error.response);
       });
     return isFollowing;
+  },
+
+  /**
+   *
+   * @param {string} id ID of the artist
+   * @param {token} token Token of the current user
+   */
+  async getArtistAlbum(id, token) {
+    const res = await axios.get(`${api}/api/v1/artists/${id}/albums?limit=&offset=`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.log(error.response);
+      });
+    return res;
   },
 
   /**
