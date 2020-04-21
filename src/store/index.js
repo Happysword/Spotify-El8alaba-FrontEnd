@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    dialog: false,
     currentUser: { username: 'Spotify user' },
     searching: false,
     liked: false,
