@@ -36,6 +36,18 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item
+            route
+            to="/home/artist/manage"
+            v-if="isArtist"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-cog</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">Manage</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <v-list dark="" dense="">
           <v-list-item-content>
@@ -54,7 +66,7 @@
             <template v-slot:activator="{ on }">
               <v-list-item @click="drawer = !drawer" v-on="on">
                 <v-list-item-icon>
-                  <v-icon>mdi-plus</v-icon>
+                  <v-icon>mdi-plus-box</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title class="subtitle-2" id="createPlaylist"
@@ -204,6 +216,7 @@ export default {
       createdPlaylistName: '',
       dialog: false,
       imageButton: false,
+      isArtist: false,
       rules: {
         required: (value) => !!value || 'Required.',
       },
@@ -214,6 +227,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  created() {
+    if (JSON.parse(localStorage.getItem('currentUser')).data.type === 'artist') {
+      this.isArtist = true;
+    }
   },
   mounted() {
     this.fetchUserPlaylists();
