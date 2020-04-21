@@ -77,7 +77,7 @@
           <v-list-item-title class="grey--text">{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list> -->
-      <dropDown :id="id" :type="type" :public="Public" :ownerID="owner">
+      <dropDown :id="id" :type="type" :public="Public" :ownerID="owner" card="card">
       </dropDown>
     </v-menu>
   </div>

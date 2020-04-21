@@ -23,9 +23,9 @@ export default {
       timeout: 2000,
     },
     showList: [],
-    songList: ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist', 'Copy Song Link'],
+    songList: ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist'],
     albumList: ['Save To Your Library', 'Copy Link'],
-    myPlaylist: ['Make Public', 'Delete', 'Copy Playlist Link'],
+    myPlaylist: ['Make Public', 'Delete', 'Copy Link'],
   }),
   props: {
     id: String,
@@ -33,6 +33,7 @@ export default {
     track: Object,
     ownerID: String,
     public: Boolean,
+    card: String,
   },
   methods: {
     /**
@@ -68,6 +69,7 @@ export default {
      * @param {String} item the Required request
      */
     async click(item) {
+      console.log(window.location.href);
       if (this.type === 'track') {
         if (item === 'Save To Your Liked Songs') {
           const response = await server.saveTrack(this.id);
@@ -156,6 +158,15 @@ export default {
             this.SnackBar.content = 'Removed From Your Library';
           }
         }
+        EventBus.$emit('snackbar', this.SnackBar);
+      }
+      if (item === 'Copy Link') {
+        if (this.card === 'card') {
+          if (this.type === 'playlist') this.$copyText(`${window.location.origin}/playlist/${this.id}`);
+          if (this.type === 'album') this.$copyText(`${window.location.origin}/album/${this.id}`);
+        } else this.$copyText(window.location.href);
+        this.SnackBar.show = true;
+        this.SnackBar.content = 'Copied to clipboard';
         EventBus.$emit('snackbar', this.SnackBar);
       }
       this.$forceUpdate(); // Force Vue to re-render the component
