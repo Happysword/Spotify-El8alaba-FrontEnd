@@ -144,7 +144,12 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-list v-if="!$store.state.MusicPlayer.navBarImage">
+        <v-list
+          v-if="
+            !$store.state.MusicPlayer.navBarImage &&
+              !$store.state.MusicPlayer.adTime
+          "
+        >
           <v-list-item
             v-for="playlist in playlists.items"
             :key="playlist.id"
@@ -160,12 +165,15 @@
           </v-list-item>
         </v-list>
         <v-img
-          v-else
+          v-else-if="
+            $store.state.MusicPlayer.navBarImage &&
+              !$store.state.MusicPlayer.adTime
+          "
           class="mt-2"
           max-height="180"
           max-width="200"
           :src="
-            $store.state.MusicPlayer.currentSong.track.album.images[0] ||
+            $store.state.MusicPlayer.currentSong.track.album.images[0].url ||
               'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
           "
           contain
@@ -178,6 +186,14 @@
             >mdi-chevron-down-circle</v-icon
           ></v-img
         >
+        <v-img
+          v-else
+          class="mt-2"
+          max-height="180"
+          max-width="200"
+          src="../assets/imgs/El-8alaba.png"
+          contain
+        ></v-img>
       </v-container>
     </v-navigation-drawer>
   </nav>

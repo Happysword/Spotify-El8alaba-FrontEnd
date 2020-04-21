@@ -40,7 +40,7 @@
               "__v": 0
             },
             "followers": [],
-            "images": [],
+            "images": [{"url":"https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5"}],
             "__v": 1
           }
         ],
@@ -64,7 +64,7 @@
           "label": "albumLabel",
           "name": "Faded album",
           "release_date": "2020-04-07T02:31:19.683Z",
-          "images": [],
+          "images": [{"url":"https://i.scdn.co/image/b16064142fcd2bd318b08aab0b93b46e87b1ebf5"}],
           "__v": 4
         },
         "duration_ms": 192000,

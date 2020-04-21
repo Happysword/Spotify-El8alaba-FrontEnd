@@ -44,7 +44,7 @@ const routes = [
     path: '/home',
     name: 'Main',
     component: Main,
-    meta: { refreshCurrentUser: true },
+    meta: { },
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },

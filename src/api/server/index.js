@@ -229,9 +229,11 @@ export default {
   /**
    * it sends a request to the server to set the current playing track
    * @param {string} ID the ID of the song played
+   * @param {string} context The Type of the List played from
+   * @param {string} contextID The ID of the Context
    * @return {Boolean} a Boolean True if successful and false if failed
    */
-  async playTrack(ID) {
+  async playTrack(ID, context, contextID) {
     const config = {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
@@ -240,6 +242,7 @@ export default {
     return axios
       .post(`${api}/api/v1/me/player/track`, {
         trackId: ID,
+        context_uri: `spotify:${context}:${contextID}`,
       }, config)
       .then((response) => {
         if (response.status === 204) return true;
