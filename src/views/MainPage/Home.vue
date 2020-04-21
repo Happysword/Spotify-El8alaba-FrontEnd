@@ -43,19 +43,19 @@
           </v-row>
         </template>
       </div>
-      <div v-for="category in categories" :key="category.id">
+      <div v-for="category in categories" :key="category._id">
         <template v-if="category.playlists.length > 0">
           <v-row>
             <v-col sm='8' md='10' lg="10">
               <h1 class="font-weight-bold white--text" id="recent"
-              @click="click(category.id, category.playlists.length)"
+              @click="click(category._id, category.playlists.length)"
               >
                 {{category.name}}
               </h1>
             </v-col>
             <v-col sm='4' md='2' lg="2" align="end" v-if="category.playlists.length > 6">
               <h1 class="white--text pr-5 pt-4 body-1" id="all"
-                @click="click(category.id, category.playlists.length)"
+                @click="click(category._id, category.playlists.length)"
               >
                 See All
               </h1>
