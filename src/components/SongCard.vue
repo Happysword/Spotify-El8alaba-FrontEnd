@@ -49,12 +49,21 @@
               fab
               small
               color="#1ED760"
-              v-if="showActionButton"
+              v-if="showActionButton && showPlayButton"
               @mousedown.stop
-              @click.stop="showPlayButton = !showPlayButton"
+              @click.stop="playAction()"
             >
-              <v-icon color="white" id="playID" v-show="showPlayButton">mdi-play</v-icon>
-              <v-icon color="white" id="pauseID" v-show="!showPlayButton">mdi-pause</v-icon>
+              <v-icon color="white" id="playID">mdi-play</v-icon>
+            </v-btn>
+            <v-btn
+              fab
+              small
+              color="#1ED760"
+              v-if="showActionButton && !showPlayButton"
+              @mousedown.stop
+              @click.stop="pauseAction()"
+            >
+              <v-icon color="white" id="pauseID">mdi-pause</v-icon>
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -101,6 +110,7 @@ export default {
       notificationMsg: String,
       isFollowing: Boolean,
       FollowJSON: [],
+      songsList: [],
       items: [
         { title: 'Start Radio' },
         { title: '' },
@@ -110,8 +120,41 @@ export default {
   },
   mounted() {
     this.fetchFollowStatus();
+    this.getSongsList();
   },
   methods: {
+    playAction() {
+      if (this.$store.state.MusicPlayer.ID === this.id) {
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
+          ID: this.id,
+        });
+      } else {
+        this.$store.state.MusicPlayer.currentSong = this.songsList;
+        this.$store.state.MusicPlayer.currentList = this.songsList;
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
+          currentList: this.songsList,
+          ID: this.id,
+          song: this.songsList[0],
+        });
+      }
+      this.showPlayButton = false;
+    },
+    pauseAction() {
+      this.$store.dispatch('playpauseplaylist', {
+        playstatus: false,
+      });
+      this.showPlayButton = true;
+    },
+    /** Get the song of album or playlist */
+    async getSongsList() {
+      if (this.type === 'playlist') {
+        this.songsList = await client.fetchSongs(this.id);
+      } else {
+        this.songsList = await client.fetchAlbumSongs(this.id);
+      }
+    },
     /* istanbul ignore next */
     /** When a card is clicked it go to route of playlist or album depending on its type */
     CardClickLink() {
@@ -214,6 +257,18 @@ export default {
               this.items[1].title = 'Save to Your Library';
             }
           });
+      }
+    },
+  },
+  computed: {
+    musicPlayerSongID() {
+      return this.$store.state.MusicPlayer.ID;
+    },
+  },
+  watch: {
+    musicPlayerSongID() {
+      if (this.$store.state.MusicPlayer.ID !== this.id) {
+        this.showPlayButton = true;
       }
     },
   },

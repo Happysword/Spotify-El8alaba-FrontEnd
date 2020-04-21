@@ -1,37 +1,56 @@
-{
-   "external_urls": [],
-   "followers": {
-     "href": null,
-     "total": 54625
-   },
-   "genres": [
-     "Rock",
-     "Metal"
-   ],
-   "biography": "Multi-Grammy nominated Cuban born singer/songwriter Camila Cabello released her debut solo album, CAMILA in January 2018 to rave reviews. It debuted at #1 on the Billboard 200 chart at the same time as her single “Havana” reached #1 on the Billboard Hot 100 chart, making her the first solo artist in nearly 15 years to reach the #1 spot on the Hot 100, Billboard 200 & Artist 100 charts in the same week. CAMILA launched its debut at #1 on 110 iTunes charts around the world, breaking the record for most #1 positions for a debut album in iTunes history. Camila also became the #1 artist on global Spotify. She released her RIAA 9x platinum smash hit “Havana,” in August 2017 where it obtained the #1 spot on the pop radio chart. “Havana” is the first song by a female artist to reach No. 1 on Billboard’s Adult Contemporary, Pop Songs & Rhythmic Songs charts in 22 years, has earned over 1.1 billion on-demand U.S. streams, according to Nielsen Music, & attained the longest run at No. 1 on Pop Songs for any song by a female artist since 2013. Havana became the most streamed song of all time by a female artist & was the number one song of 2018 globally. Her triple-platinum single “Never Be The Same,” was released in January 2018 & peaked in the top 10 of the Billboard Hot 100 chart. Camila became the first artist in history to have two multi-format number one singles as the first two singles from their debut album. In November 2018, she was named the new ambassador for Save the Children.",
-   "images":[{
-      "height":816,
-      "url":"https://i.scdn.co/image/eb266625dab075341e8c4378a177a27370f91903",
-      "width":1000
-   },
+[
    {
-      "height":522,
-      "url":"https://i.scdn.co/image/2f91c3cace3c5a6a48f3d0e2fd21364d4911b332",
-      "width":640
-   },
-   {
-      "height":163,
-      "url":"https://i.scdn.co/image/2efc93d7ee88435116093274980f04ebceb7b527",
-      "width":200
-   },
-   {
-      "height":52,
-      "url":"https://i.scdn.co/image/4f25297750dfa4051195c36809a9049f6b841a23",
-      "width":64
-   }],
-   "uri": "spotify:artist:5e9638a8a783f816309e4554",
-   "type": "artist",
-   "href": "https://api.spotify.com/v1/artists/5e9638a8a783f816309e4554",
-   "id": "5e9638a8a783f816309e4554",
-   "name": "An amazing artist"
- }
+      "external_urls":[
+
+      ],
+      "followers":{
+         "href":null,
+         "total":0
+      },
+      "genres":[
+         "rap",
+         "pop"
+      ],
+      "biography":"",
+      "userInfo":{
+         "type":"artist",
+         "product":"free",
+         "image":null,
+         "online":false,
+         "currentlyPlaying":{
+            "track":null,
+            "timestamp":null,
+            "repeat_state":false,
+            "shuffle_state":false,
+            "volume_percent":60,
+            "is_playing":false,
+            "progress_ms":0
+         },
+         "followers":1,
+         "following":[
+
+         ],
+         "_id":"5e8f2f34481183596571494e",
+         "name":"Jamie Kulas MD",
+         "email":"artist5@email.com",
+         "gender":"m",
+         "birthdate":"1998-09-25T00:00:00.000Z",
+         "devices":[
+
+         ],
+         "followedPlaylists":[
+
+         ],
+         "uri":"spotify:user:5e8f2f34481183596571494e",
+         "id":"5e8f2f34481183596571494e"
+      },
+      "images":[
+
+      ],
+      "name":"Jamie Kulas MD",
+      "uri":"spotify:artist:5e8f2f3d4811835965714962",
+      "type":"artist",
+      "href":"https://api.spotify.com/v1/artists/5e8f2f3d4811835965714962",
+      "id":"5e8f2f3d4811835965714962"
+   }
+]
