@@ -12,10 +12,75 @@
     <v-btn light rounded width=200 class="body-2" route to="/home">
       NEW RELEASES
     </v-btn>
+    <br><br><br>
+    <v-row>
+      <v-col lg= "9" sm="6" md="9" class=" py-2 title white--text text-left"
+        @click="showIcon()" style="cursor: pointer">
+        Recommended Songs
+        <v-icon color="white">
+          {{ icon }}
+        </v-icon>
+      </v-col>
+      <v-col lg= "3" sm="6" md="3">
+        <v-btn rounded dark outlined width="130" class="mx-10" @click="refresh()">
+          Refresh
+        </v-btn>
+      </v-col>
+    </v-row>
+      <template v-if="show">
+        <songsCard class="text-left ml-n5" v-for="(song,index) in recommended"
+          :key="index"
+          :counter="index"
+          :song="song"
+          :list="recommended"
+          :recommend="recommend"
+          listType="album"
+        >
+        </songsCard>
+      </template>
   </div>
 </template>
 
 <script>
+import server from 'api-client';
+import songsCard from './SongsBar.vue';
+
 export default {
+  data() {
+    return {
+      show: true,
+      icon: 'mdi-menu-up',
+      recommended: [],
+      recommend: true,
+    };
+  },
+  components: {
+    songsCard,
+  },
+  methods: {
+    /**
+     * Show/Hide recommended Tracks
+     */
+    showIcon() {
+      this.show = !this.show;
+      if (this.show === true) {
+        this.icon = 'mdi-menu-up';
+      } else {
+        this.icon = 'mdi-menu-down';
+      }
+    },
+
+    /**
+     * Refresh recommended tracks
+     */
+    async refresh() {
+      this.recommended = await server.fetchRecentlyPlayedTracks();
+      console.log('recommended');
+      console.log(this.recommended);
+    },
+  },
+  created() {
+    this.refresh();
+  },
 };
 </script>

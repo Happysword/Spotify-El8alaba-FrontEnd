@@ -20,7 +20,6 @@
               :disabled="isLinkDisabled"
               id="image-album"
             >
-              <!-- TODO[@Seif] add images from back later -->
               <v-img
                 max-height="60"
                 max-width="60"
@@ -62,7 +61,6 @@
               </router-link>
             </v-layout>
           </v-flex>
-          <!-- TODO[@Seif] picture in picture api for hovering picture -->
           <v-flex align-self-center shrink class="mx-1 ml-5">
             <v-icon
               v-if="!heartcolor"
@@ -172,23 +170,28 @@ export default {
      */
     async changeHoverPic() {
       if (!this.hoverPic) {
-        const img = new Image();
-        img.crossOrigin = true;
-        img.src = this.imgsrc;
-        const scale = Math.min(this.canvas.width / img.width, this.canvas.height / img.height);
-        // get the top left position of the image
-        const x = (this.canvas.width / 2) - (img.width / 2) * scale;
-        const y = (this.canvas.height / 2) - (img.height / 2) * scale;
-        this.canvas.getContext('2d').drawImage(img, x, y, img.width * scale, img.height * scale);
-        await this.video.play();
-        await this.video.requestPictureInPicture().catch();
+        this.changePnp();
         navigator.mediaSession.setActionHandler('play', () => { this.togglePlayact(); this.video.play(); });
         navigator.mediaSession.setActionHandler('pause', () => { this.togglePlayact(); this.video.pause(); });
+        if (!this.playstate) this.video.pause();
         this.hoverPic = true;
       } else {
         document.exitPictureInPicture().catch();
         this.hoverPic = false;
       }
+    },
+    async changePnp() {
+      const img = new Image();
+      img.crossOrigin = true;
+      img.src = this.imgsrc;
+      await img.decode();
+      const scale = Math.min(this.canvas.width / img.width, this.canvas.height / img.height);
+      // get the top left position of the image
+      const x = (this.canvas.width / 2) - (img.width / 2) * scale;
+      const y = (this.canvas.height / 2) - (img.height / 2) * scale;
+      this.canvas.getContext('2d').drawImage(img, x, y, img.width * scale, img.height * scale);
+      await this.video.play();
+      await this.video.requestPictureInPicture().catch();
     },
   },
   computed: {
@@ -216,6 +219,18 @@ export default {
         return this.$store.state.MusicPlayer.currentSong.track.album.images[0].url;
       }
       return notePic;
+    },
+    playstate() {
+      return this.$store.state.MusicPlayer.isPlaying;
+    },
+  },
+  watch: {
+    imgsrc() {
+      this.changePnp();
+    },
+    playstate() {
+      if (this.playstate) this.video.play();
+      else this.video.pause();
     },
   },
   async updated() {
@@ -245,7 +260,7 @@ export default {
     this.canvas.height = 1000;
     this.canvas.width = 1000;
     this.video.muted = true;
-    this.video.srcObject = this.canvas.captureStream();
+    this.video.srcObject = this.canvas.captureStream(30);
   },
 };
 </script>

@@ -34,20 +34,24 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-card-text align="end" style="width: 20%">
-          <v-menu absolute left>
+        <v-card-text align="end" style="width: 20%" v-if="!recommend">
+          <v-menu absolute left offset-overflow eager>
             <template v-slot:activator="{ on }">
               <v-icon size="20" class="px-2 mx-0" v-on="on" color="#E0E0E0" id="dotsIcon">
                 {{ dotsIcon }}
               </v-icon>
             </template>
-            <dropDown></dropDown>
+            <dropDown :id="song.track.id" type="track" :track="song"></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
             {{ parseInt(song.track.duration_ms / 60000) }} :
             {{ parseInt(song.track.duration_ms / 1000) % 60 }}</label
           >
         </v-card-text>
+        <v-btn rounded dark outlined v-if="recommend"
+        align="end" width="100" @click="Add()">
+          Add
+        </v-btn>
       </v-card-actions>
     </v-card>
   </v-hover>
@@ -55,6 +59,7 @@
 
 <script>
 // import store from '../store';
+import server from 'api-client';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
@@ -88,6 +93,10 @@ export default {
     list: Array,
     listid: String,
     listType: String,
+    recommend: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     dropDown,
@@ -105,7 +114,7 @@ export default {
      * Change the song icon and color to play mode
      */
     playSong() {
-      this.$store.state.MusicPlayer.isPlaying = true;
+      // this.$store.state.MusicPlayer.isPlaying = true;
       this.play = true;
       this.color = '#1ED760';
       this.color2 = '#1ED760';
@@ -117,7 +126,7 @@ export default {
      * Change the song icon and color to pause mode
      */
     pauseSong() {
-      this.$store.state.MusicPlayer.isPlaying = false;
+      // this.$store.state.MusicPlayer.isPlaying = false;
       this.play = false;
       this.color = 'grey';
       this.color2 = 'white';
@@ -137,19 +146,25 @@ export default {
       if (hover === 0) {
         this.play = !this.play;
         if (this.play === true) {
-          this.$store.state.MusicPlayer.currentSong = this.song;
-          this.$store.state.MusicPlayer.currentList = this.list;
-          this.$store.state.MusicPlayer.currentSongIndexinList = this.counter;
+          // this.$store.state.MusicPlayer.currentSong = this.song;
+          // this.$store.state.MusicPlayer.currentList = this.list;
+          // this.$store.state.MusicPlayer.currentSongIndexinList = this.counter;
           this.playSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
             song: this.song,
+            currentList: this.list,
+            ID: this.listid,
+            type: this.listType,
           });
         } else {
           this.pauseSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: false,
             song: this.song,
+            currentList: this.list,
+            ID: this.listid,
+            type: this.listType,
           });
         }
         EventBus.$emit('changePlay', this.play, this.listid);
@@ -163,6 +178,21 @@ export default {
         this.showIcon = 'mdi-play';
       }
     },
+
+    /**
+     * Add song to playlist
+     */
+    async Add() {
+      // eslint-disable-next-line no-underscore-dangle
+      const response = await server.AddTrackToPlaylist(this.$route.params.id, this.song.track._id);
+      if (response === true) {
+        EventBus.$emit('snackbar', {
+          show: true,
+          timeout: 2000,
+          content: 'Added to this Playlist',
+        });
+      }
+    },
   },
 
   /**
@@ -173,9 +203,9 @@ export default {
       if ((this.play === true && play === false) || this.counter === 0) {
         this.play = play;
         if (this.play === true) {
-          this.$store.state.MusicPlayer.currentSong = this.song;
-          this.$store.state.MusicPlayer.currentList = this.list;
-          this.$store.state.MusicPlayer.currentSongIndexinList = 0;
+          // this.$store.state.MusicPlayer.currentSong = this.song;
+          // this.$store.state.MusicPlayer.currentList = this.list;
+          // this.$store.state.MusicPlayer.currentSongIndexinList = 0;
           this.playSong();
           this.showIcon = 'mdi-volume-high';
         } else {
@@ -185,6 +215,9 @@ export default {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: this.play,
           song: this.song,
+          currentList: this.list,
+          ID: this.listid,
+          type: this.listType,
         });
       }
     });

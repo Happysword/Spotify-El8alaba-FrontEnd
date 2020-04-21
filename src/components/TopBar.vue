@@ -46,6 +46,7 @@
         <v-spacer></v-spacer>
         <v-col lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
           <v-btn
+            v-if ="UserInfo.Type != 'premium'"
             rounded
             outlined
             class="mx-4"
@@ -55,7 +56,7 @@
             >Upgrade</v-btn
           >
         </v-col>
-        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
+        <v-col md="2" sm="4" xs="12" class="mr-n10">
           <div class="text-center" id="user-btn">
             <v-menu offset-y>
               <template v-slot:activator="{ on }">
@@ -98,11 +99,14 @@
 </template>
 
 <script>
+import api from 'api-client';
 /** */
 export default {
   name: 'Topbar',
   /* istanbul ignore next */
-  created() {
+  async created() {
+    this.UserInfo.Type = await api.getCurrentUserProfile().then((Resp) => Resp.data.product);
+
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
     if (!currentUser.data.image) return;
@@ -116,6 +120,7 @@ export default {
     input: '',
     backtimes: 0,
     UserInfo: {
+      Type: 'premium',
       name: 'John Doe',
       photo:
         'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',

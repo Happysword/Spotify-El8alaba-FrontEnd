@@ -23,6 +23,7 @@ import LibraryAlbums from '../views/Library/LibraryAlbums.vue';
 import LibraryArtists from '../views/Library/LibraryArtists.vue';
 import InputSearch from '../views/Search/InputSearch.vue';
 import Artist from '../views/Artist/Artist.vue';
+import ArtistManage from '../views/Artist/ArtistManage.vue';
 import ArtistOverview from '../views/Artist/ArtistOverview.vue';
 import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
@@ -43,7 +44,7 @@ const routes = [
     path: '/home',
     name: 'Main',
     component: Main,
-    meta: { refreshCurrentUser: true },
+    meta: { },
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
@@ -56,6 +57,7 @@ const routes = [
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
       { path: '/home/user/:id', name: 'user', component: UserPage },
+      { path: '/home/artist/manage', name: 'manage', component: ArtistManage },
       {
         path: '/home/library/tracks',
         name: 'LikedTracks',

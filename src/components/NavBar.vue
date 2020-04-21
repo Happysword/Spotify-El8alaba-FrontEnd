@@ -36,6 +36,18 @@
               }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item
+            route
+            to="/home/artist/manage"
+            v-if="isArtist"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-cog</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">Manage</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <v-list dark="" dense="">
           <v-list-item-content>
@@ -54,7 +66,7 @@
             <template v-slot:activator="{ on }">
               <v-list-item @click="drawer = !drawer" v-on="on">
                 <v-list-item-icon>
-                  <v-icon>mdi-plus</v-icon>
+                  <v-icon>mdi-plus-box</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title class="subtitle-2" id="createPlaylist"
@@ -132,7 +144,12 @@
           </v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-list v-if="!$store.state.MusicPlayer.navBarImage">
+        <v-list
+          v-if="
+            !$store.state.MusicPlayer.navBarImage &&
+              !$store.state.MusicPlayer.adTime
+          "
+        >
           <v-list-item
             v-for="playlist in playlists.items"
             :key="playlist.id"
@@ -148,12 +165,15 @@
           </v-list-item>
         </v-list>
         <v-img
-          v-else
+          v-else-if="
+            $store.state.MusicPlayer.navBarImage &&
+              !$store.state.MusicPlayer.adTime
+          "
           class="mt-2"
           max-height="180"
           max-width="200"
           :src="
-            $store.state.MusicPlayer.currentSong.track.album.images[0] ||
+            $store.state.MusicPlayer.currentSong.track.album.images[0].url ||
               'https://player.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png'
           "
           contain
@@ -166,6 +186,14 @@
             >mdi-chevron-down-circle</v-icon
           ></v-img
         >
+        <v-img
+          v-else
+          class="mt-2"
+          max-height="180"
+          max-width="200"
+          src="../assets/imgs/El-8alaba.png"
+          contain
+        ></v-img>
       </v-container>
     </v-navigation-drawer>
   </nav>
@@ -204,6 +232,7 @@ export default {
       createdPlaylistName: '',
       dialog: false,
       imageButton: false,
+      isArtist: false,
       rules: {
         required: (value) => !!value || 'Required.',
       },
@@ -214,6 +243,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  created() {
+    if (JSON.parse(localStorage.getItem('currentUser')).data.type === 'artist') {
+      this.isArtist = true;
+    }
   },
   mounted() {
     this.fetchUserPlaylists();
