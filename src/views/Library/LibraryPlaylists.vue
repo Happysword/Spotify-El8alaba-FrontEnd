@@ -6,6 +6,8 @@
                    :description="card.description" :images="card.images"
                    :type="card.type"
                    :external_urls="card.external_urls"
+                   :owner="card.owner.id"
+                   :public="card.public"
                    ></song-card>
             </v-col>
         </v-row>

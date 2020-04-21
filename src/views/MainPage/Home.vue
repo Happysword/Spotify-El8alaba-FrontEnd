@@ -36,6 +36,7 @@
                 :description="recentlyPlayed[i-1].description"
                 :type="recentlyPlayed[i-1].type"
                 :artistName="recentlyPlayed[i-1].artistName"
+                :owner="recentlyPlayed[i-1].owner ? recentlyPlayed[i-1].owner.id:''"
               >
               </songCard>
             </v-col>
@@ -79,6 +80,7 @@
                 :description="category.playlists[i-1].description"
                 :type="category.playlists[i-1].type"
                 :artistName="category.playlists[i-1].artistName"
+                :owner="category.playlists[i-1].owner"
               >
               </songCard>
             </v-col>
@@ -178,6 +180,7 @@ export default {
       ],
       categories: [],
       recentlyPlayed: [],
+      owner: {},
     };
   },
   created() {
@@ -200,6 +203,13 @@ export default {
       this.recentlyPlayed = await server.fetchRecentlyPlayedLists(6);
       console.log(this.recentlyPlayed);
       this.categories = await server.fetchGenres();
+    },
+    setownerid(list) {
+      if (list.type === 'album') {
+        this.owner = {};
+      } else {
+        this.owner = list.owner;
+      }
     },
   },
 };
