@@ -37,9 +37,12 @@ describe('Testing the existence of components', () => {
   });
 
   test('check that user button exists on click', async () => {
-    expect(wrapper.find('#user-btn').exists()).toBe(true);
-    expect(wrapper.find('#logout-item').exists()).toBe(true);
-    expect(wrapper.find('#account-item').exists()).toBe(true);
+    wrapper.vm.$data.loggedIn = true;
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.find('#user-btn').exists()).toBe(true);
+      expect(wrapper.find('#logout-item').exists()).toBe(true);
+      expect(wrapper.find('#account-item').exists()).toBe(true);
+    });
   });
   test('check that change route works', async () => {
     wrapper.vm.$route.params.id = 'Faded';

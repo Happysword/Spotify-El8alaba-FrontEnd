@@ -44,7 +44,8 @@
         </v-col>
 
         <v-spacer></v-spacer>
-        <v-col lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
+        <v-col v-if="this.$route.path !== '/premium' && product !== 'premium' "
+        lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
           <v-btn
             rounded
             outlined
@@ -55,29 +56,29 @@
             >Upgrade</v-btn
           >
         </v-col>
-        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
-          <div class="text-center" id="user-btn">
-            <v-menu offset-y>
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  rounded
-                  depressed
-                  color="#27272797"
-                  v-on="on"
-                  class=" text-user text-none ml-0"
-                  small
-                  id="inner-user-btn"
-                  ><v-avatar size="25" class="mr-1 ml-0"
-                    ><v-img :src="UserInfo.photo"></v-img
-                  ></v-avatar>
-                  <div>
-                    {{ userName }}
-                  </div>
-                  <v-avatar size="20" class="mx-1">
-                    <v-icon>mdi-chevron-down</v-icon>
-                  </v-avatar>
-                </v-btn>
-              </template>
+        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5" v-if="loggedIn">
+        <div class="text-center" id="user-btn">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                rounded
+                depressed
+                color="#27272797"
+                v-on="on"
+                class=" text-user text-none ml-0"
+                small
+                id="inner-user-btn"
+                ><v-avatar size="25" class="mr-1 ml-0"
+                  ><v-img :src="UserInfo.photo"></v-img
+                ></v-avatar>
+                <div>
+                  {{ userName }}
+                </div>
+                <v-avatar size="20" class="mx-1">
+                  <v-icon>mdi-chevron-down</v-icon>
+                </v-avatar>
+              </v-btn>
+            </template>
 
               <v-list dense color="grey darken-4" dark>
                 <v-list-item
@@ -103,16 +104,19 @@ export default {
   name: 'Topbar',
   /* istanbul ignore next */
   created() {
+    this.loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
     if (!currentUser.data.image) return;
-
+    this.product = currentUser.data.product;
     const {
       image: { url },
     } = currentUser.data;
     if (url) this.UserInfo.photo = url;
   },
   data: () => ({
+    product: 'free',
+    loggedIn: false,
     input: '',
     backtimes: 0,
     UserInfo: {

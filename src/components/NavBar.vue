@@ -6,8 +6,7 @@
       dark
       v-model="drawer"
       width="230"
-      permanent
-    >
+      permanent>
       <v-container>
         <v-list dense="">
           <v-list-item-content>
@@ -16,8 +15,8 @@
               contain
               height="120"
               @click="$router.push('/home')"
-              id="logo"
-            ></v-img>
+              id="logo">
+            </v-img>
           </v-list-item-content>
           <v-list-item
             v-for="link in links"
@@ -25,52 +24,48 @@
             route
             :exact="link.exact"
             :to="link.route"
-            id="mainLinks"
-          >
+            id="mainLinks">
             <v-list-item-icon>
-              <v-icon>{{ link.icon }}</v-icon>
+                <v-icon>{{ link.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2">{{
-                link.text
-              }}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">
+                {{ link.text}}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
         <v-list dark="" dense="">
           <v-list-item-content>
-            <v-list-item-title class="caption font-weight-bold gray--text"
-              >PLAYLISTS</v-list-item-title
-            >
+            <v-list-item-title class="caption font-weight-bold gray--text">
+              PLAYLISTS
+            </v-list-item-title>
           </v-list-item-content>
-
           <v-dialog
             v-model="dialog"
             max-width="100%"
             dark=""
             overlay-color="black"
-            overlay-opacity="0.9"
-          >
+            overlay-opacity="0.9">
             <template v-slot:activator="{ on }">
               <v-list-item @click="drawer = !drawer" v-on="on">
                 <v-list-item-icon>
                   <v-icon>mdi-plus</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-title class="subtitle-2" id="createPlaylist"
-                    >Create Playlist</v-list-item-title
-                  >
+                  <v-list-item-title class="subtitle-2" id="createPlaylist">
+                    Create Playlist
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </template>
             <v-container>
               <v-row align="center" justify="center">
                 <v-subheader
-                  class="display-2
-      font-weight-bold white--text"
-                  mr-5
-                  >Create new playlist</v-subheader
-                >
+                  class="display-2 font-weight-bold white--text"
+                  mr-5>
+                  Create new playlist
+                </v-subheader>
               </v-row>
             </v-container>
             <v-card>
@@ -87,8 +82,8 @@
                         outlined=""
                         v-model="createdPlaylistName"
                         :rules="[rules.required]"
-                        id="createNewPlaylist"
-                      ></v-text-field>
+                        id="createNewPlaylist">
+                      </v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -102,20 +97,20 @@
                   depressed
                   outlined
                   class="mx-4"
-                  @click="dialog = false"
-                  >Cancel</v-btn
-                >
+                  @click="dialog = false">
+                  Cancel
+                </v-btn>
                 <v-btn
                   rounded
                   depressed
                   color="success white--text"
                   class="mx-4"
                   @click="
-                    dialog = false;
-                    createNewPlaylist();
-                  "
-                  >Create</v-btn
-                >
+                  dialog = false;
+                  createNewPlaylist();
+                  ">
+                  Create
+                </v-btn>
               </v-row>
             </v-container>
           </v-dialog>
@@ -125,9 +120,9 @@
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2" id="likedSongs"
-                >Liked Songs</v-list-item-title
-              >
+              <v-list-item-title class="subtitle-2" id="likedSongs">
+                Liked Songs
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -138,12 +133,11 @@
             :key="playlist.id"
             dense
             route
-            :to="'/playlist/' + playlist.id"
-          >
+            :to="'/playlist/' + playlist.id">
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2">{{
-                playlist.name
-              }}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">
+                {{playlist.name}}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -158,14 +152,30 @@
           "
           contain
           @mouseenter="imageButton = true"
-          @mouseleave="imageButton = false"
-          ><v-icon
+          @mouseleave="imageButton = false">
+          <v-icon
             color="grey"
             v-show="imageButton"
-            @click="$store.state.MusicPlayer.navBarImage = false"
-            >mdi-chevron-down-circle</v-icon
-          ></v-img
-        >
+            @click="$store.state.MusicPlayer.navBarImage = false">
+            mdi-chevron-down-circle
+          </v-icon>
+        </v-img>
+      </v-container>
+      <v-container id="Download">
+        <v-list dense="" >
+          <v-list-item
+            route to="/download"
+            id="mainLinks">
+            <v-list-item-icon>
+                <v-icon>mdi-arrow-down-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">
+                Download app
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
       </v-container>
     </v-navigation-drawer>
   </nav>
@@ -264,3 +274,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+#Download{
+  position: fixed;
+  bottom: 0px;
+}
+</style>
