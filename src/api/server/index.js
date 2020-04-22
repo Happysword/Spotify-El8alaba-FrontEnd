@@ -461,11 +461,13 @@ export default {
    * @param {data} formData The Data of the track
    * @param {String} token The token of the user
    */
-  async uploadTrack(formData, token) {
+  async uploadTrack(formData, token, progress) {
     const response = await axios.post(`${api}/api/v1/streaming`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      /* eslint no-param-reassign: "error" */
+      onUploadProgress: (e) => { progress.songProgress = Math.round((e.loaded * 100) / e.total); },
     })
       .then((res) => res.body)
       .catch((err) => console.log(err));
@@ -899,6 +901,19 @@ export default {
       },
     });
     return Album.data;
+  },
+
+  /**
+   * Get tracks of certain album
+   * @param {String} id ID of the album to get tracks of
+   */
+  async fetchAlbumTracks(id) {
+    const track = await axios.get(`${api}/api/v1/albums/${id}/tracks?offset=&limit=`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return track.data;
   },
 
   /**
