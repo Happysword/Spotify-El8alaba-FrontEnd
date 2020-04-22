@@ -35,13 +35,14 @@
           </v-list-item-content>
         </v-list-item>
         <v-card-text align="end" style="width: 20%" v-if="!recommend">
-          <v-menu absolute left offset-overflow eager>
+          <v-menu absolute left offset-overflow>
             <template v-slot:activator="{ on }">
-              <v-icon size="20" class="px-2 mx-0" v-on="on" color="#E0E0E0" id="dotsIcon">
+              <v-icon size="20" class="px-2 mx-0" v-on="on" color="#E0E0E0" id="dotsIcon"
+                @click="drop = true">
                 {{ dotsIcon }}
               </v-icon>
             </template>
-            <dropDown :id="song.track.id" type="track" :track="song"></dropDown>
+            <dropDown v-if="drop" :id="song.track.id" type="track" :track="song"></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
             {{ parseInt(song.track.duration_ms / 60000) }} :
@@ -71,6 +72,7 @@ export default {
     color: 'grey',
     color2: 'white',
     play: false,
+    drop: false,
   }),
   props: {
     song: {

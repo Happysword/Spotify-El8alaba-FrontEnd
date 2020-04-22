@@ -55,7 +55,7 @@
           class="mx-4"
           @click="
             $store.state.dialog = false;
-            createNewPlaylist();
+            CreateNewPlaylist();
           "
           >Create</v-btn
         >
@@ -70,6 +70,7 @@ import client from 'api-client';
 export default {
   data() {
     return {
+      token: '',
       drawer: true,
       createdPlaylistName: '',
       rules: {
@@ -79,23 +80,31 @@ export default {
   },
   methods: {
   /** Create a new playlist */
-    createNewPlaylist() {
+    async CreateNewPlaylist() {
       const token = JSON.parse(localStorage.getItem('currentUser'));
       if (token === null) {
         this.token = 'token';
       } else {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
-      client.createNewPlayList({
+      await client.createNewPlayList({
         name: this.createdPlaylistName,
         public: 'true',
         description: '',
       },
-      this.token).then((r) => {
+      this.token).then(async (r) => {
         console.log(r);
         this.createdPlaylistName = '';
-        this.fetchUserPlaylists();
       });
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve('done');
+        }, 500);
+      });
+      client.fetchCurrentUserPlaylists(this.token)
+        .then((response) => {
+          this.$store.state.userPlaylists = response;
+        });
     },
   },
 };

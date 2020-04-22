@@ -94,6 +94,9 @@ export default {
           this.SnackBar.content = 'Added to Queue';
           console.log(this.$store.state.MusicPlayer.currentQueue);
         }
+        if (item === 'Add to Playlist') {
+          EventBus.$emit('addOverlay', true, this.id);
+        }
         EventBus.$emit('snackbar', this.SnackBar);
         this.showList = this.songList;
       }
@@ -125,6 +128,10 @@ export default {
             this.$store.commit('changeLiked');
             this.SnackBar.show = true;
             this.SnackBar.content = 'Saved To Your Library';
+            server.fetchCurrentUserPlaylists(JSON.parse(localStorage.getItem('currentUser')).token)
+              .then((res) => {
+                this.$store.state.userPlaylists = res;
+              });
           }
         } else if (item === 'Remove From Your Library') {
           const response = await server.UnfollowPlaylist(this.id);
@@ -134,6 +141,10 @@ export default {
             this.$store.commit('changeLiked');
             this.SnackBar.show = true;
             this.SnackBar.content = 'Removed From Your Library';
+            server.fetchCurrentUserPlaylists(JSON.parse(localStorage.getItem('currentUser')).token)
+              .then((res) => {
+                this.$store.state.userPlaylists = res;
+              });
           }
         }
         EventBus.$emit('snackbar', this.SnackBar);
@@ -172,7 +183,7 @@ export default {
       this.$forceUpdate(); // Force Vue to re-render the component
     },
   },
-  created() {
+  mounted() {
     this.loadData();
   },
 };

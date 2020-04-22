@@ -55,7 +55,7 @@
               >PLAYLISTS</v-list-item-title
             >
           </v-list-item-content>
-          <v-list-item @click="drawer = !drawer; $store.state.dialog = true;">
+          <v-list-item @click="drawer = !drawer; $store.state.dialog = true; dialog=true;">
             <v-list-item-icon>
               <v-icon>mdi-plus-box</v-icon>
             </v-list-item-icon>
@@ -65,7 +65,7 @@
               >
             </v-list-item-content>
           </v-list-item>
-          <createList></createList>
+          <createList v-if="dialog === true"></createList>
           <v-list-item route to="/home/library/tracks">
             <v-list-item-icon>
               <v-icon>mdi-heart</v-icon>
@@ -85,7 +85,7 @@
           "
         >
           <v-list-item
-            v-for="playlist in playlists.items"
+            v-for="playlist in $store.state.userPlaylists.items"
             :key="playlist.id"
             dense
             route
@@ -188,6 +188,7 @@ export default {
     }
   },
   mounted() {
+    this.dialog = false;
     this.fetchUserPlaylists();
   },
   methods: {
@@ -205,34 +206,34 @@ export default {
       }
 
       client.fetchCurrentUserPlaylists(this.token).then((response) => {
-        this.playlists = response;
+        this.$store.state.userPlaylists = response;
       });
     },
-    /** Create a new playlist */
-    createNewPlaylist() {
-      const token = JSON.parse(localStorage.getItem('currentUser'));
+    // /** Create a new playlist */
+    // createNewPlaylist() {
+    //   const token = JSON.parse(localStorage.getItem('currentUser'));
 
-      if (token === null) {
-        this.token = 'token';
-      } else {
-        this.token = JSON.parse(localStorage.getItem('currentUser')).token;
-      }
+    //   if (token === null) {
+    //     this.token = 'token';
+    //   } else {
+    //     this.token = JSON.parse(localStorage.getItem('currentUser')).token;
+    //   }
 
-      client
-        .createNewPlayList(
-          {
-            name: this.createdPlaylistName,
-            public: 'true',
-            description: '',
-          },
-          this.token,
-        )
-        .then((r) => {
-          console.log(r);
-          this.createdPlaylistName = '';
-          this.fetchUserPlaylists();
-        });
-    },
+    //   client
+    //     .createNewPlayList(
+    //       {
+    //         name: this.createdPlaylistName,
+    //         public: 'true',
+    //         description: '',
+    //       },
+    //       this.token,
+    //     )
+    //     .then((r) => {
+    //       console.log(r);
+    //       this.createdPlaylistName = '';
+    //       this.fetchUserPlaylists();
+    //     });
+    //   },
   },
 };
 </script>

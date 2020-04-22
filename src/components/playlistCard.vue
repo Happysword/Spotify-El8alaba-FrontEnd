@@ -214,6 +214,12 @@ export default {
           this.text = 'Removed from Your Library';
         }
       }
+      if (this.listInfo.type === 'playlist') {
+        server.fetchCurrentUserPlaylists(JSON.parse(localStorage.getItem('currentUser')).token)
+          .then((res) => {
+            store.state.userPlaylists = res;
+          });
+      }
     },
   },
 
