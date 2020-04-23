@@ -9,16 +9,17 @@
       <router-view></router-view>
     </v-content>
     <music-player></music-player>
+    <Overlays></Overlays>
   </v-app>
 </template>
 
 <script>
 import api from 'api-client';
-
 import EventBus from '../../EventBus';
 import Navbar from '../../components/NavBar.vue';
 import Topbar from '../../components/TopBar.vue';
 import MusicPlayer from '../../components/MusicPlayer.vue';
+import Overlays from '../../components/Overlays.vue';
 
 export default {
   name: 'Main',
@@ -38,9 +39,17 @@ export default {
     Navbar,
     Topbar,
     MusicPlayer,
+    Overlays,
   },
   data: () => ({
     color: 'rgba(10,10,10,255)',
+    snackbar: {
+      show: false,
+      timeout: 2000,
+      content: '',
+    },
+    overlay: false,
+    listId: '',
   }),
   methods: {
     restoreColor() {

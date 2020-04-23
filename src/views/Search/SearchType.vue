@@ -16,7 +16,7 @@
                       :collaborative="card.collaborative"
                       :external_urls="card.external_urls"
                       :href="card.href"
-                      :public="card.public"
+                      :Public="card.public"
                       :snapshot_id="card.snapshot_id"
                       :uri="card.uri">
                   </song-card>

@@ -90,9 +90,10 @@
                :collaborative="albums[i-1].collaborative"
                :external_urls="albums[i-1].external_urls"
                :href="albums[i-1].href"
-               :public="albums[i-1].public"
+               :Public="albums[i-1].public"
                :snapshot_id="albums[i-1].snapshot_id"
-               :uri="albums[i-1].uri">
+               :uri="albums[i-1].uri"
+               :owner="''">
               </song-card>
             </div>
           </v-col>
@@ -118,8 +119,9 @@
               :collaborative="playlists[i-1].collaborative"
               :external_urls="playlists[i-1].external_urls"
               :href="playlists[i-1].href"
-              :public="playlists[i-1].public"
+              :Public="playlists[i-1].public"
               :snapshot_id="playlists[i-1].snapshot_id"
+              :owner="playlists[i-1].owner.id"
               :uri="playlists[i-1].uri"></song-card>
             </div>
           </v-col>
