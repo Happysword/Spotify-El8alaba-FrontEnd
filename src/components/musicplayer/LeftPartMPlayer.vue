@@ -124,7 +124,19 @@ import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
 import notePic from '../../assets/imgs/MusicNote.png';
 /* eslint-disable no-underscore-dangle */
 /**
- *
+ * @vue-data {Booelan} heartcolor - Flag for the Heart Color
+ * @vue-data {Booelan} hoverPic - Flag for the Picture in Picture
+ * @vue-data {Booelan} imageButton - Flag for the Button on the image to show
+ * @vue-data {Booelan} isLinkDisabled - Flag to disable the Image Link when Hovered
+ * @vue-data {Booelan} snackbar - Flag for the Snack Bar
+ * @vue-data {String} text - The text that is written in the Snack Bar
+ * @vue-data {Number} timeout - The time the Snack Bar remains Visible
+ * @vue-data {HTMLCanvasElement} canvas - The canvas That is Captured by the Video
+ * @vue-data {HTMLVideoElement} video - the Video that is Viewed in the Pip
+ * @vue-computed {String} albumid
+ * @vue-computed {String} artistid
+ * @vue-computed {String} imgsrc
+ * @vue-computed {String} artistname
  */
 export default {
   data: () => ({
@@ -166,7 +178,7 @@ export default {
       }
     },
     /**
-     *Changes Whether the pip shows or dissapears **still no implemented**
+     *Changes Whether the pip shows or dissapears
      */
     async changeHoverPic() {
       if (!this.hoverPic) {
@@ -180,6 +192,9 @@ export default {
         this.hoverPic = false;
       }
     },
+    /**
+     * Changes the Picture in Picture Current Song
+     */
     async changePnp() {
       const img = new Image();
       img.crossOrigin = true;

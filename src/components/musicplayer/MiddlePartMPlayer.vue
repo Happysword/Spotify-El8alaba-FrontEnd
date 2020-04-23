@@ -126,8 +126,18 @@ import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
 /* eslint-disable no-underscore-dangle */
 
 /**
- *
- */
+ * @vue-data {Boolean} shuffleState - State of the Shuffle
+ * @vue-data {String} repeatState - State of the Shuffle
+ * @vue-data {Boolean} barHover - Hover State of the Progress Bar
+ * @vue-data {Number} valueFalseBuffer - Value saved For the Bar before the request is accepted
+ * @vue-data {Array} songList - Saves the unShuffled List
+ * @vue-data {Number} songindex - Saves the Current song Index in the Unshuffled List
+ * @vue-data {Number} skipnum - Number of songs skips the user made
+ * @vue-data {String} userType - Type of the User
+ * @vue-data {HTMLAudioElement} adAudio - The Audip Element that has the Ad played
+ * @vue-computed {String} totalSongTime
+ * @vue-computed {String} currentSongTime
+*/
 export default {
   data: () => ({
     shuffleState: false,

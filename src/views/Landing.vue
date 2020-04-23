@@ -112,7 +112,10 @@
 
 <script>
 import cookies from '@/store/modules/auth/cookies';
-
+/**
+ * @vue-data {Booelan} drawer - Flag for the Navigation drawer
+ * @vue-data {Array} Buttons - Array of Objects of the Buttons
+ */
 export default {
   name: 'Landing',
   /* istanbul ignore next */

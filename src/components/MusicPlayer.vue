@@ -26,7 +26,7 @@ import { mapActions } from 'vuex';
 import LMusicP from './musicplayer/LeftPartMPlayer.vue';
 import RMusicP from './musicplayer/RightPartMPlayer.vue';
 import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
-
+/** */
 export default {
   components: {
     LMusicP,

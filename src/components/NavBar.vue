@@ -7,6 +7,7 @@
       v-model="drawer"
       width="230"
       permanent
+      :expand-on-hover="$vuetify.breakpoint.xs"
     >
       <v-container>
         <v-list dense="">

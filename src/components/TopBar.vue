@@ -56,9 +56,9 @@
             >Upgrade</v-btn
           >
         </v-col>
-        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
-          <div class="text-center" id="user-btn">
-            <v-menu offset-y>
+        <v-col md="2" sm="4" xs="12" class="pr-0 mr-5" >
+          <div class="text-center justify-end" id="user-btn">
+            <v-menu offset-y id="user-menu">
               <template v-slot:activator="{ on }">
                 <v-btn
                   rounded
@@ -100,7 +100,14 @@
 
 <script>
 import api from 'api-client';
-/** */
+/**
+ * @vue-data {String} input - User Search Input
+ * @vue-data {Number} backtimes - number of clicks on the back arrow now
+ * @vue-data {Object} UserInfo - Info about the current User
+ * @vue-data {Object} items - The Dropdown menu items
+ * @vue-computed {String} userName
+ * @vue-computed {Object} backwardstate
+*/
 export default {
   name: 'Topbar',
   /* istanbul ignore next */
