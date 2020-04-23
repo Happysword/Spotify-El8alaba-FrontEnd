@@ -119,9 +119,8 @@ export default {
    * it has song, currentList and playstatus
    */
   async playpauseplaylist({ state, dispatch }, param) {
-    if (param.ID) {
-      state.MusicPlayer.ID = param.ID;
-    }
+    if (param.ID) state.MusicPlayer.ID = param.ID;
+    if (param.type) state.MusicPlayer.Type = param.type;
     if (param.song !== undefined && param.currentList !== undefined) {
       state.MusicPlayer.currentSong = param.song;
       state.MusicPlayer.currentList = param.currentList;
