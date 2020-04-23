@@ -5,9 +5,9 @@
         <v-col align-self="center" class="pa-0" cols="3" v-if="$vuetify.breakpoint.smAndUp">
           <LMusicP
             v-if="
-              !($store.state.MusicPlayer.currentSong === false) &&
-                !$store.state.MusicPlayer.adTime
+              !($store.state.MusicPlayer.currentSong === false)
             "
+            :hidden="$store.state.MusicPlayer.adTime"
           ></LMusicP>
           <div class="mx-5" v-if="$store.state.MusicPlayer.adTime">Advertisement</div>
         </v-col>

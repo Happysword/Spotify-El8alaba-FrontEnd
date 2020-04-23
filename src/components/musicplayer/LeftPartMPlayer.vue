@@ -182,7 +182,7 @@ export default {
      */
     async changeHoverPic() {
       if (!this.hoverPic) {
-        this.changePnp();
+        await this.changePnp();
         navigator.mediaSession.setActionHandler('play', () => { this.togglePlayact(); this.video.play(); });
         navigator.mediaSession.setActionHandler('pause', () => { this.togglePlayact(); this.video.pause(); });
         if (!this.playstate) this.video.pause();
@@ -240,11 +240,11 @@ export default {
     },
   },
   watch: {
-    imgsrc() {
-      this.changePnp();
+    async imgsrc() {
+      await this.changePnp();
     },
-    playstate() {
-      if (this.playstate) this.video.play();
+    async playstate() {
+      if (this.playstate) await this.video.play().catch();
       else this.video.pause();
     },
   },
