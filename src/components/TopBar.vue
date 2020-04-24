@@ -46,6 +46,7 @@
         <v-spacer></v-spacer>
         <v-col lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
           <v-btn
+            v-if ="UserInfo.Type != 'premium'"
             rounded
             outlined
             class="mx-4"
@@ -55,9 +56,9 @@
             >Upgrade</v-btn
           >
         </v-col>
-        <v-col md="1" sm="4" xs="12" class="pr-0 mr-5">
-          <div class="text-center" id="user-btn">
-            <v-menu offset-y>
+        <v-col md="2" sm="4" xs="12" class="pr-0 mr-5" >
+          <div class="text-center justify-end" id="user-btn">
+            <v-menu offset-y id="user-menu">
               <template v-slot:activator="{ on }">
                 <v-btn
                   rounded
@@ -98,11 +99,21 @@
 </template>
 
 <script>
-/** */
+import api from 'api-client';
+/**
+ * @vue-data {String} input - User Search Input
+ * @vue-data {Number} backtimes - number of clicks on the back arrow now
+ * @vue-data {Object} UserInfo - Info about the current User
+ * @vue-data {Object} items - The Dropdown menu items
+ * @vue-computed {String} userName
+ * @vue-computed {Object} backwardstate
+*/
 export default {
   name: 'Topbar',
   /* istanbul ignore next */
-  created() {
+  async created() {
+    this.UserInfo.Type = await api.getCurrentUserProfile().then((Resp) => Resp.data.product);
+
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
     if (!currentUser.data.image) return;
@@ -116,6 +127,7 @@ export default {
     input: '',
     backtimes: 0,
     UserInfo: {
+      Type: 'premium',
       name: 'John Doe',
       photo:
         'https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',

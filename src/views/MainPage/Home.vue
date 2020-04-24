@@ -1,17 +1,62 @@
 <template>
     <v-container>
-      <div v-for="category in categories" :key="category.id">
+      <div>
+        <template v-if="recentlyPlayed.length > 0">
+          <v-row>
+            <v-col sm='8' md='10' lg="10">
+              <h1 class="font-weight-bold white--text"
+              >
+              <!-- @click="click('RecentlyPlayed',recentlyPlayed.length)" -->
+                Recently Played
+              </h1>
+            </v-col>
+            <v-col sm='4' md='2' lg="2" align="end" v-if="recentlyPlayed.length > 6">
+              <h1 class="white--text pr-5 pt-4 body-1" id="all"
+              >
+                See All
+              </h1>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col sm='6' md='4' lg="2"
+              v-for="i in (recentlyPlayed.length>6 ? 6:recentlyPlayed.length)"
+              :key ="i">
+              <!-- <artistCard v-if="played[i-1].type === 'artist'"
+                :id="played[i-1].id"
+                :name="played[i-1].name"
+                :images="played[i-1].images[0]"
+                :description="played[i-1].description"
+                :type="played[i-1].type"
+              >
+              </artistCard> -->
+              <songCard
+                :id="recentlyPlayed[i-1].id"
+                :name="recentlyPlayed[i-1].name"
+                :images="recentlyPlayed[i-1].images"
+                :description="recentlyPlayed[i-1].description"
+                :type="recentlyPlayed[i-1].type"
+                :artistName="recentlyPlayed[i-1].artistName"
+                :owner="recentlyPlayed[i-1].owner ? recentlyPlayed[i-1].owner.id:''"
+              >
+              </songCard>
+            </v-col>
+          </v-row>
+        </template>
+      </div>
+      <div v-for="category in categories" :key="category._id">
         <template v-if="category.playlists.length > 0">
           <v-row>
             <v-col sm='8' md='10' lg="10">
               <h1 class="font-weight-bold white--text" id="recent"
-              @click="click(category)"
+              @click="click(category._id, category.playlists.length)"
               >
                 {{category.name}}
               </h1>
             </v-col>
             <v-col sm='4' md='2' lg="2" align="end" v-if="category.playlists.length > 6">
-              <h1 class="white--text pr-5 pt-4 body-1" id="all" @click="click(category)">
+              <h1 class="white--text pr-5 pt-4 body-1" id="all"
+                @click="click(category._id, category.playlists.length)"
+              >
                 See All
               </h1>
             </v-col>
@@ -35,6 +80,7 @@
                 :description="category.playlists[i-1].description"
                 :type="category.playlists[i-1].type"
                 :artistName="category.playlists[i-1].artistName"
+                :owner="category.playlists[i-1].owner"
               >
               </songCard>
             </v-col>
@@ -133,6 +179,8 @@ export default {
         'Rewind and rediscover your favorites',
       ],
       categories: [],
+      recentlyPlayed: [],
+      owner: {},
     };
   },
   created() {
@@ -143,23 +191,31 @@ export default {
      * Route to Genre page
      * @param Object category object
      */
-    click(category) {
-      if (category.playlists.length >= 1) {
-        // eslint-disable-next-line no-underscore-dangle
-        this.$router.push(`/genre/${category._id}-page`);
+    click(id, length) {
+      if (length >= 1) {
+        this.$router.push(`/genre/${id}-page`);
       }
     },
     /**
      * Get list of Categories
      */
     async getCategories() {
+      this.recentlyPlayed = await server.fetchRecentlyPlayedLists(6);
+      console.log(this.recentlyPlayed);
       this.categories = await server.fetchGenres();
+    },
+    setownerid(list) {
+      if (list.type === 'album') {
+        this.owner = {};
+      } else {
+        this.owner = list.owner;
+      }
     },
   },
 };
 </script>
 <style scoped>
-#recent:hover,#all:hover {
+#recently:hover,#recent:hover,#all:hover {
   text-decoration-line: underline;
   cursor: pointer;
 }

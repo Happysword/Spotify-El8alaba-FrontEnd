@@ -33,11 +33,11 @@
         </v-icon>
       </v-overlay>
     </v-img>
-    <v-card-title id="listName" class="justify-center headline font-weight-bold pb-0">
+    <v-card-title id="listName" class="justify-center headline font-weight-bold pb-0 text-no-wrap">
       {{listInfo.name}}
     </v-card-title>
     <v-card-title id="owner" class="justify-center body-2 text grey--text pt-0" v-if="show">
-      <span v-for="(owner,i) in listInfo.artists" :key="i">{{owner.name}}</span>
+      <span>{{owner.name}}</span>
     </v-card-title>
     <v-card-actions class="justify-center">
       <v-btn
@@ -58,7 +58,7 @@
       <v-icon
         id="save"
         v-show="!store.state.liked"
-        v-if="show && songsNum" size="30"
+        v-if="show && songsNum && !isOwner" size="30"
         class="px-3"
         @click="changeLiked"
         color="#E0E0E0"
@@ -68,7 +68,7 @@
       <v-icon
         id="remove"
         v-show="store.state.liked"
-        v-if="show && songsNum"
+        v-if="show && songsNum && !isOwner"
         size="30"
         color='#1DB954'
         class="px-3"
@@ -102,7 +102,9 @@
               mdi-dots-horizontal
             </v-icon>
           </template>
-          <dropDown></dropDown>
+          <dropDown :id="listInfo.id" :type="listInfo.type"
+            :public="listInfo.public" :ownerID="owner.id">
+          </dropDown>
         </v-menu>
       </span>
       <v-tooltip id="tooltip" right v-model="tooltip">
@@ -141,6 +143,8 @@ export default {
     tooltip: false,
     play: false,
     btnColor: '#1DB954',
+    owner: {},
+    isOwner: false,
 
   }),
 
@@ -210,6 +214,12 @@ export default {
           this.text = 'Removed from Your Library';
         }
       }
+      if (this.listInfo.type === 'playlist') {
+        server.fetchCurrentUserPlaylists(JSON.parse(localStorage.getItem('currentUser')).token)
+          .then((res) => {
+            store.state.userPlaylists = res;
+          });
+      }
     },
   },
 
@@ -219,6 +229,15 @@ export default {
     // } else {
     //   this.btnColor = '#1DB954FF';
     // }
+    if (this.listInfo.type === 'playlist') {
+      this.owner = this.listInfo.owner;
+    } else if (this.listInfo.type === 'album') {
+      // need to edit
+      // this.owner.id = this.listInfo.artists[0];
+      this.owner.id = null;
+    }
+    // eslint-disable-next-line no-underscore-dangle
+    if (this.owner.id === JSON.parse(localStorage.getItem('currentUser')).data._id) this.isOwner = true;
     let response = {};
     if (this.listInfo.type === 'album') {
       // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
@@ -229,7 +248,7 @@ export default {
     } else {
       return;
     }
-    if (response.data.length !== 0 && response.data[0] === true) {
+    if (response.data.length !== 0 && response.data[0] === true && response.status === 200) {
       store.state.liked = true;
     } else {
       store.state.liked = false;

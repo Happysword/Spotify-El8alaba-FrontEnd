@@ -21,7 +21,7 @@ export default {
       };
       let Response = await PlayerRequests.playTrack(state.MusicPlayer.currentSong.track.id
       // eslint-disable-next-line no-underscore-dangle
-        || state.MusicPlayer.currentSong.track._id);
+        || state.MusicPlayer.currentSong.track._id, state.MusicPlayer.Type, state.MusicPlayer.ID);
       if (process.env.VUE_APP_API_CLIENT !== 'server') Response = true;
       // check if the response was correct
       if (Response === false) return;
@@ -119,9 +119,8 @@ export default {
    * it has song, currentList and playstatus
    */
   async playpauseplaylist({ state, dispatch }, param) {
-    if (param.ID) {
-      state.MusicPlayer.ID = param.ID;
-    }
+    if (param.ID) state.MusicPlayer.ID = param.ID;
+    if (param.type) state.MusicPlayer.Type = param.type;
     if (param.song !== undefined && param.currentList !== undefined) {
       state.MusicPlayer.currentSong = param.song;
       state.MusicPlayer.currentList = param.currentList;

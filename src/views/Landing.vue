@@ -4,31 +4,63 @@
       <div class="wrap cover">
         <div class="cover svg-photo">
           <v-app-bar color="black" class="trans-bar">
+            <!-- Controller for nav Drawer -->
+            <v-btn
+              @click.stop="drawer = !drawer"
+              v-if="$vuetify.breakpoint.xs"
+              depressed
+            >
+              <v-icon>mdi-view-sequential</v-icon>
+            </v-btn>
             <router-link to="/">
               <v-img
                 src="../assets/imgs/El-8alaba.png"
                 max-height="200"
                 max-width="200"
                 id="logo-img"
+                class="mt-4"
               ></v-img>
             </router-link>
-            <v-spacer></v-spacer>
-            <ul>
+            <v-spacer v-if="$vuetify.breakpoint.smAndUp"></v-spacer>
+            <!-- List if Normal Desktops -->
+            <ul v-if="$vuetify.breakpoint.smAndUp">
               <v-btn
                 v-for="i in buttons.length"
                 :key="i"
-                class="btn-green text-none d-none d-sm-table-cell"
+                class="btn-green text-none"
                 type="li"
                 left
                 text
                 large
-                :id="buttons[i-1].id"
-                :to="buttons[i-1].route"
+                :id="buttons[i - 1].id"
+                :to="buttons[i - 1].route"
               >
-                {{ buttons[i-1].name }}</v-btn
+                {{ buttons[i - 1].name }}</v-btn
               >
             </ul>
           </v-app-bar>
+          <!-- Drawer for mobile and Tablets-->
+          <v-navigation-drawer
+            v-if="$vuetify.breakpoint.xs"
+            v-model="drawer"
+            absolute
+            bottom
+            temporary
+          >
+            <v-list nav dense>
+              <v-list-item-group
+                v-for="i in buttons.length"
+                :key="i"
+                class="btn-green text-none"
+              >
+                <v-list-item :to="buttons[i - 1].route">
+                  <v-list-item-title>{{
+                    buttons[i - 1].name
+                  }}</v-list-item-title>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-navigation-drawer>
           <div class="text-main cover">
             <v-container fill-height>
               <v-row>
@@ -80,7 +112,10 @@
 
 <script>
 import cookies from '@/store/modules/auth/cookies';
-
+/**
+ * @vue-data {Booelan} drawer - Flag for the Navigation drawer
+ * @vue-data {Array} Buttons - Array of Objects of the Buttons
+ */
 export default {
   name: 'Landing',
   /* istanbul ignore next */
@@ -125,12 +160,12 @@ export default {
         id: 'signup-btn',
       },
     ],
+    drawer: false,
   }),
   created() {
     document.title = 'Welcome - Spotify El8alaba';
   },
 };
-
 </script>
 
 <style scoped>

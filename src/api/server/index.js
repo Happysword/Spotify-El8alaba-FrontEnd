@@ -229,9 +229,11 @@ export default {
   /**
    * it sends a request to the server to set the current playing track
    * @param {string} ID the ID of the song played
+   * @param {string} context The Type of the List played from
+   * @param {string} contextID The ID of the Context
    * @return {Boolean} a Boolean True if successful and false if failed
    */
-  async playTrack(ID) {
+  async playTrack(ID, context, contextID) {
     const config = {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
@@ -240,6 +242,7 @@ export default {
     return axios
       .post(`${api}/api/v1/me/player/track`, {
         trackId: ID,
+        context_uri: `spotify:${context}:${contextID}`,
       }, config)
       .then((response) => {
         if (response.status === 204) return true;
@@ -876,6 +879,43 @@ export default {
   },
 
   /**
+   * Fetches Current user Recently played tracks
+   * @return {Array} An Array containing Recently played tracks
+   */
+  async fetchRecentlyPlayedTracks() {
+    const lists = await axios.get(`${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return lists.data.items;
+  },
+
+  /**
+   * Fetches Current user Recently played tracks
+   * @return {Array} An Array containing Recently played tracks
+   */
+  async fetchRecentlyPlayedLists(limit) {
+    const lists = await axios.get(`${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    const promises = [];
+    const data = [];
+    for (let i = 0; i < lists.data.playContexts.length; i += 1) {
+      const arr = lists.data.playContexts[i].uri.split(':');
+      if (arr[1] === 'album') {
+        promises.push(this.fetchAlbum(arr[2]).then((res) => data.push(res)));
+      } else {
+        promises.push(this.fetchList(arr[2]).then((res) => data.push(res)));
+      }
+    }
+    await Promise.all(data);
+    return data;
+  },
+
+  /**
    * Fetches List info
    * @param  {Number}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
@@ -955,29 +995,19 @@ export default {
   /**
    * Remove Track for the Current User
    * @param  {Number}  id The id of the Track
-   * @return {Object}  The corresponding response
+   * @return {Boolean}  The corresponding response
    */
   async RemoveTrack(id) {
     const res = await axios.delete(`${api}/api/v1/me/tracks?ids=${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    });
+    }).then((response) => {
+      if (response.status === 200) return true;
+      return false;
+    }).catch(() => false);
     return res;
   },
-  // /**
-  //  * Get a playlist
-  //  * @param {string} id the id of the playlist
-  //  * @return {object} object containing the playlist infos.
-  //  */
-  // async fetchPlaylist(id) {
-  //   const res = await axios.get(`${api}/api/v1/playlists/${id}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-  //     },
-  //   });
-  //   return res;
-  // },
 
   /**
    * Save Album for the Current User
@@ -1071,6 +1101,43 @@ export default {
     return response;
   },
 
+  /**
+   * Add Track to a Playlist
+   * @param  {Number}  listId The id of the Playlist
+   * @param  {Number}  trackId the id of the track
+   * @return {Object}  The corresponding response
+   */
+  async AddTrackToPlaylist(listId, trackId) {
+    const response = await axios.post(`${api}/api/v1/playlists/${listId}/tracks`, {
+      ids: [trackId],
+    }, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    }).then((res) => {
+      if (res.status === 201) return true;
+      return false;
+    }).catch(() => false);
+    return response;
+  },
+
+  /**
+   * Change details of a Playlist
+   * @param  {Number}  id The id of the Playlist
+   * @param  {Object}  body The data to be changed
+   * @return {Object}  The corresponding response
+   */
+  async ChangeDetailsOfPlaylist(id, body) {
+    const response = axios.put(`${api}/api/v1/playlists/${id}`, body, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    }).then((res) => {
+      if (res.status === 200) return true;
+      return false;
+    }).catch(() => false);
+    return response;
+  },
 
   /**
    * Gets all categories (genres)

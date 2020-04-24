@@ -13,6 +13,14 @@ import RMPlayer from '../../src/components/musicplayer/RightPartMPlayer.vue';
 
 describe('Testing the player components', () => {
   // Setting up The Vue instances configs
+  Object.defineProperty(HTMLMediaElement.prototype, 'play', {
+    writable: true,
+    value: jest.fn().mockImplementation(() => Promise.resolve()),
+  });
+  Object.defineProperty(HTMLMediaElement.prototype, 'pause', {
+    writable: true,
+    value: jest.fn().mockImplementation(() => Promise.resolve()),
+  });
   Vue.use(Vuetify);
   const localVue = createLocalVue();
   localVue.use(Vuetify);
@@ -32,6 +40,7 @@ describe('Testing the player components', () => {
         currentList: [currentSongMock[0], currentSongMock[0]],
         currentSongIndexinList: 0,
         AudioPlayer: Audio,
+        adTime: false,
       },
     },
     mutations: {
@@ -118,6 +127,10 @@ describe('Testing the player components', () => {
       Requests,
     });
     const data = wrapper.vm.$data;
+    Object.defineProperty(HTMLImageElement.prototype, 'decode', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => Promise.resolve()),
+    });
 
     // Check that data is correct at start
 
@@ -137,9 +150,9 @@ describe('Testing the player components', () => {
     });
     it('checks skip next and skip previous', async () => {
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
-      wrapper.vm.skipNext();
+      await wrapper.vm.skipNext();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
-      wrapper.vm.skipPrevious();
+      await wrapper.vm.skipPrevious();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
     });
 

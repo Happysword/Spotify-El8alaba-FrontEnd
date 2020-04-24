@@ -47,7 +47,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-/** */
+/**
+ * @vue-data {Booelan} isInQueue - Flag for the Queue Route
+ * @vue-data {Booelan} barHover - Flag for the Hover of the Bar
+*/
 export default {
   data: () => ({
     isInQueue: false,

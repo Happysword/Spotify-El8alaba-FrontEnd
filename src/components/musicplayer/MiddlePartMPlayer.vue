@@ -9,6 +9,7 @@
           small
           id="shuffle-btn"
           @click="toggleShuffle"
+          :disabled="$store.state.MusicPlayer.adTime"
         >
           mdi-shuffle-variant
         </v-icon>
@@ -19,6 +20,7 @@
           dense
           medium
           id="skip-previous-btn"
+          :disabled="$store.state.MusicPlayer.adTime"
           @click="skipPrevious"
         >
           mdi-skip-previous
@@ -31,6 +33,7 @@
           x-large
           id="pause-btn"
           v-if="$store.state.MusicPlayer.isPlaying"
+          :disabled="$store.state.MusicPlayer.adTime"
           @click="togglePlayact"
         >
           mdi-pause-circle-outline
@@ -43,6 +46,7 @@
           id="play-btn"
           x-large
           v-else
+          :disabled="$store.state.MusicPlayer.adTime"
           @click="togglePlayact"
         >
           mdi-play-circle-outline
@@ -54,6 +58,7 @@
           dense
           medium
           id="skip-next-btn"
+          :disabled="$store.state.MusicPlayer.adTime"
           @click="skipNext"
         >
           mdi-skip-next
@@ -65,6 +70,7 @@
           dense
           small
           id="repeat-btn"
+          :disabled="$store.state.MusicPlayer.adTime"
           @click="toggleRepeat"
         >
           mdi-repeat
@@ -114,13 +120,24 @@
 </template>
 
 <script>
+import api from 'api-client';
 import { mapActions } from 'vuex';
 import PlayerRequests from '../../store/modules/MusicPlayer/Requests';
 /* eslint-disable no-underscore-dangle */
 
 /**
- *
- */
+ * @vue-data {Boolean} shuffleState - State of the Shuffle
+ * @vue-data {String} repeatState - State of the Shuffle
+ * @vue-data {Boolean} barHover - Hover State of the Progress Bar
+ * @vue-data {Number} valueFalseBuffer - Value saved For the Bar before the request is accepted
+ * @vue-data {Array} songList - Saves the unShuffled List
+ * @vue-data {Number} songindex - Saves the Current song Index in the Unshuffled List
+ * @vue-data {Number} skipnum - Number of songs skips the user made
+ * @vue-data {String} userType - Type of the User
+ * @vue-data {HTMLAudioElement} adAudio - The Audip Element that has the Ad played
+ * @vue-computed {String} totalSongTime
+ * @vue-computed {String} currentSongTime
+*/
 export default {
   data: () => ({
     shuffleState: false,
@@ -129,42 +146,64 @@ export default {
     valueFalseBuffer: 0,
     songList: [],
     songindex: 0,
+    skipnum: 0,
+    userType: '',
+    adAudio: new Audio('https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3'),
   }),
   methods: {
     ...mapActions(['togglePlayact', 'playNewSong']),
     /**
+    * Plays an Ad for Free Users Every 3 Skips
+    */
+    async adPlay() {
+      if (this.userType === 'free') this.skipnum += 1;
+      if (this.skipnum === 3) {
+        if (this.$store.state.MusicPlayer.isPlaying) {
+          await this.togglePlayact();
+        }
+        this.$store.state.MusicPlayer.adTime = true;
+        await this.adAudio.play();
+        this.skipnum = 0;
+      }
+    },
+    /**
      * Skips to the Next Song in the queue
      */
     async skipNext() {
-      // await PlayerRequests.skipNext();
-      const listlen = this.$store.state.MusicPlayer.currentList.length;
-      let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
-      listindex += 1;
-      if (listlen === listindex) listindex = 0;
-      if (listlen === 1) listindex = 0;
-      this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
-      this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
-        listindex
-      ];
-      // the song is played for the first time and play it
-      this.$store.dispatch('playNewSong');
+      await this.adPlay();
+      if (!this.$store.state.MusicPlayer.adTime) {
+        const listlen = this.$store.state.MusicPlayer.currentList.length;
+        let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
+        listindex += 1;
+        if (listlen === listindex) listindex = 0;
+        if (listlen === 1) listindex = 0;
+        this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
+        console.log(this.$store.state.MusicPlayer.currentSongIndexinList);
+        this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
+          listindex
+        ];
+        // the song is played for the first time and play it
+        this.$store.dispatch('playNewSong');
+      }
     },
     /**
      * Skips to the previous Song in the queue
      */
     async skipPrevious() {
-      // await PlayerRequests.skipPrevious();
-      const listlen = this.$store.state.MusicPlayer.currentList.length;
-      let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
-      listindex -= 1;
-      if (listindex === -1) listindex = listlen - 1;
-      if (listlen === 1) listindex = 0;
-      this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
-      this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
-        listindex
-      ];
-      // the song is played for the first time and play it
-      this.$store.dispatch('playNewSong');
+      await this.adPlay();
+      if (!this.$store.state.MusicPlayer.adTime) {
+        const listlen = this.$store.state.MusicPlayer.currentList.length;
+        let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
+        listindex -= 1;
+        if (listindex === -1) listindex = listlen - 1;
+        if (listlen === 1) listindex = 0;
+        this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
+        this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
+          listindex
+        ];
+        // the song is played for the first time and play it
+        this.$store.dispatch('playNewSong');
+      }
     },
     /**
      * Toggles Repeat to One Song or Off
@@ -235,12 +274,21 @@ export default {
 
   computed: {
     totalSongTime() {
-      const SongTimeinS = Math.floor(
-        this.$store.state.MusicPlayer.currentSong.track.duration_ms / 1000,
-      );
+      if (!this.$store.state.MusicPlayer.adTime) {
+        const SongTimeinS = Math.floor(
+          this.$store.state.MusicPlayer.currentSong.track.duration_ms / 1000,
+        );
+        const TimeString = `${Math.floor(
+          SongTimeinS / 60,
+        ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+        return TimeString;
+      }
+      const SongTimeinS = Math.floor(this.adAudio.duration);
       const TimeString = `${Math.floor(
         SongTimeinS / 60,
-      ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+      ).toString()}:${Math.floor(
+        (SongTimeinS % 60) / 10,
+      ).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
       return TimeString;
     },
 
@@ -258,6 +306,7 @@ export default {
   },
   /* istanbul ignore next */
   async created() {
+    // AudioPlayer onend the player skips Next and if last song Stops
     this.$store.state.MusicPlayer.AudioPlayer.onended = () => {
       if (
         this.$store.state.MusicPlayer.currentSongIndexinList === this
@@ -269,6 +318,26 @@ export default {
         this.skipNext();
       }
     };
+    // AdAudio Player on ended sets the Flag back to false and skips to next Song
+    this.adAudio.onended = () => {
+      this.$store.state.MusicPlayer.adTime = false;
+      this.skipNext();
+    };
+    // AdAudio ontimeupdate it changes the seekbar and the currentTime
+    this.adAudio.ontimeupdate = () => {
+      this.$store.state.MusicPlayer.currentBufferPerc = (this.adAudio.currentTime
+      / this.adAudio.duration) * 100;
+
+      const SongTimeinS = Math.floor(this.adAudio.currentTime);
+      const TimeString = `${Math.floor(
+        SongTimeinS / 60,
+      ).toString()}:${Math.floor(
+        (SongTimeinS % 60) / 10,
+      ).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
+
+      this.$store.state.MusicPlayer.currentSongTime = TimeString;
+    };
+    // Sends the Request to get the Current Playback of the User
     if (process.env.VUE_APP_API_CLIENT === 'server') {
       this.$store.state.MusicPlayer.currentSong = false;
       this.$store.state.MusicPlayer.currentList = [this.$store.state.MusicPlayer.currentSong];
@@ -278,10 +347,18 @@ export default {
             return false;
           }
           this.$store.state.MusicPlayer.currentList = [data.currentlyPlaying];
+          try {
+            this.$store.state.MusicPlayer.Type = data.currentlyPlaying.context.type;
+            const array = data.currentlyPlaying.context.uri.split(':');
+            // eslint-disable-next-line prefer-destructuring
+            this.$store.state.MusicPlayer.ID = array[2];
+          } catch (error) { console.log('missing context'); }
           return data.currentlyPlaying;
         },
       );
     }
+    // Send the request of the UserInfo to get the User type for Ads
+    this.userType = await api.getCurrentUserProfile().then((Resp) => Resp.data.product);
   },
   beforeDestroy() {
     if (this.$store.state.MusicPlayer.isPlaying === true) {

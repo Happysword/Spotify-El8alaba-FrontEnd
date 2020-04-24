@@ -2,13 +2,19 @@
   <v-footer app dark class="player" height="90">
     <v-container fluid class="mx-0 pa-0">
       <v-row>
-        <v-col align-self="center" class="pa-0" cols="3">
-          <LMusicP v-if="!(this.$store.state.MusicPlayer.currentSong === false)"></LMusicP>
+        <v-col align-self="center" class="pa-0" cols="3" v-if="$vuetify.breakpoint.smAndUp">
+          <LMusicP
+            v-if="
+              !($store.state.MusicPlayer.currentSong === false) &&
+                !$store.state.MusicPlayer.adTime
+            "
+          ></LMusicP>
+          <div class="mx-5" v-if="$store.state.MusicPlayer.adTime">Advertisement</div>
         </v-col>
-        <v-col align-self="center" class="pa-0" cols="6">
+        <v-col align-self="center" class="pa-0" cols="sm-6 xs-12">
           <MMusicP></MMusicP>
         </v-col>
-        <v-col align-self="center" class="pa-0" cols="3">
+        <v-col align-self="center" class="pa-0" cols="3" v-if="$vuetify.breakpoint.smAndUp">
           <RMusicP></RMusicP>
         </v-col>
       </v-row> </v-container
@@ -20,7 +26,7 @@ import { mapActions } from 'vuex';
 import LMusicP from './musicplayer/LeftPartMPlayer.vue';
 import RMusicP from './musicplayer/RightPartMPlayer.vue';
 import MMusicP from './musicplayer/MiddlePartMPlayer.vue';
-
+/** */
 export default {
   components: {
     LMusicP,
@@ -41,7 +47,9 @@ export default {
       );
       const TimeString = `${Math.floor(
         SongTimeinS / 60,
-      ).toString()}:${Math.floor((SongTimeinS % 60) / 10).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
+      ).toString()}:${Math.floor(
+        (SongTimeinS % 60) / 10,
+      ).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
       this.$store.state.MusicPlayer.currentSongTime = TimeString;
     };
   },

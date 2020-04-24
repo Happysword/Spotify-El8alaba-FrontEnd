@@ -8,6 +8,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    dialog: false,
+    userPlaylists: {},
     currentUser: { username: 'Spotify user' },
     searching: false,
     liked: false,
@@ -26,12 +28,15 @@ export default new Vuex.Store({
       isPlaying: false,
       currentSongTime: '0:00',
       ID: '',
+      Type: '',
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
       AudioPlayer: new Audio('http://soundbible.com/grab.php?id=2108&type=wav'),
       navBarImage: false,
       currentList: [currentSongMock[0]],
+      currentQueue: [],
       currentSongIndexinList: 0,
+      adTime: false,
     },
     prevRoute: '',
   },

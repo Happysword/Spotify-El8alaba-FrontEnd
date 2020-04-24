@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-snackbar
+    <!-- <v-snackbar
     v-model="snackbar"
     color="#2E77D0"
     :timeout="3000"
     class="mb-12 pb-12 text-center" id="snackbarID"
     >
     <h1 class="text-center subtitle-1">{{notificationMsg}}</h1>
-    </v-snackbar>
+    </v-snackbar> -->
     <v-menu offset-y absolute=""
     dark=""
     >
@@ -68,7 +68,7 @@
           </v-card-actions>
         </v-card>
       </template>
-      <v-list>
+      <!-- <v-list>
         <v-list-item
           v-for="(item, index) in items"
           :key="index"
@@ -76,13 +76,16 @@
         >
           <v-list-item-title class="grey--text">{{ item.title }}</v-list-item-title>
         </v-list-item>
-      </v-list>
+      </v-list> -->
+      <dropDown :id="id" :type="type" :public="Public" :ownerID="owner" card="card">
+      </dropDown>
     </v-menu>
   </div>
 </template>
 
 <script>
 import client from 'api-client';
+import dropDown from './mockDropdown.vue';
 
 /** */
 export default {
@@ -94,8 +97,8 @@ export default {
     id: String,
     images: Array,
     name: String,
-    owner: [],
-    public: Boolean,
+    owner: String,
+    Public: Boolean,
     snapshot_id: String,
     tracks: Object,
     type: String,
@@ -118,20 +121,24 @@ export default {
       ],
     };
   },
+  components: {
+    dropDown,
+  },
   mounted() {
-    this.fetchFollowStatus();
-    this.getSongsList();
+    // this.fetchFollowStatus();
+    // this.getSongsList();
   },
   methods: {
-    playAction() {
+    async playAction() {
+      await this.getSongsList();
       if (this.$store.state.MusicPlayer.ID === this.id) {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           ID: this.id,
         });
       } else {
-        this.$store.state.MusicPlayer.currentSong = this.songsList;
-        this.$store.state.MusicPlayer.currentList = this.songsList;
+        // this.$store.state.MusicPlayer.currentSong = this.songsList;
+        // this.$store.state.MusicPlayer.currentList = this.songsList;
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           currentList: this.songsList,
