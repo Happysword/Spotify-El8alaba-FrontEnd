@@ -157,7 +157,7 @@ export default {
     */
     async adPlay() {
       if (this.userType === 'free') this.skipnum += 1;
-      if (this.skipnum === 3) {
+      if (this.skipnum === 4) {
         if (this.$store.state.MusicPlayer.isPlaying) {
           await this.togglePlayact();
         }
@@ -172,16 +172,22 @@ export default {
     async skipNext() {
       await this.adPlay();
       if (!this.$store.state.MusicPlayer.adTime) {
-        const listlen = this.$store.state.MusicPlayer.currentList.length;
-        let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
-        listindex += 1;
-        if (listlen === listindex) listindex = 0;
-        if (listlen === 1) listindex = 0;
-        this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
-        console.log(this.$store.state.MusicPlayer.currentSongIndexinList);
-        this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
-          listindex
-        ];
+        if (this.$store.state.MusicPlayer.currentQueue.length > 0) {
+          this.$store.state.MusicPlayer.currentSong = this.$store
+            .state.MusicPlayer.currentQueue.shift();
+          this.$store.state.MusicPlayer.playQueue = true;
+        } else {
+          const listlen = this.$store.state.MusicPlayer.currentList.length;
+          let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
+          listindex += 1;
+          if (listlen === listindex) listindex = 0;
+          if (listlen === 1) listindex = 0;
+          this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
+          this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
+            listindex
+          ];
+          this.$store.state.MusicPlayer.playQueue = false;
+        }
         // the song is played for the first time and play it
         this.$store.dispatch('playNewSong');
       }
@@ -192,15 +198,22 @@ export default {
     async skipPrevious() {
       await this.adPlay();
       if (!this.$store.state.MusicPlayer.adTime) {
-        const listlen = this.$store.state.MusicPlayer.currentList.length;
-        let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
-        listindex -= 1;
-        if (listindex === -1) listindex = listlen - 1;
-        if (listlen === 1) listindex = 0;
-        this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
-        this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
-          listindex
-        ];
+        if (this.$store.state.MusicPlayer.playQueue === true) {
+          this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
+            this.$store.state.MusicPlayer.currentSongIndexinList
+          ];
+          this.$store.state.MusicPlayer.playQueue = false;
+        } else {
+          const listlen = this.$store.state.MusicPlayer.currentList.length;
+          let listindex = this.$store.state.MusicPlayer.currentSongIndexinList;
+          listindex -= 1;
+          if (listindex === -1) listindex = listlen - 1;
+          if (listlen === 1) listindex = 0;
+          this.$store.state.MusicPlayer.currentSongIndexinList = listindex;
+          this.$store.state.MusicPlayer.currentSong = this.$store.state.MusicPlayer.currentList[
+            listindex
+          ];
+        }
         // the song is played for the first time and play it
         this.$store.dispatch('playNewSong');
       }

@@ -244,7 +244,7 @@ export default {
       await this.changePnp();
     },
     async playstate() {
-      if (this.playstate) await this.video.play().catch();
+      if (this.playstate) this.video.play().catch(() => 0);
       else this.video.pause();
     },
   },

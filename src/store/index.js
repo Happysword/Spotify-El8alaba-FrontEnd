@@ -37,6 +37,7 @@ export default new Vuex.Store({
       currentQueue: [],
       currentSongIndexinList: 0,
       adTime: false,
+      playQueue: false,
     },
     prevRoute: '',
   },

@@ -21,6 +21,28 @@
           ></s-card>
         </v-col>
       </v-row>
+      <v-row no-gutters v-if="$store.state.MusicPlayer.currentQueue.length > 0">
+        <v-col cols="12">
+          <h2 class="header header-two">
+            Next in Queue
+          </h2>
+        </v-col>
+        <v-col cols="12">
+          <v-col
+            v-for="num in $store.state.MusicPlayer.currentQueue.length"
+            :key="num"
+            cols="12"
+          >
+            <s-card
+              :song="
+                $store.state.MusicPlayer.currentQueue[num -1]
+              "
+              :counter="num"
+              :list="$store.state.MusicPlayer.currentQueue"
+            ></s-card>
+          </v-col>
+        </v-col>
+      </v-row>
       <v-row no-gutters v-if="$store.state.MusicPlayer.currentList.length > 1"
         ><v-col cols="12">
           <h2 class="header header-two">
@@ -71,6 +93,9 @@ import sCard from '../../components/SongsBar.vue';
 export default {
   name: 'Queue',
   components: { sCard },
+  updated() {
+    console.log(this.$store.state.MusicPlayer.currentQueue);
+  },
 };
 </script>
 
