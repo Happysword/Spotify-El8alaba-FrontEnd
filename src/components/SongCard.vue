@@ -135,6 +135,7 @@ export default {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           ID: this.id,
+          type: this.type,
         });
       } else {
         // this.$store.state.MusicPlayer.currentSong = this.songsList;
@@ -144,6 +145,7 @@ export default {
           currentList: this.songsList,
           ID: this.id,
           song: this.songsList[0],
+          type: this.type,
         });
       }
       this.showPlayButton = false;
@@ -151,6 +153,7 @@ export default {
     pauseAction() {
       this.$store.dispatch('playpauseplaylist', {
         playstatus: false,
+        type: this.type,
       });
       this.showPlayButton = true;
     },
