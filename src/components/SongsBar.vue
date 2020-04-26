@@ -224,7 +224,7 @@ export default {
       }
     });
     EventBus.$on('changePlay', () => {
-      if (this.song !== this.$store.state.MusicPlayer.currentSong) {
+      if (this.song.track.id !== this.$store.state.MusicPlayer.currentSong.track.id) {
         this.play = false;
         this.color = 'grey';
         this.color2 = 'white';
@@ -238,7 +238,7 @@ export default {
      * Check if this song is the current song or not then set the status of it
      */
     checkSong() {
-      if (this.song === this.$store.state.MusicPlayer.currentSong) {
+      if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
         if (this.$store.state.MusicPlayer.isPlaying === true) {
           this.playSong();
         } else {
