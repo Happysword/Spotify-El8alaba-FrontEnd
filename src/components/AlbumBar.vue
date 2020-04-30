@@ -128,6 +128,9 @@
                         @change="controlMusicFile()"
                         v-model="uploadedSong"
                     ></v-file-input>
+                    <v-progress-linear color="green" :height="10"
+                    :background-opacity="0.3"
+                    :value="progress.songProgress" striped=""></v-progress-linear>
                     </v-col>
                   </v-row>
                 </v-container>
@@ -150,10 +153,68 @@
                   color="success white--text"
                   class="mx-4"
                   @click="
-                    dialog = false;
                     CreateNewTrack();
                   "
                   >Create</v-btn
+                >
+              </v-row>
+            </v-container>
+          </v-dialog>
+
+          <v-dialog
+            v-model="dialog3"
+            max-width="60%"
+            dark=""
+            overlay-color="black"
+            overlay-opacity="0.9"
+          >
+            <template v-slot:activator="{ on }">
+              <v-btn icon="" >
+                <v-icon v-on="on" @click="fetchAlbumTracks()">mdi-minus-box</v-icon>
+              </v-btn>
+            </template>
+            <v-container>
+              <v-row align="center" justify="center">
+                <v-subheader
+                  class="display-2
+      font-weight-bold white--text"
+                  mr-5
+                  >Remove a Track</v-subheader
+                >
+              </v-row>
+            </v-container>
+            <v-card>
+              <v-card-title>
+                <span class="title">Remove Track</span>
+              </v-card-title>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-toolbar dense class="my-3" v-for="track in albumTracks.items" :key="track">
+                          <v-toolbar-title>{{track.name}}</v-toolbar-title>
+
+                          <v-spacer></v-spacer>
+
+                          <v-btn icon>
+                            <v-icon color="red">mdi-close-box</v-icon>
+                          </v-btn>
+                       </v-toolbar>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
+              <v-card-actions> </v-card-actions>
+            </v-card>
+            <v-container>
+              <v-row align="center" justify="center">
+                <v-btn
+                  rounded
+                  depressed
+                  outlined
+                  class="mx-4"
+                  @click="dialog3 = false"
+                  >Cancel</v-btn
                 >
               </v-row>
             </v-container>
@@ -181,8 +242,14 @@ export default {
       albumInfo: [],
       dialog: false,
       dialog2: false,
+      dialog3: false,
       songDuration: 0,
       trackName: '',
+      albumTracks: [],
+      progress: {
+        songProgress: '',
+        imageProgress: '',
+      },
     };
   },
   async mounted() {
@@ -190,6 +257,9 @@ export default {
     console.log(this.albumID);
   },
   methods: {
+    async fetchAlbumTracks() {
+      this.albumTracks = await client.fetchAlbumTracks(this.albumID);
+    },
     controlImageFile() {
       console.log(this.uploadedImage);
     },
@@ -225,11 +295,18 @@ export default {
         },
         this.token,
       );
-      created.then((res) => {
+      created.then(async (res) => {
         const formData = new FormData();
         formData.append('trackId', res.id);
         formData.append('track', this.uploadedSong);
-        client.uploadTrack(formData, this.token);
+        client.uploadTrack(formData, this.token, this.progress);
+        this.albumInfo = await client.fetchAlbum(this.albumID);
+        if (this.progress.songProgress > 99) {
+          this.dialog = false;
+          this.progress.songProgress = 0;
+          this.trackName = '';
+          this.uploadedSong = [];
+        }
       });
     },
     UploadNewImage() {
