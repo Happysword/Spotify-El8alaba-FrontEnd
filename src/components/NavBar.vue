@@ -17,8 +17,8 @@
               contain
               height="120"
               @click="$router.push('/home')"
-              id="logo"
-            ></v-img>
+              id="logo">
+            </v-img>
           </v-list-item-content>
           <v-list-item
             v-for="link in links"
@@ -26,15 +26,14 @@
             route
             :exact="link.exact"
             :to="link.route"
-            id="mainLinks"
-          >
+            id="mainLinks">
             <v-list-item-icon>
-              <v-icon>{{ link.icon }}</v-icon>
+                <v-icon>{{ link.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2">{{
-                link.text
-              }}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">
+                {{ link.text}}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item
@@ -52,9 +51,9 @@
         </v-list>
         <v-list dark="" dense="">
           <v-list-item-content>
-            <v-list-item-title class="caption font-weight-bold gray--text"
-              >PLAYLISTS</v-list-item-title
-            >
+            <v-list-item-title class="caption font-weight-bold gray--text">
+              PLAYLISTS
+            </v-list-item-title>
           </v-list-item-content>
           <v-list-item @click="drawer = !drawer; $store.state.dialog = true; dialog=true;">
             <v-list-item-icon>
@@ -72,9 +71,9 @@
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2" id="likedSongs"
-                >Liked Songs</v-list-item-title
-              >
+              <v-list-item-title class="subtitle-2" id="likedSongs">
+                Liked Songs
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -90,12 +89,11 @@
             :key="playlist.id"
             dense
             route
-            :to="'/playlist/' + playlist.id"
-          >
+            :to="'/playlist/' + playlist.id">
             <v-list-item-content>
-              <v-list-item-title class="subtitle-2">{{
-                playlist.name
-              }}</v-list-item-title>
+              <v-list-item-title class="subtitle-2">
+                {{playlist.name}}
+              </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -113,8 +111,8 @@
           "
           contain
           @mouseenter="imageButton = true"
-          @mouseleave="imageButton = false"
-          ><v-icon
+          @mouseleave="imageButton = false">
+          <v-icon
             color="grey"
             v-show="imageButton"
             @click="$store.state.MusicPlayer.navBarImage = false"
@@ -238,3 +236,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+#Download{
+  position: fixed;
+  bottom: 0px;
+}
+</style>

@@ -31,6 +31,8 @@ import SearchType from '../views/Search/SearchType.vue';
 import RecentSearch from '../views/Search/RecentSearch.vue';
 import UserPage from '../views/Users/UserPage.vue';
 import store from '../store/index';
+import Download from '../views/Download/Download.vue';
+import Premium from '../views/Premium/Premium.vue';
 
 Vue.use(VueRouter);
 
@@ -56,6 +58,7 @@ const routes = [
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
+      { path: '/download', name: 'download', component: Download },
       { path: '/home/user/:id', name: 'user', component: UserPage },
       { path: '/home/artist/manage', name: 'manage', component: ArtistManage },
       {
@@ -110,6 +113,11 @@ const routes = [
         ],
       },
     ],
+  },
+  {
+    path: '/premium',
+    name: 'premium',
+    component: Premium,
   },
   {
     path: '/signup',

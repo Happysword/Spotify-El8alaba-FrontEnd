@@ -44,7 +44,8 @@
         </v-col>
 
         <v-spacer></v-spacer>
-        <v-col lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
+        <v-col v-if="this.$route.path !== '/premium' && product !== 'premium' "
+        lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
           <v-btn
             v-if ="UserInfo.Type != 'premium'"
             rounded
@@ -113,17 +114,19 @@ export default {
   /* istanbul ignore next */
   async created() {
     this.UserInfo.Type = await api.getCurrentUserProfile().then((Resp) => Resp.data.product);
-
+    this.loggedIn = document.cookie.search(/loggedIn=.+/) !== -1;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) return;
     if (!currentUser.data.image) return;
-
+    this.product = currentUser.data.product;
     const {
       image: { url },
     } = currentUser.data;
     if (url) this.UserInfo.photo = url;
   },
   data: () => ({
+    product: 'free',
+    loggedIn: false,
     input: '',
     backtimes: 0,
     UserInfo: {
