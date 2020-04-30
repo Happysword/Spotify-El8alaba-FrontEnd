@@ -41,6 +41,7 @@ describe('Testing the player components', () => {
         currentSongIndexinList: 0,
         AudioPlayer: Audio,
         adTime: false,
+        currentQueue: [],
       },
     },
     mutations: {
