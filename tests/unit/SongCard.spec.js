@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
 import { mount, createLocalVue } from '@vue/test-utils';
+import * as currentSongMock from '../../src/api/mock/data/MusicPlayer/currentSong.json';
+import * as currentPlaybackMock from '../../src/api/mock/data/MusicPlayer/currentPlayback.json';
 import SongCard from '../../src/components/SongCard.vue';
 
 
@@ -10,6 +13,38 @@ Vue.use(Vuetify);
 const localVue = createLocalVue();
 localVue.use(Vuetify);
 localVue.use(VueRouter);
+localVue.use(Vuex);
+
+const store = new Vuex.Store({
+  state: {
+    MusicPlayer: {
+      isMute: false,
+      currentBufferPerc: 0,
+      lastVolrecord: 50,
+      isPlaying: false,
+      currentSongTime: '0:00',
+      currentSong: currentSongMock[0],
+      currentPlayback: currentPlaybackMock[0],
+      currentList: [currentSongMock[0], currentSongMock[0]],
+      currentSongIndexinList: 0,
+      AudioPlayer: Audio,
+      adTime: false,
+      currentQueue: [],
+    },
+  },
+  mutations: {
+    setCurrentUser() {},
+  },
+  actions: {
+    toggleSound({ state }) {
+      state.MusicPlayer.isMute = !state.MusicPlayer.isMute;
+    },
+    togglePlayact({ state }) {
+      state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
+    },
+    playNewSong() {},
+  },
+});
 
 const vuetify = new Vuetify();
 
@@ -17,11 +52,18 @@ describe('SongCard.vue', () => {
   Vue.use(vuetify);
 
   test('renders a vue instance', () => {
-    expect(mount(SongCard).isVueInstance()).toBe(true);
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+    });
+    expect(wrapper.isVueInstance()).toBe(true);
   });
 
   test('All default data are correct', () => {
-    const wrapper = mount(SongCard);
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+    });
 
     const { showActionButton } = wrapper.vm.$data;
     const { showPlayButton } = wrapper.vm.$data;
@@ -37,7 +79,10 @@ describe('SongCard.vue', () => {
   });
 
   test('All components are loaded correct', () => {
-    const wrapper = mount(SongCard);
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+    });
 
     // expect(wrapper.find('#snackbarID').exists()).toEqual(true);
     expect(wrapper.find('#cardID').exists()).toEqual(true);
@@ -47,6 +92,8 @@ describe('SongCard.vue', () => {
 
   test('Description exists if it is playlist', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'playlist',
       },
@@ -62,6 +109,8 @@ describe('SongCard.vue', () => {
 
   test('Artist name exists if it is album', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'album',
       },
@@ -77,6 +126,8 @@ describe('SongCard.vue', () => {
 
   test('Test menu logic playlist not following', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'playlist',
       },
@@ -95,6 +146,8 @@ describe('SongCard.vue', () => {
 
   test('Test menu logic playlist following', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'playlist',
       },
@@ -113,6 +166,8 @@ describe('SongCard.vue', () => {
 
   test('Test menu logic album following', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'album',
       },
@@ -131,6 +186,8 @@ describe('SongCard.vue', () => {
 
   test('Test menu logic album not following', () => {
     const wrapper = mount(SongCard, {
+      localVue,
+      store,
       propsData: {
         type: 'album',
       },
