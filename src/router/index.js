@@ -12,7 +12,7 @@ import AccountOverview from '../components/Account/AccountOverview.vue';
 import EditProfile from '../components/Account/EditProfile.vue';
 import ChangePassword from '../components/Account/ChangePassword.vue';
 import NotificationSettings from '../components/Account/NotificationSettings.vue';
-import Landing from '../views/Landing.vue';
+import Landing from '../views/Landing/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
 import Genres from '../views/Genres/Genres.vue';
@@ -33,6 +33,7 @@ import UserPage from '../views/Users/UserPage.vue';
 import store from '../store/index';
 import Download from '../views/Download/Download.vue';
 import Premium from '../views/Premium/Premium.vue';
+import About from '../views/Landing/About.vue';
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,11 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
   },
   {
     path: '/home',

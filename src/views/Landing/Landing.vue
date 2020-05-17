@@ -14,7 +14,7 @@
             </v-btn>
             <router-link to="/">
               <v-img
-                src="../assets/imgs/El-8alaba.png"
+                src="../../assets/imgs/El-8alaba.png"
                 max-height="200"
                 max-width="200"
                 id="logo-img"
@@ -138,6 +138,11 @@ export default {
 
   data: () => ({
     buttons: [
+      {
+        name: 'ABOUT',
+        route: 'about',
+        id: 'about-btn',
+      },
       {
         name: 'DOWNLOAD',
         route: '/download',

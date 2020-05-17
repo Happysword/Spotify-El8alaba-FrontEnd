@@ -126,6 +126,7 @@ export default {
       state.MusicPlayer.currentList = param.currentList;
       state.MusicPlayer.currentSongIndexinList = param.currentList.indexOf(param.song);
     }
+    if (param.song === undefined) { dispatch('togglePlayact'); return; }
     if (param.playstatus === true && param.song === state.MusicPlayer.currentSong) {
       state.MusicPlayer.isFirstPlay = true;
       state.MusicPlayer.isPlaying = false;
