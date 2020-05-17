@@ -979,6 +979,24 @@ export default {
   },
 
   /**
+   * Returns the top tracks of an artist
+   * @param {String} id ID of the artist
+   */
+  async fetchArtistTopTracks(id) {
+    const artistSongs = await axios.get(`${api}/api/v1/artists/${id}/top-tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+
+    for (let i = 0; i < artistSongs.data.length; i += 1) {
+      artistSongs.data[i].track = artistSongs.data[i];
+    }
+
+    return artistSongs.data;
+  },
+
+  /**
    * Save Track for the Current User
    * @param  {Number}  id The id of the Track
    * @return {Object}  The corresponding response
