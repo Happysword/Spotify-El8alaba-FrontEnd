@@ -375,6 +375,21 @@ export default {
       .then((response) => response.data);
     return artists;
   },
+
+  /**
+   * Return Albums of an artist
+   * @param {String} id Album ID
+   */
+  async fetchArtistAlbums(id) {
+    const artistAlbums = await axios
+      .get(`${api}/api/v1/artists/${id}/albums?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => response.data);
+    return artistAlbums;
+  },
   /**
    * Get the artist related artist by passing the artist's ID
    * @param {string} id The artist ID that has other related artists
