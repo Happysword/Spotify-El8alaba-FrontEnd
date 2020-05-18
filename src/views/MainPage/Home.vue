@@ -1,5 +1,6 @@
 <template>
-    <v-container>
+  <div>
+    <v-container v-if="ready">
       <div>
         <template v-if="recentlyPlayed.length > 0">
           <v-row>
@@ -88,6 +89,29 @@
         </template>
       </div>
     </v-container>
+    <v-container v-if="!ready">
+      <div v-for="j in 6" :key="j">
+        <v-col sm="6" md="6" lg="6">
+          <v-skeleton-loader
+              ref="skeleton"
+              type="heading"
+              class="py-1"
+              dark
+          ></v-skeleton-loader>
+        </v-col>
+        <v-row class="py-12">
+          <v-col sm='6' md='4' lg="2" v-for="i in 6" :key="i">
+            <v-skeleton-loader
+              ref="skeleton"
+              type="card"
+              class="mx-auto px-1"
+              dark
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -181,6 +205,7 @@ export default {
       categories: [],
       recentlyPlayed: [],
       owner: {},
+      ready: false,
     };
   },
   created() {
@@ -200,9 +225,11 @@ export default {
      * Get list of Categories
      */
     async getCategories() {
+      this.ready = false;
       this.recentlyPlayed = await server.fetchRecentlyPlayedLists(6);
       console.log(this.recentlyPlayed);
       this.categories = await server.fetchGenres();
+      this.ready = true;
     },
     setownerid(list) {
       if (list.type === 'album') {

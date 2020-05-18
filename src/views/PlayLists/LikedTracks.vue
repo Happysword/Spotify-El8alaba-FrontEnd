@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-container fluid v-if="ready">
     <v-row justify="center">
       <v-col sm='12' md='6' lg="4" class="my-2 pr-0">
@@ -21,6 +22,29 @@
       </v-col>
     </v-row>
   </v-container>
+  <v-container v-if="!ready">
+    <v-row>
+      <v-col sm='12' md='6' lg="4" class="my-2 pr-0">
+        <v-skeleton-loader
+          ref="skeleton"
+          type="card"
+          class="mx-auto px-6"
+          dark
+        ></v-skeleton-loader>
+      </v-col>
+      <v-col sm='12' md='6' lg="8" class="my-1 pl-0">
+        <v-skeleton-loader
+          v-for="i in 6"
+          :key="i"
+          ref="skeleton"
+          type="list-item-avatar-two-line"
+          class="mx-auto px-6 py-1"
+          dark
+        ></v-skeleton-loader>
+      </v-col>
+    </v-row>
+  </v-container>
+  </div>
 </template>
 
 <script>
