@@ -23,6 +23,10 @@ module.exports = {
       maskIcon: 'icons/safari-pinned-tab.svg',
       msTileImage: 'img/icons/El-8alaba.png',
     },
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'public/firebase-messaging-sw.js',
+    },
   },
 
   chainWebpack(config) {

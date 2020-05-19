@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueClipboard from 'vue-clipboard2';
 import App from './App.vue';
 import './registerServiceWorker';
+import './firebase';
 import router from './router';
 import store from './store';
 import './Filters';
