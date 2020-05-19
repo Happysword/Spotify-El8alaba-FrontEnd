@@ -89,7 +89,8 @@
           </v-dialog>
       </v-toolbar>
       <album-bar v-for="(album, index) in artistAlbums.items" :key="index"
-       class="my-2" :albumID="album.id" :albumName="album.name"></album-bar>
+       class="my-2" :albumID="album.id" :albumName="album.name"
+       @refreshAlbums="refreshTheAlbums"></album-bar>
   </v-container>
 </template>
 
@@ -122,6 +123,9 @@ export default {
     AlbumBar,
   },
   methods: {
+    refreshTheAlbums() {
+      this.fetchArtistAlbum(this.token);
+    },
     CreateNewAlbum() {
       const token = JSON.parse(localStorage.getItem('currentUser'));
 
