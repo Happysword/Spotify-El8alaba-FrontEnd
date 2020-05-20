@@ -1,6 +1,7 @@
 // Import the Firebase SDK and Messaging product
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
+import api from 'api-client';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -28,43 +29,35 @@ messaging.usePublicVapidKey(
 // subsequent calls to getToken will return from cache.
 messaging
   .getToken()
-  .then((currentToken) => {
+  .then(async (currentToken) => {
     if (currentToken) {
       console.log(`currentToken: ${currentToken}`);
-      // sendTokenToServer(currentToken);
-      // updateUIForPushEnabled(currentToken);
+      const response = await api.sendNotificationToken({ token: currentToken });
+      console.log(response);
     } else {
       // Show permission request.
       console.log(
         'No Instance ID token available. Request permission to generate one.',
       );
-      // Show permission UI.
-      // updateUIForPushPermissionRequired();
-      // setTokenSentToServer(false);
     }
   })
   .catch((err) => {
     console.log('An error occurred while retrieving token. ', err);
-    // showToken('Error retrieving Instance ID token. ', err);
-    // setTokenSentToServer(false);
   });
 
 // Callback fired if Instance ID token is updated.
 messaging.onTokenRefresh(() => {
   messaging
     .getToken()
-    .then((refreshedToken) => {
+    .then(async (refreshedToken) => {
       console.log(`refreshedToken: ${refreshedToken}`);
-      // Indicate that the new Instance ID token has not yet been sent to the
-      // app server.
-      // setTokenSentToServer(false);
-
-      // Send Instance ID token to app server.
-      // sendTokenToServer(refreshedToken);
+      const response = await api.sendNotificationToken({
+        token: refreshedToken,
+      });
+      console.log(response);
     })
     .catch((err) => {
       console.log('Unable to retrieve refreshed token ', err);
-      // showToken('Unable to retrieve refreshed token ', err);
     });
 });
 
