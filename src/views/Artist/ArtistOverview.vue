@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     test() {
-      console.log(this.artistAlbums);
+      console.log(this.artistID);
     },
     /** Get current artist info */
     fetchAnArtist() {

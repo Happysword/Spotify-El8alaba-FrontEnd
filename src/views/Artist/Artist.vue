@@ -29,7 +29,21 @@
                     route
                     color="#1DD660"
                     dark=""
+                    v-if="showPlayButton"
+                    @click="playAction()"
                     >PLAY</v-btn
+                    >
+                    <v-btn
+                    width="120"
+                    height="40"
+                    rounded=""
+                    depressed
+                    route
+                    color="#1DD660"
+                    dark=""
+                    v-if="!showPlayButton"
+                    @click="pauseAction()"
+                    >PAUSE</v-btn
                     >
                     <v-btn
                     width="120"
@@ -96,18 +110,38 @@ export default {
   data() {
     return {
       artist: [],
+      artistID: '',
       followStatus: '',
       FollowJSON: JSON,
       isFollowing: Boolean,
       notificationMsg: String,
       snackbar: false,
       imageURL: 'https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg',
+      songsList: [],
+      showPlayButton: true,
     };
   },
   mounted() {
     this.fetchAnArtist();
   },
   methods: {
+    playAction() {
+      this.$store.dispatch('playpauseplaylist', {
+        playstatus: true,
+        currentList: this.songsList,
+        song: this.songsList[0],
+        type: 'album',
+      });
+
+      this.showPlayButton = false;
+    },
+    pauseAction() {
+      this.$store.dispatch('playpauseplaylist', {
+        playstatus: false,
+        type: 'album',
+      });
+      this.showPlayButton = true;
+    },
     /** Checks If an image is in the request */
     checkImage() {
       if (this.artist.images[0]) {
@@ -119,9 +153,15 @@ export default {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {
           [this.artist] = response;
+          this.artistID = response[0].id;
+          this.fetchArtistTopTracks();
           this.fetchFollowStatus();
           this.checkImage();
         });
+    },
+    /** Gets the top tracks of an artist */
+    async fetchArtistTopTracks() {
+      this.songsList = await client.fetchArtistTopTracks(this.artistID);
     },
     /** Fetches the current following status */
     fetchFollowStatus() {
