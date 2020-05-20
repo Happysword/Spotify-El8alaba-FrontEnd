@@ -51,51 +51,7 @@
     </v-navigation-drawer>
 
     <v-content class="white" app>
-      <v-container>
-        <v-row>
-          <v-col
-            ><div
-              class=" headline font-weight-medium green--text mt-5 text--darken-1
-              text-center"
-            >
-              This was made for a School Project Under the Software Engineering
-              course. It is a replica of most of Spotify's features. We Hope you
-              Like our Product.
-            </div>
-          </v-col></v-row
-        >
-        <v-row align="center" justify="center">
-          <v-col cols="8">
-            <div class="display-3 font-weight-bold mt-10  text-center">
-              About Us
-            </div>
-            <div class="text-justify subtitle-1 font-weight-bold mt-5">
-              With Spotify elghalaba it’s easy to find the right music for every
-              moment – on your phone or your computer. There are millions of
-              tracks on Spotify elghalaba. So whether you’re behind the wheel,
-              working out, partying or relaxing, the right music is always at
-              your fingertips. Choose what you want to listen to. You can also
-              browse through the collections of friends, artists, and
-              celebrities. Soundtrack your life with Spotify elghalaba.
-              Subscribe or listen for free.
-            </div>
-            <div class="display-3 font-weight-bold mt-10  text-center">
-              Disclaimer
-            </div>
-            <div class="subtitle-1 font-weight-bold mt-5 text-center">
-              The Music Used does not in anyway belong to Us, and we do not
-              encourage any redistribution without the consent of its Owners.
-            </div>
-          </v-col>
-          <v-col cols="4" align-self="center">
-            <v-img
-              src="../../assets/imgs/El-8alaba.png"
-              class="mt-4 ml-5"
-              id="logo-about"
-            ></v-img>
-          </v-col>
-        </v-row>
-      </v-container>
+      <router-view></router-view>
     </v-content>
 
     <v-footer app absolute dark class="trans-bar">
@@ -113,7 +69,7 @@
  * @vue-data {Array} Buttons - Array of Objects of the Buttons
  */
 export default {
-  name: 'About',
+  name: 'Help',
   /* istanbul ignore next */
 
   data: () => ({
@@ -145,10 +101,6 @@ export default {
 </script>
 
 <style scoped>
-#logo-about {
-  height: 100%;
-  width: 100%;
-}
 .list-btns {
   color: white;
 }

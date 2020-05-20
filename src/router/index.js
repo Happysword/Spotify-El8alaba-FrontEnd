@@ -34,6 +34,12 @@ import store from '../store/index';
 import Download from '../views/Download/Download.vue';
 import Premium from '../views/Premium/Premium.vue';
 import About from '../views/Landing/About.vue';
+import MainHelp from '../views/Help/MainHelp.vue';
+import HelpNavigation from '../views/Help/HelpNavigation.vue';
+import HelpPlayer from '../views/Help/HelpPlayer.vue';
+import HelpPassword from '../views/Help/HelpPassword.vue';
+import HelpProfile from '../views/Help/HelpProfile.vue';
+import HelpWebsite from '../views/Help/HelpWebsite.vue';
 
 Vue.use(VueRouter);
 
@@ -42,25 +48,52 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+    meta: { title: 'Welcome-Spotify El8alaba' },
   },
   {
     path: '/about',
     name: 'About',
     component: About,
+    meta: { title: 'About-Spotify El8alaba' },
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: MainHelp,
+    meta: { title: 'Help-Spotify El8alaba' },
+    children: [
+      { path: '/help', name: 'HelpNavigation', component: HelpNavigation },
+      { path: '/help/player', name: 'HelpNavigation', component: HelpPlayer },
+      { path: '/help/profile', name: 'HelpNavigation', component: HelpProfile },
+      {
+        path: '/help/password',
+        name: 'HelpNavigation',
+        component: HelpPassword,
+      },
+      { path: '/help/website', name: 'HelpNavigation', component: HelpWebsite },
+    ],
   },
   {
     path: '/home',
     name: 'Main',
     component: Main,
-    meta: { },
+    meta: {},
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
-      { path: '/home/search/history/showRecent', name: 'recentSearch', component: RecentSearch },
+      {
+        path: '/home/search/history/showRecent',
+        name: 'recentSearch',
+        component: RecentSearch,
+      },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/genre/:id-page', name: 'genres', component: Genres },
-      { path: '/home/search/:id/:type', name: 'searchType', component: SearchType },
+      {
+        path: '/home/search/:id/:type',
+        name: 'searchType',
+        component: SearchType,
+      },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
@@ -209,7 +242,10 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       // eslint-disable-next-line no-alert
-      alert(`${tokenRes.data.message || profileRes.data.message}\nYou will now be redirected.`);
+      alert(
+        `${tokenRes.data.message
+          || profileRes.data.message}\nYou will now be redirected.`,
+      );
       const { status } = await api.logoutUser();
       if (status === 200) next('/');
     }
@@ -226,6 +262,5 @@ router.afterEach((to, from) => {
   });
   store.state.prevRoute = from.fullPath;
 });
-
 
 export default router;

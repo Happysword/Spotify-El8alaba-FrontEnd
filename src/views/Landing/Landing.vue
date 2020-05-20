@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content class="black">
+    <v-content class="black" app>
       <div class="wrap cover">
         <div class="cover svg-photo">
           <v-app-bar color="black" class="trans-bar">
@@ -107,6 +107,12 @@
         </div>
       </div>
     </v-content>
+    <v-footer app absolute dark class="trans-bar">
+      <v-btn to="/about">About</v-btn>
+      <v-btn to="/help">Help</v-btn>
+      <v-spacer></v-spacer>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
   </v-app>
 </template>
 
@@ -139,11 +145,6 @@ export default {
   data: () => ({
     buttons: [
       {
-        name: 'ABOUT',
-        route: 'about',
-        id: 'about-btn',
-      },
-      {
         name: 'DOWNLOAD',
         route: '/download',
         id: 'download-btn',
@@ -166,9 +167,6 @@ export default {
     ],
     drawer: false,
   }),
-  created() {
-    document.title = 'Welcome - Spotify El8alaba';
-  },
 };
 </script>
 
