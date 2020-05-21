@@ -238,13 +238,15 @@ export default {
      * Check if this song is the current song or not then set the status of it
      */
     checkSong() {
-      if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
-        if (this.$store.state.MusicPlayer.isPlaying === true) {
-          this.playSong();
-        } else {
-          this.pauseSong();
+      if (this.$store.state.MusicPlayer.currentSong) {
+        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
+          if (this.$store.state.MusicPlayer.isPlaying === true) {
+            this.playSong();
+          } else {
+            this.pauseSong();
+          }
+          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
         }
-        EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
       }
       return true;
     },

@@ -16,6 +16,7 @@
           :name="d.name"
           :images="d.images"
           :type="d.type"
+          :Public="d.public"
           ></song-card>
          <artist-card v-if="d.type == 'artist'"
           :id="d.id"
