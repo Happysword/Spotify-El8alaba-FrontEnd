@@ -23,16 +23,8 @@
                @contextmenu.prevent="on.click"
            >
              <v-container fluid="">
-                 <v-img class="circle"
-                 v-if="images"
-                 :src="images[0].url"
-                 height="150px"
-                 ></v-img>
-                  <v-img class="circle"
-                 v-if="!images"
-                 :src="'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
-                 height="150px"
-                 ></v-img>
+                <v-img class="circle"
+                :src="imageURL" id="imageID" height="150px"></v-img>
              </v-container>
                <v-card-title class="font-weight-bold subtitle-2" id="nameID">
                {{name}}
@@ -107,6 +99,7 @@ export default {
       ],
       songsList: [],
       artistID: '',
+      imageURL: 'https://www.scdn.co/i/_global/twitter_card-default.jpg',
     };
   },
   mounted() {
@@ -149,6 +142,10 @@ export default {
         .then((response) => {
           this.artistID = response[0].id;
           this.fetchArtistTopTracks();
+
+          if (this.images) {
+            this.imageURL = this.images[0].url;
+          }
         });
     },
     /** Gets the top tracks of an artist */
@@ -224,7 +221,7 @@ export default {
   },
   watch: {
     musicPlayerSongID() {
-      if (this.$store.state.MusicPlayer.ID !== this.artistID) {
+      if (this.$store.state.MusicPlayer.ID !== this.songsList[0].album.id) {
         this.showPlayButton = true;
       }
     },

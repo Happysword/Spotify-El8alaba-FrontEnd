@@ -105,6 +105,7 @@
 
 <script>
 import client from 'api-client';
+import EventBus from '../../EventBus';
 
 export default {
   data() {
@@ -123,6 +124,16 @@ export default {
   },
   mounted() {
     this.fetchAnArtist();
+  },
+  created() {
+    EventBus.$on('updateHeader', () => {
+      this.fetchAnArtist();
+    });
+  },
+  watch: {
+    $route() {
+      this.fetchAnArtist();
+    },
   },
   methods: {
     playAction() {
