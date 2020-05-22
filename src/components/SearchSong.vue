@@ -83,7 +83,7 @@ export default {
       }
     },
     clickSong() {
-      this.$router.push(`/track/${this.id}`);
+      this.$router.push(`/album/${this.albumID}`);
     },
   },
 };

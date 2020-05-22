@@ -10,6 +10,7 @@
             :IDP="top.id"
             :name="top.name"
             :image="imageTop"
+            :albumID="top.albumID"
             :type="top.type"
             :artists="top.artists"
             class="a"></top-result>
@@ -40,6 +41,7 @@
                 :image="tracks[i-1].images[0]? tracks[i-1].images[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg' "
                 :SongName="tracks[i-1].name"
                 :artists="tracks[i-1].artists"
+                :albumID="tracks[i-1].albumID"
                 :uri="tracks[i-1].uri"
                 ></search-song>
             </div>
@@ -327,6 +329,7 @@ export default {
         } else if (!this.artistsExist && this.tracksExist) {
           const top = this.tracks[0];
           this.top = top;
+          this.top.albumID = top.album;
           this.top.type = 'track';
           if (this.top.images.length) {
             this.imageTop = this.top.images[0].url;

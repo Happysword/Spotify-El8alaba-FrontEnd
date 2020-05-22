@@ -49,7 +49,7 @@
           <v-spacer></v-spacer>
           <v-btn fab big color="#1ED760" id="btn"
             v-if="showActionButton && type != 'profile'"
-            @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
+            @mousedown.stop="" @click.stop="playSong()">
               <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
               <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
           </v-btn>
@@ -58,13 +58,15 @@
 </template>
 
 <script>
+import client from 'api-client';
+
 export default {
   props: {
     IDP: String,
     image: String,
     name: String,
-    track: Object,
-    type: String, // it may be artist , track , playlist , album or a profile
+    albumID: String,
+    type: String,
     artistName: String,
     owner: String,
   },
@@ -75,11 +77,38 @@ export default {
     };
   },
   methods: {
+    async playSong() {
+      this.showPlayButton = !this.showPlayButton;
+      if (this.showPlayButton) {
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: false,
+          type: this.type,
+        });
+        this.showPlayButton = true;
+      } else {
+        const songsList = await client.fetchAlbumSongs(this.albumID);
+        if (this.$store.state.MusicPlayer.ID === this.IDP) {
+          this.$store.dispatch('playpauseplaylist', {
+            playstatus: true,
+            ID: this.IDP,
+            type: this.type,
+          });
+        } else {
+          this.$store.dispatch('playpauseplaylist', {
+            playstatus: true,
+            currentList: songsList,
+            ID: this.id,
+            song: songsList[0],
+            type: this.type,
+          });
+        }
+      }
+    },
     CardClickLink() {
       if (this.type === 'playlist') {
         this.$router.push(`/playlist/${this.IDP}`);
       } else if (this.type === 'track') {
-        this.$router.push(`/track/${this.IDP}`);
+        this.$router.push(`/album/${this.albumID}`);
       } else if (this.type === 'artist') {
         this.$router.push(`/artist/${this.IDP}`);
       } else if (this.type === 'user') {
