@@ -14,6 +14,7 @@
           :list="songs"
           :listid="listInfo.id"
           :listType="listInfo.type"
+          :listOwner="ownerID"
         >
         </songsCard>
       </v-col>
@@ -67,6 +68,7 @@ export default {
       ready: false,
       listInfo: {},
       test: false,
+      ownerID: '',
     };
   },
   methods: {
@@ -74,6 +76,7 @@ export default {
      * Load view data depending on the route id
      */
     async LoadPage() {
+      this.ownerID = '';
       this.ready = false;
       this.show = true;
       this.songs = [];
@@ -105,6 +108,7 @@ export default {
         this.songs = tracks;
       } else if (this.$route.name === 'playlist') {
         this.listInfo = await server.fetchList(this.$route.params.id);
+        this.ownerID = this.listInfo.owner.id;
         this.songs = await server.fetchSongs(this.listInfo.id);
       } else if (this.$route.name === 'album') {
         const album = await server.fetchAlbum(this.$route.params.id);
@@ -149,7 +153,13 @@ export default {
   async created() {
     this.LoadPage();
   },
-
+  mounted() {
+    EventBus.$on('reload', (id) => {
+      if (id === this.$route.params.id) {
+        this.LoadPage();
+      }
+    });
+  },
   watch: {
     $route: 'LoadPage',
   },

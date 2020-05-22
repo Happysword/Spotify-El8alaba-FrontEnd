@@ -34,6 +34,8 @@ export default {
     ownerID: String,
     public: Boolean,
     card: String,
+    listID: String,
+    position: Number,
   },
   methods: {
     /**
@@ -42,6 +44,10 @@ export default {
     async loadData() {
       console.log(this.type);
       if (this.type === 'track') {
+        // eslint-disable-next-line no-underscore-dangle
+        if (this.ownerID === JSON.parse(localStorage.getItem('currentUser')).data._id) {
+          this.songList = ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist', 'Remove from this Playlist'];
+        }
         const response = await server.checkLiked(this.id);
         if (response === true) this.songList[0] = 'Remove From Your Liked Songs';
         this.showList = this.songList;
@@ -96,6 +102,18 @@ export default {
         }
         if (item === 'Add to Playlist') {
           EventBus.$emit('addOverlay', true, this.id);
+        }
+        if (item === 'Remove from this Playlist') {
+          const response = await server.RemoveTrackFromPlaylist(
+            this.listID,
+            this.id,
+            this.position,
+          );
+          if (response === true) {
+            EventBus.$emit('reload', this.listID);
+            this.SnackBar.show = true;
+            this.SnackBar.content = 'Track is Removed from This Playlist';
+          }
         }
         EventBus.$emit('snackbar', this.SnackBar);
         this.showList = this.songList;

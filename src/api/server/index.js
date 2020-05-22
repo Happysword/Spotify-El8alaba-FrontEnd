@@ -816,8 +816,7 @@ export default {
 
   /**
    * Fetches all songs of a playlist
-   * @param  {Number}  id The id of playlist
-   * @param  {string}  token The token of user
+   * @param  {String}  id The id of playlist
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
   async fetchSongs(id) {
@@ -844,7 +843,6 @@ export default {
 
   /**
    * Fetches user's saved tracks
-   * @param  {string}  token The token of user
    * @return {Object}  An object containing all saved songs of the user
    */
   async fetchSavedTracks() {
@@ -917,7 +915,7 @@ export default {
 
   /**
    * Fetches List info
-   * @param  {Number}  id The id of the desired list
+   * @param  {String}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
    */
   async fetchList(id) {
@@ -931,7 +929,7 @@ export default {
 
   /**
    * Fetches Album info
-   * @param  {Number}  id The id of the desired Album
+   * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all information about the album of ID equals to id
    */
   async fetchAlbum(id) {
@@ -958,7 +956,7 @@ export default {
 
   /**
    * Fetches Album songs
-   * @param  {Number}  id The id of the desired Album
+   * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all songs of the album of ID equals to id
    */
   async fetchAlbumSongs(id) {
@@ -980,7 +978,7 @@ export default {
 
   /**
    * Save Track for the Current User
-   * @param  {Number}  id The id of the Track
+   * @param  {String}  id The id of the Track
    * @return {Object}  The corresponding response
    */
   async SaveTrack(id) {
@@ -994,7 +992,7 @@ export default {
 
   /**
    * Remove Track for the Current User
-   * @param  {Number}  id The id of the Track
+   * @param  {String}  id The id of the Track
    * @return {Boolean}  The corresponding response
    */
   async RemoveTrack(id) {
@@ -1011,7 +1009,7 @@ export default {
 
   /**
    * Save Album for the Current User
-   * @param  {Number}  id The id of the Album
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async SaveAlbum(id) {
@@ -1025,7 +1023,7 @@ export default {
 
   /**
    * Remove Album for the Current User
-   * @param  {Number}  id The id of the Album
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async RemoveAlbum(id) {
@@ -1039,7 +1037,7 @@ export default {
 
   /**
    * Check if Album is Saved for the Current User or not
-   * @param  {Number}  id The id of the Album
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async CheckAlbum(id) {
@@ -1060,7 +1058,7 @@ export default {
 
   /**
    * Check if a Playlist is Saved for the Current User or not
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async CheckPlaylist(id) {
@@ -1075,7 +1073,7 @@ export default {
 
   /**
    * Follow a Playlist
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async FollowPlaylist(id) {
@@ -1089,7 +1087,7 @@ export default {
 
   /**
    * Unfollow a Playlist
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async UnfollowPlaylist(id) {
@@ -1103,8 +1101,8 @@ export default {
 
   /**
    * Add Track to a Playlist
-   * @param  {Number}  listId The id of the Playlist
-   * @param  {Number}  trackId the id of the track
+   * @param  {String}  listId The id of the Playlist
+   * @param  {String}  trackId the id of the track
    * @return {Object}  The corresponding response
    */
   async AddTrackToPlaylist(listId, trackId) {
@@ -1116,6 +1114,31 @@ export default {
       },
     }).then((res) => {
       if (res.status === 201) return true;
+      return false;
+    }).catch(() => false);
+    return response;
+  },
+
+  /**
+   * Remove Track from a Playlist
+   * @param  {String}  listId The id of the Playlist
+   * @param  {String}  trackId the id of the track
+   * @param  {Number}  position the position of the track in the list
+   * @return {Object}  The corresponding response
+   */
+  async RemoveTrackFromPlaylist(listId, trackId, position) {
+    const response = await axios.delete(`${api}/api/v1/playlists/${listId}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+      data: {
+        tracks: [{
+          id: trackId,
+          positions: [position],
+        }],
+      },
+    }).then((res) => {
+      if (res.status === 200) return true;
       return false;
     }).catch(() => false);
     return response;

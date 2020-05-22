@@ -42,7 +42,15 @@
                 {{ dotsIcon }}
               </v-icon>
             </template>
-            <dropDown v-if="drop" :id="song.track.id" type="track" :track="song"></dropDown>
+            <dropDown
+              v-if="drop"
+              :id="song.track.id"
+              type="track"
+              :track="song"
+              :listID="listid"
+              :ownerID="listOwner"
+              :position="counter"
+            ></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
             {{ parseInt(song.track.duration_ms / 60000) }} :
@@ -95,6 +103,10 @@ export default {
     list: Array,
     listid: String,
     listType: String,
+    listOwner: {
+      type: String,
+      default: '',
+    },
     recommend: {
       type: Boolean,
       default: false,
