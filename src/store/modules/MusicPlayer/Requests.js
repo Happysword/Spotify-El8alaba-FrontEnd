@@ -179,6 +179,15 @@ export default {
   },
 
   /**
+   * Get an Ad from the Server
+   * @return {String} the Image URL of the Ad
+   */
+  async getAd() {
+    const response = await client.getAd().then((Promisedata) => Promisedata);
+    return response;
+  },
+
+  /**
    * Check if the User Likes a certain Track
    * @param {string} ID the id of the track to be checked
    * @return {Boolean} a Boolean of the State of the track false if failed

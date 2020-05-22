@@ -2,7 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
-import Landing from '../../src/views/Landing.vue';
+import Landing from '../../src/views/Landing/Landing.vue';
 
 describe('Testing the existence of components', () => {
   Vue.use(Vuetify);

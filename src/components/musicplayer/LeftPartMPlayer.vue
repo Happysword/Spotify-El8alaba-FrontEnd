@@ -199,7 +199,9 @@ export default {
       const img = new Image();
       img.crossOrigin = true;
       img.src = this.imgsrc;
-      await img.decode();
+      await img.decode().catch(async () => {
+        img.src = notePic; await img.decode();
+      });
       const scale = Math.min(this.canvas.width / img.width, this.canvas.height / img.height);
       // get the top left position of the image
       const x = (this.canvas.width / 2) - (img.width / 2) * scale;

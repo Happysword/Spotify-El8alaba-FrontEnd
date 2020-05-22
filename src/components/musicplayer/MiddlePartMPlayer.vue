@@ -157,8 +157,9 @@ export default {
     */
     async adPlay() {
       if (this.userType === 'free') this.skipnum += 1;
-      if (this.skipnum === 4) {
+      if (this.skipnum === 3) {
         if (this.$store.state.MusicPlayer.isPlaying) {
+          this.$store.state.MusicPlayer.adImage = await PlayerRequests.getAd();
           await this.togglePlayact();
         }
         this.$store.state.MusicPlayer.adTime = true;
@@ -372,6 +373,9 @@ export default {
     }
     // Send the request of the UserInfo to get the User type for Ads
     this.userType = await api.getCurrentUserProfile().then((Resp) => Resp.data.product);
+    // Media Handlers
+    navigator.mediaSession.setActionHandler('previoustrack', () => { this.skipPrevious(); });
+    navigator.mediaSession.setActionHandler('nexttrack', () => { this.skipNext(); });
   },
   beforeDestroy() {
     if (this.$store.state.MusicPlayer.isPlaying === true) {

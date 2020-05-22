@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content class="black">
+    <v-content class="black" app>
       <div class="wrap cover">
         <div class="cover svg-photo">
           <v-app-bar color="black" class="trans-bar">
@@ -14,7 +14,7 @@
             </v-btn>
             <router-link to="/">
               <v-img
-                src="../assets/imgs/El-8alaba.png"
+                src="../../assets/imgs/El-8alaba.png"
                 max-height="200"
                 max-width="200"
                 id="logo-img"
@@ -107,6 +107,12 @@
         </div>
       </div>
     </v-content>
+    <v-footer app absolute dark class="trans-bar">
+      <v-btn to="/about">About</v-btn>
+      <v-btn to="/help">Help</v-btn>
+      <v-spacer></v-spacer>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
   </v-app>
 </template>
 
@@ -161,9 +167,6 @@ export default {
     ],
     drawer: false,
   }),
-  created() {
-    document.title = 'Welcome - Spotify El8alaba';
-  },
 };
 </script>
 
