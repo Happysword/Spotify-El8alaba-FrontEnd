@@ -240,6 +240,7 @@ export default {
       }
     },
     async fetchSearch() {
+      const response = await Client.fetchSearch(this.$route.params.id);
       this.artists = [];
       this.users = [];
       this.tracks = [];
@@ -251,7 +252,6 @@ export default {
       this.playlistsExist = false;
       this.albumsExist = false;
       this.NoResult = false;
-      const response = await Client.fetchSearch(this.$route.params.id);
       if (response) {
         if (response.artists) {
           this.artists = [];
@@ -275,6 +275,8 @@ export default {
             this.albums = response.albums;
             this.albumsExist = true;
             this.albumLength = this.albums.length < 6 ? this.albums.length : 6;
+          } else {
+            this.albumsExist = false;
           }
         }
         if (response.playlists) {
@@ -282,6 +284,8 @@ export default {
             this.playlists = response.playlists;
             this.playlistsExist = true;
             this.playlistLength = this.playlists.length < 6 ? this.playlists.length : 6;
+          } else {
+            this.playlistsExist = false;
           }
         }
         if (response.tracks) {
@@ -289,6 +293,8 @@ export default {
             this.tracks = response.tracks;
             this.tracksExist = true;
             this.trackLength = this.tracks.length <= 3 ? this.tracks.length : 3;
+          } else {
+            this.tracksExist = false;
           }
         }
         if (this.artistsExist && this.tracksExist) {
@@ -339,14 +345,15 @@ export default {
     },
   },
   watch: {
-    $route(to) {
-      this.fetchSearch(to.params.id);
-      setTimeout(3000);
+    $route() {
+      this.fetchSearch();
+      // setTimeout(50);
+      this.$forceUpdate();
+      // setTimeout(50);
     },
   },
   async created() {
-    await this.fetchSearch(this.$route.params.id);
-    setTimeout(3000);
+    await this.fetchSearch();
   },
   mounted() {
     this.$store.state.searching = true;

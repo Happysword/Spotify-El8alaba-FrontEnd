@@ -1190,50 +1190,67 @@ export default {
  */
   async fetchSearch(search) {
     let q = search;
+    let key = '';
     let z = 'track,artist,album,playlist,user';
-    if (search.includes('tracks')) {
+    if (search.includes('track')) {
       z = 'track';
-      const regex = 'tracks';
-      q = q.replace(regex, '');
+      key = 'track';
+      if (search.includes('tracks')) {
+        key += 's';
+      }
+      q = q.replace(key, '');
     }
-    if (search.includes('artists')) {
+    if (search.includes('artist')) {
       if (z === 'track,artist,album,playlist,user') {
         z = 'artist';
       } else {
         z += ',artist';
       }
-      const regex = ' artists';
-      q = q.replace(regex, '');
+      key = ' artist';
+      if (search.includes('artists')) {
+        key += 's';
+      }
+      q = q.replace(key, '');
     }
-    if (search.includes('albums')) {
+    if (search.includes('album')) {
       if (z === 'track,artist,album,playlist,user') {
         z = 'album';
       } else {
         z += ',album';
       }
-      const regex = 'albums';
-      q = q.replace(regex, '');
+      key = 'album';
+      if (search.includes('albums')) {
+        key += 's';
+      }
+      q = q.replace(key, '');
     }
-    if (search.includes('playlists')) {
+    if (search.includes('playlist')) {
       if (z === 'track,artist,album,playlist,user') {
         z = 'playlist';
       } else {
         z += ',playlist';
       }
-      const regex = 'playlists';
-      q = q.replace(regex, '');
+      key = 'playlist';
+      if (search.includes('playlists')) {
+        key += 's';
+      }
+      q = q.replace(key, '');
     }
-    if (search.includes('users')) {
+    if (search.includes('user')) {
       if (z === 'track,artist,album,playlist,user') {
         z = 'user';
       } else {
         z += ',user';
       }
-      const regex = 'users';
-      q = q.replace(regex, '');
+      key = 'user';
+      if (search.includes('users')) {
+        key += 's';
+      }
+      q = q.replace(key, '');
     }
     return axios
       .get(`${api}/api/v1/search?q=${q}&type=${z}&limit=6&offset=0`, {
+
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
