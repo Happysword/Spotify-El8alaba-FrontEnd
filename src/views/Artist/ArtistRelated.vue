@@ -2,10 +2,10 @@
     <v-container mx-5>
         <v-row>
             <v-col  xs="12" sm="6" md="4" lg="2"
-            v-for="card in artistRelatedArtists.artists" :key="card.id">
-                   <artist-card :id="card.id" :profileName="card.name"
+            v-for="card in artistRelatedArtists" :key="card.id">
+                   <artist-card :id="card.id" :name="card.name"
                    :images="card.images"
-                   :type="card.type" :external_urls="card.external_urls"
+                   :type="card.type" :external_urls="card.href"
                    ></artist-card>
             </v-col>
         </v-row>
@@ -15,7 +15,7 @@
 <script>
 import client from 'api-client';
 import ArtistCard from '../../components/ArtistCard.vue';
-
+import EventBus from '../../EventBus';
 
 export default {
   data() {
@@ -30,6 +30,9 @@ export default {
     ArtistCard,
   },
   methods: {
+    updateHeader() {
+      EventBus.$emit('updateHeader');
+    },
     /** Fetches artist related artist */
     fetchArtistRelatedArtists() {
       const token = JSON.parse(localStorage.getItem('currentUser'));
@@ -46,6 +49,5 @@ export default {
         });
     },
   },
-
 };
 </script>

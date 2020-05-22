@@ -270,6 +270,25 @@ export default {
       .catch(() => false);
   },
   /**
+   * Delete a any Track from Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async deleteAnyTrack(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .delete(`${api}/api/v1/tracks/${ID}`, config)
+      .then((response) => {
+        if (response.status === 200) return true;
+        return false;
+      })
+      .catch(() => false);
+  },
+  /**
    * Check if the User Likes a certain Track
    * @param {string} ID the id of the track to be checked
    * @return {Boolean} a Boolean of the State of the track false if failed
@@ -374,6 +393,21 @@ export default {
       })
       .then((response) => response.data);
     return artists;
+  },
+
+  /**
+   * Return Albums of an artist
+   * @param {String} id Album ID
+   */
+  async fetchArtistAlbums(id) {
+    const artistAlbums = await axios
+      .get(`${api}/api/v1/artists/${id}/albums?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => response.data);
+    return artistAlbums;
   },
   /**
    * Get the artist related artist by passing the artist's ID
@@ -977,6 +1011,24 @@ export default {
   },
 
   /**
+   * Returns the top tracks of an artist
+   * @param {String} id ID of the artist
+   */
+  async fetchArtistTopTracks(id) {
+    const artistSongs = await axios.get(`${api}/api/v1/artists/${id}/top-tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+
+    for (let i = 0; i < artistSongs.data.length; i += 1) {
+      artistSongs.data[i].track = artistSongs.data[i];
+    }
+
+    return artistSongs.data;
+  },
+
+  /**
    * Save Track for the Current User
    * @param  {String}  id The id of the Track
    * @return {Object}  The corresponding response
@@ -1028,6 +1080,20 @@ export default {
    */
   async RemoveAlbum(id) {
     const res = await axios.delete(`${api}/api/v1/me/albums?ids=${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+
+  /**
+   * Remove Album for the ant User
+   * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async RemoveAnyAlbum(id) {
+    const res = await axios.delete(`${api}/api/v1/albums/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },

@@ -191,13 +191,15 @@
                 <v-container>
                   <v-row>
                     <v-col cols="12">
-                      <v-toolbar dense class="my-3" v-for="track in albumTracks.items" :key="track">
+                      <v-toolbar dense class="my-3" v-for="track in albumTracks.items"
+                      :key="track.name">
                           <v-toolbar-title>{{track.name}}</v-toolbar-title>
 
                           <v-spacer></v-spacer>
 
                           <v-btn icon>
-                            <v-icon color="red">mdi-close-box</v-icon>
+                            <v-icon color="red" @click="deleteATrack(track.id)">
+                              mdi-close-box</v-icon>
                           </v-btn>
                        </v-toolbar>
                     </v-col>
@@ -219,6 +221,9 @@
               </v-row>
             </v-container>
           </v-dialog>
+          <v-btn icon="" >
+            <v-icon v-on="on" color="red" @click="removeTheAlbum()">mdi-close-box</v-icon>
+          </v-btn>
     </v-toolbar>
 </template>
 
@@ -254,9 +259,23 @@ export default {
   },
   async mounted() {
     this.albumInfo = await client.fetchAlbum(this.albumID);
-    console.log(this.albumID);
   },
   methods: {
+    async removeTheAlbum() {
+      client.RemoveAnyAlbum(this.albumID)
+        .then(async (res) => {
+          console.log(res);
+          this.$emit('refreshAlbums');
+        });
+    },
+    async deleteATrack(id) {
+      client.deleteAnyTrack(id)
+        .then(async (res) => {
+          console.log(res);
+          this.fetchAlbumTracks();
+          this.albumInfo = await client.fetchAlbum(this.albumID);
+        });
+    },
     async fetchAlbumTracks() {
       this.albumTracks = await client.fetchAlbumTracks(this.albumID);
     },
