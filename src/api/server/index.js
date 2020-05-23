@@ -558,6 +558,62 @@ export default {
   },
 
   /**
+   * Get Number of listens for tracks
+   * @param {object} data Data needed
+   */
+  async fetchListensOfTracks(data) {
+    const response = await axios.post(`${api}/api/v1/tracks/listens`, data, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.data);
+    return response;
+  },
+
+  /**
+   * Get Number of Likes for tracks
+   * @param {object} data Data needed
+   */
+  async fetchLikesOfTracks(data) {
+    const response = await axios.post(`${api}/api/v1/tracks/likes`, data, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.data);
+    return response;
+  },
+
+  /**
+   * Get Number of Listens for albums
+   * @param {object} data Data needed
+   */
+  async fetchListensOfAlbums(data) {
+    const response = await axios.post(`${api}/api/v1/albums/listens`, data, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.data);
+    return response;
+  },
+
+  /**
+   * Get Number of Likes for albums
+   * @param {object} data Data needed
+   */
+  async fetchLikesOfAlbums(data) {
+    const response = await axios.post(`${api}/api/v1/albums/likes`, data, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.data);
+    return response;
+  },
+
+  /**
    * Check if Current User Follows Artists or Users
    * @param {String} ids IDs of artists or user which current user follows
    * @param {String} token Token of current user

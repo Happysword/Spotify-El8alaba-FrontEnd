@@ -63,9 +63,6 @@ export default {
     this.getSongsList();
   },
   methods: {
-    test() {
-      console.log(this.songsList);
-    },
     /** Get the song of album or playlist */
     async getSongsList() {
       this.songsList = await client.fetchAlbumSongs(this.albumID);

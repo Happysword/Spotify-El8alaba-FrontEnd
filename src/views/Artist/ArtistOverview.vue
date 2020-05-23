@@ -61,6 +61,7 @@ export default {
           this.fetchArtistTopTracks();
         });
     },
+    /** Get an artist  albums */
     async fetchArtistAlbums() {
       this.artistAlbums = await client.fetchArtistAlbums(this.$route.params.id);
     },
