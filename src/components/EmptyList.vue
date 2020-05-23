@@ -75,8 +75,6 @@ export default {
      */
     async refresh() {
       this.recommended = await server.fetchRecentlyPlayedTracks();
-      console.log('recommended');
-      console.log(this.recommended);
     },
   },
   created() {

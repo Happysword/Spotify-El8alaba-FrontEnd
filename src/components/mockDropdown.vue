@@ -42,7 +42,6 @@ export default {
      * Load Dropdown data
      */
     async loadData() {
-      console.log(this.type);
       if (this.type === 'track') {
         // eslint-disable-next-line no-underscore-dangle
         if (this.ownerID === JSON.parse(localStorage.getItem('currentUser')).data._id) {

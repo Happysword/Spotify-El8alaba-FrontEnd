@@ -120,7 +120,6 @@ export default {
         //   this.songs[i] = { track: album.tracks[i] };
         // }
         this.songs = await server.fetchAlbumSongs(this.listInfo.id);
-        console.log(this.songs);
       } else {
         return;
       }
@@ -140,8 +139,13 @@ export default {
         return;
       }
       if (!this.test) {
-        const result = await analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] }, { scale: 0.6 });
-        EventBus.$emit('changeColor', result[0].color);
+        analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] }, { scale: 0.6 })
+          .then((result) => {
+            EventBus.$emit('changeColor', result[0].color);
+          }).catch((err) => {
+            EventBus.$emit('changeColor', 'rgb(150,150,150)');
+            console.log(err.message);
+          });
       }
     },
   },
