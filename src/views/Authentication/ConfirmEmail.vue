@@ -41,7 +41,7 @@
 
 <script>
 import cookies from '@/store/modules/auth/cookies';
-// import api from 'api-client';
+import api from 'api-client';
 
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
@@ -53,7 +53,16 @@ export default {
     const { confirmToken } = this.$route.params;
     if (confirmToken) {
       // Call the API wrapper
-      // Set the incorrect message properly
+      const response = await api.confirmEmail(confirmToken);
+
+      // 200 OK
+      if (response.status === 200) {
+        this.incorrect = false;
+      } else {
+        console.log(response);
+        // Set the incorrect message properly
+        this.incorrect = response.data.message;
+      }
     }
   },
   /* istanbul ignore next */

@@ -904,6 +904,24 @@ export default {
   },
 
   /**
+   * Sends a `PATCH` request to the server to confirm the user's email on signup
+   * @param  {String} confirmToken Email confirmation token that was sent by email
+   * @return {Object}              The corresponding response
+   */
+  async confirmEmail(confirmToken) {
+    const request = {
+      method: 'PATCH',
+      url: `${api}/api/v1/authentication/signup-confirm/${confirmToken}`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Fetches all songs of a playlist
    * @param  {Number}  id The id of playlist
    * @param  {string}  token The token of user
