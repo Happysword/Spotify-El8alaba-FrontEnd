@@ -13,7 +13,7 @@
                 </v-col>
             </v-row>
         </v-container>
-        <v-container mx-5>
+        <v-container mx-5 v-if="ready">
             <v-row v-if="playlists">
                <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in playlists.items" :key="card.id">
                        <song-card :id="card.id" :name="card.name"
@@ -23,6 +23,18 @@
                        ></song-card>
                 </v-col>
             </v-row>
+        </v-container>
+        <v-container v-if="!ready">
+          <v-row class="py-12">
+            <v-col sm='6' md='4' lg="2" v-for="i in 6" :key="i">
+              <v-skeleton-loader
+                ref="skeleton"
+                type="card"
+                class="mx-auto px-1"
+                dark
+              ></v-skeleton-loader>
+            </v-col>
+          </v-row>
         </v-container>
     </div>
 </template>
@@ -36,6 +48,7 @@ export default {
     return {
       userProfile: [],
       playlists: [],
+      ready: false,
     };
   },
   components: {
@@ -63,6 +76,7 @@ export default {
     },
     /** Fetches current user playlists upon entry */
     fetchUserPlaylists() {
+      this.ready = false;
       const token = JSON.parse(localStorage.getItem('currentUser'));
 
       if (token === null) {
@@ -74,6 +88,7 @@ export default {
       client.fetchaListOfUserPlaylists(this.$route.params.id, this.token)
         .then((response) => {
           this.playlists = response;
+          this.ready = true;
         });
     },
 

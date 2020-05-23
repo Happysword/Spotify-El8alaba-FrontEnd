@@ -1183,7 +1183,7 @@ export default {
    * Add Track to a Playlist
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
-   * @return {Object}  The corresponding response
+   * @return {Boolean}  The corresponding response
    */
   async AddTrackToPlaylist(listId, trackId) {
     const response = await axios.post(`${api}/api/v1/playlists/${listId}/tracks`, {
@@ -1204,10 +1204,10 @@ export default {
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
    * @param  {Number}  position the position of the track in the list
-   * @return {Object}  The corresponding response
+   * @return {Boolean}  The corresponding response
    */
   async RemoveTrackFromPlaylist(listId, trackId, position) {
-    const response = await axios.delete(`${api}/api/v1/playlists/${listId}/tracks`, {
+    const response = axios.delete(`${api}/api/v1/playlists/${listId}/tracks`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
@@ -1222,6 +1222,19 @@ export default {
       return false;
     }).catch(() => false);
     return response;
+  },
+
+  /**
+   * Get New Releases of albums
+   * @return {Array} Array on new releases
+   */
+  async fetchNewReleases() {
+    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=20`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return response.albums.items;
   },
 
   /**
