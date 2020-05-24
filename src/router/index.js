@@ -33,6 +33,7 @@ import UserPage from '../views/Users/UserPage.vue';
 import store from '../store/index';
 import Download from '../views/Download/Download.vue';
 import Premium from '../views/Premium/Premium.vue';
+import SetPremium from '../views/Premium/SetPremium.vue';
 
 Vue.use(VueRouter);
 
@@ -118,6 +119,11 @@ const routes = [
     path: '/premium',
     name: 'premium',
     component: Premium,
+  },
+  {
+    path: '/premium/:token',
+    name: 'setPremium',
+    component: SetPremium,
   },
   {
     path: '/signup',

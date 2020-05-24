@@ -13,13 +13,27 @@
                         </h4>
                     </div>
                     <v-btn
+                        v-if="request != 1"
                         class="ml-10"
                         color="#1DB954"
                         rounded
                         dark
-                        large>
+                        large
+                        @click="requestPremium()">
                         Get Premium
                     </v-btn>
+                    <div v-if="request != 0">
+                        <h1
+                            v-if="request == 1"
+                            class="white--text display-1 font-weight-bold ma-10">
+                                Please Check your e-mail
+                        </h1>
+                        <h1
+                            v-if="request == 2"
+                            class="white--text display-1 font-weight-bold ma-10">
+                            Something went wrong, Please try again later
+                        </h1>
+                    </div>
                     <div class="announce">
                         <span class="white--text ml-10">Terms and conditions apply.</span>
                     </div>
@@ -53,6 +67,7 @@
 </template>
 
 <script>
+import client from 'api-client';
 import TopBar from '../../components/TopBar.vue';
 
 export default {
@@ -60,8 +75,23 @@ export default {
   components: {
     TopBar,
   },
+  methods: {
+    async requestPremium() {
+      if (document.cookie.search(/loggedIn=.+/) === -1) {
+        this.$router.push('/login');
+      } else {
+        const response = await client.premiumRequest();
+        if (response === 200) {
+          this.request = 1;
+        } else {
+          this.request = 2;
+        }
+      }
+    },
+  },
   data() {
     return {
+      request: 0,
       reasons: [
         {
           title: 'Download music.',

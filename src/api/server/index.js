@@ -1261,4 +1261,24 @@ export default {
       })
       .catch((error) => console.log(error));
   },
+  async premiumRequest() {
+    return axios
+      .patch(`${api}/api/v1/users/premium`, {
+
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        console.log(response.status);
+        return response.status;
+      })
+      .catch((error) => console.log(error));
+  },
+  async setPremium(premiumToken) {
+    return axios
+      .post(`${api}/api/v1/users/premium/${premiumToken}`)
+      .then((response) => response.status)
+      .catch((error) => console.log(error));
+  },
 };

@@ -14,7 +14,7 @@
         <v-overlay v-if="overlay" absolute>
           <v-btn fab small color="#1ED760" class="btn"
             v-if="overlay"
-            @mousedown.stop="" @click.stop="showPlayButton = !showPlayButton">
+            @mousedown.stop="" @click.stop="playsong()">
             <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
             <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
         </v-btn>
@@ -53,6 +53,7 @@
 
 <script>
 /* istanbul ignore file */
+import client from 'api-client';
 import drop from './mockDropdown.vue';
 
 export default {
@@ -84,6 +85,33 @@ export default {
     },
     clickSong() {
       this.$router.push(`/album/${this.albumID}`);
+    },
+    async playSong() {
+      this.showPlayButton = !this.showPlayButton;
+      if (this.showPlayButton) {
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: false,
+          type: this.type,
+        });
+        this.showPlayButton = true;
+      } else {
+        const songsList = await client.fetchAlbumSongs(this.albumID);
+        if (this.$store.state.MusicPlayer.ID === this.IDP) {
+          this.$store.dispatch('playpauseplaylist', {
+            playstatus: true,
+            ID: this.IDP,
+            type: this.type,
+          });
+        } else {
+          this.$store.dispatch('playpauseplaylist', {
+            playstatus: true,
+            currentList: songsList,
+            ID: this.id,
+            song: songsList[0],
+            type: this.type,
+          });
+        }
+      }
     },
   },
 };
