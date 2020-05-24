@@ -888,8 +888,7 @@ export default {
   async sendNotificationToken(data) {
     const request = {
       method: 'POST',
-      // @todo[XL3] Verify this endpoint with BE
-      url: `${api}/api/v1/user/notification-token`,
+      url: `${api}/api/v1/users/notification-token`,
       data,
       headers: {
         'Content-Type': 'application/json',

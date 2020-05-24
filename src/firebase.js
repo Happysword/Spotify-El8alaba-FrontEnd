@@ -31,9 +31,8 @@ messaging
   .getToken()
   .then(async (currentToken) => {
     if (currentToken) {
-      console.log(`currentToken: ${currentToken}`);
       const response = await api.sendNotificationToken({ token: currentToken });
-      console.log(response);
+      if (response.status !== 200) console.log(response.data);
     } else {
       // Show permission request.
       console.log(
@@ -50,11 +49,10 @@ messaging.onTokenRefresh(() => {
   messaging
     .getToken()
     .then(async (refreshedToken) => {
-      console.log(`refreshedToken: ${refreshedToken}`);
       const response = await api.sendNotificationToken({
         token: refreshedToken,
       });
-      console.log(response);
+      if (response.status !== 200) console.log(response.data);
     })
     .catch((err) => {
       console.log('Unable to retrieve refreshed token ', err);
@@ -66,5 +64,8 @@ messaging.onTokenRefresh(() => {
 // - the user clicks on an app notification created by a service worker
 // `messaging.setBackgroundMessageHandler` handler.
 messaging.onMessage((payload) => {
-  console.log('Message received. ', payload);
+  const options = {
+    body: payload.notification.body,
+  };
+  Notification(payload.notification.title || 'Spotify El-8alaba', options);
 });

@@ -1,7 +1,9 @@
-// Firebase App (the core Firebase SDK) and messaging products
 /* eslint-disable */
-importScripts('https://www.gstatic.com/firebasejs/6.3.4/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/6.3.4/firebase-messaging.js');
+// Firebase App (the core Firebase SDK) and messaging products
+importScripts('https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js');
+importScripts(
+  'https://www.gstatic.com/firebasejs/7.14.5/firebase-messaging.js',
+);
 
 // Firebase configuration
 const firebaseConfig = {
@@ -20,23 +22,3 @@ firebase.initializeApp(firebaseConfig);
 
 // Retrieve Firebase Messaging object
 const messaging = firebase.messaging();
-
-// Called when a message is received while the app is out of focus
-messaging.setBackgroundMessageHandler((payload) => {
-  console.log(
-    '[firebase-messaging-sw.js] Received background message ',
-    payload,
-  );
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    // icon: '/firebase-logo.png',
-  };
-
-  // @note[XL3] Example said `self.registration...` instead of `this` but ESLint complained
-  return this.registration.showNotification(
-    notificationTitle,
-    notificationOptions,
-  );
-});
