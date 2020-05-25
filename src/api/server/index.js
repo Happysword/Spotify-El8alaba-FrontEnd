@@ -1234,7 +1234,7 @@ export default {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
-    return response.albums.items;
+    return response.data.albums;
   },
 
   /**

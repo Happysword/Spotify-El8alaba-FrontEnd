@@ -1,5 +1,5 @@
 <template>
-      <v-list dark id="menu" class="ma-auto">
+      <v-list dark id="menu" class="ma-auto" left>
         <v-list-item
           v-for="(item, index) in showList"
           :key="index"

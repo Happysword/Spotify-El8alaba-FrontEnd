@@ -53,19 +53,17 @@ export default {
     listCard,
   },
   methods: {
+    /**
+     * Fetch new releases
+     */
     async NewReleases() {
       this.ready = false;
-      // server.fetchNewReleases()
-      //   .then((res) => {
-      //     this.ready = true;
-      //     this.lists = res;
-      //     console.log(this.lists);
-      //   });
-
-      // TODO:[Naiera] Remove this and uncomment NewReleases
-      const response = await server.fetchGenres();
-      this.lists = response[1].playlists;
-      this.ready = true;
+      server.fetchNewReleases()
+        .then((res) => {
+          this.ready = true;
+          this.lists = res;
+          console.log(this.lists);
+        });
     },
   },
   mounted() {
