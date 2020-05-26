@@ -903,6 +903,27 @@ export default {
   },
 
   /**
+   * Sends a `DELETE` request to the server to remove a notification token
+   * @param  {String} notificationToken The notification token to be deleted
+   * @return {Object}                   The corresponding response
+   */
+  async deleteNotificationToken(notificationToken) {
+    const request = {
+      method: 'DELETE',
+      url: `${api}/api/v1/users/notification-token/${notificationToken}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `PATCH` request to the server to confirm the user's email on signup
    * @param  {String} confirmToken Email confirmation token that was sent by email
    * @return {Object}              The corresponding response

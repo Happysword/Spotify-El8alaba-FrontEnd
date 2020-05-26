@@ -6,7 +6,9 @@ import store from './store';
 import vuetify from './plugins/vuetify';
 import './Filters';
 import './registerServiceWorker';
-import './firebase';
+import fbase from './store/modules/firebase';
+
+fbase.init();
 
 Vue.use(VueClipboard);
 

@@ -1,9 +1,12 @@
 <template>
-  <pre>Logging out...</pre>
+  <div id="LogOut_root">
+    <p class="headline">Logging out...</p>
+  </div>
 </template>
 
 <script>
 import api from 'api-client';
+import fbase from '@/store/modules/firebase';
 
 /**
  * @author XL3 <abdelrahman.farid99@eng-st.cu.edu.eg>
@@ -26,11 +29,25 @@ export default {
   },
 
   async mounted() {
+    // Delete the notification token
+    let response;
+    const mes = fbase.getMessagingInstance();
+    if (mes) {
+      const token = await mes.getToken();
+      response = await api.deleteNotificationToken(token);
+      if (response.status !== 200) {
+        alert('Error deleting notification token.');
+        console.log(response.data);
+      }
+    }
+
     // Remove the current user
     // Remove all cookies
-    const { status } = await api.logoutUser();
-    if (status === 200) {
+    response = await api.logoutUser();
+    if (response.status === 200) {
       this.$router.push('/');
+    } else {
+      console.log(response.data);
     }
   },
 };
