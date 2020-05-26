@@ -101,7 +101,9 @@ describe('PasswordReset.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual(
+      'Error. Something went wrong.',
+    );
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 
@@ -136,10 +138,10 @@ describe('PasswordReset.vue', () => {
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
     expect(wrapper.vm.$data.succeeded).toEqual(true);
     expect(wrapper.find('#errorBar').exists()).toEqual(false);
-    expect(wrapper.text())
-      .toMatch(/A message has been sent to you by email with instructions/);
-    expect(wrapper.text())
-      .toMatch(/on how to reset your password\./);
+    expect(wrapper.text()).toMatch(
+      /A message has been sent to you by email with instructions on/,
+    );
+    expect(wrapper.text()).toMatch(/how to reset your password\./);
   });
 
   test('Entering an email triggers the validation properly', () => {
@@ -165,7 +167,10 @@ describe('PasswordReset.vue', () => {
 
   test('Entering a password pair triggers the validation properly', () => {
     // Add a mock token as a route parameter
-    router.push({ name: 'PasswordReset', params: { resetToken: 'mock_token' } });
+    router.push({
+      name: 'PasswordReset',
+      params: { resetToken: 'mock_token' },
+    });
 
     // Mount the component
     const wrapper = mount(PasswordReset, {
@@ -192,10 +197,13 @@ describe('PasswordReset.vue', () => {
     expect(wrapper.vm.$refs.passwordResetForm.validate()).toEqual(true);
   });
 
-  test('Resetting a fake user\'s password fails', async () => {
+  test("Resetting a fake user's password fails", async () => {
     // Add a mock token as a route parameter
     router.push({ name: 'Landing' });
-    router.push({ name: 'PasswordReset', params: { resetToken: 'mock_token' } });
+    router.push({
+      name: 'PasswordReset',
+      params: { resetToken: 'mock_token' },
+    });
 
     // Mount the component
     const wrapper = mount(PasswordReset, {
@@ -228,14 +236,19 @@ describe('PasswordReset.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual(
+      'Error. Something went wrong.',
+    );
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 
-  test('Resetting a real user\'s password succeeds', async () => {
+  test("Resetting a real user's password succeeds", async () => {
     // Add a mock token as a route parameter
     router.push({ name: 'Main' });
-    router.push({ name: 'PasswordReset', params: { resetToken: 'mock_token' } });
+    router.push({
+      name: 'PasswordReset',
+      params: { resetToken: 'mock_token' },
+    });
 
     // Mount the component
     const wrapper = mount(PasswordReset, {

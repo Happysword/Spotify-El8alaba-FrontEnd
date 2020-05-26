@@ -7,6 +7,7 @@ import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
 import LogOut from '../views/Authentication/LogOut.vue';
 import PasswordReset from '../views/Authentication/PasswordReset.vue';
+import ConfirmEmail from '../views/Authentication/ConfirmEmail.vue';
 import Account from '../views/Account/Account.vue';
 import AccountOverview from '../components/Account/AccountOverview.vue';
 import EditProfile from '../components/Account/EditProfile.vue';
@@ -46,15 +47,23 @@ const routes = [
     path: '/home',
     name: 'Main',
     component: Main,
-    meta: { },
+    meta: {},
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
-      { path: '/home/search/history/showRecent', name: 'recentSearch', component: RecentSearch },
+      {
+        path: '/home/search/history/showRecent',
+        name: 'recentSearch',
+        component: RecentSearch,
+      },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/genre/:id-page', name: 'genres', component: Genres },
-      { path: '/home/search/:id/:type', name: 'searchType', component: SearchType },
+      {
+        path: '/home/search/:id/:type',
+        name: 'searchType',
+        component: SearchType,
+      },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
@@ -120,28 +129,34 @@ const routes = [
     component: Premium,
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp,
-    meta: { title: 'Spotify El8alaba - Sign up' },
-  },
-  {
     path: '/login',
     name: 'LogIn',
     component: LogIn,
-    meta: { title: 'Spotify El8alaba - Log in' },
+    meta: { title: 'Log in' },
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp,
+    meta: { title: 'Sign up' },
+  },
+  {
+    path: '/confirm-email/:confirmToken?',
+    name: 'ConfirmEmail',
+    component: ConfirmEmail,
+    meta: { title: 'Confirm Email' },
   },
   {
     path: '/password-reset/:resetToken?',
     name: 'PasswordReset',
     component: PasswordReset,
-    meta: { title: 'Spotify El8alaba - Reset your password' },
+    meta: { title: 'Reset your password' },
   },
   {
     path: '/logout',
     name: 'LogOut',
     component: LogOut,
-    meta: { title: 'Spotify El8alaba - Log out' },
+    meta: { title: 'Log out' },
   },
   {
     path: '/account',
@@ -153,25 +168,25 @@ const routes = [
         path: 'overview',
         name: 'AccountOverview',
         component: AccountOverview,
-        meta: { title: 'Spotify El8alaba - Account Overview' },
+        meta: { title: 'Account Overview' },
       },
       {
         path: 'edit-profile',
         name: 'EditProfile',
         component: EditProfile,
-        meta: { title: 'Spotify El8alaba - Edit Profile' },
+        meta: { title: 'Edit Profile' },
       },
       {
         path: 'change-password',
         name: 'ChangePassword',
         component: ChangePassword,
-        meta: { title: 'Spotify El8alaba - Change Password' },
+        meta: { title: 'Change Password' },
       },
       {
         path: 'notifications',
         name: 'NotificationSettings',
         component: NotificationSettings,
-        meta: { title: 'Spotify El8alaba - Notification Settings' },
+        meta: { title: 'Notification Settings' },
       },
     ],
   },
@@ -203,7 +218,10 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       // eslint-disable-next-line no-alert
-      alert(`${tokenRes.data.message || profileRes.data.message}\nYou will now be redirected.`);
+      alert(
+        `${tokenRes.data.message || profileRes.data.message}\n
+        You will now be redirected.`,
+      );
       const { status } = await api.logoutUser();
       if (status === 200) next('/');
     }
@@ -214,12 +232,14 @@ router.beforeEach(async (to, from, next) => {
  * Adjusts each route's title in the browser
  */
 router.afterEach((to, from) => {
-  const defaultTitle = 'Spotify El8alaba';
+  let defaultTitle = 'Spotify El8alaba';
   Vue.nextTick(() => {
-    document.title = to.meta.title || defaultTitle;
+    if (to.meta && to.meta.title) {
+      defaultTitle = `${defaultTitle} - ${to.meta.title}`;
+    }
+    document.title = defaultTitle;
   });
   store.state.prevRoute = from.fullPath;
 });
-
 
 export default router;
