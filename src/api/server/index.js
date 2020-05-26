@@ -1410,6 +1410,22 @@ export default {
   },
 
   /**
+   * Get list of recommended tracks
+   * @return {Array} Array on recommended tracks
+   */
+  async fetchRecommendedTracks() {
+    const response = await axios.get(`${api}/api/v1/tracks/recommend`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    for (let i = 0; i < response.data.length; i += 1) {
+      response.data[i] = { track: response.data[i] };
+    }
+    return response.data;
+  },
+
+  /**
    * Change details of a Playlist
    * @param  {Number}  id The id of the Playlist
    * @param  {Object}  body The data to be changed

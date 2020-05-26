@@ -74,7 +74,7 @@ export default {
      * Refresh recommended tracks
      */
     async refresh() {
-      this.recommended = await server.fetchRecentlyPlayedTracks();
+      this.recommended = await server.fetchRecommendedTracks();
     },
   },
   created() {
