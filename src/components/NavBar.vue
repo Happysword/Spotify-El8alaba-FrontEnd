@@ -124,7 +124,7 @@
           class="mt-2"
           max-height="180"
           max-width="200"
-          src="../assets/imgs/El-8alaba.png"
+          :src= "$store.state.MusicPlayer.adImage"
           contain
         ></v-img>
       </v-container>

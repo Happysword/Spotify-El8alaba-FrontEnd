@@ -13,7 +13,7 @@ import AccountOverview from '../components/Account/AccountOverview.vue';
 import EditProfile from '../components/Account/EditProfile.vue';
 import ChangePassword from '../components/Account/ChangePassword.vue';
 import NotificationSettings from '../components/Account/NotificationSettings.vue';
-import Landing from '../views/Landing.vue';
+import Landing from '../views/Landing/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
 import Genres from '../views/Genres/Genres.vue';
@@ -34,6 +34,13 @@ import UserPage from '../views/Users/UserPage.vue';
 import store from '../store/index';
 import Download from '../views/Download/Download.vue';
 import Premium from '../views/Premium/Premium.vue';
+import About from '../views/Landing/About.vue';
+import MainHelp from '../views/Help/MainHelp.vue';
+import HelpNavigation from '../views/Help/HelpNavigation.vue';
+import HelpPlayer from '../views/Help/HelpPlayer.vue';
+import HelpPassword from '../views/Help/HelpPassword.vue';
+import HelpProfile from '../views/Help/HelpProfile.vue';
+import HelpWebsite from '../views/Help/HelpWebsite.vue';
 
 Vue.use(VueRouter);
 
@@ -42,6 +49,30 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+    meta: { title: 'Welcome-Spotify El8alaba' },
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: { title: 'About-Spotify El8alaba' },
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: MainHelp,
+    meta: { title: 'Help-Spotify El8alaba' },
+    children: [
+      { path: '/help', name: 'HelpNavigation', component: HelpNavigation },
+      { path: '/help/player', name: 'HelpNavigation', component: HelpPlayer },
+      { path: '/help/profile', name: 'HelpNavigation', component: HelpProfile },
+      {
+        path: '/help/password',
+        name: 'HelpNavigation',
+        component: HelpPassword,
+      },
+      { path: '/help/website', name: 'HelpNavigation', component: HelpWebsite },
+    ],
   },
   {
     path: '/home',

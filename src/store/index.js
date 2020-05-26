@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import * as currentSongMock from '../api/mock/data/MusicPlayer/currentSong.json';
 import * as currentPlaybackMock from '../api/mock/data/MusicPlayer/currentPlayback.json';
 import PlayerActions from './modules/MusicPlayer/StoreActions';
+import Logo from '../assets/imgs/El-8alaba.png';
 
 Vue.use(Vuex);
 
@@ -37,6 +38,7 @@ export default new Vuex.Store({
       currentQueue: [],
       currentSongIndexinList: 0,
       adTime: false,
+      adImage: Logo,
       playQueue: false,
     },
     prevRoute: '',
