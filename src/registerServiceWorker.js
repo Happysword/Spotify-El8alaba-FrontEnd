@@ -1,17 +1,17 @@
-/* eslint-disable no-console */
+/* eslint-disable */
 
 import { register } from 'register-service-worker';
 
 if (process.env.NODE_ENV === 'production') {
-  register(`${process.env.BASE_URL}service-worker.js`, {
+  register(`${process.env.BASE_URL}firebase-messaging-sw.js`, {
     ready() {
       console.log(
-        'App is being served from cache by a service worker.\n'
-          + 'For more details, visit https://goo.gl/AFskqB',
+        'App is being served from cache by a service worker.\n' +
+          'For more details, visit https://goo.gl/AFskqB',
       );
     },
     registered() {
-      console.log('Service worker has been registered.');
+      console.log('Firebase service worker has been registered.');
     },
     cached() {
       console.log('Content has been cached for offline use.');

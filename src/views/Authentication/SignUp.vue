@@ -7,18 +7,31 @@
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
             <router-link to="/">
-              <v-img id="logo" src="../../assets/imgs/El-8alaba.png" contain height="140"></v-img>
+              <v-img
+                id="logo"
+                src="../../assets/imgs/El-8alaba.png"
+                contain
+                height="140"
+              ></v-img>
             </router-link>
 
             <v-col class="text-center">
-              <v-btn id="fbSignupBtn" color="#1877F2" rounded x-large dark @click="fbSignup">
+              <v-btn
+                id="fbSignupBtn"
+                color="#1877F2"
+                rounded
+                x-large
+                dark
+                @click="fbSignup"
+              >
                 <v-img
                   src="../../assets/imgs/fb-logo.png"
                   class="mr-4 mt-n1 ml-n4"
                   contain
                   max-height="38"
                   max-width="38"
-                ></v-img>Sign Up with Facebook
+                />
+                Sign Up with Facebook
               </v-btn>
             </v-col>
 
@@ -40,7 +53,8 @@
               id="errorBar"
               class="caption red darken-1 white--text text-center py-3 mb-8"
               v-if="userInput.incorrect"
-              >{{ userInput.incorrect }}
+            >
+              {{ userInput.incorrect }}
             </p>
 
             <!-- Form -->
@@ -69,8 +83,9 @@
                 ref="confirmEmail"
                 v-model="userInput.confirmEmail"
                 :rules="[
-                  (data) => (!!data && data === userInput.email)
-                    || 'Email address doesn\'t match',
+                  (data) =>
+                    (!!data && data === userInput.email) ||
+                    'Email address doesn\'t match',
                 ]"
                 @change="validateConfirmEmail"
               />
@@ -88,7 +103,9 @@
                   validation.minLength('Password', 8),
                 ]"
                 :type="userInput.showPassword ? 'text' : 'password'"
-                :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :append-icon="
+                  userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'
+                "
                 @click:append="userInput.showPassword = !userInput.showPassword"
               />
 
@@ -117,6 +134,7 @@
                     color="#1DB954"
                     outlined
                     label="Day"
+                    type="number"
                     v-model="userInput.dob.day"
                     :rules="[validation.validDay()]"
                   />
@@ -140,6 +158,7 @@
                     color="#1DB954"
                     outlined
                     label="Year"
+                    type="number"
                     v-model="userInput.dob.year"
                     :rules="[validation.validYear()]"
                   />
@@ -147,7 +166,12 @@
               </v-row>
 
               <!-- Gender -->
-              <v-radio-group id="genderRadio" mandatory row v-model="userInput.gender">
+              <v-radio-group
+                id="genderRadio"
+                mandatory
+                row
+                v-model="userInput.gender"
+              >
                 <v-radio label="Male" value="m" />
                 <v-radio label="Female" value="f" />
               </v-radio-group>
@@ -162,7 +186,9 @@
                   @click="submit"
                   min-width="60%"
                   x-large
-                >Sign Up</v-btn>
+                >
+                  Sign Up
+                </v-btn>
               </v-row>
             </v-form>
 
@@ -172,6 +198,13 @@
                 <span class="link">Log in</span>
               </router-link>
             </p>
+            <v-overlay :value="userInput.submitted" opacity="0.95">
+              <p class="title text-center link">
+                You have been signed up successfully! A message has been sent to
+                your email address.<br />
+                Please follow the instructions in it to confirm your email.
+              </p>
+            </v-overlay>
           </v-col>
         </v-row>
       </v-container>
@@ -239,6 +272,7 @@ export default {
         },
         gender: '',
         incorrect: false,
+        submitted: false,
       },
 
       validation,
@@ -275,19 +309,13 @@ export default {
       });
 
       // If the request was successful,
-      // add the currentUser to localStorage,
-      // set the loggedIn token to session
-      // and route to home
+      // tell the user they need to confirm their email,
       // 200 OK
       if (response.status === 200) {
-        const currentUser = {
-          token: response.data.token,
-          data: response.data.data.user,
-        };
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-        cookies.setCookiesToSession(['loggedIn']);
-
-        this.$router.push('/home');
+        this.userInput.submitted = true;
+        // @note[XL3] The signup endpoint sets the loggedIn cookie, which conflicts
+        // with route guards, which is why I'm clearing it manually
+        cookies.clearData(['currentUser'], ['loggedIn']);
       } else {
         this.userInput.incorrect = response.data.message;
       }
