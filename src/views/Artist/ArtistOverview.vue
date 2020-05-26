@@ -77,9 +77,6 @@ export default {
     },
   },
   methods: {
-    test() {
-      console.log(this.artistID);
-    },
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
@@ -88,6 +85,7 @@ export default {
           this.fetchArtistTopTracks();
         });
     },
+    /** Get an artist  albums */
     async fetchArtistAlbums() {
       this.artistAlbums = await client.fetchArtistAlbums(this.$route.params.id);
     },

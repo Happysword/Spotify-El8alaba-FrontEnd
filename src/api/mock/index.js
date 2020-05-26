@@ -18,6 +18,9 @@ import genresPlaylists1 from './data/Genres-Playlists.json';
 import genresPlaylists2 from './data/Genres-Playlists2.json';
 import search from './data/Search.json';
 import getaUsersProfile from './data/Get-A-Users-Profile.json';
+import getArtistTopTracks from './data/Get-Artist-Top-Traks.json';
+import getArtistAlbums from './data/Get-Artist-Albums.json';
+import getArtistAlbum from './data/Get-Artist-Album.json';
 
 /**
  * Fetches mock data after a given timeout.
@@ -187,6 +190,16 @@ export default {
   async createNewPlayList(createdPlaylist, token) {
     console.log(token);
     console.log(createdPlaylist);
+  },
+
+  /**
+   * Creates a new Album
+   * @param {Object} createdAlbum The Created Album object
+   * @param {string} token The token of the user
+   */
+  async createNewAlbum(createdAlbum, token) {
+    console.log(createdAlbum);
+    console.log(token);
   },
 
   /**
@@ -750,6 +763,32 @@ export default {
     }
     return fetch(getAnArtist, 100);
   },
+
+  /**
+   * Return Albums of an artist
+   * @param {String} id Album ID
+   */
+  async fetchArtistAlbums(id) {
+    console.log(id);
+    return fetch(getArtistAlbums, 200);
+  },
+
+  /**
+   *
+   * @param {string} id ID of the artist
+   * @param {token} token Token of the current user
+   */
+  async getArtistAlbum(id, token) {
+    console.log(id);
+    console.log(token);
+    return fetch(getArtistAlbum, 200);
+  },
+
+  async fetchArtistTopTracks(id) {
+    console.log(id);
+    return fetch(getArtistTopTracks, 100);
+  },
+
   async fetchArtistRelatedArtists(id, token) {
     console.log(token);
     let dummy = id || true;

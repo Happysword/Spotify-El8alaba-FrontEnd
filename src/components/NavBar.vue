@@ -48,6 +48,18 @@
               <v-list-item-title class="subtitle-2">Manage</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+           <v-list-item
+            route
+            to="/home/artist/statistics"
+            v-if="isArtist"
+          >
+            <v-list-item-icon>
+              <v-icon>mdi-poll</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">Statistics</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
         <v-list dark="" dense="">
           <v-list-item-content>
