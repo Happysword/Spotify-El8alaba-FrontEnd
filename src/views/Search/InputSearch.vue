@@ -10,7 +10,7 @@
             :IDP="top.id"
             :name="top.name"
             :image="imageTop"
-            :albumID="top.albumID"
+            :albumID="top.album"
             :type="top.type"
             :artists="top.artists"
             class="a"></top-result>
@@ -38,11 +38,9 @@
             <div @click="local(tracks[i-1].id, 'track')">
               <search-song
                 :id="tracks[i-1].id"
-                :image="tracks[i-1].images[0]? tracks[i-1].images[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg' "
                 :SongName="tracks[i-1].name"
                 :artists="tracks[i-1].artists"
-                :albumID="tracks[i-1].albumID"
-                :uri="tracks[i-1].uri"
+                :albumID="tracks[i-1].album"
                 ></search-song>
             </div>
             </v-col>
@@ -256,20 +254,25 @@ export default {
       this.NoResult = false;
       if (response) {
         if (response.artists) {
-          this.artists = [];
-          this.users = [];
-          if (response.artists.length > 0) {
-            for (let i = 0; i < response.artists.length; i += 1) {
-              if (response.artists[i].type === 'artist') {
-                this.artists.push(response.artists[i]);
-              } else if (response.artists[i].type === 'user') {
-                this.users.push(response.artists[i]);
-              }
+          if (response.artists) {
+            if (response.artists.length > 0) {
+              this.artists = response.artists;
+              this.artistsExist = true;
+              this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
+            } else {
+              this.artistsExist = false;
             }
-            this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
-            this.artistsExist = this.artistLength ? true : 0;
-            this.userLength = this.users.length < 6 ? this.users.length : 6;
-            this.usersExist = !!this.userLength;
+          }
+        }
+        if (response.users) {
+          if (response.users) {
+            if (response.users.length > 0) {
+              this.users = response.users;
+              this.usersExist = true;
+              this.userLength = this.users.length < 6 ? this.users.length : 6;
+            } else {
+              this.usersExist = false;
+            }
           }
         }
         if (response.albums) {

@@ -7,14 +7,14 @@
   @mouseleave=" overlay = false">
   <v-card-actions>
     <v-img
-      :src=image
+      src="https://www.scdn.co/i/_global/twitter_card-default.jpg"
       max-height="80px"
       max-width="80px"
       class="img">
         <v-overlay v-if="overlay" absolute>
           <v-btn fab small color="#1ED760" class="btn"
             v-if="overlay"
-            @mousedown.stop="" @click.stop="playsong()">
+            @mousedown.stop="" @click="playsong()">
             <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
             <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
         </v-btn>
@@ -61,6 +61,7 @@ export default {
     return {
       overlay: false,
       showPlayButton: true,
+      image: String,
     };
   },
   components: {
@@ -68,12 +69,9 @@ export default {
   },
   props: {
     id: String,
-    image: String,
     SongName: String,
-    track: Object,
     artists: Array,
     albumID: String,
-    uri: String,
   },
   methods: {
     clickArtist(y) {
