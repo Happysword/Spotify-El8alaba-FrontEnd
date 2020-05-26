@@ -9,17 +9,24 @@
         v-for="( s , i ) in RecentLength" :key="i">
          <artist-card v-if="RecentSearch[i].type == 'artist'"
           :id="RecentSearch[i].id"
-          :profileName="RecentSearch[i].name"
+          :name="RecentSearch[i].name"
           :images="RecentSearch[i].images"
           :type="RecentSearch[i].type"
-        ></artist-card>
-        <profile-card
-        v-if="RecentSearch[i].type == 'user'"
-        :profileName="RecentSearch[i].name"
-        :id="RecentSearch[i].id"
-        :images="RecentSearch[i].images"
-        :type="RecentSearch[i].type"></profile-card>
-         </v-col>
+          ></artist-card>
+          <profile-card
+          v-if="RecentSearch[i].type == 'user'"
+          :profileName="RecentSearch[i].name"
+          :id="RecentSearch[i].id"
+          :images="RecentSearch[i].images"
+          :type="RecentSearch[i].type"></profile-card>
+          <song-card
+              v-if="RecentSearch[i].type != 'artist' && RecentSearch[i].type != 'user'"
+              :id="RecentSearch[i].id"
+              :name="RecentSearch[i].name"
+              :images="RecentSearch[i].images"
+              :type="RecentSearch[i].type">
+          </song-card>
+        </v-col>
     </v-row>
     </div>
     <div v-if="PGenresExist">
@@ -57,7 +64,7 @@
 import client from 'api-client';
 import Genres from '../../components/GenresCard.vue';
 import pref from '../../components/prefGenres.vue';
-// import SongCard from '../../components/SongCard.vue';
+import SongCard from '../../components/SongCard.vue';
 import ArtistCard from '../../components/ArtistCard.vue';
 import ProfileCard from '../../components/ProfileCard.vue';
 
@@ -66,7 +73,7 @@ export default {
   components: {
     Genres,
     pref,
-    // SongCard,
+    SongCard,
     ArtistCard,
     ProfileCard,
   },
@@ -96,6 +103,7 @@ export default {
     this.fetchAllGenres();
     // this.fetchAllPrefG();
     this.RecentSearch = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
+    console.log(this.RecentSearch);
     if (this.RecentSearch.length !== 0) {
       this.RecentExist = true;
       if (this.RecentSearch.length > 6) {

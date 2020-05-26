@@ -45,7 +45,7 @@
           </v-card-subtitle>
         </template>
 
-        <v-card-actions v-if="showActionButton && type != 'profile'">
+        <v-card-actions v-if="showActionButton && type != 'artist'">
           <v-spacer></v-spacer>
           <v-btn fab big color="#1ED760" id="btn"
             v-if="showActionButton && type != 'profile'"

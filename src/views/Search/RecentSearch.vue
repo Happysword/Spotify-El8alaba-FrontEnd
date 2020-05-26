@@ -11,15 +11,21 @@
       <v-row>
         <v-col  xs="12" sm="6" md="3" lg="2"
         v-for="d in Recent" :key="d.id">
-         <song-card v-if="d.type != 'artist'"
+         <song-card v-if="d.type != 'artist' && d.type != 'user'"
           :id="d.id"
           :name="d.name"
           :images="d.images"
           :type="d.type"
           ></song-card>
+          <profile-card
+          v-if="d.type == 'user'"
+          :profileName="d.name"
+          :id="d.id"
+          :images="d.images"
+          :type="d.type"></profile-card>
          <artist-card v-if="d.type == 'artist'"
           :id="d.id"
-          :profileName="d.name"
+          :name="d.name"
           :images="d.images"
           :type="d.type"
         ></artist-card>
@@ -68,6 +74,7 @@ export default {
         this.Recent.length ? this.RecentExist = true : this.RecentExist = false;
       }
     }
+    console.log(this.Recent);
   },
 };
 </script>

@@ -58,7 +58,7 @@
         </v-layout>
 
           <v-col  xs="12" sm="6" md="3" lg="2" v-for=" i in artistLength" :key="i-1">
-            <div @click="local(artists[i-1].name, artists[i-1].type)">
+            <div @click="local(artists[i-1].id, artists[i-1].type)">
               <ArtistCard
                 :id="artists[i-1].id"
                 :name="artists[i-1].name"
@@ -202,13 +202,19 @@ export default {
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
+        data = data.data;
       } else if (type === 'album') {
         data = await Client.fetchAlbum(id);
       } else if (type === 'artist') {
         data = await Client.fetchAnArtist(id);
+        // eslint-disable-next-line prefer-destructuring
+        data = data[0];
       } else if (type === 'playlist') {
         data = await Client.fetchList(id);
+      } else if (type === 'user') {
+        data = await Client.fetchaUserProfile(id, JSON.parse(localStorage.getItem('currentUser')).token);
       }
+      console.log(data);
       this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
       if (!(this.SearchHistory.some((x) => x.id === data.id))) {
         const temp = JSON.parse(localStorage.getItem('currentUser'));
@@ -216,11 +222,11 @@ export default {
         this.SavedData.name = data.name;
         this.SavedData.id = data.id;
         this.SavedData.type = data.type;
-        if (data.type === 'track') {
-          this.SavedData.images = data.images;
+        if (data.type === 'track' || data.type === 'user') {
+          this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
         } else {
           // eslint-disable-next-line no-unused-expressions
-          data.images[0] ? this.SavedData.images = data.images : this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
+          data.images.length ? this.SavedData.images = data.images : this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
         }
         this.SearchHistory.push(this.SavedData);
         localStorage.setItem('SearchHistory', JSON.stringify(this.SearchHistory));
