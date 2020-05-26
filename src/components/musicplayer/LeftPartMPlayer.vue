@@ -243,7 +243,9 @@ export default {
   },
   watch: {
     async imgsrc() {
-      await this.changePnp();
+      if (this.hoverPic) {
+        await this.changePnp();
+      }
     },
     async playstate() {
       if (this.playstate) this.video.play().catch(() => 0);
