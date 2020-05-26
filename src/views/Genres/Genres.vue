@@ -1,35 +1,16 @@
 <template>
-  <v-container v-if="ready">
-    <br><br><br><br><br>
-    <h1 class="white--text display-3 font-weight-bold">
-    {{ title }}</h1>
-    <br><br><br><br>
-    <div v-if="PopularExist">
-      <p class="white--text display-1 font-weight-bold">Popular Playlists</p>
-      <v-row>
-        <v-col xs="12" sm="6" md="3" lg="2" v-for=" i in PPLength"
-        :key="PopularPlaylists[i-1].id">
-          <SongCard
-          :id="PopularPlaylists[i-1].id"
-          :name="PopularPlaylists[i-1].name"
-          :description="PopularPlaylists[i-1].description"
-          :images="PopularPlaylists[i-1].images"
-          :type="PopularPlaylists[i-1].type"
-          :collaborative="PopularPlaylists[i-1].collaborative"
-          :external_urls="PopularPlaylists[i-1].external_urls"
-          :href="PopularPlaylists[i-1].href"
-          :public="PopularPlaylists[i-1].public"
-          :uri="PopularPlaylists[i-1].uri"></SongCard>
-        </v-col>
-      </v-row>
-    </div>
-    <br><br>
-    <div v-if="PopularExist">
-      <p class="white--text display-1 font-weight-bold">Releases</p>
-      <v-row>
-        <v-col xs="12" sm="6" md="3" lg="2" v-for="i in PPLength"
-        :key="PopularPlaylists[i-1].id">
-          <SongCard
+  <div>
+    <v-container v-if="ready">
+      <br><br><br><br><br>
+      <h1 class="white--text display-3 font-weight-bold">
+      {{ title }}</h1>
+      <br><br><br><br>
+      <div v-if="PopularExist">
+        <p class="white--text display-1 font-weight-bold">Popular Playlists</p>
+        <v-row>
+          <v-col xs="12" sm="6" md="3" lg="2" v-for=" i in PPLength"
+          :key="PopularPlaylists[i-1].id">
+            <SongCard
             :id="PopularPlaylists[i-1].id"
             :name="PopularPlaylists[i-1].name"
             :description="PopularPlaylists[i-1].description"
@@ -38,13 +19,64 @@
             :collaborative="PopularPlaylists[i-1].collaborative"
             :external_urls="PopularPlaylists[i-1].external_urls"
             :href="PopularPlaylists[i-1].href"
-            :public="PopularPlaylists[i-1].public"
-            :snapshot_id="PopularPlaylists[i-1].snapshot_id"
+            :Public="PopularPlaylists[i-1].public"
             :uri="PopularPlaylists[i-1].uri"></SongCard>
+          </v-col>
+        </v-row>
+      </div>
+      <br><br>
+      <div v-if="PopularExist">
+        <p class="white--text display-1 font-weight-bold">Releases</p>
+        <v-row>
+          <v-col xs="12" sm="6" md="3" lg="2" v-for="i in PPLength"
+          :key="PopularPlaylists[i-1].id">
+            <SongCard
+              :id="PopularPlaylists[i-1].id"
+              :name="PopularPlaylists[i-1].name"
+              :description="PopularPlaylists[i-1].description"
+              :images="PopularPlaylists[i-1].images"
+              :type="PopularPlaylists[i-1].type"
+              :collaborative="PopularPlaylists[i-1].collaborative"
+              :external_urls="PopularPlaylists[i-1].external_urls"
+              :href="PopularPlaylists[i-1].href"
+              :Public="PopularPlaylists[i-1].public"
+              :snapshot_id="PopularPlaylists[i-1].snapshot_id"
+              :uri="PopularPlaylists[i-1].uri"></SongCard>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+    <v-container v-if="!ready">
+      <br><br><br><br><br>
+      <v-skeleton-loader
+        ref="skeleton"
+        type="heading"
+        class="py-1"
+        dark
+      ></v-skeleton-loader>
+      <br><br><br><br>
+      <div v-for="j in 2" :key="j">
+        <v-col sm="6" md="6" lg="6">
+          <v-skeleton-loader
+            ref="skeleton"
+            type="heading"
+            class="py-1"
+            dark
+          ></v-skeleton-loader>
         </v-col>
-      </v-row>
-    </div>
-  </v-container>
+        <v-row class="py-12">
+          <v-col sm='6' md='4' lg="2" v-for="i in 6" :key="i">
+            <v-skeleton-loader
+              ref="skeleton"
+              type="card"
+              class="mx-auto px-1"
+              dark
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>

@@ -138,8 +138,6 @@ export default {
           type: this.type,
         });
       } else {
-        // this.$store.state.MusicPlayer.currentSong = this.songsList;
-        // this.$store.state.MusicPlayer.currentList = this.songsList;
         this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           currentList: this.songsList,

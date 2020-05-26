@@ -308,6 +308,25 @@ export default {
       .catch(() => false);
   },
   /**
+   * Delete a any Track from Server
+   * @param {string} ID the id of the track to be saved
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async deleteAnyTrack(ID) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
+      },
+    };
+    return axios
+      .delete(`${api}/api/v1/tracks/${ID}`, config)
+      .then((response) => {
+        if (response.status === 200) return true;
+        return false;
+      })
+      .catch(() => false);
+  },
+  /*
    * Get an Ad from the Server
    * @return {String} the Image URL of the Ad
    */
@@ -430,6 +449,21 @@ export default {
       })
       .then((response) => response.data);
     return artists;
+  },
+
+  /**
+   * Return Albums of an artist
+   * @param {String} id Album ID
+   */
+  async fetchArtistAlbums(id) {
+    const artistAlbums = await axios
+      .get(`${api}/api/v1/artists/${id}/albums?limit=&offset=`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((response) => response.data);
+    return artistAlbums;
   },
   /**
    * Get the artist related artist by passing the artist's ID
@@ -957,8 +991,7 @@ export default {
 
   /**
    * Fetches all songs of a playlist
-   * @param  {Number}  id The id of playlist
-   * @param  {string}  token The token of user
+   * @param  {String}  id The id of playlist
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
   async fetchSongs(id) {
@@ -989,7 +1022,6 @@ export default {
 
   /**
    * Fetches user's saved tracks
-   * @param  {string}  token The token of user
    * @return {Object}  An object containing all saved songs of the user
    */
   async fetchSavedTracks() {
@@ -1073,7 +1105,7 @@ export default {
 
   /**
    * Fetches List info
-   * @param  {Number}  id The id of the desired list
+   * @param  {String}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
    */
   async fetchList(id) {
@@ -1089,7 +1121,7 @@ export default {
 
   /**
    * Fetches Album info
-   * @param  {Number}  id The id of the desired Album
+   * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all information about the album of ID equals to id
    */
   async fetchAlbum(id) {
@@ -1123,7 +1155,7 @@ export default {
 
   /**
    * Fetches Album songs
-   * @param  {Number}  id The id of the desired Album
+   * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all songs of the album of ID equals to id
    */
   async fetchAlbumSongs(id) {
@@ -1144,8 +1176,26 @@ export default {
   },
 
   /**
+   * Returns the top tracks of an artist
+   * @param {String} id ID of the artist
+   */
+  async fetchArtistTopTracks(id) {
+    const artistSongs = await axios.get(`${api}/api/v1/artists/${id}/top-tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+
+    for (let i = 0; i < artistSongs.data.length; i += 1) {
+      artistSongs.data[i].track = artistSongs.data[i];
+    }
+
+    return artistSongs.data;
+  },
+
+  /**
    * Save Track for the Current User
-   * @param  {Number}  id The id of the Track
+   * @param  {String}  id The id of the Track
    * @return {Object}  The corresponding response
    */
   async SaveTrack(id) {
@@ -1161,7 +1211,7 @@ export default {
 
   /**
    * Remove Track for the Current User
-   * @param  {Number}  id The id of the Track
+   * @param  {String}  id The id of the Track
    * @return {Boolean}  The corresponding response
    */
   async RemoveTrack(id) {
@@ -1183,7 +1233,7 @@ export default {
 
   /**
    * Save Album for the Current User
-   * @param  {Number}  id The id of the Album
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async SaveAlbum(id) {
@@ -1199,7 +1249,7 @@ export default {
 
   /**
    * Remove Album for the Current User
-   * @param  {Number}  id The id of the Album
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async RemoveAlbum(id) {
@@ -1214,8 +1264,22 @@ export default {
   },
 
   /**
-   * Check if Album is Saved for the Current User or not
+   * Remove Album for the ant User
    * @param  {Number}  id The id of the Album
+   * @return {Object}  The corresponding response
+   */
+  async RemoveAnyAlbum(id) {
+    const res = await axios.delete(`${api}/api/v1/albums/${id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return res;
+  },
+
+  /**
+   * Check if Album is Saved for the Current User or not
+   * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
   async CheckAlbum(id) {
@@ -1239,7 +1303,7 @@ export default {
 
   /**
    * Check if a Playlist is Saved for the Current User or not
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async CheckPlaylist(id) {
@@ -1262,7 +1326,7 @@ export default {
 
   /**
    * Follow a Playlist
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async FollowPlaylist(id) {
@@ -1282,7 +1346,7 @@ export default {
 
   /**
    * Unfollow a Playlist
-   * @param  {Number}  id The id of the Playlist
+   * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async UnfollowPlaylist(id) {
@@ -1301,9 +1365,9 @@ export default {
 
   /**
    * Add Track to a Playlist
-   * @param  {Number}  listId The id of the Playlist
-   * @param  {Number}  trackId the id of the track
-   * @return {Object}  The corresponding response
+   * @param  {String}  listId The id of the Playlist
+   * @param  {String}  trackId the id of the track
+   * @return {Boolean}  The corresponding response
    */
   async AddTrackToPlaylist(listId, trackId) {
     const response = await axios
@@ -1326,6 +1390,60 @@ export default {
       })
       .catch(() => false);
     return response;
+  },
+
+  /**
+   * Remove Track from a Playlist
+   * @param  {String}  listId The id of the Playlist
+   * @param  {String}  trackId the id of the track
+   * @param  {Number}  position the position of the track in the list
+   * @return {Boolean}  The corresponding response
+   */
+  async RemoveTrackFromPlaylist(listId, trackId, position) {
+    const response = axios.delete(`${api}/api/v1/playlists/${listId}/tracks`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+      data: {
+        tracks: [{
+          id: trackId,
+          positions: [position],
+        }],
+      },
+    }).then((res) => {
+      if (res.status === 200) return true;
+      return false;
+    }).catch(() => false);
+    return response;
+  },
+
+  /**
+   * Get New Releases of albums
+   * @return {Array} Array on new releases
+   */
+  async fetchNewReleases() {
+    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=20`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    return response.data.albums;
+  },
+
+  /**
+   * Get list of recommended tracks
+   * @return {Array} Array on recommended tracks
+   */
+  async fetchRecommendedTracks() {
+    const response = await axios.get(`${api}/api/v1/tracks/recommend`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    });
+    for (let i = 0; i < response.data.length; i += 1) {
+      response.data[i] = { track: response.data[i] };
+    }
+    return response.data;
   },
 
   /**

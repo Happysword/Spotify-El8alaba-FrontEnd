@@ -60,7 +60,7 @@ describe('PlaylistCard.vue Component', () => {
     router,
     store,
   });
-
+  localStorage.setItem('currentUser', JSON.stringify({ data: { _id: '' } }));
   const data = wrapper.vm.$data;
 
   test('renders a vue instance', () => {
@@ -113,7 +113,7 @@ describe('PlaylistCard.vue Component', () => {
       name: 'playlist',
       component: LikedTracks,
       params: {
-        id: '1AwZz0mBuGbCEoNRQdYQju',
+        id: '5iKYvhddpkuAOzOvrLRznN',
       },
     });
     await wrapper.vm.LoadPage();
@@ -121,7 +121,7 @@ describe('PlaylistCard.vue Component', () => {
     expect(data.songsNum).toEqual(songs[2].items.length);
     expect(data.show).toEqual(true);
     expect(data.ready).toEqual(true);
-    expect(data.listInfo).toEqual(lists[2]);
+    expect(data.listInfo).toEqual(lists[5]);
   });
 
   test('Load Album', async () => {
@@ -132,6 +132,7 @@ describe('PlaylistCard.vue Component', () => {
       component: LikedTracks,
       params: {
         id: '5m4VYOPoIpkV0XgOiRKkWC',
+
       },
     });
     await wrapper.vm.LoadPage();
@@ -140,5 +141,23 @@ describe('PlaylistCard.vue Component', () => {
     expect(data.show).toEqual(true);
     expect(data.ready).toEqual(true);
     expect(data.listInfo).toEqual(albums.items[0]);
+  });
+
+  test('Load empty Playlist', async () => {
+    data.test = true;
+    wrapper.vm.$router.push({
+      path: '/playlist',
+      name: 'playlist',
+      component: LikedTracks,
+      params: {
+        id: '5iKYvhddpkuAOzOvrLRznF',
+      },
+    });
+    await wrapper.vm.LoadPage();
+    expect(data.songs).toEqual([]);
+    expect(data.songsNum).toEqual(0);
+    expect(data.show).toEqual(true);
+    expect(data.ready).toEqual(true);
+    expect(data.listInfo).toEqual(lists[6]);
   });
 });

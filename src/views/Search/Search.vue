@@ -1,56 +1,73 @@
 <template>
-  <v-container fluid="">
-    <div v-if="RecentExist">
-      <h2 class="white--text mt-10 font-weight-bold RECENT"
-      id="history"
-      @click="History()">Recent searches</h2>
-    <v-row>
-        <v-col  xs="12" sm="6" md="3" lg="2"
-        v-for="( s , i ) in RecentLength" :key="i">
-         <artist-card v-if="RecentSearch[i].type == 'artist'"
-          :id="RecentSearch[i].id"
+  <div>
+    <v-container fluid="" v-if="ready">
+      <div v-if="RecentExist">
+        <h2 class="white--text mt-10 font-weight-bold RECENT"
+        id="history"
+        @click="History()">Recent searches</h2>
+      <v-row>
+          <v-col  xs="12" sm="6" md="3" lg="2"
+          v-for="( s , i ) in RecentLength" :key="i">
+          <artist-card v-if="RecentSearch[i].type == 'artist'"
+            :id="RecentSearch[i].id"
+            :profileName="RecentSearch[i].name"
+            :images="RecentSearch[i].images"
+            :type="RecentSearch[i].type"
+          ></artist-card>
+          <profile-card
+          v-if="RecentSearch[i].type == 'user'"
           :profileName="RecentSearch[i].name"
+          :id="RecentSearch[i].id"
           :images="RecentSearch[i].images"
-          :type="RecentSearch[i].type"
-        ></artist-card>
-        <profile-card
-        v-if="RecentSearch[i].type == 'user'"
-        :profileName="RecentSearch[i].name"
-        :id="RecentSearch[i].id"
-        :images="RecentSearch[i].images"
-        :type="RecentSearch[i].type"></profile-card>
-         </v-col>
-    </v-row>
-    </div>
-    <div v-if="PGenresExist">
-    <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
-    <v-row>
-        <v-col  xs="12" sm="12" md="12" lg="4"
-        v-for="PGenre in PGenres" :key="PGenre._id">
-          <pref
+          :type="RecentSearch[i].type"></profile-card>
+          </v-col>
+      </v-row>
+      </div>
+      <div v-if="PGenresExist">
+      <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
+      <v-row>
+          <v-col  xs="12" sm="12" md="12" lg="4"
+          v-for="PGenre in PGenres" :key="PGenre._id">
+            <pref
+              class="mt-3"
+              :source="PGenre.icons[0]? PGenre.icons[0].url :'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
+              :title="PGenre.name"
+              :route="PGenre._id"
+            ></pref>
+          </v-col>
+      </v-row>
+      </div>
+      <div v-if="genresExist">
+      <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
+      <v-row>
+        <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
+        :key="genre._id">
+        <Genres
+          class="mt-3"
+          :source="genre.icons[0]? genre.icons[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
+          :title="genre.name"
+          :route="genre._id"
+        ></Genres>
+      </v-col>
+      </v-row>
+      </div>
+    </v-container>
+    <v-container v-if="!ready">
+      <br><br><br>
+      <v-row v-for="j in 6" :key="j">
+        <v-col xs="12" sm="6" md="3" lg="2" v-for="i in 6" :key="i">
+          <v-skeleton-loader
+            ref="skeleton"
+            type="image"
             class="mt-3"
-            :source="PGenre.icons[0]? PGenre.icons[0].url :'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
-            :title="PGenre.name"
-            :route="PGenre._id"
-          ></pref>
-         </v-col>
-    </v-row>
-    </div>
-    <div v-if="genresExist">
-    <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
-    <v-row>
-      <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
-      :key="genre._id">
-      <Genres
-        class="mt-3"
-        :source="genre.icons[0]? genre.icons[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
-        :title="genre.name"
-        :route="genre._id"
-      ></Genres>
-    </v-col>
-    </v-row>
-    </div>
-  </v-container>
+            dark
+            height="100%"
+            width="100%"
+          ></v-skeleton-loader>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -79,14 +96,17 @@ export default {
       RecentLength: 0,
       PGenresExist: false,
       RecentExist: false,
+      ready: false,
     };
   },
   methods: {
     async fetchAllGenres() {
+      this.ready = false;
       this.genres = await client.fetchGenres();
       if (this.genres.length > 0) {
         this.genresExist = true;
       } else this.genres = {};
+      this.ready = true;
     },
     History() {
       this.$router.push('/home/search/history/showRecent');

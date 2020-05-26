@@ -1,5 +1,6 @@
 <template>
-    <v-container fluid="" class="cont">
+  <div>
+    <v-container fluid="" class="cont" v-if="ready">
       <v-row v-if="artistsExist || tracksExist">
         <v-col xs="12" sm="12" md="6" lg="5">
           <span class="white--text mt-10 ml-8 display-1 font-weight-bold">Best result</span>
@@ -153,6 +154,68 @@
               You can also try to use fewer keywords or other keywords.</p>
       </v-container>
     </v-container>
+    <v-container v-if="!ready">
+      <br><br>
+      <v-row>
+        <v-skeleton-loader
+          ref="skeleton"
+          type="heading"
+          class="py-1 pl-2"
+          dark
+          width="50%"
+        ></v-skeleton-loader>
+        <v-spacer></v-spacer>
+        <v-skeleton-loader
+          ref="skeleton"
+          type="heading"
+          class="py-1 pl-n6"
+          dark
+          width="50%"
+        ></v-skeleton-loader>
+      </v-row>
+      <v-row>
+        <v-col xs="12" sm="12" md="6" lg="5">
+          <v-skeleton-loader
+            ref="skeleton"
+            type="card"
+            class="mx-auto px-1"
+            dark
+            tile
+          ></v-skeleton-loader>
+        </v-col>
+        <v-col xs="12" sm="12" md="6" lg="7">
+          <v-skeleton-loader
+            v-for="i in 3" :key="i"
+            ref="skeleton"
+            type="list-item-avatar-two-line"
+            class="py-2"
+            dark
+            tile
+          ></v-skeleton-loader>
+        </v-col>
+      </v-row>
+      <div v-for="j in 3" :key="j">
+        <v-col sm="6" md="6" lg="6">
+          <v-skeleton-loader
+            ref="skeleton"
+            type="heading"
+            class="pt-6"
+            dark
+          ></v-skeleton-loader>
+        </v-col>
+        <v-row class="py-6">
+          <v-col sm='6' md='4' lg="2" v-for="i in 6" :key="i">
+            <v-skeleton-loader
+              ref="skeleton"
+              type="card"
+              class="mx-auto px-1"
+              dark
+            ></v-skeleton-loader>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -195,6 +258,7 @@ export default {
       userLength: 0,
       albumLength: 0,
       trackLength: 0,
+      ready: false,
     };
   },
   methods: {
@@ -240,6 +304,7 @@ export default {
       }
     },
     async fetchSearch() {
+      this.ready = false;
       this.artists = [];
       this.users = [];
       this.tracks = [];
@@ -336,6 +401,7 @@ export default {
         this.NoResult = true;
       }
       console.log(this.tracks);
+      this.ready = true;
     },
   },
   watch: {
