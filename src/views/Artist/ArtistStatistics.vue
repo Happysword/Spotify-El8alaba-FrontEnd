@@ -165,8 +165,8 @@ export default {
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < this.LikesTrackData.length; i++) {
           const obj = {
-            name: this.LikesTrackData[i]._id.trackId,
-            date: `${this.LikesTrackData[i]._id.day}/${this.LikesTrackData[i]._id.month}/${this.LikesTrackData[i]._id.year}`,
+            name: this.LikesTrackData[i].track.name,
+            date: `${this.LikesTrackData[i].day}/${this.LikesTrackData[i].month}/${this.LikesTrackData[i].year}`,
             likes: this.LikesTrackData[i].liked,
           };
           this.LikesTrackObject.push(obj);
@@ -186,8 +186,8 @@ export default {
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < this.ListensTracksData.length; i++) {
           const obj = {
-            name: this.ListensTracksData[i]._id.trackId,
-            date: `${this.ListensTracksData[i]._id.day}/${this.ListensTracksData[i]._id.month}/${this.ListensTracksData[i]._id.year}`,
+            name: this.ListensTracksData[i].track.name,
+            date: `${this.ListensTracksData[i].day}/${this.ListensTracksData[i].month}/${this.ListensTracksData[i].year}`,
             plays: this.ListensTracksData[i].played,
           };
           this.ListensTrackObject.push(obj);
@@ -207,8 +207,8 @@ export default {
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < this.ListensAlbumsData.length; i++) {
           const obj = {
-            name: this.ListensAlbumsData[i]._id.albumId,
-            date: `${this.ListensAlbumsData[i]._id.day}/${this.ListensAlbumsData[i]._id.month}/${this.ListensAlbumsData[i]._id.year}`,
+            name: this.ListensAlbumsData[i].album.name,
+            date: `${this.ListensAlbumsData[i].day}/${this.ListensAlbumsData[i].month}/${this.ListensAlbumsData[i].year}`,
             plays: this.ListensAlbumsData[i].played,
           };
           this.ListensAlbumsObject.push(obj);
@@ -228,9 +228,9 @@ export default {
         // eslint-disable-next-line no-plusplus
         for (let i = 0; i < this.LikesAlbumsData.length; i++) {
           const obj = {
-            name: this.LikesAlbumsData[i]._id.albumId,
-            date: `${this.LikesAlbumsData[i]._id.day}/${this.LikesAlbumsData[i]._id.month}/${this.LikesAlbumsData[i]._id.year}`,
-            likes: this.LikesAlbumsData[i].played,
+            name: this.LikesAlbumsData[i].album.name,
+            date: `${this.LikesAlbumsData[i].day}/${this.LikesAlbumsData[i].month}/${this.LikesAlbumsData[i].year}`,
+            likes: this.LikesAlbumsData[i].liked,
           };
           this.LikesAlbumsObject.push(obj);
         }

@@ -50,9 +50,6 @@ export default {
     },
   },
   methods: {
-    test() {
-      console.log(this.artistID);
-    },
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
