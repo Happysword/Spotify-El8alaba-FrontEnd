@@ -140,6 +140,23 @@
           contain
         ></v-img>
       </v-container>
+      <v-container id="Download">
+        <v-list dense="" >
+          <v-list-item
+            route to="/download"
+            id="mainLinks">
+            <v-list-item-icon>
+                <v-icon>mdi-arrow-down-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title class="subtitle-2">
+                Download app
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-container>
+
     </v-navigation-drawer>
   </nav>
 </template>

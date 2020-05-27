@@ -100,7 +100,6 @@ const routes = [
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
-      { path: '/download', name: 'download', component: Download },
       { path: '/home/user/:id', name: 'user', component: UserPage },
       { path: '/home/artist/manage', name: 'manage', component: ArtistManage },
       { path: '/NewReleases', name: 'NewReleases', component: NewReleases },
@@ -168,6 +167,11 @@ const routes = [
     name: 'LogIn',
     component: LogIn,
     meta: { title: 'Log in' },
+  },
+  {
+    path: '/download',
+    name: 'download',
+    component: Download,
   },
   {
     path: '/signup',
