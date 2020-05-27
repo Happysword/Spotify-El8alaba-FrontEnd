@@ -1,17 +1,31 @@
 <template>
   <div>
-    <v-icon class="py-5" size="100" color="#FFFFFFE0">
-      mdi-spotify
-    </v-icon>
-    <p class=" py-2 display-2 font-weight-bold white--text">
-      It's a bit empty here...
-    </p>
-    <p class="subtitle-1 grey--text">
-      Let's find some songs for your playlist
-    </p>
-    <v-btn light rounded width=200 class="body-2" route to="/NewReleases">
-      NEW RELEASES
-    </v-btn>
+    <v-container v-if="empty" class="my-6 text-center">
+      <v-icon class="py-5" size="100" color="#FFFFFFE0">
+        mdi-spotify
+      </v-icon>
+      <p class=" py-2 display-2 font-weight-bold white--text">
+        It's a bit empty here...
+      </p>
+      <p class="subtitle-1 grey--text">
+        Let's find some songs for your playlist
+      </p>
+      <v-btn light rounded width=200 class="body-2" route to="/NewReleases">
+        NEW RELEASES
+      </v-btn>
+    </v-container>
+    <v-container v-if="!empty" class="my-1 pl-0 text-truncate">
+      <songsCard v-for="(song,index) in songs"
+        :key="index"
+        :counter="index"
+        :song="song"
+        :list="songs"
+        :listid="listId"
+        listType="playlist"
+        :listOwner="ownerID"
+      >
+      </songsCard>
+    </v-container>
     <br><br><br>
     <v-row>
       <v-col lg= "9" sm="6" md="9" class=" py-2 title white--text text-left"
@@ -44,6 +58,7 @@
 <script>
 import server from 'api-client';
 import songsCard from './SongsBar.vue';
+import EventBus from '../EventBus';
 
 export default {
   data() {
@@ -52,7 +67,13 @@ export default {
       icon: 'mdi-menu-up',
       recommended: [],
       recommend: true,
+      songs: [],
+      empty: true,
     };
+  },
+  props: {
+    ownerID: String,
+    listId: String,
   },
   components: {
     songsCard,
@@ -79,6 +100,19 @@ export default {
   },
   created() {
     this.refresh();
+  },
+  mounted() {
+    EventBus.$on('refreshSongs', async () => {
+      server.fetchSongs(this.$route.params.id)
+        .then((res) => {
+          this.songs = res;
+          if (this.songs.length > 0) {
+            this.empty = false;
+          } else {
+            this.empty = true;
+          }
+        });
+    });
   },
 };
 </script>
