@@ -32,8 +32,8 @@ describe('Testing the existence of components', () => {
     expect(wrapper.find('#right-chevron').exists()).toBe(true);
   });
 
-  test('check that the upgrade buttons exist', () => {
-    expect(wrapper.find('#upgrade-btn').exists()).toBe(true);
+  test('check that the upgrade does not exist', () => {
+    expect(wrapper.find('#upgrade-btn').exists()).toBe(false);
   });
 
   test('check that user button exists on click', async () => {
