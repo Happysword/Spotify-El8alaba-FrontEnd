@@ -27,20 +27,21 @@
       </songsCard>
     </v-container>
     <br><br><br>
-    <v-row>
-      <v-col lg= "9" sm="6" md="9" class=" py-2 title white--text text-left"
-        @click="showIcon()" style="cursor: pointer">
-        Recommended Songs
-        <v-icon color="white">
-          {{ icon }}
-        </v-icon>
-      </v-col>
-      <v-col lg= "3" sm="6" md="3">
-        <v-btn rounded dark outlined width="130" class="mx-10" @click="refresh()">
-          Refresh
-        </v-btn>
-      </v-col>
-    </v-row>
+    <template v-if="type === 'playlist'">
+      <v-row>
+        <v-col lg= "9" sm="6" md="9" class=" py-2 title white--text text-left"
+          @click="showIcon()" style="cursor: pointer">
+          Recommended Songs
+          <v-icon color="white">
+            {{ icon }}
+          </v-icon>
+        </v-col>
+        <v-col lg= "3" sm="6" md="3">
+          <v-btn rounded dark outlined width="130" class="mx-10" @click="refresh()">
+            Refresh
+          </v-btn>
+        </v-col>
+      </v-row>
       <template v-if="show">
         <songsCard class="text-left ml-n5" v-for="(song,index) in recommended"
           :key="index"
@@ -52,6 +53,7 @@
         >
         </songsCard>
       </template>
+    </template>
   </div>
 </template>
 
@@ -74,6 +76,7 @@ export default {
   props: {
     ownerID: String,
     listId: String,
+    type: String,
   },
   components: {
     songsCard,
@@ -99,7 +102,9 @@ export default {
     },
   },
   created() {
-    this.refresh();
+    if (this.type === 'playlist') {
+      this.refresh();
+    }
   },
   mounted() {
     EventBus.$on('refreshSongs', async () => {
