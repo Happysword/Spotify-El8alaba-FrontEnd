@@ -564,9 +564,6 @@ export default {
    * @return {object} an object containing necessary data about genre
    */
   async fetchGenre(id) {
-    console.log(id);
-
-    console.log(id);
     if (id === undefined) {
       return {};
     }
@@ -596,7 +593,6 @@ export default {
    * @return {Array} an Array containing all playlists
    */
   async fetchCategoryPlaylists(id) {
-    console.log(id);
     if (id === 'gaming') {
       return genresPlaylists1;
     }
@@ -628,7 +624,6 @@ export default {
   async fetchSearch(x) {
     if (x !== undefined) {
       let obj;
-      console.log(x);
       if (x.match(/Amr Diab.*/)) {
       // eslint-disable-next-line prefer-destructuring
         obj = search[0];

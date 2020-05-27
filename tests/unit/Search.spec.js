@@ -20,6 +20,9 @@ const router = new VueRouter();
 const store = new Vuex.Store({
   state: {
     searching: false,
+    MusicPlayer: {
+      ID: 'test',
+    },
   },
 });
 
@@ -70,18 +73,15 @@ describe('testing Search', () => {
     expect(wrapper.vm.RecentLength).toEqual(0);
   });
   test('checking the recent searches', () => {
-    const SavedData = {};
-    SavedData.name = 'Godzilla (feat. Juice WRLD)';
-    SavedData.id = '7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.description = undefined;
-    SavedData.type = 'track';
-    SavedData.collaborative = undefined;
-    SavedData.external_urls = { spotify: 'https://open.spotify.com/track/7FIWs0pqAYbP91WWM0vlTQ' };
-    SavedData.href = 'https://api.spotify.com/v1/tracks/7FIWs0pqAYbP91WWM0vlTQ';
-    SavedData.public = undefined;
-    SavedData.snapshot_id = undefined;
-    SavedData.tracks = undefined;
-    SavedData.uri = 'spotify:track:7FIWs0pqAYbP91WWM0vlTQ';
+    const SavedData = [{}];
+    SavedData[0].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[0].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[0].type = 'track';
+    SavedData[0].UserID = 'test';
+    const user = {};
+    user.data = {};
+    user.data.id = 'test';
+    localStorage.setItem('currentUser', JSON.stringify(user));
     localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
     const wrapper = mount(Search, {
       localVue,
@@ -89,6 +89,7 @@ describe('testing Search', () => {
       router,
       store,
     });
+    wrapper.vm.$store.state.MusicPlayer.ID = 'test';
     expect(wrapper.vm.RecentExist).toBe(true);
     expect(wrapper.find('#history').exists()).toEqual(true);
     wrapper.find('#history').trigger('click');

@@ -47,7 +47,7 @@
         <v-col v-if="this.$route.path !== '/premium' && product !== 'premium' "
         lg="2" md="2" sm="4" xs="12" class="pr-0 mr-0">
           <v-btn
-            v-if ="UserInfo.Type != 'premium'"
+            v-if ="loggedIn && UserInfo.Type != 'premium'"
             rounded
             outlined
             class="mx-4"

@@ -104,8 +104,8 @@ describe('testing Search', () => {
     expect(c.type).toBe('track');
     c = await Client.fetchAlbum('2IV13wMMDBs2OyqNdAswSP');
     expect(c.type).toBe('album');
-    c = await Client.fetchAnArtist('5abSRg0xN1NV3gLbuvX24M');
-    expect(c.type).toBe('artist');
+    c = await Client.fetchAnArtist('5e8f2f3d4811835965714962');
+    expect(c[0].type).toBe('artist');
     c = await Client.fetchPlaylist('5iKYvhddpkuAOzOvrLRznN');
     expect(c.type).toBe('playlist');
     c = await Client.fetchPlaylist('4z1sqetlyzn9FyVCvazJa6');

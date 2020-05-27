@@ -47,10 +47,8 @@ export default {
     TopBar,
   },
   async created() {
-    console.log('downloading');
     const result = await analyze('https://open.scdn.co/cdn/images/devices/mac.80dcea83.png');
     EventBus.$emit('changeColor', result[100].color);
-    console.log('downloaded');
   },
 };
 </script>

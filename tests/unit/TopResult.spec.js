@@ -24,35 +24,6 @@ describe('TopResult.vue', () => {
     expect(wrapper.vm.showPlayButton).toBe(true);
   });
 
-  test('showing only the play button', () => {
-    const wrapper = shallowMount(TopResult, {
-      propsData: {
-        type: 'artist',
-      },
-    });
-    wrapper.vm.$data.showActionButton = true;
-    wrapper.vm.$nextTick(() => {
-      expect(wrapper.find('#btn').exists()).toBe(true);
-      expect(wrapper.find('#play').exists()).toBe(true);
-      expect(wrapper.find('#pause').exists()).toBe(false);
-    });
-  });
-
-  test('showing only the pause button', () => {
-    const wrapper = shallowMount(TopResult, {
-      propsData: {
-        type: 'artist',
-      },
-    });
-    wrapper.vm.showActionButton = true;
-    wrapper.vm.showPlayButton = false;
-    wrapper.vm.$nextTick(() => {
-      expect(wrapper.find('#btn').exists()).toBe(true);
-      expect(wrapper.find('#pause').exists()).toBe(true);
-      expect(wrapper.find('#play').exists()).toBe(false);
-    });
-  });
-
   test('not showing the play/pause button when type is profile', () => {
     const wrapper = shallowMount(TopResult, {
       propsData: {
@@ -96,7 +67,7 @@ describe('TopResult.vue', () => {
       router,
     });
     wrapper.vm.CardClickLink();
-    expect(wrapper.vm.$route.path).toBe('/artist/test');
+    expect(wrapper.vm.$route.path).toBe('/home/artist/test');
   });
   test('test artist link', () => {
     const wrapper = shallowMount(TopResult, {
@@ -115,12 +86,13 @@ describe('TopResult.vue', () => {
       propsData: {
         IDP: 'test',
         type: 'track',
+        albumID: 'test',
       },
       localVue,
       router,
     });
     wrapper.vm.CardClickLink();
-    expect(wrapper.vm.$route.path).toBe('/track/test');
+    expect(wrapper.vm.$route.path).toBe('/album/test');
   });
   test('test artist link', () => {
     const wrapper = shallowMount(TopResult, {
@@ -144,6 +116,6 @@ describe('TopResult.vue', () => {
       router,
     });
     wrapper.vm.CardClickLink();
-    expect(wrapper.vm.$route.path).toBe('/user/test');
+    expect(wrapper.vm.$route.path).toBe('/home/user/test');
   });
 });

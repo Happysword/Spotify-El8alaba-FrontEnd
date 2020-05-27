@@ -75,7 +75,6 @@ export default {
         this.Recent.length ? this.RecentExist = true : this.RecentExist = false;
       }
     }
-    console.log(this.Recent);
   },
 };
 </script>

@@ -373,7 +373,8 @@
       ],
     "tracks":[
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "album",
             "artists": [
               {
@@ -627,7 +628,8 @@
           "uri": "spotify:track:3ZTuYuaV1fhdNnuIBuzTYy"
         },
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "album",
             "artists": [
               {
@@ -881,7 +883,8 @@
           "uri": "spotify:track:6TYFcqqQVQPb3YsgfRhvqs"
         },
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "compilation",
             "artists": [
               {
@@ -1717,7 +1720,8 @@
       ],
     "tracks": [
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "album",
             "artists": [
               {
@@ -1978,10 +1982,16 @@
           "preview_url": null,
           "track_number": 7,
           "type": "track",
-          "uri": "spotify:track:7FIWs0pqAYbP91WWM0vlTQ"
+          "uri": "spotify:track:7FIWs0pqAYbP91WWM0vlTQ",
+          "data":{
+            "name":"Godzilla",
+            "id": "7FIWs0pqAYbP91WWM0vlTQ",
+            "type": "track"
+          }
         },
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "album",
             "artists": [
               {
@@ -2235,7 +2245,8 @@
           "uri": "spotify:track:6N0AnkdDFZUetw8KAGHV7e"
         },
         {
-          "album": {
+          "album": "123",
+          "album1": {
             "album_type": "album",
             "artists": [
               {

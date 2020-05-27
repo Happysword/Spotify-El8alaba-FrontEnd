@@ -100,7 +100,6 @@ const routes = [
       },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
-      { path: '/track/:id', name: 'track' },
       { path: '/home/user/:id', name: 'user', component: UserPage },
       { path: '/home/artist/manage', name: 'manage', component: ArtistManage },
       { path: '/NewReleases', name: 'NewReleases', component: NewReleases },

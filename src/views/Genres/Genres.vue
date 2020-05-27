@@ -114,8 +114,6 @@ export default {
         // .then((res) => { this.PopularPlaylists = res; });
         // this.PopularPlaylists = JSON.parse(JSON.stringify(data));
         this.PopularPlaylists = data;
-        console.log(this.PopularPlaylists);
-        console.log(this.PopularPlaylists.length);
         if (this.PopularPlaylists.length) {
           this.PopularExist = true;
           this.PPLength = 4;

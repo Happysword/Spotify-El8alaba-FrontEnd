@@ -32,10 +32,6 @@ describe('testing Search', () => {
     await wrapper.vm.fetchGenreReq();
     const a = await Client.fetchGenre(wrapper.vm.$route.params.id);
     expect(wrapper.vm.$data.category).toBe(a);
-    // console.log(wrapper.vm.$data.category);
-    // console.log(wrapper.vm.$data.PPLength);
-    // console.log(wrapper.vm.$data.title);
-    // console.log(wrapper.vm.$data.category.name);
     expect(wrapper.vm.$route.params.id).toBe('gaming');
   });
 

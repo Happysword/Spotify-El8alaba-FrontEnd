@@ -278,7 +278,6 @@ export default {
       } else if (type === 'user') {
         data = await Client.fetchaUserProfile(id, JSON.parse(localStorage.getItem('currentUser')).token);
       }
-      console.log(data);
       this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
       if (!(this.SearchHistory.some((x) => x.id === data.id))) {
         const temp = JSON.parse(localStorage.getItem('currentUser'));
@@ -418,7 +417,6 @@ export default {
       } else {
         this.NoResult = true;
       }
-      console.log(this.tracks);
       this.ready = true;
     },
   },

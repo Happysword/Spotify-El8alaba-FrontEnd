@@ -110,9 +110,9 @@ export default {
       } else if (this.type === 'track') {
         this.$router.push(`/album/${this.albumID}`);
       } else if (this.type === 'artist') {
-        this.$router.push(`/artist/${this.IDP}`);
+        this.$router.push(`/home/artist/${this.IDP}`);
       } else if (this.type === 'user') {
-        this.$router.push(`/user/${this.IDP}`);
+        this.$router.push(`/home/user/${this.IDP}`);
       } else if (this.type === 'album') {
         this.$router.push(`/album/${this.IDP}`);
       }

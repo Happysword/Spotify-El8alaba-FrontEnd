@@ -128,6 +128,7 @@ export default {
       for (let i = 0; i < temp.length; i += 1) {
         if (user.data.id === temp[i].UserID) {
           this.RecentSearch.push(temp[i]);
+          this.ready = true;
         }
         // eslint-disable-next-line no-unused-expressions
         this.RecentSearch.length ? this.RecentExist = true : this.RecentExist = false;

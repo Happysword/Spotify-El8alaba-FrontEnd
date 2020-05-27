@@ -4,20 +4,23 @@
      "image": "https://i.scdn.co/image/ab67616d00001e022e984e588e38e212e585180e",
      "SongName": "3maltaha agmad",
      "track": "LOL",
-     "artistName": "Abyusif"
+     "artistName": "Abyusif",
+     "album": "123"
     },
      {
       "id" : "fdwcgvgbhd45rewn",
       "image": "https://i.scdn.co/image/ab67616d00001e02d9ac4a9970da8f98ce2e2b35",
       "SongName": "As if it's your Last",
       "track": "LOL",
-      "artistName": "BlackPink"
+      "artistName": "BlackPink",
+      "album": "123"
     }, 
     {
       "id" : "fdwcgvgbhd45rewn",
       "image": "https://i.scdn.co/image/ab67616d00001e0251d73145f1e025c905953e7a",
       "SongName": "Astronomia",
       "track": "LOL",
-      "artistName": "ViceTone"
+      "artistName": "ViceTone",
+      "album": "123"
     }
 ]
