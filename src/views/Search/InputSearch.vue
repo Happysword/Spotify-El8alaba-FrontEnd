@@ -404,11 +404,7 @@ export default {
           this.top = top;
           this.top.albumID = top.album;
           this.top.type = 'track';
-          if (this.top.images.length) {
-            this.imageTop = this.top.images[0].url;
-          } else {
-            this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
-          }
+          this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
         }
         if (!this.artistsExist && !this.usersExist
         && !this.playlistsExist && !this.albumsExist && !this.tracksExist) {
