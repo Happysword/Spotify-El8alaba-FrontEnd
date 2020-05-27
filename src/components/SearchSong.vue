@@ -14,7 +14,7 @@
         <v-overlay v-if="overlay" absolute>
           <v-btn fab small color="#1ED760" class="btn"
             v-if="overlay"
-            @mousedown.stop="" @click="playsong()">
+            @mousedown.stop="" @click="playSong()">
             <v-icon color="white" id="play" v-if="showPlayButton">mdi-play</v-icon>
             <v-icon color="white" id="pause" v-if="!showPlayButton">mdi-pause</v-icon>
         </v-btn>
@@ -91,13 +91,12 @@ export default {
           playstatus: false,
           type: this.type,
         });
-        this.showPlayButton = true;
       } else {
         const songsList = await client.fetchAlbumSongs(this.albumID);
-        if (this.$store.state.MusicPlayer.ID === this.IDP) {
+        if (this.$store.state.MusicPlayer.ID === this.id) {
           this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
-            ID: this.IDP,
+            ID: this.id,
             type: this.type,
           });
         } else {

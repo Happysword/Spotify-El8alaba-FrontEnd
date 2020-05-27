@@ -102,14 +102,21 @@ export default {
   async created() {
     this.fetchAllGenres();
     // this.fetchAllPrefG();
-    this.RecentSearch = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
-    console.log(this.RecentSearch);
-    if (this.RecentSearch.length !== 0) {
-      this.RecentExist = true;
-      if (this.RecentSearch.length > 6) {
-        this.RecentLength = 6;
-      } else {
-        this.RecentLength = this.RecentSearch.length;
+    const temp = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
+    if (temp.length !== 0) {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      for (let i = 0; i < temp.length; i += 1) {
+        if (user.data.id === temp[i].UserID) {
+          this.RecentSearch.push(temp[i]);
+        }
+        // eslint-disable-next-line no-unused-expressions
+        this.RecentSearch.length ? this.RecentExist = true : this.RecentExist = false;
+        // eslint-disable-next-line no-unused-expressions
+        if (this.RecentSearch.length <= 6) {
+          this.RecentLength = this.RecentSearch.length;
+        } else {
+          this.RecentLength = 6;
+        }
       }
     }
   },
