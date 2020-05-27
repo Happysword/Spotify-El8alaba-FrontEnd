@@ -67,14 +67,14 @@ const routes = [
     meta: { title: 'Help-Spotify El8alaba' },
     children: [
       { path: '/help', name: 'HelpNavigation', component: HelpNavigation },
-      { path: '/help/player', name: 'HelpNavigation', component: HelpPlayer },
-      { path: '/help/profile', name: 'HelpNavigation', component: HelpProfile },
+      { path: '/help/player', name: 'HelpPlayer', component: HelpPlayer },
+      { path: '/help/profile', name: 'HelpProfile', component: HelpProfile },
       {
         path: '/help/password',
-        name: 'HelpNavigation',
+        name: 'HelpPassword',
         component: HelpPassword,
       },
-      { path: '/help/website', name: 'HelpNavigation', component: HelpWebsite },
+      { path: '/help/website', name: 'HelpWebsite', component: HelpWebsite },
     ],
   },
   {
