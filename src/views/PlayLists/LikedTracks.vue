@@ -18,8 +18,8 @@
         >
         </songsCard>
       </v-col>
-      <v-col sm='12' md='6' lg="8" class="my-6 text-center" v-if="!songsNum">
-        <emptyList></emptyList>
+      <v-col sm='12' md='6' lg="8" v-if="!songsNum">
+        <emptyList :ownerID="ownerID" :listId="listInfo.id"></emptyList>
       </v-col>
     </v-row>
   </v-container>

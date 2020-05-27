@@ -162,9 +162,6 @@ export default {
       if (hover === 0) {
         this.play = !this.play;
         if (this.play === true) {
-          // this.$store.state.MusicPlayer.currentSong = this.song;
-          // this.$store.state.MusicPlayer.currentList = this.list;
-          // this.$store.state.MusicPlayer.currentSongIndexinList = this.counter;
           this.playSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
@@ -207,6 +204,7 @@ export default {
           timeout: 2000,
           content: 'Added to this Playlist',
         });
+        EventBus.$emit('refreshSongs');
       }
     },
   },
@@ -219,9 +217,6 @@ export default {
       if ((this.play === true && play === false) || this.counter === 0) {
         this.play = play;
         if (this.play === true) {
-          // this.$store.state.MusicPlayer.currentSong = this.song;
-          // this.$store.state.MusicPlayer.currentList = this.list;
-          // this.$store.state.MusicPlayer.currentSongIndexinList = 0;
           this.playSong();
           this.showIcon = 'mdi-volume-high';
         } else {
