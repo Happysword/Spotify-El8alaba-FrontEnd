@@ -42,7 +42,15 @@
                 {{ dotsIcon }}
               </v-icon>
             </template>
-            <dropDown v-if="drop" :id="song.track.id" type="track" :track="song"></dropDown>
+            <dropDown
+              v-if="drop"
+              :id="song.track.id"
+              type="track"
+              :track="song"
+              :listID="listid"
+              :ownerID="listOwner"
+              :position="counter"
+            ></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
             {{ parseInt(song.track.duration_ms / 60000) }} :
@@ -73,6 +81,8 @@ export default {
     color2: 'white',
     play: false,
     drop: false,
+    listTYPE: '',
+    listID: '',
   }),
   props: {
     song: {
@@ -95,6 +105,10 @@ export default {
     list: Array,
     listid: String,
     listType: String,
+    listOwner: {
+      type: String,
+      default: '',
+    },
     recommend: {
       type: Boolean,
       default: false,
@@ -156,8 +170,8 @@ export default {
             playstatus: true,
             song: this.song,
             currentList: this.list,
-            ID: this.listid,
-            type: this.listType,
+            ID: this.listID,
+            type: this.listTYPE,
           });
         } else {
           this.pauseSong();
@@ -165,8 +179,8 @@ export default {
             playstatus: false,
             song: this.song,
             currentList: this.list,
-            ID: this.listid,
-            type: this.listType,
+            ID: this.listID,
+            type: this.listTYPE,
           });
         }
         EventBus.$emit('changePlay', this.play, this.listid);
@@ -218,8 +232,8 @@ export default {
           playstatus: this.play,
           song: this.song,
           currentList: this.list,
-          ID: this.listid,
-          type: this.listType,
+          ID: this.listID,
+          type: this.listTYPE,
         });
       }
     });
@@ -238,16 +252,26 @@ export default {
      * Check if this song is the current song or not then set the status of it
      */
     checkSong() {
-      if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
-        if (this.$store.state.MusicPlayer.isPlaying === true) {
-          this.playSong();
-        } else {
-          this.pauseSong();
+      if (this.$store.state.MusicPlayer.currentSong) {
+        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
+          if (this.$store.state.MusicPlayer.isPlaying === true) {
+            this.playSong();
+          } else {
+            this.pauseSong();
+          }
+          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
         }
-        EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
       }
       return true;
     },
+  },
+  created() {
+    this.listID = this.listid;
+    this.listTYPE = this.listType;
+    if (this.listType === 'Liked') {
+      this.listID = this.list[0].track.album.id;
+      this.listTYPE = 'album';
+    }
   },
 };
 </script>

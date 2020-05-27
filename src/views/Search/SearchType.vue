@@ -1,5 +1,6 @@
 <template>
-    <v-container fluid="" class="cont">
+  <div>
+    <v-container fluid="" class="cont" v-if="ready">
       <v-container v-if="dataExist">
         <p class="white--text font-weight-bold display-1">
                 Viewing {{this.$route.params.type}} for {{this.$route.params.id}}
@@ -44,6 +45,27 @@
             No results for {{ this.$route.params.id }} {{ this.$route.params.type}}</span>
         </v-container>
     </v-container>
+    <v-container v-if="!ready">
+      <v-col sm="6" md="6" lg="6">
+        <v-skeleton-loader
+            ref="skeleton"
+            type="heading"
+            class="py-1"
+            dark
+        ></v-skeleton-loader>
+      </v-col>
+      <v-row class="pb-6" v-for="j in 2" :key="j">
+        <v-col sm='6' md='4' lg="2" v-for="i in 6" :key="i">
+          <v-skeleton-loader
+            ref="skeleton"
+            type="card"
+            class="mx-auto px-1"
+            dark
+          ></v-skeleton-loader>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -64,10 +86,12 @@ export default {
       data: [],
       NoResult: false,
       dataExist: false,
+      ready: false,
     };
   },
   methods: {
     async fetchSearch() {
+      this.ready = false;
       this.datasExist = false;
       const response = await Client.fetchSearch(`${this.$route.params.id} ${this.$route.params.type}`);
       if (response) {
@@ -84,6 +108,7 @@ export default {
         }
         if (this.data.length > 0) { this.dataExist = true; }
       }
+      this.ready = true;
     },
   },
   async created() {

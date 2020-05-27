@@ -21,12 +21,12 @@ const vuetify = new Vuetify();
 const router = new VueRouter();
 
 describe('PlaylistCard.vue Component', () => {
+  localStorage.setItem('currentUser', JSON.stringify({ data: { _id: '' } }));
   const wrapper = mount(PlaylistCard, {
     localVue,
     vuetify,
     router,
   });
-
   const data = wrapper.vm.$data;
   wrapper.vm.$props.songsNum = 1;
 

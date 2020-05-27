@@ -12,7 +12,7 @@
       @mouseout="overlay= play"
       :src="listInfo.images[0].url" class="mt-1"
     >
-      <v-overlay v-show="overlay && songsNum > 0" absolute>
+      <v-overlay v-show="overlay && (songsNum > 0)" absolute>
         <v-icon
           id="playIcon"
           size="70"
@@ -58,7 +58,8 @@
       <v-icon
         id="save"
         v-show="!store.state.liked"
-        v-if="show && songsNum && !isOwner" size="30"
+        v-if="show && songsNum && !isOwner"
+        size="30"
         class="px-3"
         @click="changeLiked"
         color="#E0E0E0"
@@ -114,7 +115,7 @@
         <span>More</span>
       </v-tooltip>
     </v-card-actions>
-    <p class="text-center grey--text" id="songNum" v-if="songsNum">
+    <p class="text-center grey--text" id="songNum" v-if="songsNum !== 0">
       <span class="text-center grey--text" id="albumDate" v-if="listInfo.type === 'album'">
         {{listInfo.release_date.split('-')[0]}} .
       </span>
@@ -195,7 +196,7 @@ export default {
           // TODO[@Naiera]: Follow this playlist
           response = await server.FollowPlaylist(this.listInfo.id);
         }
-        console.log(response);
+        // console.log(response);
         if (response.status === 200 || response.status === 201) {
           this.snackbar = true;
           this.text = 'Saved to Your Library';
@@ -208,7 +209,7 @@ export default {
           // TODO[@Naiera]: Unfollow this playlist
           response = await server.UnfollowPlaylist(this.listInfo.id);
         }
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           this.snackbar = true;
           this.text = 'Removed from Your Library';

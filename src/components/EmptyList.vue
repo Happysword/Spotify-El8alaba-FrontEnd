@@ -9,7 +9,7 @@
     <p class="subtitle-1 grey--text">
       Let's find some songs for your playlist
     </p>
-    <v-btn light rounded width=200 class="body-2" route to="/home">
+    <v-btn light rounded width=200 class="body-2" route to="/NewReleases">
       NEW RELEASES
     </v-btn>
     <br><br><br>
@@ -74,9 +74,7 @@ export default {
      * Refresh recommended tracks
      */
     async refresh() {
-      this.recommended = await server.fetchRecentlyPlayedTracks();
-      console.log('recommended');
-      console.log(this.recommended);
+      this.recommended = await server.fetchRecommendedTracks();
     },
   },
   created() {

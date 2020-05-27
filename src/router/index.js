@@ -7,16 +7,18 @@ import SignUp from '../views/Authentication/SignUp.vue';
 import LogIn from '../views/Authentication/LogIn.vue';
 import LogOut from '../views/Authentication/LogOut.vue';
 import PasswordReset from '../views/Authentication/PasswordReset.vue';
+import ConfirmEmail from '../views/Authentication/ConfirmEmail.vue';
 import Account from '../views/Account/Account.vue';
 import AccountOverview from '../components/Account/AccountOverview.vue';
 import EditProfile from '../components/Account/EditProfile.vue';
 import ChangePassword from '../components/Account/ChangePassword.vue';
 import NotificationSettings from '../components/Account/NotificationSettings.vue';
-import Landing from '../views/Landing.vue';
+import Landing from '../views/Landing/Landing.vue';
 import Queue from '../views/MainPage/Queue.vue';
 import Search from '../views/Search/Search.vue';
 import Genres from '../views/Genres/Genres.vue';
 import LikedTracks from '../views/PlayLists/LikedTracks.vue';
+import NewReleases from '../views/PlayLists/NewReleases.vue';
 import Library from '../views/Library/Library.vue';
 import LibraryPlaylists from '../views/Library/LibraryPlaylists.vue';
 import LibraryAlbums from '../views/Library/LibraryAlbums.vue';
@@ -24,6 +26,7 @@ import LibraryArtists from '../views/Library/LibraryArtists.vue';
 import InputSearch from '../views/Search/InputSearch.vue';
 import Artist from '../views/Artist/Artist.vue';
 import ArtistManage from '../views/Artist/ArtistManage.vue';
+import ArtistStatistics from '../views/Artist/ArtistStatistics.vue';
 import ArtistOverview from '../views/Artist/ArtistOverview.vue';
 import ArtistRelated from '../views/Artist/ArtistRelated.vue';
 import ArtistAbout from '../views/Artist/ArtistAbout.vue';
@@ -34,6 +37,13 @@ import store from '../store/index';
 import Download from '../views/Download/Download.vue';
 import Premium from '../views/Premium/Premium.vue';
 import SetPremium from '../views/Premium/SetPremium.vue';
+import About from '../views/Landing/About.vue';
+import MainHelp from '../views/Help/MainHelp.vue';
+import HelpNavigation from '../views/Help/HelpNavigation.vue';
+import HelpPlayer from '../views/Help/HelpPlayer.vue';
+import HelpPassword from '../views/Help/HelpPassword.vue';
+import HelpProfile from '../views/Help/HelpProfile.vue';
+import HelpWebsite from '../views/Help/HelpWebsite.vue';
 
 Vue.use(VueRouter);
 
@@ -42,26 +52,59 @@ const routes = [
     path: '/',
     name: 'Landing',
     component: Landing,
+    meta: { title: 'Welcome-Spotify El8alaba' },
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: { title: 'About-Spotify El8alaba' },
+  },
+  {
+    path: '/help',
+    name: 'Help',
+    component: MainHelp,
+    meta: { title: 'Help-Spotify El8alaba' },
+    children: [
+      { path: '/help', name: 'HelpNavigation', component: HelpNavigation },
+      { path: '/help/player', name: 'HelpNavigation', component: HelpPlayer },
+      { path: '/help/profile', name: 'HelpNavigation', component: HelpProfile },
+      {
+        path: '/help/password',
+        name: 'HelpNavigation',
+        component: HelpPassword,
+      },
+      { path: '/help/website', name: 'HelpNavigation', component: HelpWebsite },
+    ],
   },
   {
     path: '/home',
     name: 'Main',
     component: Main,
-    meta: { },
+    meta: {},
     children: [
       { path: '/home', name: 'home', component: Home },
       { path: '/home/queue', name: 'queue', component: Queue },
       { path: '/home/search', name: 'search', component: Search },
-      { path: '/home/search/history/showRecent', name: 'recentSearch', component: RecentSearch },
+      {
+        path: '/home/search/history/showRecent',
+        name: 'recentSearch',
+        component: RecentSearch,
+      },
       { path: '/home/search/:id', name: 'inputSearch', component: InputSearch },
       { path: '/genre/:id-page', name: 'genres', component: Genres },
-      { path: '/home/search/:id/:type', name: 'searchType', component: SearchType },
+      {
+        path: '/home/search/:id/:type',
+        name: 'searchType',
+        component: SearchType,
+      },
       { path: '/album/:id', name: 'album', component: LikedTracks },
       { path: '/playlist/:id', name: 'playlist', component: LikedTracks },
       { path: '/track/:id', name: 'track' },
-      { path: '/download', name: 'download', component: Download },
       { path: '/home/user/:id', name: 'user', component: UserPage },
       { path: '/home/artist/manage', name: 'manage', component: ArtistManage },
+      { path: '/NewReleases', name: 'NewReleases', component: NewReleases },
+      { path: '/home/artist/statistics', name: 'statistics', component: ArtistStatistics },
       {
         path: '/home/library/tracks',
         name: 'LikedTracks',
@@ -126,28 +169,39 @@ const routes = [
     component: SetPremium,
   },
   {
-    path: '/signup',
-    name: 'SignUp',
-    component: SignUp,
-    meta: { title: 'Spotify El8alaba - Sign up' },
-  },
-  {
     path: '/login',
     name: 'LogIn',
     component: LogIn,
-    meta: { title: 'Spotify El8alaba - Log in' },
+    meta: { title: 'Log in' },
+  },
+  {
+    path: '/download',
+    name: 'download',
+    component: Download,
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp,
+    meta: { title: 'Sign up' },
+  },
+  {
+    path: '/confirm-email/:confirmToken?',
+    name: 'ConfirmEmail',
+    component: ConfirmEmail,
+    meta: { title: 'Confirm Email' },
   },
   {
     path: '/password-reset/:resetToken?',
     name: 'PasswordReset',
     component: PasswordReset,
-    meta: { title: 'Spotify El8alaba - Reset your password' },
+    meta: { title: 'Reset your password' },
   },
   {
     path: '/logout',
     name: 'LogOut',
     component: LogOut,
-    meta: { title: 'Spotify El8alaba - Log out' },
+    meta: { title: 'Log out' },
   },
   {
     path: '/account',
@@ -159,25 +213,25 @@ const routes = [
         path: 'overview',
         name: 'AccountOverview',
         component: AccountOverview,
-        meta: { title: 'Spotify El8alaba - Account Overview' },
+        meta: { title: 'Account Overview' },
       },
       {
         path: 'edit-profile',
         name: 'EditProfile',
         component: EditProfile,
-        meta: { title: 'Spotify El8alaba - Edit Profile' },
+        meta: { title: 'Edit Profile' },
       },
       {
         path: 'change-password',
         name: 'ChangePassword',
         component: ChangePassword,
-        meta: { title: 'Spotify El8alaba - Change Password' },
+        meta: { title: 'Change Password' },
       },
       {
         path: 'notifications',
         name: 'NotificationSettings',
         component: NotificationSettings,
-        meta: { title: 'Spotify El8alaba - Notification Settings' },
+        meta: { title: 'Notification Settings' },
       },
     ],
   },
@@ -209,7 +263,10 @@ router.beforeEach(async (to, from, next) => {
       next();
     } else {
       // eslint-disable-next-line no-alert
-      alert(`${tokenRes.data.message || profileRes.data.message}\nYou will now be redirected.`);
+      alert(
+        `${tokenRes.data.message || profileRes.data.message}\n
+        You will now be redirected.`,
+      );
       const { status } = await api.logoutUser();
       if (status === 200) next('/');
     }
@@ -220,12 +277,14 @@ router.beforeEach(async (to, from, next) => {
  * Adjusts each route's title in the browser
  */
 router.afterEach((to, from) => {
-  const defaultTitle = 'Spotify El8alaba';
+  let defaultTitle = 'Spotify El8alaba';
   Vue.nextTick(() => {
-    document.title = to.meta.title || defaultTitle;
+    if (to.meta && to.meta.title) {
+      defaultTitle = `${defaultTitle} - ${to.meta.title}`;
+    }
+    document.title = defaultTitle;
   });
   store.state.prevRoute = from.fullPath;
 });
-
 
 export default router;

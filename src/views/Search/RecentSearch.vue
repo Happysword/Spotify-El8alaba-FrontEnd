@@ -16,6 +16,7 @@
           :name="d.name"
           :images="d.images"
           :type="d.type"
+          :Public="d.public"
           ></song-card>
           <profile-card
           v-if="d.type == 'user'"
