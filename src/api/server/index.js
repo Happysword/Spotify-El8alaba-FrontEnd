@@ -24,9 +24,7 @@ export default {
   async fetchCurrentSong() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -42,9 +40,7 @@ export default {
   async fetchCurrentPlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -60,9 +56,7 @@ export default {
   async pausePlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -81,9 +75,7 @@ export default {
   async startPlayback() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -102,9 +94,7 @@ export default {
   async skipNext() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -123,9 +113,7 @@ export default {
   async skipPrevious() {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -145,9 +133,7 @@ export default {
   async toggleShuffle(state) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -168,9 +154,7 @@ export default {
   async toggleRepeat(state) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     // to be removed if changed later
@@ -194,9 +178,7 @@ export default {
   async seekPosition(positionMs) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -216,17 +198,11 @@ export default {
   async setVolume(volumePercent) {
     const config = {
       headers: {
-        Authorization: ` Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: ` Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
-      .put(
-        `${api}/api/v1/me/player/volume?volume_percent=${volumePercent}`,
-        {},
-        config,
-      )
+      .put(`${api}/api/v1/me/player/volume?volume_percent=${volumePercent}`, {}, config)
       .then((response) => {
         if (response.status === 204) return true;
         return false;
@@ -242,9 +218,7 @@ export default {
   async saveTrack(ID) {
     const config = {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -266,9 +240,7 @@ export default {
   async playTrack(ID, context, contextID) {
     const config = {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -294,9 +266,7 @@ export default {
   async deleteTrack(ID) {
     const config = {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -326,7 +296,8 @@ export default {
       })
       .catch(() => false);
   },
-  /*
+
+  /**
    * Get an Ad from the Server
    * @return {String} the Image URL of the Ad
    */
@@ -348,9 +319,7 @@ export default {
   async checkLiked(ID) {
     const config = {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        } `,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token} `,
       },
     };
     return axios
@@ -442,9 +411,7 @@ export default {
     const artists = await axios
       .get(`${api}/api/v1/artists/${id}`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((response) => response.data);
@@ -626,11 +593,12 @@ export default {
    * @param {object} data Data needed
    */
   async fetchListensOfTracks(data) {
-    const response = await axios.post(`${api}/api/v1/tracks/listens`, data, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-      },
-    })
+    const response = await axios
+      .post(`${api}/api/v1/tracks/listens`, data, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((res) => res.data);
     return response;
   },
@@ -640,11 +608,12 @@ export default {
    * @param {object} data Data needed
    */
   async fetchLikesOfTracks(data) {
-    const response = await axios.post(`${api}/api/v1/tracks/likes`, data, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-      },
-    })
+    const response = await axios
+      .post(`${api}/api/v1/tracks/likes`, data, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((res) => res.data);
     return response;
   },
@@ -654,11 +623,12 @@ export default {
    * @param {object} data Data needed
    */
   async fetchListensOfAlbums(data) {
-    const response = await axios.post(`${api}/api/v1/albums/listens`, data, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-      },
-    })
+    const response = await axios
+      .post(`${api}/api/v1/albums/listens`, data, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((res) => res.data);
     return response;
   },
@@ -668,11 +638,12 @@ export default {
    * @param {object} data Data needed
    */
   async fetchLikesOfAlbums(data) {
-    const response = await axios.post(`${api}/api/v1/albums/likes`, data, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-      },
-    })
+    const response = await axios
+      .post(`${api}/api/v1/albums/likes`, data, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
       .then((res) => res.data);
     return response;
   },
@@ -723,14 +694,11 @@ export default {
    */
   async ifUsersFollowsaPlaylist(userID, playlistID, token) {
     const response = await axios
-      .get(
-        `${api}/api/v1/playlists/${playlistID}/followers/contains?ids=${userID}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      .get(`${api}/api/v1/playlists/${playlistID}/followers/contains?ids=${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      )
+      })
       .then((res) => res.data);
     return response;
   },
@@ -816,7 +784,7 @@ export default {
   },
 
   /**
-   * Sends a **POST** request to the server to signup the user
+   * Sends a `POST` request to the server to signup the user
    * @param  {Object} data The user's signup data
    * @return {Object}      The corresponding response
    */
@@ -844,7 +812,7 @@ export default {
   },
 
   /**
-   * Sends a **POST** request to the server for a Reset Password token
+   * Sends a `POST` request to the server for a Reset Password token
    * @param  {Object} data The user's email
    * @return {Object}      The corresponding response
    */
@@ -1028,6 +996,28 @@ export default {
   },
 
   /**
+   * Sends a `POST` request to the server to enable/disable certain notifications
+   * @param  {Object} data The types of notifications that need to be set
+   * @return {Object}      The corresponding response
+   */
+  async setNotificationSettings(data) {
+    const request = {
+      method: 'POST',
+      data,
+      url: `${api}/api/v1/users/notification-toggle`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `PATCH` request to the server to confirm the user's email on signup
    * @param  {String} confirmToken Email confirmation token that was sent by email
    * @return {Object}              The corresponding response
@@ -1053,9 +1043,7 @@ export default {
   async fetchSongs(id) {
     const songs = await axios.get(`${api}/api/v1/playlists/${id}/tracks`, {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return songs.data.items;
@@ -1068,9 +1056,7 @@ export default {
   async fetchTrack(id) {
     const res = await axios.get(`${api}/api/v1/tracks/${id}`, {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return res;
@@ -1084,9 +1070,7 @@ export default {
     const songs = await axios
       .get(`${api}/api/v1/me/tracks`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((res) => {
@@ -1117,16 +1101,11 @@ export default {
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedTracks() {
-    const lists = await axios.get(
-      `${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const lists = await axios.get(`${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     return lists.data.items;
   },
 
@@ -1135,16 +1114,11 @@ export default {
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedLists(limit) {
-    const lists = await axios.get(
-      `${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const lists = await axios.get(`${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     const promises = [];
     const data = [];
     for (let i = 0; i < lists.data.playContexts.length; i += 1) {
@@ -1167,9 +1141,7 @@ export default {
   async fetchList(id) {
     const lists = await axios.get(`${api}/api/v1/playlists/${id}`, {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return lists.data;
@@ -1183,9 +1155,7 @@ export default {
   async fetchAlbum(id) {
     const Album = await axios.get(`${api}/api/v1/albums/${id}`, {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return Album.data;
@@ -1196,16 +1166,11 @@ export default {
    * @param {String} id ID of the album to get tracks of
    */
   async fetchAlbumTracks(id) {
-    const track = await axios.get(
-      `${api}/api/v1/albums/${id}/tracks?offset=&limit=`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const track = await axios.get(`${api}/api/v1/albums/${id}/tracks?offset=&limit=`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     return track.data;
   },
 
@@ -1257,9 +1222,7 @@ export default {
   async SaveTrack(id) {
     const res = await axios.put(`${api}/api/v1/me/tracks?ids=${id}`, '', {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return res;
@@ -1274,9 +1237,7 @@ export default {
     const res = await axios
       .delete(`${api}/api/v1/me/tracks?ids=${id}`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((response) => {
@@ -1295,9 +1256,7 @@ export default {
   async SaveAlbum(id) {
     const res = await axios.put(`${api}/api/v1/me/albums?ids=${id}`, '', {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return res;
@@ -1311,9 +1270,7 @@ export default {
   async RemoveAlbum(id) {
     const res = await axios.delete(`${api}/api/v1/me/albums?ids=${id}`, {
       headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem('currentUser')).token
-        }`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
     });
     return res;
@@ -1342,9 +1299,7 @@ export default {
     const response = await axios
       .get(`${api}/api/v1/me/albums/contains?ids=${id}`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((res) => {
@@ -1364,18 +1319,11 @@ export default {
    */
   async CheckPlaylist(id) {
     /* eslint-disable no-underscore-dangle */
-    const response = await axios.get(
-      `${api}/api/v1/playlists/${id}/followers/contains?ids=${
-        JSON.parse(localStorage.getItem('currentUser')).data._id
-      }`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const response = await axios.get(`${api}/api/v1/playlists/${id}/followers/contains?ids=${JSON.parse(localStorage.getItem('currentUser')).data._id}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     return response;
   },
   /* eslint-enable no-underscore-dangle */
@@ -1386,17 +1334,11 @@ export default {
    * @return {Object}  The corresponding response
    */
   async FollowPlaylist(id) {
-    const response = await axios.put(
-      `${api}/api/v1/playlists/${id}/followers`,
-      '',
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const response = await axios.put(`${api}/api/v1/playlists/${id}/followers`, '', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     return response;
   },
 
@@ -1406,16 +1348,11 @@ export default {
    * @return {Object}  The corresponding response
    */
   async UnfollowPlaylist(id) {
-    const response = await axios.delete(
-      `${api}/api/v1/playlists/${id}/followers`,
-      {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
-        },
+    const response = await axios.delete(`${api}/api/v1/playlists/${id}/followers`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
-    );
+    });
     return response;
   },
 
@@ -1434,9 +1371,7 @@ export default {
         },
         {
           headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem('currentUser')).token
-            }`,
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
           },
         },
       )
@@ -1456,20 +1391,25 @@ export default {
    * @return {Boolean}  The corresponding response
    */
   async RemoveTrackFromPlaylist(listId, trackId, position) {
-    const response = axios.delete(`${api}/api/v1/playlists/${listId}/tracks`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
-      },
-      data: {
-        tracks: [{
-          id: trackId,
-          positions: [position],
-        }],
-      },
-    }).then((res) => {
-      if (res.status === 200) return true;
-      return false;
-    }).catch(() => false);
+    const response = axios
+      .delete(`${api}/api/v1/playlists/${listId}/tracks`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+        data: {
+          tracks: [
+            {
+              id: trackId,
+              positions: [position],
+            },
+          ],
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) return true;
+        return false;
+      })
+      .catch(() => false);
     return response;
   },
 
@@ -1512,9 +1452,7 @@ export default {
     const response = axios
       .put(`${api}/api/v1/playlists/${id}`, body, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((res) => {
@@ -1533,9 +1471,7 @@ export default {
     return axios
       .get(`${api}/api/v1/browse/categories`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((response) => response.data)
@@ -1550,9 +1486,7 @@ export default {
     return axios
       .get(`${api}/api/v1/browse/categories/${id}`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((response) => response.data)
@@ -1565,16 +1499,11 @@ export default {
    */
   async fetchCategoryPlaylists(id) {
     return axios
-      .get(
-        `${api}/api/v1/browse/categories/${id}/playlists?country=EG&limit=20&offset=0`,
-        {
-          headers: {
-            Authorization: `Bearer ${
-              JSON.parse(localStorage.getItem('currentUser')).token
-            }`,
-          },
+      .get(`${api}/api/v1/browse/categories/${id}/playlists?country=EG&limit=20&offset=0`, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
-      )
+      })
       .then((response) => response.data)
       .catch((error) => console.log(error));
   },
@@ -1630,9 +1559,7 @@ export default {
     return axios
       .get(`${api}/api/v1/search?q=${q}&type=${z}&limit=6&offset=0`, {
         headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem('currentUser')).token
-          }`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
       })
       .then((response) => {
