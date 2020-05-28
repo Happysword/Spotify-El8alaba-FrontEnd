@@ -78,7 +78,7 @@ export default {
     genres: [],
     href: String,
     id: String,
-    images: [],
+    images: Array,
     name: String,
     popularity: String,
     type: String,
@@ -143,8 +143,10 @@ export default {
           this.artistID = response[0].id;
           this.fetchArtistTopTracks();
 
-          if (this.images) {
-            this.imageURL = this.images[0].url;
+          if (this.images && (this.images.length > 0)) {
+            if (this.images[0]) {
+              this.imageURL = this.images[0].url;
+            }
           }
         });
     },
@@ -221,7 +223,8 @@ export default {
   },
   watch: {
     musicPlayerSongID() {
-      if (this.$store.state.MusicPlayer.ID !== this.songsList[0].album.id) {
+      if (this.songsList.length
+      && this.$store.state.MusicPlayer.ID !== this.songsList[0].album.id) {
         this.showPlayButton = true;
       }
     },

@@ -31,7 +31,7 @@
           <v-row class="mb-1 mt-2 head" >
             <span class="white--text display-1 font-weight-bold z">Tracks</span>
             <v-spacer></v-spacer>
-            <span class="seeAll"
+            <span class="seeAll" id="seeAllTracks"
             @click="spanClicked()" @mouseover="typeToSee= 'tracks'">See All</span>
             </v-row>
           <v-row v-for="i in trackLength"  :key="i-1">
@@ -63,7 +63,7 @@
               <ArtistCard
                 :id="artists[i-1].id"
                 :name="artists[i-1].name"
-                :images="artists[i-1].image"
+                :images="[artists[i-1].image]"
                 :type="artists[i-1].type"
                 :href="artists[i-1].href"
               >
@@ -476,4 +476,7 @@ export default {
     display: inline-block;
     overflow-wrap: break-word;
     }
+  #seeAllTracks {
+    margin-right: 60%;
+  }
 </style>
