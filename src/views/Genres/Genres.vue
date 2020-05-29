@@ -110,10 +110,8 @@ export default {
         this.title = 'Recently Played';
         this.ready = true;
         const data = await Client.fetchRecentlyPlayedLists(20);
-        // .then((res) => JSON.parse(JSON.stringify(res)))
-        // .then((res) => { this.PopularPlaylists = res; });
-        // this.PopularPlaylists = JSON.parse(JSON.stringify(data));
         this.PopularPlaylists = data;
+        /* istanbul ignore next */
         if (this.PopularPlaylists.length) {
           this.PopularExist = true;
           this.PPLength = 4;
@@ -122,17 +120,19 @@ export default {
       }
       this.ready = false;
       this.category = await Client.fetchGenre(this.$route.params.id);
+      /* istanbul ignore next */
       if (this.category !== undefined && this.category !== {}) {
         if (this.category.icons && this.category.icons.length && !this.test) {
+          /* istanbul ignore next */
           const result = await analyze(this.category.icons[0].url);
+          /* istanbul ignore next */
           EventBus.$emit('changeColor', result[100].color);
         }
         this.title = this.category.name;
         this.ready = true;
       }
-      // eslint-disable-next-line no-underscore-dangle
       this.PopularPlaylists = await Client.fetchCategoryPlaylists(this.$route.params.id);
-      // this.PopularPlaylists = this.category.playlists;
+      /* istanbul ignore next */
       if (this.PopularPlaylists) {
         this.PopularExist = true;
         if (this.PopularPlaylists.length > 6) {

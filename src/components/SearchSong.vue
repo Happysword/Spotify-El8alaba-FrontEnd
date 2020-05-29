@@ -3,6 +3,7 @@
   class="container"
   dark
   flat
+  v-on:="checkSong"
   @mouseover="overlay = true"
   @mouseleave=" overlay = false">
   <v-card-actions>
@@ -26,11 +27,11 @@
                 <v-list-item-title
                 class="mx-2 subtitle song"
                  @click="clickSong()">
-                  {{ SongName }}
+                  {{ track.name }}
                 </v-list-item-title>
                 <div>
                 <span class="grey--text ml-2 text artist"
-                v-for="artist in artists" :key="artist.id"
+                v-for="artist in track.artists" :key="artist.id"
                 @click="clickArtist(artist.name)">
                   {{ artist.name }}
                 </span>
@@ -40,11 +41,11 @@
   <v-card-text  align="end">
      <v-menu absolute left>
         <template v-slot:activator="{ on }">
-          <v-icon size="30" class="px-3 mx-0 dot" v-on="on" color="#E0E0E0">
+          <v-icon size="30" class="px-3 mx-0 dot" v-on="on" @click="drop = true" color="#E0E0E0">
              mdi-dots-horizontal
           </v-icon>
         </template>
-        <drop></drop>
+        <drop v-if="drop"></drop>
      </v-menu>
   </v-card-text>
   </v-card-actions>
@@ -52,9 +53,9 @@
 </template>
 
 <script>
-/* istanbul ignore file */
 import client from 'api-client';
 import drop from './mockDropdown.vue';
+import EventBus from '../EventBus';
 
 export default {
   data() {
@@ -62,52 +63,69 @@ export default {
       overlay: false,
       showPlayButton: true,
       image: String,
+      songsList: Array,
+      drop: false,
     };
   },
   components: {
     drop,
   },
   props: {
-    id: String,
-    SongName: String,
-    artists: Array,
-    albumID: String,
+    track: Object,
+  },
+  async created() {
+    this.songsList = await client.fetchAlbumSongs(this.track.album);
   },
   methods: {
-    clickArtist(y) {
-      for (let i = 0; i < this.artists.length; i += 1) {
-        if (y === this.artists[i].name) {
-          this.$router.push(`/artist/${this.artists[i].id}`);
-        }
-      }
-    },
     clickSong() {
-      this.$router.push(`/album/${this.albumID}`);
+      this.$router.push(`/album/${this.track.album}`);
     },
     async playSong() {
       this.showPlayButton = !this.showPlayButton;
       if (this.showPlayButton) {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: false,
-          type: this.type,
+          ID: this.track.album,
+          type: 'album',
         });
       } else {
-        const songsList = await client.fetchAlbumSongs(this.albumID);
-        if (this.$store.state.MusicPlayer.ID === this.id) {
-          this.$store.dispatch('playpauseplaylist', {
-            playstatus: true,
-            ID: this.id,
-            type: this.type,
-          });
-        } else {
-          this.$store.dispatch('playpauseplaylist', {
-            playstatus: true,
-            currentList: songsList,
-            ID: this.id,
-            song: songsList[0],
-            type: this.type,
-          });
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
+          song: {
+            track: this.track,
+          },
+          currentList: this.songsList,
+          ID: this.track.album,
+          type: 'album',
+        });
+      }
+      EventBus.$emit('changePlay', !this.showPlayButton, this.track.album);
+    },
+  },
+  computed: {
+    checkSong() {
+      if (this.$store.state.MusicPlayer.currentSong) {
+        if (this.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
+          if (this.$store.state.MusicPlayer.isPlaying === true) {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.showPlayButton = false;
+          } else {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.showPlayButton = true;
+          }
         }
+      }
+      return true;
+    },
+    musicPlayerSongID() {
+      return this.$store.state.MusicPlayer.ID;
+    },
+  },
+  watch: {
+    /* istanbul ignore next */
+    musicPlayerSongID() {
+      if (this.$store.state.MusicPlayer.ID !== this.id) {
+        this.showPlayButton = true;
       }
     },
   },

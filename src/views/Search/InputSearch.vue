@@ -6,7 +6,7 @@
           <span class="white--text mt-10 ml-8 display-1 font-weight-bold">Best result</span>
           <div @click="local(top.id, top.type)">
             <top-result
-            v-if="top.type === 'track' || top.type === 'album' "
+            v-if="top.type === 'album' "
             id="top1"
             :IDP="top.id"
             :name="top.name"
@@ -14,6 +14,17 @@
             :albumID="top.album"
             :type="top.type"
             :artists="top.artists"
+            class="a"></top-result>
+            <top-result
+            v-if="top.type === 'track'"
+            id="top1"
+            :IDP="top.id"
+            :name="top.name"
+            :image="imageTop"
+            :albumID="top.album"
+            :type="top.type"
+            :artists="top.artists"
+            :track="top"
             class="a"></top-result>
           </div>
           <div @click="local(top.id, top.type)">
@@ -38,10 +49,7 @@
             <v-col xs="12" sm="12" md="12" lg="12" class="ss">
             <div @click="local(tracks[i-1].id, 'track')">
               <search-song
-                :id="tracks[i-1].id"
-                :SongName="tracks[i-1].name"
-                :artists="tracks[i-1].artists"
-                :albumID="tracks[i-1].album"
+                :track="tracks[i-1]"
                 ></search-song>
             </div>
             </v-col>
@@ -285,6 +293,9 @@ export default {
         this.SavedData.name = data.name;
         this.SavedData.id = data.id;
         this.SavedData.type = data.type;
+        if (data.type === 'track') {
+          this.SavedData.album = data.album;
+        }
         if (data.type === 'track' || data.type === 'user') {
           this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
         } else {
@@ -329,8 +340,6 @@ export default {
               this.artists = response.artists;
               this.artistsExist = true;
               this.artistLength = this.artists.length < 6 ? this.artists.length : 6;
-            } else {
-              this.artistsExist = false;
             }
           }
         }
@@ -340,8 +349,6 @@ export default {
               this.users = response.users;
               this.usersExist = true;
               this.userLength = this.users.length < 6 ? this.users.length : 6;
-            } else {
-              this.usersExist = false;
             }
           }
         }
@@ -350,8 +357,6 @@ export default {
             this.albums = response.albums;
             this.albumsExist = true;
             this.albumLength = this.albums.length < 6 ? this.albums.length : 6;
-          } else {
-            this.albumsExist = false;
           }
         }
         if (response.playlists) {
@@ -359,8 +364,6 @@ export default {
             this.playlists = response.playlists;
             this.playlistsExist = true;
             this.playlistLength = this.playlists.length < 6 ? this.playlists.length : 6;
-          } else {
-            this.playlistsExist = false;
           }
         }
         if (response.tracks) {
@@ -368,8 +371,6 @@ export default {
             this.tracks = response.tracks;
             this.tracksExist = true;
             this.trackLength = this.tracks.length <= 3 ? this.tracks.length : 3;
-          } else {
-            this.tracksExist = false;
           }
         }
         if (this.artistsExist && this.tracksExist) {
@@ -377,6 +378,7 @@ export default {
             const top = this.artists[0];
             this.top = top;
             if (this.top.image) {
+              /* istanbul ignore next */
               this.imageTop = this.top.image.url;
             } else {
               this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
@@ -387,6 +389,7 @@ export default {
             if (this.top.images && this.top.images.length) {
               this.imageTop = this.top.images[0].url;
             } else {
+              /* istanbul ignore next */
               this.imageTop = 'https://www.scdn.co/i/_global/twitter_card-default.jpg';
             }
           }

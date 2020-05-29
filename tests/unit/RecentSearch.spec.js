@@ -66,4 +66,23 @@ describe('testing Search', () => {
     wrapper1.find('#clear').trigger('click');
     expect(wrapper1.vm.$data.Recent).toStrictEqual([]);
   });
+  test('clearing Local storage', () => {
+    const SavedData = [{}, {}];
+    const user = { data: { id: '123456' } };
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    SavedData[0].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[0].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[0].UserID = '1234';
+    SavedData[0].type = 'track';
+    SavedData[1].name = 'Godzilla (feat. Juice WRLD)';
+    SavedData[1].id = '7FIWs0pqAYbP91WWM0vlTQ';
+    SavedData[1].UserID = '1234';
+    SavedData[1].type = 'track';
+    localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
+    const wrapper1 = shallowMount(Recent, {
+      localVue,
+      router,
+    });
+    expect(wrapper1.vm.$data.RecentExist).toBe(false);
+  });
 });

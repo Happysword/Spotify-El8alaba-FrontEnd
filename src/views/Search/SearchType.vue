@@ -83,8 +83,7 @@ export default {
   },
   data() {
     return {
-      data: [],
-      NoResult: false,
+      data: Array,
       dataExist: false,
       ready: false,
     };
@@ -92,7 +91,8 @@ export default {
   methods: {
     async fetchSearch() {
       this.ready = false;
-      this.datasExist = false;
+      this.dataExist = false;
+      this.data = [];
       const response = await Client.fetchSearch(`${this.$route.params.id} ${this.$route.params.type}`);
       if (response) {
         if (response.artists && this.$route.params.type === 'artists') {
@@ -108,6 +108,7 @@ export default {
         }
         if (this.data.length > 0) { this.dataExist = true; }
       }
+      console.log(this.data.length);
       this.ready = true;
     },
   },

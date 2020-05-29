@@ -102,8 +102,51 @@ describe('testing Search', () => {
       },
       localVue,
       router,
+      store,
     });
     wrapper.vm.routing();
     expect(wrapper.vm.$route.path).toBe('/genre/test-page');
+  });
+  test('checking the recent searches', () => {
+    const SavedData = [{}, {}, {}, {}, {}, {}, {}];
+    for (let i = 0; i < 7; i += 1) {
+      SavedData[i].name = JSON.stringify(i);
+      SavedData[i].id = JSON.stringify(i);
+      SavedData[i].type = JSON.stringify(i);
+      SavedData[i].UserID = 'test';
+    }
+    const user = {};
+    user.data = {};
+    user.data.id = 'test';
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
+    const wrapper = mount(Search, {
+      localVue,
+      vuetify,
+      router,
+      store,
+    });
+    expect(wrapper.vm.RecentLength).toBe(6);
+  });
+  test('checking the recent searches', () => {
+    const SavedData = [{}, {}, {}, {}, {}, {}, {}];
+    for (let i = 0; i < 7; i += 1) {
+      SavedData[i].name = JSON.stringify(i);
+      SavedData[i].id = JSON.stringify(i);
+      SavedData[i].type = JSON.stringify(i);
+      SavedData[i].UserID = 'test';
+    }
+    const user = {};
+    user.data = {};
+    user.data.id = '123';
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    localStorage.setItem('SearchHistory', JSON.stringify(SavedData));
+    const wrapper = mount(Search, {
+      localVue,
+      vuetify,
+      router,
+      store,
+    });
+    expect(wrapper.vm.RecentLength).toBe(0);
   });
 });

@@ -16,6 +16,7 @@ import Boolean from './data/Boolean.json';
 import playlistSongs from './data/playlistSongs.json';
 import genresPlaylists1 from './data/Genres-Playlists.json';
 import genresPlaylists2 from './data/Genres-Playlists2.json';
+import genresPlaylists3 from './data/Genres-Playlists3.json';
 import search from './data/Search.json';
 import getaUsersProfile from './data/Get-A-Users-Profile.json';
 import getArtistTopTracks from './data/Get-Artist-Top-Traks.json';
@@ -599,7 +600,21 @@ export default {
     if (id === 'soul') {
       return genresPlaylists2;
     }
+    if (id === 'Test') {
+      return genresPlaylists3;
+    }
+    if (id === '') {
+      return null;
+    }
     return {};
+  },
+  /**
+   * Fetches Current user Recently played tracks
+   * @return {Array} An Array containing Recently played tracks
+   */
+  async fetchRecentlyPlayedLists(limit) {
+    console.log(limit);
+    return genresPlaylists1;
   },
   /**
    * Fetches all new releases related to a specific Category
@@ -613,6 +628,9 @@ export default {
     }
     if (id === 'soul') {
       return genresPlaylists2;
+    }
+    if (id === 'Test') {
+      return genresPlaylists3;
     }
     return {};
   },
@@ -633,6 +651,9 @@ export default {
       // eslint-disable-next-line prefer-destructuring
         obj = search[1];
         return obj;
+      }
+      if (x.match(/Test.*/)) {
+        return {};
       }
     }
     return null;

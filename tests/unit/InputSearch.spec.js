@@ -49,13 +49,13 @@ describe('testing Search', () => {
     expect(wrapper.vm.$data.playlistsExist).toBe(true);
     expect(wrapper.vm.$data.albumsExist).toBe(true);
     expect(wrapper.vm.$data.tracksExist).toBe(true);
-    expect(wrapper.vm.$data.usersExist).toBe(false);
+    expect(wrapper.vm.$data.usersExist).toBe(true);
     expect(wrapper.vm.$data.NoResult).toBe(false);
     expect(wrapper.vm.$data.artistLength).not.toBe(0);
     expect(wrapper.vm.$data.albumLength).not.toBe(0);
     expect(wrapper.vm.$data.trackLength).not.toBe(0);
     expect(wrapper.vm.$data.playlistLength).not.toBe(0);
-    expect(wrapper.vm.$data.userLength).toBe(0);
+    expect(wrapper.vm.$data.userLength).toBe(1);
     expect(wrapper.vm.$data.top).toBe(wrapper.vm.$data.tracks[0] || wrapper.vm.$data.artists[0]);
   });
   test('click see all', async () => {
@@ -97,6 +97,7 @@ describe('testing Search', () => {
     wrapper.vm.$route.params.id = 'Test';
     await wrapper.vm.fetchSearch(wrapper.vm.$route.params.id);
     expect(wrapper.vm.$data.NoResult).toBe(true);
+    await wrapper.vm.local('5e8f2f2f481183596571493f', 'user');
   });
   test('mock api functions', async () => {
     let c;
@@ -112,5 +113,15 @@ describe('testing Search', () => {
     expect(c.type).toBe('playlist');
     c = await Client.fetchPlaylist('test');
     expect(c).toStrictEqual({});
+  });
+  test('No data', () => {
+    wrapper.vm.$route.params.id = 'Test';
+    wrapper.vm.fetchSearch();
+    expect(wrapper.vm.NoResult).toBe(true);
+    expect(wrapper.vm.artistsExist).toBe(false);
+    expect(wrapper.vm.usersExist).toBe(false);
+    expect(wrapper.vm.tracksExist).toBe(false);
+    expect(wrapper.vm.playlistsExist).toBe(false);
+    expect(wrapper.vm.albumsExist).toBe(false);
   });
 });

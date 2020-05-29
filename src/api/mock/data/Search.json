@@ -2649,6 +2649,11 @@
           "type": "playlist",
           "uri": "spotify:playlist:5jxJgNqtMTLYisOSNBFr4D"
         }
+      ],
+      "users": [
+        {
+          "name": "test"
+        }
       ]
     }
 ]

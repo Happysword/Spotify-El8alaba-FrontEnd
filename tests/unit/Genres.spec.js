@@ -7,6 +7,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Gaming from '@/api/mock/data/genres.json';
 import Playlist from '@/api/mock/data/Genres-Playlists.json';
 import Playlist2 from '@/api/mock/data/Genres-Playlists2.json';
+// import Playlist3 from '@/api/mock/data/Genres-Playlists3.json';
 import Client from '@/api/mock';
 
 
@@ -34,7 +35,6 @@ describe('testing Search', () => {
     expect(wrapper.vm.$data.category).toBe(a);
     expect(wrapper.vm.$route.params.id).toBe('gaming');
   });
-
   test('testing api fns', async () => {
     let container;
     container = await Client.fetchGenre(wrapper.vm.$route.params.id);
@@ -55,5 +55,18 @@ describe('testing Search', () => {
     expect(container).toBe(Playlist2);
     container = await Client.fetchTrack('test');
     expect(container).toStrictEqual({});
+  });
+  test('fetching Genre 2', async () => {
+    const wrapper2 = shallowMount(Genres, {
+      localVue,
+      router,
+    });
+    wrapper2.vm.$data.test = true;
+    wrapper2.vm.$route.params.id = 'Test';
+    wrapper2.vm.fetchGenreReq();
+    wrapper2.vm.$route.params.id = 'RecentlyPlayed';
+    wrapper2.vm.fetchGenreReq();
+    wrapper2.vm.$route.params.id = undefined;
+    wrapper2.vm.fetchGenreReq();
   });
 });

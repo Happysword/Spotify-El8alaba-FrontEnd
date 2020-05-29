@@ -33,7 +33,9 @@ export default {
     },
     async getcolor(x) {
       const result = await analyze(x);
+      /* istanbul ignore next */
       this.color = result[100].color;
+      /* istanbul ignore next */
       this.ready = true;
     },
   },

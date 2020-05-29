@@ -112,7 +112,10 @@ export default {
       this.genres = await client.fetchGenres();
       if (this.genres.length > 0) {
         this.genresExist = true;
-      } else this.genres = {};
+      } else {
+        /* istanbul ignore next */
+        this.genres = {};
+      }
       this.ready = true;
     },
     History() {
@@ -148,7 +151,7 @@ export default {
   updated() {
     this.$store.state.searching = true;
   },
-
+  /* istanbul ignore next */
   destroyed() {
     this.$store.state.searching = false;
   },

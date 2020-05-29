@@ -45,7 +45,7 @@
           </v-card-subtitle>
         </template>
 
-        <v-card-actions v-if="showActionButton && type != 'artist'">
+        <v-card-actions v-if="showActionButton && type != 'artist'" v-on:="checkSong">
           <v-spacer></v-spacer>
           <v-btn fab big color="#1ED760" id="btn"
             v-if="showActionButton && type != 'profile'"
@@ -59,6 +59,7 @@
 
 <script>
 import client from 'api-client';
+import EventBus from '../EventBus';
 
 export default {
   props: {
@@ -68,13 +69,44 @@ export default {
     albumID: String,
     type: String,
     artistName: String,
-    owner: String,
+    track: Object,
   },
   data() {
     return {
       showActionButton: false,
       showPlayButton: true,
+      songsList: Array,
     };
+  },
+  computed: {
+    checkSong() {
+      if (this.$store.state.MusicPlayer.currentSong) {
+        console.log(this.IDP);
+        console.log(this.$store.state.MusicPlayer.currentSong.track.id);
+        if (this.IDP === this.$store.state.MusicPlayer.currentSong.track.id) {
+          if (this.$store.state.MusicPlayer.isPlaying === true) {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.showPlayButton = false;
+          } else {
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.showPlayButton = true;
+          }
+          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.albumID);
+        }
+      }
+      return true;
+    },
+    musicPlayerSongID() {
+      return this.$store.state.MusicPlayer.ID;
+    },
+  },
+  watch: {
+    /* istanbul ignore next */
+    musicPlayerSongID() {
+      if (this.$store.state.MusicPlayer.ID !== this.IDP) {
+        this.showPlayButton = true;
+      }
+    },
   },
   methods: {
     async playSong() {
@@ -82,27 +114,21 @@ export default {
       if (this.showPlayButton) {
         this.$store.dispatch('playpauseplaylist', {
           playstatus: false,
-          type: this.type,
+          ID: this.albumID,
+          type: 'album',
         });
-        this.showPlayButton = true;
       } else {
-        const songsList = await client.fetchAlbumSongs(this.albumID);
-        if (this.$store.state.MusicPlayer.ID === this.IDP) {
-          this.$store.dispatch('playpauseplaylist', {
-            playstatus: true,
-            ID: this.IDP,
-            type: this.type,
-          });
-        } else {
-          this.$store.dispatch('playpauseplaylist', {
-            playstatus: true,
-            currentList: songsList,
-            ID: this.id,
-            song: songsList[0],
-            type: this.type,
-          });
-        }
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
+          song: {
+            track: this.track,
+          },
+          currentList: this.songsList,
+          ID: this.albumID,
+          type: 'album',
+        });
       }
+      // EventBus.$emit('changePlay', !this.showPlayButton, this.albumID);
     },
     CardClickLink() {
       if (this.type === 'playlist') {
@@ -124,6 +150,11 @@ export default {
         this.$router.push(`/artist/${this.artistName}`);
       }
     },
+  },
+  async created() {
+    if (this.type === 'track') {
+      this.songsList = await client.fetchAlbumSongs(this.albumID);
+    }
   },
 };
 </script>

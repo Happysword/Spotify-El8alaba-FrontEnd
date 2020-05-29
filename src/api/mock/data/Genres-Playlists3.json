@@ -1,0 +1,74 @@
+[
+  {
+    "collaborative": false,
+    "description": "Upbeat music from FINAL FANTASY series to enrich your drive time. ファイナルファンタジーシリーズを彩る音楽の宝庫より、ドライブのお供にふさわしい疾走感溢れる楽曲をあなたに。©2019 SQUARE ENIX Co., Ltd. All Rights Reserved. Character Graphic: Kazuko Shibuya",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWUm2a02iDDTG"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUm2a02iDDTG",
+    "id": "37i9dQZF1DWUm2a02iDDTG",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f0000000233de72a20f18d89c2bd578ed",
+        "width": null
+      }
+    ],
+    "name": "FINAL FANTASY -drive-",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTU4MzQ4NzczOSwwMDAwMDAwMzAwMDAwMTZiM2NjM2NlNmQwMDAwMDE3MGFmMzk2NmU3",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWUm2a02iDDTG/tracks",
+      "total": 30
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DWUm2a02iDDTG"
+  },
+  {
+    "collaborative": false,
+    "description": "Happy songs from FINAL FANTASY series to cheer you up. ファイナルファンタジーシリーズを彩る音楽の宝庫より、聴くだけでポジティブな気持ちになれる日々の生活の応援ソングをあなたに。©2019 SQUARE ENIX Co., Ltd. All Rights Reserved. Character Graphic: Kazuko Shibuya",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/playlist/37i9dQZF1DX7UhMBB8rJ6x"
+    },
+    "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX7UhMBB8rJ6x",
+    "id": "37i9dQZF1DX7UhMBB8rJ6x",
+    "images": [
+      {
+        "height": null,
+        "url": "https://i.scdn.co/image/ab67706f000000024f826c122a859e997762ba69",
+        "width": null
+      }
+    ],
+    "name": "FINAL FANTASY -up!-",
+    "owner": {
+      "display_name": "Spotify",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/user/spotify"
+      },
+      "href": "https://api.spotify.com/v1/users/spotify",
+      "id": "spotify",
+      "type": "user",
+      "uri": "spotify:user:spotify"
+    },
+    "primary_color": null,
+    "public": null,
+    "snapshot_id": "MTU4MzQ4NzUyMSwwMDAwMDAwNDAwMDAwMTZiM2NjMzIyY2QwMDAwMDE3MGFmMzYxMjk0",
+    "tracks": {
+      "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DX7UhMBB8rJ6x/tracks",
+      "total": 30
+    },
+    "type": "playlist",
+    "uri": "spotify:playlist:37i9dQZF1DX7UhMBB8rJ6x"
+  }
+]
