@@ -33,11 +33,16 @@ export default {
     let response;
     const mes = fbase.getMessagingInstance();
     if (mes) {
-      const token = await mes.getToken();
-      response = await api.deleteNotificationToken(token);
-      if (response.status !== 200) {
-        alert('Error deleting notification token.');
-        console.log(response.data);
+      try {
+        const token = await mes.getToken();
+        console.log(token);
+        response = await api.deleteNotificationToken(token);
+
+        if (response.status !== 200) {
+          console.log('Error deleting notification token.', response.data.message);
+        }
+      } catch (err) {
+        console.log('Error deleting notification token.', err);
       }
     }
 
