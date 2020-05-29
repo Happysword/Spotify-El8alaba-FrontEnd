@@ -37,5 +37,5 @@ deploy to the instance:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
     - apt-get update
-    - apt-get install openssh-client
+    - apt-get install -y openssh-client
     - ssh  $EC2_INSTANCE "cd ~/front && git pull origin master && ./start-docker.sh"
