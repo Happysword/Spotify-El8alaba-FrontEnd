@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import client from 'api-client';
 import drop from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
@@ -63,7 +62,6 @@ export default {
       overlay: false,
       showPlayButton: true,
       image: String,
-      songsList: Array,
       drop: false,
     };
   },
@@ -72,9 +70,6 @@ export default {
   },
   props: {
     track: Object,
-  },
-  async created() {
-    this.songsList = await client.fetchAlbumSongs(this.track.album);
   },
   methods: {
     /**
@@ -100,7 +95,7 @@ export default {
           song: {
             track: this.track,
           },
-          currentList: this.songsList,
+          currentList: [this.track],
           ID: this.track.album,
           type: 'album',
         });
@@ -122,20 +117,24 @@ export default {
             // eslint-disable-next-line vue/no-side-effects-in-computed-properties
             this.showPlayButton = true;
           }
+          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.track.album);
         }
       }
       return true;
     },
     musicPlayerSongID() {
-      return this.$store.state.MusicPlayer.ID;
+      return this.$store.state.MusicPlayer.currentSong;
     },
   },
   watch: {
     /* istanbul ignore next */
     musicPlayerSongID() {
-      if (this.$store.state.MusicPlayer.ID !== this.id) {
+      if (this.$store.state.MusicPlayer.currentSong !== this.track) {
         this.showPlayButton = true;
       }
+    },
+    track() {
+      this.showPlayButton = true;
     },
   },
 };

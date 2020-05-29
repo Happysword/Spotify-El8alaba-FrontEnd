@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 <template>
     <v-card
       class="mx-auto"
@@ -58,7 +59,6 @@
 </template>
 
 <script>
-import client from 'api-client';
 import EventBus from '../EventBus';
 
 export default {
@@ -75,7 +75,6 @@ export default {
     return {
       showActionButton: false,
       showPlayButton: true,
-      songsList: Array,
     };
   },
   computed: {
@@ -98,13 +97,23 @@ export default {
       return true;
     },
     musicPlayerSongID() {
-      return this.$store.state.MusicPlayer.ID;
+      return this.$store.state.MusicPlayer.currentSong;
     },
   },
   watch: {
     /* istanbul ignore next */
     musicPlayerSongID() {
+      if (this.$store.state.MusicPlayer.currentSong !== this.track) {
+        this.showPlayButton = true;
+      }
+    },
+    EventBus() {
       if (this.$store.state.MusicPlayer.ID !== this.IDP) {
+        this.showPlayButton = true;
+      }
+    },
+    IDP() {
+      if (this.type === 'track') {
         this.showPlayButton = true;
       }
     },
@@ -127,7 +136,7 @@ export default {
           song: {
             track: this.track,
           },
-          currentList: this.songsList,
+          currentList: [this.track],
           ID: this.albumID,
           type: 'album',
         });
@@ -160,11 +169,6 @@ export default {
         this.$router.push(`/artist/${this.artistName}`);
       }
     },
-  },
-  async created() {
-    if (this.type === 'track') {
-      this.songsList = await client.fetchAlbumSongs(this.albumID);
-    }
   },
 };
 </script>
