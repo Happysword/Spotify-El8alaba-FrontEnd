@@ -26,15 +26,15 @@ run unit tests:
 
 deploy to the instance:
   stage: deploy
-   only:
-  - master
+  only:
+    - master
  stage: deploy
  before_script:
-   - mkdir -p ~/.ssh
-   - echo -e "$SSH_PVT_K" > ~/.ssh/id_rsa
-   - chmod 600  ~/.ssh/id_rsa
-   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PVT_K" > ~/.ssh/id_rsa
+    - chmod 600  ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
  script:
-   - apt-get update
-   - apt-get install openssh-client
-   - ssh  $EC2_INSTANCE "cd ~/front && git pull origin master && ./start-docker.sh"
+    - apt-get update
+    - apt-get install openssh-client
+    - ssh  $EC2_INSTANCE "cd ~/front && git pull origin master && ./start-docker.sh"
