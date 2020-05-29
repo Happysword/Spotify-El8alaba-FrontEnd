@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container fluid="" v-if="ready">
+    <v-container fluid="">
       <div v-if="RecentExist">
         <h2 class="white--text mt-10 font-weight-bold RECENT"
         id="history"
@@ -30,7 +30,7 @@
           </v-col>
       </v-row>
       </div>
-      <div v-if="PGenresExist">
+      <div v-if="PGenresExist && ready">
       <h2 class="white--text mt-10 font-weight-bold">Prefered Genres</h2>
       <v-row>
           <v-col  xs="12" sm="12" md="12" lg="4"
@@ -44,7 +44,7 @@
           </v-col>
       </v-row>
       </div>
-      <div v-if="genresExist">
+      <div v-if="genresExist && ready">
       <h2 class="white--text mt-10 font-weight-bold">Browse all</h2>
       <v-row>
         <v-col  xs="12" sm="6" md="3" lg="2"  v-for="genre in genres"
@@ -134,7 +134,6 @@ export default {
       for (let i = 0; i < temp.length; i += 1) {
         if (user.data.id === temp[i].UserID) {
           this.RecentSearch.push(temp[i]);
-          this.ready = true;
         }
         // eslint-disable-next-line no-unused-expressions
         this.RecentSearch.length ? this.RecentExist = true : this.RecentExist = false;
