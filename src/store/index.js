@@ -32,7 +32,7 @@ export default new Vuex.Store({
       Type: '',
       currentSong: currentSongMock[0],
       currentPlayback: currentPlaybackMock[0],
-      AudioPlayer: new Audio('http://soundbible.com/grab.php?id=2108&type=wav'),
+      AudioPlayer: new Audio('https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3'),
       navBarImage: false,
       currentList: [currentSongMock[0]],
       currentQueue: [],
