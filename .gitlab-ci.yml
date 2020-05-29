@@ -28,13 +28,14 @@ deploy to the instance:
   stage: deploy
   only:
     - master
- stage: deploy
- before_script:
+    - 64-add-stage-and-deploy-stages-to-ci-cd-pipeline
+  stage: deploy
+  before_script:
     - mkdir -p ~/.ssh
     - echo -e "$SSH_PVT_K" > ~/.ssh/id_rsa
     - chmod 600  ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
- script:
+  script:
     - apt-get update
     - apt-get install openssh-client
     - ssh  $EC2_INSTANCE "cd ~/front && git pull origin master && ./start-docker.sh"
