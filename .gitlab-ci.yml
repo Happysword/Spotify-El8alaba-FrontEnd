@@ -2,6 +2,8 @@ image: node:13-slim
 stages:
   - build
   - test
+  - staging
+  - deploy
 
 # Cache modules in between jobs
 cache:
@@ -21,3 +23,19 @@ run unit tests:
   stage: test
   script:
     - npm run test
+
+deploy to the instance:
+  stage: deploy
+  only:
+    - master
+    - 64-add-stage-and-deploy-stages-to-ci-cd-pipeline
+  stage: deploy
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo -e "$SSH_PVT_K" > ~/.ssh/id_rsa
+    - chmod 600  ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - apt-get update
+    - apt-get install -y openssh-client
+    - ssh  $EC2_INSTANCE "cd ~/front && git pull origin master && ./start-docker.sh"
