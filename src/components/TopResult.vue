@@ -79,10 +79,11 @@ export default {
     };
   },
   computed: {
+    /**
+     * Check if this song is the current song or not then set the status of it
+     */
     checkSong() {
       if (this.$store.state.MusicPlayer.currentSong) {
-        console.log(this.IDP);
-        console.log(this.$store.state.MusicPlayer.currentSong.track.id);
         if (this.IDP === this.$store.state.MusicPlayer.currentSong.track.id) {
           if (this.$store.state.MusicPlayer.isPlaying === true) {
             // eslint-disable-next-line vue/no-side-effects-in-computed-properties
@@ -109,6 +110,9 @@ export default {
     },
   },
   methods: {
+    /**
+     * Play or pause this song
+     */
     async playSong() {
       this.showPlayButton = !this.showPlayButton;
       if (this.showPlayButton) {
@@ -130,6 +134,9 @@ export default {
       }
       // EventBus.$emit('changePlay', !this.showPlayButton, this.albumID);
     },
+    /**
+     * routes to the top result page
+     */
     CardClickLink() {
       if (this.type === 'playlist') {
         this.$router.push(`/playlist/${this.IDP}`);
@@ -143,6 +150,9 @@ export default {
         this.$router.push(`/album/${this.IDP}`);
       }
     },
+    /**
+     * routes to the artist's page if the top result was a track or an album
+     */
     artistLink() {
       if (this.artistName === 'Spotify' || this.owner === 'Spotify') {
         this.$router.push('/home');

@@ -89,6 +89,9 @@ export default {
     };
   },
   methods: {
+    /**
+   * fetch specific type of data according to users selection or input
+   */
     async fetchSearch() {
       this.ready = false;
       this.dataExist = false;

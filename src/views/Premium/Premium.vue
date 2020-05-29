@@ -76,6 +76,10 @@ export default {
     TopBar,
   },
   methods: {
+    /**
+   * checks if a user is logged in
+   * if so it will send the upgrade to premium request
+   */
     async requestPremium() {
       if (document.cookie.search(/loggedIn=.+/) === -1) {
         this.$router.push('/login');

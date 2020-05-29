@@ -105,6 +105,9 @@ export default {
     };
   },
   methods: {
+    /**
+   * fetch most popular playlists for a specific category or genre
+   */
     async fetchGenreReq() {
       if (this.$route.params.id === 'RecentlyPlayed') {
         this.title = 'Recently Played';

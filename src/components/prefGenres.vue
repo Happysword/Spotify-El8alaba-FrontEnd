@@ -28,10 +28,16 @@ export default {
     };
   },
   methods: {
+    /**
+   * get's the dominant color in genre's image
+   */
     async getcolor(x) {
       const result = await analyze(x);
       this.color = result[100].color;
     },
+    /**
+   * routes to the genre's page
+   */
     routing() {
       this.$router.push(`/genre/${this.route}-page`);
     },

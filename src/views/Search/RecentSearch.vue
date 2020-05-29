@@ -57,6 +57,10 @@ export default {
     };
   },
   methods: {
+    /**
+   * Clear the recent search and delete it from local storage
+   * and redirect to search page
+   */
     ClearAll() {
       this.Recent = [];
       localStorage.setItem('SearchHistory', JSON.stringify(this.Recent));
@@ -64,6 +68,7 @@ export default {
     },
   },
   created() {
+    // checking for saved data has the same users id for the current user
     const temp = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
     if (temp.length !== 0) {
       const user = JSON.parse(localStorage.getItem('currentUser'));

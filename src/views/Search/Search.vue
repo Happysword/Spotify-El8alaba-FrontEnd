@@ -107,6 +107,9 @@ export default {
     };
   },
   methods: {
+    /**
+   * fetch all the categories
+   */
     async fetchAllGenres() {
       this.ready = false;
       this.genres = await client.fetchGenres();

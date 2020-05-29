@@ -65,6 +65,9 @@ export default {
     TopBar,
   },
   methods: {
+    /**
+   * sends the premium token to confirm the upgrade
+   */
     async setPremium() {
       const response = await client.setPremium(this.$route.params.token);
       if (response === 200) {

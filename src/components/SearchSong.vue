@@ -77,9 +77,15 @@ export default {
     this.songsList = await client.fetchAlbumSongs(this.track.album);
   },
   methods: {
+    /**
+     * routes to the album's page
+     */
     clickSong() {
       this.$router.push(`/album/${this.track.album}`);
     },
+    /**
+     * Play or pause this song
+     */
     async playSong() {
       this.showPlayButton = !this.showPlayButton;
       if (this.showPlayButton) {
@@ -103,6 +109,9 @@ export default {
     },
   },
   computed: {
+    /**
+     * Check if this song is the current song or not then set the status of it
+     */
     checkSong() {
       if (this.$store.state.MusicPlayer.currentSong) {
         if (this.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {

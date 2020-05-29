@@ -1585,6 +1585,9 @@ export default {
       })
       .catch((error) => console.log(error));
   },
+  /**
+   * sends premium request to server to get an email sent to user's email
+   */
   async premiumRequest() {
     return axios
       .patch(`${api}/api/v1/users/premium`, {
@@ -1599,6 +1602,10 @@ export default {
       })
       .catch((error) => console.log(error));
   },
+  /**
+   * sends premium token to server to verify the user's upgrade
+   * @param {string} premiumToken token given in the e-mail
+   */
   async setPremium(premiumToken) {
     return axios
       .post(`${api}/api/v1/users/premium/${premiumToken}`)

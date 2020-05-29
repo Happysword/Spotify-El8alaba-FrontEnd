@@ -28,9 +28,15 @@ export default {
     };
   },
   methods: {
+    /**
+   * routes to the genre's page
+   */
     routing() {
       this.$router.push(`/genre/${this.route}-page`);
     },
+    /**
+   * get's the dominant color in genre's image
+   */
     async getcolor(x) {
       const result = await analyze(x);
       /* istanbul ignore next */

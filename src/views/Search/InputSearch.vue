@@ -270,7 +270,13 @@ export default {
     };
   },
   methods: {
+    /**
+   * add the data to recent search as the user has clicked on it
+   * @param {string} type type of data as it could be track, artist, user, album or playlist
+   * @param {string} id id of data
+   */
     async local(id, type) {
+      // sending request to fetch related data
       let data;
       if (type === 'track') {
         data = await Client.fetchTrack(id);
@@ -286,6 +292,7 @@ export default {
       } else if (type === 'user') {
         data = await Client.fetchaUserProfile(id, JSON.parse(localStorage.getItem('currentUser')).token);
       }
+      // checking local storage if it contains the same id
       this.SearchHistory = JSON.parse(localStorage.getItem('SearchHistory') || '[]');
       if (!(this.SearchHistory.some((x) => x.id === data.id))) {
         const temp = JSON.parse(localStorage.getItem('currentUser'));
@@ -306,6 +313,9 @@ export default {
         localStorage.setItem('SearchHistory', JSON.stringify(this.SearchHistory));
       }
     },
+    /**
+   * redirect to see specific type of data as clicked on "see all"
+   */
     spanClicked() {
       if (this.typeToSee === 'tracks') {
         this.$router.push(`/home/search/${this.$route.params.id}/tracks`);
@@ -319,6 +329,9 @@ export default {
         this.$router.push(`/home/search/${this.$route.params.id}/users`);
       }
     },
+    /**
+   * fetch data related to the user's input
+   */
     async fetchSearch() {
       const response = await Client.fetchSearch(this.$route.params.id);
       this.ready = false;
@@ -373,6 +386,7 @@ export default {
             this.trackLength = this.tracks.length <= 3 ? this.tracks.length : 3;
           }
         }
+        // selecting Top Result of data
         if (this.artistsExist && this.tracksExist) {
           if (this.artists[0].popularity >= this.tracks[0].popularity) {
             const top = this.artists[0];
