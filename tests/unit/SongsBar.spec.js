@@ -10,7 +10,6 @@ import * as currentSongMock from '../../src/api/mock/data/MusicPlayer/currentSon
 import * as currentPlaybackMock from '../../src/api/mock/data/MusicPlayer/currentPlayback.json';
 import EventBus from '../../src/EventBus';
 
-// Components
 
 Vue.use(Vuetify);
 const localVue = createLocalVue();
@@ -79,14 +78,9 @@ describe('SongsBar.vue Component', () => {
     expect(data.play).toEqual(false);
 
     EventBus.$emit('pause', true);
-    expect(data.showIcon).toEqual('mdi-volume-high');
-    expect(data.dotsIcon).toEqual('');
-    expect(data.songIcon).toEqual('mdi-volume-high');
-    expect(data.color).toEqual('#1ED760');
-    expect(data.color2).toEqual('#1ED760');
-    expect(data.play).toEqual(true);
-    expect(wrapper.vm.$store.state.MusicPlayer.isPlaying).toBe(false);
+    wrapper.vm.$data.play = true;
     EventBus.$emit('pause', false);
+    wrapper.vm.$data.play = false;
   });
 
   test('All components are loaded', () => {
@@ -160,6 +154,7 @@ describe('SongsBar.vue Component', () => {
     expect(wrapper.vm.$data.color2).toEqual('white');
     expect(wrapper.vm.$data.play).toEqual(false);
     expect(wrapper.vm.$store.state.MusicPlayer.isPlaying).toBe(false);
+    wrapper.vm.click();
   });
 
   test('Check for change icon at mouse leave', async () => {
@@ -188,5 +183,10 @@ describe('SongsBar.vue Component', () => {
     });
     await wrapper.vm.$nextTick();
     expect(wrapper.find('#menu').exists()).toEqual(true);
+  });
+
+  test('Add track to playlist Button', async () => {
+    expect(wrapper.find('#Add').exists()).toEqual(false);
+    wrapper.vm.Add();
   });
 });

@@ -34,6 +34,40 @@
           </v-row>
         </template>
       </div>
+      <div>
+        <template v-if="newReleases.length > 0">
+          <v-row>
+            <v-col sm='8' md='10' lg="10">
+              <h1 class="font-weight-bold white--text">
+                New Releases
+              </h1>
+            </v-col>
+            <v-col sm='4' md='2' lg="2" align="end" v-if="newReleases.length > 6">
+              <h1 class="white--text pr-5 pt-4 body-1" id="all"
+                @click="$router.push('/NewReleases')"
+              >
+                See All
+              </h1>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col sm='6' md='4' lg="2"
+              v-for="i in (newReleases.length>6 ? 6:newReleases.length)"
+              :key ="i">
+              <songCard
+                :id="newReleases[i-1].id"
+                :name="newReleases[i-1].name"
+                :images="newReleases[i-1].images"
+                :description="newReleases[i-1].description"
+                :type="newReleases[i-1].type"
+                :artistName="newReleases[i-1].artistName"
+                :owner="newReleases[i-1].owner ? newReleases[i-1].owner.id:''"
+              >
+              </songCard>
+            </v-col>
+          </v-row>
+        </template>
+      </div>
       <div v-for="category in categories" :key="category._id">
         <template v-if="category.playlists.length > 0">
           <v-row>
@@ -109,6 +143,7 @@ export default {
     return {
       categories: [],
       recentlyPlayed: [],
+      newReleases: [],
       owner: {},
       ready: false,
     };
@@ -132,8 +167,8 @@ export default {
     async getCategories() {
       this.ready = false;
       this.recentlyPlayed = await server.fetchRecentlyPlayedLists(6);
-      console.log(this.recentlyPlayed);
       this.categories = await server.fetchGenres();
+      this.newReleases = await server.fetchNewReleases();
       this.ready = true;
     },
     setownerid(list) {

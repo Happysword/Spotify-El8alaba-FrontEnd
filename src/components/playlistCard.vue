@@ -177,9 +177,7 @@ export default {
      * Change status of the current song
      */
     changeStatus() {
-      this.play = !this.play;
-      this.overlay = this.play;
-      EventBus.$emit('pause', this.play);
+      EventBus.$emit('pause', !this.play);
     },
 
     /**
@@ -190,26 +188,20 @@ export default {
       store.commit('changeLiked');
       if (store.state.liked === true) {
         if (this.listInfo.type === 'album') {
-          // response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
           response = await server.SaveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
-          // TODO[@Naiera]: Follow this playlist
           response = await server.FollowPlaylist(this.listInfo.id);
         }
-        // console.log(response);
         if (response.status === 200 || response.status === 201) {
           this.snackbar = true;
           this.text = 'Saved to Your Library';
         }
       } else if (store.state.liked === false) {
         if (this.listInfo.type === 'album') {
-          // const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
           response = await server.RemoveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
-          // TODO[@Naiera]: Unfollow this playlist
           response = await server.UnfollowPlaylist(this.listInfo.id);
         }
-        // console.log(response);
         if (response.status === 200) {
           this.snackbar = true;
           this.text = 'Removed from Your Library';
@@ -225,27 +217,18 @@ export default {
   },
 
   async created() {
-    // if (this.songsNum === 0) {
-    //   this.btnColor = '#1DB95480';
-    // } else {
-    //   this.btnColor = '#1DB954FF';
-    // }
     if (this.listInfo.type === 'playlist') {
       this.owner = this.listInfo.owner;
     } else if (this.listInfo.type === 'album') {
-      // need to edit
-      // this.owner.id = this.listInfo.artists[0];
       this.owner.id = null;
     }
     // eslint-disable-next-line no-underscore-dangle
     if (this.owner.id === JSON.parse(localStorage.getItem('currentUser')).data._id) this.isOwner = true;
     let response = {};
     if (this.listInfo.type === 'album') {
-      // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
       response = await server.CheckAlbum(this.listInfo.id);
     } else if (this.listInfo.type === 'playlist') {
       response = await server.CheckPlaylist(this.listInfo.id);
-      console.log(response);
     } else {
       return;
     }
@@ -255,18 +238,6 @@ export default {
       store.state.liked = false;
     }
   },
-
-  // /**
-  //  * Check if there is an event
-  //  */
-  // mounted() {
-  //   EventBus.$on('changePlay', (play, id) => {
-  //     if (this.listInfo.id === id) {
-  //       this.overlay = play;
-  //       this.play = play;
-  //     }
-  //   });
-  // },
 
   /**
    * Update play icon

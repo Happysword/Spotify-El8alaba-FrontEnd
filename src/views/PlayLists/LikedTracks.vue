@@ -93,7 +93,6 @@ export default {
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
-        console.log(tracks);
         this.songs = tracks;
       } else if (this.$route.name === 'playlist') {
         this.listInfo = await server.fetchList(this.$route.params.id);
