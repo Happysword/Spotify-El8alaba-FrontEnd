@@ -2,6 +2,9 @@
 docker container stop front-prod
 docker container rm front-prod
 
+# Stop back container to save ram for build process
+docker container stop back-prod
+
 # Delete images
 docker image rm front
 
@@ -16,3 +19,6 @@ docker container run -d \
 	 --network sp8 \
 	 -p 4000:80 \
 	front:latest
+
+# Start back container again
+docker container start back-prod
