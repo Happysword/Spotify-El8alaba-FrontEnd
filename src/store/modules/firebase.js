@@ -40,9 +40,7 @@ export default {
             if (response.status !== 200) console.log(response.data);
           } else {
             // Show permission request.
-            console.log(
-              'No Instance ID token available. Request permission to generate one.',
-            );
+            console.log('No Instance ID token available. Request permission to generate one.');
           }
         })
         .catch((err) => {
@@ -72,10 +70,7 @@ export default {
         const options = {
           body: payload.notification.body,
         };
-        return new Notification(
-          payload.notification.title || 'Spotify El-8alaba',
-          options,
-        );
+        return new Notification(payload.notification.title || 'Spotify El-8alaba', options);
       });
     }
   },

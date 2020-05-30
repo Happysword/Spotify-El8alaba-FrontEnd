@@ -7,23 +7,11 @@
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
             <router-link to="/">
-              <v-img
-                id="logo"
-                src="../../assets/imgs/El-8alaba.png"
-                contain
-                height="140"
-              ></v-img>
+              <v-img id="logo" src="../../assets/imgs/El-8alaba.png" contain height="140"></v-img>
             </router-link>
 
             <v-col class="text-center">
-              <v-btn
-                id="fbSignupBtn"
-                color="#1877F2"
-                rounded
-                x-large
-                dark
-                @click="fbSignup"
-              >
+              <v-btn id="fbSignupBtn" color="#1877F2" rounded x-large dark @click="fbSignup">
                 <v-img
                   src="../../assets/imgs/fb-logo.png"
                   class="mr-4 mt-n1 ml-n4"
@@ -83,9 +71,7 @@
                 ref="confirmEmail"
                 v-model="userInput.confirmEmail"
                 :rules="[
-                  (data) =>
-                    (!!data && data === userInput.email) ||
-                    'Email address doesn\'t match',
+                  (data) => (!!data && data === userInput.email) || 'Email address doesn\'t match',
                 ]"
                 @change="validateConfirmEmail"
               />
@@ -98,14 +84,9 @@
                 outlined
                 label="Password"
                 v-model="userInput.password"
-                :rules="[
-                  validation.required('Password'),
-                  validation.minLength('Password', 8),
-                ]"
+                :rules="[validation.required('Password'), validation.minLength('Password', 8)]"
                 :type="userInput.showPassword ? 'text' : 'password'"
-                :append-icon="
-                  userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'
-                "
+                :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="userInput.showPassword = !userInput.showPassword"
               />
 
@@ -125,8 +106,8 @@
               />
 
               <!-- Date of Birth -->
-              <p class="subtitle-2 grey--text text--darken-1">Date of Birth</p>
-              <v-row class="mt-n6 mb-n10">
+              <p class="subtitle-2 grey--text text--darken-1 mt-n4">Date of Birth</p>
+              <v-row class="mt-n6 mb-n6">
                 <!-- Day -->
                 <v-col cols="3">
                   <v-text-field
@@ -166,26 +147,33 @@
               </v-row>
 
               <!-- Gender -->
-              <v-radio-group
-                id="genderRadio"
-                mandatory
-                row
-                v-model="userInput.gender"
-              >
-                <v-radio label="Male" value="m" />
-                <v-radio label="Female" value="f" />
-              </v-radio-group>
+              <p class="subtitle-2 grey--text text--darken-1">Gender</p>
+              <div class="mt-n4">
+                <v-radio-group id="genderRadio" mandatory row v-model="userInput.gender">
+                  <v-radio label="Male" value="m" />
+                  <v-radio label="Female" value="f" />
+                </v-radio-group>
+              </div>
+
+              <!-- Account type -->
+              <p class="subtitle-2 grey--text text--darken-1">Account type</p>
+              <div class="mt-n4">
+                <v-radio-group id="accountRadio" mandatory row v-model="userInput.type">
+                  <v-radio label="User" value="user" />
+                  <v-radio label="Artist" value="artist" />
+                </v-radio-group>
+              </div>
 
               <!-- Sign Up -->
               <v-row justify="center" align="center">
                 <v-btn
                   id="signupBtn"
                   color="#1DB954"
+                  min-width="60%"
                   rounded
                   dark
-                  @click="submit"
-                  min-width="60%"
                   x-large
+                  @click="submit"
                 >
                   Sign Up
                 </v-btn>
@@ -200,8 +188,8 @@
             </p>
             <v-overlay :value="userInput.submitted" opacity="0.95">
               <p class="title text-center link">
-                You have been signed up successfully! A message has been sent to
-                your email address.<br />
+                You have been signed up successfully! A message has been sent to your email
+                address.<br />
                 Please follow the instructions in it to confirm your email.
               </p>
             </v-overlay>
@@ -271,6 +259,7 @@ export default {
           year: '',
         },
         gender: '',
+        type: 'user',
         incorrect: false,
         submitted: false,
       },
@@ -305,7 +294,7 @@ export default {
         passwordConfirm: this.userInput.password,
         gender: this.userInput.gender,
         birthdate: formatDob(this.userInput.dob),
-        type: 'user',
+        type: this.userInput.type,
       });
 
       // If the request was successful,
