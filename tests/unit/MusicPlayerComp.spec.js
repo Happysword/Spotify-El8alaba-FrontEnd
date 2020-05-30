@@ -150,11 +150,15 @@ describe('Testing the player components', () => {
       expect(wrapper.find('#seek-bar').exists()).toBe(true);
     });
     it('checks skip next and skip previous', async () => {
+      wrapper.vm.$data.userType = 'free';
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
       await wrapper.vm.skipNext();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
       await wrapper.vm.skipPrevious();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
+      await wrapper.vm.skipNext();
+      await wrapper.vm.skipNext();
+      await wrapper.vm.skipNext();
     });
 
     it('Toggle Shuffle tests', async () => {
