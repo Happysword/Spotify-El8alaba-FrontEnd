@@ -12,7 +12,7 @@ cache:
   - .npm/
 
 before_script:
-  - npm ci --cache .npm --prefer-offline
+  - npm i
     
 build code:
   stage: build
