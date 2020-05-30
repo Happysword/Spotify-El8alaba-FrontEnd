@@ -127,5 +127,9 @@ describe('Requests of Player', () => {
       data = await Requests.deleteTrack(1);
       expect(data).toEqual(false);
     });
+    it('Tests getAd', async () => {
+      data = await Requests.getAd();
+      expect(typeof data).toBe('string');
+    });
   });
 });
