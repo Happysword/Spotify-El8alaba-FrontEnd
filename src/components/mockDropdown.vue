@@ -48,7 +48,7 @@ export default {
           this.songList = ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist', 'Remove from this Playlist'];
         }
         const response = await server.checkLiked(this.id);
-        if (response === true) this.songList[0] = 'Remove From Your Liked Songs';
+        if (response === true) { this.songList[0] = 'Remove From Your Liked Songs'; }
         this.showList = this.songList;
       }
       if (this.type === 'playlist') {
@@ -74,11 +74,10 @@ export default {
      * @param {String} item the Required request
      */
     async click(item) {
-      console.log(window.location.href);
       if (this.type === 'track') {
         if (item === 'Save To Your Liked Songs') {
           const response = await server.saveTrack(this.id);
-
+          console.log(response);
           if (response === true) {
             this.songList[0] = 'Remove From Your Liked Songs';
             this.SnackBar.show = true;
@@ -97,7 +96,6 @@ export default {
           this.$store.state.MusicPlayer.currentQueue.push(this.track);
           this.SnackBar.show = true;
           this.SnackBar.content = 'Added to Queue';
-          console.log(this.$store.state.MusicPlayer.currentQueue);
         }
         if (item === 'Add to Playlist') {
           EventBus.$emit('addOverlay', true, this.id);
@@ -201,6 +199,9 @@ export default {
     },
   },
   mounted() {
+    this.loadData();
+  },
+  created() {
     this.loadData();
   },
 };

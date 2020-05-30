@@ -57,7 +57,7 @@
             {{ parseInt(song.track.duration_ms / 1000) % 60 }}</label
           >
         </v-card-text>
-        <v-btn rounded dark outlined v-if="recommend"
+        <v-btn id="Add" rounded dark outlined v-if="recommend"
         align="end" width="100" @click="Add()">
           Add
         </v-btn>
@@ -130,7 +130,6 @@ export default {
      * Change the song icon and color to play mode
      */
     playSong() {
-      // this.$store.state.MusicPlayer.isPlaying = true;
       this.play = true;
       this.color = '#1ED760';
       this.color2 = '#1ED760';
@@ -142,7 +141,6 @@ export default {
      * Change the song icon and color to pause mode
      */
     pauseSong() {
-      // this.$store.state.MusicPlayer.isPlaying = false;
       this.play = false;
       this.color = 'grey';
       this.color2 = 'white';
@@ -162,7 +160,6 @@ export default {
       if (hover === 0) {
         this.play = !this.play;
         if (this.play === true) {
-          this.playSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
             song: this.song,
@@ -171,7 +168,6 @@ export default {
             type: this.listTYPE,
           });
         } else {
-          this.pauseSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: false,
             song: this.song,
@@ -180,7 +176,6 @@ export default {
             type: this.listTYPE,
           });
         }
-        EventBus.$emit('changePlay', this.play, this.listid);
       }
       if (hover === 1) {
         this.showIcon = this.songIcon;
@@ -214,17 +209,17 @@ export default {
    */
   mounted() {
     EventBus.$on('pause', (play) => {
-      if ((this.play === true && play === false) || this.counter === 0) {
-        this.play = play;
-        if (this.play === true) {
-          this.playSong();
-          this.showIcon = 'mdi-volume-high';
-        } else {
-          this.pauseSong();
-          this.showIcon = 'mdi-music-note-outline';
-        }
+      if (this.play === true && play === false) {
         this.$store.dispatch('playpauseplaylist', {
-          playstatus: this.play,
+          playstatus: false,
+          song: this.song,
+          currentList: this.list,
+          ID: this.listID,
+          type: this.listTYPE,
+        });
+      } else if (this.counter === 0 && play === true) {
+        this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
           song: this.song,
           currentList: this.list,
           ID: this.listID,
@@ -234,11 +229,7 @@ export default {
     });
     EventBus.$on('changePlay', () => {
       if (this.song.track.id !== this.$store.state.MusicPlayer.currentSong.track.id) {
-        this.play = false;
-        this.color = 'grey';
-        this.color2 = 'white';
-        this.songIcon = 'mdi-music-note-outline';
-        this.showIcon = 'mdi-music-note-outline';
+        this.pauseSong();
       }
     });
   },
@@ -254,7 +245,7 @@ export default {
           } else {
             this.pauseSong();
           }
-          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
+          EventBus.$emit('changePlay', this.play, this.listid);
         }
       }
       return true;
