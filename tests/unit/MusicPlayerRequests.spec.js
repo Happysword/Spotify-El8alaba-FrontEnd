@@ -118,6 +118,10 @@ describe('Requests of Player', () => {
     it('Tests playTrack', async () => {
       data = await Requests.playTrack('1', '2', '3');
       expect(data).toEqual(true);
+      data = await Requests.playTrack(1);
+      expect(data).toEqual(false);
+      data = await Requests.checkLiked(1);
+      expect(data).toEqual(false);
     });
     it('Tests saveTrack', async () => {
       data = await Requests.saveTrack(1);

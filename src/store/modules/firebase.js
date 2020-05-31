@@ -1,4 +1,5 @@
 // Import the Firebase SDK and Messaging product
+/* istanbul ignore file */
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import api from 'api-client';
