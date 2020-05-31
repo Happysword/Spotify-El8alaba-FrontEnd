@@ -239,6 +239,7 @@ export default {
     }
   },
 
+  /* istanbul ignore next */
   /**
    * Update play icon
    */

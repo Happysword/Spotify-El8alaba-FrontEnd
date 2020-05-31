@@ -129,6 +129,65 @@ describe('PlaylistCard.vue Component', () => {
   });
 });
 
+describe('PlaylistCard.vue Component (Playlist)', () => {
+  localStorage.setItem('currentUser', JSON.stringify({ data: { _id: '' } }));
+  const wrapper = mount(PlaylistCard, {
+    localVue,
+    vuetify,
+    router,
+    propsData: {
+      songsNum: 1,
+      show: true,
+      images: '',
+      name: 'String',
+      owners: [],
+      listInfo: {
+        images: [{ url: '' }],
+        name: '',
+        release_date: '',
+        id: '1',
+        type: 'playlist',
+        owner: { id: '1' },
+      },
+    },
+  });
+
+  test('Add or remove list icons changed', async () => {
+    wrapper.find('#save').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+
+    // await wrapper.vm.changeLiked();
+    expect(wrapper.vm.$data.store.state.liked).toEqual(true);
+    expect(wrapper.vm.$data.snackbar).toEqual(true);
+    expect(wrapper.vm.$data.text).toEqual('Saved to Your Library');
+
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 2100);
+    });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.$data.snackbar).toEqual(false);
+
+    wrapper.find('#remove').trigger('click');
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.$data.store.state.liked).toEqual(false);
+    expect(wrapper.vm.$data.snackbar).toEqual(true);
+    expect(wrapper.vm.$data.text).toEqual('Removed from Your Library');
+  });
+});
+
+
 describe('EmptyList.vue Component', () => {
   const wrapper = mount(EmptyList, {
     localVue,
