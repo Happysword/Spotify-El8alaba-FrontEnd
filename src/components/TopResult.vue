@@ -107,11 +107,13 @@ export default {
         this.showPlayButton = true;
       }
     },
+    /* istanbul ignore next */
     EventBus() {
       if (this.$store.state.MusicPlayer.ID !== this.IDP) {
         this.showPlayButton = true;
       }
     },
+    /* istanbul ignore next */
     IDP() {
       if (this.type === 'track') {
         this.showPlayButton = true;
