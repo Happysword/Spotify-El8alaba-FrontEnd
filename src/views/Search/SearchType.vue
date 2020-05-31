@@ -5,17 +5,16 @@
         <p class="white--text font-weight-bold display-1">
                 Viewing {{this.$route.params.type}} for {{this.$route.params.id}}
             </p>
-            <v-row>
+            <v-row v-if="this.$route.params.type != 'tracks'">
             <v-col  xs="12" sm="6" md="3" lg="2"  v-for="card in data" :key="card.id">
                   <song-card
-                      v-if="card.type != 'artist' && card.type != 'user'"
+                      v-if="card.type == 'album' && card.type == 'playlist'"
                       :id="card.id"
                       :name="card.name"
                       :description="card.description"
                       :images="card.images"
                       :type="card.type"
                       :collaborative="card.collaborative"
-                      :external_urls="card.external_urls"
                       :href="card.href"
                       :Public="card.public"
                       :snapshot_id="card.snapshot_id"
@@ -37,7 +36,14 @@
                       :type="card.type">
                   </profile-card>
             </v-col>
-
+            </v-row>
+            <v-row v-if="this.$route.params.type == 'tracks'">
+              <v-col xs="12" sm="12" md="12" lg="12" class="ss"
+                v-for="card in data" :key="card.id">
+                  <search-song
+                    :track="card">
+                  </search-song>
+              </v-col>
             </v-row>
         </v-container>
         <v-container v-if="!dataExist" id="NO">
@@ -73,6 +79,7 @@ import Client from 'api-client';
 import SongCard from '../../components/SongCard.vue';
 import ArtistCard from '../../components/ArtistCard.vue';
 import ProfileCard from '../../components/ProfileCard.vue';
+import SearchSong from '../../components/SearchSong.vue';
 
 export default {
   name: 'searchType',
@@ -80,6 +87,7 @@ export default {
     SongCard,
     ArtistCard,
     ProfileCard,
+    SearchSong,
   },
   data() {
     return {

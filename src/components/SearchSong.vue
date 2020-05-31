@@ -45,7 +45,14 @@
              mdi-dots-horizontal
           </v-icon>
         </template>
-        <drop v-if="drop"></drop>
+        <drop
+          v-if="drop"
+          :id="track.id"
+          type="track"
+          :track="{track: track}"
+          listID='1'
+          ownerID='1'>
+        </drop>
      </v-menu>
   </v-card-text>
   </v-card-actions>
