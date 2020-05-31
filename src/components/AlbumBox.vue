@@ -94,6 +94,7 @@ export default {
     },
   },
   watch: {
+    /* istanbul ignore next */
     musicPlayerSongID() {
       if (this.$store.state.MusicPlayer.ID !== this.albumID) {
         this.showPlayButton = true;

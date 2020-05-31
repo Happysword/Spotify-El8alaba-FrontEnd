@@ -30,6 +30,7 @@ const store = new Vuex.Store({
       AudioPlayer: Audio,
       adTime: false,
       currentQueue: [],
+      ID: 'test',
     },
   },
   mutations: {
@@ -43,8 +44,10 @@ const store = new Vuex.Store({
       state.MusicPlayer.isPlaying = !state.MusicPlayer.isPlaying;
     },
     playNewSong() {},
+    playpauseplaylist() {},
   },
 });
+
 
 const vuetify = new Vuetify();
 
@@ -157,7 +160,7 @@ describe('SongCard.vue', () => {
         };
       },
     });
-
+    wrapper.vm.playAction();
     wrapper.vm.menuLogic(1);
     wrapper.vm.$nextTick(() => {
       expect(wrapper.$data.isFollowing).toEqual(false);
@@ -197,10 +200,64 @@ describe('SongCard.vue', () => {
         };
       },
     });
-
+    wrapper.vm.getSongsList();
     wrapper.vm.menuLogic(1);
     wrapper.vm.$nextTick(() => {
       expect(wrapper.$data.isFollowing).toEqual(true);
     });
+  });
+  test('Test pauseAction function', () => {
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+      propsData: {
+        type: 'album',
+        id: 'test',
+      },
+      data() {
+        return {
+          isFollowing: false,
+        };
+      },
+    });
+
+    wrapper.vm.pauseAction();
+    expect(wrapper.vm.showPlayButton).toBe(true);
+  });
+  test('Test playAction function', () => {
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+      propsData: {
+        type: 'playlist',
+        id: 'test',
+      },
+      data() {
+        return {
+          test: true,
+        };
+      },
+    });
+
+    wrapper.vm.playAction();
+    expect(wrapper.vm.showPlayButton).toBe(false);
+  });
+  test('Test playAction function 2', () => {
+    const wrapper = mount(SongCard, {
+      localVue,
+      store,
+      propsData: {
+        type: 'album',
+        id: '!test',
+      },
+      data() {
+        return {
+          test: true,
+        };
+      },
+    });
+
+    wrapper.vm.playAction();
+    expect(wrapper.vm.showPlayButton).toBe(false);
   });
 });
