@@ -58,7 +58,7 @@ export default {
       } else {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
-
+      /* istanbul ignore next */
       client.fetchArtistRelatedArtists(this.$route.params.id, this.token)
         .then((response) => {
           this.artistRelatedArtists = response;

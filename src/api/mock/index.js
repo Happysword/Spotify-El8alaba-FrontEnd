@@ -109,6 +109,7 @@ export default {
     console.log(ids + token);
     return fetch(Boolean, 100);
   },
+  /* istanbul ignore next */
   /**
    * Check if Users Follows a playlist
    * @param {String} userID ID of current user
@@ -192,7 +193,7 @@ export default {
     console.log(token);
     console.log(createdPlaylist);
   },
-
+  /* istanbul ignore next */
   /**
    * Creates a new Album
    * @param {Object} createdAlbum The Created Album object
@@ -788,7 +789,7 @@ export default {
     console.log(id);
     return fetch(getArtistAlbums, 200);
   },
-
+  /* istanbul ignore next */
   /**
    *
    * @param {string} id ID of the artist

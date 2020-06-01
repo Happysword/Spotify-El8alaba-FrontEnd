@@ -56,6 +56,8 @@ describe('ArtistCard.vue', () => {
       localVue,
       router,
       store,
+      data: {
+      },
     });
     const { showActionButton } = wrapper.vm.$data;
     const { showPlayButton } = wrapper.vm.$data;
@@ -68,6 +70,9 @@ describe('ArtistCard.vue', () => {
     expect(snackbar).toEqual(false);
     expect(item0).toEqual('Start Radio');
     expect(item2).toEqual('Copy link');
+    wrapper.vm.$data.songsList = [{ album: { id: '1' } }];
+    wrapper.vm.playAction();
+    wrapper.vm.pauseAction();
   });
 
   test('Test menu logic artist not following', () => {

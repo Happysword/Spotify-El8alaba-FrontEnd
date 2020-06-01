@@ -136,6 +136,7 @@ export default {
       });
       this.showPlayButton = true;
     },
+    /* istanbul ignore next */
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.id)
@@ -222,6 +223,7 @@ export default {
     },
   },
   watch: {
+    /* istanbul ignore next */
     musicPlayerSongID() {
       if (this.songsList.length
       && this.$store.state.MusicPlayer.ID !== this.songsList[0].album.id) {

@@ -28,6 +28,7 @@ export default {
     profileName: String,
   },
   methods: {
+    /* istanbul ignore next */
     /** When a card is clicked it go to route of the profile */
     CardClickLink() {
       this.$router.push(`/home/user/${this.id}`);

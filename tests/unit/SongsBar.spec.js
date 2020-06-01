@@ -5,11 +5,11 @@ import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import { mount, createLocalVue } from '@vue/test-utils';
 import SongsBar from '@/components/SongsBar.vue';
+import CreatePlaylist from '@/components/CreatePlayList.vue';
 import Requests from '../../src/store/modules/MusicPlayer/Requests';
 import * as currentSongMock from '../../src/api/mock/data/MusicPlayer/currentSong.json';
 import * as currentPlaybackMock from '../../src/api/mock/data/MusicPlayer/currentPlayback.json';
 import EventBus from '../../src/EventBus';
-
 
 Vue.use(Vuetify);
 const localVue = createLocalVue();
@@ -188,5 +188,19 @@ describe('SongsBar.vue Component', () => {
   test('Add track to playlist Button', async () => {
     expect(wrapper.find('#Add').exists()).toEqual(false);
     wrapper.vm.Add();
+  });
+});
+
+describe('CreatePlaylist.vue Component', () => {
+  localStorage.setItem('currentUser', JSON.stringify({ data: { _id: '' } }));
+  const wrapper = mount(CreatePlaylist, {
+    localVue,
+    vuetify,
+    router,
+    store,
+  });
+
+  test('Create New List', async () => {
+    await wrapper.vm.CreateNewPlaylist();
   });
 });

@@ -242,11 +242,13 @@ export default {
     },
   },
   watch: {
+  /* istanbul ignore next */
     async imgsrc() {
       if (this.hoverPic) {
         await this.changePnp();
       }
     },
+    /* istanbul ignore next */
     async playstate() {
       if (this.playstate) this.video.play().catch(() => 0);
       else this.video.pause();

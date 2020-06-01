@@ -37,7 +37,7 @@
       {{listInfo.name}}
     </v-card-title>
     <v-card-title id="owner" class="justify-center body-2 text grey--text pt-0" v-if="show">
-      <span>{{owner.name}}</span>
+      <span @click="RouteToOwnerPage()">{{owner.name}}</span>
     </v-card-title>
     <v-card-actions class="justify-center">
       <v-btn
@@ -173,6 +173,18 @@ export default {
   },
 
   methods: {
+    /* istanbul ignore next */
+    /**
+     * Route To Owner Page
+     */
+    RouteToOwnerPage() {
+      if (this.owner.type === 'artist') {
+        this.$router.push(`/home/artist/${this.owner.id}`);
+      } else {
+        this.$router.push(`/home/user/${this.owner.id}`);
+      }
+    },
+
     /**
      * Change status of the current song
      */
@@ -220,7 +232,8 @@ export default {
     if (this.listInfo.type === 'playlist') {
       this.owner = this.listInfo.owner;
     } else if (this.listInfo.type === 'album') {
-      this.owner.id = null;
+      this.owner = this.listInfo.artists[0].userInfo
+        ? this.listInfo.artists[0].userInfo : { id: null };
     }
     // eslint-disable-next-line no-underscore-dangle
     if (this.owner.id === JSON.parse(localStorage.getItem('currentUser')).data._id) this.isOwner = true;
@@ -271,3 +284,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+#owner:hover,#album:hover {
+  color: rgba(255, 255, 255, 0.911);
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+</style>

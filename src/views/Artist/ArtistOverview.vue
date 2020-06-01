@@ -72,11 +72,13 @@ export default {
     AlbumBox,
   },
   computed: {
+    /* istanbul ignore next */
     computedObj() {
       return this.limit ? this.songs.slice(0, this.limit) : this.songs;
     },
   },
   methods: {
+    /* istanbul ignore next */
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)

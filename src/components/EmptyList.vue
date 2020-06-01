@@ -106,6 +106,7 @@ export default {
       this.refresh();
     }
   },
+  /* istanbul ignore next */
   mounted() {
     EventBus.$on('refreshSongs', async () => {
       server.fetchSongs(this.$route.params.id)

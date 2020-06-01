@@ -27,7 +27,7 @@ export default {
       }
     });
   },
-
+  /* istanbul ignore next */
   async mounted() {
     // Delete the notification token
     let response;
