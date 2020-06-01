@@ -320,7 +320,7 @@ export default {
         formData.append('track', this.uploadedSong);
         client.uploadTrack(formData, this.token, this.progress);
         this.albumInfo = await client.fetchAlbum(this.albumID);
-        if (this.progress.songProgress > 99) {
+        if (this.progress.songProgress > 90) {
           this.dialog = false;
           this.progress.songProgress = 0;
           this.trackName = '';
