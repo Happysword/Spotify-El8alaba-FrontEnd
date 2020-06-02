@@ -29,7 +29,7 @@
               <span id="artist" @click="click('artist')">{{ song.track.artists[0].name }}</span>
               <span id="album" v-if="listType !== 'album'"
                 @click="click('album')">
-                . {{ song.track.album.name }}
+                . {{ song.track.album ? song.track.album.name:'' }}
               </span>
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -208,17 +208,17 @@ export default {
    * Check if there is an event
    */
   mounted() {
-    EventBus.$on('pause', (play) => {
+    EventBus.$on('pause', async (play) => {
       if (this.play === true && play === false) {
-        this.$store.dispatch('playpauseplaylist', {
+        await this.$store.dispatch('playpauseplaylist', {
           playstatus: false,
           song: this.song,
           currentList: this.list,
           ID: this.listID,
           type: this.listTYPE,
         });
-      } else if (this.counter === 0 && play === true) {
-        this.$store.dispatch('playpauseplaylist', {
+      } else if (this.counter === 0 && play === true && this.play === false) {
+        await this.$store.dispatch('playpauseplaylist', {
           playstatus: true,
           song: this.song,
           currentList: this.list,
@@ -239,7 +239,8 @@ export default {
      */
     checkSong() {
       if (this.$store.state.MusicPlayer.currentSong) {
-        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
+        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id
+            && this.listID === this.$store.state.MusicPlayer.ID) {
           if (this.$store.state.MusicPlayer.isPlaying === true) {
             this.playSong();
           } else {
