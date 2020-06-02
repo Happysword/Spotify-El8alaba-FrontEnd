@@ -239,6 +239,9 @@ export default {
     albumRoute() {
       return `/album/${this.albumID}`;
     },
+    songProgressPresentage() {
+      return this.progress.songProgress;
+    },
   },
   data() {
     return {
@@ -259,6 +262,17 @@ export default {
   },
   async mounted() {
     this.albumInfo = await client.fetchAlbum(this.albumID);
+  },
+  watch: {
+    // eslint-disable-next-line no-unused-vars
+    songProgressPresentage(n, o) {
+      if (n > 98) {
+        this.dialog = false;
+        this.progress.songProgress = 0;
+        this.trackName = '';
+        this.uploadedSong = [];
+      }
+    },
   },
   methods: {
     async removeTheAlbum() {
@@ -320,12 +334,6 @@ export default {
         formData.append('track', this.uploadedSong);
         client.uploadTrack(formData, this.token, this.progress);
         this.albumInfo = await client.fetchAlbum(this.albumID);
-        if (this.progress.songProgress > 90) {
-          this.dialog = false;
-          this.progress.songProgress = 0;
-          this.trackName = '';
-          this.uploadedSong = [];
-        }
       });
     },
     UploadNewImage() {
