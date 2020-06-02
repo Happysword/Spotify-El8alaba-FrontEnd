@@ -29,13 +29,12 @@ const router = new VueRouter({
 
 describe('AccountOverview.vue', () => {
   // Mock the alert function to skip its execution
-  jest.spyOn(window, 'alert')
-    .mockImplementation(() => {});
+  jest.spyOn(window, 'alert').mockImplementation(() => {});
   const currentUser = {
     data: {
       type: 'user',
       product: 'free',
-      image: null,
+      image: [],
       currentlyPlaying: null,
       followers: null,
       _id: '5e6b95fda1903935ccb355a0',
@@ -57,19 +56,20 @@ describe('AccountOverview.vue', () => {
     const wrapper = mount(AccountOverview, { localVue, vuetify, router });
     wrapper.vm.$router.push('/account/overview');
 
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('done');
+      }, 50);
+    });
+
+    await wrapper.vm.$nextTick();
+    expect(wrapper.vm.loaded).toEqual(true);
     expect(wrapper.find('#title').exists()).toEqual(true);
     expect(wrapper.find('#usernameEntry').exists()).toEqual(true);
     expect(wrapper.find('#emailEntry').exists()).toEqual(true);
     expect(wrapper.find('#dobEntry').exists()).toEqual(true);
     expect(wrapper.find('#countryEntry').exists()).toEqual(true);
     expect(wrapper.find('#planCard').exists()).toEqual(true);
-
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve('done');
-      }, 50);
-    });
-    await wrapper.vm.$nextTick();
     expect(wrapper.find('#toPremiumBtn').exists()).toEqual(true);
   });
 
@@ -84,6 +84,7 @@ describe('AccountOverview.vue', () => {
     });
 
     await wrapper.vm.$nextTick();
+    expect(wrapper.vm.loaded).toEqual(true);
     const usernameEntry = wrapper.find('#usernameEntry');
     const emailEntry = wrapper.find('#emailEntry');
     const dobEntry = wrapper.find('#dobEntry');
@@ -109,6 +110,7 @@ describe('AccountOverview.vue', () => {
     });
 
     await wrapper.vm.$nextTick();
+    expect(wrapper.vm.loaded).toEqual(true);
     const usernameEntry = wrapper.find('#usernameEntry');
     const emailEntry = wrapper.find('#emailEntry');
     const dobEntry = wrapper.find('#dobEntry');

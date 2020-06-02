@@ -1,110 +1,129 @@
 <template>
-<v-app>
-<v-content class="grey lighten-4 pa-0 pa-sm-8">
-<!-- Root Container -->
-<v-container id="EditProfile_root">
-  <p id="title"
-     class="spotify-green headline pt-6 pl-3 mb-12 d-none d-sm-flex">
-    Edit profile
-  </p>
+  <v-app>
+    <v-content class="grey lighten-4 pa-0 pa-sm-8">
+      <!-- Root Container -->
+      <v-container id="EditProfile_root">
+        <p id="title" class="spotify-green headline pt-6 pl-3 mb-12 d-none d-sm-flex">
+          Edit profile
+        </p>
 
-  <v-card flat id="formCard"
-          class="pa-4 pb-8 pa-sm-12">
-    <!-- Error bar -->
-    <p
-      id="errorBar"
-      class="caption red darken-1 white--text text-center py-3 mb-8"
-      v-if="userInput.incorrect"
-      >{{ userInput.incorrect }}
-    </p>
+        <v-card flat id="formCard" class="pa-4 pb-8 pa-sm-12">
+          <!-- Error bar -->
+          <p
+            id="errorBar"
+            class="caption red darken-1 white--text text-center py-3 mb-8"
+            v-if="userInput.incorrect"
+          >
+            {{ userInput.incorrect }}
+          </p>
 
-    <!-- Form -->
-    <v-form ref="editProfileForm">
-      <!-- Name -->
-      <v-text-field id="nameField"
-                    color="#1DB954"
-                    outlined
-                    label="Name"
-                    v-model="userInput.name"
-                    :rules="[
-                      validation.noSpecialCharacters('Name', true),
-                      validation.validName(true),
-                    ]"/>
+          <!-- Form -->
+          <v-form ref="editProfileForm">
+            <v-file-input
+              id="avatarInput"
+              label="Avatar"
+              color="#1DB954"
+              outlined
+              accept="image/*"
+              append-icon="mdi-camera"
+              prepend-icon=""
+              placeholder="Click here"
+              v-model="userInput.avatar"
+            />
 
-      <!-- Gender -->
-      <v-select id="genderSelect"
-                color="#1DB954"
-                label="Gender"
-                :items="genders"
-                v-model="userInput.gender"
-                outlined/>
+            <!-- Name -->
+            <v-text-field
+              id="nameField"
+              color="#1DB954"
+              outlined
+              label="Name"
+              v-model="userInput.name"
+              :rules="[validation.noSpecialCharacters('Name', true), validation.validName(true)]"
+            />
 
-      <!-- Date of Birth -->
-      <p class="subtitle-2 grey--text text--darken-1">Date of Birth</p>
-      <v-row class="mt-n6 mb-n4">
-        <!-- Day -->
-        <v-col cols="3">
-          <v-text-field id="dobDayField"
-                        color="#1DB954"
-                        outlined
-                        label="Day"
-                        v-model="userInput.dob.day"
-                        :rules="[validation.validDay(true)]"/>
-        </v-col>
-        <!-- Month -->
-        <v-col>
-          <v-select id="dobMonthSelect"
-                    color="#1DB954"
-                    outlined
-                    label="Month"
-                    :items="months"
-                    v-model="userInput.dob.month"/>
-        </v-col>
-        <!-- Year -->
-        <v-col cols="3">
-          <v-text-field id="dobYearField"
-                        color="#1DB954"
-                        outlined
-                        label="Year"
-                        v-model="userInput.dob.year"
-                        :rules="[validation.validYear(true)]"/>
-        </v-col>
-      </v-row>
+            <!-- Gender -->
+            <v-select
+              id="genderSelect"
+              color="#1DB954"
+              label="Gender"
+              :items="genders"
+              v-model="userInput.gender"
+              outlined
+            />
 
-      <!-- Country -->
-      <v-select id="countrySelect"
-                color="#1DB954"
-                label="Country"
-                :items="countries"
-                v-model="userInput.country"
-                outlined/>
+            <!-- Date of Birth -->
+            <p class="subtitle-2 grey--text text--darken-1">Date of Birth</p>
+            <v-row class="mt-n6 mb-n4">
+              <!-- Day -->
+              <v-col cols="3">
+                <v-text-field
+                  id="dobDayField"
+                  color="#1DB954"
+                  outlined
+                  label="Day"
+                  v-model="userInput.dob.day"
+                  :rules="[validation.validDay(true)]"
+                />
+              </v-col>
+              <!-- Month -->
+              <v-col>
+                <v-select
+                  id="dobMonthSelect"
+                  color="#1DB954"
+                  outlined
+                  label="Month"
+                  :items="months"
+                  v-model="userInput.dob.month"
+                />
+              </v-col>
+              <!-- Year -->
+              <v-col cols="3">
+                <v-text-field
+                  id="dobYearField"
+                  color="#1DB954"
+                  outlined
+                  label="Year"
+                  v-model="userInput.dob.year"
+                  :rules="[validation.validYear(true)]"
+                />
+              </v-col>
+            </v-row>
 
-      <!-- Mobile Phone Number -->
-      <v-text-field id="phoneField"
-                    color="#1DB954"
-                    outlined
-                    placeholder="+201XXXXXXXXX"
-                    label="Mobile Phone Number"
-                    v-model="userInput.phoneNumber"
-                    :rules="[validation.validMobilePhoneNumber(true)]"/>
-      <v-row justify="end">
-        <router-link to="/account/overview">
-          <v-btn id="cancelBtn" class="mr-4" text rounded>
-            Cancel
-          </v-btn>
-        </router-link>
-        <v-btn id="saveBtn"
-               class="mr-4" color="#1DB954" rounded dark
-               @click="submit">
-          Save Profile
-        </v-btn>
-      </v-row>
-    </v-form>
-  </v-card>
+            <!-- Country -->
+            <v-select
+              id="countrySelect"
+              color="#1DB954"
+              label="Country"
+              :items="countries"
+              v-model="userInput.country"
+              outlined
+            />
 
-</v-container>
-</v-content>
-</v-app>
+            <!-- Mobile Phone Number -->
+            <v-text-field
+              id="phoneField"
+              color="#1DB954"
+              outlined
+              placeholder="+201XXXXXXXXX"
+              label="Mobile Phone Number"
+              v-model="userInput.phoneNumber"
+              :rules="[validation.validMobilePhoneNumber(true)]"
+            />
+            <v-row justify="end">
+              <router-link to="/account/overview">
+                <v-btn id="cancelBtn" class="mr-4" text rounded>
+                  Cancel
+                </v-btn>
+              </router-link>
+              <v-btn id="saveBtn" class="mr-4" color="#1DB954" rounded dark @click="submit">
+                Save Profile
+              </v-btn>
+            </v-row>
+          </v-form>
+        </v-card>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -168,6 +187,7 @@ export default {
       { text: 'Yemen', value: 'YE' },
     ],
     userInput: {
+      avatar: undefined,
       name: '',
       gender: '',
       dob: {
@@ -218,6 +238,17 @@ export default {
         }
       });
 
+      /* istanbul ignore if */
+      // Update avatar
+      if (this.userInput.avatar) {
+        const fdata = new FormData();
+        fdata.append('image', this.userInput.avatar);
+        const avatarRes = await api.updateAvatar(fdata);
+        if (avatarRes.status !== 202) {
+          console.log(avatarRes.data);
+        }
+      }
+
       // Send the request
       const response = await api.editProfile(editedData);
 
@@ -229,6 +260,7 @@ export default {
         const userProfile = response.data;
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
         currentUser.data = userProfile;
+        /* istanbul ignore if */
         if (currentUser.data.userInfo) {
           Object.keys(currentUser.data.userInfo).forEach((key) => {
             currentUser.data[key] = currentUser.data.userInfo[key];
@@ -251,6 +283,6 @@ a {
 }
 
 .spotify-green {
-  color: #1DB954 !important;
+  color: #1db954 !important;
 }
 </style>

@@ -273,6 +273,7 @@ export default {
      * Signups the user and re-routes them to Home
      */
     async submit() {
+      /* istanbul ignore if */
       if (!this.$refs.signupForm.validate()) return;
 
       /**
@@ -282,6 +283,7 @@ export default {
        */
       const formatDob = (dob) => {
         let { day } = dob;
+        /* istanbul ignore if */
         if (parseInt(day, 10) < 10) day = `0${day}`;
         return `${dob.year}-${dob.month}-${day}`;
       };
