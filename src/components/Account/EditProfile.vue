@@ -149,6 +149,27 @@ export default {
       }
     });
   },
+
+  created() {
+    const { data } = JSON.parse(localStorage.getItem('currentUser')) || { data: null };
+    if (!data) return;
+
+    /* istanbul ignore if */
+    if (data.userInfo) {
+      Object.keys(data.userInfo).forEach((key) => {
+        data[key] = data.userInfo[key];
+      });
+    }
+
+    this.userInput.name = data.name;
+    this.userInput.gender = data.gender;
+    this.userInput.dob.day = data.birthdate.substring(8, 10);
+    this.userInput.dob.month = data.birthdate.substring(5, 7);
+    this.userInput.dob.year = data.birthdate.substring(0, 4);
+    this.userInput.country = data.country;
+    this.userInput.phoneNumber = data.phoneNumber;
+  },
+
   data: () => ({
     months: [
       { text: 'January', value: '01' },
@@ -224,7 +245,6 @@ export default {
       };
 
       // Collect edited data
-      // @extra[XL3] Add name and avatar
       const editedData = {};
       Object.keys(this.userInput).forEach((key) => {
         if (this.userInput[key] !== '' && this.userInput[key] !== 'incorrect') {
