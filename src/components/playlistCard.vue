@@ -273,8 +273,8 @@ export default {
      * Check if this list is the current list or not then set the status of it
      */
     changePlayEvent() {
-      EventBus.$on('changePlay', (play) => {
-        if (this.listInfo.id === this.$store.state.MusicPlayer.ID) {
+      EventBus.$on('changePlay', (play, id) => {
+        if (this.listInfo.id === this.$store.state.MusicPlayer.ID || this.listInfo.id === id) {
           this.overlay = play;
           this.play = play;
         }
