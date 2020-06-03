@@ -302,13 +302,15 @@ export default {
    * @return {String} the Image URL of the Ad
    */
   async getAd() {
+    let link = 'https://searchengineland.com/figz/wp-content/seloads/2017/02/';
+    link = `${link}google-adwords-green-outline-ad-2017-1920.png`;
     return axios
       .get(`${api}/api/v1/ads`)
       .then((response) => {
         if (response.status === 200) return response.data.ad.images[0].url;
-        return 'https://searchengineland.com/figz/wp-content/seloads/2017/02/google-adwords-green-outline-ad-2017-1920.png';
+        return link;
       })
-      .catch(() => 'https://searchengineland.com/figz/wp-content/seloads/2017/02/google-adwords-green-outline-ad-2017-1920.png');
+      .catch(() => link);
   },
 
   /**
@@ -919,6 +921,28 @@ export default {
   },
 
   /**
+   * Sends a `POST` request to the server to update the user's avatar
+   * @param  {Object} data The FormData object containing the image
+   * @return {Object}      The corresponding response
+   */
+  async updateAvatar(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/users/update-avatar`,
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `GET` request to the server to log out the current user
    * @return {Object} The corresponding response
    */
@@ -1018,6 +1042,23 @@ export default {
   },
 
   /**
+   * Sends a `GET` request to the server to get the user's notification status
+   * @return {Object} The corresponding response
+   */
+  async fetchNotificationSettings() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/users/notification-status`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `PATCH` request to the server to confirm the user's email on signup
    * @param  {String} confirmToken Email confirmation token that was sent by email
    * @return {Object}              The corresponding response
@@ -1101,11 +1142,14 @@ export default {
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedTracks() {
-    const lists = await axios.get(`${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const lists = await axios.get(
+      `${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     return lists.data.items;
   },
 
@@ -1114,11 +1158,14 @@ export default {
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedLists(limit) {
-    const lists = await axios.get(`${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const lists = await axios.get(
+      `${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     const promises = [];
     const data = [];
     for (let i = 0; i < lists.data.playContexts.length; i += 1) {
@@ -1319,11 +1366,16 @@ export default {
    */
   async CheckPlaylist(id) {
     /* eslint-disable no-underscore-dangle */
-    const response = await axios.get(`${api}/api/v1/playlists/${id}/followers/contains?ids=${JSON.parse(localStorage.getItem('currentUser')).data._id}`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const response = await axios.get(
+      `${api}/api/v1/playlists/${id}/followers/contains?ids=${
+        JSON.parse(localStorage.getItem('currentUser')).data._id
+      }`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     return response;
   },
   /* eslint-enable no-underscore-dangle */
@@ -1574,7 +1626,6 @@ export default {
     }
     return axios
       .get(`${api}/api/v1/search?q=${q}&type=${z}&limit=6&offset=0`, {
-
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
@@ -1591,7 +1642,6 @@ export default {
   async premiumRequest() {
     return axios
       .patch(`${api}/api/v1/users/premium`, {
-
         headers: {
           'Content-Type': 'application/json',
         },

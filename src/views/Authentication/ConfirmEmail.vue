@@ -7,12 +7,7 @@
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
             <router-link to="/">
-              <v-img
-                id="logo"
-                src="../../assets/imgs/El-8alaba.png"
-                contain
-                height="140"
-              />
+              <v-img id="logo" src="../../assets/imgs/El-8alaba.png" contain height="140" />
             </router-link>
             <p class="mb-12 text-center font-weight-bold display-1">
               Confirm your email
@@ -20,16 +15,10 @@
 
             <p v-if="!incorrect" class="body-1 text-center">
               Your email address has been confirmed successfully! You can now
-              <router-link to="/login">
-                <span class="link">log in</span>.
-              </router-link>
+              <router-link to="/login"> <span class="link">log in</span>. </router-link>
             </p>
             <!-- Error bar -->
-            <p
-              v-else
-              id="errorBar"
-              class="red darken-1 white--text text-center py-3"
-            >
+            <p v-else-if="loaded" id="errorBar" class="red darken-1 white--text text-center py-3">
               {{ incorrect }}
             </p>
           </v-col>
@@ -63,6 +52,7 @@ export default {
         // Set the incorrect message properly
         this.incorrect = response.data.message;
       }
+      this.loaded = true;
     }
   },
   /* istanbul ignore next */
@@ -84,7 +74,7 @@ export default {
     });
   },
 
-  data: () => ({ incorrect: 'ERROR' }),
+  data: () => ({ loaded: false, incorrect: 'ERROR' }),
 };
 </script>
 

@@ -101,9 +101,7 @@ describe('PasswordReset.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(
-      'Error. Something went wrong.',
-    );
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 
@@ -138,10 +136,7 @@ describe('PasswordReset.vue', () => {
     expect(wrapper.vm.$data.userInput.incorrect).toEqual(false);
     expect(wrapper.vm.$data.succeeded).toEqual(true);
     expect(wrapper.find('#errorBar').exists()).toEqual(false);
-    expect(wrapper.text()).toMatch(
-      /A message has been sent to you by email with instructions on/,
-    );
-    expect(wrapper.text()).toMatch(/how to reset your password\./);
+    expect(wrapper.text()).toMatch(/A message has been sent to you by email with instructions on/);
   });
 
   test('Entering an email triggers the validation properly', () => {
@@ -236,9 +231,7 @@ describe('PasswordReset.vue', () => {
     });
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.vm.$data.userInput.incorrect).toEqual(
-      'Error. Something went wrong.',
-    );
+    expect(wrapper.vm.$data.userInput.incorrect).toEqual('Error. Something went wrong.');
     expect(wrapper.find('#errorBar').exists()).toEqual(true);
   });
 

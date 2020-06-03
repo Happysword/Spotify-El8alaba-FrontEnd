@@ -1,67 +1,69 @@
 <template>
-<v-app>
-<v-content class="pa-4">
-  <!-- Title -->
-  <p id="title"
-     class="display-2 font-weight-bold pt-6 pl-3 mb-12">
-    Account overview
-  </p>
+  <v-app>
+    <v-content class="pa-4">
+      <!-- Title -->
+      <p id="title" class="display-2 font-weight-bold pt-6 pl-3 mb-12">
+        Account overview
+      </p>
 
-  <!-- Main column -->
-  <v-col>
-    <!-- Profile -->
-    <p class="title font-weight-bold">
-      Profile
-    </p>
-    <v-col>
-      <div v-for="(entry, i) in profileInfo" :key="i"
-           :id="`${entry.id}Entry`">
-        <v-row justify="space-between">
-          <p class="subtitle-1 grey--text">
-            {{ entry.name }}
-          </p>
-          <p class="body-1">
-            {{ entry.data }}
-          </p>
-        </v-row>
-        <hr class="lower-opacity mx-n6 mt-0 mb-2" :key="i"/>
-      </div>
-    </v-col>
-
-    <p class="my-8"></p>
-
-    <!-- Plan details -->
-    <p class="title font-weight-bold">
-      Your plan
-    </p>
-    <v-card flat outlined id="planCard">
-      <div class="purple-gradient mb-n6">
-        <p class="ml-4 font-weight-bold display-1 plan-type text-capitalize">
-          Spotify {{ plan }}
+      <!-- Main column -->
+      <v-col v-if="loaded">
+        <!-- Profile -->
+        <p class="title font-weight-bold">
+          Profile
         </p>
-      </div>
-      <v-card-text class="black--text">
-        <p class="my-8">
-          {{ description[plan] }}
-        </p>
-        <v-divider/>
-        <p class="my-8 font-weight-bold title text-capitalize">
-          {{ plan }}
-        </p>
-      </v-card-text>
-    </v-card>
-    <v-btn id="toPremiumBtn"
-           v-if="plan === 'free'"
-           x-large rounded outlined dark
-           color="secondary"
-           class="mt-3"
-           to="/premium">
-      Join Premium
-    </v-btn>
+        <v-col>
+          <div v-for="(entry, i) in profileInfo" :key="i" :id="`${entry.id}Entry`">
+            <v-row justify="space-between">
+              <p class="subtitle-1 grey--text">
+                {{ entry.name }}
+              </p>
+              <p class="body-1">
+                {{ entry.data }}
+              </p>
+            </v-row>
+            <hr class="lower-opacity mx-n6 mt-0 mb-2" :key="i" />
+          </div>
+        </v-col>
 
-  </v-col>
-</v-content>
-</v-app>
+        <p class="my-8"></p>
+
+        <!-- Plan details -->
+        <p class="title font-weight-bold">
+          Your plan
+        </p>
+        <v-card flat outlined id="planCard">
+          <div class="purple-gradient mb-n6">
+            <p class="ml-4 font-weight-bold display-1 plan-type text-capitalize">
+              Spotify {{ plan }}
+            </p>
+          </div>
+          <v-card-text class="black--text">
+            <p class="my-8">
+              {{ description[plan] }}
+            </p>
+            <v-divider />
+            <p class="my-8 font-weight-bold title text-capitalize">
+              {{ plan }}
+            </p>
+          </v-card-text>
+        </v-card>
+        <v-btn
+          id="toPremiumBtn"
+          v-if="plan === 'free'"
+          x-large
+          rounded
+          outlined
+          dark
+          color="secondary"
+          class="mt-3"
+          to="/premium"
+        >
+          Join Premium
+        </v-btn>
+      </v-col>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -87,6 +89,7 @@ export default {
     });
   },
   data: () => ({
+    loaded: false,
     profileInfo: [
       { id: 'username', name: 'Username', data: 'lorem' },
       { id: 'email', name: 'Email', data: 'lorem' },
@@ -102,7 +105,7 @@ export default {
     },
   }),
 
-  async beforeCreate() {
+  async created() {
     // Request the user's info
     const response = await api.getCurrentUserProfile();
 
@@ -118,7 +121,10 @@ export default {
 
       // Date of Birth
       const dob = new Date(userProfile.birthdate);
-      this.profileInfo[2].data = `${dob.getUTCDate()}/${dob.getUTCMonth() + 1}/${dob.getUTCFullYear().toString().substr(2, 2)}`;
+      this.profileInfo[2].data = `${dob.getUTCDate()}/${dob.getUTCMonth() + 1}/${dob
+        .getUTCFullYear()
+        .toString()
+        .substr(2, 2)}`;
 
       // Country
       this.profileInfo[3].data = userProfile.country;
@@ -134,6 +140,7 @@ export default {
         this.$router.push('/');
       }
     }
+    this.loaded = true;
   },
 };
 </script>
@@ -145,8 +152,8 @@ export default {
 
 .purple-gradient {
   margin-top: 0px;
-  background-color: #9C27B0;
-  background: linear-gradient(#AB47BC, #9C27B0, #AB47BC)
+  background-color: #9c27b0;
+  background: linear-gradient(#ab47bc, #9c27b0, #ab47bc);
 }
 
 .plan-type {
