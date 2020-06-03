@@ -274,7 +274,7 @@ export default {
      */
     changePlayEvent() {
       EventBus.$on('changePlay', (play, id) => {
-        if (this.listInfo.id === id) {
+        if (this.listInfo.id === this.$store.state.MusicPlayer.ID || this.listInfo.id === id) {
           this.overlay = play;
           this.play = play;
         }

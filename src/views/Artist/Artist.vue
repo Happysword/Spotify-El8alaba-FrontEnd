@@ -10,7 +10,7 @@
       </v-snackbar>
         <v-card v-if="artist && artist.followers">
             <v-img :src="imageURL"
-            gradient="rgba(255,255,255,0) 0%,rgba(0,0,0,1) 100%"
+            gradient="rgba(255,255,255,0) 0%,rgba(18,18,18,255) 100%"
             class="align-center"
             height="340px">
             <v-container fluid="" mx-3>

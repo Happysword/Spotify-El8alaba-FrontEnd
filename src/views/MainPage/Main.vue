@@ -39,7 +39,7 @@ export default {
     Overlays,
   },
   data: () => ({
-    color: 'rgba(10,10,10,255)',
+    color: 'rgba(18,18,18,255)',
     snackbar: {
       show: false,
       timeout: 2000,
@@ -50,7 +50,7 @@ export default {
   }),
   methods: {
     restoreColor() {
-      this.color = 'rgba(10,10,10,255)';
+      this.color = 'rgba(18,18,18,255)';
     },
   },
   async mounted() {
