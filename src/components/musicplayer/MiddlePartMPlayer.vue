@@ -294,7 +294,9 @@ export default {
         );
         const TimeString = `${Math.floor(
           SongTimeinS / 60,
-        ).toString()}:${Math.floor(SongTimeinS % 60).toString()}`;
+        ).toString()}:${Math.floor(
+          (SongTimeinS % 60) / 10,
+        ).toString()}${Math.floor(SongTimeinS % 10).toString()}`;
         return TimeString;
       }
       const SongTimeinS = Math.floor(this.adAudio.duration);
