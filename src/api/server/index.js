@@ -1486,7 +1486,7 @@ export default {
    * @return {Array} Array on new releases
    */
   async fetchNewReleases() {
-    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=20`, {
+    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=40`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
