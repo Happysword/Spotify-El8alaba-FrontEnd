@@ -94,6 +94,9 @@ import server from 'api-client';
 import EventBus from '../EventBus';
 import createList from './CreatePlayList.vue';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data() {
     return {
@@ -119,6 +122,7 @@ export default {
   methods: {
     /**
      * Unfollow User's List
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async Delete() {
       const response = await server.UnfollowPlaylist(this.listId);
@@ -136,6 +140,7 @@ export default {
     },
     /**
      * Add song to playlist
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async AddtoPlaylist(id) {
       // eslint-disable-next-line no-underscore-dangle
@@ -152,7 +157,6 @@ export default {
   },
   computed: {
     reRender() {
-      console.log('Rerender');
       this.$forceUpdate(); // Force Vue to re-render the component
       return true;
     },
@@ -171,7 +175,6 @@ export default {
     EventBus.$on('addOverlay', (overlay, id) => {
       this.addOverlay = overlay;
       this.trackId = id;
-      console.log(this.trackId);
     });
   },
 };

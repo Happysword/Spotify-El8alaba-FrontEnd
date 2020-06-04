@@ -143,13 +143,12 @@ export default {
         .then((response) => {
           this.artistID = response[0].id;
           this.fetchArtistTopTracks();
-
-          if (this.images && (this.images.length > 0)) {
-            if (this.images[0]) {
-              this.imageURL = this.images[0].url;
-            }
-          }
         });
+      if (this.images && (this.images.length > 0)) {
+        if (this.images[0]) {
+          this.imageURL = this.images[0].url;
+        }
+      }
     },
     /** Gets the top tracks of an artist */
     async fetchArtistTopTracks() {

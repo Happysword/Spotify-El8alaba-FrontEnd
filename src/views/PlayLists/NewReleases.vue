@@ -42,6 +42,9 @@
 import server from 'api-client';
 import listCard from '../../components/SongCard.vue';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data() {
     return {
@@ -55,6 +58,7 @@ export default {
   methods: {
     /**
      * Fetch new releases
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async NewReleases() {
       this.ready = false;

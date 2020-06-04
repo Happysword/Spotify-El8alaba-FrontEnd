@@ -57,6 +57,9 @@ import playlistCard from '../../components/playlistCard.vue';
 import songsCard from '../../components/SongsBar.vue';
 import emptyList from '../../components/EmptyList.vue';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data() {
     return {
@@ -72,6 +75,7 @@ export default {
   methods: {
     /**
      * Load view data depending on the route id
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async LoadPage() {
       this.ownerID = '';

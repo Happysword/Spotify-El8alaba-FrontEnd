@@ -134,6 +134,9 @@
 import server from 'api-client';
 import songCard from '../../components/SongCard.vue';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   name: 'Home',
   components: {
@@ -154,7 +157,9 @@ export default {
   methods: {
     /**
      * Route to Genre page
-     * @param Object category object
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+     * @param {String} id category id
+     * @param {Number} length number of playlists in this category
      */
     click(id, length) {
       if (length >= 1) {
@@ -163,6 +168,7 @@ export default {
     },
     /**
      * Get list of Categories
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async getCategories() {
       this.ready = false;
@@ -170,13 +176,6 @@ export default {
       this.categories = await server.fetchGenres();
       this.newReleases = await server.fetchNewReleases();
       this.ready = true;
-    },
-    setownerid(list) {
-      if (list.type === 'album') {
-        this.owner = {};
-      } else {
-        this.owner = list.owner;
-      }
     },
   },
 };

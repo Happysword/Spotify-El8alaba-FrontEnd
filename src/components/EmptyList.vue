@@ -62,6 +62,9 @@ import server from 'api-client';
 import songsCard from './SongsBar.vue';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data() {
     return {
@@ -84,6 +87,7 @@ export default {
   methods: {
     /**
      * Show/Hide recommended Tracks
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     showIcon() {
       this.show = !this.show;
@@ -96,6 +100,7 @@ export default {
 
     /**
      * Refresh recommended tracks
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async refresh() {
       this.recommended = await server.fetchRecommendedTracks();

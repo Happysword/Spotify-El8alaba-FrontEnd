@@ -67,11 +67,15 @@
 </template>
 
 <script>
-// import store from '../store';
 import server from 'api-client';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ * @vue-computed {Boolean} checkSong Check if this song is the
+ * current song or not then set the status of it
+ */
 export default {
   data: () => ({
     showIcon: 'mdi-music-note-outline',
@@ -120,6 +124,7 @@ export default {
   methods: {
     /**
      * Route to artist/album page
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param String type of routing page
      */
     click(type) {
@@ -128,6 +133,7 @@ export default {
     },
     /**
      * Change the song icon and color to play mode
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     playSong() {
       this.play = true;
@@ -139,6 +145,7 @@ export default {
 
     /**
      * Change the song icon and color to pause mode
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     pauseSong() {
       this.play = false;
@@ -150,6 +157,7 @@ export default {
 
     /**
      * Change the song mode depending on mouse mode if mouse is over or leave or click
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param {Number} hover controls the mode of the song it takes the values of 0, 1, 2
      * if 0 then change the mode of the song and play or pause it
      * if 1 then set the mode to idle that there is no hover
@@ -189,6 +197,7 @@ export default {
 
     /**
      * Add song to playlist
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async Add() {
       // eslint-disable-next-line no-underscore-dangle
@@ -206,6 +215,7 @@ export default {
 
   /**
    * Check if there is an event
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    */
   mounted() {
     EventBus.$on('pause', async (play) => {
@@ -234,9 +244,6 @@ export default {
     });
   },
   computed: {
-    /**
-     * Check if this song is the current song or not then set the status of it
-     */
     checkSong() {
       if (this.$store.state.MusicPlayer.currentSong) {
         if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id

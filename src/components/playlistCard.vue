@@ -130,9 +130,13 @@ import store from '../store';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ * @vue-computed {Boolean} changePlayEvent Check if this
+ * list is the current list or not then set the status of it
+ */
 export default {
   name: 'ListCard',
-
   data: () => ({
 
     overlay: false,
@@ -176,6 +180,7 @@ export default {
     /* istanbul ignore next */
     /**
      * Route To Owner Page
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     RouteToOwnerPage() {
       if (this.owner.type === 'artist') {
@@ -187,6 +192,7 @@ export default {
 
     /**
      * Change status of the current song
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     changeStatus() {
       EventBus.$emit('pause', !this.play);
@@ -194,6 +200,7 @@ export default {
 
     /**
      * Add or remove Current List to/from user's library
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async changeLiked() {
       let response = {};
@@ -227,7 +234,10 @@ export default {
       }
     },
   },
-
+  /**
+   * Load Data
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+   */
   async created() {
     if (this.listInfo.type === 'playlist') {
       this.owner = this.listInfo.owner;
@@ -255,6 +265,7 @@ export default {
   /* istanbul ignore next */
   /**
    * Update play icon
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    */
   updated() {
     if (this.play === true) {
@@ -269,9 +280,6 @@ export default {
   },
 
   computed: {
-    /**
-     * Check if this list is the current list or not then set the status of it
-     */
     changePlayEvent() {
       EventBus.$on('changePlay', (play, id) => {
         if (this.listInfo.id === this.$store.state.MusicPlayer.ID || this.listInfo.id === id) {

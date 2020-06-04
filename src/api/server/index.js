@@ -1078,6 +1078,7 @@ export default {
 
   /**
    * Fetches all songs of a playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of playlist
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
@@ -1105,6 +1106,7 @@ export default {
 
   /**
    * Fetches user's saved tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Object}  An object containing all saved songs of the user
    */
   async fetchSavedTracks() {
@@ -1139,6 +1141,7 @@ export default {
 
   /**
    * Fetches Current user Recently played tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedTracks() {
@@ -1154,8 +1157,9 @@ export default {
   },
 
   /**
-   * Fetches Current user Recently played tracks
-   * @return {Array} An Array containing Recently played tracks
+   * Fetches Current user Recently played Lists
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+   * @return {Array} An Array containing Recently played Lists
    */
   async fetchRecentlyPlayedLists(limit) {
     const lists = await axios.get(
@@ -1182,6 +1186,7 @@ export default {
 
   /**
    * Fetches List info
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
    */
@@ -1196,6 +1201,7 @@ export default {
 
   /**
    * Fetches Album info
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all information about the album of ID equals to id
    */
@@ -1223,13 +1229,13 @@ export default {
 
   /**
    * Fetches Album songs
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all songs of the album of ID equals to id
    */
   async fetchAlbumSongs(id) {
     // eslint-disable-next-line no-undef
     const album = await this.fetchAlbum(id);
-    // TODO:: Remove this loop
     const songs = [];
     for (let i = 0; i < album.tracks.length; i += 1) {
       // album.tracks[i].artists = [{ name: 'Artist' }];
@@ -1263,6 +1269,7 @@ export default {
 
   /**
    * Save Track for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Track
    * @return {Object}  The corresponding response
    */
@@ -1277,6 +1284,7 @@ export default {
 
   /**
    * Remove Track for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Track
    * @return {Boolean}  The corresponding response
    */
@@ -1297,6 +1305,7 @@ export default {
 
   /**
    * Save Album for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1311,6 +1320,7 @@ export default {
 
   /**
    * Remove Album for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1339,6 +1349,7 @@ export default {
 
   /**
    * Check if Album is Saved for the Current User or not
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1361,6 +1372,7 @@ export default {
 
   /**
    * Check if a Playlist is Saved for the Current User or not
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
@@ -1378,10 +1390,10 @@ export default {
     );
     return response;
   },
-  /* eslint-enable no-underscore-dangle */
 
   /**
    * Follow a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
@@ -1396,6 +1408,7 @@ export default {
 
   /**
    * Unfollow a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
@@ -1410,6 +1423,7 @@ export default {
 
   /**
    * Add Track to a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
    * @return {Boolean}  The corresponding response
@@ -1437,6 +1451,7 @@ export default {
 
   /**
    * Remove Track from a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
    * @param  {Number}  position the position of the track in the list
@@ -1467,6 +1482,7 @@ export default {
 
   /**
    * Get New Releases of albums
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} Array on new releases
    */
   async fetchNewReleases() {
@@ -1480,6 +1496,7 @@ export default {
 
   /**
    * Get list of recommended tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} Array on recommended tracks
    */
   async fetchRecommendedTracks() {
@@ -1496,6 +1513,7 @@ export default {
 
   /**
    * Change details of a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {Number}  id The id of the Playlist
    * @param  {Object}  body The data to be changed
    * @return {Object}  The corresponding response

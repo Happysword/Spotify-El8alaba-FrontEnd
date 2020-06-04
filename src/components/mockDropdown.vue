@@ -14,6 +14,9 @@
 import server from 'api-client';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data: () => ({
     overlay: false,
@@ -39,7 +42,8 @@ export default {
   },
   methods: {
     /**
-     * Load Dropdown data
+     * Load Dropdown data According to the data type (Track - album - playlist - user's playlist)
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async loadData() {
       if (this.type === 'track') {
@@ -70,14 +74,14 @@ export default {
     },
 
     /**
-     * Make a proper request based on the click
+     * Make a proper request based on the clicked item
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param {String} item the Required request
      */
     async click(item) {
       if (this.type === 'track') {
         if (item === 'Save To Your Liked Songs') {
           const response = await server.saveTrack(this.id);
-          console.log(response);
           if (response === true) {
             this.songList[0] = 'Remove From Your Liked Songs';
             this.SnackBar.show = true;
