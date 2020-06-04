@@ -53,9 +53,10 @@
             ></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
-            {{ parseInt(song.track.duration_ms / 60000) }} :
-            {{ parseInt(song.track.duration_ms / 1000) % 60 }}</label
-          >
+            <span>{{parseInt(song.track.duration_ms / 60000)}} : </span>
+            <span>{{((parseInt(song.track.duration_ms / 1000) % 60) >= 10)? '':'0'}}</span>
+            <span>{{parseInt(song.track.duration_ms / 1000) % 60}}</span>
+          </label>
         </v-card-text>
         <v-btn id="Add" rounded dark outlined v-if="recommend"
         align="end" width="100" @click="Add()">
