@@ -1,5 +1,5 @@
 <template>
-  <v-app :style="`background: linear-gradient(0deg,rgba(0,0,0,1) 70%, ${color} 100%);`">
+  <v-app :style="`background: linear-gradient(0deg,rgba(18,18,18,20) 70%, ${color} 100%);`">
     <Navbar />
     <Topbar />
     <v-content>
