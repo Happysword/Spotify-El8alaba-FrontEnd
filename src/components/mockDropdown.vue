@@ -28,7 +28,7 @@ export default {
     showList: [],
     songList: ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist'],
     albumList: ['Save To Your Library', 'Copy Link'],
-    myPlaylist: ['Make Public', 'Delete', 'Copy Link'],
+    myPlaylist: ['Make Public', 'Delete', 'Copy Link', 'Upload Cover Image'],
   }),
   props: {
     id: String,
@@ -152,6 +152,9 @@ export default {
                 this.$store.state.userPlaylists = res;
               });
           }
+        } else if (item === 'Upload Cover Image') {
+          this.overlay = true;
+          EventBus.$emit('imageOverlay', this.overlay, this.id);
         } else if (item === 'Remove From Your Library') {
           const response = await server.UnfollowPlaylist(this.id);
           if (response.status === 200) {

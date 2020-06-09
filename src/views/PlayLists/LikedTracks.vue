@@ -51,7 +51,6 @@
 <script>
 // eslint-disable-next-line import/no-duplicates
 import server from 'api-client';
-import analyze from 'rgbaster';
 import EventBus from '../../EventBus';
 import playlistCard from '../../components/playlistCard.vue';
 import songsCard from '../../components/SongsBar.vue';
@@ -68,7 +67,6 @@ export default {
       show: true,
       ready: false,
       listInfo: {},
-      test: false,
       ownerID: '',
     };
   },
@@ -89,6 +87,7 @@ export default {
             {
               height: 640,
               url: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
+              colors: ['rgb(102, 104, 144)'],
               width: 640,
             },
           ],
@@ -110,7 +109,10 @@ export default {
         return;
       }
       if (this.listInfo.images.length === 0) {
-        this.listInfo.images = [{ url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/240px-Spotify_logo_without_text.svg.png' }];
+        this.listInfo.images = [{
+          url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/240px-Spotify_logo_without_text.svg.png',
+          colors: ['rgb(24, 216, 96)'],
+        }];
       }
       this.ready = true;
       if (!Array.isArray(this.songs)) {
@@ -122,15 +124,8 @@ export default {
         EventBus.$emit('changeColor', 'rgb(50,50,50)');
         return;
       }
-      /* istanbul ignore next */
-      if (!this.test) {
-        analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] }, { scale: 0.6 })
-          .then((result) => {
-            EventBus.$emit('changeColor', result[0].color);
-          }).catch((err) => {
-            EventBus.$emit('changeColor', 'rgb(150,150,150)');
-            console.log(err.message);
-          });
+      if (this.listInfo.images[0].colors) {
+        EventBus.$emit('changeColor', this.listInfo.images[0].colors[0]);
       }
     },
   },
@@ -146,7 +141,9 @@ export default {
   mounted() {
     EventBus.$on('reload', (id) => {
       if (id === this.$route.params.id) {
-        this.LoadPage();
+        // this.LoadPage();
+        /* eslint no-restricted-globals:0 */
+        location.reload();
       }
     });
   },

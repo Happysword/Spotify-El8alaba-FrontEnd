@@ -290,6 +290,15 @@ export default {
       return true;
     },
   },
+  /* istanbul ignore next */
+  mounted() {
+    EventBus.$on('reload1', (id) => {
+      if (id === this.$route.params.id) {
+        /* eslint no-restricted-globals:0 */
+        location.reload();
+      }
+    });
+  },
 };
 </script>
 <style scoped>

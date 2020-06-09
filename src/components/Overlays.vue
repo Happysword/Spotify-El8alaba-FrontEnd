@@ -1,6 +1,6 @@
 <template>
-<div>
-  <v-snackbar
+  <div>
+    <v-snackbar
       id="snackbar"
       v-model="snackbar.show"
       :timeout="snackbar.timeout"
@@ -12,9 +12,9 @@
     </v-snackbar>
     <v-dialog :value="overlay" justify="center"
       overlay-color="#000000FF" overlay-opacity="0.7" dark>
-        <h1 class="display-2 white--text text-center mb-12">
-          Do you really want to delete this playlist?
-        </h1>
+      <h1 class="display-2 white--text text-center mb-12">
+        Do you really want to delete this playlist?
+      </h1>
       <div align="center">
         <v-btn
           justify="center"
@@ -86,6 +86,67 @@
       </template>
       </v-row>
     </v-dialog>
+    <v-dialog
+      v-model="dialog2"
+      max-width="60%"
+      dark=""
+      overlay-color="black"
+      overlay-opacity="0.9"
+    >
+      <v-container>
+        <v-row align="center" justify="center">
+          <v-subheader
+            class="display-2 font-weight-bold white--text"
+            mr-5>
+            Upload Image
+          </v-subheader>
+        </v-row>
+      </v-container>
+      <v-card>
+        <v-card-title>
+          <span class="title">New Image</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-file-input
+                  accept="image/*"
+                  placeholder="Pick an image"
+                  prepend-icon="mdi-image"
+                  label="File Input"
+                  v-model="uploadedImage"
+              ></v-file-input>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions> </v-card-actions>
+      </v-card>
+      <v-container>
+        <v-row align="center" justify="center">
+          <v-btn
+            rounded
+            depressed
+            outlined
+            class="mx-4"
+            @click="dialog2 = false"
+            >Cancel</v-btn
+          >
+          <v-btn
+            rounded
+            depressed
+            color="success white--text"
+            class="mx-4"
+            @click="
+              dialog2 = false;
+              UploadNewImage();
+            "
+            >Upload</v-btn
+          >
+        </v-row>
+      </v-container>
+    </v-dialog>
 </div>
 </template>
 
@@ -114,6 +175,8 @@ export default {
       on: -1,
       // eslint-disable-next-line no-underscore-dangle
       userId: JSON.parse(localStorage.getItem('currentUser')).data._id,
+      uploadedImage: [],
+      dialog2: false,
     };
   },
   components: {
@@ -154,6 +217,18 @@ export default {
         };
       }
     },
+    /**
+     * Upload Custom image to playlist
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+     */
+    async UploadNewImage() {
+      const formData = new FormData();
+      formData.append('image', this.uploadedImage);
+      server.uploadPlaylistImage(formData, this.listId)
+        .then(() => {
+          EventBus.$emit('reload1', this.listId);
+        });
+    },
   },
   computed: {
     reRender() {
@@ -175,6 +250,11 @@ export default {
     EventBus.$on('addOverlay', (overlay, id) => {
       this.addOverlay = overlay;
       this.trackId = id;
+    });
+
+    EventBus.$on('imageOverlay', (overlay, id) => {
+      this.dialog2 = overlay;
+      this.listId = id;
     });
   },
 };

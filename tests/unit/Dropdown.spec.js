@@ -101,9 +101,9 @@ describe('User Playlist Dropdown', () => {
 
   test('All data is correct', async () => {
     expect(wrapper.vm.$data.myPlaylist)
-      .toEqual(['Make Secret', 'Delete', 'Copy Link']);
+      .toEqual(['Make Secret', 'Delete', 'Copy Link', 'Upload Cover Image']);
     expect(wrapper.vm.$data.showList)
-      .toEqual(['Make Secret', 'Delete', 'Copy Link']);
+      .toEqual(['Make Secret', 'Delete', 'Copy Link', 'Upload Cover Image']);
   });
 
   test('Click', async () => {
@@ -114,6 +114,7 @@ describe('User Playlist Dropdown', () => {
     await wrapper.vm.click('Delete');
     expect(wrapper.vm.$data.overlay).toEqual(true);
     await wrapper.vm.click('Copy Link');
+    await wrapper.vm.click('Upload Cover Image');
   });
 });
 

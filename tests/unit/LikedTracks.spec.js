@@ -85,6 +85,7 @@ describe('PlaylistCard.vue Component', () => {
       {
         height: 640,
         url: 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png',
+        colors: ['rgb(102, 104, 144)'],
         width: 640,
       },
     ],
@@ -92,7 +93,6 @@ describe('PlaylistCard.vue Component', () => {
     type: 'Liked',
   };
   test('Load Liked Songs', async () => {
-    data.test = true;
     wrapper.vm.$router.push({
       path: '/home/library/tracks',
       name: 'LikedTracks',
@@ -107,7 +107,6 @@ describe('PlaylistCard.vue Component', () => {
   });
 
   test('Load Playlist', async () => {
-    data.test = true;
     wrapper.vm.$router.push({
       path: '/playlist',
       name: 'playlist',
@@ -125,7 +124,6 @@ describe('PlaylistCard.vue Component', () => {
   });
 
   test('Load Album', async () => {
-    data.test = true;
     wrapper.vm.$router.push({
       path: '/album',
       name: 'album',
@@ -144,7 +142,6 @@ describe('PlaylistCard.vue Component', () => {
   });
 
   test('Load empty Playlist', async () => {
-    data.test = true;
     wrapper.vm.$router.push({
       path: '/playlist',
       name: 'playlist',

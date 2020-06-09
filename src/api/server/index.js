@@ -1550,6 +1550,25 @@ export default {
   },
 
   /**
+   * Upload Custom Image to Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+   * @param  {Number}  id The id of the Playlist
+   * @param  {formData}  formData The data of the image
+   * @return {Object}  The corresponding response
+   */
+  async uploadPlaylistImage(formData, id) {
+    const response = await axios
+      .post(`${api}/api/v1/playlists/${id}/images`, formData, {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
+      })
+      .then((res) => res.body)
+      .catch((err) => console.log(err));
+    return response;
+  },
+
+  /**
    * Gets all categories (genres)
    * @return {object} an object containing all the genres
    */
