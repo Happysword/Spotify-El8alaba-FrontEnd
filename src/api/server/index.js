@@ -507,6 +507,22 @@ export default {
   },
 
   /**
+   * Updates Album
+   * @param {String} updatedAlbum the album object
+   * @param {String} albumId the album id
+   */
+  async updateAlbum(updatedAlbum, albumId) {
+    const response = await axios.patch(`${api}/api/v1/albums/${albumId}`, updatedAlbum, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.body);
+
+    return response;
+  },
+
+  /**
    * Create a new Track
    * @param {object} createdTrack The created Track
    * @param {String} token Token of current user
