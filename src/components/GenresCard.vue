@@ -29,10 +29,6 @@ export default {
       this.$router.push(`/genre/${this.route}-page`);
     },
   },
-  created() {
-    console.log(this.color);
-    console.log(this.source);
-  },
 };
 </script>
 

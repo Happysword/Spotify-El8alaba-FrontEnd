@@ -27,7 +27,8 @@
       </songsCard>
     </v-container>
     <br><br><br>
-    <template v-if="type === 'playlist'">
+    <template v-if="type === 'playlist'
+      && ownerID === currentUserId">
       <v-row>
         <v-col lg= "9" sm="6" md="9" class=" py-2 title white--text text-left"
           @click="showIcon()" style="cursor: pointer">
@@ -74,6 +75,8 @@ export default {
       recommend: true,
       songs: [],
       empty: true,
+      // eslint-disable-next-line no-underscore-dangle
+      currentUserId: JSON.parse(localStorage.getItem('currentUser')).data._id,
     };
   },
   props: {

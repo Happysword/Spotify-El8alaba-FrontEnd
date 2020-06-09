@@ -25,7 +25,11 @@
               :id="RecentSearch[i].id"
               :name="RecentSearch[i].name"
               :images="RecentSearch[i].images"
-              :type="RecentSearch[i].type">
+              description=''
+              :type="RecentSearch[i].type"
+              :external_urls="RecentSearch[i].external_urls"
+              owner=""
+              :Public="RecentSearch[i].public">
           </song-card>
           </v-col>
       </v-row>

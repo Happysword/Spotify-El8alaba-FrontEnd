@@ -19,6 +19,7 @@
                       :href="card.href"
                       :Public="card.public"
                       :snapshot_id="card.snapshot_id"
+                      :owner="card.owner.id"
                       :uri="card.uri">
                   </song-card>
                   <artist-card
