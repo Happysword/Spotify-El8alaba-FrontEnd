@@ -130,6 +130,7 @@ export default {
           password: this.userInput.newPw,
         });
 
+        /* istanbul ignore next */
         // Update localStorage token
         // Set the logged in cookie to session
         // Route to Account Overview

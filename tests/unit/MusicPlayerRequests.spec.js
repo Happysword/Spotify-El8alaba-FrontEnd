@@ -116,16 +116,28 @@ describe('Requests of Player', () => {
       expect(typeof await mock.fetchToken()).toBe('object');
     });
     it('Tests playTrack', async () => {
+      data = await Requests.playTrack('1', '2', '3');
+      expect(data).toEqual(true);
       data = await Requests.playTrack(1);
+      expect(data).toEqual(false);
+      data = await Requests.checkLiked(1);
       expect(data).toEqual(false);
     });
     it('Tests saveTrack', async () => {
       data = await Requests.saveTrack(1);
       expect(data).toEqual(false);
+      data = await Requests.saveTrack('1234');
+      expect(data).toEqual(true);
     });
     it('Tests deleteTrack', async () => {
       data = await Requests.deleteTrack(1);
       expect(data).toEqual(false);
+      data = await Requests.deleteTrack('1234');
+      expect(data).toEqual(true);
+    });
+    it('Tests getAd', async () => {
+      data = await Requests.getAd();
+      expect(typeof data).toBe('string');
     });
   });
 });

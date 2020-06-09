@@ -6,13 +6,7 @@
           <v-col sm="8" lg="6" xl="4" class="px-8">
             <!-- Logo -->
             <router-link to="/">
-              <v-img
-                id="logo"
-                src="../../assets/imgs/El-8alaba.png"
-                contain
-                height="140"
-              >
-              </v-img>
+              <v-img id="logo" src="../../assets/imgs/El-8alaba.png" contain height="140"> </v-img>
             </router-link>
 
             <p class="mb-12 text-center font-weight-bold display-1">
@@ -38,17 +32,10 @@
                   outlined
                   label="New Password"
                   v-model="userInput.password"
-                  :rules="[
-                    validation.required('Password'),
-                    validation.minLength('Password', 8),
-                  ]"
+                  :rules="[validation.required('Password'), validation.minLength('Password', 8)]"
                   :type="userInput.showPassword ? 'text' : 'password'"
-                  :append-icon="
-                    userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'
-                  "
-                  @click:append="
-                    userInput.showPassword = !userInput.showPassword
-                  "
+                  :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="userInput.showPassword = !userInput.showPassword"
                 />
                 <v-text-field
                   id="confirmPasswordField"
@@ -58,17 +45,11 @@
                   ref="confirmPassword"
                   v-model="userInput.confirmPassword"
                   :rules="[
-                    (data) =>
-                      (!!data && data === userInput.password) ||
-                      'Password doesn\'t match',
+                    (data) => (!!data && data === userInput.password) || 'Password doesn\'t match',
                   ]"
                   :type="userInput.showPassword ? 'text' : 'password'"
-                  :append-icon="
-                    userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'
-                  "
-                  @click:append="
-                    userInput.showPassword = !userInput.showPassword
-                  "
+                  :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="userInput.showPassword = !userInput.showPassword"
                   @change="validateConfirmPassword"
                 />
 
@@ -98,8 +79,8 @@
               <template v-if="!succeeded">
                 <p class="body-1 text-center">
                   Enter your <span class="font-weight-bold">email address</span>
-                  that you used to register. We'll send you an email with your
-                  username and a link to reset your password.
+                  that you used to register. We'll send you an email with your username and a link
+                  to reset your password.
                 </p>
 
                 <v-form ref="passwordResetForm">
@@ -134,8 +115,8 @@
 
               <template v-else>
                 <p class="body-1 text-center">
-                  A message has been sent to you by email with instructions on
-                  how to reset your password.
+                  A message has been sent to you by email with instructions on how to reset your
+                  password.
                 </p>
               </template>
             </template>
@@ -263,6 +244,7 @@ export default {
 
           cookies.setCookiesToSession(['loggedIn']);
           this.$router.push('/home');
+          /* istanbul ignore else */
         } else {
           this.userInput.incorrect = response.data.message;
         }

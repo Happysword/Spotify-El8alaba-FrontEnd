@@ -41,7 +41,7 @@ describe('Testing the player components', () => {
         currentSongIndexinList: 0,
         AudioPlayer: Audio,
         adTime: false,
-        currentQueue: [],
+        currentQueue: [currentSongMock[0]],
       },
     },
     mutations: {
@@ -150,11 +150,17 @@ describe('Testing the player components', () => {
       expect(wrapper.find('#seek-bar').exists()).toBe(true);
     });
     it('checks skip next and skip previous', async () => {
+      wrapper.vm.$data.userType = 'free';
+      await wrapper.vm.skipNext();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
       await wrapper.vm.skipNext();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(1);
+      wrapper.vm.$data.skipnum = 0;
       await wrapper.vm.skipPrevious();
       expect(wrapper.vm.$store.state.MusicPlayer.currentSongIndexinList).toBe(0);
+      await wrapper.vm.skipNext();
+      await wrapper.vm.skipNext();
+      await wrapper.vm.skipNext();
     });
 
     it('Toggle Shuffle tests', async () => {

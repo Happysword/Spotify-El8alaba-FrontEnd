@@ -29,7 +29,7 @@
               <span id="artist" @click="click('artist')">{{ song.track.artists[0].name }}</span>
               <span id="album" v-if="listType !== 'album'"
                 @click="click('album')">
-                . {{ song.track.album.name }}
+                . {{ song.track.album ? song.track.album.name:'' }}
               </span>
             </v-list-item-subtitle>
           </v-list-item-content>
@@ -53,11 +53,12 @@
             ></dropDown>
           </v-menu>
           <label class="mx-2" :style="`color:${color} `" id="duration">
-            {{ parseInt(song.track.duration_ms / 60000) }} :
-            {{ parseInt(song.track.duration_ms / 1000) % 60 }}</label
-          >
+            <span>{{parseInt(song.track.duration_ms / 60000)}} : </span>
+            <span>{{((parseInt(song.track.duration_ms / 1000) % 60) >= 10)? '':'0'}}</span>
+            <span>{{parseInt(song.track.duration_ms / 1000) % 60}}</span>
+          </label>
         </v-card-text>
-        <v-btn rounded dark outlined v-if="recommend"
+        <v-btn id="Add" rounded dark outlined v-if="recommend"
         align="end" width="100" @click="Add()">
           Add
         </v-btn>
@@ -67,11 +68,15 @@
 </template>
 
 <script>
-// import store from '../store';
 import server from 'api-client';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ * @vue-computed {Boolean} checkSong Check if this song is the
+ * current song or not then set the status of it
+ */
 export default {
   data: () => ({
     showIcon: 'mdi-music-note-outline',
@@ -120,6 +125,7 @@ export default {
   methods: {
     /**
      * Route to artist/album page
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param String type of routing page
      */
     click(type) {
@@ -128,9 +134,9 @@ export default {
     },
     /**
      * Change the song icon and color to play mode
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     playSong() {
-      // this.$store.state.MusicPlayer.isPlaying = true;
       this.play = true;
       this.color = '#1ED760';
       this.color2 = '#1ED760';
@@ -140,9 +146,9 @@ export default {
 
     /**
      * Change the song icon and color to pause mode
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     pauseSong() {
-      // this.$store.state.MusicPlayer.isPlaying = false;
       this.play = false;
       this.color = 'grey';
       this.color2 = 'white';
@@ -152,6 +158,7 @@ export default {
 
     /**
      * Change the song mode depending on mouse mode if mouse is over or leave or click
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param {Number} hover controls the mode of the song it takes the values of 0, 1, 2
      * if 0 then change the mode of the song and play or pause it
      * if 1 then set the mode to idle that there is no hover
@@ -162,7 +169,6 @@ export default {
       if (hover === 0) {
         this.play = !this.play;
         if (this.play === true) {
-          this.playSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: true,
             song: this.song,
@@ -171,7 +177,6 @@ export default {
             type: this.listTYPE,
           });
         } else {
-          this.pauseSong();
           this.$store.dispatch('playpauseplaylist', {
             playstatus: false,
             song: this.song,
@@ -180,7 +185,6 @@ export default {
             type: this.listTYPE,
           });
         }
-        EventBus.$emit('changePlay', this.play, this.listid);
       }
       if (hover === 1) {
         this.showIcon = this.songIcon;
@@ -194,6 +198,7 @@ export default {
 
     /**
      * Add song to playlist
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async Add() {
       // eslint-disable-next-line no-underscore-dangle
@@ -211,20 +216,21 @@ export default {
 
   /**
    * Check if there is an event
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    */
   mounted() {
-    EventBus.$on('pause', (play) => {
-      if ((this.play === true && play === false) || this.counter === 0) {
-        this.play = play;
-        if (this.play === true) {
-          this.playSong();
-          this.showIcon = 'mdi-volume-high';
-        } else {
-          this.pauseSong();
-          this.showIcon = 'mdi-music-note-outline';
-        }
-        this.$store.dispatch('playpauseplaylist', {
-          playstatus: this.play,
+    EventBus.$on('pause', async (play) => {
+      if (this.play === true && play === false) {
+        await this.$store.dispatch('playpauseplaylist', {
+          playstatus: false,
+          song: this.song,
+          currentList: this.list,
+          ID: this.listID,
+          type: this.listTYPE,
+        });
+      } else if (this.counter === 0 && play === true && this.play === false) {
+        await this.$store.dispatch('playpauseplaylist', {
+          playstatus: true,
           song: this.song,
           currentList: this.list,
           ID: this.listID,
@@ -234,27 +240,21 @@ export default {
     });
     EventBus.$on('changePlay', () => {
       if (this.song.track.id !== this.$store.state.MusicPlayer.currentSong.track.id) {
-        this.play = false;
-        this.color = 'grey';
-        this.color2 = 'white';
-        this.songIcon = 'mdi-music-note-outline';
-        this.showIcon = 'mdi-music-note-outline';
+        this.pauseSong();
       }
     });
   },
   computed: {
-    /**
-     * Check if this song is the current song or not then set the status of it
-     */
     checkSong() {
       if (this.$store.state.MusicPlayer.currentSong) {
-        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id) {
+        if (this.song.track.id === this.$store.state.MusicPlayer.currentSong.track.id
+            && this.listID === this.$store.state.MusicPlayer.ID) {
           if (this.$store.state.MusicPlayer.isPlaying === true) {
             this.playSong();
           } else {
             this.pauseSong();
           }
-          EventBus.$emit('changePlay', this.$store.state.MusicPlayer.isPlaying, this.listid);
+          EventBus.$emit('changePlay', this.play, this.listid);
         }
       }
       return true;

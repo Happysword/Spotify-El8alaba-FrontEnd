@@ -1,104 +1,102 @@
 <template>
-<v-app>
-<v-content class="wrap cover">
-  <!-- Main app bar -->
-  <v-app-bar color="black" class="trans-bar">
-    <router-link to="/home">
-      <v-img id="logo"
-             src="../../assets/imgs/El-8alaba.png"
-             class="mt-4"
-             contain
-             max-height="200"
-             max-width="200">
-      </v-img>
-    </router-link>
-    <v-spacer/>
-    <ul>
-      <v-btn v-for="(button, i) in buttons" :key="i"
-             :id="`${button.name}Btn`"
-             class="btn-green text-none d-none d-sm-table-cell"
-             type="li"
-             left
-             text
-             large
-             :to="button.route">
-        <span class="text-uppercase">{{ button.name }}</span>
-      </v-btn>
-    </ul>
-  </v-app-bar>
+  <v-app>
+    <v-content class="wrap cover">
+      <!-- Main app bar -->
+      <v-app-bar color="black" class="trans-bar">
+        <router-link to="/home">
+          <v-img
+            id="logo"
+            src="../../assets/imgs/El-8alaba.png"
+            class="mt-4"
+            contain
+            max-height="200"
+            max-width="200"
+          >
+          </v-img>
+        </router-link>
+        <v-spacer />
+        <ul>
+          <v-btn
+            v-for="(button, i) in buttons"
+            :key="i"
+            :id="`${button.name}Btn`"
+            class="btn-green text-none d-none d-sm-table-cell"
+            type="li"
+            left
+            text
+            large
+            :to="button.route"
+          >
+            <span class="text-uppercase">{{ button.name }}</span>
+          </v-btn>
+        </ul>
+      </v-app-bar>
 
-  <!-- Root container -->
-  <v-container id="Account_root">
-    <v-row justify="center">
-      <v-col xl="10">
-        <v-row justify="center" align="start" class="mt-n6">
-          <!-- <v-col lg="10" xl="8" class="px-0"> -->
-          <v-col md="4" lg="3" v-if="$vuetify.breakpoint.mdAndUp">
-            <!-- Tab layout -->
-            <!-- Vertical on medium and higher breakpoints -->
-            <v-tabs id="tabs"
-                    v-model="currentTab"
-                    dark
-                    color="#1DB954"
-                    vertical
-                    show-arrows>
+      <!-- Root container -->
+      <v-container id="Account_root">
+        <v-row justify="center">
+          <v-col xl="10">
+            <v-row justify="center" align="start" class="mt-n6">
+              <!-- <v-col lg="10" xl="8" class="px-0"> -->
+              <v-col md="4" lg="3" v-if="$vuetify.breakpoint.mdAndUp">
+                <!-- Tab layout -->
+                <!-- Vertical on medium and higher breakpoints -->
+                <v-tabs id="tabs" v-model="currentTab" dark color="#1DB954" vertical show-arrows>
+                  <!-- Avatar -->
+                  <v-img
+                    id="avatar"
+                    :src="image"
+                    class="rounded-img d-none d-md-flex"
+                    width="96"
+                    height="96"
+                  >
+                  </v-img>
+                  <!-- Route each tab to its respective path -->
+                  <!-- For example: change-password-tab -->
+                  <v-tab v-for="(tab, i) in tabs" :key="i" :id="`${tab.link}-tab`" :to="tab.link">
+                    <!-- Display only on md+ -->
+                    <v-icon class="mr-3 d-none d-md-flex">
+                      {{ tab.icon }}
+                    </v-icon>
 
-              <!-- Avatar -->
-              <v-img id="avatar"
-                      :src="image"
-                      class="rounded-img d-none d-md-flex"
-                      width="96"
-                      height="96">
-              </v-img>
-              <!-- Route each tab to its respective path -->
-              <!-- For example: change-password-tab -->
-              <v-tab v-for="(tab, i) in tabs" :key="i"
-                    :id="`${tab.link}-tab`"
-                    :to="tab.link">
-                <!-- Display only on md+ -->
-                <v-icon class="mr-3 d-none d-md-flex">
-                  {{ tab.icon }}
-                </v-icon>
+                    {{ tab.title }}
+                    <v-spacer />
+                  </v-tab>
+                </v-tabs>
+              </v-col>
 
-                {{ tab.title }}
-                <v-spacer/>
-              </v-tab>
-            </v-tabs>
-          </v-col>
+              <v-col class="px-0">
+                <v-tabs
+                  id="tabs"
+                  v-if="$vuetify.breakpoint.smAndDown"
+                  v-model="currentTab"
+                  dark
+                  color="#1DB954"
+                  show-arrows
+                >
+                  <!-- Route each tab to its respective path -->
+                  <!-- For example: change-password-tab -->
+                  <v-tab v-for="(tab, i) in tabs" :key="i" :id="`${tab.link}-tab`" :to="tab.link">
+                    <!-- Display only on md+ -->
+                    <v-icon class="mr-3 d-none d-md-flex">
+                      {{ tab.icon }}
+                    </v-icon>
 
-          <v-col class="px-0">
-            <v-tabs id="tabs"
-                    v-if="$vuetify.breakpoint.smAndDown"
-                    v-model="currentTab"
-                    dark
-                    color="#1DB954"
-                    show-arrows>
-
-              <!-- Route each tab to its respective path -->
-              <!-- For example: change-password-tab -->
-              <v-tab v-for="(tab, i) in tabs" :key="i"
-                    :id="`${tab.link}-tab`"
-                    :to="tab.link">
-                <!-- Display only on md+ -->
-                <v-icon class="mr-3 d-none d-md-flex">
-                  {{ tab.icon }}
-                </v-icon>
-
-                {{ tab.title }}
-                <v-spacer/>
-              </v-tab>
-            </v-tabs>
-            <!-- Route content -->
-            <v-card class="pa-0" flat tile id="tab-content">
-              <router-view/>
-            </v-card>
+                    {{ tab.title }}
+                    <v-spacer />
+                  </v-tab>
+                </v-tabs>
+                <!-- Route content -->
+                <v-card class="pa-0" flat tile id="tab-content">
+                  <router-view />
+                </v-card>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-content>
-</v-app>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -146,10 +144,9 @@ export default {
     });
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) return;
-    if (!currentUser.data.image) return;
+    if (currentUser.data.image.length === 0) return;
 
-    const { image: { url } } = currentUser.data;
+    const { url } = currentUser.data.image[0];
     if (url) this.image = url;
   },
 

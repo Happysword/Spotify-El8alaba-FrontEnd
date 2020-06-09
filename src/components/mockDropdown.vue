@@ -14,6 +14,9 @@
 import server from 'api-client';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data: () => ({
     overlay: false,
@@ -39,7 +42,8 @@ export default {
   },
   methods: {
     /**
-     * Load Dropdown data
+     * Load Dropdown data According to the data type (Track - album - playlist - user's playlist)
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async loadData() {
       if (this.type === 'track') {
@@ -48,7 +52,7 @@ export default {
           this.songList = ['Save To Your Liked Songs', 'Add to Queue', 'Add to Playlist', 'Remove from this Playlist'];
         }
         const response = await server.checkLiked(this.id);
-        if (response === true) this.songList[0] = 'Remove From Your Liked Songs';
+        if (response === true) { this.songList[0] = 'Remove From Your Liked Songs'; }
         this.showList = this.songList;
       }
       if (this.type === 'playlist') {
@@ -70,15 +74,14 @@ export default {
     },
 
     /**
-     * Make a proper request based on the click
+     * Make a proper request based on the clicked item
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      * @param {String} item the Required request
      */
     async click(item) {
-      console.log(window.location.href);
       if (this.type === 'track') {
         if (item === 'Save To Your Liked Songs') {
           const response = await server.saveTrack(this.id);
-
           if (response === true) {
             this.songList[0] = 'Remove From Your Liked Songs';
             this.SnackBar.show = true;
@@ -97,7 +100,6 @@ export default {
           this.$store.state.MusicPlayer.currentQueue.push(this.track);
           this.SnackBar.show = true;
           this.SnackBar.content = 'Added to Queue';
-          console.log(this.$store.state.MusicPlayer.currentQueue);
         }
         if (item === 'Add to Playlist') {
           EventBus.$emit('addOverlay', true, this.id);
@@ -201,6 +203,9 @@ export default {
     },
   },
   mounted() {
+    this.loadData();
+  },
+  created() {
     this.loadData();
   },
 };

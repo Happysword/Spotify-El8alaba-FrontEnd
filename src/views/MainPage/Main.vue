@@ -1,15 +1,12 @@
 <template>
-  <v-app :style="
-        `background: linear-gradient(0deg,rgba(0,0,0,1) 70%, ${color} 100%);`
-      ">
-    <Navbar></Navbar>
-    <Topbar></Topbar>
-    <v-content
-    >
-      <router-view></router-view>
+  <v-app :style="`background: linear-gradient(0deg,rgba(18,18,18,20) 70%, ${color} 100%);`">
+    <Navbar />
+    <Topbar />
+    <v-content>
+      <router-view />
     </v-content>
-    <music-player></music-player>
-    <Overlays></Overlays>
+    <music-player />
+    <Overlays />
   </v-app>
 </template>
 
@@ -42,7 +39,7 @@ export default {
     Overlays,
   },
   data: () => ({
-    color: 'rgba(10,10,10,255)',
+    color: 'rgba(18,18,18,255)',
     snackbar: {
       show: false,
       timeout: 2000,
@@ -53,7 +50,7 @@ export default {
   }),
   methods: {
     restoreColor() {
-      this.color = 'rgba(10,10,10,255)';
+      this.color = 'rgba(18,18,18,255)';
     },
   },
   async mounted() {

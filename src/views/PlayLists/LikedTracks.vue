@@ -57,6 +57,9 @@ import playlistCard from '../../components/playlistCard.vue';
 import songsCard from '../../components/SongsBar.vue';
 import emptyList from '../../components/EmptyList.vue';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ */
 export default {
   data() {
     return {
@@ -72,6 +75,7 @@ export default {
   methods: {
     /**
      * Load view data depending on the route id
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async LoadPage() {
       this.ownerID = '';
@@ -93,7 +97,6 @@ export default {
         };
         this.show = false;
         const tracks = await server.fetchSavedTracks();
-        console.log(tracks);
         this.songs = tracks;
       } else if (this.$route.name === 'playlist') {
         this.listInfo = await server.fetchList(this.$route.params.id);
@@ -119,6 +122,7 @@ export default {
         EventBus.$emit('changeColor', 'rgb(50,50,50)');
         return;
       }
+      /* istanbul ignore next */
       if (!this.test) {
         analyze(this.listInfo.images[0].url, { ignore: ['rgb(255,255,255)', 'rgb(0,0,0)'] }, { scale: 0.6 })
           .then((result) => {
@@ -138,6 +142,7 @@ export default {
   async created() {
     this.LoadPage();
   },
+  /* istanbul ignore next */
   mounted() {
     EventBus.$on('reload', (id) => {
       if (id === this.$route.params.id) {

@@ -71,7 +71,7 @@
               <ArtistCard
                 :id="artists[i-1].id"
                 :name="artists[i-1].name"
-                :images="[artists[i-1].image]"
+                :images="artists[i-1].image"
                 :type="artists[i-1].type"
                 :href="artists[i-1].href"
               >

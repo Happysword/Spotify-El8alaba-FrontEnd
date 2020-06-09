@@ -14,12 +14,6 @@ export default new Vuex.Store({
     currentUser: { username: 'Spotify user' },
     searching: false,
     liked: false,
-    items: [
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-    ],
     MusicPlayer: {
       isFirstPlay: true,
       isMute: false,

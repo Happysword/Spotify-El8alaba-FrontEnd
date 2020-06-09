@@ -19,6 +19,7 @@ export default {
   },
   methods: {
     /** Get current artist info */
+    /* istanbul ignore next */
     fetchAnArtist() {
       client.fetchAnArtist(this.$route.params.id)
         .then((response) => {

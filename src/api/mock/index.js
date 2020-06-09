@@ -109,6 +109,7 @@ export default {
     console.log(ids + token);
     return fetch(Boolean, 100);
   },
+  /* istanbul ignore next */
   /**
    * Check if Users Follows a playlist
    * @param {String} userID ID of current user
@@ -192,7 +193,7 @@ export default {
     console.log(token);
     console.log(createdPlaylist);
   },
-
+  /* istanbul ignore next */
   /**
    * Creates a new Album
    * @param {Object} createdAlbum The Created Album object
@@ -788,7 +789,7 @@ export default {
     console.log(id);
     return fetch(getArtistAlbums, 200);
   },
-
+  /* istanbul ignore next */
   /**
    *
    * @param {string} id ID of the artist
@@ -966,6 +967,52 @@ export default {
       return { status: 200 };
     }
     return { status: 0 };
+  },
+
+  /**
+   * Add Track To Playlist
+   * @param  {String}  id The id of the Playlist
+   * @param  {String}  songid The id of the Track
+   * @return {Object}  The corresponding response
+   */
+  async AddTrackToPlaylist(id, songid) {
+    if (id && songid) {
+      return true;
+    }
+    return false;
+  },
+  /**
+   * Remove a Liked Track
+   * @param {string} ID the id of the track to be removed
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async RemoveTrack(ID) {
+    if (ID) {
+      return fetch(true, 100).then((Promisedata) => Promisedata);
+    }
+  },
+  /**
+   * Remove a Track From Playlist
+   * @param {string} listID the id of the track to be removed
+   * @param {string} ID the id of the track to be removed
+   * @param {string} position the id of the track to be removed
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async RemoveTrackFromPlaylist(listID, ID, position) {
+    if (listID && ID && position) {
+      return fetch(true, 100).then((Promisedata) => Promisedata);
+    }
+  },
+  /**
+   * Change Details Of Playlist
+   * @param {string} ID the id of the list
+   * @param {Object} body the details to be changed
+   * @return {Boolean} a Boolean True if successful and false if failed
+   */
+  async ChangeDetailsOfPlaylist(ID, body) {
+    if (ID && body) {
+      return fetch(true, 100).then((Promisedata) => Promisedata);
+    }
   },
 };
 /* eslint-enable consistent-return */

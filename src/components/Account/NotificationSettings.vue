@@ -17,7 +17,7 @@
             </v-col>
           </v-row>
           <!-- Settings -->
-          <v-col>
+          <v-col v-if="loaded">
             <template v-for="(setting, key, i) in settings">
               <v-row
                 :key="`row-${i}`"
@@ -32,7 +32,7 @@
                     {{ setting.description }}
                   </p>
                 </v-col>
-                <v-spacer></v-spacer>
+                <v-spacer />
                 <!-- Checkbox -->
                 <v-col cols="2">
                   <v-checkbox
@@ -46,21 +46,21 @@
               </v-row>
               <hr class="lower-opacity mx-n4 mt-n2 d-flex d-md-none" :key="`hr-${i}`" />
             </template>
-          </v-col>
-          <!-- Buttons -->
-          <v-row justify="end">
-            <p v-if="submitted" class="spotify-green font-weight-bold mt-2 mb-n2 pr-6">
-              Saved successfully!
-            </p>
-            <router-link to="/account/overview">
-              <v-btn id="cancelBtn" class="mr-4" text rounded>
-                Cancel
+            <!-- Buttons -->
+            <v-row justify="end" class="pt-8 mb-n8">
+              <p v-if="submitted" class="spotify-green font-weight-bold mt-2 mb-n2 pr-6">
+                Saved successfully!
+              </p>
+              <router-link to="/account/overview">
+                <v-btn id="cancelBtn" class="mr-4" text rounded>
+                  Cancel
+                </v-btn>
+              </router-link>
+              <v-btn id="saveBtn" class="mr-4" color="#1DB954" rounded dark @click="submit">
+                Save
               </v-btn>
-            </router-link>
-            <v-btn id="saveBtn" class="mr-4" color="#1DB954" rounded dark @click="submit">
-              Save
-            </v-btn>
-          </v-row>
+            </v-row>
+          </v-col>
         </v-card>
       </v-container>
     </v-content>
@@ -74,8 +74,19 @@ import api from 'api-client';
  */
 export default {
   name: 'NotificationSettings',
+  async created() {
+    const response = await api.fetchNotificationSettings();
+    if (response.status === 200) {
+      const status = response.data;
+      Object.keys(this.settings).forEach((setting) => {
+        this.settings[setting].checked = status[setting] === 1;
+      });
+    }
+    this.loaded = true;
+  },
   data: () => ({
     submitted: false,
+    loaded: false,
     settings: {
       userFollowed: {
         title: 'Profile Follows',
@@ -105,7 +116,7 @@ export default {
       Object.keys(this.settings).forEach((setting) => {
         notif[setting] = this.settings[setting].checked ? 1 : 0;
       });
-      const response = await api.setNotificationSettings();
+      const response = await api.setNotificationSettings(notif);
       // 200 OK
       if (response.status !== 200) {
         alert('Error setting notification settings...');

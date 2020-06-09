@@ -136,19 +136,19 @@ export default {
       });
       this.showPlayButton = true;
     },
+    /* istanbul ignore next */
     /** Get current artist info */
     fetchAnArtist() {
       client.fetchAnArtist(this.id)
         .then((response) => {
           this.artistID = response[0].id;
           this.fetchArtistTopTracks();
-
-          if (this.images && (this.images.length > 0)) {
-            if (this.images[0]) {
-              this.imageURL = this.images[0].url;
-            }
-          }
         });
+      if (this.images && (this.images.length > 0)) {
+        if (this.images[0]) {
+          this.imageURL = this.images[0].url;
+        }
+      }
     },
     /** Gets the top tracks of an artist */
     async fetchArtistTopTracks() {
@@ -222,6 +222,7 @@ export default {
     },
   },
   watch: {
+    /* istanbul ignore next */
     musicPlayerSongID() {
       if (this.songsList.length
       && this.$store.state.MusicPlayer.ID !== this.songsList[0].album.id) {

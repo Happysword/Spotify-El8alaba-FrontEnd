@@ -302,13 +302,15 @@ export default {
    * @return {String} the Image URL of the Ad
    */
   async getAd() {
+    let link = 'https://searchengineland.com/figz/wp-content/seloads/2017/02/';
+    link = `${link}google-adwords-green-outline-ad-2017-1920.png`;
     return axios
       .get(`${api}/api/v1/ads`)
       .then((response) => {
         if (response.status === 200) return response.data.ad.images[0].url;
-        return 'https://searchengineland.com/figz/wp-content/seloads/2017/02/google-adwords-green-outline-ad-2017-1920.png';
+        return link;
       })
-      .catch(() => 'https://searchengineland.com/figz/wp-content/seloads/2017/02/google-adwords-green-outline-ad-2017-1920.png');
+      .catch(() => link);
   },
 
   /**
@@ -500,6 +502,22 @@ export default {
       })
       .then((res) => res.body)
       .catch((err) => console.log(err));
+
+    return response;
+  },
+
+  /**
+   * Updates Album
+   * @param {String} updatedAlbum the album object
+   * @param {String} albumId the album id
+   */
+  async updateAlbum(updatedAlbum, albumId) {
+    const response = await axios.patch(`${api}/api/v1/albums/${albumId}`, updatedAlbum, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+      },
+    })
+      .then((res) => res.body);
 
     return response;
   },
@@ -919,6 +937,28 @@ export default {
   },
 
   /**
+   * Sends a `POST` request to the server to update the user's avatar
+   * @param  {Object} data The FormData object containing the image
+   * @return {Object}      The corresponding response
+   */
+  async updateAvatar(data) {
+    const request = {
+      method: 'POST',
+      url: `${api}/api/v1/users/update-avatar`,
+      data,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `GET` request to the server to log out the current user
    * @return {Object} The corresponding response
    */
@@ -1018,6 +1058,23 @@ export default {
   },
 
   /**
+   * Sends a `GET` request to the server to get the user's notification status
+   * @return {Object} The corresponding response
+   */
+  async fetchNotificationSettings() {
+    const request = {
+      method: 'GET',
+      url: `${api}/api/v1/users/notification-status`,
+    };
+
+    const response = await axios(request)
+      .then((res) => res)
+      .catch((err) => err.response);
+
+    return response;
+  },
+
+  /**
    * Sends a `PATCH` request to the server to confirm the user's email on signup
    * @param  {String} confirmToken Email confirmation token that was sent by email
    * @return {Object}              The corresponding response
@@ -1037,6 +1094,7 @@ export default {
 
   /**
    * Fetches all songs of a playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of playlist
    * @return {Object}  An object containing all songs in a given playlist of ID equals to id
    */
@@ -1064,6 +1122,7 @@ export default {
 
   /**
    * Fetches user's saved tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Object}  An object containing all saved songs of the user
    */
   async fetchSavedTracks() {
@@ -1098,27 +1157,35 @@ export default {
 
   /**
    * Fetches Current user Recently played tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} An Array containing Recently played tracks
    */
   async fetchRecentlyPlayedTracks() {
-    const lists = await axios.get(`${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const lists = await axios.get(
+      `${api}/api/v1/me/player/recently-played?limit=20&before=1587256700923`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     return lists.data.items;
   },
 
   /**
-   * Fetches Current user Recently played tracks
-   * @return {Array} An Array containing Recently played tracks
+   * Fetches Current user Recently played Lists
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+   * @return {Array} An Array containing Recently played Lists
    */
   async fetchRecentlyPlayedLists(limit) {
-    const lists = await axios.get(`${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const lists = await axios.get(
+      `${api}/api/v1/me/player/recently-played-contexts?limit=${limit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     const promises = [];
     const data = [];
     for (let i = 0; i < lists.data.playContexts.length; i += 1) {
@@ -1135,6 +1202,7 @@ export default {
 
   /**
    * Fetches List info
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired list
    * @return {Object} An object containing all information about the list of ID equals to id
    */
@@ -1149,6 +1217,7 @@ export default {
 
   /**
    * Fetches Album info
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all information about the album of ID equals to id
    */
@@ -1176,13 +1245,13 @@ export default {
 
   /**
    * Fetches Album songs
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the desired Album
    * @return {Object} An object containing all songs of the album of ID equals to id
    */
   async fetchAlbumSongs(id) {
     // eslint-disable-next-line no-undef
     const album = await this.fetchAlbum(id);
-    // TODO:: Remove this loop
     const songs = [];
     for (let i = 0; i < album.tracks.length; i += 1) {
       // album.tracks[i].artists = [{ name: 'Artist' }];
@@ -1216,6 +1285,7 @@ export default {
 
   /**
    * Save Track for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Track
    * @return {Object}  The corresponding response
    */
@@ -1230,6 +1300,7 @@ export default {
 
   /**
    * Remove Track for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Track
    * @return {Boolean}  The corresponding response
    */
@@ -1250,6 +1321,7 @@ export default {
 
   /**
    * Save Album for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1264,6 +1336,7 @@ export default {
 
   /**
    * Remove Album for the Current User
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1292,6 +1365,7 @@ export default {
 
   /**
    * Check if Album is Saved for the Current User or not
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Album
    * @return {Object}  The corresponding response
    */
@@ -1314,22 +1388,28 @@ export default {
 
   /**
    * Check if a Playlist is Saved for the Current User or not
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
   async CheckPlaylist(id) {
     /* eslint-disable no-underscore-dangle */
-    const response = await axios.get(`${api}/api/v1/playlists/${id}/followers/contains?ids=${JSON.parse(localStorage.getItem('currentUser')).data._id}`, {
-      headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+    const response = await axios.get(
+      `${api}/api/v1/playlists/${id}/followers/contains?ids=${
+        JSON.parse(localStorage.getItem('currentUser')).data._id
+      }`,
+      {
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
+        },
       },
-    });
+    );
     return response;
   },
-  /* eslint-enable no-underscore-dangle */
 
   /**
    * Follow a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
@@ -1344,6 +1424,7 @@ export default {
 
   /**
    * Unfollow a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  id The id of the Playlist
    * @return {Object}  The corresponding response
    */
@@ -1358,6 +1439,7 @@ export default {
 
   /**
    * Add Track to a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
    * @return {Boolean}  The corresponding response
@@ -1385,6 +1467,7 @@ export default {
 
   /**
    * Remove Track from a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {String}  listId The id of the Playlist
    * @param  {String}  trackId the id of the track
    * @param  {Number}  position the position of the track in the list
@@ -1415,10 +1498,11 @@ export default {
 
   /**
    * Get New Releases of albums
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} Array on new releases
    */
   async fetchNewReleases() {
-    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=20`, {
+    const response = await axios.get(`${api}/api/v1/browse/new-releases?limit=40`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
       },
@@ -1428,6 +1512,7 @@ export default {
 
   /**
    * Get list of recommended tracks
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @return {Array} Array on recommended tracks
    */
   async fetchRecommendedTracks() {
@@ -1444,6 +1529,7 @@ export default {
 
   /**
    * Change details of a Playlist
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    * @param  {Number}  id The id of the Playlist
    * @param  {Object}  body The data to be changed
    * @return {Object}  The corresponding response
@@ -1574,7 +1660,6 @@ export default {
     }
     return axios
       .get(`${api}/api/v1/search?q=${q}&type=${z}&limit=6&offset=0`, {
-
         headers: {
           Authorization: `Bearer ${JSON.parse(localStorage.getItem('currentUser')).token}`,
         },
@@ -1591,7 +1676,6 @@ export default {
   async premiumRequest() {
     return axios
       .patch(`${api}/api/v1/users/premium`, {
-
         headers: {
           'Content-Type': 'application/json',
         },

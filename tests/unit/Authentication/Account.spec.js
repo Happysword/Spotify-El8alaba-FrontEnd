@@ -25,7 +25,7 @@ const router = new VueRouter({
 });
 
 describe('Account.vue', () => {
-  const currentUser = { data: { image: null } };
+  const currentUser = { data: { image: [] } };
   localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
   test('All page components are loaded', () => {
@@ -55,20 +55,29 @@ describe('Account.vue', () => {
 
     expect(wrapper.vm.$data.image).toEqual(avatar);
 
-    expect(wrapper.vm.$data.buttons[0])
-      .toEqual({ name: 'home', route: '/home' });
-    expect(wrapper.vm.$data.buttons[1])
-      .toEqual({ name: 'download', route: '/download' });
-    expect(wrapper.vm.$data.buttons[2])
-      .toEqual({ name: 'premium', route: '/premium' });
+    expect(wrapper.vm.$data.buttons[0]).toEqual({ name: 'home', route: '/home' });
+    expect(wrapper.vm.$data.buttons[1]).toEqual({ name: 'download', route: '/download' });
+    expect(wrapper.vm.$data.buttons[2]).toEqual({ name: 'premium', route: '/premium' });
 
-    expect(wrapper.vm.$data.tabs[0])
-      .toEqual({ title: 'Account Overview', icon: 'mdi-home', link: 'overview' });
-    expect(wrapper.vm.$data.tabs[1])
-      .toEqual({ title: 'Edit Profile', icon: 'mdi-pencil', link: 'edit-profile' });
-    expect(wrapper.vm.$data.tabs[2])
-      .toEqual({ title: 'Change Password', icon: 'mdi-lock', link: 'change-password' });
-    expect(wrapper.vm.$data.tabs[3])
-      .toEqual({ title: 'Notification Settings', icon: 'mdi-bell', link: 'notifications' });
+    expect(wrapper.vm.$data.tabs[0]).toEqual({
+      title: 'Account Overview',
+      icon: 'mdi-home',
+      link: 'overview',
+    });
+    expect(wrapper.vm.$data.tabs[1]).toEqual({
+      title: 'Edit Profile',
+      icon: 'mdi-pencil',
+      link: 'edit-profile',
+    });
+    expect(wrapper.vm.$data.tabs[2]).toEqual({
+      title: 'Change Password',
+      icon: 'mdi-lock',
+      link: 'change-password',
+    });
+    expect(wrapper.vm.$data.tabs[3]).toEqual({
+      title: 'Notification Settings',
+      icon: 'mdi-bell',
+      link: 'notifications',
+    });
   });
 });

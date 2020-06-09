@@ -24,7 +24,7 @@
                       v-if="card.type === 'artist'"
                       :id="card.id"
                       :name="card.name"
-                      :images="[card.image]"
+                      :images="card.image"
                       :type="card.type"
                       :href="card.href">
                   </artist-card>

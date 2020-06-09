@@ -5,7 +5,7 @@
         <v-col  xs="12" sm="6" md="4" lg="2"
           v-for="card in artistRelatedArtists" :key="card.id">
           <artist-card :id="card.id" :name="card.name"
-            :images="card.images"
+            :images="card.userInfo.image"
             :type="card.type" :external_urls="card.href"
           ></artist-card>
         </v-col>
@@ -58,7 +58,7 @@ export default {
       } else {
         this.token = JSON.parse(localStorage.getItem('currentUser')).token;
       }
-
+      /* istanbul ignore next */
       client.fetchArtistRelatedArtists(this.$route.params.id, this.token)
         .then((response) => {
           this.artistRelatedArtists = response;

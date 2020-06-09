@@ -37,7 +37,7 @@
       {{listInfo.name}}
     </v-card-title>
     <v-card-title id="owner" class="justify-center body-2 text grey--text pt-0" v-if="show">
-      <span>{{owner.name}}</span>
+      <span @click="RouteToOwnerPage()">{{owner.name}}</span>
     </v-card-title>
     <v-card-actions class="justify-center">
       <v-btn
@@ -130,9 +130,13 @@ import store from '../store';
 import dropDown from './mockDropdown.vue';
 import EventBus from '../EventBus';
 
+/**
+ * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+ * @vue-computed {Boolean} changePlayEvent Check if this
+ * list is the current list or not then set the status of it
+ */
 export default {
   name: 'ListCard',
-
   data: () => ({
 
     overlay: false,
@@ -173,43 +177,50 @@ export default {
   },
 
   methods: {
+    /* istanbul ignore next */
+    /**
+     * Route To Owner Page
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+     */
+    RouteToOwnerPage() {
+      if (this.owner.type === 'artist') {
+        this.$router.push(`/home/artist/${this.owner.id}`);
+      } else {
+        this.$router.push(`/home/user/${this.owner.id}`);
+      }
+    },
+
     /**
      * Change status of the current song
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     changeStatus() {
-      this.play = !this.play;
-      this.overlay = this.play;
-      EventBus.$emit('pause', this.play);
+      EventBus.$emit('pause', !this.play);
     },
 
     /**
      * Add or remove Current List to/from user's library
+     * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
      */
     async changeLiked() {
       let response = {};
       store.commit('changeLiked');
       if (store.state.liked === true) {
         if (this.listInfo.type === 'album') {
-          // response = await server.SaveAlbum('5e71de1c7e4ff73544999694');
           response = await server.SaveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
-          // TODO[@Naiera]: Follow this playlist
           response = await server.FollowPlaylist(this.listInfo.id);
         }
-        // console.log(response);
         if (response.status === 200 || response.status === 201) {
           this.snackbar = true;
           this.text = 'Saved to Your Library';
         }
       } else if (store.state.liked === false) {
         if (this.listInfo.type === 'album') {
-          // const response = await server.RemoveAlbum('5e71de1c7e4ff73544999694');
           response = await server.RemoveAlbum(this.listInfo.id);
         } else if (this.listInfo.type === 'playlist') {
-          // TODO[@Naiera]: Unfollow this playlist
           response = await server.UnfollowPlaylist(this.listInfo.id);
         }
-        // console.log(response);
         if (response.status === 200) {
           this.snackbar = true;
           this.text = 'Removed from Your Library';
@@ -223,29 +234,24 @@ export default {
       }
     },
   },
-
+  /**
+   * Load Data
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
+   */
   async created() {
-    // if (this.songsNum === 0) {
-    //   this.btnColor = '#1DB95480';
-    // } else {
-    //   this.btnColor = '#1DB954FF';
-    // }
     if (this.listInfo.type === 'playlist') {
       this.owner = this.listInfo.owner;
     } else if (this.listInfo.type === 'album') {
-      // need to edit
-      // this.owner.id = this.listInfo.artists[0];
-      this.owner.id = null;
+      this.owner = this.listInfo.artists[0].userInfo
+        ? this.listInfo.artists[0].userInfo : { id: null };
     }
     // eslint-disable-next-line no-underscore-dangle
     if (this.owner.id === JSON.parse(localStorage.getItem('currentUser')).data._id) this.isOwner = true;
     let response = {};
     if (this.listInfo.type === 'album') {
-      // const response = await server.CheckAlbum('5e71de1c7e4ff73544999694');
       response = await server.CheckAlbum(this.listInfo.id);
     } else if (this.listInfo.type === 'playlist') {
       response = await server.CheckPlaylist(this.listInfo.id);
-      console.log(response);
     } else {
       return;
     }
@@ -256,20 +262,10 @@ export default {
     }
   },
 
-  // /**
-  //  * Check if there is an event
-  //  */
-  // mounted() {
-  //   EventBus.$on('changePlay', (play, id) => {
-  //     if (this.listInfo.id === id) {
-  //       this.overlay = play;
-  //       this.play = play;
-  //     }
-  //   });
-  // },
-
+  /* istanbul ignore next */
   /**
    * Update play icon
+   * @author Naiera <naiera.refaey99@eng-st.cu.edu.eg>
    */
   updated() {
     if (this.play === true) {
@@ -284,12 +280,9 @@ export default {
   },
 
   computed: {
-    /**
-     * Check if this list is the current list or not then set the status of it
-     */
     changePlayEvent() {
       EventBus.$on('changePlay', (play, id) => {
-        if (this.listInfo.id === id) {
+        if (this.listInfo.id === this.$store.state.MusicPlayer.ID || this.listInfo.id === id) {
           this.overlay = play;
           this.play = play;
         }
@@ -299,3 +292,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+#owner:hover,#album:hover {
+  color: rgba(255, 255, 255, 0.911);
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+</style>

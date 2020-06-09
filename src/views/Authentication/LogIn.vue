@@ -1,144 +1,122 @@
 <template>
-<v-app>
-<v-content>
-  <v-container id="LogIn_root" class="py-0">
-    <!-- Main row -->
-    <v-row justify="center" align="center">
-      <v-col sm="8" lg="6" xl="4" class="px-8">
-        <!-- Logo -->
-        <router-link to="/">
-          <v-img
-            id="logo"
-            src="../../assets/imgs/El-8alaba.png"
-            contain
-            height="140">
-          </v-img>
-        </router-link>
+  <v-app>
+    <v-content>
+      <v-container id="LogIn_root" class="py-0">
+        <!-- Main row -->
+        <v-row justify="center" align="center">
+          <v-col sm="8" lg="6" xl="4" class="px-8">
+            <!-- Logo -->
+            <router-link to="/">
+              <v-img id="logo" src="../../assets/imgs/El-8alaba.png" contain height="140"> </v-img>
+            </router-link>
 
-        <v-col class="text-center">
-          <v-btn id="fbLoginBtn"
-                 color="#1877F2"
-                 rounded
-                 x-large
-                 dark
-                 @click="fbLogin">
-            <v-img
-              src="../../assets/imgs/fb-logo.png"
-              class="mr-4 mt-n1 ml-n4"
-              contain
-              max-height="38"
-              max-width="38">
-            </v-img>
-            Log in with Facebook
-          </v-btn>
-        </v-col>
-
-        <v-row>
-          <v-col>
-            <v-divider class="my-3 mb-6"/>
-          </v-col>
-          <v-col cols="1">
-            <p class="text-center font-weight-bold title"
-              >OR
-            </p>
-          </v-col>
-          <v-col>
-            <v-divider class="my-3 mb-6"/>
-          </v-col>
-        </v-row>
-
-        <!-- Error bar -->
-        <p
-          id="errorBar"
-          class="caption red darken-1 white--text text-center py-3 mb-8"
-          v-if="!!userInput.incorrect">
-          {{ userInput.incorrect }}
-        </p>
-
-        <!-- Form -->
-        <v-form ref="loginForm">
-          <!-- Email -->
-          <v-text-field
-            id="emailField"
-            color="#1DB954"
-            outlined
-            placeholder="Email address"
-            v-model="userInput.email"
-            :rules="[
-              validation.required('Email'),
-              validation.minLength('Email', 3),
-              validation.validEmail(),
-            ]"
-          />
-
-          <!-- Password -->
-          <!-- Minimum password length is 8 -->
-          <v-text-field
-            id="passwordField"
-            color="#1DB954"
-            outlined
-            placeholder="Password"
-            v-model="userInput.password"
-            :rules="[
-              validation.required('Password'),
-              validation.minLength('Password', 8),
-            ]"
-            :type="userInput.showPassword ? 'text' : 'password'"
-            :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="userInput.showPassword = !userInput.showPassword"
-          />
-
-          <v-row>
-            <!-- 'Remember me' checkbox -->
-            <v-col>
-              <v-checkbox
-                id="rememberCheck"
-                color="#1DB954"
-                class="mt-0"
-                label="Remember me"
-                v-model="userInput.rememberMe"
-              />
-            </v-col>
-            <v-spacer/>
-            <!-- 'Submit' button -->
-            <v-col cols="12" sm="5">
-              <v-btn
-                id="loginBtn"
-                color="#1DB954"
-                rounded
-                dark
-                block
-                @click="submit"
-                >Log In
+            <v-col class="text-center">
+              <v-btn id="fbLoginBtn" color="#1877F2" rounded x-large dark @click="fbLogin">
+                <v-img
+                  src="../../assets/imgs/fb-logo.png"
+                  class="mr-4 mt-n1 ml-n4"
+                  contain
+                  max-height="38"
+                  max-width="38"
+                >
+                </v-img>
+                Log in with Facebook
               </v-btn>
             </v-col>
-          </v-row>
-        </v-form>
-        <!-- 'Forgot your password' link -->
-        <v-container class="text-center">
-          <router-link to="/password-reset">
-            <span id="forgotPasswordPrompt" class="link">
-              Forgot your password?
-            </span>
-          </router-link>
-        </v-container>
 
-        <v-divider class="my-3"/>
-        <p class="title text-center font-weight-bold">
-          Don't have an account?
-        </p>
-        <!-- 'Signup' button -->
-        <v-btn id="signupBtn"
-               color="secondary"
-               rounded outlined block large
-               to="/signup">
-          Sign Up
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-content>
-</v-app>
+            <v-row>
+              <v-col>
+                <v-divider class="my-3 mb-6" />
+              </v-col>
+              <v-col cols="1">
+                <p class="text-center font-weight-bold title">OR</p>
+              </v-col>
+              <v-col>
+                <v-divider class="my-3 mb-6" />
+              </v-col>
+            </v-row>
+
+            <!-- Error bar -->
+            <p
+              id="errorBar"
+              class="caption red darken-1 white--text text-center py-3 mb-8"
+              v-if="!!userInput.incorrect"
+            >
+              {{ userInput.incorrect }}
+            </p>
+
+            <!-- Form -->
+            <v-form ref="loginForm">
+              <!-- Email -->
+              <v-text-field
+                id="emailField"
+                color="#1DB954"
+                outlined
+                placeholder="Email address"
+                v-model="userInput.email"
+                :rules="[
+                  validation.required('Email'),
+                  validation.minLength('Email', 3),
+                  validation.validEmail(),
+                ]"
+              />
+
+              <!-- Password -->
+              <!-- Minimum password length is 8 -->
+              <v-text-field
+                id="passwordField"
+                color="#1DB954"
+                outlined
+                placeholder="Password"
+                v-model="userInput.password"
+                :rules="[validation.required('Password'), validation.minLength('Password', 8)]"
+                :type="userInput.showPassword ? 'text' : 'password'"
+                :append-icon="userInput.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                @click:append="userInput.showPassword = !userInput.showPassword"
+              />
+
+              <v-row>
+                <!-- 'Remember me' checkbox -->
+                <v-col>
+                  <v-checkbox
+                    id="rememberCheck"
+                    color="#1DB954"
+                    class="mt-0"
+                    label="Remember me"
+                    v-model="userInput.rememberMe"
+                  />
+                </v-col>
+                <v-spacer />
+                <!-- 'Submit' button -->
+                <v-col cols="12" sm="5">
+                  <v-btn id="loginBtn" color="#1DB954" rounded dark block @click="submit">
+                    Log In
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-form>
+            <!-- 'Forgot your password' link -->
+            <v-container class="text-center">
+              <router-link to="/password-reset">
+                <span id="forgotPasswordPrompt" class="link">
+                  Forgot your password?
+                </span>
+              </router-link>
+            </v-container>
+
+            <v-divider class="my-3" />
+            <p class="title text-center font-weight-bold">
+              Don't have an account?
+            </p>
+            <!-- 'Signup' button -->
+            <v-btn id="signupBtn" color="secondary" rounded outlined block large to="/signup">
+              Sign Up
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -173,8 +151,7 @@ export default {
     });
   },
 
-  mounted() {
-  },
+  mounted() {},
 
   data() {
     return {
@@ -224,6 +201,8 @@ export default {
         if (!this.userInput.rememberMe) {
           cookies.setCookiesToSession(['loggedIn']);
         }
+
+        console.log(JSON.parse(localStorage.currentUser));
 
         this.$router.push('/home');
       } else {

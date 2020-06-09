@@ -119,10 +119,8 @@ export default {
     if (!currentUser) return;
     if (!currentUser.data.image) return;
     this.product = currentUser.data.product;
-    const {
-      image: { url },
-    } = currentUser.data;
-    if (url) this.UserInfo.photo = url;
+    if (!currentUser.data.image[0].url) return;
+    this.UserInfo.photo = currentUser.data.image[0].url;
   },
   data: () => ({
     product: 'free',
