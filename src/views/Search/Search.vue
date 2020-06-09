@@ -8,14 +8,14 @@
       <v-row>
           <v-col  xs="12" sm="6" md="3" lg="2"
           v-for="( s , i ) in RecentLength" :key="i">
-          <artist-card v-if="RecentSearch[i].type == 'artist'"
+          <artist-card v-if="RecentSearch[i].type === 'artist'"
             :id="RecentSearch[i].id"
             :name="RecentSearch[i].name"
             :images="RecentSearch[i].images"
             :type="RecentSearch[i].type"
           ></artist-card>
           <profile-card
-          v-if="RecentSearch[i].type == 'user'"
+          v-if="RecentSearch[i].type === 'user'"
           :profileName="RecentSearch[i].name"
           :id="RecentSearch[i].id"
           :images="RecentSearch[i].images"
@@ -40,6 +40,8 @@
               :source="PGenre.icons[0]? PGenre.icons[0].url :'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
               :title="PGenre.name"
               :route="PGenre._id"
+              :color="PGenre.icons[0] && PGenre.icons[0].colors[0]
+                ? PGenre.icons[0].colors[0] : 'rgb(24, 216, 96)'"
             ></pref>
           </v-col>
       </v-row>
@@ -54,6 +56,8 @@
           :source="genre.icons[0]? genre.icons[0].url : 'https://www.scdn.co/i/_global/twitter_card-default.jpg'"
           :title="genre.name"
           :route="genre._id"
+          :color="genre.icons[0] && genre.icons[0].colors[0]
+            ? genre.icons[0].colors[0] : 'rgb(24, 216, 96)'"
         ></Genres>
       </v-col>
       </v-row>
@@ -145,6 +149,7 @@ export default {
         }
       }
     }
+    console.log(this.RecentSearch);
   },
   mounted() {
     this.$store.state.searching = true;

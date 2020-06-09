@@ -300,11 +300,17 @@ export default {
         this.SavedData.name = data.name;
         this.SavedData.id = data.id;
         this.SavedData.type = data.type;
+        console.log(data);
+        console.log(data.type);
         if (data.type === 'track') {
           this.SavedData.album = data.album;
-        }
-        if (data.type === 'track' || data.type === 'user') {
           this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
+        } else if (data.type === 'artist') {
+          // eslint-disable-next-line no-unused-expressions
+          this.SavedData.images = data.userInfo.image ? data.userInfo.image : [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
+        } else if (data.type === 'user') {
+          // eslint-disable-next-line no-unused-expressions
+          this.SavedData.images = data.image ? data.image : [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];
         } else {
           // eslint-disable-next-line no-unused-expressions
           data.images.length ? this.SavedData.images = data.images : this.SavedData.images = [{ url: 'https://www.scdn.co/i/_global/twitter_card-default.jpg' }];

@@ -81,7 +81,6 @@
 
 <script>
 import Client from 'api-client';
-import analyze from 'rgbaster';
 import EventBus from '../../EventBus';
 import SongCard from '../../components/SongCard.vue';
 
@@ -125,12 +124,9 @@ export default {
       this.category = await Client.fetchGenre(this.$route.params.id);
       /* istanbul ignore next */
       if (this.category !== undefined && this.category !== {}) {
-        if (this.category.icons && this.category.icons.length && !this.test) {
-          /* istanbul ignore next */
-          const result = await analyze(this.category.icons[0].url);
-          /* istanbul ignore next */
-          EventBus.$emit('changeColor', result[100].color);
-        }
+        EventBus.$emit('changeColor', this.category.icons[0] && this.category.icons[0].colors
+          && this.category.icons[0].colors[0]
+          ? this.category.icons[0].colors[0] : 'rgb(24, 216, 96)');
         this.title = this.category.name;
         this.ready = true;
       }

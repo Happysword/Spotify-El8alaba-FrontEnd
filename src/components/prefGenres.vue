@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import analyze from 'rgbaster';
 /* istanbul ignore file */
 
 export default {
@@ -21,29 +20,20 @@ export default {
     source: String,
     title: String,
     route: String,
+    color: String,
   },
   data() {
     return {
-      color: String,
+      // color: String,
     };
   },
   methods: {
-    /**
-   * get's the dominant color in genre's image
-   */
-    async getcolor(x) {
-      const result = await analyze(x);
-      this.color = result[100].color;
-    },
-    /**
+  /**
    * routes to the genre's page
    */
     routing() {
       this.$router.push(`/genre/${this.route}-page`);
     },
-  },
-  created() {
-    this.getcolor(this.source);
   },
 };
 </script>

@@ -155,8 +155,8 @@ export default {
     },
     /** Checks If an image is in the request */
     checkImage() {
-      if (this.artist.images[0]) {
-        this.imageURL = this.artist.images[0].url;
+      if (this.artist.userInfo.image[0]) {
+        this.imageURL = this.artist.userInfo.image[0].url;
       }
     },
     /** Get current artist info */

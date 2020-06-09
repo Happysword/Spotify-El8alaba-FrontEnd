@@ -3,11 +3,11 @@
         <v-container>
             <v-row>
                 <v-col class="text-center">
-                  <v-avatar size="200" v-if="!(userProfile.images)">
+                  <v-avatar size="200" v-if="!(userProfile.image)">
                         <img src="https://www.scdn.co/i/_global/twitter_card-default.jpg">
                     </v-avatar>
-                    <v-avatar size="200" v-if="userProfile.images">
-                        <img :src="userProfile.images[0].url">
+                    <v-avatar size="200" v-if="userProfile.image">
+                        <img :src="userProfile.image[0].url">
                     </v-avatar>
                     <h1 class="white--text mt-9">{{userProfile.name}}</h1>
                 </v-col>
@@ -42,6 +42,7 @@
 <script>
 import client from 'api-client';
 import SongCard from '../../components/SongCard.vue';
+import EventBus from '../../EventBus';
 
 export default {
   data() {
@@ -72,6 +73,8 @@ export default {
       client.fetchaUserProfile(this.$route.params.id, this.token)
         .then((response) => {
           this.userProfile = response;
+          // eslint-disable-next-line no-unused-expressions
+          EventBus.$emit('changeColor', this.userProfile.image[0] ? this.userProfile.image[0].colors[0] : 'rgb(24, 216, 96)');
         });
     },
     /** Fetches current user playlists upon entry */
