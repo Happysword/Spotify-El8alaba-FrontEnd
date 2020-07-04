@@ -1,4 +1,5 @@
 # Spotify-el8alaba
+![alt-text](https://j.gifs.com/81njRg.gif)
 
 ## Prerequisites
 Install `nodejs`. Use this [installation guide](https://nodejs.org/en/download/package-manager/) according to your OS
